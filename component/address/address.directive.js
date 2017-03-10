@@ -2,7 +2,7 @@
 
 angular
     .module('ods-lib')
-    .directive('Address', Address);
+    .directive('address', Address);
 
 Address.$inject = ['$uibModal', '$state'];
 

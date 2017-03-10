@@ -6,8 +6,9 @@
   "license": "MIT",
   "private": true,
   "main": "./dist/ods-lib.js",
-  "devDependencies": {
-    "angular": "1.2.x",
-    "angular-mocks": "~1.2.x"
+  "dependencies": {
+    "angular": "1.5.x",
+    "angular-mocks": "~1.2.x",
+    "jSignature": "*"
   }
 }
