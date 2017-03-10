@@ -9,7 +9,9 @@ This project was developed from the application template seed here
 
 ## Getting Started
 
-To get you started you can simply clone the angular-component-seed repository and install the dependencies:
+Documentation will be coming soon.
+
+### Install the dependencies:
 
 ### Prerequisites
 
