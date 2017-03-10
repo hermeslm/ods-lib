@@ -1,0 +1,13 @@
+{
+  "name": "ods-lib",
+  "description": "AngularJS tools Lib developed by One Development Solution LLC.",
+  "version": "1.0.0",
+  "homepage": "https://github.com/hermeslm/ods-lib",
+  "license": "MIT",
+  "private": true,
+  "main": "./dist/ods-lib.js",
+  "devDependencies": {
+    "angular": "1.2.x",
+    "angular-mocks": "~1.2.x"
+  }
+}
