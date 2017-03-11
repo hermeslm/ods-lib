@@ -10,7 +10,7 @@ function Address($uibModal, $state) {
 
     var directive = {
         restrict: 'E',
-        templateUrl: 'address.html',
+        templateUrl: 'address/address.html',
         scope: {
             address: '=',
             countries: '=',
@@ -28,7 +28,7 @@ function Address($uibModal, $state) {
 
         $scope.openModal = function ($element) {
             $uibModal.open({
-                templateUrl: 'address-dialog.html',
+                templateUrl: 'address/address-dialog.html',
                 controller: 'AddressDialogController',
                 controllerAs: 'vm',
                 backdrop: 'static',

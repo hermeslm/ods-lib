@@ -10,7 +10,7 @@ function jSignature($timeout, JSignature) {
 
     var directive = {
         restrict: 'E',
-        templateUrl: 'j-signature.html',
+        templateUrl: 'j-signature/j-signature.html',
         scope: {
             sig: '=',
             width: '@',
