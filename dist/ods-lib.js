@@ -17,131 +17,6 @@ $templateCache.put('j-signature/j-signature.html','<div id="signature"><div id="
 
 angular
     .module('ods-lib')
-    .controller('AddressDialogController', AddressDialogController);
-
-AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states'];
-
-function AddressDialogController($uibModalInstance, address, countries, states) {
-    var vm = this;
-
-    vm.address = address;
-    vm.countries = countries;
-    vm.states = states;
-
-    vm.clear = clear;
-    vm.save = save;
-
-    function clear() {
-        $uibModalInstance.dismiss('cancel');
-    }
-
-    function save() {
-        $uibModalInstance.close(vm.address);
-        vm.isSaving = false;
-        // onSaveSuccess;
-    }
-
-    function onSaveSuccess(result) {
-
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('address', Address);
-
-Address.$inject = ['$uibModal', '$state'];
-
-function Address($uibModal, $state) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'address.html',
-        scope: {
-            address: '=',
-            countries: '=',
-            states: '=',
-            ngModel: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.openModal = function ($element) {
-            $uibModal.open({
-                templateUrl: 'address-dialog.html',
-                controller: 'AddressDialogController',
-                controllerAs: 'vm',
-                backdrop: 'static',
-                size: 'lg',
-                resolve: {
-                    address: function () {
-                        if ($scope.ngModel !== null) {
-                            return {
-                                address: $scope.ngModel.address,
-                                address2: $scope.ngModel.address2,
-                                city: $scope.ngModel.city,
-                                state: $scope.ngModel.state,
-                                zip: $scope.ngModel.zip,
-                                country: $scope.ngModel.country,
-                                phone: $scope.ngModel.phone,
-                                mobile: $scope.ngModel.mobile,
-                                fax: $scope.ngModel.fax,
-                                email: $scope.ngModel.email,
-                                notes: $scope.ngModel.notes
-                            }
-                        } else {
-                            return null;
-                        }
-                    },
-                    countries: function () {
-                        return $scope.countries;
-                    },
-                    states: function () {
-                        return $scope.states;
-                    }
-
-                }
-            }).result.then(function (result) {
-                // $element.
-                updateValue(result);
-                //$state.go($state.current.name, null, {reload: $state.current.name});
-            }, function (result) {
-                //$state.go($state.current.name);
-            });
-        };
-
-        $scope.printName = printName;
-
-        function printName(address) {
-            if (address != null) {
-                return address.address + ' ' +
-                    address.address2 + ' ' +
-                    address.city + ',' +
-                    address.state.name + ' ' +
-                    address.zip
-            } else {
-                return '';
-            }
-        }
-
-        function updateValue(value) {
-            // var input = $element[0].getElementsByTagName('input');
-            $scope.ngModel = value;
-        }
-
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
     .filter('Phone', Phone);
 
 function Phone() {
@@ -237,25 +112,52 @@ function PropsFilter() {
 
 angular
     .module('ods-lib')
-    .directive('jSignature', Signature);
+    .controller('AddressDialogController', AddressDialogController);
 
-jSignature.$inject = ['$timeout', 'JSignature'];
+AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states'];
 
-function jSignature($timeout, JSignature) {
+function AddressDialogController($uibModalInstance, address, countries, states) {
+    var vm = this;
+
+    vm.address = address;
+    vm.countries = countries;
+    vm.states = states;
+
+    vm.clear = clear;
+    vm.save = save;
+
+    function clear() {
+        $uibModalInstance.dismiss('cancel');
+    }
+
+    function save() {
+        $uibModalInstance.close(vm.address);
+        vm.isSaving = false;
+        // onSaveSuccess;
+    }
+
+    function onSaveSuccess(result) {
+
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('address', Address);
+
+Address.$inject = ['$uibModal', '$state'];
+
+function Address($uibModal, $state) {
 
     var directive = {
         restrict: 'E',
-        templateUrl: 'j-signature.html',
+        templateUrl: 'address/address.html',
         scope: {
-            sig: '=',
-            width: '@',
-            height: '@',
-            color: '@',
-            bgColor: '@',
-            lineWidth: '@',
-            cssclass: '@',
-            undo: '@',
-            save: '='
+            address: '=',
+            countries: '=',
+            states: '=',
+            ngModel: '='
         },
         link: linkFunc
     };
@@ -266,217 +168,70 @@ function jSignature($timeout, JSignature) {
 
     function linkFunc($scope, $element) {
 
-        console.log('jSignatureDirective: link');
-        console.dir($scope, $element);
+        $scope.openModal = function ($element) {
+            $uibModal.open({
+                templateUrl: 'address/address-dialog.html',
+                controller: 'AddressDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    address: function () {
+                        if ($scope.ngModel !== null) {
+                            return {
+                                address: $scope.ngModel.address,
+                                address2: $scope.ngModel.address2,
+                                city: $scope.ngModel.city,
+                                state: $scope.ngModel.state,
+                                zip: $scope.ngModel.zip,
+                                country: $scope.ngModel.country,
+                                phone: $scope.ngModel.phone,
+                                mobile: $scope.ngModel.mobile,
+                                fax: $scope.ngModel.fax,
+                                email: $scope.ngModel.email,
+                                notes: $scope.ngModel.notes
+                            }
+                        } else {
+                            return null;
+                        }
+                    },
+                    countries: function () {
+                        return $scope.countries;
+                    },
+                    states: function () {
+                        return $scope.states;
+                    }
 
-        var options = {
-            width: $scope.width,
-            height: $scope.height,
-            color: $scope.color,
-            'background-color': $scope.bgColor,
-            lineWidth: $scope.lineWidth,
-            cssClass: $scope.cssClass,
-            UndoButton: $scope.undo
+                }
+            }).result.then(function (result) {
+                // $element.
+                updateValue(result);
+                //$state.go($state.current.name, null, {reload: $state.current.name});
+            }, function (result) {
+                //$state.go($state.current.name);
+            });
         };
 
-        JSignature.initialize($scope, options);
+        $scope.printName = printName;
 
-        $scope.reset = function () {
-            JSignature.reset();
-        };
-
-//             $scope.initialized = false;
-//
-//             var options = {
-//                 width: $scope.width,
-//                 height: $scope.height,
-//                 color: $scope.color,
-//                 'background-color': $scope.bgColor,
-//                 lineWidth: $scope.lineWidth,
-//                 cssclass: $scope.cssclass
-//             };
-//
-//             $scope.initialize = function() {
-//                 if (!$scope.initialized) {
-//                     $element.find('#jSignature').jSignature(options);
-//                     $scope.initialized = true;
-//                 }
-//             };
-//
-//             $scope.reset = function() {
-//                 console.log('reset!!!');
-//                 $element.jSignature('reset');
-//             };
-//
-//             $scope.getData = function() {
-//                 console.log('getData!!!');
-//                 var datapair = $element.jSignature('getData', 'base30');
-//                 var svg = $element.jSignature('getData', 'svg');
-//                 console.dir(datapair);
-//                 //alert(datapair);
-//                 //              alert(svg);
-//                 $scope.save(svg);
-//             };
-//
-//             $scope.setData = function(sig) {
-//                 console.log('setData!!!');
-//
-//
-//
-//                 if (sig) {
-//                     datapair = sig;
-//                 }
-//                 console.log(datapair);
-//                 $element.jSignature('setData', 'data:' + datapair.join(','));
-//             };
-//
-//
-//             $scope.initialize();
-// //            $scope.setData();
-//
-//
-//             $scope.$watch('sig', function(sig) {
-//                 if (sig) {
-//                     console.log('watch if ' + sig);
-//                     $scope.setData(sig);
-//                     //alert('watch if ' + sig);
-//
-//                     return;
-//                 }
-//                 console.log('watch else');
-//
-//             });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('Signature', Signature);
-
-function Signature() {
-
-    var apinamespace = 'jSignature';
-
-    var exportTypes = {
-        DEFAULT: 'default',
-        NATIVE: 'native',
-        IMAGE: 'image',
-        BASE30: 'base30',
-        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
-        SVG: 'svg',
-        SVG_XML: 'image/svg+xml',
-        SVG_BASE64: 'svgbase64',
-        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
-    }
-
-    var importTypes = {
-        NATIVE: 'native',
-        IMAGE: 'image',
-        IMAGE_PNG_BASE64: 'image/png;base64',
-        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
-        IMAGE_JPG_BASE64: 'image/jpg;base64'
-    }
-
-    var object = {
-        initialized: false,
-        options: {
-            width: null,
-            height: null,
-            color: null,
-            'background-color': null,
-            lineWidth: null,
-            cssclass: null,
-            UndoButton: false
-        },
-        element: null
-    };
-
-    var service = {
-        getObject: getObject,
-        exportTypes: exportTypes,
-        importTypes: importTypes,
-        initialize: initialize,
-        reset: reset,
-        getData: getData,
-        // setData: setData,
-        disable: disable,
-        enable: enable
-    };
-
-    return service;
-
-    function initialize(element, options) {
-
-        object.initialized = false;
-
-        if (!object.initialized) {
-            // object.element = element.find('#jSignature').jSignature(options);
-            object.element = $('#jSignature');
-            object.initialized = true;
-            object.element.jSignature(options);
+        function printName(address) {
+            if (address != null) {
+                return address.address + ' ' +
+                    address.address2 + ' ' +
+                    address.city + ',' +
+                    address.state.name + ' ' +
+                    address.zip
+            } else {
+                return '';
+            }
         }
-    };
 
-    function reset() {
-        // console.log('reset!!!');
-        object.element.jSignature('reset');
-    };
+        function updateValue(value) {
+            // var input = $element[0].getElementsByTagName('input');
+            $scope.ngModel = value;
+        }
 
-    function getData(type) {
-        // console.log('getData!!!');
-        return object.element.jSignature('getData', type);
-    };
-
-    function getDataAsSVG() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function getDataAsBase30() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function setData(sig) {
-        // console.log('setData!!!');
-        // console.log(sig);
-        object.element.jSignature('setData', 'data:' + sig.join(','));
-    };
-
-    function disable() {
-        // console.log('Disable!!!');
-        object.element.jSignature('disable');
-    };
-
-    function enable() {
-        // console.log('Enable!!!');
-        object.element.jSignature('enable');
-    };
-
-    function undo() {
-        var eventName = apinamespace + '.undo'
-        object.element.jSignature('events');
-    };
-
-    function getObject() {
-        // $('#signature').on('change', function(e){
-        //     var undef
-        //     if ($(e.target).jSignature('getData','native').length) {
-        //         $tools.find('input').prop('disabled', false)
-        //     } else {
-        //         $tools.find('input').prop('disabled', true)
-        //     }
-        //
-        // })
-        return object.element;
     }
-
-
 }
 'use strict';
 
@@ -1041,5 +796,250 @@ function ModalEntity($uibModal, $rootScope, $state) {
 //     $state.go('^');
 // });
     }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('jSignature', Signature);
+
+jSignature.$inject = ['$timeout', 'JSignature'];
+
+function jSignature($timeout, JSignature) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'j-signature/j-signature.html',
+        scope: {
+            sig: '=',
+            width: '@',
+            height: '@',
+            color: '@',
+            bgColor: '@',
+            lineWidth: '@',
+            cssclass: '@',
+            undo: '@',
+            save: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        console.log('jSignatureDirective: link');
+        console.dir($scope, $element);
+
+        var options = {
+            width: $scope.width,
+            height: $scope.height,
+            color: $scope.color,
+            'background-color': $scope.bgColor,
+            lineWidth: $scope.lineWidth,
+            cssClass: $scope.cssClass,
+            UndoButton: $scope.undo
+        };
+
+        JSignature.initialize($scope, options);
+
+        $scope.reset = function () {
+            JSignature.reset();
+        };
+
+//             $scope.initialized = false;
+//
+//             var options = {
+//                 width: $scope.width,
+//                 height: $scope.height,
+//                 color: $scope.color,
+//                 'background-color': $scope.bgColor,
+//                 lineWidth: $scope.lineWidth,
+//                 cssclass: $scope.cssclass
+//             };
+//
+//             $scope.initialize = function() {
+//                 if (!$scope.initialized) {
+//                     $element.find('#jSignature').jSignature(options);
+//                     $scope.initialized = true;
+//                 }
+//             };
+//
+//             $scope.reset = function() {
+//                 console.log('reset!!!');
+//                 $element.jSignature('reset');
+//             };
+//
+//             $scope.getData = function() {
+//                 console.log('getData!!!');
+//                 var datapair = $element.jSignature('getData', 'base30');
+//                 var svg = $element.jSignature('getData', 'svg');
+//                 console.dir(datapair);
+//                 //alert(datapair);
+//                 //              alert(svg);
+//                 $scope.save(svg);
+//             };
+//
+//             $scope.setData = function(sig) {
+//                 console.log('setData!!!');
+//
+//
+//
+//                 if (sig) {
+//                     datapair = sig;
+//                 }
+//                 console.log(datapair);
+//                 $element.jSignature('setData', 'data:' + datapair.join(','));
+//             };
+//
+//
+//             $scope.initialize();
+// //            $scope.setData();
+//
+//
+//             $scope.$watch('sig', function(sig) {
+//                 if (sig) {
+//                     console.log('watch if ' + sig);
+//                     $scope.setData(sig);
+//                     //alert('watch if ' + sig);
+//
+//                     return;
+//                 }
+//                 console.log('watch else');
+//
+//             });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .factory('Signature', Signature);
+
+function Signature() {
+
+    var apinamespace = 'jSignature';
+
+    var exportTypes = {
+        DEFAULT: 'default',
+        NATIVE: 'native',
+        IMAGE: 'image',
+        BASE30: 'base30',
+        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
+        SVG: 'svg',
+        SVG_XML: 'image/svg+xml',
+        SVG_BASE64: 'svgbase64',
+        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
+    }
+
+    var importTypes = {
+        NATIVE: 'native',
+        IMAGE: 'image',
+        IMAGE_PNG_BASE64: 'image/png;base64',
+        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
+        IMAGE_JPG_BASE64: 'image/jpg;base64'
+    }
+
+    var object = {
+        initialized: false,
+        options: {
+            width: null,
+            height: null,
+            color: null,
+            'background-color': null,
+            lineWidth: null,
+            cssclass: null,
+            UndoButton: false
+        },
+        element: null
+    };
+
+    var service = {
+        getObject: getObject,
+        exportTypes: exportTypes,
+        importTypes: importTypes,
+        initialize: initialize,
+        reset: reset,
+        getData: getData,
+        // setData: setData,
+        disable: disable,
+        enable: enable
+    };
+
+    return service;
+
+    function initialize(element, options) {
+
+        object.initialized = false;
+
+        if (!object.initialized) {
+            // object.element = element.find('#jSignature').jSignature(options);
+            object.element = $('#jSignature');
+            object.initialized = true;
+            object.element.jSignature(options);
+        }
+    };
+
+    function reset() {
+        // console.log('reset!!!');
+        object.element.jSignature('reset');
+    };
+
+    function getData(type) {
+        // console.log('getData!!!');
+        return object.element.jSignature('getData', type);
+    };
+
+    function getDataAsSVG() {
+        // console.log('getData!!!');
+        // var datapair = object.element.jSignature('getData', 'base30');
+        var svg = object.element.jSignature('getData', 'svg');
+        return svg;
+    };
+
+    function getDataAsBase30() {
+        // console.log('getData!!!');
+        // var datapair = object.element.jSignature('getData', 'base30');
+        var svg = object.element.jSignature('getData', 'svg');
+        return svg;
+    };
+
+    function setData(sig) {
+        // console.log('setData!!!');
+        // console.log(sig);
+        object.element.jSignature('setData', 'data:' + sig.join(','));
+    };
+
+    function disable() {
+        // console.log('Disable!!!');
+        object.element.jSignature('disable');
+    };
+
+    function enable() {
+        // console.log('Enable!!!');
+        object.element.jSignature('enable');
+    };
+
+    function undo() {
+        var eventName = apinamespace + '.undo'
+        object.element.jSignature('events');
+    };
+
+    function getObject() {
+        // $('#signature').on('change', function(e){
+        //     var undef
+        //     if ($(e.target).jSignature('getData','native').length) {
+        //         $tools.find('input').prop('disabled', false)
+        //     } else {
+        //         $tools.find('input').prop('disabled', true)
+        //     }
+        //
+        // })
+        return object.element;
+    }
+
+
 }
 })();
