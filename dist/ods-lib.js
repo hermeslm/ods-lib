@@ -113,19 +113,19 @@ function Address($uibModal, $state) {
             });
         };
 
-        $scope.printName = printName;
-
-        function printName(address) {
-            if (address != null) {
-                return address.address + ' ' +
-                    address.address2 + ' ' +
-                    address.city + ',' +
-                    address.state.name + ' ' +
-                    address.zip
-            } else {
-                return '';
-            }
-        }
+        // $scope.printName = printName;
+        //
+        // function printName(address) {
+        //     if (address != null) {
+        //         return address.address + ' ' +
+        //             address.address2 + ' ' +
+        //             address.city + ',' +
+        //             address.state.name + ' ' +
+        //             address.zip
+        //     } else {
+        //         return '';
+        //     }
+        // }
 
         function updateValue(value) {
             // var input = $element[0].getElementsByTagName('input');
