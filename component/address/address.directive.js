@@ -4,9 +4,9 @@ angular
     .module('ods-lib')
     .directive('address', Address);
 
-Address.$inject = ['$uibModal', '$state'];
+Address.$inject = ['$uibModal'];
 
-function Address($uibModal, $state) {
+function Address($uibModal) {
 
     var directive = {
         restrict: 'E',
