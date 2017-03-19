@@ -4,9 +4,9 @@ angular
     .module('ods-lib')
     .controller('AddressDialogController', AddressDialogController);
 
-AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states'];
+AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states', '$filter'];
 
-function AddressDialogController($uibModalInstance, address, countries, states) {
+function AddressDialogController($uibModalInstance, address, countries, states, $filter) {
     var vm = this;
 
     vm.address = address;
