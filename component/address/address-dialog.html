@@ -15,14 +15,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="control-label" for="field_address">Address</label>
+                    <label class="control-label" for="field_address">Street</label>
                     <input type="text" class="form-control" name="address" id="field_address"
                            ng-model="vm.address.address" placeholder="Street..." tabindex="2"/>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
-                    <label class="control-label" for="field_phone">Other</label>
+                    <label class="control-label" for="field_phone">Phone</label>
                     <input type="text" class="form-control" name="phone" id="field_phone"
                            ng-model="vm.address.phone" placeholder="Phone..." tabindex="8"/>
                 </div>
@@ -31,12 +31,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
+                    <label class="control-label" for="field_address">Street2</label>
                     <input type="text" class="form-control" name="address2" id="field_address2"
                            ng-model="vm.address.address2" placeholder="Street 2..." tabindex="3"/>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
+                    <label class="control-label" for="field_address">Mobile</label>
                     <input type="text" class="form-control" name="mobile" id="field_mobile"
                            ng-model="vm.address.mobile" placeholder="Mobile..." tabindex="9"/>
                 </div>
@@ -47,12 +49,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label class="control-label" for="field_address">City</label>
                             <input type="text" class="form-control" name="city" id="field_city"
                                    ng-model="vm.address.city" placeholder="City..." tabindex="4"/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label class="control-label" for="field_address">State</label>
                             <select class="form-control" id="field_state" name="state"
                                     ng-model="vm.address.state" tabindex="5"
                                     ng-options="state as state.name for state in vm.states track by state.code">
@@ -66,6 +70,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
+                            <label class="control-label" for="field_address">Fax</label>
                             <input type="text" class="form-control" name="fax" id="field_fax"
                                    ng-model="vm.address.fax" placeholder="Fax..." tabindex="10"/>
                         </div>
@@ -78,12 +83,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label class="control-label" for="field_address">Zip</label>
                             <input type="text" class="form-control" name="zipCode" id="field_zipCode"
                                    ng-model="vm.address.zip" placeholder="ZIP" tabindex="6"/>
                         </div>
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
+                            <label class="control-label" for="field_address">Country</label>
                             <select class="form-control" id="field_country" name="country"
                                     ng-model="vm.address.country" tabindex="7"
                                     ng-options="country as country.name for country in vm.countries track by country.code">
@@ -97,6 +104,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
+                            <label class="control-label" for="field_address">Email</label>
                             <input type="text" class="form-control" name="email" id="field_email"
                                    ng-model="vm.address.email" placeholder="Email..." tabindex="11"/>
                         </div>
@@ -120,7 +128,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
             <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
         </button>
-        <button type="button" ng-click="vm.save()" ng-disabled="editForm.$invalid || vm.isSaving"
+        <button type="button" ng-click="vm.save()" ng-disabled="addressForm.$invalid || vm.isSaving"
                 class="btn btn-primary">
             <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
         </button>

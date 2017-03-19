@@ -17,101 +17,6 @@ $templateCache.put('j-signature/j-signature.html','<div id="signature"><div id="
 
 angular
     .module('ods-lib')
-    .filter('Phone', Phone);
-
-function Phone() {
-    return function (phone) {
-        if (!phone) {
-            return '';
-        }
-
-        var value = phone.toString().trim().replace(/^\+/, '');
-
-        if (value.match(/[^0-9]/)) {
-            return phone;
-        }
-
-        var country, city, number;
-
-        switch (value.length) {
-            case 10: // +1PPP####### -> C (PPP) ###-####
-                country = 1;
-                city = value.slice(0, 3);
-                number = value.slice(3);
-                break;
-
-            case 11: // +CPPP####### -> CCC (PP) ###-####
-                country = value[0];
-                city = value.slice(1, 4);
-                number = value.slice(4);
-                break;
-
-            case 12: // +CCCPP####### -> CCC (PP) ###-####
-                country = value.slice(0, 3);
-                city = value.slice(3, 5);
-                number = value.slice(5);
-                break;
-
-            default:
-                return phone;
-        }
-
-        if (country === 1) {
-            country = "";
-        }
-
-        number = number.slice(0, 3) + '-' + number.slice(3);
-
-        return (country + " (" + city + ") " + number).trim();
-    };
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .filter('PropsFilter', PropsFilter);
-
-/**
- * AngularJS default filter with the following expression:
- * "person in people | filter: {name: $select.search, age: $select.search}"
- * performs an AND between 'name: $select.search' and 'age: $select.search'.
- * We want to perform an OR.
- */
-function PropsFilter() {
-    return function (items, props) {
-        var out = [];
-
-        if (angular.isArray(items)) {
-            var keys = Object.keys(props);
-
-            items.forEach(function (item) {
-                var itemMatches = false;
-
-                for (var i = 0; i < keys.length; i++) {
-                    var prop = keys[i];
-                    var text = props[prop].toLowerCase();
-                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-                        itemMatches = true;
-                        break;
-                    }
-                }
-
-                if (itemMatches) {
-                    out.push(item);
-                }
-            });
-        } else {
-            // Let the output be the input untouched
-            out = items;
-        }
-
-        return out;
-    };
-}
-'use strict';
-
-angular
-    .module('ods-lib')
     .controller('AddressDialogController', AddressDialogController);
 
 AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states'];
@@ -232,6 +137,346 @@ function Address($uibModal, $state) {
         }
 
     }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .filter('Phone', Phone);
+
+function Phone() {
+    return function (phone) {
+        if (!phone) {
+            return '';
+        }
+
+        var value = phone.toString().trim().replace(/^\+/, '');
+
+        if (value.match(/[^0-9]/)) {
+            return phone;
+        }
+
+        var country, city, number;
+
+        switch (value.length) {
+            case 10: // +1PPP####### -> C (PPP) ###-####
+                country = 1;
+                city = value.slice(0, 3);
+                number = value.slice(3);
+                break;
+
+            case 11: // +CPPP####### -> CCC (PP) ###-####
+                country = value[0];
+                city = value.slice(1, 4);
+                number = value.slice(4);
+                break;
+
+            case 12: // +CCCPP####### -> CCC (PP) ###-####
+                country = value.slice(0, 3);
+                city = value.slice(3, 5);
+                number = value.slice(5);
+                break;
+
+            default:
+                return phone;
+        }
+
+        if (country === 1) {
+            country = "";
+        }
+
+        number = number.slice(0, 3) + '-' + number.slice(3);
+
+        return (country + " (" + city + ") " + number).trim();
+    };
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .filter('PropsFilter', PropsFilter);
+
+/**
+ * AngularJS default filter with the following expression:
+ * "person in people | filter: {name: $select.search, age: $select.search}"
+ * performs an AND between 'name: $select.search' and 'age: $select.search'.
+ * We want to perform an OR.
+ */
+function PropsFilter() {
+    return function (items, props) {
+        var out = [];
+
+        if (angular.isArray(items)) {
+            var keys = Object.keys(props);
+
+            items.forEach(function (item) {
+                var itemMatches = false;
+
+                for (var i = 0; i < keys.length; i++) {
+                    var prop = keys[i];
+                    var text = props[prop].toLowerCase();
+                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                        itemMatches = true;
+                        break;
+                    }
+                }
+
+                if (itemMatches) {
+                    out.push(item);
+                }
+            });
+        } else {
+            // Let the output be the input untouched
+            out = items;
+        }
+
+        return out;
+    };
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('jSignature', Signature);
+
+jSignature.$inject = ['$timeout', 'JSignature'];
+
+function jSignature($timeout, JSignature) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'j-signature/j-signature.html',
+        scope: {
+            sig: '=',
+            width: '@',
+            height: '@',
+            color: '@',
+            bgColor: '@',
+            lineWidth: '@',
+            cssclass: '@',
+            undo: '@',
+            save: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        console.log('jSignatureDirective: link');
+        console.dir($scope, $element);
+
+        var options = {
+            width: $scope.width,
+            height: $scope.height,
+            color: $scope.color,
+            'background-color': $scope.bgColor,
+            lineWidth: $scope.lineWidth,
+            cssClass: $scope.cssClass,
+            UndoButton: $scope.undo
+        };
+
+        JSignature.initialize($scope, options);
+
+        $scope.reset = function () {
+            JSignature.reset();
+        };
+
+//             $scope.initialized = false;
+//
+//             var options = {
+//                 width: $scope.width,
+//                 height: $scope.height,
+//                 color: $scope.color,
+//                 'background-color': $scope.bgColor,
+//                 lineWidth: $scope.lineWidth,
+//                 cssclass: $scope.cssclass
+//             };
+//
+//             $scope.initialize = function() {
+//                 if (!$scope.initialized) {
+//                     $element.find('#jSignature').jSignature(options);
+//                     $scope.initialized = true;
+//                 }
+//             };
+//
+//             $scope.reset = function() {
+//                 console.log('reset!!!');
+//                 $element.jSignature('reset');
+//             };
+//
+//             $scope.getData = function() {
+//                 console.log('getData!!!');
+//                 var datapair = $element.jSignature('getData', 'base30');
+//                 var svg = $element.jSignature('getData', 'svg');
+//                 console.dir(datapair);
+//                 //alert(datapair);
+//                 //              alert(svg);
+//                 $scope.save(svg);
+//             };
+//
+//             $scope.setData = function(sig) {
+//                 console.log('setData!!!');
+//
+//
+//
+//                 if (sig) {
+//                     datapair = sig;
+//                 }
+//                 console.log(datapair);
+//                 $element.jSignature('setData', 'data:' + datapair.join(','));
+//             };
+//
+//
+//             $scope.initialize();
+// //            $scope.setData();
+//
+//
+//             $scope.$watch('sig', function(sig) {
+//                 if (sig) {
+//                     console.log('watch if ' + sig);
+//                     $scope.setData(sig);
+//                     //alert('watch if ' + sig);
+//
+//                     return;
+//                 }
+//                 console.log('watch else');
+//
+//             });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .factory('Signature', Signature);
+
+function Signature() {
+
+    var apinamespace = 'jSignature';
+
+    var exportTypes = {
+        DEFAULT: 'default',
+        NATIVE: 'native',
+        IMAGE: 'image',
+        BASE30: 'base30',
+        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
+        SVG: 'svg',
+        SVG_XML: 'image/svg+xml',
+        SVG_BASE64: 'svgbase64',
+        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
+    }
+
+    var importTypes = {
+        NATIVE: 'native',
+        IMAGE: 'image',
+        IMAGE_PNG_BASE64: 'image/png;base64',
+        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
+        IMAGE_JPG_BASE64: 'image/jpg;base64'
+    }
+
+    var object = {
+        initialized: false,
+        options: {
+            width: null,
+            height: null,
+            color: null,
+            'background-color': null,
+            lineWidth: null,
+            cssclass: null,
+            UndoButton: false
+        },
+        element: null
+    };
+
+    var service = {
+        getObject: getObject,
+        exportTypes: exportTypes,
+        importTypes: importTypes,
+        initialize: initialize,
+        reset: reset,
+        getData: getData,
+        // setData: setData,
+        disable: disable,
+        enable: enable
+    };
+
+    return service;
+
+    function initialize(element, options) {
+
+        object.initialized = false;
+
+        if (!object.initialized) {
+            // object.element = element.find('#jSignature').jSignature(options);
+            object.element = $('#jSignature');
+            object.initialized = true;
+            object.element.jSignature(options);
+        }
+    };
+
+    function reset() {
+        // console.log('reset!!!');
+        object.element.jSignature('reset');
+    };
+
+    function getData(type) {
+        // console.log('getData!!!');
+        return object.element.jSignature('getData', type);
+    };
+
+    function getDataAsSVG() {
+        // console.log('getData!!!');
+        // var datapair = object.element.jSignature('getData', 'base30');
+        var svg = object.element.jSignature('getData', 'svg');
+        return svg;
+    };
+
+    function getDataAsBase30() {
+        // console.log('getData!!!');
+        // var datapair = object.element.jSignature('getData', 'base30');
+        var svg = object.element.jSignature('getData', 'svg');
+        return svg;
+    };
+
+    function setData(sig) {
+        // console.log('setData!!!');
+        // console.log(sig);
+        object.element.jSignature('setData', 'data:' + sig.join(','));
+    };
+
+    function disable() {
+        // console.log('Disable!!!');
+        object.element.jSignature('disable');
+    };
+
+    function enable() {
+        // console.log('Enable!!!');
+        object.element.jSignature('enable');
+    };
+
+    function undo() {
+        var eventName = apinamespace + '.undo'
+        object.element.jSignature('events');
+    };
+
+    function getObject() {
+        // $('#signature').on('change', function(e){
+        //     var undef
+        //     if ($(e.target).jSignature('getData','native').length) {
+        //         $tools.find('input').prop('disabled', false)
+        //     } else {
+        //         $tools.find('input').prop('disabled', true)
+        //     }
+        //
+        // })
+        return object.element;
+    }
+
+
 }
 'use strict';
 
@@ -796,250 +1041,5 @@ function ModalEntity($uibModal, $rootScope, $state) {
 //     $state.go('^');
 // });
     }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('jSignature', Signature);
-
-jSignature.$inject = ['$timeout', 'JSignature'];
-
-function jSignature($timeout, JSignature) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'j-signature/j-signature.html',
-        scope: {
-            sig: '=',
-            width: '@',
-            height: '@',
-            color: '@',
-            bgColor: '@',
-            lineWidth: '@',
-            cssclass: '@',
-            undo: '@',
-            save: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        console.log('jSignatureDirective: link');
-        console.dir($scope, $element);
-
-        var options = {
-            width: $scope.width,
-            height: $scope.height,
-            color: $scope.color,
-            'background-color': $scope.bgColor,
-            lineWidth: $scope.lineWidth,
-            cssClass: $scope.cssClass,
-            UndoButton: $scope.undo
-        };
-
-        JSignature.initialize($scope, options);
-
-        $scope.reset = function () {
-            JSignature.reset();
-        };
-
-//             $scope.initialized = false;
-//
-//             var options = {
-//                 width: $scope.width,
-//                 height: $scope.height,
-//                 color: $scope.color,
-//                 'background-color': $scope.bgColor,
-//                 lineWidth: $scope.lineWidth,
-//                 cssclass: $scope.cssclass
-//             };
-//
-//             $scope.initialize = function() {
-//                 if (!$scope.initialized) {
-//                     $element.find('#jSignature').jSignature(options);
-//                     $scope.initialized = true;
-//                 }
-//             };
-//
-//             $scope.reset = function() {
-//                 console.log('reset!!!');
-//                 $element.jSignature('reset');
-//             };
-//
-//             $scope.getData = function() {
-//                 console.log('getData!!!');
-//                 var datapair = $element.jSignature('getData', 'base30');
-//                 var svg = $element.jSignature('getData', 'svg');
-//                 console.dir(datapair);
-//                 //alert(datapair);
-//                 //              alert(svg);
-//                 $scope.save(svg);
-//             };
-//
-//             $scope.setData = function(sig) {
-//                 console.log('setData!!!');
-//
-//
-//
-//                 if (sig) {
-//                     datapair = sig;
-//                 }
-//                 console.log(datapair);
-//                 $element.jSignature('setData', 'data:' + datapair.join(','));
-//             };
-//
-//
-//             $scope.initialize();
-// //            $scope.setData();
-//
-//
-//             $scope.$watch('sig', function(sig) {
-//                 if (sig) {
-//                     console.log('watch if ' + sig);
-//                     $scope.setData(sig);
-//                     //alert('watch if ' + sig);
-//
-//                     return;
-//                 }
-//                 console.log('watch else');
-//
-//             });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('Signature', Signature);
-
-function Signature() {
-
-    var apinamespace = 'jSignature';
-
-    var exportTypes = {
-        DEFAULT: 'default',
-        NATIVE: 'native',
-        IMAGE: 'image',
-        BASE30: 'base30',
-        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
-        SVG: 'svg',
-        SVG_XML: 'image/svg+xml',
-        SVG_BASE64: 'svgbase64',
-        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
-    }
-
-    var importTypes = {
-        NATIVE: 'native',
-        IMAGE: 'image',
-        IMAGE_PNG_BASE64: 'image/png;base64',
-        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
-        IMAGE_JPG_BASE64: 'image/jpg;base64'
-    }
-
-    var object = {
-        initialized: false,
-        options: {
-            width: null,
-            height: null,
-            color: null,
-            'background-color': null,
-            lineWidth: null,
-            cssclass: null,
-            UndoButton: false
-        },
-        element: null
-    };
-
-    var service = {
-        getObject: getObject,
-        exportTypes: exportTypes,
-        importTypes: importTypes,
-        initialize: initialize,
-        reset: reset,
-        getData: getData,
-        // setData: setData,
-        disable: disable,
-        enable: enable
-    };
-
-    return service;
-
-    function initialize(element, options) {
-
-        object.initialized = false;
-
-        if (!object.initialized) {
-            // object.element = element.find('#jSignature').jSignature(options);
-            object.element = $('#jSignature');
-            object.initialized = true;
-            object.element.jSignature(options);
-        }
-    };
-
-    function reset() {
-        // console.log('reset!!!');
-        object.element.jSignature('reset');
-    };
-
-    function getData(type) {
-        // console.log('getData!!!');
-        return object.element.jSignature('getData', type);
-    };
-
-    function getDataAsSVG() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function getDataAsBase30() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function setData(sig) {
-        // console.log('setData!!!');
-        // console.log(sig);
-        object.element.jSignature('setData', 'data:' + sig.join(','));
-    };
-
-    function disable() {
-        // console.log('Disable!!!');
-        object.element.jSignature('disable');
-    };
-
-    function enable() {
-        // console.log('Enable!!!');
-        object.element.jSignature('enable');
-    };
-
-    function undo() {
-        var eventName = apinamespace + '.undo'
-        object.element.jSignature('events');
-    };
-
-    function getObject() {
-        // $('#signature').on('change', function(e){
-        //     var undef
-        //     if ($(e.target).jSignature('getData','native').length) {
-        //         $tools.find('input').prop('disabled', false)
-        //     } else {
-        //         $tools.find('input').prop('disabled', true)
-        //     }
-        //
-        // })
-        return object.element;
-    }
-
-
 }
 })();
