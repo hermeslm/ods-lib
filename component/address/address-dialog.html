@@ -7,11 +7,6 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <!--<div class="form-group" ng-show="vm.address.id">-->
-            <!--<label for="id" data-translate="global.field.id">ID</label>-->
-            <!--<input type="text" class="form-control" id="id" name="id" tabindex="1"-->
-                   <!--ng-model="vm.address.id" readonly/>-->
-        <!--</div>-->
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -56,12 +51,15 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label" for="field_state">State</label>
-                            <select class="form-control" id="field_state" name="state"
-                                    ng-model="vm.address.state" tabindex="5"
-                                    ng-options="state as state.name for state in vm.states track by state.code">
-                                <option value="" disabled hidden>State...</option>
-                            </select>
+                            <div class="form-group">
+                                <label class="control-label" for="field_country">Country</label>
+                                <select class="form-control" id="field_country" name="country"
+                                        ng-model="vm.address.country" tabindex="7"
+                                        ng-change="vm.onCountryChange()"
+                                        ng-options="country as country.name for country in vm.countries track by country.code">
+                                    <option value="" disabled hidden>Country...</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -89,14 +87,12 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div class="form-group">
-                            <label class="control-label" for="field_country">Country</label>
-                            <select class="form-control" id="field_country" name="country"
-                                    ng-model="vm.address.country" tabindex="7"
-                                    ng-options="country as country.name for country in vm.countries track by country.code">
-                                <option value="" disabled hidden>Country...</option>
-                            </select>
-                        </div>
+                        <label class="control-label" for="field_state">State</label>
+                        <select class="form-control" id="field_state" name="state"
+                                ng-model="vm.address.state" tabindex="5"
+                                ng-options="state as state.name for state in vm.states track by state.code">
+                            <option value="" disabled hidden>State...</option>
+                        </select>
                     </div>
                 </div>
             </div>
