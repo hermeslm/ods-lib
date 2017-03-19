@@ -36,19 +36,20 @@ function Address($uibModal, $state) {
                 resolve: {
                     address: function () {
                         if ($scope.ngModel !== null) {
-                            return {
-                                address: $scope.ngModel.address,
-                                address2: $scope.ngModel.address2,
-                                city: $scope.ngModel.city,
-                                state: $scope.ngModel.state,
-                                zip: $scope.ngModel.zip,
-                                country: $scope.ngModel.country,
-                                phone: $scope.ngModel.phone,
-                                mobile: $scope.ngModel.mobile,
-                                fax: $scope.ngModel.fax,
-                                email: $scope.ngModel.email,
-                                notes: $scope.ngModel.notes
-                            }
+                            return $scope.ngModel;
+                            // {
+                            //     address: $scope.ngModel.address,
+                            //     address2: $scope.ngModel.address2,
+                            //     city: $scope.ngModel.city,
+                            //     state: $scope.ngModel.state,
+                            //     zip: $scope.ngModel.zip,
+                            //     // country: $scope.ngModel.country,
+                            //     phone: $scope.ngModel.phone,
+                            //     mobile: $scope.ngModel.mobile,
+                            //     fax: $scope.ngModel.fax,
+                            //     email: $scope.ngModel.email,
+                            //     notes: $scope.ngModel.notes
+                            // }
                         } else {
                             return null;
                         }

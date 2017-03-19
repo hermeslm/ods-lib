@@ -89,7 +89,7 @@
                         <label class="control-label" for="field_state">State</label>
                         <select class="form-control" id="field_state" name="state"
                                 ng-model="vm.address.state" tabindex="5"
-                                ng-options="state as state.name for state in vm.states | filter:{countryCode:vm.address.state.country.code} track by state.code">
+                                ng-options="state as state.name for state in vm.states | filter:{country.code:vm.address.state.country.code} track by state.code">
                             <option value="" disabled hidden>State...</option>
                         </select>
                     </div>
