@@ -15,7 +15,6 @@ function AddressDialogController($uibModalInstance, address, countries, states, 
 
     vm.clear = clear;
     vm.save = save;
-    vm.onCountryChange = onCountryChange;
 
     function clear() {
         $uibModalInstance.dismiss('cancel');
@@ -24,9 +23,5 @@ function AddressDialogController($uibModalInstance, address, countries, states, 
     function save() {
         $uibModalInstance.close(vm.address);
         vm.isSaving = false;
-    }
-
-    function onCountryChange() {
-        $filter('filter')(vm.states, vm.address.country.code, undefined);
     }
 }
