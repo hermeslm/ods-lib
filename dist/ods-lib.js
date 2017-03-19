@@ -10,9 +10,9 @@ angular
 
 
 'use strict';
-angular.module('ods-lib').run(['$templateCache', function($templateCache) {$templateCache.put('address/address-dialog.html','<form name="addressForm" role="form" novalidate ng-submit="vm.save()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myAddressLabel">Create or edit a Address</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><div class="form-group" ng-show="vm.address.id"><label for="id" data-translate="global.field.id">ID</label><input type="text" class="form-control" id="id" name="id" tabindex="1" ng-model="vm.address.id" readonly="readonly"></div><div class="row"><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_address">Address</label><input type="text" class="form-control" name="address" id="field_address" ng-model="vm.address.address" placeholder="Street..." tabindex="2"></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_phone">Other</label><input type="text" class="form-control" name="phone" id="field_phone" ng-model="vm.address.phone" placeholder="Phone..." tabindex="8"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" name="address2" id="field_address2" ng-model="vm.address.address2" placeholder="Street 2..." tabindex="3"></div></div><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" name="mobile" id="field_mobile" ng-model="vm.address.mobile" placeholder="Mobile..." tabindex="9"></div></div></div><div class="row"><div class="col-md-6"><div class="row"><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" name="city" id="field_city" ng-model="vm.address.city" placeholder="City..." tabindex="4"></div></div><div class="col-md-6"><div class="form-group"><select class="form-control" id="field_state" name="state" ng-model="vm.address.state" tabindex="5" ng-options="state as state.name for state in vm.states track by state.code"><option value="" disabled="disabled" hidden>State...</option></select></div></div></div></div><div class="col-md-6"><div class="row"><div class="col-md-12"><div class="form-group"><input type="text" class="form-control" name="fax" id="field_fax" ng-model="vm.address.fax" placeholder="Fax..." tabindex="10"></div></div></div></div></div><div class="row"><div class="col-md-6"><div class="row"><div class="col-md-6"><div class="form-group"><input type="text" class="form-control" name="zipCode" id="field_zipCode" ng-model="vm.address.zip" placeholder="ZIP" tabindex="6"></div></div><div class="col-md-6"><div class="form-group"><select class="form-control" id="field_country" name="country" ng-model="vm.address.country" tabindex="7" ng-options="country as country.name for country in vm.countries track by country.code"><option value="" disabled="disabled" hidden>Country...</option></select></div></div></div></div><div class="col-md-6"><div class="row"><div class="col-md-12"><div class="form-group"><input type="text" class="form-control" name="email" id="field_email" ng-model="vm.address.email" placeholder="Email..." tabindex="11"></div></div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group"><label class="control-label" for="field_notes">Notes</label><textarea rows="3" class="form-control" name="notes" id="field_notes" ng-model="vm.address.notes" placeholder="Notes..." tabindex="12">\n                    </textarea></div></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button type="button" ng-click="vm.save()" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span></button></div></form>');
-$templateCache.put('address/address.html','<label class="control-label" for="udt-address">Address</label><div class="input-group"><input type="text" class="form-control" name="udt-address" id="udt-address" readonly="readonly" value="{{printName(ngModel)}}"> <span class="input-group-addon" ng-click="openModal()"><i class="fa fa-external-link"></i></span></div>');
-$templateCache.put('j-signature/j-signature.html','<div id="signature"><div id="jSignature"></div><button class="btn btn-danger" ng-click="reset()"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');}]);
+angular.module('ods-lib').run(['$templateCache', function($templateCache) {$templateCache.put('j-signature/j-signature.html','<div id="signature"><div id="jSignature"></div><button class="btn btn-danger" ng-click="reset()"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');
+$templateCache.put('address/address-dialog.html','<form name="addressForm" role="form" novalidate ng-submit="vm.save()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myAddressLabel">Create or edit a Address</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><div class="form-group" ng-show="vm.address.id"><label for="id" data-translate="global.field.id">ID</label><input type="text" class="form-control" id="id" name="id" tabindex="1" ng-model="vm.address.id" readonly="readonly"></div><div class="row"><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_address">Street</label><input type="text" class="form-control" name="address" id="field_address" ng-model="vm.address.address" placeholder="Street..." tabindex="2"></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_phone">Phone</label><input type="text" class="form-control" name="phone" id="field_phone" ng-model="vm.address.phone" placeholder="Phone..." tabindex="8"></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_address">Street2</label><input type="text" class="form-control" name="address2" id="field_address2" ng-model="vm.address.address2" placeholder="Street 2..." tabindex="3"></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_address">Mobile</label><input type="text" class="form-control" name="mobile" id="field_mobile" ng-model="vm.address.mobile" placeholder="Mobile..." tabindex="9"></div></div></div><div class="row"><div class="col-md-6"><div class="row"><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_address">City</label><input type="text" class="form-control" name="city" id="field_city" ng-model="vm.address.city" placeholder="City..." tabindex="4"></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_address">State</label><select class="form-control" id="field_state" name="state" ng-model="vm.address.state" tabindex="5" ng-options="state as state.name for state in vm.states track by state.code"><option value="" disabled="disabled" hidden>State...</option></select></div></div></div></div><div class="col-md-6"><div class="row"><div class="col-md-12"><div class="form-group"><label class="control-label" for="field_address">Fax</label><input type="text" class="form-control" name="fax" id="field_fax" ng-model="vm.address.fax" placeholder="Fax..." tabindex="10"></div></div></div></div></div><div class="row"><div class="col-md-6"><div class="row"><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_address">Zip</label><input type="text" class="form-control" name="zipCode" id="field_zipCode" ng-model="vm.address.zip" placeholder="ZIP" tabindex="6"></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_address">Country</label><select class="form-control" id="field_country" name="country" ng-model="vm.address.country" tabindex="7" ng-options="country as country.name for country in vm.countries track by country.code"><option value="" disabled="disabled" hidden>Country...</option></select></div></div></div></div><div class="col-md-6"><div class="row"><div class="col-md-12"><div class="form-group"><label class="control-label" for="field_address">Email</label><input type="text" class="form-control" name="email" id="field_email" ng-model="vm.address.email" placeholder="Email..." tabindex="11"></div></div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group"><label class="control-label" for="field_notes">Notes</label><textarea rows="3" class="form-control" name="notes" id="field_notes" ng-model="vm.address.notes" placeholder="Notes..." tabindex="12">\n                    </textarea></div></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button type="button" ng-click="vm.save()" ng-disabled="addressForm.$invalid || vm.isSaving" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span></button></div></form>');
+$templateCache.put('address/address.html','<label class="control-label" for="udt-address">Address</label><div class="input-group"><input type="text" class="form-control" name="udt-address" id="udt-address" readonly="readonly" value="{{printName(ngModel)}}"> <span class="input-group-addon" ng-click="openModal()"><i class="fa fa-external-link"></i></span></div>');}]);
 'use strict';
 
 angular
@@ -137,101 +137,6 @@ function Address($uibModal, $state) {
         }
 
     }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .filter('Phone', Phone);
-
-function Phone() {
-    return function (phone) {
-        if (!phone) {
-            return '';
-        }
-
-        var value = phone.toString().trim().replace(/^\+/, '');
-
-        if (value.match(/[^0-9]/)) {
-            return phone;
-        }
-
-        var country, city, number;
-
-        switch (value.length) {
-            case 10: // +1PPP####### -> C (PPP) ###-####
-                country = 1;
-                city = value.slice(0, 3);
-                number = value.slice(3);
-                break;
-
-            case 11: // +CPPP####### -> CCC (PP) ###-####
-                country = value[0];
-                city = value.slice(1, 4);
-                number = value.slice(4);
-                break;
-
-            case 12: // +CCCPP####### -> CCC (PP) ###-####
-                country = value.slice(0, 3);
-                city = value.slice(3, 5);
-                number = value.slice(5);
-                break;
-
-            default:
-                return phone;
-        }
-
-        if (country === 1) {
-            country = "";
-        }
-
-        number = number.slice(0, 3) + '-' + number.slice(3);
-
-        return (country + " (" + city + ") " + number).trim();
-    };
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .filter('PropsFilter', PropsFilter);
-
-/**
- * AngularJS default filter with the following expression:
- * "person in people | filter: {name: $select.search, age: $select.search}"
- * performs an AND between 'name: $select.search' and 'age: $select.search'.
- * We want to perform an OR.
- */
-function PropsFilter() {
-    return function (items, props) {
-        var out = [];
-
-        if (angular.isArray(items)) {
-            var keys = Object.keys(props);
-
-            items.forEach(function (item) {
-                var itemMatches = false;
-
-                for (var i = 0; i < keys.length; i++) {
-                    var prop = keys[i];
-                    var text = props[prop].toLowerCase();
-                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-                        itemMatches = true;
-                        break;
-                    }
-                }
-
-                if (itemMatches) {
-                    out.push(item);
-                }
-            });
-        } else {
-            // Let the output be the input untouched
-            out = items;
-        }
-
-        return out;
-    };
 }
 'use strict';
 
@@ -477,6 +382,101 @@ function Signature() {
     }
 
 
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .filter('Phone', Phone);
+
+function Phone() {
+    return function (phone) {
+        if (!phone) {
+            return '';
+        }
+
+        var value = phone.toString().trim().replace(/^\+/, '');
+
+        if (value.match(/[^0-9]/)) {
+            return phone;
+        }
+
+        var country, city, number;
+
+        switch (value.length) {
+            case 10: // +1PPP####### -> C (PPP) ###-####
+                country = 1;
+                city = value.slice(0, 3);
+                number = value.slice(3);
+                break;
+
+            case 11: // +CPPP####### -> CCC (PP) ###-####
+                country = value[0];
+                city = value.slice(1, 4);
+                number = value.slice(4);
+                break;
+
+            case 12: // +CCCPP####### -> CCC (PP) ###-####
+                country = value.slice(0, 3);
+                city = value.slice(3, 5);
+                number = value.slice(5);
+                break;
+
+            default:
+                return phone;
+        }
+
+        if (country === 1) {
+            country = "";
+        }
+
+        number = number.slice(0, 3) + '-' + number.slice(3);
+
+        return (country + " (" + city + ") " + number).trim();
+    };
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .filter('PropsFilter', PropsFilter);
+
+/**
+ * AngularJS default filter with the following expression:
+ * "person in people | filter: {name: $select.search, age: $select.search}"
+ * performs an AND between 'name: $select.search' and 'age: $select.search'.
+ * We want to perform an OR.
+ */
+function PropsFilter() {
+    return function (items, props) {
+        var out = [];
+
+        if (angular.isArray(items)) {
+            var keys = Object.keys(props);
+
+            items.forEach(function (item) {
+                var itemMatches = false;
+
+                for (var i = 0; i < keys.length; i++) {
+                    var prop = keys[i];
+                    var text = props[prop].toLowerCase();
+                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                        itemMatches = true;
+                        break;
+                    }
+                }
+
+                if (itemMatches) {
+                    out.push(item);
+                }
+            });
+        } else {
+            // Let the output be the input untouched
+            out = items;
+        }
+
+        return out;
+    };
 }
 'use strict';
 
