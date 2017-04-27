@@ -75,8 +75,8 @@ function Address($uibModal) {
 
         function printName(address) {
             if (address != null) {
-                return address.address + ' ' +
-                    address.address2 + ' ' +
+                return address.street + ' ' +
+                    address.street2 + ' ' +
                     address.city + ',' +
                     address.state.name + ' ' +
                     address.zip
