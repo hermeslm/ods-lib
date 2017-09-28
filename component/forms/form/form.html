@@ -1,0 +1,75 @@
+<form name="{{schema.name}}" role="form" novalidate ng-submit="save()" show-validation>
+    <div class="box-body padding-top">
+        <div class="alert alert-success" ng-show="vm.success">
+            <strong>Password changed!</strong>
+        </div>
+        <div class="alert alert-danger" ng-show="vm.error">
+            <strong>An error has occurred!</strong> The password could not be changed.
+        </div>
+        <div class="alert alert-danger" ng-show="vm.doNotMatch">
+            The password and its confirmation do not match!
+        </div>
+        <div ng-repeat="section in schema.layout">
+            <h4 ng-bind-html="section.title"></h4>
+            <div class="{{row.cssClass}}" ng-repeat="row in section.rows">
+                <div class="{{col.cssClass}}" ng-repeat="col in row.cols">
+                    <div ng-if="col.field">
+                        <div class="form-group" ng-switch="col.field.type"
+                             ng-class="{'has-error': {{schema.name}}.{{col.field.name}}.$invalid}">
+
+                            <label class="control-label" for="{{col.field.name}}"
+                                   ng-hide="vm.hideTitle(col.field)">{{col.field.label}}</label>
+
+                            <div ng-switch-when="NUMBER">
+                                <ng-include src="vm.getFieldTemplate('NUMBER')"></ng-include>
+                            </div>
+
+                            <div ng-switch-when="TEXT">
+                                <ng-include src="vm.getFieldTemplate('TEXT')"></ng-include>
+                            </div>
+
+                            <div ng-switch-when="DATE">
+                                <ng-include src="vm.getFieldTemplate('DATE')"></ng-include>
+                            </div>
+
+                            <div ng-switch-when="TEXTAREA">
+                                <ng-include src="vm.getFieldTemplate('TEXTAREA')"></ng-include>
+                            </div>
+
+                            <div ng-switch-when="TOGGLE">
+                                <ng-include src="vm.getFieldTemplate('TOGGLE')"></ng-include>
+                            </div>
+
+                            <div ng-switch-when="SELECT">
+                                <ng-include src="vm.getFieldTemplate('SELECT')"></ng-include>
+                            </div>
+
+                            <div ng-switch-when="MULTI_SELECT">
+                                <ng-include src="vm.getFieldTemplate('MULTI_SELECT')"></ng-include>
+                            </div>
+
+                            <div ng-switch-default>
+                                <ng-include src="vm.getFieldTemplate('TEXT')"></ng-include>
+                            </div>
+
+                            <div ng-show="{{schema.name}}.{{col.field.name}}.$invalid">
+                                <p class="help-block"
+                                   ng-show="{{schema.name}}.{{col.field.name}}.$error.required">
+                                    This field is required.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="box-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Clear</span>
+        </button>
+        <button type="submit" ng-disabled="{{schema.name}}.$invalid" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

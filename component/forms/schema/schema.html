@@ -1,0 +1,14 @@
+<div class="box-schema">
+    <div class="alert alert-danger" ng-show="vm.error">
+        <strong>An error has occurred!</strong> Error in schema.
+    </div>
+    <ul dnd-list="schema.layout" dnd-allowed-types="schema.allowedTypes">
+        <li class="box-schema-section" ng-repeat="object in schema.layout"
+            dnd-draggable="object"
+            dnd-disable-if="object.componentType == undefined"
+            dnd-effect-allowed="move"
+            dnd-moved="schema.layout.splice($index, 1)"
+            ng-include="'forms/schema/components/component.html'">
+        </li>
+    </ul>
+</div>

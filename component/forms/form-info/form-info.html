@@ -1,0 +1,31 @@
+<form name="formInfo" role="form" novalidate ng-submit="save()" show-validation>
+    <div class="box-body padding-top">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group" ng-class="{'has-error': formSchema.formName.$invalid}">
+                    <label class="control-label" for="formName">Form name</label>
+                    <input class="form-control" name="formName" id="formName"
+                           ng-model="schema.name" ng-required="true"/>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group" ng-class="{'has-error': formSchema.formLabel.$invalid}">
+                    <label class="control-label" for="formLabel">Form label</label>
+                    <input class="form-control" name="formLabel" id="formLabel"
+                           ng-model="schema.label" ng-required="true"/>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-group" ng-class="{'has-error': formSchema.description.$invalid}">
+                    <label class="control-label" for="description">Form description</label>
+                    <textarea class="form-control" name="description" id="description"
+                              ng-model="schema.description" ng-required="false"
+                              rows="3" placeholder="Type form description...">
+                    </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

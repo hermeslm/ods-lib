@@ -1,0 +1,56 @@
+<uib-tabset class="nav-tabs-custom">
+    <uib-tab index="0" heading="Properties">
+        <form name="sectionPropertiesForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <div class="row no-vertical-margin">
+                    <div class="form-group margin-bottom"
+                         ng-class="{'has-error': sectionPropertiesForm.name.$invalid}">
+                        <label for="name" class="col-sm-2 control-label">Name:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="Name..." ng-model="section.name"
+                                   ng-required="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-vertical-margin">
+                    <div class="form-group margin-bottom"
+                         ng-class="{'has-error': sectionPropertiesForm.rows.$invalid}">
+                        <label for="rows" class="col-sm-2 control-label">Rows:</label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" id="rows" name="rows"
+                                   placeholder="Rows..." ng-model="section.rows.length"
+                                   ng-required="false" ng-disabled="true">
+                        </div>
+                        <div class="col-lg-6">
+                            <button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-vertical-margin">
+                    <div class="form-group margin-bottom"
+                         ng-class="{'has-error': sectionPropertiesForm.title.$invalid}">
+                        <label for="title" class="col-sm-2 control-label">Title:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="title" name="title"
+                                   placeholder="Title..." ng-model="section.title"
+                                   ng-required="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="3" heading="Debug" ng-show="debugMode">
+        <div class="jsonify padding">
+            <div class="btn-toolbar btn-toolbar-right">
+                <button class="btn btn-default btn-xs" type="button" title="Copy the json data." ng-click="copy()"><span
+                        class="fa fa-clipboard"></span></button>
+                <!--<button class="btn btn-default btn-xs" type="button" title="Display hidden properties."-->
+                <!--ng-click="displayHidden = !displayHidden" ng-class="{ 'active': displayHidden }"><span-->
+                <!--class="fa fa-eye"></span></button>-->
+            </div>
+            <pre>{{modelAsJson}}</pre>
+        </div>
+    </uib-tab>
+</uib-tabset>

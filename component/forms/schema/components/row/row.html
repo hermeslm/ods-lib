@@ -1,0 +1,36 @@
+<div class="box-draggable" ng-class="{ 'error': row.invalid}">
+    <div class="box-overlay">
+        <div class="btn-toolbar btn-toolbar-right">
+            <button class="btn btn-default btn-xs" type="button"
+                    ng-disabled="section.displayProperties && section.invalid"
+                    ng-class="{ 'active': section.displayProperties }" ng-click="toggleRowProperties(row)"
+                    title="Configure this Section.">
+                <span class="fa fa-wrench"></span>
+            </button>
+            <button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeRow(schema, row)"
+                    title="Remove">
+                <span class="fa fa-trash"></span>
+            </button>
+        </div>
+    </div>
+    <div class="box padding">
+        <div class="box-body no-padding">
+            <ul dnd-list="row.cols" dnd-allowed-types="row.allowedTypes">
+                <li class="box-row {{col.cssClass}}" ng-repeat="col in row.cols"
+                    dnd-draggable="col"
+                    dnd-effect-allowed="move"
+                    dnd-moved="row.cols.splice($index, 1)"
+                    dnd-selected="models.selected = col"
+                    ng-class="{selected: models.selected === row.cols}"
+                    ng-include="'forms/schema/components/row/item.html'">
+                </li>
+            </ul>
+        </div>
+        <!-- /.box-body -->
+    </div>
+    <div class="box-properties-container" ng-class="{ visible: row.displayProperties }">
+        <div class="padding">
+            <div ng-include="'forms/schema/components/row/row-properties.html'"></div>
+        </div>
+    </div>
+</div>

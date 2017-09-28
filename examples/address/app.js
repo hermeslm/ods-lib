@@ -9,8 +9,8 @@ app.controller('MainCtrl', function ($scope) {
 
     $scope.address = {
         "id": 951,
-        "address": "1905 NW 82 ave",
-        "address2": "",
+        "street": "1905 NW 82 ave",
+        "street2": "",
         "city": "Doral",
         "zip": "33126",
         "phone": "1-(314)638-4688",

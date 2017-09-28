@@ -1,0 +1,10 @@
+<div class="input-group" ng-hide="vm.hideParam(col.field)">
+    <input id="{{col.field.name}}" class="form-control" name="{{col.field.name}}"
+           uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(col.field)"
+           ng-model="col.field.value" is-open="col.field.datePickerOpenStatus"/>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="vm.openCalendar($index)">
+            <i class="glyphicon glyphicon-calendar"></i>
+        </button>
+    </span>
+</div>

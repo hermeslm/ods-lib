@@ -1,0 +1,44 @@
+<div class="box-draggable" ng-class="{ 'error': object.invalid}">
+    <div class="box-overlay">
+        <div class="btn-toolbar btn-toolbar-right">
+            <button class="btn btn-default btn-xs" type="button"
+                    ng-disabled="section.displayProperties && section.invalid"
+                    ng-class="{ 'active': section.displayProperties }" ng-click="toggleSectionProperties(section)"
+                    title="Configure this Section.">
+                <span class="fa fa-wrench"></span>
+            </button>
+            <button class="btn btn-default btn-xs" type="button" ng-click="schemaCtrl.swapFields($index - 1, $index)"
+                    ng-disabled="$index === 0" title="Move up">
+                <span class="fa fa-arrow-up"></span>
+            </button>
+            <button class="btn btn-default btn-xs" type="button" ng-click="schemaCtrl.swapFields($index, $index + 1)"
+                    ng-disabled="$index === schema.fields.length - 1" title="Move down">
+                <span class="fa fa-arrow-down"></span>
+            </button>
+            <button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeSection(schema, section)"
+                    title="Remove">
+                <span class="fa fa-trash"></span>
+            </button>
+        </div>
+    </div>
+    <div class="box-header with-border">
+        <h4 class="box-title" ng-bind-html="section.title"></h4>
+    </div>
+    <div class="box-body">
+        <ul dnd-list="section.rows" dnd-allowed-types="row.allowedTypes">
+            <li class="{{row.cssClass}} padding-top" ng-repeat="row in section.rows"
+                dnd-draggable="row"
+                dnd-type="row.componentType"
+                dnd-disable-if="row.componentType == undefined"
+                dnd-effect-allowed="move"
+                dnd-moved="section.rows.splice($index, 1)"
+                ng-include="'forms/schema/components/row.html'">
+            </li>
+        </ul>
+    </div>
+    <div class="box-properties-container" ng-class="{ visible: section.displayProperties }">
+        <div class="padding">
+            <div ng-include="'forms/schema/components/section/section-properties.html'"></div>
+        </div>
+    </div>
+</div>

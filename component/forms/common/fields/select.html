@@ -1,0 +1,13 @@
+<div ng-hide="vm.hideParam(col.field)">
+    <ui-select name="{{col.field.name}}" id="{{col.field.name}}" ng-model="col.field.value"
+               ui-select-required="vm.getRequired(col.field)" close-on-select="true" title="{{col.field.title}}">
+        <ui-select-match placeholder="{{col.field.placeholder}}">
+            {{vm.getSelectTitleField(col.field, $select.selected)}}
+        </ui-select-match>
+        <ui-select-choices repeat="element in col.field.data | filter:$select.search | limitTo: col.field.limitTo">
+            <div ng-bind-html="vm.getSelectTitleField(col.field, element) | highlight: $select.search"></div>
+            <!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>-->
+            <!--{{vm.getSelectTitleField(param, element)}}-->
+        </ui-select-choices>
+    </ui-select>
+</div>

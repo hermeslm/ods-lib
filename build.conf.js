@@ -3,17 +3,29 @@
  */
 module.exports = {
 
-  srcJs: ['component/**/*.module.js', 'component/**/*.js', '!component/**/*_test.js'],
-  srcHtml: ['component/**/*.html', 'component/**/*.htm'],
-  destHtml: './component',
-  tests: 'component/**/*_test.js',
-  buildFolder: 'dist',
-  buildJsFilename: 'ods-lib.js',
-  banner: '/*!\n' +
+    srcJs: ['component/**/*.module.js', 'component/**/*.js', '!component/**/*_test.js'],
+    srcHtml: ['component/**/*.html', 'component/**/*.htm'],
+    destHtml: './component',
+    tests: 'component/**/*_test.js',
+    buildFolder: 'dist',
+    buildJsFilename: 'ods-lib.js',
+    banner: '/*!\n' +
     ' * See LICENSE in this repository for license information\n' +
     ' */\n',
-  closureStart: '(function(){\n',
-  closureEnd: '\n})();',
-  useStrict: '\'use strict\';\n',
-
+    closureStart: '(function(){\n',
+    closureEnd: '\n})();',
+    useStrict: '\'use strict\';\n',
+    injectPaths: {
+        sass: ['./scss/**/*.scss'],
+        javascript: [
+            './www/**/*.js',
+            '!./www/js/app.js',
+            '!./www/lib/**'
+        ],
+        css: [
+            './www/**/*.css',
+            '!./www/css/ionic.app*.css',
+            '!./www/lib/**'
+        ]
+    }
 };

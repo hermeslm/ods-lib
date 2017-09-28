@@ -1,0 +1,97 @@
+<uib-tabset class="nav-tabs-custom">
+    <uib-tab index="0" heading="Properties">
+        <form name="sectionPropertiesForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <div class="row no-vertical-margin">
+                    <div class="form-group margin-bottom"
+                         ng-class="{'has-error': sectionPropertiesForm.name.$invalid}">
+                        <label for="name" class="col-sm-2 control-label">Name:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="name" name="name"
+                                   placeholder="Name..." ng-model="row.name"
+                                   ng-required="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-vertical-margin">
+                    <div class="form-group margin-bottom"
+                         ng-class="{'has-error': sectionPropertiesForm.cssClass.$invalid}">
+                        <label for="cssClass" class="col-sm-2 control-label">Class Name:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="cssClass" name="cssClass"
+                                   placeholder="Css Class..." ng-model="row.cssClass"
+                                   ng-required="true">
+                        </div>
+                    </div>
+                </div>
+                <div class="row no-vertical-margin">
+                    <div class="form-group margin-bottom"
+                         ng-class="{'has-error': sectionPropertiesForm.cols.$invalid}">
+                        <label for="cols" class="col-sm-2 control-label">Cols:</label>
+                        <div class="col-sm-4">
+                            <input type="number" class="form-control" id="cols" name="cols"
+                                   placeholder="Cols..." ng-model="row.cols.length"
+                                   ng-required="false" ng-disabled="true">
+                        </div>
+                        <div class="col-lg-6">
+                            <!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row no-vertical-margin">
+            <div class="col-lg-6">
+                <table ng-table="tableParams"
+                       class="table table-bordered table-hover table-condensed editable-table demoTable"
+                       ng-form="tableForm" disable-filter="isAdding">
+                    <colgroup>
+                        <col width="50%"/>
+                    </colgroup>
+                    <tr ng-repeat="row in $data" ng-form="rowForm">
+                        <td title="'Class Name'" ng-switch="row.isEditing" ng-form="cssClass" class="align-middle">
+                            <span ng-switch-default class="editable-text">{{row.cssClass}}</span>
+                            <div class="controls" ng-switch-when="true">
+                                <input type="text" name="cssClass" ng-model="row.cssClass"
+                                       class="editable-input form-control input-sm" required/>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-primary btn-sm" ng-click="saveColumnEdited(row, rowForm)"
+                                    ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid">
+                                <span class="glyphicon glyphicon-ok"></span>
+                            </button>
+                            <button class="btn btn-default btn-sm" ng-click="cancelColumnEdited(row, rowForm)"
+                                    ng-if="row.isEditing">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                            <button class="btn btn-default btn-sm" ng-click="row.isEditing = true"
+                                    ng-if="!row.isEditing">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </button>
+                            <button class="btn btn-danger btn-sm" ng-click="removeColumn($data, $index)"
+                                    ng-if="!row.isEditing">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-lg-6">
+                <button class="btn btn-primary" ng-click="addColumn(row)">Add column</button>
+            </div>
+        </div>
+    </uib-tab>
+    <uib-tab index="3" heading="Debug" ng-show="debugMode">
+        <div class="jsonify padding">
+            <div class="btn-toolbar btn-toolbar-right">
+                <button class="btn btn-default btn-xs" type="button" title="Copy the json data." ng-click="copy()"><span
+                        class="fa fa-clipboard"></span></button>
+                <!--<button class="btn btn-default btn-xs" type="button" title="Display hidden properties."-->
+                <!--ng-click="displayHidden = !displayHidden" ng-class="{ 'active': displayHidden }"><span-->
+                <!--class="fa fa-eye"></span></button>-->
+            </div>
+            <pre>{{modelAsJson}}</pre>
+        </div>
+    </uib-tab>
+</uib-tabset>
