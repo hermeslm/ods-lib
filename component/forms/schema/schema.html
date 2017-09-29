@@ -3,12 +3,12 @@
         <strong>An error has occurred!</strong> Error in schema.
     </div>
     <ul dnd-list="schema.layout" dnd-allowed-types="schema.allowedTypes">
-        <li class="box-schema-section" ng-repeat="object in schema.layout"
-            dnd-draggable="object"
-            dnd-disable-if="object.componentType == undefined"
+        <li class="box-schema-section" ng-repeat="section in schema.layout"
+            dnd-draggable="section"
+            dnd-disable-if="section.componentType == undefined"
             dnd-effect-allowed="move"
-            dnd-moved="schema.layout.splice($index, 1)"
-            ng-include="'forms/schema/components/component.html'">
+            dnd-moved="schema.layout.splice($index, 1)">
+            <ods-section schema="schema" section="section" index="$index" debug-mode="debugMode"></ods-section>
         </li>
     </ul>
 </div>

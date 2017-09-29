@@ -13,12 +13,11 @@ function ModelDirective(OdsFormService) {
 
     var directive = {
         restrict: 'E',
-        templateUrl: 'forms/model/model.html',
+        templateUrl: 'forms/common/model/model.html',
         scope: {
-            schema: '='
+            model: '=',
+            cssClass: '@'
         },
-        // controller: 'OdsFormController',
-        // controllerAs: 'vm',
         link: linkFunc
     };
 
@@ -28,9 +27,14 @@ function ModelDirective(OdsFormService) {
 
     function linkFunc($scope, $element) {
 
-        $scope.$watch('schema', function(model) {
+        $scope.copy = copy;
+
+        $scope.$watch('model', function(model) {
             $scope.modelAsJson = angular.toJson(model, true);
         }, true);
 
+        function copy() {
+            OdsFormService.copyJson(angular.toJson($scope.model, true));
+        }
     }
 }

@@ -1,7 +1,7 @@
-<div class="input-group" ng-hide="vm.hideParam(col.field)">
-    <input id="{{col.field.name}}" class="form-control" name="{{col.field.name}}"
-           uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(col.field)"
-           ng-model="col.field.value" is-open="col.field.datePickerOpenStatus"/>
+<div class="input-group" ng-hide="vm.hideParam(field)">
+    <input id="{{field.name}}" class="form-control" name="{{field.name}}"
+           uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(field)"
+           ng-model="field.value" is-open="field.datePickerOpenStatus"/>
     <span class="input-group-btn">
         <button type="button" class="btn btn-default" ng-click="vm.openCalendar($index)">
             <i class="glyphicon glyphicon-calendar"></i>

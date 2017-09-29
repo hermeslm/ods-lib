@@ -2,21 +2,24 @@
     <div class="box-overlay">
         <div class="btn-toolbar btn-toolbar-right">
             <button class="btn btn-default btn-xs" type="button"
-                    ng-disabled="section.displayProperties && section.invalid"
-                    ng-class="{ 'active': section.displayProperties }" ng-click="toggleSectionProperties(section)"
+                    ng-disabled="section.showProperties && section.invalid"
+                    ng-class="{ 'active': section.showProperties }"
+                    ng-click="toggleProperties(section)"
                     title="Configure this Section.">
                 <span class="fa fa-wrench"></span>
             </button>
-            <button class="btn btn-default btn-xs" type="button" ng-click="schemaCtrl.swapFields($index - 1, $index)"
-                    ng-disabled="$index === 0" title="Move up">
+            <button class="btn btn-default btn-xs" type="button"
+                    ng-click="swap(index - 1, index)"
+                    ng-disabled="index === 0" title="Move up">
                 <span class="fa fa-arrow-up"></span>
             </button>
-            <button class="btn btn-default btn-xs" type="button" ng-click="schemaCtrl.swapFields($index, $index + 1)"
-                    ng-disabled="$index === schema.fields.length - 1" title="Move down">
+            <button class="btn btn-default btn-xs" type="button"
+                    ng-click="swap(index, index + 1)" title="Move down"
+                    ng-disabled="index === schema.layout.length - 1">
                 <span class="fa fa-arrow-down"></span>
             </button>
-            <button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeSection(schema, section)"
-                    title="Remove">
+            <button class="btn btn-default btn-xs btn-danger" type="button"
+                    ng-click="remove(index)" title="Remove">
                 <span class="fa fa-trash"></span>
             </button>
         </div>
@@ -25,18 +28,18 @@
         <h4 class="box-title" ng-bind-html="section.title"></h4>
     </div>
     <div class="box-body">
-        <ul dnd-list="section.rows" dnd-allowed-types="row.allowedTypes">
+        <ul dnd-list="section.rows" dnd-allowed-types="section.allowedTypes">
             <li class="{{row.cssClass}} padding-top" ng-repeat="row in section.rows"
                 dnd-draggable="row"
                 dnd-type="row.componentType"
                 dnd-disable-if="row.componentType == undefined"
                 dnd-effect-allowed="move"
-                dnd-moved="section.rows.splice($index, 1)"
-                ng-include="'forms/schema/components/row.html'">
+                dnd-moved="section.rows.splice($index, 1)">
+                <ods-row section="section" row="row" index="$index" debug-mode="debugMode"></ods-row>
             </li>
         </ul>
     </div>
-    <div class="box-properties-container" ng-class="{ visible: section.displayProperties }">
+    <div class="box-properties-container" ng-class="{ visible: section.showProperties }">
         <div class="padding">
             <div ng-include="'forms/schema/components/section/section-properties.html'"></div>
         </div>

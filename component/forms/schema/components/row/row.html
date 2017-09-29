@@ -2,33 +2,36 @@
     <div class="box-overlay">
         <div class="btn-toolbar btn-toolbar-right">
             <button class="btn btn-default btn-xs" type="button"
-                    ng-disabled="section.displayProperties && section.invalid"
-                    ng-class="{ 'active': section.displayProperties }" ng-click="toggleRowProperties(row)"
-                    title="Configure this Section.">
+                    ng-disabled="section.showProperties && section.invalid"
+                    ng-class="{ 'active': section.showProperties }" title="Configure this Section."
+                    ng-click="toggleRowProperties(row)">
                 <span class="fa fa-wrench"></span>
             </button>
-            <button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeRow(schema, row)"
-                    title="Remove">
+            <button class="btn btn-default btn-xs btn-danger" type="button" title="Remove"
+                    ng-click="removeRow(index)">
                 <span class="fa fa-trash"></span>
             </button>
         </div>
     </div>
-    <div class="box padding">
+    <div class="box-field-container padding">
         <div class="box-body no-padding">
-            <ul dnd-list="row.cols" dnd-allowed-types="row.allowedTypes">
-                <li class="box-row {{col.cssClass}}" ng-repeat="col in row.cols"
-                    dnd-draggable="col"
-                    dnd-effect-allowed="move"
-                    dnd-moved="row.cols.splice($index, 1)"
-                    dnd-selected="models.selected = col"
-                    ng-class="{selected: models.selected === row.cols}"
-                    ng-include="'forms/schema/components/row/item.html'">
-                </li>
-            </ul>
+            <div class="box-row {{col.cssClass}}" ng-repeat="col in row.cols">
+                <ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1"
+                    dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)">
+                    <li class="box-field" ng-repeat="field in col.fields"
+                        dnd-draggable="field"
+                        dnd-type="field.componentType"
+                        dnd-effect-allowed="move"
+                        dnd-selected="models.selected = field"
+                        ng-class="{selected: models.selected === col.fields}">
+                        <ods-field row="row" col="col" index="$index" field="field" debug-mode="debugMode"></ods-field>
+                    </li>
+                </ul>
+            </div>
         </div>
         <!-- /.box-body -->
     </div>
-    <div class="box-properties-container" ng-class="{ visible: row.displayProperties }">
+    <div class="box-properties-container" ng-class="{ visible: row.showProperties }">
         <div class="padding">
             <div ng-include="'forms/schema/components/row/row-properties.html'"></div>
         </div>

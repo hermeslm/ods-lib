@@ -7,6 +7,15 @@
   margin-left: 10px;
 }
 
+.toolbar-container {
+  margin-top: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
 .panel-toolbar .panel-body {
   padding: 10px 5px;
   padding-bottom: 0 !important;
@@ -51,6 +60,14 @@
   filter: aplha(opacity(100));
 }
 
+.box-schema .dndDragging {
+  opacity: 0.7;
+}
+
+.box-schema .dndDraggingSource {
+  display: none;
+}
+
 .box-schema ul[dnd-list] {
   margin: 0px;
   min-height: 30px;
@@ -75,19 +92,38 @@
   border-radius: 4px;
 }
 
+.box-row-container {
+  margin-top: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.box-field-container {
+  margin-top: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  float: left;
+  width: 100%;
+}
+
 .padding {
   padding: 10px;
 }
 
 .box-overlay {
-  /*position: absolute;*/
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   /* Needed by IE */
   filter: alpha(opacity=0);
-  background: #FFF;
   background-color: rgba(255, 255, 255, 0);
   cursor: move;
 }
@@ -116,25 +152,17 @@
   pointer-events: auto;
 }
 
-.box {
-  margin-top: 10px;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
 .box-body {
   padding: 0 10px;
 }
 
 .box-body li {
   display: block;
-  padding-top: 5px;
-  padding-right: 5px;
-  padding-bottom: 0px;
-  padding-left: 5px;
+  padding: 15px 5px 0px;
+}
+
+.box-footer {
+  padding: 10px;
 }
 
 .box-properties-container.visible {
@@ -158,10 +186,10 @@
 
 .box-row {
   display: block;
-  background-color: #8c8c8c;
+  background-color: #d9d9d9;
   padding: 4px;
   line-height: 20px;
-  border: 1px solid #ddd;
+  border: 1px dashed #868686;
 }
 
 .tab-content {
@@ -192,6 +220,11 @@
 
 .jsonify .btn-toolbar-right {
   right: 15px;
+}
+
+.fixed-height {
+  overflow-y: auto;
+  max-height: 350px;
 }
 
 .no-padding {

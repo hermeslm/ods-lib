@@ -16,6 +16,7 @@
         .constant('OdsComponentType', {
             'SECTION': 'section', //Do not edit this type
             'ROW': 'row', //Do not edit this type
+            'COLUMN': 'column', //Do not edit this type
             'FIELD': 'field' //Do not edit this type
         });
 })();

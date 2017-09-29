@@ -29,18 +29,17 @@
             return OdsFormService.getFieldTemplate(fieldType);
         }
 
-        function getSelectTitleField(param, element) {
+        function getSelectTitleField(field, element) {
 
-            if (element) {
-                if (param.render) {
-                    return param.render(element);
+            if (field) {
+                if (field.render) {
+                    return field.render(element);
                 } else {
-                    return param.titleField !== undefined ? element[param.titleField] : element.name;
+                    return field.titleField !== undefined ? element[field.titleField] : element.name;
                 }
             } else {
-                return param.placeholder;
+                return field.placeholder;
             }
         }
-
     }
 })();

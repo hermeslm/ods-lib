@@ -22,16 +22,7 @@
                 disabled: false,
                 title: 'Layout',
                 icon: 'fa fa-dashboard',
-                components: [OdsFormService.newSectionObject()
-                    // , {
-                    //     componentType: OdsComponentType.ROW,
-                    //     cssClass: 'row',
-                    //     cols: [{
-                    //         cssClass: 'col-lg-12',
-                    //         field: null
-                    //     }]
-                    // }
-                ]
+                components: [OdsFormService.newSectionObject()]
             }, {
                 id: 1,
                 open: false,
@@ -74,26 +65,27 @@
             }]
         };
 
-        vm.getSuperFieldTemplate = getSuperFieldTemplate;
+        // vm.getSuperFieldTemplate = getSuperFieldTemplate;
         vm.getToolbarComponent = getToolbarComponent;
-        vm.addField = addField;
-        vm.addSection = addSection;
 
-        function getSuperFieldTemplate() {
-            return OdsFormService.getSuperFieldTemplate();
-        }
+        // vm.addField = addField;
+        // vm.addSection = addSection;
+
+        // function getSuperFieldTemplate() {
+        //     return OdsFormService.getSuperFieldTemplate();
+        // }
 
         function getToolbarComponent(componentType) {
             return OdsFormService.getToolbarComponent(componentType);
         }
 
-        function addField() {
-            alert("Add field function");
-        }
-
-        function addSection() {
-            alert("Add section function");
-        }
+        // function addField() {
+        //     alert("Add field function");
+        // }
+        //
+        // function addSection() {
+        //     alert("Add section function");
+        // }
 
     };
 })();

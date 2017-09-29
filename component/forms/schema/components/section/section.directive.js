@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsSection', SectionDirective);
 
-SectionDirective.$inject = ['OdsFormService'];
+SectionDirective.$inject = ['OdsFormService', 'dialogs'];
 
-function SectionDirective(OdsFormService) {
+function SectionDirective(OdsFormService, dialogs) {
 
     var directive = {
         restrict: 'E',
@@ -17,10 +17,9 @@ function SectionDirective(OdsFormService) {
         scope: {
             schema: '=',
             section: '=',
+            index: '=',
             debugMode: '='
         },
-        // controller: 'OdsSchemaController',
-        // controllerAs: 'vm',
         link: linkFunc
     };
 
@@ -30,29 +29,62 @@ function SectionDirective(OdsFormService) {
 
     function linkFunc($scope, $element) {
 
-        $scope.toggleSectionProperties = toggleSectionProperties;
-        $scope.removeSection = removeSection;
+        $scope.toggleProperties = toggleProperties;
+        $scope.remove = remove;
+        $scope.swap = swap;
         $scope.addRow = addRow;
 
-        function toggleSectionProperties(section) {
+        /**
+         * Toggle Section properties options.
+         * @param section Current section to show properties options.
+         */
+        function toggleProperties(section) {
 
-            section.displayProperties = !section.displayProperties;
-            $scope.expanded = section.displayProperties;
+            section.showProperties = !section.showProperties;
         }
 
-        function removeSection(schema, section) {
+        /**
+         * Remove section from schema.
+         * @param index Section index to remove.
+         */
+        function remove(index) {
 
-            $scope.schema = OdsFormService.removeSection(schema, section);
+            dialogs.confirm('Confirm!!!', 'Do you want to remove this section?',
+                {size: 'sm'}).result.then(function (btn) {
+                $scope.schema.layout.splice(index, 1);
+            });
         }
 
+        /**
+         * Swap Section order.
+         * @param index New Section index.
+         */
+        function swap(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this section?',
+                {size: 'sm'}).result.then(function (btn) {
+
+                var _previousValue = [];
+                angular.copy($scope.schema.layout, _previousValue);
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.schema.layout.length ||
+                    idx2 >= $scope.schema.layout.length) {
+
+                    return;
+                }
+                $scope.schema.layout[idx1] = $scope.schema.layout.splice(idx2, 1, $scope.schema.layout[idx1])[0];
+
+            });
+        }
+
+        /**
+         * Add a new row to the current Section.
+         */
         function addRow() {
+
             $scope.section.rows.push(OdsFormService.newRowObject());
         }
-
-        $scope.$watch('section', function (model) {
-            $scope.modelAsJson = angular.toJson(model, true);
-        }, true);
-
 
     }
 }

@@ -20,15 +20,16 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
             componentType: OdsComponentType.ROW,
             cols: [{
                 cssClass: 'col-lg-12',
-                field: {
+                fields: [{
                     label: 'Problems',
                     name: 'problems',
                     placeholder: 'Type the patient problems...',
                     type: OdsFieldType.TEXTAREA,
+                    componentType: OdsComponentType.FIELD,
                     required: true,
                     rows: 8,
                     value: ''
-                }
+                }]
             }]
         }]
     };
@@ -42,15 +43,16 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
             componentType: OdsComponentType.ROW,
             cols: [{
                 cssClass: 'col-lg-12',
-                field: {
+                fields: [{
                     label: 'Situation',
                     name: 'situation',
                     placeholder: 'Type the patient situation...',
                     type: OdsFieldType.TEXTAREA,
+                    componentType: OdsComponentType.FIELD,
                     required: true,
                     rows: 2,
                     value: ''
-                }
+                }]
             }]
         }]
     };
@@ -64,50 +66,54 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
             componentType: OdsComponentType.ROW,
             cols: [{
                 cssClass: 'col-lg-4',
-                field: {
+                fields: [{
                     label: 'Have you ever thought about killing yourself or others?',
                     name: 'suicide',
                     type: OdsFieldType.TOGGLE,
+                    componentType: OdsComponentType.FIELD,
                     ln: false,
                     on: 'Yes',
                     off: 'No',
                     value: ''
-                }
+                }]
             }, {
                 cssClass: 'col-lg-8',
-                field: {
+                fields: [{
                     label: 'If yes, explain',
                     name: 'suicideIfTrue',
                     placeholder: '',
                     type: OdsFieldType.TEXT,
+                    componentType: OdsComponentType.FIELD,
                     required: false,
                     value: ''
-                }
+                }]
             }]
         }, {
             cssClass: 'row',
             componentType: OdsComponentType.ROW,
             cols: [{
                 cssClass: 'col-lg-4',
-                field: {
+                fields: [{
                     label: 'Do you own a weapon?',
                     name: 'weapon',
                     type: OdsFieldType.TOGGLE,
+                    componentType: OdsComponentType.FIELD,
                     ln: false,
                     on: 'Yes',
                     off: 'No',
                     value: ''
-                }
+                }]
             }, {
                 cssClass: 'col-lg-8',
-                field: {
+                fields: [{
                     label: 'If yes, explain',
                     name: 'weaponIfTrue',
                     placeholder: '',
                     type: OdsFieldType.TEXT,
+                    componentType: OdsComponentType.FIELD,
                     required: false,
                     value: ''
-                }
+                }]
             }]
         }]
     };
@@ -121,13 +127,14 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
             componentType: OdsComponentType.ROW,
             cols: [{
                 cssClass: 'col-lg-6',
-                field: {
+                fields: [{
                     label: 'What is your sexual orientation?',
                     name: 'sexualOrientation',
                     required: true,
                     multiSelect: false,
                     placeholder: 'Type sexual orientation...',
                     type: OdsFieldType.SELECT,
+                    componentType: OdsComponentType.FIELD,
                     valueField: 'id',
                     titleField: 'name',
                     limitTo: 10,
@@ -149,16 +156,17 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                         id: 3,
                         name: 'Bisexual'
                     }]
-                }
+                }]
             }, {
                 cssClass: 'col-lg-6',
-                field: {
+                fields: [{
                     label: 'Describe current sexual activity',
                     name: 'sexualActivity',
                     required: true,
                     multiSelect: false,
                     placeholder: 'Type sexual activity...',
                     type: OdsFieldType.MULTI_SELECT,
+                    componentType: OdsComponentType.FIELD,
                     valueField: 'id',
                     titleField: 'name',
                     limitTo: 10,
@@ -180,7 +188,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                         id: 3,
                         name: 'Multiple partners'
                     }]
-                }
+                }]
             }]
         }]
     };

@@ -1,0 +1,10 @@
+<div class="jsonify padding">
+    <div class="btn-toolbar btn-toolbar-right">
+        <button class="btn btn-default btn-xs" type="button" title="Copy the json data." ng-click="copy()"><span
+                class="fa fa-clipboard"></span></button>
+        <!--<button class="btn btn-default btn-xs" type="button" title="Display hidden properties."-->
+        <!--ng-click="displayHidden = !displayHidden" ng-class="{ 'active': displayHidden }"><span-->
+        <!--class="fa fa-eye"></span></button>-->
+    </div>
+    <pre class="{{cssClass}}">{{modelAsJson}}</pre>
+</div>

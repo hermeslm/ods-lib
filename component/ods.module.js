@@ -16,6 +16,9 @@ angular
         'nzToggle',
         'dndLists',
         'ngTable',
-        'ngSanitize'])
+        'ngSanitize',
+        'cp.ngConfirm',
+        'dialogs.main',
+        'dialogs.default-translations'])
     .value('version', '1.0');
 

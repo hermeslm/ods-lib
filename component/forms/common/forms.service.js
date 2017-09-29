@@ -8,31 +8,59 @@
         .module('ods-lib')
         .factory('OdsFormService', OdsFormService);
 
-    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType'];
+    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', '$window'];
 
-    function OdsFormService(OdsFieldType, OdsComponentType) {
+    function OdsFormService(OdsFieldType, OdsComponentType, $window) {
 
-        var lastIdValue = 0;
+        var uniqueCounter = (+new Date) % 10000;
         var schema = null;
 
         var service = {
             initSchema: initSchema,
+            generateName: generateName,
             getToolbarComponent: getToolbarComponent,
-            // getSchemaSectionPropertiesComponent: getSchemaSectionPropertiesComponent,
-            getSchemaComponent: getSchemaComponent,
+            getSchemaField: getSchemaField,
+            getSchemaFieldProperties: getSchemaFieldProperties,
             newSectionObject: newSectionObject,
-            removeSection: removeSection,
             newRowObject: newRowObject,
             newColumnObject: newColumnObject,
-            getSuperFieldTemplate: getSuperFieldTemplate,
             getFieldTemplate: getFieldTemplate,
+            copyJson: copyJson,
             saveFormData: saveFormData,
             saveFormSchema: saveFormSchema
         };
 
+        /**
+         * Generate object name by type.
+         * @param type Object type.
+         * @returns
+         */
+        function generateName(type) {
+
+            uniqueCounter++;
+
+            switch (type) {
+                case OdsComponentType.SECTION:
+                    return 'section' + uniqueCounter;
+                case OdsComponentType.ROW:
+                    return 'row' + uniqueCounter;
+                case OdsComponentType.COLUMN:
+                    return 'column' + uniqueCounter;
+                case OdsComponentType.FIELD:
+                    return 'field' + uniqueCounter;
+                default :
+                    return uniqueCounter;
+            }
+        }
+
+        /**
+         * Init the schema
+         * @param schema
+         * @returns {*}
+         */
         function initSchema(schema) {
 
-            if(schema) {
+            if (schema) {
                 schema.allowedTypes = [OdsComponentType.SECTION];
 
                 for (var i = 0; i < schema.layout.length; i++) {
@@ -40,10 +68,14 @@
                     schema.layout[i].allowedTypes = [OdsComponentType.ROW];
                     for (var j = 0; j < schema.layout[i].rows.length; j++) {
                         schema.layout[i].rows[j].displayProperties = false;
+                        for (var k = 0; k < schema.layout[i].rows[j].cols.length; k++) {
+                            schema.layout[i].rows[j].cols[k].allowedTypes = [OdsComponentType.FIELD];
+                            schema.layout[i].rows[j].cols[k].displayProperties = false;
+                        }
                     }
                 }
                 this.schema = schema;
-            }else {
+            } else {
                 alert('Please specify a schema!!!');
             }
             return schema;
@@ -66,87 +98,65 @@
             }
         }
 
-        // function getSchemaSectionPropertiesComponent(){
-        //     return 'forms/schema/components/section-properties.html';
-        // }
+        function getSchemaField(field) {
 
-        function getSchemaComponent(component) {
-
-            switch (component.componentType) {
-                case OdsComponentType.SECTION:
-                    return 'forms/schema/components/section.html';
-                case OdsComponentType.FIELD:
-                    switch (component.type) {
-                        case OdsFieldType.TEXT:
-                            return 'forms/toolbar/components/text.html';
-                        default :
-                            return 'forms/toolbar/components/no-component.html';
-                    }
+            switch (field.type) {
+                case OdsFieldType.TEXT:
+                    return 'forms/schema/components/text/text.html';
                 default :
-                    return 'forms/toolbar/components/no-component.html';
+                    return 'forms/schema/components/no-field.html';
             }
         }
 
-        function removeSection(schema, section) {
+        function getSchemaFieldProperties(field) {
 
-            var index = $.grep(schema.layout, function (sec, i) {
-                var index = -1;
-                if (sec.name === section.name) {
-                    return i;
-                }
-                return index;
-            });
-
-            schema.layout.splice(index, 1);
-            return schema;
+            switch (field.type) {
+                case OdsFieldType.TEXT:
+                    return 'forms/schema/components/text/text-properties.html';
+                default :
+                    return 'forms/schema/components/no-field-properties.html';
+            }
         }
+
 
         function newSectionObject() {
 
-            lastIdValue++;
+            uniqueCounter++;
             return {
-                name: 'row' + lastIdValue,
+                name: generateName(OdsComponentType.SECTION),
                 componentType: OdsComponentType.SECTION,
                 title: 'Section',
                 displayProperties: false,
                 allowedTypes: [
                     OdsComponentType.ROW
                 ],
-                rows: []
+                rows: [newRowObject()]
             }
         }
 
         function newRowObject() {
 
-            lastIdValue++;
+            uniqueCounter++;
             return {
-                name: 'row' + lastIdValue,
+                name: generateName(OdsComponentType.ROW),
                 componentType: OdsComponentType.ROW,
                 cssClass: 'row',
                 displayProperties: false,
-                allowedTypes: [
-                    OdsComponentType.FIELD
-                ],
-                cols: [{
-                    cssClass: 'col-lg-12',
-                    field: null
-                }]
+                cols: [newColumnObject(12)]
             }
         }
 
         function newColumnObject(colWidth) {
 
-            lastIdValue++;
+            uniqueCounter++;
             return {
-                name: 'column' + lastIdValue,
+                name: generateName(OdsComponentType.COLUMN),
                 cssClass: 'col-lg-' + colWidth,
-                field: null
+                allowedTypes: [
+                    OdsComponentType.FIELD
+                ],
+                fields: []
             }
-        }
-
-        function getSuperFieldTemplate() {
-
-            return 'forms/toolbar/field.html';
         }
 
         function getFieldTemplate(fieldType) {
@@ -169,6 +179,11 @@
                 default :
                     return 'forms/common/fields/text.html';
             }
+        }
+
+        function copyJson(json) {
+
+            $window.prompt("Copy to clipboard: Ctrl+C, Enter", json);
         }
 
         function saveFormData(schema) {

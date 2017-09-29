@@ -18,8 +18,6 @@ function SchemaDirective(OdsFormService, $timeout) {
             schema: '=',
             debugMode: '='
         },
-        controller: 'OdsSchemaController',
-        controllerAs: 'vm',
         link: linkFunc
     };
 
@@ -30,12 +28,6 @@ function SchemaDirective(OdsFormService, $timeout) {
     function linkFunc($scope, $element) {
 
         $scope.schema = OdsFormService.initSchema($scope.schema);
-
-        $scope.getSchemaComponent = getSchemaComponent;
-
-        function getSchemaComponent(object) {
-            return OdsFormService.getSchemaComponent(object);
-        }
 
     }
 }
