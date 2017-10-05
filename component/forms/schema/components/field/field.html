@@ -8,18 +8,18 @@
                     title="Configure this field.">
                 <span class="fa fa-wrench"></span>
             </button>
-            <button class="btn btn-default btn-xs" type="button"
-                    ng-click="swap(index - 1, index)"
-                    ng-disabled="index === 0" title="Move up">
-                <span class="fa fa-arrow-left"></span>
-            </button>
-            <button class="btn btn-default btn-xs" type="button"
-                    ng-click="swap(index, index + 1)"
-                    ng-disabled="$index === schema.fields.length - 1" title="Move down">
-                <span class="fa fa-arrow-right"></span>
-            </button>
+            <!--<button class="btn btn-default btn-xs" type="button"-->
+                    <!--ng-click="swap(index - 1, index)"-->
+                    <!--ng-disabled="index === 0" title="Move up">-->
+                <!--<span class="fa fa-arrow-left"></span>-->
+            <!--</button>-->
+            <!--<button class="btn btn-default btn-xs" type="button"-->
+                    <!--ng-click="swap(index, index + 1)"-->
+                    <!--ng-disabled="$index === schema.fields.length - 1" title="Move down">-->
+                <!--<span class="fa fa-arrow-right"></span>-->
+            <!--</button>-->
             <button class="btn btn-default btn-xs btn-danger" type="button"
-                    ng-click="remove(index)" title="Remove">
+                    ng-click="removeField(index)" title="Remove">
                 <span class="fa fa-trash"></span>
             </button>
         </div>

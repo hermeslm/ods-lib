@@ -11,6 +11,79 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
 
     // var $scope = this;
 
+    var section0 = {
+        "name": "section9543",
+        "componentType": "section",
+        "title": "Section",
+        "displayProperties": false,
+        "allowedTypes": [
+            "row"
+        ],
+        "rows": [
+            {
+                "name": "row9545",
+                "componentType": "row",
+                "cssClass": "row",
+                "displayProperties": false,
+                "cols": [
+                    {
+                        "name": "column9547",
+                        "cssClass": "col-lg-6",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Password",
+                                "name": "field3729",
+                                "placeholder": "Escriba su contrsena",
+                                "type": "password",
+                                "required": false,
+                                "value": "Lolopingu.0",
+                                "showProperties": true,
+                                "validation": {
+                                    "required": true,
+                                    "messages": {
+                                        "required": "Campo requerido",
+                                        "pattern": "La contrasena debe cumplir."
+                                    },
+                                    "pattern": "(?=.*\\d)(?=.*[!@#$%^&*\\-=()|?.\"';:]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$"
+                                },
+                                "patternSelect": "11"
+                            }
+                        ]
+                    }, {
+                        "name": "column9547",
+                        "cssClass": "col-lg-6",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [{
+                            "componentType": "field",
+                            "label": "Number",
+                            "name": "field3872",
+                            "placeholder": "",
+                            "type": "number",
+                            "required": false,
+                            "showProperties": true,
+                            "patternSelect": "4",
+                            "validation": {
+                                "pattern": "^-{0,1}\\d+$",
+                                "required": true,
+                                "messages": {
+                                    "required": "Numero requerido",
+                                    "pattern": "Solo valores enteros"
+                                }
+                            }
+                        }]
+                    }
+                ]
+            }
+        ],
+        "showProperties": true
+    };
+
     $scope.section1 = {
         name: 'section1',
         componentType: OdsComponentType.SECTION,
@@ -244,6 +317,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
     // };
 
     $scope.sections = [];
+    $scope.sections.push(section0);
     $scope.sections.push($scope.section1);
     $scope.sections.push($scope.section2);
     $scope.sections.push($scope.section3);

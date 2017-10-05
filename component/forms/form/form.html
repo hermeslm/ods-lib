@@ -6,14 +6,14 @@
     <!-- form start -->
     <form name="{{schema.name}}" role="form" novalidate ng-submit="save()" show-validation>
         <div class="box-body padding-top">
-            <div class="alert alert-success" ng-show="vm.success">
-                <strong>Password changed!</strong>
+            <div class="alert alert-success" ng-show="success">
+                <strong>Success! </strong>{{message}}
             </div>
-            <div class="alert alert-danger" ng-show="vm.error">
-                <strong>An error has occurred!</strong> The password could not be changed.
+            <div class="alert alert-danger" ng-show="error">
+                <strong>Error! </strong>{{message}}
             </div>
-            <div class="alert alert-danger" ng-show="vm.doNotMatch">
-                The password and its confirmation do not match!
+            <div class="alert alert-info" ng-show="info">
+                <strong>Information! </strong>{{message}}
             </div>
             <div ng-repeat="section in schema.layout">
                 <h4 ng-bind-html="section.title"></h4>
@@ -21,48 +21,44 @@
                     <div class="{{col.cssClass}}" ng-repeat="col in row.cols">
                         <div class="" ng-repeat="field in col.fields">
                             <div ng-if="field">
-                                <div class="form-group" ng-switch="field.type"
+                                <div class="form-group"
                                      ng-class="{'has-error': {{schema.name}}.{{field.name}}.$invalid}">
 
                                     <label class="control-label" for="{{field.name}}"
                                            ng-hide="vm.hideTitle(field)">{{field.label}}</label>
 
-                                    <div ng-switch-when="NUMBER">
-                                        <ng-include src="vm.getFieldTemplate('NUMBER')"></ng-include>
-                                    </div>
+                                    <ng-include src="getFormFieldTemplate(field.type)"></ng-include>
 
-                                    <div ng-switch-when="TEXT">
-                                        <ng-include src="vm.getFieldTemplate('TEXT')"></ng-include>
-                                    </div>
-
-                                    <div ng-switch-when="DATE">
-                                        <ng-include src="vm.getFieldTemplate('DATE')"></ng-include>
-                                    </div>
-
-                                    <div ng-switch-when="TEXTAREA">
-                                        <ng-include src="vm.getFieldTemplate('TEXTAREA')"></ng-include>
-                                    </div>
-
-                                    <div ng-switch-when="TOGGLE">
-                                        <ng-include src="vm.getFieldTemplate('TOGGLE')"></ng-include>
-                                    </div>
-
-                                    <div ng-switch-when="SELECT">
-                                        <ng-include src="vm.getFieldTemplate('SELECT')"></ng-include>
-                                    </div>
-
-                                    <div ng-switch-when="MULTI_SELECT">
-                                        <ng-include src="vm.getFieldTemplate('MULTI_SELECT')"></ng-include>
-                                    </div>
-
-                                    <div ng-switch-default>
-                                        <ng-include src="vm.getFieldTemplate('TEXT')"></ng-include>
-                                    </div>
+                                    <!--<div>-->
+                                    <!--<tt>field = {{field}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.{{field.name}}.$valid = {{testForm.name.$valid}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.{{field.name}}.$error = {{testForm.name.$error}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.{{field.name}}.$valid = {{testForm.name.$valid}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.{{field.name}}.$error = {{testForm.name.$error}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.$valid = {{testForm.$valid}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.$valid = {{testForm.$valid}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.{{field.name}}.$error.required = {{!!testForm.name.$error.required}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.{{field.name}}.$error.minlength = {{!!testForm.name.$error.minlength}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.{{field.name}}.$error.maxlength = {{!!testForm.name.$error.maxlength}}</tt><br/>-->
+                                    <!--<tt>{{schema.name}}.{{field.name}}.$error.pattern = {{!!testForm.name.$error.pattern}}</tt><br/>-->
+                                    <!--</div>-->
 
                                     <div ng-show="{{schema.name}}.{{field.name}}.$invalid">
                                         <p class="help-block"
                                            ng-show="{{schema.name}}.{{field.name}}.$error.required">
-                                            This field is required.
+                                            {{field.validation.messages.required}}
+                                        </p>
+                                        <p class="help-block"
+                                           ng-show="{{schema.name}}.{{field.name}}.$error.minlength">
+                                            {{field.validation.messages.minlength}}
+                                        </p>
+                                        <p class="help-block"
+                                           ng-show="{{schema.name}}.{{field.name}}.$error.maxlength">
+                                            {{field.validation.messages.maxlength}}
+                                        </p>
+                                        <p class="help-block"
+                                           ng-show="{{schema.name}}.{{field.name}}.$error.pattern">
+                                            {{field.validation.messages.pattern}}
                                         </p>
                                     </div>
                                 </div>

@@ -9,7 +9,7 @@
                  is-open="group.open" is-disabled="group.disabled" ng-repeat="group in vm.toolbar.groups"
                  ng-init="groupIndex = $index">
                 <ul class="list-group no-margin-bottom">
-                    <li class="padding-bottom" ng-repeat="component in group.components">
+                    <li class="padding-bottom no-padding-top" ng-repeat="component in group.components">
                         <div class="box-toolbar"
                              dnd-draggable="component"
                              dnd-type="component.componentType"

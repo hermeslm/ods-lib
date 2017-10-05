@@ -21,10 +21,17 @@
             getToolbarComponent: getToolbarComponent,
             getSchemaField: getSchemaField,
             getSchemaFieldProperties: getSchemaFieldProperties,
+            getValidationPatterns: getValidationPatterns,
             newSectionObject: newSectionObject,
             newRowObject: newRowObject,
             newColumnObject: newColumnObject,
-            getFieldTemplate: getFieldTemplate,
+            //Fields creation methods
+            newFieldTextObject: newFieldTextObject,
+            newFieldNumberObject: newFieldNumberObject,
+            newFieldPasswordObject: newFieldPasswordObject,
+            newFieldTextareaObject: newFieldTextareaObject,
+
+            getFormFieldTemplate: getFormFieldTemplate,
             copyJson: copyJson,
             saveFormData: saveFormData,
             saveFormSchema: saveFormSchema
@@ -81,6 +88,11 @@
             return schema;
         }
 
+        /**
+         * Return a toolbar component template from type.
+         * @param component Component type.
+         * @returns {*} Component template.
+         */
         function getToolbarComponent(component) {
 
             switch (component.componentType) {
@@ -89,7 +101,13 @@
                 case OdsComponentType.FIELD:
                     switch (component.type) {
                         case OdsFieldType.TEXT:
-                            return 'forms/toolbar/components/text.html';
+                            return 'forms/toolbar/components/input.html';
+                        case OdsFieldType.NUMBER:
+                            return 'forms/toolbar/components/input.html';
+                        case OdsFieldType.PASSWORD:
+                            return 'forms/toolbar/components/input.html';
+                        case OdsFieldType.TEXTAREA:
+                            return 'forms/toolbar/components/textarea.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -98,30 +116,127 @@
             }
         }
 
+        /**
+         * Return field template for Schema View
+         * @param field Field
+         * @returns {*}
+         */
         function getSchemaField(field) {
 
             switch (field.type) {
                 case OdsFieldType.TEXT:
-                    return 'forms/schema/components/text/text.html';
+                    return 'forms/schema/components/input.html';
+                case OdsFieldType.NUMBER:
+                    return 'forms/schema/components/input.html';
+                case OdsFieldType.PASSWORD:
+                    return 'forms/schema/components/input.html';
+                case OdsFieldType.TEXTAREA:
+                    return 'forms/schema/components/textarea/textarea.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
         }
 
+        /**
+         * Return field properties template for Schema View
+         * @param field Field
+         * @returns {*}
+         */
         function getSchemaFieldProperties(field) {
 
             switch (field.type) {
                 case OdsFieldType.TEXT:
                     return 'forms/schema/components/text/text-properties.html';
+                case OdsFieldType.NUMBER:
+                    return 'forms/schema/components/number/number-properties.html';
+                case OdsFieldType.PASSWORD:
+                    return 'forms/schema/components/password/password-properties.html';
+                case OdsFieldType.TEXTAREA:
+                    return 'forms/schema/components/textarea/textarea-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
         }
 
+        /**
+         * Return pattern list.
+         * @returns pattern list.
+         */
+        function getValidationPatterns() {
 
+            var patterns = [
+                {
+                    value: 0,
+                    pattern: '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$',
+                    title: 'Url',
+                    group: 'url'
+                }, {
+                    value: 1,
+                    pattern: '^([a-z][a-z0-9\\-]+(\\.|\\-*\\.))+[a-z]{2,6}$',
+                    title: 'Domain',
+                    group: 'domain'
+                }, {
+                    value: 2,
+                    pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
+                    title: 'IPv4 Address',
+                    group: 'ip'
+                }, {
+                    value: 3,
+                    pattern: '^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$',
+                    title: 'Email Address',
+                    group: 'email'
+                }, {
+                    value: 4,
+                    pattern: '^-{0,1}\\d+$',
+                    title: 'Integer',
+                    group: 'numeric'
+                }, {
+                    value: 5,
+                    pattern: '^\\d+$',
+                    title: 'Positive Integer',
+                    group: 'numeric'
+                }, {
+                    value: 6,
+                    pattern: '^-\\d+$',
+                    title: 'Negative Integer',
+                    group: 'numeric'
+                }, {
+                    value: 7,
+                    pattern: '^-{0,1}\\d*\\.{0,1}\\d+$',
+                    title: 'Number',
+                    group: 'numeric'
+                }, {
+                    value: 8,
+                    pattern: '^\\d*\\.{0,1}\\d+$',
+                    title: 'Positive Number',
+                    group: 'numeric'
+                }, {
+                    value: 9,
+                    pattern: '^-\\d*\\.{0,1}\\d+$',
+                    title: 'Negative Number',
+                    group: 'numeric'
+                }, {
+                    value: 10,
+                    pattern: '^(19|20)[\\d]{2,2}$',
+                    title: 'Year (1920-2099)',
+                    group: 'numeric'
+                }, {
+                    value: 11,
+                    pattern: '(?=.*\\d)(?=.*[!@#$%^&*\\-=()|?."\';:]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$',
+                    title: 'Password',
+                    group: 'password'
+                }
+            ];
+
+            return patterns;
+        }
+
+        /**
+         * Create a new Section Object.
+         * @returns {{name, componentType: string, title: string, displayProperties: boolean, allowedTypes: [null], rows: [null]}}
+         */
         function newSectionObject() {
 
-            uniqueCounter++;
             return {
                 name: generateName(OdsComponentType.SECTION),
                 componentType: OdsComponentType.SECTION,
@@ -134,9 +249,12 @@
             }
         }
 
+        /**
+         * Create a new Row Object.
+         * @returns {{name, componentType: string, cssClass: string, displayProperties: boolean, cols: [null]}}
+         */
         function newRowObject() {
 
-            uniqueCounter++;
             return {
                 name: generateName(OdsComponentType.ROW),
                 componentType: OdsComponentType.ROW,
@@ -146,9 +264,13 @@
             }
         }
 
+        /**
+         * Create a new Column Object.
+         * @param colWidth Width of column.
+         * @returns {{name, cssClass: string, allowedTypes: [null], fields: Array}}
+         */
         function newColumnObject(colWidth) {
 
-            uniqueCounter++;
             return {
                 name: generateName(OdsComponentType.COLUMN),
                 cssClass: 'col-lg-' + colWidth,
@@ -159,13 +281,101 @@
             }
         }
 
-        function getFieldTemplate(fieldType) {
+        /**
+         * Create a new Field Text Object.
+         * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
+         */
+        function newFieldTextObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'TextBox',
+                name: generateName(OdsComponentType.FIELD),
+                placeholder: '',
+                type: OdsFieldType.TEXT,
+                required: false,
+                value: null,
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
+        /**
+         * Create a new Field Number Object.
+         * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
+         */
+        function newFieldNumberObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Number',
+                name: generateName(OdsComponentType.FIELD),
+                placeholder: '',
+                type: OdsFieldType.NUMBER,
+                required: false,
+                value: null,
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
+        /**
+         * Create a new Field Password Object.
+         * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
+         */
+        function newFieldPasswordObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Password',
+                name: generateName(OdsComponentType.FIELD),
+                placeholder: '',
+                type: OdsFieldType.PASSWORD,
+                required: false,
+                value: null,
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
+        /**
+         * Create a new Field Textarea Object.
+         * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
+         */
+        function newFieldTextareaObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Textarea',
+                name: generateName(OdsComponentType.FIELD),
+                placeholder: '',
+                type: OdsFieldType.TEXTAREA,
+                required: false,
+                rows: 3,
+                value: null,
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
+        /**
+         * Return field template for each field type in Form View
+         * @param fieldType Field type
+         * @returns {*}
+         */
+        function getFormFieldTemplate(fieldType) {
 
             switch (fieldType) {
                 case OdsFieldType.TEXT:
-                    return 'forms/common/fields/text.html';
+                    return 'forms/common/fields/input.html';
                 case OdsFieldType.NUMBER:
-                    return 'forms/common/fields/number.html';
+                    return 'forms/common/fields/input.html';
+                case OdsFieldType.PASSWORD:
+                    return 'forms/common/fields/input.html';
                 case OdsFieldType.DATE:
                     return 'forms/common/fields/date.html';
                 case OdsFieldType.TEXTAREA:
@@ -183,7 +393,7 @@
 
         function copyJson(json) {
 
-            $window.prompt("Copy to clipboard: Ctrl+C, Enter", json);
+            $window.prompt('Copy to clipboard: Ctrl+C, Enter', json);
         }
 
         function saveFormData(schema) {

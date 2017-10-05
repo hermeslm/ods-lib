@@ -135,10 +135,14 @@ function RowDirective(OdsFormService, OdsComponentType, NgTableParams, dialogs) 
          * Add column to current row.
          * @param row Row to add column.
          */
-        function removeColumn(cols, index) {
+        function removeColumn(index) {
 
-            $scope.row.cols.splice(index, 1);
-            $scope.tableParams.reload();
+            dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
+                {size: 'sm'}).result.then(function (btn) {
+
+                $scope.row.cols.splice(index, 1);
+                $scope.tableParams.reload();
+            });
         }
     }
 }

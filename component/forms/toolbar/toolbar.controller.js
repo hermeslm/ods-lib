@@ -22,27 +22,21 @@
                 disabled: false,
                 title: 'Layout',
                 icon: 'fa fa-dashboard',
-                components: [OdsFormService.newSectionObject()]
+                components: [
+                    OdsFormService.newSectionObject()
+                ]
             }, {
                 id: 1,
                 open: false,
                 disabled: false,
                 title: 'Text input fields',
                 icon: 'fa fa-dashboard',
-                components: [{
-                    componentType: OdsComponentType.FIELD,
-                    label: 'TextBox',
-                    name: 'textbox1',
-                    placeholder: '',
-                    type: OdsFieldType.TEXT,
-                    required: false,
-                    value: ''
-                }, {
-                    id: 1,
-                    type: OdsFieldType.NUMBER,
-                    title: 'Number',
-                    template: '/api/report/rounding-report'
-                }]
+                components: [
+                    OdsFormService.newFieldTextObject(),
+                    OdsFormService.newFieldNumberObject(),
+                    OdsFormService.newFieldPasswordObject(),
+                    OdsFormService.newFieldTextareaObject()
+                ]
             }, {
                 id: 2,
                 open: false,

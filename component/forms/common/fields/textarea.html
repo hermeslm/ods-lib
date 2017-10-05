@@ -1,5 +1,4 @@
-<textarea class="form-control" name="{{field.name}}" id="{{field.name}}"
-          rows="{{field.rows}}" placeholder="{{field.placeholder}}"
-          ng-hide="vm.hideParam(field)" ng-model="field.value"
-          ng-required="vm.getRequired(field)">
+<textarea class="form-control" name="{{field.name}}" id="{{field.name}}" placeholder="{{field.placeholder}}"
+          title="{{field.tooltip}}" ng-model="field.value" ng-required="getRequired(field)" type="{{field.type}}"
+          ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}">
 </textarea>

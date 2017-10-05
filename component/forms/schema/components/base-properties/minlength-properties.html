@@ -1,0 +1,22 @@
+<div class="row no-vertical-margin">
+    <div class="form-group margin-bottom"
+         ng-class="{'has-error': fieldValidationForm.minLength.$invalid}">
+        <label for="minLength" class="col-sm-2 control-label">Min Length:</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="minLength" name="minLength"
+                   placeholder="Min Length..." ng-model="field.validation.minlength"
+                   ng-required="false" ng-change="onChangeMinLength()">
+        </div>
+    </div>
+</div>
+<div class="row no-vertical-margin" ng-show="field.validation.minlength">
+    <div class="form-group margin-bottom"
+         ng-class="{'has-error': fieldValidationForm.minLengthMessage.$invalid}">
+        <label for="minLengthMessage" class="col-sm-2 control-label">Message</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="minLengthMessage" name="minLengthMessage"
+                   placeholder="Min length message..." ng-model="field.validation.messages.minlength"
+                   ng-required="false">
+        </div>
+    </div>
+</div>
