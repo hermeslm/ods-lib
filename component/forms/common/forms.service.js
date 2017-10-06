@@ -25,11 +25,19 @@
             newSectionObject: newSectionObject,
             newRowObject: newRowObject,
             newColumnObject: newColumnObject,
+
             //Fields creation methods
             newFieldTextObject: newFieldTextObject,
             newFieldNumberObject: newFieldNumberObject,
             newFieldPasswordObject: newFieldPasswordObject,
             newFieldTextareaObject: newFieldTextareaObject,
+            newFieldSelectObject: newFieldSelectObject,
+
+            //Select utils methods
+            getSelectFieldId: getSelectFieldId,
+            getSelectFieldTitle: getSelectFieldTitle,
+            getSelectFieldTitleValue: getSelectFieldTitleValue,
+            getSelectFieldIdValue: getSelectFieldIdValue,
 
             getFormFieldTemplate: getFormFieldTemplate,
             copyJson: copyJson,
@@ -108,6 +116,8 @@
                             return 'forms/toolbar/components/input.html';
                         case OdsFieldType.TEXTAREA:
                             return 'forms/toolbar/components/textarea.html';
+                        case OdsFieldType.SELECT:
+                            return 'forms/toolbar/components/select.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -132,6 +142,8 @@
                     return 'forms/schema/components/input.html';
                 case OdsFieldType.TEXTAREA:
                     return 'forms/schema/components/textarea/textarea.html';
+                case OdsFieldType.SELECT:
+                    return 'forms/schema/components/select/select.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
@@ -153,6 +165,8 @@
                     return 'forms/schema/components/password/password-properties.html';
                 case OdsFieldType.TEXTAREA:
                     return 'forms/schema/components/textarea/textarea-properties.html';
+                case OdsFieldType.SELECT:
+                    return 'forms/schema/components/select/select-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
@@ -363,6 +377,40 @@
         }
 
         /**
+         * Create a new Field Select Object
+         * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, multiSelect: boolean, valueField: string, titleField: string, limitTo: number, value: Array, data: Array, validation: {messages: {}}}}
+         */
+        function newFieldSelectObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Select',
+                name: generateName(OdsComponentType.FIELD),
+                placeholder: '',
+                type: OdsFieldType.SELECT,
+                required: false,
+                multiSelect: false,
+                valueField: '',
+                titleField: '',
+                limitTo: 10,
+                value: null,
+                options: [{
+                    id: 1,
+                    name: 'Option 1'
+                }, {
+                    id: 2,
+                    name: 'Option 2'
+                }, {
+                    id: 3,
+                    name: 'Option 3'
+                }],
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
+        /**
          * Return field template for each field type in Form View
          * @param fieldType Field type
          * @returns {*}
@@ -388,6 +436,55 @@
                     return 'forms/common/fields/multi-select.html';
                 default :
                     return 'forms/common/fields/text.html';
+            }
+        }
+
+        function getSelectFieldId(field) {
+
+            var defaultId = 'id';
+            if (field) {
+                return field.valueField !== undefined ? field.valueField : defaultId;
+            } else {
+                return defaultId;
+            }
+        }
+
+        function getSelectFieldTitle(field) {
+
+            var defaultName = 'name';
+            if (field) {
+                return field.titleField !== undefined ? field.titleField : defaultName;
+            } else {
+                return defaultName;
+            }
+        }
+
+        function getSelectFieldTitleValue(field, element) {
+
+            if (field) {
+                if (field.render && element && element.constructor !== Array) {
+                    return field.render(element);
+                } else {
+                    if (element && element.constructor !== Array) {
+                        return field.titleField !== undefined ? element[field.titleField] : element.name;
+                    }
+                    else {
+                        return field.placeholder;
+                    }
+                }
+            } else {
+                return field.placeholder;
+            }
+        }
+
+        function getSelectFieldIdValue(field, element) {
+
+            if (field) {
+                if (element && element.constructor !== Array) {
+                    return field.valueField !== undefined ? element[field.valueField] : element.id;
+                }
+            } else {
+                return field.placeholder;
             }
         }
 

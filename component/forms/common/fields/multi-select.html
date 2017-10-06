@@ -1,13 +1,11 @@
-<div ng-hide="vm.hideParam(field)">
-    <ui-select name="{{field.name}}" id="{{field.name}}" multiple ng-model="field.value"
-               ui-select-required="vm.getRequired(field)" close-on-select="true" title="{{field.title}}">
-        <ui-select-match placeholder="{{field.placeholder}}">
-            {{vm.getSelectTitleField(field, $item)}}
-        </ui-select-match>
-        <ui-select-choices repeat="element in field.data | filter:$select.search | limitTo: field.limitTo">
-            <div ng-bind-html="vm.getSelectTitleField(field, element) | highlight: $select.search"></div>
-            <!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>-->
-            <!--{{vm.getSelectTitleField(param, element)}}-->
-        </ui-select-choices>
-    </ui-select>
-</div>
+<ui-select name="{{field.name}}" id="{{field.name}}" multiple ng-model="field.value"
+           ui-select-required="getRequired(field)" close-on-select="true" title="{{field.title}}">
+    <ui-select-match placeholder="{{field.placeholder}}">
+        {{getSelectTitleFieldValue(field, $item)}}
+    </ui-select-match>
+    <ui-select-choices repeat="element in field.options | filter:$select.search | limitTo: field.limitTo">
+        <div ng-bind-html="getSelectTitleFieldValue(field, element) | highlight: $select.search"></div>
+        <!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>-->
+        <!--{{vm.getSelectTitleField(param, element)}}-->
+    </ui-select-choices>
+</ui-select>

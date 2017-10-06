@@ -43,19 +43,9 @@
                 disabled: false,
                 title: 'Select input fields',
                 icon: 'fa fa-dashboard',
-                components: [{
-                    id: 0,
-                    type: OdsFieldType.TEXT,
-                    title: 'TextBox',
-                    name: 'texbox',
-                    template: '/api/report/rounding-report',
-                }, {
-                    id: 1,
-                    type: OdsFieldType.NUMBER,
-                    title: 'Number',
-                    name: 'number',
-                    template: '/api/report/rounding-report'
-                }]
+                components: [
+                    OdsFormService.newFieldSelectObject()
+                ]
             }]
         };
 

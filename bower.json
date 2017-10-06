@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": false,
   "main": "./dist/ods-lib.js",
+  "appPath": "./examples/",
   "dependencies": {
     "bootstrap": "3.3.7",
     "font-awesome": "4.7.0",

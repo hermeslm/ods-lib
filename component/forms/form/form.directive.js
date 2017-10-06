@@ -28,6 +28,7 @@ function FormDirective(OdsFormService, $timeout) {
     function linkFunc($scope, $element) {
 
         $scope.form;
+
         $scope.clear = clear;
         $scope.save = save;
 
@@ -36,7 +37,7 @@ function FormDirective(OdsFormService, $timeout) {
         $scope.getMaxLength = getMaxLength;
         $scope.getPattern = getPattern;
         $scope.getFormFieldTemplate = getFormFieldTemplate;
-        $scope.getSelectTitleField = getSelectTitleField;
+        $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
 
         /**
          * Return if field is required.
@@ -95,17 +96,9 @@ function FormDirective(OdsFormService, $timeout) {
             return OdsFormService.getFormFieldTemplate(fieldType);
         }
 
-        function getSelectTitleField(field, element) {
+        function getSelectFieldTitleValue(field, element) {
 
-            if (field) {
-                if (field.render) {
-                    return field.render(element);
-                } else {
-                    return field.titleField !== undefined ? element[field.titleField] : element.name;
-                }
-            } else {
-                return field.placeholder;
-            }
+            return OdsFormService.getSelectFieldTitleValue(field, element);
         }
 
         function clear() {
@@ -126,30 +119,30 @@ function FormDirective(OdsFormService, $timeout) {
 
             $scope.error = true;
             $scope.message = message;
-            $timeout( function(){
+            $timeout(function () {
                 $scope.error = false;
                 $scope.message = '';
-            }, 5000 );
+            }, 5000);
         }
 
         function showSuccess(message) {
 
             $scope.success = true;
             $scope.message = message;
-            $timeout( function(){
+            $timeout(function () {
                 $scope.success = false;
                 $scope.message = '';
-            }, 5000 );
+            }, 5000);
         }
 
         function showInfo(message) {
 
             $scope.info = true;
             $scope.message = message;
-            $timeout( function(){
+            $timeout(function () {
                 $scope.info = false;
                 $scope.message = '';
-            }, 5000 );
+            }, 5000);
         }
 
         // $scope.$watch('schema', function(schema) {

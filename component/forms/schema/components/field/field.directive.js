@@ -35,6 +35,10 @@ function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
         $scope.getSchemaFieldProperties = getSchemaFieldProperties;
         $scope.removeField = removeField;
 
+        $scope.getSelectFieldId = getSelectFieldId;
+        $scope.getSelectFieldTitle = getSelectFieldTitle;
+        $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
+
         $scope.patterns = OdsFormService.getValidationPatterns();
         $scope.onSelectPattern = onSelectPattern;
         $scope.onChangeMinLength = onChangeMinLength;
@@ -58,6 +62,21 @@ function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
         function getSchemaFieldProperties(field) {
 
             return OdsFormService.getSchemaFieldProperties(field);
+        }
+
+        function getSelectFieldId(field) {
+
+            return OdsFormService.getSelectFieldId(field);
+        }
+
+        function getSelectFieldTitle(field) {
+
+            return OdsFormService.getSelectFieldTitle(field);
+        }
+
+        function getSelectFieldTitleValue(field, element) {
+
+            return OdsFormService.getSelectFieldTitleValue(field, element);
         }
 
         /**

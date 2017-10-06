@@ -15,6 +15,7 @@ var path = require('path'),
     htmlmin = require('gulp-htmlmin'),
     templateCache = require('gulp-angular-templatecache'),
     config = require('./build.conf.js'),
+    serve = require('./gulp-tasks/serve'),
     plugins = require('gulp-load-plugins')();
 
 var ciMode = false;
@@ -74,7 +75,7 @@ gulp.task('forms-inject', function () {
         .pipe(gulp.dest('./examples/forms'));
 });
 
-gulp.task('forms-copy-css', function() {
+gulp.task('forms-copy-css', function () {
     gulp.src(['./component/forms/**/*.css'])
         .pipe(gulp.dest('./dist/forms'));
 });
@@ -85,7 +86,7 @@ gulp.task('scss', function () {
         .pipe(sourcemap.init())
         .pipe(scss({outputStyle: 'expanded'}).on('error', scss.logError))
         .pipe(autoprefixer(autoprefixer({
-            browsers : ['> 1%', 'last 5 versions', 'ie > 10']
+            browsers: ['> 1%', 'last 5 versions', 'ie > 10']
         })))
         .pipe(sourcemap.write('.'))
         .pipe(gulp.dest('./dist/forms/'));
@@ -118,12 +119,16 @@ gulp.task('ci', function () {
 gulp.task('build', ['clean', 'templates', 'scripts']);
 
 
-
 gulp.task('default', function (done) {
     runSequence('build', 'forms-copy-css', 'forms-inject', 'scss', function () {
         console.log('Run something else');
         done();
     });
+});
+
+gulp.task('build-samples', function () {
+    gulp.src(['./dist/**/*'])
+        .pipe(gulp.dest('./examples/dist'));
 });
 
 //watcher task for the scss files
@@ -133,4 +138,12 @@ gulp.task('scss:watch', function () {
 
 gulp.task('watch', function () {
     gulp.watch('./component/**/*', ['default']);
+});
+
+gulp.task('serve', function (done) {
+    runSequence('build', 'forms-copy-css', 'forms-inject', 'scss', 'build-samples', function () {
+        console.log('Running serve task.');
+        serve();
+        done();
+    });
 });

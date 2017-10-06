@@ -41,7 +41,6 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                 "type": "password",
                                 "required": false,
                                 "value": "Lolopingu.0",
-                                "showProperties": true,
                                 "validation": {
                                     "required": true,
                                     "messages": {
@@ -66,7 +65,6 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                             "placeholder": "",
                             "type": "number",
                             "required": false,
-                            "showProperties": true,
                             "patternSelect": "4",
                             "validation": {
                                 "pattern": "^-{0,1}\\d+$",
@@ -80,8 +78,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                     }
                 ]
             }
-        ],
-        "showProperties": true
+        ]
     };
 
     $scope.section1 = {
@@ -208,27 +205,33 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                     placeholder: 'Type sexual orientation...',
                     type: OdsFieldType.SELECT,
                     componentType: OdsComponentType.FIELD,
-                    valueField: 'id',
-                    titleField: 'name',
+                    valueField: 'value',
+                    titleField: 'text',
                     limitTo: 10,
                     render: function (element) {
                         if (element.length === 0) {
                             return 'Type sexual orientation...';
                         } else {
-                            return element.name;
+                            return element.text;
                         }
                     },
-                    value: [],
-                    data: [{
-                        id: 1,
-                        name: 'Heterosexual'
+                    value: null,
+                    options: [{
+                        value: 1,
+                        text: 'Heterosexual'
                     }, {
-                        id: 2,
-                        name: 'Homosexual'
+                        value: 2,
+                        text: 'Homosexual'
                     }, {
-                        id: 3,
-                        name: 'Bisexual'
-                    }]
+                        value: 3,
+                        text: 'Bisexual'
+                    }],
+                    validation: {
+                        required: true,
+                        messages: {
+                            required: 'Campo requerido'
+                        }
+                    }
                 }]
             }, {
                 cssClass: 'col-lg-6',
@@ -251,7 +254,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                         }
                     },
                     value: [],
-                    data: [{
+                    options: [{
                         id: 1,
                         name: 'Abstains'
                     }, {
@@ -317,10 +320,10 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
     // };
 
     $scope.sections = [];
-    $scope.sections.push(section0);
-    $scope.sections.push($scope.section1);
-    $scope.sections.push($scope.section2);
-    $scope.sections.push($scope.section3);
+    // $scope.sections.push(section0);
+    // $scope.sections.push($scope.section1);
+    // $scope.sections.push($scope.section2);
+    // $scope.sections.push($scope.section3);
     $scope.sections.push($scope.section4);
 
     $scope.schema = {

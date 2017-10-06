@@ -23,6 +23,7 @@
                         dnd-type="field.componentType"
                         dnd-effect-allowed="move"
                         dnd-selected="models.selected = field"
+                        dnd-moved="col.fields.splice($index, 1)"
                         ng-class="{selected: models.selected === col.fields}">
                         <ods-field row="row" col="col" index="$index" field="field" debug-mode="debugMode"></ods-field>
                     </li>
