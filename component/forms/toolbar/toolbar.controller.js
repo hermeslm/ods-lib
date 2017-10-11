@@ -44,7 +44,27 @@
                 title: 'Select input fields',
                 icon: 'fa fa-dashboard',
                 components: [
-                    OdsFormService.newFieldSelectObject()
+                    OdsFormService.newFieldSelectObject(),
+                    OdsFormService.newFieldMultiSelectObject()
+
+                ]
+            }, {
+                id: 3,
+                open: false,
+                disabled: false,
+                title: 'Toggle fields',
+                icon: 'fa fa-dashboard',
+                components: [
+                    OdsFormService.newFieldToggleObject()
+                ]
+            }, {
+                id: 4,
+                open: false,
+                disabled: false,
+                title: 'DateTime fields',
+                icon: 'fa fa-dashboard',
+                components: [
+                    OdsFormService.newDateTimeObject()
                 ]
             }]
         };

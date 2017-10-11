@@ -1,3 +1,9 @@
+.affix {
+  width: calc(25% - 30px);
+  top: 0;
+  max-height: 95%;
+}
+
 .ng-table-pager {
   display: none;
 }

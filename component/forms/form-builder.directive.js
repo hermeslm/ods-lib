@@ -29,6 +29,5 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
 
     function linkFunc($scope, $element) {
 
-        //$scope.model = true;
     }
 }

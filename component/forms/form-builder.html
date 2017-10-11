@@ -1,12 +1,3 @@
-<!--<div class="row" ng-show="infoMessage" ng-class="ng-hide">-->
-<!--<div class="col-lg-12">-->
-<!--<div uib-alert class="alert alert-info alert-dismissible" close="hideInfoMessage()">-->
-<!--<h4><i class="icon fa fa-info"> </i> Reports info! </h4>-->
-<!--If don't have a PDF viewer plugin in the browser. No biggie... you can download it.-->
-<!--Please select the report and download it from report preview.-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
 <div class="row">
     <div class="col-md-3">
         <ods-form-toolbar></ods-form-toolbar>
@@ -20,7 +11,7 @@
                 <ods-schema schema="schema" debug-mode="debugMode"></ods-schema>
             </uib-tab>
             <uib-tab index="2" heading="Form Preview">
-                <ods-form schema="schema" on-save="vm.onSave"></ods-form>
+                <ods-form schema="schema" on-save="saveForm(schema)"></ods-form>
             </uib-tab>
             <uib-tab index="3" heading="Form Model" ng-show="debugMode">
                 <ods-model model="schema"></ods-model>

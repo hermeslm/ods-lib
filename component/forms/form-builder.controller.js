@@ -8,17 +8,13 @@
         .module('ods-lib')
         .controller('OdsFormBuilderController', OdsFormBuilderController);
 
-    OdsFormBuilderController.$inject = ['OdsFormService'];
+    OdsFormBuilderController.$inject = ['$scope', 'OdsFormService'];
 
-    function OdsFormBuilderController(OdsFormService) {
+    function OdsFormBuilderController($scope, OdsFormService) {
 
-        var vm = this;
-
-        vm.onSave = onSave;
-
-        function onSave(schema, data) {
-            alert(data);
+        $scope.saveForm = function(schema){
+            var data = OdsFormService.saveFormData(schema);
+            console.log("The form data is: " + JSON.stringify(data, null, 4));
         }
-
     }
 })();

@@ -1,50 +1,5 @@
-<div class="row no-vertical-margin">
-    <div class="form-group margin-bottom"
-         ng-class="{'has-error': fieldPropertiesForm.name.$invalid}">
-        <label for="name" class="col-sm-2 control-label">Name:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="name" name="name"
-                   placeholder="Name..." ng-model="field.name" ng-required="true">
-        </div>
-    </div>
-</div>
-<div class="row no-vertical-margin">
-    <div class="form-group margin-bottom"
-         ng-class="{'has-error': fieldPropertiesForm.label.$invalid}">
-        <label for="label" class="col-sm-2 control-label">Label:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="label" name="label"
-                   placeholder="Label..." ng-model="field.label" ng-required="false">
-        </div>
-    </div>
-</div>
-<div class="row no-vertical-margin">
-    <div class="form-group margin-bottom"
-         ng-class="{'has-error': fieldPropertiesForm.placeholder.$invalid}">
-        <label for="placeholder" class="col-sm-2 control-label">Placeholder:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="placeholder" name="placeholder"
-                   placeholder="Label..." ng-model="field.placeholder" ng-required="false">
-        </div>
-    </div>
-</div>
-<div class="row no-vertical-margin">
-    <div class="form-group margin-bottom"
-         ng-class="{'has-error': fieldPropertiesForm.tooltip.$invalid}">
-        <label for="tooltip" class="col-sm-2 control-label">Tooltip:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="tooltip" name="tooltip"
-                   placeholder="Tooltip..." ng-model="field.tooltip" ng-required="false">
-        </div>
-    </div>
-</div>
-<div class="row no-vertical-margin">
-    <div class="form-group margin-bottom"
-         ng-class="{'has-error': fieldPropertiesForm.value.$invalid}">
-        <label for="value" class="col-sm-2 control-label">Value:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" id="value" name="value"
-                   placeholder="Value..." ng-model="field.value" ng-required="false">
-        </div>
-    </div>
-</div>
+<div ng-include="'forms/schema/components/base-properties/name-properties.html'"></div>
+<div ng-include="'forms/schema/components/base-properties/label-properties.html'"></div>
+<div ng-include="'forms/schema/components/base-properties/placeholder-properties.html'"></div>
+<div ng-include="'forms/schema/components/base-properties/tooltip-properties.html'"></div>
+<div ng-include="'forms/schema/components/base-properties/value-properties.html'"></div>

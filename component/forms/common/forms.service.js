@@ -8,9 +8,9 @@
         .module('ods-lib')
         .factory('OdsFormService', OdsFormService);
 
-    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', '$window'];
+    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window'];
 
-    function OdsFormService(OdsFieldType, OdsComponentType, $window) {
+    function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window) {
 
         var uniqueCounter = (+new Date) % 10000;
         var schema = null;
@@ -22,6 +22,7 @@
             getSchemaField: getSchemaField,
             getSchemaFieldProperties: getSchemaFieldProperties,
             getValidationPatterns: getValidationPatterns,
+            getDateTimeFormats: getDateTimeFormats,
             newSectionObject: newSectionObject,
             newRowObject: newRowObject,
             newColumnObject: newColumnObject,
@@ -32,6 +33,9 @@
             newFieldPasswordObject: newFieldPasswordObject,
             newFieldTextareaObject: newFieldTextareaObject,
             newFieldSelectObject: newFieldSelectObject,
+            newFieldMultiSelectObject: newFieldMultiSelectObject,
+            newFieldToggleObject: newFieldToggleObject,
+            newDateTimeObject: newDateTimeObject,
 
             //Select utils methods
             getSelectFieldId: getSelectFieldId,
@@ -118,6 +122,12 @@
                             return 'forms/toolbar/components/textarea.html';
                         case OdsFieldType.SELECT:
                             return 'forms/toolbar/components/select.html';
+                        case OdsFieldType.MULTI_SELECT:
+                            return 'forms/toolbar/components/multi-select.html';
+                        case OdsFieldType.TOGGLE:
+                            return 'forms/toolbar/components/toggle.html';
+                        case OdsFieldType.DATETIME:
+                            return 'forms/toolbar/components/datetime.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -144,6 +154,12 @@
                     return 'forms/schema/components/textarea/textarea.html';
                 case OdsFieldType.SELECT:
                     return 'forms/schema/components/select/select.html';
+                case OdsFieldType.MULTI_SELECT:
+                    return 'forms/schema/components/multi-select/multi-select.html';
+                case OdsFieldType.TOGGLE:
+                    return 'forms/schema/components/toggle/toggle.html';
+                case OdsFieldType.DATETIME:
+                    return 'forms/schema/components/datetime/datetime.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
@@ -167,14 +183,51 @@
                     return 'forms/schema/components/textarea/textarea-properties.html';
                 case OdsFieldType.SELECT:
                     return 'forms/schema/components/select/select-properties.html';
+                case OdsFieldType.MULTI_SELECT:
+                    return 'forms/schema/components/multi-select/multi-select-properties.html';
+                case OdsFieldType.TOGGLE:
+                    return 'forms/schema/components/toggle/toggle-properties.html';
+                case OdsFieldType.DATETIME:
+                    return 'forms/schema/components/datetime/datetime-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
         }
 
         /**
+         * Return field template for each field type in Form View
+         * @param fieldType Field type
+         * @returns {*}
+         */
+        function getFormFieldTemplate(fieldType) {
+
+            switch (fieldType) {
+                case OdsFieldType.TEXT:
+                    return 'forms/common/fields/input.html';
+                case OdsFieldType.NUMBER:
+                    return 'forms/common/fields/input.html';
+                case OdsFieldType.PASSWORD:
+                    return 'forms/common/fields/input.html';
+                case OdsFieldType.DATE:
+                    return 'forms/common/fields/date.html';
+                case OdsFieldType.TEXTAREA:
+                    return 'forms/common/fields/textarea.html';
+                case OdsFieldType.TOGGLE:
+                    return 'forms/common/fields/toggle.html';
+                case OdsFieldType.SELECT:
+                    return 'forms/common/fields/select.html';
+                case OdsFieldType.MULTI_SELECT:
+                    return 'forms/common/fields/multi-select.html';
+                case OdsFieldType.DATETIME:
+                    return 'forms/common/fields/datetime.html';
+                default :
+                    return 'forms/common/fields/no-field.html';
+            }
+        }
+
+        /**
          * Return pattern list.
-         * @returns pattern list.
+         * @returns [null,null,null,null,null,null,null,null,null,null,null,null] list.
          */
         function getValidationPatterns() {
 
@@ -243,6 +296,23 @@
             ];
 
             return patterns;
+        }
+
+        function getDateTimeFormats() {
+
+            var object = OdsDateTimeFormat;
+            var formats = [];
+            for (var property in object) {
+                if (object.hasOwnProperty(property)) {
+                    // do stuff
+                    var format = {
+                        value: object[property],
+                        option: property
+                    };
+                    formats.push(format);
+                }
+            }
+            return formats;
         }
 
         /**
@@ -411,31 +481,61 @@
         }
 
         /**
-         * Return field template for each field type in Form View
-         * @param fieldType Field type
-         * @returns {*}
+         * Create a new Field Multiselect Object
+         * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, multiSelect: boolean, valueField: string, titleField: string, limitTo: number, value: Array, options: Array, render: null, validation: {messages: {}}}}
          */
-        function getFormFieldTemplate(fieldType) {
+        function newFieldMultiSelectObject() {
 
-            switch (fieldType) {
-                case OdsFieldType.TEXT:
-                    return 'forms/common/fields/input.html';
-                case OdsFieldType.NUMBER:
-                    return 'forms/common/fields/input.html';
-                case OdsFieldType.PASSWORD:
-                    return 'forms/common/fields/input.html';
-                case OdsFieldType.DATE:
-                    return 'forms/common/fields/date.html';
-                case OdsFieldType.TEXTAREA:
-                    return 'forms/common/fields/textarea.html';
-                case OdsFieldType.TOGGLE:
-                    return 'forms/common/fields/toggle.html';
-                case OdsFieldType.SELECT:
-                    return 'forms/common/fields/select.html';
-                case OdsFieldType.MULTI_SELECT:
-                    return 'forms/common/fields/multi-select.html';
-                default :
-                    return 'forms/common/fields/text.html';
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Multi select',
+                name: generateName(OdsComponentType.FIELD),
+                placeholder: '',
+                type: OdsFieldType.MULTI_SELECT,
+                required: false,
+                multiSelect: true,
+                valueField: 'id',
+                titleField: 'name',
+                limitTo: 10,
+                value: [],
+                options: [],
+                render: null,
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
+        /**
+         * Create a new Field Toggle Object
+         * @returns {{componentType: string, label: string, name, type: string, ln: boolean, on: string, off: string, value: string}}
+         */
+        function newFieldToggleObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Toggle',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.TOGGLE,
+                ln: false,
+                on: 'Yes',
+                off: 'No',
+                value: false
+            }
+        }
+
+        function newDateTimeObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'DateTime',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.DATETIME,
+                enableTime: false,
+                format: OdsDateTimeFormat.ShortDate,
+                selectedFormat: OdsDateTimeFormat.ShortDate,
+                required: false,
+                value: new Date()
             }
         }
 
@@ -507,7 +607,9 @@
                 for (var j = 0; j < rows.length; j++) {
                     var cols = rows[j].cols;
                     for (var k = 0; k < cols.length; k++) {
-                        formData[cols[k].field.name] = cols[k].field.value;
+                        var fields = cols[k].fields;
+                        for (var l = 0; l < fields.length; l++)
+                            formData[cols[k].fields[l].name] = cols[k].fields[l].value;
                     }
                 }
             }

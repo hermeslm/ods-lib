@@ -75,10 +75,10 @@ gulp.task('forms-inject', function () {
         .pipe(gulp.dest('./examples/forms'));
 });
 
-gulp.task('forms-copy-css', function () {
-    gulp.src(['./component/forms/**/*.css'])
-        .pipe(gulp.dest('./dist/forms'));
-});
+// gulp.task('forms-copy-css', function () {
+//     gulp.src(['./component/forms/**/*.css'])
+//         .pipe(gulp.dest('./dist/forms'));
+// });
 
 //Task to process Sass files in the 'scss' folder
 gulp.task('scss', function () {
@@ -120,7 +120,7 @@ gulp.task('build', ['clean', 'templates', 'scripts']);
 
 
 gulp.task('default', function (done) {
-    runSequence('build', 'forms-copy-css', 'forms-inject', 'scss', function () {
+    runSequence('build', 'scss', 'forms-inject', 'build-samples', function () {
         console.log('Run something else');
         done();
     });
@@ -141,7 +141,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('serve', function (done) {
-    runSequence('build', 'forms-copy-css', 'forms-inject', 'scss', 'build-samples', function () {
+    runSequence('build', 'scss', 'forms-inject', 'build-samples', function () {
         console.log('Running serve task.');
         serve();
         done();

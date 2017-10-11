@@ -1,4 +1,4 @@
-<ui-select name="{{field.name}}" id="{{field.name}}" ng-model="field.value"
+<ui-select name="{{field.name}}" id="{{field.name}}" ng-model="field.value" ng-disabled="{{fieldDisabled}}"
            ui-select-required="getRequired(field)" close-on-select="true" title="{{field.tooltip}}">
     <ui-select-match placeholder="{{field.placeholder}}">
         {{getSelectFieldTitleValue(field, $select.selected)}}

@@ -1,0 +1,14 @@
+<div ng-include="'forms/toolbar/components/label.html'"></div>
+<div class="input-group input-group-sm">
+    <input id="{{component.name}}" type="text" class="form-control" name="{{component.name}}"
+           ng-required="getRequired(field)"
+           datetime-picker="{{field.format}}"
+           ng-model="field.value"
+           is-open="field.open"
+           ng-disabled="true"/>
+    <span class="input-group-btn">
+        <button type="button" class="btn btn-default" ng-click="">
+            <i class="fa fa-calendar"></i>
+        </button>
+    </span>
+</div>

@@ -137,14 +137,20 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
             cols: [{
                 cssClass: 'col-lg-4',
                 fields: [{
-                    label: 'Have you ever thought about killing yourself or others?',
-                    name: 'suicide',
-                    type: OdsFieldType.TOGGLE,
-                    componentType: OdsComponentType.FIELD,
+                    label: "Have you ever thought about killing yourself or others?",
+                    name: "suicide",
+                    type: "toggle",
+                    componentType: "field",
                     ln: false,
-                    on: 'Yes',
-                    off: 'No',
-                    value: ''
+                    on: "Yes",
+                    off: "No",
+                    value: false,
+                    validation: {
+                        required: true,
+                        messages: {
+                            required: "Campo requerido"
+                        }
+                    }
                 }]
             }, {
                 cssClass: 'col-lg-8',
@@ -319,12 +325,27 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
     //     }]
     // };
 
+    $scope.sectionLast = {
+        name: 'section1',
+        componentType: OdsComponentType.SECTION,
+        title: 'Test Section',
+        rows: [{
+            cssClass: 'row',
+            componentType: OdsComponentType.ROW,
+            cols: [{
+                cssClass: 'col-lg-12',
+                fields: []
+            }]
+        }]
+    };
+
     $scope.sections = [];
     // $scope.sections.push(section0);
     // $scope.sections.push($scope.section1);
     // $scope.sections.push($scope.section2);
     // $scope.sections.push($scope.section3);
-    $scope.sections.push($scope.section4);
+    // $scope.sections.push($scope.section4);
+    $scope.sections.push($scope.sectionLast);
 
     $scope.schema = {
         name: 'testForm',

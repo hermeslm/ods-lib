@@ -1,0 +1,4 @@
+<div ng-include="'forms/toolbar/components/label.html'"></div>
+<br ng-if="component.ln"/>
+<toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}"
+        ng-model="component.value"></toggle>

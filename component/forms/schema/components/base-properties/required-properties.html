@@ -1,9 +1,9 @@
 <div class="row no-vertical-margin">
     <div class="form-group margin-bottom"
          ng-class="{'has-error': fieldValidationForm.required.$invalid}">
-        <label for="required" class="col-sm-2 control-label"
+        <label for="required" class="col-sm-4 control-label"
                title="Indicates if a value is required for this field.">Required:</label>
-        <div class="col-sm-10">
+        <div class="col-sm-8">
             <input type="checkbox" id="required" name="required" ng-model="field.validation.required"
                    class="ng-pristine ng-valid" ng-change="onChangeRequired()">
         </div>
@@ -12,8 +12,8 @@
 <div class="row no-vertical-margin" ng-show="field.validation.required">
     <div class="form-group margin-bottom"
          ng-class="{'has-error': fieldValidationForm.requiredMessage.$invalid}">
-        <label for="requiredMessage" class="col-sm-2 control-label">Required Message</label>
-        <div class="col-sm-10">
+        <label for="requiredMessage" class="col-sm-4 control-label">Required Message</label>
+        <div class="col-sm-8">
             <input type="text" class="form-control" id="requiredMessage" name="requiredMessage"
                    placeholder="Required Message..." ng-model="field.validation.messages.required"
                    ng-required="false">

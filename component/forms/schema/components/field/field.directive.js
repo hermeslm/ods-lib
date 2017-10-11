@@ -30,6 +30,12 @@ function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
 
     function linkFunc($scope, $element) {
 
+        /**
+         * This set the field in Schema view disabled.
+         * @type {boolean}
+         */
+        $scope.fieldDisabled = true;
+
         $scope.toggleFieldProperties = toggleFieldProperties;
         $scope.getSchemaField = getSchemaField;
         $scope.getSchemaFieldProperties = getSchemaFieldProperties;
@@ -44,6 +50,12 @@ function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
         $scope.onChangeMinLength = onChangeMinLength;
         $scope.onChangeMaxLength = onChangeMaxLength;
         $scope.onChangeRequired = onChangeRequired;
+
+        $scope.openCalendar = openCalendar;
+        $scope.formats = OdsFormService.getDateTimeFormats();
+        $scope.formats.push({value: 'custom', option: 'Custom format'});
+        $scope.showCustomFormat = $scope.field.selectedFormat === 'custom' ? true : false;
+        $scope.onSelectFormat = onSelectFormat;
 
         /**
          * Toggle Row properties options.
@@ -108,7 +120,6 @@ function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
                 }
                 $scope.field.validation = pattern;
             }
-
         }
 
         function onChangeMinLength() {
@@ -140,5 +151,31 @@ function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
                 }
             }
         }
+
+        /**
+         * Open and close Calendar popup
+         * @param field
+         * @returns {boolean|*}
+         */
+        function openCalendar(field) {
+
+            field.open = !field.open;
+            return field.open;
+        }
+
+        /**
+         * On select format event in Calendar field.
+         */
+        function onSelectFormat(selectedFormat) {
+
+            if (selectedFormat === 'custom') {
+                $scope.showCustomFormat = true;
+                $scope.field.format = 'MM/dd/yyyy';
+            } else {
+                $scope.showCustomFormat = false;
+                $scope.field.format = selectedFormat;
+            }
+        }
+
     }
 }

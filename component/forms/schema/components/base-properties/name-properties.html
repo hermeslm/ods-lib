@@ -1,0 +1,10 @@
+<div class="row no-vertical-margin">
+    <div class="form-group margin-bottom"
+         ng-class="{'has-error': fieldPropertiesForm.name.$invalid}">
+        <label for="name" class="col-sm-4 control-label">Name:</label>
+        <div class="col-sm-8">
+            <input type="text" class="form-control" id="name" name="name"
+                   placeholder="Name..." ng-model="field.name" ng-required="true">
+        </div>
+    </div>
+</div>

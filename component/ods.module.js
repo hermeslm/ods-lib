@@ -3,7 +3,9 @@
 angular
     .module('ods-lib', [
         'ui.bootstrap',
+        'ui.toggle',
         'ui.select',
+        'ui.bootstrap.datetimepicker',
         'webcam',
         'nzToggle',
         'dndLists',
@@ -12,6 +14,7 @@ angular
         'cp.ngConfirm',
         'dialogs.main',
         'dialogs.default-translations',
-        'ngMessages'])
+        'ngMessages',
+        'mgcrea.bootstrap.affix'])
     .value('version', '1.0');
 

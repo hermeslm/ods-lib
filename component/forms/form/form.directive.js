@@ -16,7 +16,7 @@ function FormDirective(OdsFormService, $timeout) {
         templateUrl: 'forms/form/form.html',
         scope: {
             schema: '=',
-            onSave: '='
+            onSave: '&'
         },
         link: linkFunc
     };
@@ -38,6 +38,8 @@ function FormDirective(OdsFormService, $timeout) {
         $scope.getPattern = getPattern;
         $scope.getFormFieldTemplate = getFormFieldTemplate;
         $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
+
+        $scope.openCalendar = openCalendar;
 
         /**
          * Return if field is required.
@@ -106,10 +108,13 @@ function FormDirective(OdsFormService, $timeout) {
             showInfo("Form cleared!!!");
         }
 
+        /**
+         * Call to external callback if it is specified, show error message if not defined.
+         */
         function save() {
-            if ($scope.onSave !== undefined) {
-                var data = OdsFormService.saveFormData($scope.schema);
-                $scope.onSave($scope.schema, data);
+
+            if ($scope.onSave) {
+                $scope.onSave();
             } else {
                 showError('You must to to define onSave() function.');
             }
@@ -148,5 +153,17 @@ function FormDirective(OdsFormService, $timeout) {
         // $scope.$watch('schema', function(schema) {
         //     console.log('Schema changed.');
         // }, true);
+
+        /**
+         * Open and close Calendar popup
+         * @param field
+         * @returns {boolean|*}
+         */
+        function openCalendar(field) {
+
+            field.open = !field.open;
+            return field.open;
+        }
+
     }
 }

@@ -1,8 +1,8 @@
 <div class="row no-vertical-margin">
     <div class="form-group margin-bottom"
          ng-class="{'has-error': fieldValidationForm.patternSelect.$invalid}">
-        <label for="patternSelect" class="col-sm-2 control-label">Pattern Selection</label>
-        <div class="col-sm-10">
+        <label for="patternSelect" class="col-sm-4 control-label">Pattern Selection</label>
+        <div class="col-sm-8">
             <select name="patternSelect" id="patternSelect" ng-model="field.patternSelect"
                     class="form-control" ng-change="onSelectPattern()">
                 <option value="">Select Pattern...</option>
@@ -15,8 +15,8 @@
 <div class="row no-vertical-margin">
     <div class="form-group margin-bottom"
          ng-class="{'has-error': fieldValidationForm.pattern.$invalid}">
-        <label for="pattern" class="col-sm-2 control-label">Pattern</label>
-        <div class="col-sm-10">
+        <label for="pattern" class="col-sm-4 control-label">Pattern</label>
+        <div class="col-sm-8">
             <input type="text" class="form-control" id="pattern" name="pattern"
                    ng-model="field.validation.pattern" ng-required="false" readonly>
         </div>
@@ -25,8 +25,8 @@
 <div class="row no-vertical-margin" ng-show="field.patternSelect">
     <div class="form-group margin-bottom"
          ng-class="{'has-error': fieldValidationForm.patternMessage.$invalid}">
-        <label for="patternMessage" class="col-sm-2 control-label">Message</label>
-        <div class="col-sm-10">
+        <label for="patternMessage" class="col-sm-4 control-label">Message</label>
+        <div class="col-sm-8">
             <input type="text" class="form-control" id="patternMessage" name="patternMessage"
                    placeholder="Pattern Message..." ng-model="field.validation.messages.pattern"
                    ng-required="false">

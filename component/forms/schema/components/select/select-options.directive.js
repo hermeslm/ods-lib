@@ -13,7 +13,7 @@ function FieldSelectOptionsDirective(OdsFormService) {
 
     var directive = {
         restrict: 'E',
-        templateUrl: 'forms/schema/components/base-properties/select-options-properties.html',
+        templateUrl: 'forms/schema/components/select/select-options-properties.html',
         scope: {
             field: '='
         },
