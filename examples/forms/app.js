@@ -334,7 +334,24 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
             componentType: OdsComponentType.ROW,
             cols: [{
                 cssClass: 'col-lg-12',
-                fields: []
+                fields: [{
+                    "componentType": "field",
+                    "label": "If yes:",
+                    "name": "field4554",
+                    "type": "if_yes",
+                    "ln": false,
+                    "on": "Yes",
+                    "off": "No",
+                    "value": {
+                        "toggle": false,
+                        "textarea": null
+                    },
+                    "placeholder": "",
+                    "validation": {
+                        "messages": {}
+                    },
+                    "showProperties": false
+                }]
             }]
         }]
     };

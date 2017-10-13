@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div ng-include="'forms/toolbar/components/label.html'"></div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-2">
+        <br ng-if="component.ln"/>
+        <toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}"
+                ng-model="component.value"></toggle>
+    </div>
+    <div class="col-lg-10">
+        <input class="form-control" name="{{component.name}}" id="{{component.name}}"/>
+    </div>
+</div>

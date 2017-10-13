@@ -66,6 +66,15 @@
                 components: [
                     OdsFormService.newDateTimeObject()
                 ]
+            }, {
+                id: 5,
+                open: false,
+                disabled: false,
+                title: 'Plugins',
+                icon: 'fa fa-dashboard',
+                components: [
+                    OdsFormService.newYesNoObject()
+                ]
             }]
         };
 

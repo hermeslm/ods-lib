@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsRow', RowDirective);
 
-RowDirective.$inject = ['OdsFormService', 'OdsComponentType', 'NgTableParams', 'dialogs'];
+RowDirective.$inject = ['OdsFormService', 'OdsComponentType', 'OdsFieldType', 'NgTableParams', 'dialogs'];
 
-function RowDirective(OdsFormService, OdsComponentType, NgTableParams, dialogs) {
+function RowDirective(OdsFormService, OdsComponentType, OdsFieldType, NgTableParams, dialogs) {
 
     var directive = {
         restrict: 'E',
@@ -40,6 +40,11 @@ function RowDirective(OdsFormService, OdsComponentType, NgTableParams, dialogs) 
 
             if(type === OdsComponentType.FIELD){
                 item.name = OdsFormService.generateName(OdsComponentType.FIELD);
+                if(item.type === OdsFieldType.DATETIME){
+                    var today = new Date();
+                    var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0));
+                    item.value = new Date();
+                }
                 return item;
             }
         };

@@ -12,6 +12,7 @@
             TOGGLE: 'toggle',
             SELECT: 'select',
             MULTI_SELECT: 'multiselect',
+            IF_YES: 'if_yes'
             //You can add your new field types
         })
         .constant('OdsComponentType', {

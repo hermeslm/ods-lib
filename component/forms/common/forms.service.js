@@ -37,6 +37,9 @@
             newFieldToggleObject: newFieldToggleObject,
             newDateTimeObject: newDateTimeObject,
 
+            //Fields plugins creation methods
+            newYesNoObject: newYesNoObject,
+
             //Select utils methods
             getSelectFieldId: getSelectFieldId,
             getSelectFieldTitle: getSelectFieldTitle,
@@ -44,6 +47,7 @@
             getSelectFieldIdValue: getSelectFieldIdValue,
 
             getFormFieldTemplate: getFormFieldTemplate,
+            getTimeZoneUTC: getTimeZoneUTC,
             copyJson: copyJson,
             saveFormData: saveFormData,
             saveFormSchema: saveFormSchema
@@ -128,6 +132,8 @@
                             return 'forms/toolbar/components/toggle.html';
                         case OdsFieldType.DATETIME:
                             return 'forms/toolbar/components/datetime.html';
+                        case OdsFieldType.IF_YES:
+                            return 'forms/toolbar/plugins/if-yes.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -160,6 +166,8 @@
                     return 'forms/schema/components/toggle/toggle.html';
                 case OdsFieldType.DATETIME:
                     return 'forms/schema/components/datetime/datetime.html';
+                case OdsFieldType.IF_YES:
+                    return 'forms/schema/plugins/if-yes/if-yes.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
@@ -189,6 +197,8 @@
                     return 'forms/schema/components/toggle/toggle-properties.html';
                 case OdsFieldType.DATETIME:
                     return 'forms/schema/components/datetime/datetime-properties.html';
+                case OdsFieldType.IF_YES:
+                    return 'forms/schema/plugins/if-yes/if-yes-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
@@ -220,6 +230,8 @@
                     return 'forms/common/fields/multi-select.html';
                 case OdsFieldType.DATETIME:
                     return 'forms/common/fields/datetime.html';
+                case OdsFieldType.IF_YES:
+                    return 'forms/common/fields/plugins/if-yes.html';
                 default :
                     return 'forms/common/fields/no-field.html';
             }
@@ -526,6 +538,8 @@
 
         function newDateTimeObject() {
 
+            var today = new Date();
+            var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 9, 0, 0));
             return {
                 componentType: OdsComponentType.FIELD,
                 label: 'DateTime',
@@ -534,9 +548,39 @@
                 enableTime: false,
                 format: OdsDateTimeFormat.ShortDate,
                 selectedFormat: OdsDateTimeFormat.ShortDate,
+                // datepickerOptions: {
+                //     timezone: getTimeZoneUTC()
+                // },
+                // utc: true,
                 required: false,
-                value: new Date()
+                value: date
             }
+        }
+
+        function newYesNoObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'If yes:',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.IF_YES,
+                ln: false,
+                on: 'Yes',
+                off: 'No',
+                value: {
+                    toggle: false,
+                    textarea: null,
+                },
+                placeholder: '',
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
+        function getTimeZoneUTC() {
+
+            return 'UTC/GMT';
         }
 
         function getSelectFieldId(field) {

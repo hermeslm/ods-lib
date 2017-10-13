@@ -1,7 +1,7 @@
 <div class="input-group input-group-sm">
     <input id="{{field.name}}" class="form-control" name="{{field.name}}" type="text" enable-time="field.enableTime"
-           datetime-picker="{{field.format}}" ng-model-options="{timezone:'UTC'}" ng-required="getRequired(field)"
-           ng-model="field.value" is-open="field.open"/>
+           datetime-picker="{{field.format}}" ng-required="getRequired(field)" ng-model="field.value"
+           is-open="field.open" ng-model-options="field.datepickerOptions"/>
     <span class="input-group-btn">
         <button type="button" class="btn btn-default" ng-click="openCalendar(field)">
             <i class="fa fa-calendar"></i>

@@ -40,6 +40,24 @@
                         </div>
                     </div>
                 </div>
+                <!--<div class="row no-vertical-margin">-->
+                    <!--<div class="form-group margin-bottom"-->
+                         <!--ng-class="{'has-error': fieldPropertiesForm.utc.$invalid}">-->
+                        <!--<label for="utc" class="col-sm-4 control-label"-->
+                               <!--title="Indicates Time in UTC or not for this field.">UTC:</label>-->
+                        <!--<div class="col-sm-8">-->
+                            <!--<input type="checkbox" id="utc" name="utc" ng-model="field.utc"-->
+                                   <!--class="ng-pristine ng-valid" ng-change="onChangeUTCOption()">-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="1" heading="Validation">
+        <form name="fieldValidationForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <div ng-include="'forms/schema/components/base-properties/required-properties.html'"></div>
             </div>
         </form>
     </uib-tab>
