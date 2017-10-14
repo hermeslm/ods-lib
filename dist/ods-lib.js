@@ -56,7 +56,7 @@ $templateCache.put('forms/toolbar/components/select.html','<div ng-include="\'fo
 $templateCache.put('forms/toolbar/components/textarea.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><textarea class="form-control" name="{{component.name}}" id="{{component.name}}" rows="{{component.rows}}" placeholder="{{component.placeholder}}">\n</textarea>');
 $templateCache.put('forms/toolbar/components/toggle.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle>');
 $templateCache.put('forms/toolbar/plugins/if-yes.html','<div class="row"><div class="col-lg-12"><div ng-include="\'forms/toolbar/components/label.html\'"></div></div></div><div class="row"><div class="col-lg-2"><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle></div><div class="col-lg-10"><input class="form-control" name="{{component.name}}" id="{{component.name}}"></div></div>');
-$templateCache.put('forms/common/fields/plugins/if-yes.html','<br ng-if="field.ln"><toggle name="{{field.name}}" id="{{field.name}}" on="{{field.on}}" off="{{field.off}}" ng-model="field.value.toggle"></toggle><textarea class="form-control" name="{{field.name}}" id="{{field.name}}" placeholder="{{field.placeholder}}" title="{{field.tooltip}}" style="margin-top: 10px" ng-model="field.value.textarea" ng-required="field.value.toggle" type="{{field.type}}" ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" ng-show="field.value.toggle"></textarea>');
+$templateCache.put('forms/toolbar/plugins/table.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><table class="table table-bordered table-responsive" id="{{component.name}}"><thead><tr><td>#</td><td ng-repeat="column in component.columns">{{column.title}}</td></tr></thead><tbody><tr ng-repeat="row in component.value"><td ng-repeat="col in row">{{col}}</td></tr></tbody></table>');
 $templateCache.put('forms/schema/components/base-properties/common-properties.html','<div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/placeholder-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div>');
 $templateCache.put('forms/schema/components/base-properties/label-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.label.$invalid}"><label for="label" class="col-sm-4 control-label">Label:</label><div class="col-sm-8"><input type="text" class="form-control" id="label" name="label" placeholder="Label..." ng-model="field.label" ng-required="false"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/maxlength-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.maxLength.$invalid}"><label for="maxLength" class="col-sm-4 control-label">Max Length:</label><div class="col-sm-8"><input type="number" class="form-control" id="maxLength" name="maxLength" placeholder="Max Length..." ng-model="field.validation.maxlength" ng-required="false" ng-change="onChangeMaxLength()"></div></div></div><div class="row no-vertical-margin" ng-show="field.validation.maxlength"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.minLengthMessage.$invalid}"><label for="maxLengthMessage" class="col-sm-4 control-label">Message</label><div class="col-sm-8"><input type="text" class="form-control" id="maxLengthMessage" name="maxLengthMessage" placeholder="Max length message..." ng-model="field.validation.messages.maxlength" ng-required="false"></div></div></div>');
@@ -71,6 +71,7 @@ $templateCache.put('forms/schema/components/datetime/datetime-properties.html','
 $templateCache.put('forms/schema/components/datetime/datetime.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/datetime.html\'"></div>');
 $templateCache.put('forms/schema/components/field/field-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="sectionPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.name.$invalid}"><label for="name" class="col-sm-2 control-label">Name:</label><div class="col-sm-4"><input type="text" class="form-control" id="name" name="name" placeholder="Name..." ng-model="row.name" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.cssClass.$invalid}"><label for="cssClass" class="col-sm-2 control-label">Class Name:</label><div class="col-sm-4"><input type="text" class="form-control" id="cssClass" name="cssClass" placeholder="Css Class..." ng-model="row.cssClass" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.cols.$invalid}"><label for="cols" class="col-sm-2 control-label">Cols:</label><div class="col-sm-4"><input type="number" class="form-control" id="cols" name="cols" placeholder="Cols..." ng-model="row.cols.length" ng-required="false" ng-disabled="true"></div><div class="col-lg-6"><!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>--></div></div></div></div></form><div class="row no-vertical-margin"><div class="col-lg-6"><table ng-table="tableParams" class="table table-bordered table-hover table-condensed editable-table demoTable" ng-form="tableForm" disable-filter="isAdding"><colgroup><col width="50%"></colgroup><tr ng-repeat="row in $data" ng-form="rowForm"><td title="\'Class Name\'" ng-switch="row.isEditing" ng-form="cssClass" class="align-middle"><span ng-switch-default class="editable-text">{{row.cssClass}}</span><div class="controls" ng-switch-when="true"><input type="text" name="cssClass" ng-model="row.cssClass" class="editable-input form-control input-sm" required></div></td><td><button class="btn btn-primary btn-sm" ng-click="saveColumnEdited(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button> <button class="btn btn-default btn-sm" ng-click="cancelColumnEdited(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button> <button class="btn btn-default btn-sm" ng-click="row.isEditing = true" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span></button> <button class="btn btn-danger btn-sm" ng-click="removeColumn($data, $index)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button></td></tr></table></div><div class="col-lg-6"><button class="btn btn-primary" ng-click="addColumn(row)">Add column</button></div></div></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><ods-model model="row" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/field/field.html','<div class="box-draggable" ng-class="{ \'error\': object.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" ng-disabled="field.displayProperties && field.invalid" ng-class="{ \'active\': field.showProperties }" ng-click="toggleFieldProperties(field)" title="Configure this field."><span class="fa fa-wrench"></span></button><!--<button class="btn btn-default btn-xs" type="button"--><!--ng-click="swap(index - 1, index)"--><!--ng-disabled="index === 0" title="Move up">--><!--<span class="fa fa-arrow-left"></span>--><!--</button>--><!--<button class="btn btn-default btn-xs" type="button"--><!--ng-click="swap(index, index + 1)"--><!--ng-disabled="$index === schema.fields.length - 1" title="Move down">--><!--<span class="fa fa-arrow-right"></span>--><!--</button>--> <button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeField(index)" title="Remove"><span class="fa fa-trash"></span></button></div></div><div class="box-field-container padding"><div class="box-body no-padding"><div ng-include="getSchemaField(field)"></div></div></div><div class="box-properties-container" ng-class="{ visible: field.showProperties }"><div class="padding"><div ng-include="getSchemaFieldProperties(field)"></div></div></div></div>');
+$templateCache.put('forms/common/fields/plugins/if-yes.html','<br ng-if="field.ln"><toggle name="{{field.name}}" id="{{field.name}}" on="{{field.on}}" off="{{field.off}}" ng-model="field.value.toggle"></toggle><textarea class="form-control" name="{{field.name}}" id="{{field.name}}" placeholder="{{field.placeholder}}" title="{{field.tooltip}}" style="margin-top: 10px" ng-model="field.value.textarea" ng-required="field.value.toggle" type="{{field.type}}" ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" ng-show="field.value.toggle"></textarea>');
 $templateCache.put('forms/schema/components/multi-select/multi-select-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="limitTo" name="limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><table class="table table-condensed position-relative" style="position: relative"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="checkbox" name="{{field.name}}Selected[]" ng-value="field.options[$index]" ng-checked="field.value.indexOf(field.options[$index]) > -1" ng-click="toggleSelection(field.options[$index])"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" ng-required="true"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table>');
 $templateCache.put('forms/schema/components/multi-select/multi-select-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-multi-select-options field="field"></ods-field-multi-select-options></div></form></uib-tab><uib-tab index="2" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/multi-select/multi-select.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/multi-select.html\'"></div>');
@@ -89,7 +90,7 @@ $templateCache.put('forms/schema/components/textarea/textarea.html','<div ng-inc
 $templateCache.put('forms/schema/components/toggle/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/toggle/toggle-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/toggle/toggle.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/toggle.html\'"></div>');
-$templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.toggleValue.$invalid}"><label for="toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="toggleValue" name="toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.textValue.$invalid}"><label for="textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="textValue" name="textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div></div></form></uib-tab><!--<uib-tab index="1" heading="Validation">--><!--<form name="fieldValidationForm" class="form-horizontal">--><!--<div class="box-body padding-top">--><!--<div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div>--><!--<div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div>--><!--<div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div>--><!--<div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div>--><!--</div>--><!--</form>--><!--</uib-tab>--><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.toggleValue.$invalid}"><label for="toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="toggleValue" name="toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.textValue.$invalid}"><label for="textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="textValue" name="textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/plugins/if-yes/if-yes.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes.html\'"></div>');}]);
 'use strict';
 
@@ -217,6 +218,305 @@ function Address($uibModal) {
 
 angular
     .module('ods-lib')
+    .directive('jSignature', Signature);
+
+jSignature.$inject = ['$timeout', 'JSignature'];
+
+function jSignature($timeout, JSignature) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'j-signature/j-signature.html',
+        scope: {
+            sig: '=',
+            width: '@',
+            height: '@',
+            color: '@',
+            bgColor: '@',
+            lineWidth: '@',
+            cssclass: '@',
+            undo: '@',
+            save: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        console.log('jSignatureDirective: link');
+        console.dir($scope, $element);
+
+        var options = {
+            width: $scope.width,
+            height: $scope.height,
+            color: $scope.color,
+            'background-color': $scope.bgColor,
+            lineWidth: $scope.lineWidth,
+            cssClass: $scope.cssClass,
+            UndoButton: $scope.undo
+        };
+
+        JSignature.initialize($scope, options);
+
+        $scope.reset = function () {
+            JSignature.reset();
+        };
+
+//             $scope.initialized = false;
+//
+//             var options = {
+//                 width: $scope.width,
+//                 height: $scope.height,
+//                 color: $scope.color,
+//                 'background-color': $scope.bgColor,
+//                 lineWidth: $scope.lineWidth,
+//                 cssclass: $scope.cssclass
+//             };
+//
+//             $scope.initialize = function() {
+//                 if (!$scope.initialized) {
+//                     $element.find('#jSignature').jSignature(options);
+//                     $scope.initialized = true;
+//                 }
+//             };
+//
+//             $scope.reset = function() {
+//                 console.log('reset!!!');
+//                 $element.jSignature('reset');
+//             };
+//
+//             $scope.getData = function() {
+//                 console.log('getData!!!');
+//                 var datapair = $element.jSignature('getData', 'base30');
+//                 var svg = $element.jSignature('getData', 'svg');
+//                 console.dir(datapair);
+//                 //alert(datapair);
+//                 //              alert(svg);
+//                 $scope.save(svg);
+//             };
+//
+//             $scope.setData = function(sig) {
+//                 console.log('setData!!!');
+//
+//
+//
+//                 if (sig) {
+//                     datapair = sig;
+//                 }
+//                 console.log(datapair);
+//                 $element.jSignature('setData', 'data:' + datapair.join(','));
+//             };
+//
+//
+//             $scope.initialize();
+// //            $scope.setData();
+//
+//
+//             $scope.$watch('sig', function(sig) {
+//                 if (sig) {
+//                     console.log('watch if ' + sig);
+//                     $scope.setData(sig);
+//                     //alert('watch if ' + sig);
+//
+//                     return;
+//                 }
+//                 console.log('watch else');
+//
+//             });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .factory('Signature', Signature);
+
+function Signature() {
+
+    var apinamespace = 'jSignature';
+
+    var exportTypes = {
+        DEFAULT: 'default',
+        NATIVE: 'native',
+        IMAGE: 'image',
+        BASE30: 'base30',
+        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
+        SVG: 'svg',
+        SVG_XML: 'image/svg+xml',
+        SVG_BASE64: 'svgbase64',
+        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
+    }
+
+    var importTypes = {
+        NATIVE: 'native',
+        IMAGE: 'image',
+        IMAGE_PNG_BASE64: 'image/png;base64',
+        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
+        IMAGE_JPG_BASE64: 'image/jpg;base64'
+    }
+
+    var object = {
+        initialized: false,
+        options: {
+            width: null,
+            height: null,
+            color: null,
+            'background-color': null,
+            lineWidth: null,
+            cssclass: null,
+            UndoButton: false
+        },
+        element: null
+    };
+
+    var service = {
+        getObject: getObject,
+        exportTypes: exportTypes,
+        importTypes: importTypes,
+        initialize: initialize,
+        reset: reset,
+        getData: getData,
+        // setData: setData,
+        disable: disable,
+        enable: enable
+    };
+
+    return service;
+
+    function initialize(element, options) {
+
+        object.initialized = false;
+
+        if (!object.initialized) {
+            // object.element = element.find('#jSignature').jSignature(options);
+            object.element = $('#jSignature');
+            object.initialized = true;
+            object.element.jSignature(options);
+        }
+    };
+
+    function reset() {
+        // console.log('reset!!!');
+        object.element.jSignature('reset');
+    };
+
+    function getData(type) {
+        // console.log('getData!!!');
+        return object.element.jSignature('getData', type);
+    };
+
+    function getDataAsSVG() {
+        // console.log('getData!!!');
+        // var datapair = object.element.jSignature('getData', 'base30');
+        var svg = object.element.jSignature('getData', 'svg');
+        return svg;
+    };
+
+    function getDataAsBase30() {
+        // console.log('getData!!!');
+        // var datapair = object.element.jSignature('getData', 'base30');
+        var svg = object.element.jSignature('getData', 'svg');
+        return svg;
+    };
+
+    function setData(sig) {
+        // console.log('setData!!!');
+        // console.log(sig);
+        object.element.jSignature('setData', 'data:' + sig.join(','));
+    };
+
+    function disable() {
+        // console.log('Disable!!!');
+        object.element.jSignature('disable');
+    };
+
+    function enable() {
+        // console.log('Enable!!!');
+        object.element.jSignature('enable');
+    };
+
+    function undo() {
+        var eventName = apinamespace + '.undo'
+        object.element.jSignature('events');
+    };
+
+    function getObject() {
+        // $('#signature').on('change', function(e){
+        //     var undef
+        //     if ($(e.target).jSignature('getData','native').length) {
+        //         $tools.find('input').prop('disabled', false)
+        //     } else {
+        //         $tools.find('input').prop('disabled', true)
+        //     }
+        //
+        // })
+        return object.element;
+    }
+
+
+}
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .controller('OdsFormBuilderController', OdsFormBuilderController);
+
+    OdsFormBuilderController.$inject = ['$scope', 'OdsFormService'];
+
+    function OdsFormBuilderController($scope, OdsFormService) {
+
+        $scope.saveForm = function(schema){
+            var data = OdsFormService.saveFormData(schema);
+            console.log("The form data is: " + JSON.stringify(data, null, 4));
+        }
+    }
+})();
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsFormBuilder', OdsFormBuilder);
+
+OdsFormBuilder.$inject = ['OdsFormService', '$uibModal', '$sce', '$q'];
+
+function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/form-builder.html',
+        scope: {
+            schema: '=',
+            debugMode: '='
+        },
+        controller: 'OdsFormBuilderController',
+        controllerAs: 'vm',
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+    }
+}
+
+'use strict';
+
+angular
+    .module('ods-lib')
     .filter('Phone', Phone);
 
 function Phone() {
@@ -308,60 +608,6 @@ function PropsFilter() {
         return out;
     };
 }
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('OdsFormBuilderController', OdsFormBuilderController);
-
-    OdsFormBuilderController.$inject = ['$scope', 'OdsFormService'];
-
-    function OdsFormBuilderController($scope, OdsFormService) {
-
-        $scope.saveForm = function(schema){
-            var data = OdsFormService.saveFormData(schema);
-            console.log("The form data is: " + JSON.stringify(data, null, 4));
-        }
-    }
-})();
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsFormBuilder', OdsFormBuilder);
-
-OdsFormBuilder.$inject = ['OdsFormService', '$uibModal', '$sce', '$q'];
-
-function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/form-builder.html',
-        scope: {
-            schema: '=',
-            debugMode: '='
-        },
-        controller: 'OdsFormBuilderController',
-        controllerAs: 'vm',
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-    }
-}
-
 'use strict';
 
 angular
@@ -973,251 +1219,6 @@ function ModalEntity($uibModal, $rootScope, $state) {
 // });
     }
 }
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('jSignature', Signature);
-
-jSignature.$inject = ['$timeout', 'JSignature'];
-
-function jSignature($timeout, JSignature) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'j-signature/j-signature.html',
-        scope: {
-            sig: '=',
-            width: '@',
-            height: '@',
-            color: '@',
-            bgColor: '@',
-            lineWidth: '@',
-            cssclass: '@',
-            undo: '@',
-            save: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        console.log('jSignatureDirective: link');
-        console.dir($scope, $element);
-
-        var options = {
-            width: $scope.width,
-            height: $scope.height,
-            color: $scope.color,
-            'background-color': $scope.bgColor,
-            lineWidth: $scope.lineWidth,
-            cssClass: $scope.cssClass,
-            UndoButton: $scope.undo
-        };
-
-        JSignature.initialize($scope, options);
-
-        $scope.reset = function () {
-            JSignature.reset();
-        };
-
-//             $scope.initialized = false;
-//
-//             var options = {
-//                 width: $scope.width,
-//                 height: $scope.height,
-//                 color: $scope.color,
-//                 'background-color': $scope.bgColor,
-//                 lineWidth: $scope.lineWidth,
-//                 cssclass: $scope.cssclass
-//             };
-//
-//             $scope.initialize = function() {
-//                 if (!$scope.initialized) {
-//                     $element.find('#jSignature').jSignature(options);
-//                     $scope.initialized = true;
-//                 }
-//             };
-//
-//             $scope.reset = function() {
-//                 console.log('reset!!!');
-//                 $element.jSignature('reset');
-//             };
-//
-//             $scope.getData = function() {
-//                 console.log('getData!!!');
-//                 var datapair = $element.jSignature('getData', 'base30');
-//                 var svg = $element.jSignature('getData', 'svg');
-//                 console.dir(datapair);
-//                 //alert(datapair);
-//                 //              alert(svg);
-//                 $scope.save(svg);
-//             };
-//
-//             $scope.setData = function(sig) {
-//                 console.log('setData!!!');
-//
-//
-//
-//                 if (sig) {
-//                     datapair = sig;
-//                 }
-//                 console.log(datapair);
-//                 $element.jSignature('setData', 'data:' + datapair.join(','));
-//             };
-//
-//
-//             $scope.initialize();
-// //            $scope.setData();
-//
-//
-//             $scope.$watch('sig', function(sig) {
-//                 if (sig) {
-//                     console.log('watch if ' + sig);
-//                     $scope.setData(sig);
-//                     //alert('watch if ' + sig);
-//
-//                     return;
-//                 }
-//                 console.log('watch else');
-//
-//             });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('Signature', Signature);
-
-function Signature() {
-
-    var apinamespace = 'jSignature';
-
-    var exportTypes = {
-        DEFAULT: 'default',
-        NATIVE: 'native',
-        IMAGE: 'image',
-        BASE30: 'base30',
-        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
-        SVG: 'svg',
-        SVG_XML: 'image/svg+xml',
-        SVG_BASE64: 'svgbase64',
-        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
-    }
-
-    var importTypes = {
-        NATIVE: 'native',
-        IMAGE: 'image',
-        IMAGE_PNG_BASE64: 'image/png;base64',
-        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
-        IMAGE_JPG_BASE64: 'image/jpg;base64'
-    }
-
-    var object = {
-        initialized: false,
-        options: {
-            width: null,
-            height: null,
-            color: null,
-            'background-color': null,
-            lineWidth: null,
-            cssclass: null,
-            UndoButton: false
-        },
-        element: null
-    };
-
-    var service = {
-        getObject: getObject,
-        exportTypes: exportTypes,
-        importTypes: importTypes,
-        initialize: initialize,
-        reset: reset,
-        getData: getData,
-        // setData: setData,
-        disable: disable,
-        enable: enable
-    };
-
-    return service;
-
-    function initialize(element, options) {
-
-        object.initialized = false;
-
-        if (!object.initialized) {
-            // object.element = element.find('#jSignature').jSignature(options);
-            object.element = $('#jSignature');
-            object.initialized = true;
-            object.element.jSignature(options);
-        }
-    };
-
-    function reset() {
-        // console.log('reset!!!');
-        object.element.jSignature('reset');
-    };
-
-    function getData(type) {
-        // console.log('getData!!!');
-        return object.element.jSignature('getData', type);
-    };
-
-    function getDataAsSVG() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function getDataAsBase30() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function setData(sig) {
-        // console.log('setData!!!');
-        // console.log(sig);
-        object.element.jSignature('setData', 'data:' + sig.join(','));
-    };
-
-    function disable() {
-        // console.log('Disable!!!');
-        object.element.jSignature('disable');
-    };
-
-    function enable() {
-        // console.log('Enable!!!');
-        object.element.jSignature('enable');
-    };
-
-    function undo() {
-        var eventName = apinamespace + '.undo'
-        object.element.jSignature('events');
-    };
-
-    function getObject() {
-        // $('#signature').on('change', function(e){
-        //     var undef
-        //     if ($(e.target).jSignature('getData','native').length) {
-        //         $tools.find('input').prop('disabled', false)
-        //     } else {
-        //         $tools.find('input').prop('disabled', true)
-        //     }
-        //
-        // })
-        return object.element;
-    }
-
-
-}
 (function () {
     'use strict';
 
@@ -1267,6 +1268,262 @@ function Signature() {
     }
 })();
 
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsSchema', SchemaDirective);
+
+SchemaDirective.$inject = ['OdsFormService', '$timeout'];
+
+function SchemaDirective(OdsFormService, $timeout) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/schema.html',
+        scope: {
+            schema: '=',
+            debugMode: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        $scope.schema = OdsFormService.initSchema($scope.schema);
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .controller('OdsSchemaController', OdsSchemaController);
+
+    OdsSchemaController.$inject = ['OdsFormService'];
+
+    function OdsSchemaController(OdsFormService) {
+
+        var vm = this;
+
+    }
+})();
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsFormInfo', OdsFormInfoDirective);
+
+OdsFormInfoDirective.$inject = ['OdsFormService'];
+
+function OdsFormInfoDirective(OdsFormService) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/form-info/form-info.html',
+        scope: {
+            schema: '='
+        },
+        // controller: 'OdsSchemaController',
+        // controllerAs: 'vm',
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsForm', FormDirective);
+
+FormDirective.$inject = ['OdsFormService', '$timeout'];
+
+function FormDirective(OdsFormService, $timeout) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/form/form.html',
+        scope: {
+            schema: '=',
+            onSave: '&'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        $scope.form;
+
+        $scope.clear = clear;
+        $scope.save = save;
+
+        $scope.getRequired = getRequired;
+        $scope.getMinLength = getMinLength;
+        $scope.getMaxLength = getMaxLength;
+        $scope.getPattern = getPattern;
+        $scope.getFormFieldTemplate = getFormFieldTemplate;
+        $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
+
+        $scope.openCalendar = openCalendar;
+
+        /**
+         * Return if field is required.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getRequired(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.required &&
+            field.validation.required !== undefined ? field.validation.required : false;
+        }
+
+        /**
+         * Return if field has min length.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getMinLength(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.minlength &&
+            field.validation.minlength !== undefined ? field.validation.minlength : null;
+        }
+
+        /**
+         * Return if field has a pattern.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getPattern(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.pattern &&
+            field.validation.pattern !== undefined ? field.validation.pattern : null;
+        }
+
+        /**
+         * Return if field has max length.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getMaxLength(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.maxlength &&
+            field.validation.maxlength !== undefined ? field.validation.maxlength : null;
+        }
+
+        function getFormFieldTemplate(fieldType) {
+
+            return OdsFormService.getFormFieldTemplate(fieldType);
+        }
+
+        function getSelectFieldTitleValue(field, element) {
+
+            return OdsFormService.getSelectFieldTitleValue(field, element);
+        }
+
+        function clear() {
+            //TODO confirm if you want to clear al fields.
+            showInfo("Form cleared!!!");
+        }
+
+        /**
+         * Call to external callback if it is specified, show error message if not defined.
+         */
+        function save() {
+
+            if ($scope.onSave) {
+                $scope.onSave();
+            } else {
+                showError('You must to to define onSave() function.');
+            }
+        }
+
+        function showError(message) {
+
+            $scope.error = true;
+            $scope.message = message;
+            $timeout(function () {
+                $scope.error = false;
+                $scope.message = '';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+
+            $scope.success = true;
+            $scope.message = message;
+            $timeout(function () {
+                $scope.success = false;
+                $scope.message = '';
+            }, 5000);
+        }
+
+        function showInfo(message) {
+
+            $scope.info = true;
+            $scope.message = message;
+            $timeout(function () {
+                $scope.info = false;
+                $scope.message = '';
+            }, 5000);
+        }
+
+        // $scope.$watch('schema', function(schema) {
+        //     console.log('Schema changed.');
+        // }, true);
+
+        /**
+         * Open and close Calendar popup
+         * @param field
+         * @returns {boolean|*}
+         */
+        function openCalendar(field) {
+
+            field.open = !field.open;
+            return field.open;
+        }
+
+    }
+}
+
 (function () {
     'use strict';
 
@@ -1281,7 +1538,8 @@ function Signature() {
             TOGGLE: 'toggle',
             SELECT: 'select',
             MULTI_SELECT: 'multiselect',
-            IF_YES: 'if_yes'
+            IF_YES: 'if_yes',
+            TABLE: 'table'
             //You can add your new field types
         })
         .constant('OdsComponentType', {
@@ -1350,6 +1608,7 @@ function Signature() {
 
             //Fields plugins creation methods
             newYesNoObject: newYesNoObject,
+            newTableObject: newTableObject,
 
             //Select utils methods
             getSelectFieldId: getSelectFieldId,
@@ -1445,6 +1704,8 @@ function Signature() {
                             return 'forms/toolbar/components/datetime.html';
                         case OdsFieldType.IF_YES:
                             return 'forms/toolbar/plugins/if-yes.html';
+                        case OdsFieldType.TABLE:
+                            return 'forms/toolbar/plugins/table.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -1889,6 +2150,26 @@ function Signature() {
             }
         }
 
+        function newTableObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Table',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.TABLE,
+                columns:[
+                    {title:'Column1', field:'column1'},
+                    {title:'Column2', field:'column2'}
+                ],
+                value: [
+                    [1, 'Row1 Col1', 'Row2 Col 2']
+                ],
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
         function getTimeZoneUTC() {
 
             return 'UTC/GMT';
@@ -1983,262 +2264,6 @@ function Signature() {
 /**
  * Created by hermeslm on 3/28/17.
  */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsForm', FormDirective);
-
-FormDirective.$inject = ['OdsFormService', '$timeout'];
-
-function FormDirective(OdsFormService, $timeout) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/form/form.html',
-        scope: {
-            schema: '=',
-            onSave: '&'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.form;
-
-        $scope.clear = clear;
-        $scope.save = save;
-
-        $scope.getRequired = getRequired;
-        $scope.getMinLength = getMinLength;
-        $scope.getMaxLength = getMaxLength;
-        $scope.getPattern = getPattern;
-        $scope.getFormFieldTemplate = getFormFieldTemplate;
-        $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
-
-        $scope.openCalendar = openCalendar;
-
-        /**
-         * Return if field is required.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getRequired(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.required &&
-            field.validation.required !== undefined ? field.validation.required : false;
-        }
-
-        /**
-         * Return if field has min length.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getMinLength(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.minlength &&
-            field.validation.minlength !== undefined ? field.validation.minlength : null;
-        }
-
-        /**
-         * Return if field has a pattern.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getPattern(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.pattern &&
-            field.validation.pattern !== undefined ? field.validation.pattern : null;
-        }
-
-        /**
-         * Return if field has max length.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getMaxLength(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.maxlength &&
-            field.validation.maxlength !== undefined ? field.validation.maxlength : null;
-        }
-
-        function getFormFieldTemplate(fieldType) {
-
-            return OdsFormService.getFormFieldTemplate(fieldType);
-        }
-
-        function getSelectFieldTitleValue(field, element) {
-
-            return OdsFormService.getSelectFieldTitleValue(field, element);
-        }
-
-        function clear() {
-            //TODO confirm if you want to clear al fields.
-            showInfo("Form cleared!!!");
-        }
-
-        /**
-         * Call to external callback if it is specified, show error message if not defined.
-         */
-        function save() {
-
-            if ($scope.onSave) {
-                $scope.onSave();
-            } else {
-                showError('You must to to define onSave() function.');
-            }
-        }
-
-        function showError(message) {
-
-            $scope.error = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.error = false;
-                $scope.message = '';
-            }, 5000);
-        }
-
-        function showSuccess(message) {
-
-            $scope.success = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.success = false;
-                $scope.message = '';
-            }, 5000);
-        }
-
-        function showInfo(message) {
-
-            $scope.info = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.info = false;
-                $scope.message = '';
-            }, 5000);
-        }
-
-        // $scope.$watch('schema', function(schema) {
-        //     console.log('Schema changed.');
-        // }, true);
-
-        /**
-         * Open and close Calendar popup
-         * @param field
-         * @returns {boolean|*}
-         */
-        function openCalendar(field) {
-
-            field.open = !field.open;
-            return field.open;
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('OdsSchemaController', OdsSchemaController);
-
-    OdsSchemaController.$inject = ['OdsFormService'];
-
-    function OdsSchemaController(OdsFormService) {
-
-        var vm = this;
-
-    }
-})();
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsFormInfo', OdsFormInfoDirective);
-
-OdsFormInfoDirective.$inject = ['OdsFormService'];
-
-function OdsFormInfoDirective(OdsFormService) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/form-info/form-info.html',
-        scope: {
-            schema: '='
-        },
-        // controller: 'OdsSchemaController',
-        // controllerAs: 'vm',
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsSchema', SchemaDirective);
-
-SchemaDirective.$inject = ['OdsFormService', '$timeout'];
-
-function SchemaDirective(OdsFormService, $timeout) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/schema.html',
-        scope: {
-            schema: '=',
-            debugMode: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.schema = OdsFormService.initSchema($scope.schema);
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
 (function () {
     'use strict';
 
@@ -2311,7 +2336,8 @@ function SchemaDirective(OdsFormService, $timeout) {
                 title: 'Plugins',
                 icon: 'fa fa-dashboard',
                 components: [
-                    OdsFormService.newYesNoObject()
+                    OdsFormService.newYesNoObject(),
+                    OdsFormService.newTableObject()
                 ]
             }]
         };
@@ -2705,97 +2731,6 @@ function FieldMultiSelectOptionsDirective(OdsFormService) {
 
 angular
     .module('ods-lib')
-    .directive('odsSection', SectionDirective);
-
-SectionDirective.$inject = ['OdsFormService', 'dialogs'];
-
-function SectionDirective(OdsFormService, dialogs) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/components/section/section.html',
-        scope: {
-            schema: '=',
-            section: '=',
-            index: '=',
-            debugMode: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.toggleProperties = toggleProperties;
-        $scope.remove = remove;
-        $scope.swap = swap;
-        $scope.addRow = addRow;
-
-        /**
-         * Toggle Section properties options.
-         * @param section Current section to show properties options.
-         */
-        function toggleProperties(section) {
-
-            section.showProperties = !section.showProperties;
-        }
-
-        /**
-         * Remove section from schema.
-         * @param index Section index to remove.
-         */
-        function remove(index) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want to remove this section?',
-                {size: 'sm'}).result.then(function (btn) {
-                $scope.schema.layout.splice(index, 1);
-            });
-        }
-
-        /**
-         * Swap Section order.
-         * @param index New Section index.
-         */
-        function swap(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this section?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                var _previousValue = [];
-                angular.copy($scope.schema.layout, _previousValue);
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.schema.layout.length ||
-                    idx2 >= $scope.schema.layout.length) {
-
-                    return;
-                }
-                $scope.schema.layout[idx1] = $scope.schema.layout.splice(idx2, 1, $scope.schema.layout[idx1])[0];
-
-            });
-        }
-
-        /**
-         * Add a new row to the current Section.
-         */
-        function addRow() {
-
-            $scope.section.rows.push(OdsFormService.newRowObject());
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
     .directive('odsRow', RowDirective);
 
 RowDirective.$inject = ['OdsFormService', 'OdsComponentType', 'OdsFieldType', 'NgTableParams', 'dialogs'];
@@ -2940,6 +2875,97 @@ function RowDirective(OdsFormService, OdsComponentType, OdsFieldType, NgTablePar
                 $scope.tableParams.reload();
             });
         }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsSection', SectionDirective);
+
+SectionDirective.$inject = ['OdsFormService', 'dialogs'];
+
+function SectionDirective(OdsFormService, dialogs) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/components/section/section.html',
+        scope: {
+            schema: '=',
+            section: '=',
+            index: '=',
+            debugMode: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        $scope.toggleProperties = toggleProperties;
+        $scope.remove = remove;
+        $scope.swap = swap;
+        $scope.addRow = addRow;
+
+        /**
+         * Toggle Section properties options.
+         * @param section Current section to show properties options.
+         */
+        function toggleProperties(section) {
+
+            section.showProperties = !section.showProperties;
+        }
+
+        /**
+         * Remove section from schema.
+         * @param index Section index to remove.
+         */
+        function remove(index) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want to remove this section?',
+                {size: 'sm'}).result.then(function (btn) {
+                $scope.schema.layout.splice(index, 1);
+            });
+        }
+
+        /**
+         * Swap Section order.
+         * @param index New Section index.
+         */
+        function swap(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this section?',
+                {size: 'sm'}).result.then(function (btn) {
+
+                var _previousValue = [];
+                angular.copy($scope.schema.layout, _previousValue);
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.schema.layout.length ||
+                    idx2 >= $scope.schema.layout.length) {
+
+                    return;
+                }
+                $scope.schema.layout[idx1] = $scope.schema.layout.splice(idx2, 1, $scope.schema.layout[idx1])[0];
+
+            });
+        }
+
+        /**
+         * Add a new row to the current Section.
+         */
+        function addRow() {
+
+            $scope.section.rows.push(OdsFormService.newRowObject());
+        }
+
     }
 }
 

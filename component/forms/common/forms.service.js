@@ -39,6 +39,7 @@
 
             //Fields plugins creation methods
             newYesNoObject: newYesNoObject,
+            newTableObject: newTableObject,
 
             //Select utils methods
             getSelectFieldId: getSelectFieldId,
@@ -134,6 +135,8 @@
                             return 'forms/toolbar/components/datetime.html';
                         case OdsFieldType.IF_YES:
                             return 'forms/toolbar/plugins/if-yes.html';
+                        case OdsFieldType.TABLE:
+                            return 'forms/toolbar/plugins/table.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -572,6 +575,26 @@
                     textarea: null,
                 },
                 placeholder: '',
+                validation: {
+                    messages: {}
+                }
+            }
+        }
+
+        function newTableObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Table',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.TABLE,
+                columns:[
+                    {title:'Column1', field:'column1'},
+                    {title:'Column2', field:'column2'}
+                ],
+                value: [
+                    [1, 'Row1 Col1', 'Row2 Col 2']
+                ],
                 validation: {
                     messages: {}
                 }

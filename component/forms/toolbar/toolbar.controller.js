@@ -73,7 +73,8 @@
                 title: 'Plugins',
                 icon: 'fa fa-dashboard',
                 components: [
-                    OdsFormService.newYesNoObject()
+                    OdsFormService.newYesNoObject(),
+                    OdsFormService.newTableObject()
                 ]
             }]
         };
