@@ -12,7 +12,7 @@ function Address($uibModal) {
         restrict: 'E',
         templateUrl: 'address/address.html',
         scope: {
-            label: '=',
+            label: '@',
             address: '=',
             countries: '=',
             states: '=',
