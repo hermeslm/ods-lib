@@ -1,7 +1,7 @@
 .affix {
   width: calc(21.2% - 30px);
   max-height: 95%;
-  bottom: 15%;
+  bottom: 5%;
 }
 
 .ng-table-pager {

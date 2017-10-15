@@ -57,19 +57,19 @@
                             </div>
                         </td>
                         <td>
-                            <button class="btn btn-primary btn-sm" ng-click="saveColumnEdited(row, rowForm)"
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="saveColumnEdited(row, rowForm)"
                                     ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid">
                                 <span class="glyphicon glyphicon-ok"></span>
                             </button>
-                            <button class="btn btn-default btn-sm" ng-click="cancelColumnEdited(row, rowForm)"
+                            <button type="button" class="btn btn-default btn-sm" ng-click="cancelColumnEdited(row, rowForm)"
                                     ng-if="row.isEditing">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
-                            <button class="btn btn-default btn-sm" ng-click="row.isEditing = true"
+                            <button type="button" class="btn btn-default btn-sm" ng-click="row.isEditing = true"
                                     ng-if="!row.isEditing">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </button>
-                            <button class="btn btn-danger btn-sm" ng-click="removeColumn($index)"
+                            <button type="button" class="btn btn-danger btn-sm" ng-click="removeColumn($index)"
                                     ng-if="!row.isEditing">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </button>
@@ -78,7 +78,7 @@
                 </table>
             </div>
             <div class="col-lg-6">
-                <button class="btn btn-primary" ng-click="addColumn(row)">Add column</button>
+                <button type="button" class="btn btn-primary" ng-click="addColumn(row)">Add column</button>
             </div>
         </div>
     </uib-tab>
