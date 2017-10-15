@@ -81,7 +81,7 @@ gulp.task('forms-inject', function () {
 // });
 
 //Task to process Sass files in the 'scss' folder
-gulp.task('scss', function () {
+gulp.task('form-scss', function () {
     return gulp.src('./component/forms/style.scss')
         .pipe(sourcemap.init())
         .pipe(scss({outputStyle: 'expanded'}).on('error', scss.logError))
@@ -90,6 +90,18 @@ gulp.task('scss', function () {
         })))
         .pipe(sourcemap.write('.'))
         .pipe(gulp.dest('./dist/forms/'));
+});
+
+//Task to process Sass files in the 'scss' folder
+gulp.task('steps-scss', function () {
+    return gulp.src('./component/steps-indicator/style.css')
+        .pipe(sourcemap.init())
+        .pipe(scss({outputStyle: 'expanded'}).on('error', scss.logError))
+        .pipe(autoprefixer(autoprefixer({
+            browsers: ['> 1%', 'last 5 versions', 'ie > 10']
+        })))
+        .pipe(sourcemap.write('.'))
+        .pipe(gulp.dest('./dist/steps-indicator/'));
 });
 
 gulp.task('test', function () {
@@ -116,12 +128,18 @@ gulp.task('ci', function () {
     return gulp.start(['clean', 'scripts', 'test']);
 });
 
-gulp.task('build', ['clean', 'templates', 'scripts']);
-
+// gulp.task('build', ['clean', 'templates', 'scripts']);
+gulp.task('build', function (done) {
+    runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss',
+        'forms-inject', 'build-samples', function () {
+            // console.log('Run something else');
+            done();
+        })
+});
 
 gulp.task('default', function (done) {
-    runSequence('build', 'scss', 'forms-inject', 'build-samples', function () {
-        console.log('Run something else');
+    runSequence('build', function () {
+        // console.log('Run something else');
         done();
     });
 });
@@ -129,11 +147,6 @@ gulp.task('default', function (done) {
 gulp.task('build-samples', function () {
     gulp.src(['./dist/**/*'])
         .pipe(gulp.dest('./examples/dist'));
-});
-
-//watcher task for the scss files
-gulp.task('scss:watch', function () {
-    gulp.watch('./component/forms/style.scss', ['scss']);
 });
 
 gulp.task('watch', function () {
