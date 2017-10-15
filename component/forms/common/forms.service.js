@@ -16,6 +16,7 @@
         var schema = null;
 
         var service = {
+            newSchema: newSchema,
             initSchema: initSchema,
             generateName: generateName,
             getToolbarComponent: getToolbarComponent,
@@ -53,6 +54,18 @@
             saveFormData: saveFormData,
             saveFormSchema: saveFormSchema
         };
+
+        /**
+         * Create a new Schema.
+         */
+        function newSchema() {
+            return {
+                name: 'newForm',
+                label: 'New Form',
+                description: 'New Form Description',
+                layout: []
+            };
+        }
 
         /**
          * Generate object name by type.
