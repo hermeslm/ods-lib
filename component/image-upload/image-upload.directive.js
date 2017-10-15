@@ -11,7 +11,7 @@
 
         var directive = {
             restrict: 'E',
-            templateUrl: 'app/components/ods-lib/image-upload/image-upload.html',
+            templateUrl: 'image-upload/image-upload.html',
             scope: {//all this scope value defined, are attr for the directive. Can be used like is explained below
                 image: '=',//modal field for the image value
                 typeImage: '=',//modal field form the image type
@@ -29,7 +29,7 @@
         function linkFunc($scope, element) {
             $scope.openModal = function (element) {
                 $uibModal.open({
-                    templateUrl: 'app/components/ods-lib/image-upload/image-upload-dialog.html',
+                    templateUrl: 'image-upload/image-upload-dialog.html',
                     controller: 'ImageUploadDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
