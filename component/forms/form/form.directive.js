@@ -32,14 +32,24 @@ function FormDirective(OdsFormService, $timeout) {
         $scope.clear = clear;
         $scope.save = save;
 
+        //Common field validation
         $scope.getRequired = getRequired;
         $scope.getMinLength = getMinLength;
         $scope.getMaxLength = getMaxLength;
         $scope.getPattern = getPattern;
+
+
         $scope.getFormFieldTemplate = getFormFieldTemplate;
+
+        //Select field specific
         $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
 
+        //Calendar field specific
         $scope.openCalendar = openCalendar;
+
+        //Table field specific
+        $scope.removeRow = removeRow;
+        $scope.removeColumn = removeColumn;
 
         /**
          * Return if field is required.
@@ -163,6 +173,26 @@ function FormDirective(OdsFormService, $timeout) {
 
             field.open = !field.open;
             return field.open;
+        }
+
+        /**
+         * Remove row from section.
+         * @param table Table to remove row
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            OdsFormService.removeRow(table, index);
+        }
+
+        /**
+         * Add column to current row.
+         * @param table Table to remove column
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            OdsFormService.removeColumn(table, index);
         }
 
     }

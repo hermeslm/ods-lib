@@ -8,9 +8,9 @@
         .module('ods-lib')
         .factory('OdsFormService', OdsFormService);
 
-    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window'];
+    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs'];
 
-    function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window) {
+    function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs) {
 
         var uniqueCounter = (+new Date) % 10000;
         var schema = null;
@@ -19,9 +19,14 @@
             newSchema: newSchema,
             initSchema: initSchema,
             generateName: generateName,
+            onAdd: onAdd,
+
+            //Templates management
             getToolbarComponent: getToolbarComponent,
             getSchemaField: getSchemaField,
             getSchemaFieldProperties: getSchemaFieldProperties,
+            getFormFieldTemplate: getFormFieldTemplate,
+
             getValidationPatterns: getValidationPatterns,
             getDateTimeFormats: getDateTimeFormats,
             newSectionObject: newSectionObject,
@@ -41,6 +46,7 @@
             //Fields plugins creation methods
             newYesNoObject: newYesNoObject,
             newTableObject: newTableObject,
+            newItemObject: newItemObject,
 
             //Select utils methods
             getSelectFieldId: getSelectFieldId,
@@ -48,7 +54,10 @@
             getSelectFieldTitleValue: getSelectFieldTitleValue,
             getSelectFieldIdValue: getSelectFieldIdValue,
 
-            getFormFieldTemplate: getFormFieldTemplate,
+            //Table field specific
+            removeRow: removeRow,
+            removeColumn: removeColumn,
+
             getTimeZoneUTC: getTimeZoneUTC,
             copyJson: copyJson,
             saveFormData: saveFormData,
@@ -85,8 +94,32 @@
                     return 'column' + uniqueCounter;
                 case OdsComponentType.FIELD:
                     return 'field' + uniqueCounter;
+                case OdsComponentType.ITEM:
+                    return 'item' + uniqueCounter;
+                case OdsComponentType.PLUGIN:
+                    return 'plugin' + uniqueCounter;
                 default :
                     return uniqueCounter;
+            }
+        }
+
+        /**
+         * Catch onAdd event in drag and drop for setting field properties,
+         * we only set field name and datetime for now.
+         *
+         * @param item Field
+         * @param type Field type.
+         */
+        function onAdd(item, type) {
+
+            if(type === OdsComponentType.FIELD){
+                item.name = generateName(OdsComponentType.FIELD);
+                if(item.type === OdsFieldType.DATETIME){
+                    // var today = new Date();
+                    // var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0));
+                    item.value = new Date();
+                }
+                return item;
             }
         }
 
@@ -184,6 +217,8 @@
                     return 'forms/schema/components/datetime/datetime.html';
                 case OdsFieldType.IF_YES:
                     return 'forms/schema/plugins/if-yes/if-yes.html';
+                case OdsFieldType.TABLE:
+                    return 'forms/schema/plugins/table/container.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
@@ -215,6 +250,8 @@
                     return 'forms/schema/components/datetime/datetime-properties.html';
                 case OdsFieldType.IF_YES:
                     return 'forms/schema/plugins/if-yes/if-yes-properties.html';
+                case OdsFieldType.TABLE:
+                    return 'forms/schema/plugins/table/table-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
@@ -248,6 +285,8 @@
                     return 'forms/common/fields/datetime.html';
                 case OdsFieldType.IF_YES:
                     return 'forms/common/fields/plugins/if-yes.html';
+                case OdsFieldType.TABLE:
+                    return 'forms/common/fields/plugins/table.html';
                 default :
                     return 'forms/common/fields/no-field.html';
             }
@@ -601,9 +640,9 @@
                 label: 'Table',
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.TABLE,
-                columns:[
-                    {title:'Column1', field:'column1'},
-                    {title:'Column2', field:'column2'}
+                cssClass: 'table table-bordered table-responsive position-relative',
+                matrix: [
+                    [newItemObject(), newItemObject()]
                 ],
                 value: [
                     [1, 'Row1 Col1', 'Row2 Col 2']
@@ -611,6 +650,56 @@
                 validation: {
                     messages: {}
                 }
+            }
+        }
+
+        function newItemObject() {
+
+            return {
+                name: generateName(OdsComponentType.ITEM),
+                fields: [],
+                // width: '10px',
+                allowedTypes: [OdsComponentType.FIELD]
+            }
+        }
+
+        /**
+         * Remove row from section.
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            if (table.matrix.length > 1) {
+                dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
+                    {size: 'sm'}).result.then(function (btn) {
+
+                    table.matrix.splice(index, 1);
+                });
+            } else {
+                dialogs.notify('Information', 'At least one row must exist.',
+                    {size: 'sm'}).result.then(function (btn) {
+                });
+            }
+        }
+
+        /**
+         * Add column to current row.
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            if (table.matrix[0].length > 1) {
+                dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
+                    {size: 'sm'}).result.then(function (btn) {
+
+                    for (var i = 0; i < table.matrix.length; i++) {
+                        table.matrix[i].splice(index, 1);
+                    }
+                });
+            } else {
+                dialogs.notify('Information', 'At least one column must exist.',
+                    {size: 'sm'}).result.then(function (btn) {
+                });
             }
         }
 

@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsField', FieldDirective);
 
-FieldDirective.$inject = ['OdsFormService', 'OdsComponentType', 'dialogs'];
+FieldDirective.$inject = ['OdsFormService', 'dialogs'];
 
-function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
+function FieldDirective(OdsFormService, dialogs) {
 
     var directive = {
         restrict: 'E',
@@ -18,6 +18,7 @@ function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
             row: '=',
             col: '=',
             field: '=',
+            popoverProps: '@',
             index: '=',
             debugMode: '='
         },
@@ -35,6 +36,7 @@ function FieldDirective(OdsFormService, OdsComponentType, dialogs) {
          * @type {boolean}
          */
         $scope.fieldDisabled = true;
+        $scope.popoverProps = ($scope.popoverProps === 'true');
 
         $scope.toggleFieldProperties = toggleFieldProperties;
         $scope.getSchemaField = getSchemaField;

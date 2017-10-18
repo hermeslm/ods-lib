@@ -1,4 +1,12 @@
 
+.popover{
+  max-width: 100%; // Max Width of the popover (depending on the container!)
+}
+
+.position-relative {
+  position: relative;
+  overflow-x: auto;
+}
 
 .affix {
   width: calc(21.2% - 30px);

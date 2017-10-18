@@ -1,0 +1,50 @@
+<form name="{{field.name}}" class="position-relative">
+    <table class="{{field.cssClass}}" id="{{field.name}}">
+        <tbody>
+        <tr ng-repeat="row in field.matrix">
+            <td ng-repeat="col in row" width="{{col.width}}">
+                <div class="box-row col-lg-12">
+                    <ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px;"
+                        dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)">
+                        <li class="box-field" ng-repeat="field in col.fields"
+                            dnd-draggable="field"
+                            dnd-type="field.componentType"
+                            dnd-effect-allowed="move"
+                            dnd-selected="models.selected = field"
+                            dnd-moved="col.fields.splice($index, 1)"
+                            ng-class="{selected: models.selected === col.fields}">
+                            <ods-field row="row" col="col" index="$index" field="field" popover-props="true"
+                                       debug-mode="debugMode"></ods-field>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+            <td ng-show="field.deleteRows" width="20px">
+                <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
+                        class="btn btn-danger pull-right"><span class="fa fa-trash"></span>
+                </button>
+            </td>
+        </tr>
+        <tr ng-show="field.deleteColumns">
+            <td ng-repeat="col in field.matrix[0]">
+                <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
+                        class="btn btn-danger pull-right"><span class="fa fa-trash"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <!--<div class="btn-edit position-relative">-->
+    <!--<button type="button" class="btn btn-default" ng-show="!editableTableForm.$visible"-->
+    <!--ng-click="editableTableForm.$show()">-->
+    <!--edit-->
+    <!--</button>-->
+    <!--</div>-->
+    <!--<div class="btn-form" ng-show="editableTableForm.$visible">-->
+    <!--<button type="submit" ng-disabled="editableTableForm.$waiting" class="btn btn-primary position-relative">save-->
+    <!--</button>-->
+    <!--<button type="button" ng-disabled="editableTableForm.$waiting" ng-click="editableTableForm.$cancel()"-->
+    <!--class="btn btn-default position-relative">cancel-->
+    <!--</button>-->
+    <!--</div>-->
+</form>

@@ -36,17 +36,16 @@ function RowDirective(OdsFormService, OdsComponentType, OdsFieldType, NgTablePar
         $scope.cancelColumnEdited = cancelColumnEdited;
         $scope.saveColumnEdited = saveColumnEdited;
 
-        $scope.onAdd = function(item, type) {
+        $scope.onAdd = onAdd;
 
-            if(type === OdsComponentType.FIELD){
-                item.name = OdsFormService.generateName(OdsComponentType.FIELD);
-                if(item.type === OdsFieldType.DATETIME){
-                    var today = new Date();
-                    var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0));
-                    item.value = new Date();
-                }
-                return item;
-            }
+        /**
+         * Catch onAdd event in drag and drop for setting field properties
+         * @param item Field
+         * @param type Field type.
+         */
+        function onAdd(item, type) {
+
+            OdsFormService.onAdd(item, type);
         };
 
         $scope.tableParams = new NgTableParams({}, {

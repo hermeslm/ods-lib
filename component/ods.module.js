@@ -15,6 +15,12 @@ angular
         'dialogs.main',
         'dialogs.default-translations',
         'ngMessages',
-        'mgcrea.bootstrap.affix'])
+        'mgcrea.bootstrap.affix',
+        'xeditable'])
     .value('version', '1.0');
+
+angular
+    .module('ods-lib').run(function (editableOptions) {
+    editableOptions.theme = 'bs3';
+});
 

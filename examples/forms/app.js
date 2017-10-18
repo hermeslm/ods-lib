@@ -336,21 +336,72 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                 cssClass: 'col-lg-12',
                 fields: [{
                     "componentType": "field",
-                    "label": "If yes:",
-                    "name": "field4554",
-                    "type": "if_yes",
-                    "ln": false,
-                    "on": "Yes",
-                    "off": "No",
-                    "value": {
-                        "toggle": false,
-                        "textarea": null
-                    },
-                    "placeholder": "",
+                    "allowedTypes": [
+                        "field"
+                    ],
+                    "label": "Table",
+                    "name": "field5499",
+                    "type": "table",
+                    "cssClass": "table table-bordered table-responsive position-relative",
+                    "matrix": [
+                        [
+                            {
+                                "name": "item1",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "TextBox",
+                                        "name": "field4990",
+                                        "placeholder": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ]
+                            }
+                        ],
+                        [
+                            {
+                                "name": "item4989",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Number",
+                                        "name": "field4991",
+                                        "placeholder": "",
+                                        "type": "number",
+                                        "required": false,
+                                        "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ]
+                            }
+                        ]
+                    ],
+                    "value": [
+                        [
+                            1,
+                            "Row1 Col1",
+                            "Row2 Col 2"
+                        ]
+                    ],
                     "validation": {
                         "messages": {}
                     },
-                    "showProperties": false
+                    "showProperties": true,
+                    "deleteColumns": false,
+                    "deleteRows": true
                 }]
             }]
         }]

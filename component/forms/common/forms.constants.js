@@ -20,7 +20,8 @@
             SECTION: 'section', //Do not edit this type
             ROW: 'row', //Do not edit this type
             COLUMN: 'column', //Do not edit this type
-            FIELD: 'field' //Do not edit this type
+            FIELD: 'field', //Do not edit this type
+            PLUGIN: 'plugin' //Do not edit this type
         })
         .constant('OdsDateTimeFormat', {
             FullDate: 'fullDate',
@@ -31,7 +32,7 @@
             Short: 'short',
             ShortDate: 'shortDate',
             ShortTime: 'shortTime',
-            ISO8601Long:'MM/dd/yyyy HH:mm:ss',
+            ISO8601Long: 'MM/dd/yyyy HH:mm:ss',
             // ISO8601Short:'Y-m-d',
             ShortDateLongYear: 'MM/dd/yyyy'
             // FullDateTime: 'l, F d, Y g:i:s A',
