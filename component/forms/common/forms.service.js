@@ -528,8 +528,8 @@
                 type: OdsFieldType.SELECT,
                 required: false,
                 multiSelect: false,
-                valueField: '',
-                titleField: '',
+                valueField: 'id',
+                titleField: 'name',
                 limitTo: 10,
                 value: null,
                 options: [{
