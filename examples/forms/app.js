@@ -336,22 +336,19 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                 cssClass: 'col-lg-12',
                 fields: [{
                     "componentType": "field",
-                    "allowedTypes": [
-                        "field"
-                    ],
                     "label": "Table",
-                    "name": "field5499",
+                    "name": "field1040",
                     "type": "table",
                     "cssClass": "table table-bordered table-responsive position-relative",
                     "matrix": [
                         [
                             {
-                                "name": "item1",
+                                "name": "item1038",
                                 "fields": [
                                     {
                                         "componentType": "field",
                                         "label": "TextBox",
-                                        "name": "field4990",
+                                        "name": "field1041",
                                         "placeholder": "",
                                         "type": "text",
                                         "required": false,
@@ -364,20 +361,153 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                 "allowedTypes": [
                                     "field"
                                 ]
+                            },
+                            {
+                                "name": "item1039",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Select",
+                                        "name": "field1042",
+                                        "placeholder": "",
+                                        "type": "select",
+                                        "required": false,
+                                        "multiSelect": false,
+                                        "valueField": "",
+                                        "titleField": "",
+                                        "limitTo": 10,
+                                        "value": {
+                                            "": "Good"
+                                        },
+                                        "options": [
+                                            {
+                                                "": "Good"
+                                            },
+                                            {
+                                                "": "Regular"
+                                            },
+                                            {
+                                                "": "Bad"
+                                            }
+                                        ],
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ]
                             }
                         ],
                         [
                             {
-                                "name": "item4989",
+                                "name": "item7821",
                                 "fields": [
                                     {
                                         "componentType": "field",
-                                        "label": "Number",
-                                        "name": "field4991",
+                                        "label": "TextBox",
+                                        "name": "field7822",
                                         "placeholder": "",
-                                        "type": "number",
+                                        "type": "text",
                                         "required": false,
                                         "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ]
+                            },
+                            {
+                                "name": "item7823",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Select",
+                                        "name": "field7824",
+                                        "placeholder": "",
+                                        "type": "select",
+                                        "required": false,
+                                        "multiSelect": false,
+                                        "valueField": "",
+                                        "titleField": "",
+                                        "limitTo": 10,
+                                        "value": {
+                                            "": "Regular"
+                                        },
+                                        "options": [
+                                            {
+                                                "": "Good"
+                                            },
+                                            {
+                                                "": "Regular"
+                                            },
+                                            {
+                                                "": "Bad"
+                                            }
+                                        ],
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ]
+                            }
+                        ],
+                        [
+                            {
+                                "name": "item7825",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "TextBox",
+                                        "name": "field7826",
+                                        "placeholder": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ]
+                            },
+                            {
+                                "name": "item7827",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Select",
+                                        "name": "field7828",
+                                        "placeholder": "",
+                                        "type": "select",
+                                        "required": false,
+                                        "multiSelect": false,
+                                        "valueField": "",
+                                        "titleField": "",
+                                        "limitTo": 10,
+                                        "value": {
+                                            "": "Bad"
+                                        },
+                                        "options": [
+                                            {
+                                                "": "Good"
+                                            },
+                                            {
+                                                "": "Regular"
+                                            },
+                                            {
+                                                "": "Bad"
+                                            }
+                                        ],
                                         "validation": {
                                             "messages": {}
                                         }
@@ -389,21 +519,19 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                             }
                         ]
                     ],
-                    "value": [
-                        [
-                            1,
-                            "Row1 Col1",
-                            "Row2 Col 2"
-                        ]
-                    ],
                     "validation": {
                         "messages": {}
                     },
                     "showProperties": true,
-                    "deleteColumns": false,
                     "deleteRows": true
-                }]
-            }]
+                }
+                ],
+                "allowedTypes": [
+                    "field"
+                ],
+                "displayProperties": false
+            }
+            ]
         }]
     };
 

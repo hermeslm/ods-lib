@@ -3,6 +3,16 @@
         <div class="row no-vertical-margin">
             <div class="form-group margin-bottom"
                  ng-class="{'has-error': fieldPropsForm.deleteRows.$invalid}">
+                <label for="totals" class="col-sm-4 control-label">Show Totals:</label>
+                <div class="col-sm-8">
+                    <input type="checkbox" id="totals" name="totals"
+                           ng-model="field.totals">
+                </div>
+            </div>
+        </div>
+        <div class="row no-vertical-margin">
+            <div class="form-group margin-bottom"
+                 ng-class="{'has-error': fieldPropsForm.deleteRows.$invalid}">
                 <label for="deleteRows" class="col-sm-4 control-label">Delete rows:</label>
                 <div class="col-sm-8">
                     <input type="checkbox" id="deleteRows" name="deleteRows"
@@ -57,9 +67,14 @@
             <div class="form-group margin-bottom"
                  ng-class="{'has-error': fieldPropsForm.col{{$index}}.$invalid}">
                 <label for="col{{$index}}" class="col-sm-4 control-label">Column {{$index + 1}} width:</label>
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                     <input type="text" class="form-control" id="col{{$index}}" name="col{{$index}}"
                            placeholder="Width..." ng-model="field.matrix[0][$index].width">
+                </div>
+                <div class="col-lg-2">
+                    <label for="total{{$index}}" class="control-label">Total:</label>
+                    <input type="checkbox" id="total{{$index}}" name="total{{$index}}" title="Add total to this column"
+                           ng-model="col.total">
                 </div>
             </div>
         </div>

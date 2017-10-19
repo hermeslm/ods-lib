@@ -25,6 +25,13 @@
                 </button>
             </td>
         </tr>
+        <tr ng-show="field.totals">
+            <td ng-repeat="col in field.matrix[0]">
+                <div ng-show="col.total" class="pull-right">
+                    <ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total>
+                </div>
+            </td>
+        </tr>
         <tr ng-show="field.deleteColumns">
             <td ng-repeat="col in field.matrix[0]">
                 <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
@@ -34,17 +41,14 @@
         </tr>
         </tbody>
     </table>
-    <!--<div class="btn-edit position-relative">-->
-    <!--<button type="button" class="btn btn-default" ng-show="!editableTableForm.$visible"-->
-    <!--ng-click="editableTableForm.$show()">-->
-    <!--edit-->
-    <!--</button>-->
-    <!--</div>-->
+    <div class="btn-edit position-relative">
+        <button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button>
+    </div>
     <!--<div class="btn-form" ng-show="editableTableForm.$visible">-->
-    <!--<button type="submit" ng-disabled="editableTableForm.$waiting" class="btn btn-primary position-relative">save-->
-    <!--</button>-->
-    <!--<button type="button" ng-disabled="editableTableForm.$waiting" ng-click="editableTableForm.$cancel()"-->
-    <!--class="btn btn-default position-relative">cancel-->
-    <!--</button>-->
+        <!--<button type="submit" ng-disabled="editableTableForm.$waiting" class="btn btn-primary position-relative">save-->
+        <!--</button>-->
+        <!--<button type="button" ng-disabled="editableTableForm.$waiting" ng-click="editableTableForm.$cancel()"-->
+                <!--class="btn btn-default position-relative">cancel-->
+        <!--</button>-->
     <!--</div>-->
 </form>

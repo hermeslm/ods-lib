@@ -29,6 +29,7 @@ function TableDirective(OdsFormService) {
         $scope.removeRow = removeRow;
         $scope.removeColumn = removeColumn;
         $scope.onAdd = onAdd;
+        $scope.cloneRow = cloneRow;
 
         function onAdd(item, type) {
 
@@ -54,5 +55,10 @@ function TableDirective(OdsFormService) {
 
             OdsFormService.removeColumn(table, index);
         }
+
+        function cloneRow(table) {
+
+            OdsFormService.cloneRow(table);
+        };
     }
 }

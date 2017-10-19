@@ -50,6 +50,7 @@ function FormDirective(OdsFormService, $timeout) {
         //Table field specific
         $scope.removeRow = removeRow;
         $scope.removeColumn = removeColumn;
+        $scope.cloneRow = cloneRow;
 
         /**
          * Return if field is required.
@@ -193,6 +194,15 @@ function FormDirective(OdsFormService, $timeout) {
         function removeColumn(table, index) {
 
             OdsFormService.removeColumn(table, index);
+        }
+
+        /**
+         * Clone the last row in table and add it as a new row.
+         * @param table Table
+         */
+        function cloneRow(table){
+
+            OdsFormService.cloneRow(table);
         }
 
     }

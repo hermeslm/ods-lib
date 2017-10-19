@@ -13,7 +13,7 @@
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs) {
 
         var uniqueCounter = (+new Date) % 10000;
-        var schema = null;
+        // var schema = null;
 
         var service = {
             newSchema: newSchema,
@@ -57,6 +57,7 @@
             //Table field specific
             removeRow: removeRow,
             removeColumn: removeColumn,
+            cloneRow: cloneRow,
 
             getTimeZoneUTC: getTimeZoneUTC,
             copyJson: copyJson,
@@ -112,9 +113,9 @@
          */
         function onAdd(item, type) {
 
-            if(type === OdsComponentType.FIELD){
+            if (type === OdsComponentType.FIELD) {
                 item.name = generateName(OdsComponentType.FIELD);
-                if(item.type === OdsFieldType.DATETIME){
+                if (item.type === OdsFieldType.DATETIME) {
                     // var today = new Date();
                     // var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0));
                     item.value = new Date();
@@ -644,9 +645,6 @@
                 matrix: [
                     [newItemObject(), newItemObject()]
                 ],
-                value: [
-                    [1, 'Row1 Col1', 'Row2 Col 2']
-                ],
                 validation: {
                     messages: {}
                 }
@@ -701,6 +699,24 @@
                     {size: 'sm'}).result.then(function (btn) {
                 });
             }
+        }
+
+        /**
+         * Clone the last row in table and add it as a new row.
+         * @param table Table
+         */
+        function cloneRow(table) {
+
+            //copy last row in table
+            var row = angular.copy(table.matrix[table.matrix.length - 1]);
+            //set new name for every field in row.
+            for (var i = 0; i < row.length; i++) {
+                row[i].name = generateName(OdsComponentType.ITEM);
+                for (var j = 0; j < row[i].fields.length; j++) {
+                    row[i].fields[j].name = generateName(OdsComponentType.FIELD);
+                }
+            }
+            table.matrix.push(row);
         }
 
         function getTimeZoneUTC() {
@@ -762,6 +778,7 @@
             $window.prompt('Copy to clipboard: Ctrl+C, Enter', json);
         }
 
+        //TODO add get values from table field, not implemented at the moment.
         function saveFormData(schema) {
 
             var formData = {
