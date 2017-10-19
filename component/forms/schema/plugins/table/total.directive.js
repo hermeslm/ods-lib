@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsTableTotal', TableTotalDirective);
 
-TableTotalDirective.$inject = [];
+TableTotalDirective.$inject = ['OdsFormService'];
 
-function TableTotalDirective() {
+function TableTotalDirective(OdsFormService) {
 
     return {
         restrict: 'E',
@@ -39,9 +39,9 @@ function TableTotalDirective() {
             for (var i = 0; i < model.matrix.length; i ++){
 
                 if(model.matrix[i][index].fields.length > 0) {
-                    if (typeof model.matrix[i][index].fields[0].value == 'number') {
-                        total += model.matrix[i][index].fields[0].value;
-                    }
+                    // if (typeof model.matrix[i][index].fields[0].value == 'number') {
+                        total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
+                    // }
                 }
             }
             return total;

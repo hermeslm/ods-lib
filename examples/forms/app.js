@@ -334,11 +334,157 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
             componentType: OdsComponentType.ROW,
             cols: [{
                 cssClass: 'col-lg-12',
-                fields: [],
-                "allowedTypes": [
-                    "field"
+                fields: [{
+                    "componentType": "field",
+                    "label": "Table",
+                    "name": "field5817",
+                    "type": "table",
+                    "cssClass": "table table-bordered table-responsive position-relative",
+                    "matrix": [
+                        [
+                            {
+                                "name": "item5815",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "TextBox",
+                                        "name": "field5819",
+                                        "placeholder": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ],
+                                "totalLabel": "Total"
+                            },
+                            {
+                                "name": "item5816",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Number",
+                                        "name": "field5820",
+                                        "placeholder": "",
+                                        "type": "number",
+                                        "required": false,
+                                        "value": 1,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ],
+                                "totalLabel": "Total",
+                                "total": true
+                            }
+                        ],
+                        [
+                            {
+                                "name": "item5821",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "TextBox",
+                                        "name": "field5822",
+                                        "placeholder": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ],
+                                "totalLabel": "Total"
+                            },
+                            {
+                                "name": "item5823",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Number",
+                                        "name": "field5824",
+                                        "placeholder": "",
+                                        "type": "number",
+                                        "required": false,
+                                        "value": 2,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ],
+                                "totalLabel": "Total"
+                            }
+                        ],
+                        [
+                            {
+                                "name": "item5825",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "TextBox",
+                                        "name": "field5826",
+                                        "placeholder": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ],
+                                "totalLabel": "Total"
+                            },
+                            {
+                                "name": "item5827",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Number",
+                                        "name": "field5828",
+                                        "placeholder": "",
+                                        "type": "number",
+                                        "required": false,
+                                        "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ],
+                                "totalLabel": "Total"
+                            }
+                        ]
+                    ],
+                    "validation": {
+                        "messages": {}
+                    },
+                    "showProperties": true,
+                    "totals": true
+                }],
+                allowedTypes: [
+                    'field'
                 ],
-                "displayProperties": false
+                displayProperties: false
             }
             ]
         }]
