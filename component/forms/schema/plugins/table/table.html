@@ -19,10 +19,18 @@
                     </ul>
                 </div>
             </td>
-            <td ng-show="field.deleteRows" width="20px">
+            <td ng-show="field.manageRows" width="20px">
                 <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
                         ng-show="field.rowHeader && $index !== 0" class="btn btn-danger pull-right">
                     <span class="fa fa-trash"></span>
+                </button>
+                <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up"
+                        class="btn btn-info pull-right" ng-disabled="$index === 0">
+                    <span class="fa fa-arrow-up"></span>
+                </button>
+                <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down"
+                        class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1">
+                    <span class="fa fa-arrow-down"></span>
                 </button>
             </td>
         </tr>
@@ -33,15 +41,20 @@
                 </div>
             </td>
         </tr>
-        <tr ng-show="field.deleteColumns">
+        <tr ng-show="field.manageColumns">
             <td ng-repeat="col in field.matrix[0]">
                 <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
                         ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right">
                     <span class="fa fa-trash"></span>
                 </button>
-                <!--<button type="button" ng-click="removeColumn(field, $index)" title="Remove column"-->
-                        <!--class="btn btn-danger pull-right"><span class="fa fa-trash"></span>-->
-                <!--</button>-->
+                <button type="button" ng-click="swapColumn($index, $index + 1)" title="Swap column right"
+                        class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1">
+                    <span class="fa fa-arrow-right"></span>
+                </button>
+                <button type="button" ng-click="swapColumn($index - 1, $index)" title="Swap column left"
+                        class="btn btn-info pull-right" ng-disabled="$index === 0">
+                    <span class="fa fa-arrow-left"></span>
+                </button>
             </td>
         </tr>
         </tbody>

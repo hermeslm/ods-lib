@@ -6,14 +6,14 @@
                 <ng-include src="getFormFieldTemplate(field.type)"></ng-include>
             </div>
         </td>
-        <td ng-show="field.deleteRows" width="20px">
+        <td ng-show="field.manageRows" width="20px">
             <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
                     ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right">
                 <span class="fa fa-trash"></span>
             </button>
         </td>
     </tr>
-    <tr ng-show="field.deleteColumns">
+    <tr ng-show="field.manageColumns">
         <td ng-repeat="col in field.matrix[0]">
             <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
                     ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right">
