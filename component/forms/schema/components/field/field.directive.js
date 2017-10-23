@@ -58,7 +58,6 @@ function FieldDirective(OdsFormService, dialogs) {
         $scope.formats.push({value: 'custom', option: 'Custom format'});
         $scope.showCustomFormat = $scope.field.selectedFormat === 'custom' ? true : false;
         $scope.onSelectFormat = onSelectFormat;
-        $scope.onChangeUTCOption = onChangeUTCOption;
 
         /**
          * Toggle Row properties options.
@@ -179,18 +178,5 @@ function FieldDirective(OdsFormService, dialogs) {
                 $scope.field.format = selectedFormat;
             }
         }
-
-        /**
-         * If UTC is selected set timezone to UTC.
-         * @returns {*|string|picker1.datepickerOptions|{showWeeks, startingDay, dateDisabled}|picker4.datepickerOptions|{maxDate}}
-         */
-        function onChangeUTCOption() {
-
-            if ($scope.field.utc)
-                $scope.field.datepickerOptions.timezone = OdsFormService.getTimeZoneUTC();
-            else
-                $scope.field.datepickerOptions.timezone = null;
-        }
-
     }
 }

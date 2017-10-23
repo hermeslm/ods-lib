@@ -1,21 +1,23 @@
 <table class="{{field.cssClass}}" id="{{field.name}}">
     <tbody>
     <tr ng-repeat="row in field.matrix">
-        <td ng-repeat="col in row" width="{{col.width}}">
+        <td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}">
             <div class="col-lg-12" ng-repeat="field in col.fields">
                 <ng-include src="getFormFieldTemplate(field.type)"></ng-include>
             </div>
         </td>
         <td ng-show="field.deleteRows" width="20px">
             <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
-                    class="btn btn-danger pull-right"><span class="fa fa-trash"></span>
+                    ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right">
+                <span class="fa fa-trash"></span>
             </button>
         </td>
     </tr>
     <tr ng-show="field.deleteColumns">
         <td ng-repeat="col in field.matrix[0]">
             <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
-                    class="btn btn-danger pull-right"><span class="fa fa-trash"></span>
+                    ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right">
+                <span class="fa fa-trash"></span>
             </button>
         </td>
     </tr>

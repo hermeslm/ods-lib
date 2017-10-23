@@ -1,0 +1,23 @@
+<uib-tabset class="nav-tabs-custom">
+    <uib-tab index="0" heading="Properties">
+        <form name="fieldPropertiesForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <div ng-include="'forms/schema/components/base-properties/label-properties.html'"></div>
+                <div class="row no-vertical-margin">
+                    <div class="form-group margin-bottom"
+                         ng-class="{'has-error': fieldPropertiesForm.cssClass.$invalid}">
+                        <label for="cssClass" class="col-sm-2 control-label">Css class:</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="cssClass" name="cssClass"
+                                   placeholder="Css class..." ng-model="field.cssClass"
+                                   ng-required="false">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="1" heading="Debug" ng-show="debugMode">
+        <ods-model model="field"></ods-model>
+    </uib-tab>
+</uib-tabset>

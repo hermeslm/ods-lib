@@ -45,6 +45,7 @@
             newFieldMultiSelectObject: newFieldMultiSelectObject,
             newFieldToggleObject: newFieldToggleObject,
             newDateTimeObject: newDateTimeObject,
+            newFieldLabelObject: newFieldLabelObject,
 
             //Fields plugins creation methods
             newYesNoObject: newYesNoObject,
@@ -187,6 +188,8 @@
                             return 'forms/toolbar/plugins/if-yes.html';
                         case OdsFieldType.TABLE:
                             return 'forms/toolbar/plugins/table.html';
+                        case OdsFieldType.LABEL:
+                            return 'forms/toolbar/components/label.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -223,6 +226,8 @@
                     return 'forms/schema/plugins/if-yes/if-yes.html';
                 case OdsFieldType.TABLE:
                     return 'forms/schema/plugins/table/container.html';
+                case OdsFieldType.LABEL:
+                    return 'forms/schema/components/label.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
@@ -256,6 +261,8 @@
                     return 'forms/schema/plugins/if-yes/if-yes-properties.html';
                 case OdsFieldType.TABLE:
                     return 'forms/schema/plugins/table/table-properties.html';
+                case OdsFieldType.LABEL:
+                    return 'forms/schema/components/label/label-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
@@ -291,6 +298,8 @@
                     return 'forms/common/fields/plugins/if-yes.html';
                 case OdsFieldType.TABLE:
                     return 'forms/common/fields/plugins/table.html';
+                case OdsFieldType.LABEL:
+                    return 'forms/common/fields/label-empty.html';
                 default :
                     return 'forms/common/fields/no-field.html';
             }
@@ -619,6 +628,18 @@
             }
         }
 
+        function newFieldLabelObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Label',
+                cssClass: 'text-left',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.LABEL,
+                value: 'Label'
+            }
+        }
+
         function newYesNoObject() {
 
             return {
@@ -735,10 +756,33 @@
             var value = 0;
             switch (field.type) {
                 case OdsFieldType.TEXT:
-                    value += Number(field.value);
+                    if (field.value) {
+                        value += Number(field.value);
+                    }
                     break;
                 case OdsFieldType.NUMBER:
-                    value += Number(field.value);
+                    if (field.value) {
+                        value += Number(field.value);
+                    }
+                    break;
+                case OdsFieldType.SELECT:
+                    if (field.value) {
+                        var id = getSelectFieldId(field);
+                        value += Number(field.value[id]);
+                    }
+                    break;
+                case OdsFieldType.MULTI_SELECT:
+                    if (field.value) {
+                        var id = getSelectFieldId(field);
+                        for (var i = 0; i < field.value.length; i++) {
+                            value += Number(field.value[i][id]);
+                        }
+                    }
+                    break;
+                case OdsFieldType.TEXTAREA:
+                    if (field.value) {
+                        value += Number(field.value);
+                    }
                     break;
             }
 

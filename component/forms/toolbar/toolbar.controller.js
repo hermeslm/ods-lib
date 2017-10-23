@@ -74,7 +74,8 @@
                 icon: 'fa fa-dashboard',
                 components: [
                     OdsFormService.newYesNoObject(),
-                    OdsFormService.newTableObject()
+                    OdsFormService.newTableObject(),
+                    OdsFormService.newFieldLabelObject()
                 ]
             }]
         };

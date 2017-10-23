@@ -1,3 +1,7 @@
+.table-td {
+  vertical-align: middle !important;
+}
+
 .popover {
   max-width: 100%;
 }

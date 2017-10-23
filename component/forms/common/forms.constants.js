@@ -13,7 +13,8 @@
             SELECT: 'select',
             MULTI_SELECT: 'multiselect',
             IF_YES: 'if_yes',
-            TABLE: 'table'
+            TABLE: 'table',
+            LABEL: 'label'
             //You can add your new field types
         })
         .constant('OdsComponentType', {

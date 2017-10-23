@@ -21,7 +21,8 @@
             </td>
             <td ng-show="field.deleteRows" width="20px">
                 <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
-                        class="btn btn-danger pull-right"><span class="fa fa-trash"></span>
+                        ng-show="field.rowHeader && $index !== 0" class="btn btn-danger pull-right">
+                    <span class="fa fa-trash"></span>
                 </button>
             </td>
         </tr>
@@ -35,8 +36,12 @@
         <tr ng-show="field.deleteColumns">
             <td ng-repeat="col in field.matrix[0]">
                 <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
-                        class="btn btn-danger pull-right"><span class="fa fa-trash"></span>
+                        ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right">
+                    <span class="fa fa-trash"></span>
                 </button>
+                <!--<button type="button" ng-click="removeColumn(field, $index)" title="Remove column"-->
+                        <!--class="btn btn-danger pull-right"><span class="fa fa-trash"></span>-->
+                <!--</button>-->
             </td>
         </tr>
         </tbody>
@@ -44,11 +49,4 @@
     <div class="btn-edit position-relative" ng-show="field.canCloneRow">
         <button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button>
     </div>
-    <!--<div class="btn-form" ng-show="editableTableForm.$visible">-->
-        <!--<button type="submit" ng-disabled="editableTableForm.$waiting" class="btn btn-primary position-relative">save-->
-        <!--</button>-->
-        <!--<button type="button" ng-disabled="editableTableForm.$waiting" ng-click="editableTableForm.$cancel()"-->
-                <!--class="btn btn-default position-relative">cancel-->
-        <!--</button>-->
-    <!--</div>-->
 </form>

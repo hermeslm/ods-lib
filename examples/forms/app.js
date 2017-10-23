@@ -347,15 +347,11 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                 "fields": [
                                     {
                                         "componentType": "field",
-                                        "label": "TextBox",
-                                        "name": "field5819",
-                                        "placeholder": "",
-                                        "type": "text",
-                                        "required": false,
-                                        "value": null,
-                                        "validation": {
-                                            "messages": {}
-                                        }
+                                        "label": "Label",
+                                        "cssClass": "text-left",
+                                        "name": "field48",
+                                        "type": "label",
+                                        "value": "Label"
                                     }
                                 ],
                                 "allowedTypes": [
@@ -368,15 +364,11 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                 "fields": [
                                     {
                                         "componentType": "field",
-                                        "label": "Number",
-                                        "name": "field5820",
-                                        "placeholder": "",
-                                        "type": "number",
-                                        "required": false,
-                                        "value": 1,
-                                        "validation": {
-                                            "messages": {}
-                                        }
+                                        "label": "Label",
+                                        "cssClass": "text-left",
+                                        "name": "field2586",
+                                        "type": "label",
+                                        "value": "Label"
                                     }
                                 ],
                                 "allowedTypes": [
@@ -384,6 +376,23 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                 ],
                                 "totalLabel": "Total",
                                 "total": true
+                            },
+                            {
+                                "name": "item2022",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Label",
+                                        "cssClass": "text-left",
+                                        "name": "field2587",
+                                        "type": "label",
+                                        "value": "Label"
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ],
+                                "totalLabel": "Total"
                             }
                         ],
                         [
@@ -392,15 +401,11 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                 "fields": [
                                     {
                                         "componentType": "field",
-                                        "label": "TextBox",
-                                        "name": "field5822",
-                                        "placeholder": "",
-                                        "type": "text",
-                                        "required": false,
-                                        "value": null,
-                                        "validation": {
-                                            "messages": {}
-                                        }
+                                        "label": "Label",
+                                        "cssClass": "text-left",
+                                        "name": "field2585",
+                                        "type": "label",
+                                        "value": "Label"
                                     }
                                 ],
                                 "allowedTypes": [
@@ -414,34 +419,11 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                     {
                                         "componentType": "field",
                                         "label": "Number",
-                                        "name": "field5824",
+                                        "name": "field2584",
                                         "placeholder": "",
                                         "type": "number",
                                         "required": false,
-                                        "value": 2,
-                                        "validation": {
-                                            "messages": {}
-                                        }
-                                    }
-                                ],
-                                "allowedTypes": [
-                                    "field"
-                                ],
-                                "totalLabel": "Total"
-                            }
-                        ],
-                        [
-                            {
-                                "name": "item5825",
-                                "fields": [
-                                    {
-                                        "componentType": "field",
-                                        "label": "TextBox",
-                                        "name": "field5826",
-                                        "placeholder": "",
-                                        "type": "text",
-                                        "required": false,
-                                        "value": null,
+                                        "value": 1,
                                         "validation": {
                                             "messages": {}
                                         }
@@ -453,14 +435,14 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                 "totalLabel": "Total"
                             },
                             {
-                                "name": "item5827",
+                                "name": "item2023",
                                 "fields": [
                                     {
                                         "componentType": "field",
-                                        "label": "Number",
-                                        "name": "field5828",
+                                        "label": "TextBox",
+                                        "name": "field2583",
                                         "placeholder": "",
-                                        "type": "number",
+                                        "type": "text",
                                         "required": false,
                                         "value": null,
                                         "validation": {
@@ -470,8 +452,65 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                 ],
                                 "allowedTypes": [
                                     "field"
+                                ]
+                            }
+                        ],
+                        [
+                            {
+                                "name": "item2577",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Label",
+                                        "cssClass": "text-left",
+                                        "name": "field2580",
+                                        "type": "label",
+                                        "value": "Label"
+                                    }
                                 ],
-                                "totalLabel": "Total"
+                                "allowedTypes": [
+                                    "field"
+                                ]
+                            },
+                            {
+                                "name": "item2578",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "Number",
+                                        "name": "field2581",
+                                        "placeholder": "",
+                                        "type": "number",
+                                        "required": false,
+                                        "value": 2,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ]
+                            },
+                            {
+                                "name": "item2579",
+                                "fields": [
+                                    {
+                                        "componentType": "field",
+                                        "label": "TextBox",
+                                        "name": "field2582",
+                                        "placeholder": "",
+                                        "type": "text",
+                                        "required": false,
+                                        "value": null,
+                                        "validation": {
+                                            "messages": {}
+                                        }
+                                    }
+                                ],
+                                "allowedTypes": [
+                                    "field"
+                                ]
                             }
                         ]
                     ],
@@ -479,7 +518,11 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                         "messages": {}
                     },
                     "showProperties": true,
-                    "totals": true
+                    "totals": true,
+                    "deleteRows": true,
+                    "deleteColumns": true,
+                    "rowHeader": true,
+                    "colHeader": false
                 }],
                 allowedTypes: [
                     'field'

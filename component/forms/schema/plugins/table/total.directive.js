@@ -36,12 +36,10 @@ function TableTotalDirective(OdsFormService) {
         function total(model) {
             var index = $scope.colIndex;
             var total = 0;
-            for (var i = 0; i < model.matrix.length; i ++){
+            for (var i = 0; i < model.matrix.length; i++) {
 
-                if(model.matrix[i][index].fields.length > 0) {
-                    // if (typeof model.matrix[i][index].fields[0].value == 'number') {
-                        total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
-                    // }
+                if (model.matrix[i][index].fields.length > 0) {
+                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
                 }
             }
             return total;
