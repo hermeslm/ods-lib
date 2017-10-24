@@ -5,13 +5,15 @@
             <td ng-repeat="col in row" width="{{col.width}}">
                 <div class="box-row col-lg-12">
                     <ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px;"
-                        dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)">
+                        dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)"
+                        dnd-drop="checkItem(index, item, external, type)">
                         <li class="box-field" ng-repeat="field in col.fields"
                             dnd-draggable="field"
                             dnd-type="field.componentType"
                             dnd-effect-allowed="move"
                             dnd-selected="models.selected = field"
                             dnd-moved="col.fields.splice($index, 1)"
+                            dnd-callback="onDrop(list, $index, targetList, targetIndex)"
                             ng-class="{selected: models.selected === col.fields}">
                             <ods-field row="row" col="col" index="$index" field="field" popover-props="true"
                                        debug-mode="debugMode"></ods-field>

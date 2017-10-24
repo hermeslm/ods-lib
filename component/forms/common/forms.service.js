@@ -65,6 +65,7 @@
 
             getTimeZoneUTC: getTimeZoneUTC,
             copyJson: copyJson,
+            getDataFromComponentCode: getDataFromComponentCode,
             saveFormData: saveFormData,
             saveFormSchema: saveFormSchema
         };
@@ -311,7 +312,7 @@
          */
         function getValidationPatterns() {
 
-            var patterns = [
+            return [
                 {
                     value: 0,
                     pattern: '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$',
@@ -374,8 +375,6 @@
                     group: 'password'
                 }
             ];
-
-            return patterns;
         }
 
         function getDateTimeFormats() {
@@ -531,7 +530,7 @@
 
         /**
          * Create a new Field Select Object
-         * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, multiSelect: boolean, valueField: string, titleField: string, limitTo: number, value: Array, data: Array, validation: {messages: {}}}}
+         * @returns Field Select Object
          */
         function newFieldSelectObject() {
 
@@ -591,7 +590,7 @@
 
         /**
          * Create a new Field Toggle Object
-         * @returns {{componentType: string, label: string, name, type: string, ln: boolean, on: string, off: string, value: string}}
+         * @returns Field Toggle Object
          */
         function newFieldToggleObject() {
 
@@ -619,9 +618,9 @@
                 enableTime: false,
                 format: OdsDateTimeFormat.ShortDate,
                 selectedFormat: OdsDateTimeFormat.ShortDate,
-                // datepickerOptions: {
-                //     timezone: getTimeZoneUTC()
-                // },
+                options: {
+                    timezone: getTimeZoneUTC()
+                },
                 // utc: true,
                 required: false,
                 value: date
@@ -652,7 +651,7 @@
                 off: 'No',
                 value: {
                     toggle: false,
-                    textarea: null,
+                    textarea: null
                 },
                 placeholder: '',
                 validation: {
@@ -689,33 +688,35 @@
         }
 
         /**
-         * Remove row from section.
+         * Remove row from table.
+         * @param table Table
          * @param index Row index to remove.
          */
         function removeRow(table, index) {
 
             if (table.matrix.length > 1) {
                 dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
-                    {size: 'sm'}).result.then(function (btn) {
+                    {size: 'sm'}).result.then(function () {
 
                     table.matrix.splice(index, 1);
                 });
             } else {
                 dialogs.notify('Information', 'At least one row must exist.',
-                    {size: 'sm'}).result.then(function (btn) {
+                    {size: 'sm'}).result.then(function () {
                 });
             }
         }
 
         /**
-         * Add column to current row.
-         * @param row Row to add column.
+         * remove column to from table.
+         * @param table Table
+         * @param index Column index to remove.
          */
         function removeColumn(table, index) {
 
             if (table.matrix[0].length > 1) {
                 dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
-                    {size: 'sm'}).result.then(function (btn) {
+                    {size: 'sm'}).result.then(function () {
 
                     for (var i = 0; i < table.matrix.length; i++) {
                         table.matrix[i].splice(index, 1);
@@ -723,7 +724,7 @@
                 });
             } else {
                 dialogs.notify('Information', 'At least one column must exist.',
-                    {size: 'sm'}).result.then(function (btn) {
+                    {size: 'sm'}).result.then(function () {
                 });
             }
         }
@@ -863,7 +864,7 @@
         function copyJson(json) {
 
             // $window.prompt('Copy to clipboard: Ctrl+C, Enter', json);
-            var result = copyToClipboard(json);
+            copyToClipboard(json);
             $window.alert('Code copied to clipboard!!!');
         }
 
@@ -873,7 +874,8 @@
             var formData = {
                 formName: schema.name,
                 formLabel: schema.label,
-                formDescription: schema.description
+                formDescription: schema.description,
+                fields: []
             };
 
             var layout = schema.layout;
@@ -883,8 +885,29 @@
                     var cols = rows[j].cols;
                     for (var k = 0; k < cols.length; k++) {
                         var fields = cols[k].fields;
-                        for (var l = 0; l < fields.length; l++)
-                            formData[cols[k].fields[l].name] = cols[k].fields[l].value;
+                        for (var l = 0; l < fields.length; l++) {
+                            if (fields[l].type == OdsFieldType.TABLE) {
+                                for (var m = 0; m < fields[l].matrix.length; m++) {
+                                    for (var p = 0; p < fields[l].matrix[m].length; p++) {
+                                        var field = {
+                                            name: cols[k].fields[l].matrix[m][p].fields[0].name,
+                                            type: cols[k].fields[l].matrix[m][p].fields[0].type,
+                                            code: cols[k].fields[l].matrix[m][p].fields[0].code,
+                                            value: cols[k].fields[l].matrix[m][p].fields[0].value
+                                        };
+                                        formData.fields.push(field);
+                                    }
+                                }
+                            } else {
+                                var field = {
+                                    name: cols[k].fields[l].name,
+                                    type: cols[k].fields[l].type,
+                                    code: cols[k].fields[l].code,
+                                    value: cols[k].fields[l].value
+                                };
+                                formData.fields.push(field);
+                            }
+                        }
                     }
                 }
             }
@@ -894,6 +917,59 @@
         function saveFormSchema(schema) {
 
             return schema;
+        }
+
+        function getDataFromComponentCode(schema, code) {
+
+            var resultFields = [];
+
+            var layout = schema.layout;
+            for (var i = 0; i < layout.length; i++) {
+                var rows = layout[i].rows;
+                for (var j = 0; j < rows.length; j++) {
+                    var cols = rows[j].cols;
+                    for (var k = 0; k < cols.length; k++) {
+                        var fields = cols[k].fields;
+                        for (var l = 0; l < fields.length; l++) {
+                            if (fields[l].type == OdsFieldType.TABLE) {
+                                for (var m = 0; m < fields[l].matrix.length; m++) {
+                                    for (var p = 0; p < fields[l].matrix[m].length; p++) {
+                                        if (cols[k].fields[l].matrix[m][p].fields[0].code === code) {
+                                            var field = {
+                                                name: cols[k].fields[l].matrix[m][p].fields[0].name,
+                                                type: cols[k].fields[l].matrix[m][p].fields[0].type,
+                                                code: cols[k].fields[l].matrix[m][p].fields[0].code,
+                                                value: cols[k].fields[l].matrix[m][p].fields[0].value
+                                            };
+                                            resultFields.push(field);
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (cols[k].fields[l].code === code) {
+                                    var field = {
+                                        name: cols[k].fields[l].name,
+                                        type: cols[k].fields[l].type,
+                                        code: cols[k].fields[l].code,
+                                        value: cols[k].fields[l].value
+                                    };
+                                    resultFields.push(field);
+                                }
+                            }
+                            // //TODO if component is a table we need to lookup for every field in the table.
+                            // if (cols[k].fields[l].code === code) {
+                            //     var field = {
+                            //         name: cols[k].fields[l].name,
+                            //         code: cols[k].fields[l].code,
+                            //         value: cols[k].fields[l].value
+                            //     };
+                            //     resultFields.push(field);
+                            // }
+                        }
+                    }
+                }
+            }
+            return fields;
         }
 
         return service;

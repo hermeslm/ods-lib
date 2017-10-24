@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsTable', TableDirective);
 
-TableDirective.$inject = ['OdsFormService', 'dialogs'];
+TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
 
-function TableDirective(OdsFormService, dialogs) {
+function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
 
     var directive = {
         restrict: 'E',
@@ -32,6 +32,18 @@ function TableDirective(OdsFormService, dialogs) {
         $scope.cloneRow = cloneRow;
         $scope.swapRow = swapRow;
         $scope.swapColumn = swapColumn;
+        $scope.checkItem = checkItem;
+
+        function checkItem(index, item, external, type) {
+
+            //We prevent add recursively a table inside other.
+            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
+                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.',
+                    {size: 'sm'});
+                return false;
+            } else return item;
+
+        }
 
         function onAdd(item, type) {
 

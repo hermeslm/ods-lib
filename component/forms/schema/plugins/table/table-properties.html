@@ -15,6 +15,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="row no-vertical-margin">
+                    <div class="form-group margin-bottom"
+                         ng-class="{'has-error': sectionPropertiesForm.code.$invalid}">
+                        <label for="code" class="col-sm-4 control-label">Component code:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="code" name="code"
+                                   placeholder="Code..." ng-model="field.code"
+                                   ng-required="false">
+                            <span class="help-block">Code is like a identification or type in this form.
+                                useful for a component classification.</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </uib-tab>

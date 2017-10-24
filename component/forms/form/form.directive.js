@@ -124,10 +124,12 @@ function FormDirective(OdsFormService, $timeout) {
          */
         function save() {
 
-            if ($scope.onSave) {
-                $scope.onSave();
-            } else {
-                showError('You must to to define onSave() function.');
+            if ($scope.schema.handleSubmit) {
+                if ($scope.onSave) {
+                    $scope.onSave();
+                } else {
+                    showError('You must to to define onSave() function.');
+                }
             }
         }
 
@@ -200,7 +202,7 @@ function FormDirective(OdsFormService, $timeout) {
          * Clone the last row in table and add it as a new row.
          * @param table Table
          */
-        function cloneRow(table){
+        function cloneRow(table) {
 
             OdsFormService.cloneRow(table);
         }
