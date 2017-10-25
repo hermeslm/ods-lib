@@ -37,7 +37,11 @@
     "angular-confirm": {
       "dependencies": {
         "angular": "1.5.8"
-      }
+      },
+      "main": [
+        "dist/angular-confirm.min.js",
+        "dist/angular-confirm.min.css"
+      ]
     },
     "angular-sanitize": {
       "dependencies": {
