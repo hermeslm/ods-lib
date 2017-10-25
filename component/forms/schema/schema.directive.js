@@ -27,6 +27,8 @@ function SchemaDirective(OdsFormService, $timeout) {
 
     function linkFunc($scope, $element) {
 
-        $scope.schema = OdsFormService.initSchema($scope.schema);
+        if(!$scope.schema) {
+            $scope.schema = OdsFormService.initSchema($scope.schema);
+        }
     }
 }
