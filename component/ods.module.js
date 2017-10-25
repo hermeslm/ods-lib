@@ -14,8 +14,8 @@ angular
         'dialogs.main',
         'dialogs.default-translations',
         'ngMessages',
-        'mgcrea.bootstrap.affix',
-        'xeditable'], function ($rootScopeProvider) {
+        'mgcrea.bootstrap.affix'
+    ], function ($rootScopeProvider) {
 
         //We add this due to a limitation of AngularJS to avoid infinite recursion
         // or infinite loop when dirty checking the model. In our case is because template recursion.

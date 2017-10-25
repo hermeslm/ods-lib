@@ -18,8 +18,8 @@ angular
         'dialogs.main',
         'dialogs.default-translations',
         'ngMessages',
-        'mgcrea.bootstrap.affix',
-        'xeditable'], function ($rootScopeProvider) {
+        'mgcrea.bootstrap.affix'
+    ], function ($rootScopeProvider) {
 
         //We add this due to a limitation of AngularJS to avoid infinite recursion
         // or infinite loop when dirty checking the model. In our case is because template recursion.
@@ -63,6 +63,8 @@ $templateCache.put('forms/schema/components/input.html','<div ng-include="\'form
 $templateCache.put('forms/schema/components/label.html','<label class="control-label" for="{{field.name}}" ng-hide="hideTitle(field)" ng-bind-html="field.label"></label>');
 $templateCache.put('forms/schema/components/no-field-properties.html','<div><h4>Field properties error</h4><div style="padding: 5px">Please fix this field properties: {{field.name}}, Type: {{field.type}}</div></div>');
 $templateCache.put('forms/schema/components/no-field.html','<div><h4>Field error</h4><div style="padding: 5px">Please fix this field: {{field.name}}, Type: {{field.type}}</div></div>');
+$templateCache.put('forms/toolbar/plugins/if-yes.html','<div class="row"><div class="col-lg-12"><div ng-include="\'forms/toolbar/components/label.html\'"></div></div></div><div class="row"><div class="col-lg-2"><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle></div><div class="col-lg-10"><input class="form-control" name="{{component.name}}" id="{{component.name}}"></div></div>');
+$templateCache.put('forms/toolbar/plugins/table.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><table class="table table-bordered table-responsive" id="{{component.name}}"><!--<thead>--><!--<tr>--><!--<td>#</td>--><!--<td ng-repeat="column in component.columns">{{column.title}}</td>--><!--</tr>--><!--</thead>--><tbody><tr ng-repeat="row in component.matrix"><td ng-repeat="col in row">{{col.name}}</td></tr></tbody></table>');
 $templateCache.put('forms/toolbar/components/component.html','<div class="" ng-class="{ \'error\': object.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs btn-primary" type="button" ng-click="vm.addSection(component)" title="Add this field."><span class="fa fa-hand-pointer-o"></span></button></div></div><div class="box-body"><div ng-include="vm.getToolbarComponent(component)"></div></div></div>');
 $templateCache.put('forms/toolbar/components/datetime.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><div class="input-group input-group-sm"><input id="{{component.name}}" type="text" class="form-control" name="{{component.name}}" ng-required="getRequired(field)" datetime-picker="{{field.format}}" ng-model="field.value" is-open="field.open" ng-disabled="true"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click=""><i class="fa fa-calendar"></i></button></span></div>');
 $templateCache.put('forms/toolbar/components/input.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><input class="form-control" name="{{component.name}}" id="{{component.name}}">');
@@ -73,10 +75,15 @@ $templateCache.put('forms/toolbar/components/section.html','<div class=""><h3>Se
 $templateCache.put('forms/toolbar/components/select.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><select name="{{component.name}}" id="{{component.name}}" class="form-control"><option value="1">Option 1...</option></select>');
 $templateCache.put('forms/toolbar/components/textarea.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><textarea class="form-control" name="{{component.name}}" id="{{component.name}}" rows="{{component.rows}}" placeholder="{{component.placeholder}}">\n</textarea>');
 $templateCache.put('forms/toolbar/components/toggle.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle>');
-$templateCache.put('forms/toolbar/plugins/if-yes.html','<div class="row"><div class="col-lg-12"><div ng-include="\'forms/toolbar/components/label.html\'"></div></div></div><div class="row"><div class="col-lg-2"><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle></div><div class="col-lg-10"><input class="form-control" name="{{component.name}}" id="{{component.name}}"></div></div>');
-$templateCache.put('forms/toolbar/plugins/table.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><table class="table table-bordered table-responsive" id="{{component.name}}"><!--<thead>--><!--<tr>--><!--<td>#</td>--><!--<td ng-repeat="column in component.columns">{{column.title}}</td>--><!--</tr>--><!--</thead>--><tbody><tr ng-repeat="row in component.matrix"><td ng-repeat="col in row">{{col.name}}</td></tr></tbody></table>');
 $templateCache.put('forms/common/fields/plugins/if-yes.html','<br ng-if="field.ln"><toggle name="{{field.name}}" id="{{field.name}}" on="{{field.on}}" off="{{field.off}}" ng-model="field.value.toggle"></toggle><textarea class="form-control" name="{{field.name}}" id="{{field.name}}" placeholder="{{field.placeholder}}" title="{{field.tooltip}}" style="margin-top: 10px" ng-model="field.value.textarea" ng-required="field.value.toggle" type="{{field.type}}" ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" ng-show="field.value.toggle"></textarea>');
 $templateCache.put('forms/common/fields/plugins/table.html','<table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}"><div class="col-lg-12" ng-repeat="field in col.fields"><ng-include src="getFormFieldTemplate(field.type)"></ng-include></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr></tbody></table><div class="btn-edit position-relative"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div>');
+$templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.toggleValue.$invalid}"><label for="toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="toggleValue" name="toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.textValue.$invalid}"><label for="textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="textValue" name="textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/if-yes/if-yes.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes.html\'"></div>');
+$templateCache.put('forms/schema/plugins/table/container.html','<div ng-include="\'forms/schema/components/label.html\'"></div><ods-table field="field" mode="edit"></ods-table>');
+$templateCache.put('forms/schema/plugins/table/table-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.cssClass.$invalid}"><label for="cssClass" class="col-sm-4 control-label">Class Name:</label><div class="col-sm-8"><input type="text" class="form-control" id="cssClass" name="cssClass" placeholder="Css Class..." ng-model="field.cssClass" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.code.$invalid}"><label for="code" class="col-sm-4 control-label">Component code:</label><div class="col-sm-8"><input type="text" class="form-control" id="code" name="code" placeholder="Code..." ng-model="field.code" ng-required="false"> <span class="help-block">Code is like a identification or type in this form. useful for a component classification.</span></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Layout"><ods-table-props field="field"></ods-table-props></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/table/table-props.html','<div class="container padding-top"><div class="row"><form name="fieldPropsForm" class="form-horizontal"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.rows.$invalid}"><label for="rows" class="control-label col-sm-5">Rows:</label><div class="col-sm-3"><input type="number" class="form-control" id="rows" name="rows" placeholder="Rows..." ng-model="field.matrix.length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addRow()" title="Add row">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.cols.$invalid}"><label for="cols" class="control-label col-sm-5">Cols:</label><div class="col-lg-3"><input type="number" class="form-control" id="cols" name="cols" placeholder="Cols..." ng-model="field.matrix[0].length" ng-required="false" ng-disabled="true"></div><div class="col-lg-3"><button type="button" class="btn btn-primary" ng-click="addColumn()" title="Add column">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.totals.$invalid}"><label for="rowHeader" class="control-label col-sm-5">Row Header:</label><input class="col-sm-1" type="checkbox" id="rowHeader" name="rowHeader" ng-model="field.rowHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.canClone.$invalid}"><label for="colHeader" class="control-label col-sm-5">Col Header:</label><input class="col-sm-1" type="checkbox" id="colHeader" name="colHeader" ng-model="field.colHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.totals.$invalid}"><label for="totals" class="control-label col-sm-5">Show Totals:</label><input class="col-sm-1" type="checkbox" id="totals" name="totals" ng-model="field.totals"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.canClone.$invalid}"><label for="canClone" class="control-label col-sm-5">Can clone row:</label><input class="col-sm-1" type="checkbox" id="canClone" name="canClone" ng-model="field.canCloneRow"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.manageRows.$invalid}"><label for="manageRows" class="control-label col-sm-5">Manage rows:</label><input class="col-sm-1" type="checkbox" id="manageRows" name="manageRows" ng-model="field.manageRows"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.manageColumns.$invalid}"><label for="manageColumns" class="control-label col-sm-5">Manage columns:</label><input class="col-sm-1" type="checkbox" id="manageColumns" name="manageColumns" ng-model="field.manageColumns"></div></div><div class="col-md-8 col-sm-8 col-xs-12"><h3>Columns configuration</h3><table class="table table-bordered"><thead><tr><th>#</th><th>CSS class</th><th>Width</th><th>Total</th><th>Total Label</th></tr></thead><tbody><tr ng-repeat="col in field.matrix[0]"><td>{{$index + 1}}</td><td><input type="text" class="form-control" id="col{{$index}}" name="col{{$index}}" placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass"></td><td><input type="text" class="form-control" id="width{{$index}}" name="width{{$index}}" placeholder="width..." ng-model="col.width"></td><td><input type="checkbox" id="total{{$index}}" name="total{{$index}}" title="Add total to this column" ng-model="col.total"></td><td><input type="text" class="form-control" id="totalLabel{{$index}}" name="totalLabel{{$index}}" placeholder="Total label..." ng-model="field.matrix[0][$index].totalLabel"></td></tr></tbody></table></div></form></div></div>');
+$templateCache.put('forms/schema/plugins/table/table.html','<form name="{{field.name}}" class="position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" width="{{col.width}}"><div class="box-row col-lg-12"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)" dnd-drop="checkItem(index, item, external, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" dnd-callback="onDrop(list, $index, targetList, targetIndex)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" popover-props="true" debug-mode="debugMode"></ods-field></li></ul></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.rowHeader && $index !== 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-up"></span></button> <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-down"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapColumn($index, $index + 1)" title="Swap column right" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-right"></span></button> <button type="button" ng-click="swapColumn($index - 1, $index)" title="Swap column left" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-left"></span></button></td></tr></tbody></table><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div></form>');
+$templateCache.put('forms/schema/plugins/table/total.html','<div><b>{{label}}: {{total}}</b></div>');
 $templateCache.put('forms/schema/components/base-properties/common-properties.html','<div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/placeholder-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div>');
 $templateCache.put('forms/schema/components/base-properties/label-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.label.$invalid}"><label for="label" class="col-sm-4 control-label">Label:</label><div class="col-sm-8"><input type="text" class="form-control" id="label" name="label" placeholder="Label..." ng-model="field.label" ng-required="false"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/maxlength-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.maxLength.$invalid}"><label for="maxLength" class="col-sm-4 control-label">Max Length:</label><div class="col-sm-8"><input type="number" class="form-control" id="maxLength" name="maxLength" placeholder="Max Length..." ng-model="field.validation.maxlength" ng-required="false" ng-change="onChangeMaxLength()"></div></div></div><div class="row no-vertical-margin" ng-show="field.validation.maxlength"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.minLengthMessage.$invalid}"><label for="maxLengthMessage" class="col-sm-4 control-label">Message</label><div class="col-sm-8"><input type="text" class="form-control" id="maxLengthMessage" name="maxLengthMessage" placeholder="Max length message..." ng-model="field.validation.messages.maxlength" ng-required="false"></div></div></div>');
@@ -98,6 +105,8 @@ $templateCache.put('forms/schema/components/multi-select/multi-select-properties
 $templateCache.put('forms/schema/components/multi-select/multi-select.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/multi-select.html\'"></div>');
 $templateCache.put('forms/schema/components/number/number-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/password/password-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/components/row/row-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="sectionPropertiesForm" class="form-horizontal"><div class="container padding-top"><div class="row"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.name.$invalid}"><label for="name" class="col-sm-5 control-label">Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="name" name="name" placeholder="Name..." ng-model="row.name" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.cssClass.$invalid}"><label for="cssClass" class="col-sm-5 control-label">Class Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="cssClass" name="cssClass" placeholder="Css Class..." ng-model="row.cssClass" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.cols.$invalid}"><label for="cols" class="col-sm-5 control-label">Cols:</label><div class="col-sm-7"><input type="number" class="form-control" id="cols" name="cols" placeholder="Cols..." ng-model="row.cols.length" ng-required="false" ng-disabled="true"></div><!--<div class="col-lg-3">--><!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>--><!--</div>--></div></div><div class="col-md-8 col-sm-8 col-xs-12"><!--<h3>Columns configuration</h3>--><table class="table table-condensed table-responsive table-striped"><thead><tr><th>Columns #</th><th>CSS class</th><th>Actions</th></tr></thead><tbody><tr ng-repeat="col in row.cols"><td>{{$index + 1}}</td><td><input type="text" name="cssClass" ng-model="col.cssClass" class="form-control input-sm" required></td><td><button type="button" class="btn btn-danger btn-sm" ng-click="removeColumn($index)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button></td></tr><tr><td></td><td></td><td><button type="button" class="btn btn-primary" ng-click="addColumn(row)">Add column</button></td></tr></tbody></table></div></div></div></form></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><ods-model model="row" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/components/row/row.html','<div class="box-draggable" ng-class="{ \'error\': row.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" ng-disabled="section.showProperties && section.invalid" ng-class="{ \'active\': section.showProperties }" title="Configure this Section." ng-click="toggleRowProperties(row)"><span class="fa fa-wrench"></span></button> <button class="btn btn-default btn-xs btn-danger" type="button" title="Remove" ng-click="removeRow(index)"><span class="fa fa-trash"></span></button></div></div><div class="box-field-container padding"><div class="box-body no-padding"><div class="box-row {{col.cssClass}}" ng-repeat="col in row.cols"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" debug-mode="debugMode"></ods-field></li></ul></div></div><!-- /.box-body --></div><div class="box-properties-container" ng-class="{ visible: row.showProperties }"><div class="padding"><div ng-include="\'forms/schema/components/row/row-properties.html\'"></div></div></div></div>');
 $templateCache.put('forms/schema/components/section/section-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="sectionPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.name.$invalid}"><label for="name" class="col-sm-2 control-label">Name:</label><div class="col-sm-4"><input type="text" class="form-control" id="name" name="name" placeholder="Name..." ng-model="section.name" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.rows.$invalid}"><label for="rows" class="col-sm-2 control-label">Rows:</label><div class="col-sm-4"><input type="number" class="form-control" id="rows" name="rows" placeholder="Rows..." ng-model="section.rows.length" ng-required="false" ng-disabled="true"></div><div class="col-lg-6"><button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.title.$invalid}"><label for="title" class="col-sm-2 control-label">Title:</label><div class="col-sm-9"><input type="text" class="form-control" id="title" name="title" placeholder="Title..." ng-model="section.title" ng-required="false"></div></div></div></div></form></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><ods-model model="section" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/section/section.html','<div class="box-draggable" ng-class="{ \'error\': object.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" ng-disabled="section.showProperties && section.invalid" ng-class="{ \'active\': section.showProperties }" ng-click="toggleProperties(section)" title="Configure this Section."><span class="fa fa-wrench"></span></button> <button class="btn btn-default btn-xs" type="button" ng-click="swap(index - 1, index)" ng-disabled="index === 0" title="Move up"><span class="fa fa-arrow-up"></span></button> <button class="btn btn-default btn-xs" type="button" ng-click="swap(index, index + 1)" title="Move down" ng-disabled="index === schema.layout.length - 1"><span class="fa fa-arrow-down"></span></button> <button class="btn btn-default btn-xs btn-danger" type="button" ng-click="remove(index)" title="Remove"><span class="fa fa-trash"></span></button></div></div><div class="box-header with-border"><h4 class="box-title" ng-bind-html="section.title"></h4></div><div class="box-body"><ul dnd-list="section.rows" dnd-allowed-types="section.allowedTypes"><li class="{{row.cssClass}} padding-top" ng-repeat="row in section.rows" dnd-draggable="row" dnd-type="row.componentType" dnd-disable-if="row.componentType == undefined" dnd-effect-allowed="move" dnd-moved="section.rows.splice($index, 1)"><ods-row section="section" row="row" index="$index" debug-mode="debugMode"></ods-row></li></ul></div><div class="box-properties-container" ng-class="{ visible: section.showProperties }"><div class="padding"><div ng-include="\'forms/schema/components/section/section-properties.html\'"></div></div></div></div>');
 $templateCache.put('forms/schema/components/select/select-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="limitTo" name="limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><table class="table table-condensed position-relative" style="position: relative"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="radio" name="{{field.name}}Selected[]" ng-value="field.options[$index]" ng-model="field.value"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" ng-required="true"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table>');
@@ -106,18 +115,131 @@ $templateCache.put('forms/schema/components/select/select.html','<div ng-include
 $templateCache.put('forms/schema/components/text/text-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/textarea/textarea-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/textarea/textarea.html','<div ng-include="\'forms/schema/components/label.html\'"></div><textarea class="form-control" name="{{field.name}}" id="{{field.name}}" ng-required="{{field.required}}" title="{{field.tooltip}}" rows="{{field.rows}}" placeholder="{{field.placeholder}}" ng-model="field.value">\n</textarea>');
-$templateCache.put('forms/schema/components/row/row-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="sectionPropertiesForm" class="form-horizontal"><div class="container padding-top"><div class="row"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.name.$invalid}"><label for="name" class="col-sm-5 control-label">Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="name" name="name" placeholder="Name..." ng-model="row.name" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.cssClass.$invalid}"><label for="cssClass" class="col-sm-5 control-label">Class Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="cssClass" name="cssClass" placeholder="Css Class..." ng-model="row.cssClass" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.cols.$invalid}"><label for="cols" class="col-sm-5 control-label">Cols:</label><div class="col-sm-7"><input type="number" class="form-control" id="cols" name="cols" placeholder="Cols..." ng-model="row.cols.length" ng-required="false" ng-disabled="true"></div><!--<div class="col-lg-3">--><!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>--><!--</div>--></div></div><div class="col-md-8 col-sm-8 col-xs-12"><!--<h3>Columns configuration</h3>--><table class="table table-condensed table-responsive table-striped"><thead><tr><th>Columns #</th><th>CSS class</th><th>Actions</th></tr></thead><tbody><tr ng-repeat="col in row.cols"><td>{{$index + 1}}</td><td><input type="text" name="cssClass" ng-model="col.cssClass" class="form-control input-sm" required></td><td><button type="button" class="btn btn-danger btn-sm" ng-click="removeColumn($index)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button></td></tr><tr><td></td><td></td><td><button type="button" class="btn btn-primary" ng-click="addColumn(row)">Add column</button></td></tr></tbody></table></div></div></div></form></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><ods-model model="row" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/components/row/row.html','<div class="box-draggable" ng-class="{ \'error\': row.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" ng-disabled="section.showProperties && section.invalid" ng-class="{ \'active\': section.showProperties }" title="Configure this Section." ng-click="toggleRowProperties(row)"><span class="fa fa-wrench"></span></button> <button class="btn btn-default btn-xs btn-danger" type="button" title="Remove" ng-click="removeRow(index)"><span class="fa fa-trash"></span></button></div></div><div class="box-field-container padding"><div class="box-body no-padding"><div class="box-row {{col.cssClass}}" ng-repeat="col in row.cols"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" debug-mode="debugMode"></ods-field></li></ul></div></div><!-- /.box-body --></div><div class="box-properties-container" ng-class="{ visible: row.showProperties }"><div class="padding"><div ng-include="\'forms/schema/components/row/row-properties.html\'"></div></div></div></div>');
 $templateCache.put('forms/schema/components/toggle/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/toggle/toggle-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/components/toggle/toggle.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/toggle.html\'"></div>');
-$templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.toggleValue.$invalid}"><label for="toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="toggleValue" name="toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.textValue.$invalid}"><label for="textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="textValue" name="textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field"></ods-model></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/plugins/if-yes/if-yes.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes.html\'"></div>');
-$templateCache.put('forms/schema/plugins/table/container.html','<div ng-include="\'forms/schema/components/label.html\'"></div><ods-table field="field" mode="edit"></ods-table>');
-$templateCache.put('forms/schema/plugins/table/table-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.cssClass.$invalid}"><label for="cssClass" class="col-sm-4 control-label">Class Name:</label><div class="col-sm-8"><input type="text" class="form-control" id="cssClass" name="cssClass" placeholder="Css Class..." ng-model="field.cssClass" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.code.$invalid}"><label for="code" class="col-sm-4 control-label">Component code:</label><div class="col-sm-8"><input type="text" class="form-control" id="code" name="code" placeholder="Code..." ng-model="field.code" ng-required="false"> <span class="help-block">Code is like a identification or type in this form. useful for a component classification.</span></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Layout"><ods-table-props field="field"></ods-table-props></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><ods-model model="field" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/plugins/table/table-props.html','<div class="container padding-top"><div class="row"><form name="fieldPropsForm" class="form-horizontal"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.rows.$invalid}"><label for="rows" class="control-label col-sm-5">Rows:</label><div class="col-sm-3"><input type="number" class="form-control" id="rows" name="rows" placeholder="Rows..." ng-model="field.matrix.length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addRow()" title="Add row">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.cols.$invalid}"><label for="cols" class="control-label col-sm-5">Cols:</label><div class="col-lg-3"><input type="number" class="form-control" id="cols" name="cols" placeholder="Cols..." ng-model="field.matrix[0].length" ng-required="false" ng-disabled="true"></div><div class="col-lg-3"><button type="button" class="btn btn-primary" ng-click="addColumn()" title="Add column">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.totals.$invalid}"><label for="rowHeader" class="control-label col-sm-5">Row Header:</label><input class="col-sm-1" type="checkbox" id="rowHeader" name="rowHeader" ng-model="field.rowHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.canClone.$invalid}"><label for="colHeader" class="control-label col-sm-5">Col Header:</label><input class="col-sm-1" type="checkbox" id="colHeader" name="colHeader" ng-model="field.colHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.totals.$invalid}"><label for="totals" class="control-label col-sm-5">Show Totals:</label><input class="col-sm-1" type="checkbox" id="totals" name="totals" ng-model="field.totals"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.canClone.$invalid}"><label for="canClone" class="control-label col-sm-5">Can clone row:</label><input class="col-sm-1" type="checkbox" id="canClone" name="canClone" ng-model="field.canCloneRow"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.manageRows.$invalid}"><label for="manageRows" class="control-label col-sm-5">Manage rows:</label><input class="col-sm-1" type="checkbox" id="manageRows" name="manageRows" ng-model="field.manageRows"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.manageColumns.$invalid}"><label for="manageColumns" class="control-label col-sm-5">Manage columns:</label><input class="col-sm-1" type="checkbox" id="manageColumns" name="manageColumns" ng-model="field.manageColumns"></div></div><div class="col-md-8 col-sm-8 col-xs-12"><h3>Columns configuration</h3><table class="table table-bordered"><thead><tr><th>#</th><th>CSS class</th><th>Width</th><th>Total</th><th>Total Label</th></tr></thead><tbody><tr ng-repeat="col in field.matrix[0]"><td>{{$index + 1}}</td><td><input type="text" class="form-control" id="col{{$index}}" name="col{{$index}}" placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass"></td><td><input type="text" class="form-control" id="width{{$index}}" name="width{{$index}}" placeholder="width..." ng-model="col.width"></td><td><input type="checkbox" id="total{{$index}}" name="total{{$index}}" title="Add total to this column" ng-model="col.total"></td><td><input type="text" class="form-control" id="totalLabel{{$index}}" name="totalLabel{{$index}}" placeholder="Total label..." ng-model="field.matrix[0][$index].totalLabel"></td></tr></tbody></table></div></form></div></div>');
-$templateCache.put('forms/schema/plugins/table/table.html','<form name="{{field.name}}" class="position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" width="{{col.width}}"><div class="box-row col-lg-12"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)" dnd-drop="checkItem(index, item, external, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" dnd-callback="onDrop(list, $index, targetList, targetIndex)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" popover-props="true" debug-mode="debugMode"></ods-field></li></ul></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.rowHeader && $index !== 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-up"></span></button> <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-down"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapColumn($index, $index + 1)" title="Swap column right" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-right"></span></button> <button type="button" ng-click="swapColumn($index - 1, $index)" title="Swap column left" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-left"></span></button></td></tr></tbody></table><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div></form>');
-$templateCache.put('forms/schema/plugins/table/total.html','<div><b>{{label}}: {{total}}</b></div>');}]);
+$templateCache.put('forms/schema/components/toggle/toggle.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/toggle.html\'"></div>');}]);
+'use strict';
+
+angular
+    .module('ods-lib')
+    .controller('AddressDialogController', AddressDialogController);
+
+AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states', '$filter'];
+
+function AddressDialogController($uibModalInstance, address, countries, states, $filter) {
+    var vm = this;
+
+    vm.address = address;
+    vm.countries = countries;
+    vm.states = states;
+
+    vm.clear = clear;
+    vm.save = save;
+
+    function clear() {
+        $uibModalInstance.dismiss('cancel');
+    }
+
+    function save() {
+        $uibModalInstance.close(vm.address);
+        vm.isSaving = false;
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('address', Address);
+
+Address.$inject = ['$uibModal'];
+
+function Address($uibModal) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'address/address.html',
+        scope: {
+            label: '@',
+            address: '=',
+            countries: '=',
+            states: '=',
+            ngModel: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        $scope.openModal = function ($element) {
+            $uibModal.open({
+                templateUrl: 'address/address-dialog.html',
+                controller: 'AddressDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    address: function () {
+                        if ($scope.ngModel !== null) {
+                            return $scope.ngModel;
+                            // {
+                            //     address: $scope.ngModel.address,
+                            //     address2: $scope.ngModel.address2,
+                            //     city: $scope.ngModel.city,
+                            //     state: $scope.ngModel.state,
+                            //     zip: $scope.ngModel.zip,
+                            //     // country: $scope.ngModel.country,
+                            //     phone: $scope.ngModel.phone,
+                            //     mobile: $scope.ngModel.mobile,
+                            //     fax: $scope.ngModel.fax,
+                            //     email: $scope.ngModel.email,
+                            //     notes: $scope.ngModel.notes
+                            // }
+                        } else {
+                            return null;
+                        }
+                    },
+                    countries: function () {
+                        return $scope.countries;
+                    },
+                    states: function () {
+                        return $scope.states;
+                    }
+
+                }
+            }).result.then(function (result) {
+                // $element.
+                updateValue(result);
+                //$state.go($state.current.name, null, {reload: $state.current.name});
+            }, function (result) {
+                //$state.go($state.current.name);
+            });
+        };
+
+        $scope.printName = printName;
+
+        function printName(address) {
+            if (address != null) {
+                return address.street + ' ' +
+                    address.street2 + ' ' +
+                    address.city + ',' +
+                    address.state.name + ' ' +
+                    address.zip
+            } else {
+                return '';
+            }
+        }
+
+        function updateValue(value) {
+            // var input = $element[0].getElementsByTagName('input');
+            $scope.ngModel = value;
+        }
+
+    }
+}
 'use strict';
 
 angular
@@ -229,6 +351,60 @@ function PropsFilter() {
         return out;
     };
 }
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .controller('OdsFormBuilderController', OdsFormBuilderController);
+
+    OdsFormBuilderController.$inject = ['$scope', 'OdsFormService'];
+
+    function OdsFormBuilderController($scope, OdsFormService) {
+
+        $scope.saveForm = function(schema){
+            var data = OdsFormService.saveFormData(schema);
+            console.log("The form data is: " + JSON.stringify(data, null, 4));
+        }
+    }
+})();
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsFormBuilder', OdsFormBuilder);
+
+OdsFormBuilder.$inject = ['OdsFormService', '$uibModal', '$sce', '$q'];
+
+function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/form-builder.html',
+        scope: {
+            schema: '=',
+            debugMode: '='
+        },
+        controller: 'OdsFormBuilderController',
+        controllerAs: 'vm',
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+    }
+}
+
 /**
  * Created by PpTMUnited on 2/21/2017.
  */
@@ -481,60 +657,6 @@ function ImageUploadService() {
     }
 }
 
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('OdsFormBuilderController', OdsFormBuilderController);
-
-    OdsFormBuilderController.$inject = ['$scope', 'OdsFormService'];
-
-    function OdsFormBuilderController($scope, OdsFormService) {
-
-        $scope.saveForm = function(schema){
-            var data = OdsFormService.saveFormData(schema);
-            console.log("The form data is: " + JSON.stringify(data, null, 4));
-        }
-    }
-})();
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsFormBuilder', OdsFormBuilder);
-
-OdsFormBuilder.$inject = ['OdsFormService', '$uibModal', '$sce', '$q'];
-
-function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/form-builder.html',
-        scope: {
-            schema: '=',
-            debugMode: '='
-        },
-        controller: 'OdsFormBuilderController',
-        controllerAs: 'vm',
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-    }
-}
-
 'use strict';
 
 angular
@@ -779,128 +901,6 @@ function Signature() {
     }
 
 
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .controller('AddressDialogController', AddressDialogController);
-
-AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states', '$filter'];
-
-function AddressDialogController($uibModalInstance, address, countries, states, $filter) {
-    var vm = this;
-
-    vm.address = address;
-    vm.countries = countries;
-    vm.states = states;
-
-    vm.clear = clear;
-    vm.save = save;
-
-    function clear() {
-        $uibModalInstance.dismiss('cancel');
-    }
-
-    function save() {
-        $uibModalInstance.close(vm.address);
-        vm.isSaving = false;
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('address', Address);
-
-Address.$inject = ['$uibModal'];
-
-function Address($uibModal) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'address/address.html',
-        scope: {
-            label: '@',
-            address: '=',
-            countries: '=',
-            states: '=',
-            ngModel: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.openModal = function ($element) {
-            $uibModal.open({
-                templateUrl: 'address/address-dialog.html',
-                controller: 'AddressDialogController',
-                controllerAs: 'vm',
-                backdrop: 'static',
-                size: 'lg',
-                resolve: {
-                    address: function () {
-                        if ($scope.ngModel !== null) {
-                            return $scope.ngModel;
-                            // {
-                            //     address: $scope.ngModel.address,
-                            //     address2: $scope.ngModel.address2,
-                            //     city: $scope.ngModel.city,
-                            //     state: $scope.ngModel.state,
-                            //     zip: $scope.ngModel.zip,
-                            //     // country: $scope.ngModel.country,
-                            //     phone: $scope.ngModel.phone,
-                            //     mobile: $scope.ngModel.mobile,
-                            //     fax: $scope.ngModel.fax,
-                            //     email: $scope.ngModel.email,
-                            //     notes: $scope.ngModel.notes
-                            // }
-                        } else {
-                            return null;
-                        }
-                    },
-                    countries: function () {
-                        return $scope.countries;
-                    },
-                    states: function () {
-                        return $scope.states;
-                    }
-
-                }
-            }).result.then(function (result) {
-                // $element.
-                updateValue(result);
-                //$state.go($state.current.name, null, {reload: $state.current.name});
-            }, function (result) {
-                //$state.go($state.current.name);
-            });
-        };
-
-        $scope.printName = printName;
-
-        function printName(address) {
-            if (address != null) {
-                return address.street + ' ' +
-                    address.street2 + ' ' +
-                    address.city + ',' +
-                    address.state.name + ' ' +
-                    address.zip
-            } else {
-                return '';
-            }
-        }
-
-        function updateValue(value) {
-            // var input = $element[0].getElementsByTagName('input');
-            $scope.ngModel = value;
-        }
-
-    }
 }
 /**
  * Created by hermeslm on 3/28/17.
@@ -1592,55 +1592,6 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
 
 angular
     .module('ods-lib')
-    .directive('stepsIndicator', StepsIndicator);
-
-StepsIndicator.$inject = [];
-
-function StepsIndicator() {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'steps-indicator/template.html',
-        scope: {
-            ngModel: '=',
-            class: '@',
-            type: '@'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.changeStatus = changeStatus;
-
-        function changeStatus(elem) {
-
-            if ($scope.type === 'multiselect') {
-                if (elem.callback) {
-                    elem.callback(elem);
-                }
-            } else {
-                if (elem.callback) {
-                    for (var i = 0; i < $scope.ngModel.length; i++) {
-                        $scope.ngModel[i].status = '';
-                    }
-                    elem.callback(elem);
-                }
-            }
-            var elementPos = $scope.ngModel.map(function(x) {return x.name; }).indexOf(elem.name);
-            $scope.ngModel[elementPos].status = 'active';
-        }
-    }
-}
-
-'use strict';
-
-angular
-    .module('ods-lib')
     .factory('DYMO', DYMO);
 
 DYMO.$inject = ['XMLConfig', 'Base64', 'moment'];
@@ -2248,6 +2199,55 @@ function ModalEntity($uibModal, $rootScope, $state) {
 // });
     }
 }
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('stepsIndicator', StepsIndicator);
+
+StepsIndicator.$inject = [];
+
+function StepsIndicator() {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'steps-indicator/template.html',
+        scope: {
+            ngModel: '=',
+            class: '@',
+            type: '@'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        $scope.changeStatus = changeStatus;
+
+        function changeStatus(elem) {
+
+            if ($scope.type === 'multiselect') {
+                if (elem.callback) {
+                    elem.callback(elem);
+                }
+            } else {
+                if (elem.callback) {
+                    for (var i = 0; i < $scope.ngModel.length; i++) {
+                        $scope.ngModel[i].status = '';
+                    }
+                    elem.callback(elem);
+                }
+            }
+            var elementPos = $scope.ngModel.map(function(x) {return x.name; }).indexOf(elem.name);
+            $scope.ngModel[elementPos].status = 'active';
+        }
+    }
+}
+
 (function () {
     'use strict';
 
@@ -3535,39 +3535,6 @@ function FormDirective(OdsFormService, $timeout) {
 /**
  * Created by hermeslm on 3/28/17.
  */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsSchema', SchemaDirective);
-
-SchemaDirective.$inject = ['OdsFormService', '$timeout'];
-
-function SchemaDirective(OdsFormService, $timeout) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/schema.html',
-        scope: {
-            schema: '=',
-            debugMode: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.schema = OdsFormService.initSchema($scope.schema);
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
 (function () {
     'use strict';
 
@@ -3614,6 +3581,39 @@ function OdsFormInfoDirective(OdsFormService) {
 
     function linkFunc($scope, $element) {
 
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsSchema', SchemaDirective);
+
+SchemaDirective.$inject = ['OdsFormService', '$timeout'];
+
+function SchemaDirective(OdsFormService, $timeout) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/schema.html',
+        scope: {
+            schema: '=',
+            debugMode: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        $scope.schema = OdsFormService.initSchema($scope.schema);
     }
 }
 
@@ -3794,6 +3794,234 @@ function ModelDirective(OdsFormService) {
 
         function copy() {
             OdsFormService.copyJson(angular.toJson($scope.model, true));
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableProps', TablePropsDirective);
+
+TablePropsDirective.$inject = ['OdsFormService'];
+
+function TablePropsDirective(OdsFormService) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table-props.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope, $element) {
+
+        $scope.addRow = addRow;
+        $scope.addColumn = addColumn;
+
+        /**
+         * Add row to the table
+         */
+        function addRow() {
+            var columnLength = $scope.field.matrix[0].length;
+            var row = [];
+            for (var i = 0; i < columnLength; i++) {
+                row.push(OdsFormService.newItemObject());
+            }
+            $scope.field.matrix.push(row);
+        }
+
+        /**
+         * Add column to the table.
+         * @param row Row to add column.
+         */
+        function addColumn() {
+            for (var i = 0; i < $scope.field.matrix.length; i++) {
+                $scope.field.matrix[i].push(OdsFormService.newItemObject());
+            }
+        }
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTable', TableDirective);
+
+TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
+
+function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        $scope.removeRow = removeRow;
+        $scope.removeColumn = removeColumn;
+        $scope.onAdd = onAdd;
+        $scope.cloneRow = cloneRow;
+        $scope.swapRow = swapRow;
+        $scope.swapColumn = swapColumn;
+        $scope.checkItem = checkItem;
+
+        function checkItem(index, item, external, type) {
+
+            //We prevent add recursively a table inside other.
+            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
+                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.',
+                    {size: 'sm'});
+                return false;
+            } else return item;
+
+        }
+
+        function onAdd(item, type) {
+
+            OdsFormService.onAdd(item, type);
+        };
+
+        /**
+         * Remove row from section.
+         * @param table Table to remove row
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            OdsFormService.removeRow(table, index);
+        }
+
+        /**
+         * Add column to current row.
+         * @param table Table to remove column
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            OdsFormService.removeColumn(table, index);
+        }
+
+        function cloneRow(table) {
+
+            OdsFormService.cloneRow(table);
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapRow(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
+                {size: 'sm'}).result.then(function (btn) {
+
+                // var _previousValue = [];
+                // angular.copy($scope.field.matrix, _previousValue);
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix.length ||
+                    idx2 >= $scope.field.matrix.length) {
+
+                    return;
+                }
+                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
+
+            });
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapColumn(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
+                {size: 'sm'}).result.then(function (btn) {
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix[idx1].length ||
+                    idx2 >= $scope.field.matrix[idx2].length) {
+
+                    return;
+                }
+                for (var i = 0; i < $scope.field.matrix.length; i++) {
+                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
+                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
+                    $scope.field.matrix[i][idx1] = tmp;
+                }
+            });
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableTotal', TableTotalDirective);
+
+TableTotalDirective.$inject = ['OdsFormService'];
+
+function TableTotalDirective(OdsFormService) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/total.html',
+        scope: {
+            field: '=',
+            label: '=',
+            colIndex: '='
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.total = 0;
+        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
+
+        $scope.$watch('field', function (model) {
+            $scope.total = total(model);
+        }, true);
+
+        function total(model) {
+            var index = $scope.colIndex;
+            var total = 0;
+            for (var i = 0; i < model.matrix.length; i++) {
+
+                if (model.matrix[i][index].fields.length > 0) {
+                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
+                }
+            }
+            return total;
         }
     }
 }
@@ -4336,234 +4564,6 @@ function FieldSelectOptionsDirective(OdsFormService) {
             }
             $scope.field.options = options;
         }, true);
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableProps', TablePropsDirective);
-
-TablePropsDirective.$inject = ['OdsFormService'];
-
-function TablePropsDirective(OdsFormService) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table-props.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope, $element) {
-
-        $scope.addRow = addRow;
-        $scope.addColumn = addColumn;
-
-        /**
-         * Add row to the table
-         */
-        function addRow() {
-            var columnLength = $scope.field.matrix[0].length;
-            var row = [];
-            for (var i = 0; i < columnLength; i++) {
-                row.push(OdsFormService.newItemObject());
-            }
-            $scope.field.matrix.push(row);
-        }
-
-        /**
-         * Add column to the table.
-         * @param row Row to add column.
-         */
-        function addColumn() {
-            for (var i = 0; i < $scope.field.matrix.length; i++) {
-                $scope.field.matrix[i].push(OdsFormService.newItemObject());
-            }
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTable', TableDirective);
-
-TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
-
-function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.removeRow = removeRow;
-        $scope.removeColumn = removeColumn;
-        $scope.onAdd = onAdd;
-        $scope.cloneRow = cloneRow;
-        $scope.swapRow = swapRow;
-        $scope.swapColumn = swapColumn;
-        $scope.checkItem = checkItem;
-
-        function checkItem(index, item, external, type) {
-
-            //We prevent add recursively a table inside other.
-            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
-                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.',
-                    {size: 'sm'});
-                return false;
-            } else return item;
-
-        }
-
-        function onAdd(item, type) {
-
-            OdsFormService.onAdd(item, type);
-        };
-
-        /**
-         * Remove row from section.
-         * @param table Table to remove row
-         * @param index Row index to remove.
-         */
-        function removeRow(table, index) {
-
-            OdsFormService.removeRow(table, index);
-        }
-
-        /**
-         * Add column to current row.
-         * @param table Table to remove column
-         * @param row Row to add column.
-         */
-        function removeColumn(table, index) {
-
-            OdsFormService.removeColumn(table, index);
-        }
-
-        function cloneRow(table) {
-
-            OdsFormService.cloneRow(table);
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapRow(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                // var _previousValue = [];
-                // angular.copy($scope.field.matrix, _previousValue);
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix.length ||
-                    idx2 >= $scope.field.matrix.length) {
-
-                    return;
-                }
-                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
-
-            });
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapColumn(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix[idx1].length ||
-                    idx2 >= $scope.field.matrix[idx2].length) {
-
-                    return;
-                }
-                for (var i = 0; i < $scope.field.matrix.length; i++) {
-                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
-                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
-                    $scope.field.matrix[i][idx1] = tmp;
-                }
-            });
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableTotal', TableTotalDirective);
-
-TableTotalDirective.$inject = ['OdsFormService'];
-
-function TableTotalDirective(OdsFormService) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/total.html',
-        scope: {
-            field: '=',
-            label: '=',
-            colIndex: '='
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.total = 0;
-        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
-
-        $scope.$watch('field', function (model) {
-            $scope.total = total(model);
-        }, true);
-
-        function total(model) {
-            var index = $scope.colIndex;
-            var total = 0;
-            for (var i = 0; i < model.matrix.length; i++) {
-
-                if (model.matrix[i][index].fields.length > 0) {
-                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
-                }
-            }
-            return total;
-        }
     }
 }
 
