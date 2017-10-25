@@ -324,6 +324,35 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
     //         }
     //     }]
     // };
+    $scope.sectionTmp = {
+        "name": "section6627",
+        "componentType": "section",
+        "title": "Section",
+        "displayProperties": false,
+        "allowedTypes": [
+            "row"
+        ],
+        "rows": [
+            {
+                "name": "row6628",
+                "componentType": "row",
+                "cssClass": "row",
+                "displayProperties": false,
+                "cols": [
+                    {
+                        "name": "column6629",
+                        "cssClass": "col-lg-12",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": []
+                    }
+                ],
+                "showProperties": true
+            }
+        ],
+        "showProperties": false
+    };
 
     $scope.sectionLast = {
         name: 'section1',
@@ -539,6 +568,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
     // $scope.sections.push($scope.section2);
     // $scope.sections.push($scope.section3);
     // $scope.sections.push($scope.section4);
+    $scope.sections.push($scope.sectionTmp);
     $scope.sections.push($scope.sectionLast);
 
     $scope.schema = {

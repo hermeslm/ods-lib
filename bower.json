@@ -21,7 +21,6 @@
     "angular-ui-select": "0.19.6",
     "nz-toggle": "^2.2.1",
     "angular-drag-and-drop-lists": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#2.1.0",
-    "ng-table": "https://github.com/hermeslm/ng-table.git#4.0.2",
     "underscore": "^1.8.3",
     "angular-confirm": "angular1-confirm#^1.1.0",
     "angular-dialog-service": "^5.3.0",

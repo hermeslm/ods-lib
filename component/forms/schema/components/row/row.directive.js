@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsRow', RowDirective);
 
-RowDirective.$inject = ['OdsFormService', 'OdsComponentType', 'OdsFieldType', 'NgTableParams', 'dialogs'];
+RowDirective.$inject = ['OdsFormService', 'dialogs'];
 
-function RowDirective(OdsFormService, OdsComponentType, OdsFieldType, NgTableParams, dialogs) {
+function RowDirective(OdsFormService, dialogs) {
 
     var directive = {
         restrict: 'E',
@@ -33,9 +33,6 @@ function RowDirective(OdsFormService, OdsComponentType, OdsFieldType, NgTablePar
         $scope.removeRow = removeRow;
         $scope.addColumn = addColumn;
         $scope.removeColumn = removeColumn;
-        $scope.cancelColumnEdited = cancelColumnEdited;
-        $scope.saveColumnEdited = saveColumnEdited;
-
         $scope.onAdd = onAdd;
 
         /**
@@ -47,48 +44,6 @@ function RowDirective(OdsFormService, OdsComponentType, OdsFieldType, NgTablePar
 
             OdsFormService.onAdd(item, type);
         };
-
-        $scope.tableParams = new NgTableParams({}, {
-
-            filterDelay: 0,
-            dataset: $scope.row.cols
-        });
-
-        /**
-         * Cancel row column edited in row properties
-         * @param row
-         * @param rowForm
-         */
-        function cancelColumnEdited(row, rowForm) {
-
-            var originalRow = resetRow(row, rowForm);
-            angular.extend(row, originalRow);
-        }
-
-        /**
-         * Reset row column edited in row properties
-         * @param row
-         * @param rowForm
-         * @returns {*}
-         */
-        function resetRow(row, rowForm) {
-
-            row.isEditing = false;
-            rowForm.$setPristine();
-
-            return row;
-        }
-
-        /**
-         * Save row column edited in row properties
-         * @param row
-         * @param rowForm
-         */
-        function saveColumnEdited(row, rowForm) {
-
-            var originalRow = resetRow(row, rowForm);
-            angular.extend(originalRow, row);
-        }
 
         /**
          * Toggle Row properties options.
@@ -127,7 +82,6 @@ function RowDirective(OdsFormService, OdsComponentType, OdsFieldType, NgTablePar
             }
             if (gridSize < 12) {
                 row.cols.push(OdsFormService.newColumnObject(12 - gridSize));
-                $scope.tableParams.reload();
             } else {
                 dialogs.notify('Notification', 'Columns can\'t be greater than 12 columns, please fix it!!!',
                     {size: 'sm'}).result.then(function (btn) {

@@ -9,7 +9,6 @@ angular
         'webcam',
         'nzToggle',
         'dndLists',
-        'ngTable',
         'ngSanitize',
         'cp.ngConfirm',
         'dialogs.main',
