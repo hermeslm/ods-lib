@@ -16,14 +16,17 @@ angular
         'ngMessages',
         'mgcrea.bootstrap.affix'
     ])
-    .config(function ($rootScopeProvider) {
-
-        //We add this due to a limitation of AngularJS to avoid infinite recursion
-        // or infinite loop when dirty checking the model. In our case is because template recursion.
-        $rootScopeProvider.digestTtl(15);
-    })
+    .config(configFunction)
     .value('version', '1.0')
     .run(function (/*editableOptions */) {
         // editableOptions.theme = 'bs3';
     });
 
+configFunction.$inject = ['$rootScopeProvider'];
+
+function configFunction($rootScopeProvider) {
+
+    //We add this due to a limitation of AngularJS to avoid infinite recursion
+    // or infinite loop when dirty checking the model. In our case is because template recursion.
+    $rootScopeProvider.digestTtl(15);
+}
