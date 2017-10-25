@@ -37,6 +37,8 @@
 .panel-toolbar .panel-body {
   padding: 10px 5px;
   padding-bottom: 0 !important;
+  max-height: 320px;
+  overflow-y: auto;
 }
 
 .no-margin-bottom {
