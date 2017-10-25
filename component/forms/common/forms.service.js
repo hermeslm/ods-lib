@@ -78,7 +78,8 @@
                 name: 'newForm',
                 label: 'New Form',
                 description: 'New Form Description',
-                layout: []
+                layout: [],
+                allowedTypes: [OdsComponentType.SECTION]
             };
         }
 

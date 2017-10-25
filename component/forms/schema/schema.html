@@ -2,6 +2,13 @@
     <div class="alert alert-danger" ng-show="vm.error">
         <strong>An error has occurred!</strong> Error in schema.
     </div>
+    <div class="container" ng-if="schema.layout.length === 0">
+        <div class="col-lg-12 alert alert-info text-center">
+            <p class="box-schema-area-empty-x">X</p>
+            <p class="lead hidden-phone">To start <strong>Drag</strong> a <strong>section</strong>
+                from the <strong>toolbar</strong> onto this <strong>canvas</strong>.</p>
+        </div>
+    </div>
     <ul dnd-list="schema.layout" dnd-allowed-types="schema.allowedTypes">
         <li class="box-schema-section" ng-repeat="section in schema.layout"
             dnd-draggable="section"
