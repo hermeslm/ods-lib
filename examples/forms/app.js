@@ -571,11 +571,11 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
     $scope.sections.push($scope.sectionTmp);
     $scope.sections.push($scope.sectionLast);
 
-    $scope.schema = {
-        name: 'testForm',
-        label: 'Form Test',
-        description: 'Form Description',
-        layout: $scope.sections
-    };
+    // $scope.schema = {
+    //     name: 'testForm',
+    //     label: 'Form Test',
+    //     description: 'Form Description',
+    //     layout: $scope.sections
+    // };
 
 }
