@@ -1,14 +1,14 @@
 <div class="" ng-class="{ 'error': object.invalid}">
     <div class="box-overlay">
         <div class="btn-toolbar btn-toolbar-right">
-            <button class="btn btn-default btn-xs btn-primary" type="button" ng-click="vm.addSection(component)"
+            <button class="btn btn-default btn-xs btn-primary" type="button"
                     title="Add this field.">
                 <span class="fa fa-hand-pointer-o"></span>
             </button>
         </div>
     </div>
     <div class="box-body">
-        <div ng-include="vm.getToolbarComponent(component)">
+        <div ng-include="getToolbarComponent(component)">
         </div>
     </div>
 </div>
