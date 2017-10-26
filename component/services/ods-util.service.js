@@ -2,9 +2,9 @@
 
 angular
     .module('ods-lib')
-    .service('GUIUtils', GUIUtils);
+    .service('OdsUtils', OdsUtils);
 
-function GUIUtils() {
+function OdsUtils() {
 
     var statusTypes = ['default', 'danger', 'primary', 'success', 'info', 'warning'];
 

@@ -9,10 +9,10 @@
         .controller('ImageUploadDialogController', ImageUploadDialogController);
 
     ImageUploadDialogController.$inject = ['$timeout', '$uibModalInstance', 'DataUtils', '$scope',
-        'GUIUtils', 'image', 'typeImage'];
+        'OdsUtils', 'image', 'typeImage'];
 
     function ImageUploadDialogController($timeout, $uibModalInstance, DataUtils, $scope,
-                                         GUIUtils, image, typeImage) {
+                                         OdsUtils, image, typeImage) {
         var vm = this;
 
         vm.image = {};
@@ -55,7 +55,7 @@
         };
 
         vm.resetUserPicture = function () {
-            GUIUtils.resetUserPicture(vm.image);
+            OdsUtils.resetUserPicture(vm.image);
         };
 
         var _video = null,
