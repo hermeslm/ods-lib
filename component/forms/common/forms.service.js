@@ -75,7 +75,7 @@
          */
         function newSchema() {
             return {
-                name: 'newForm',
+                name: generateName(OdsComponentType.FORM),
                 label: 'New Form',
                 description: 'New Form Description',
                 layout: [],
@@ -93,6 +93,8 @@
             uniqueCounter++;
 
             switch (type) {
+                case OdsComponentType.FORM:
+                    return 'form' + uniqueCounter;
                 case OdsComponentType.SECTION:
                     return 'section' + uniqueCounter;
                 case OdsComponentType.ROW:

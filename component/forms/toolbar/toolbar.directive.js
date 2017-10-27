@@ -14,8 +14,6 @@ function OdsFormToolbar(OdsFormService) {
     var directive = {
         restrict: 'E',
         templateUrl: 'forms/toolbar/toolbar.html',
-        // controller: 'OdsFormToolbarController',
-        // controllerAs: 'vm',
         link: linkFunc
     };
 
