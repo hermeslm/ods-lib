@@ -36,7 +36,6 @@ function FieldDirective(OdsFormService, dialogs) {
          * @type {boolean}
          */
         $scope.fieldDisabled = true;
-        $scope.popoverProps = ($scope.popoverProps === 'true');
 
         $scope.toggleFieldProperties = toggleFieldProperties;
         $scope.getSchemaField = getSchemaField;
@@ -65,7 +64,14 @@ function FieldDirective(OdsFormService, dialogs) {
          */
         function toggleFieldProperties(field) {
 
-            field.showProperties = !field.showProperties;
+            //We check if field width < 300, then properties will sow as popover
+            if ($element[0].children[0].clientWidth < 300) {
+                $scope.field.popoverProps = !$scope.field.popoverProps;
+                field.showProperties = false;
+            } else {
+                $scope.field.popoverProps = false;
+                field.showProperties = !field.showProperties;
+            }
         }
 
         function getSchemaField(field) {

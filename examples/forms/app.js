@@ -28,7 +28,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                 "cols": [
                     {
                         "name": "column9547",
-                        "cssClass": "col-lg-6",
+                        "cssClass": "col-lg-2",
                         "allowedTypes": [
                             "field"
                         ],
@@ -49,36 +49,85 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                                     },
                                     "pattern": "(?=.*\\d)(?=.*[!@#$%^&*\\-=()|?.\"';:]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$"
                                 },
-                                "patternSelect": "11"
+                                "patternSelect": "11",
+                                "showProperties": false
                             }
                         ]
-                    }, {
+                    },
+                    {
                         "name": "column9547",
-                        "cssClass": "col-lg-6",
+                        "cssClass": "col-lg-3",
                         "allowedTypes": [
                             "field"
                         ],
-                        "fields": [{
-                            "componentType": "field",
-                            "label": "Number",
-                            "name": "field3872",
-                            "placeholder": "",
-                            "type": "number",
-                            "required": false,
-                            "patternSelect": "4",
-                            "validation": {
-                                "pattern": "^-{0,1}\\d+$",
-                                "required": true,
-                                "messages": {
-                                    "required": "Numero requerido",
-                                    "pattern": "Solo valores enteros"
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Number",
+                                "name": "field3872",
+                                "placeholder": "",
+                                "type": "number",
+                                "required": false,
+                                "patternSelect": "4",
+                                "validation": {
+                                    "pattern": "^-{0,1}\\d+$",
+                                    "required": true,
+                                    "messages": {
+                                        "required": "Numero requerido",
+                                        "pattern": "Solo valores enteros"
+                                    }
+                                },
+                                "showProperties": false
+                            }
+                        ]
+                    },
+                    {
+                        "name": "column3153",
+                        "cssClass": "col-lg-4",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "TextBox",
+                                "name": "field3155",
+                                "placeholder": "",
+                                "type": "text",
+                                "required": false,
+                                "value": null,
+                                "validation": {
+                                    "messages": {}
                                 }
                             }
-                        }]
+                        ]
+                    },
+                    {
+                        "name": "column3154",
+                        "cssClass": "col-lg-3",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "TextBox",
+                                "name": "field3156",
+                                "placeholder": "",
+                                "type": "text",
+                                "required": false,
+                                "value": null,
+                                "validation": {
+                                    "messages": {}
+                                }
+                            }
+                        ]
                     }
-                ]
+                ],
+                "showProperties": false
             }
-        ]
+        ],
+        "showProperties": false
     };
 
     $scope.section1 = {
