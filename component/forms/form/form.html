@@ -26,23 +26,9 @@
                                          ng-class="{'has-error': {{schema.name}}.{{field.name}}.$invalid}">
 
                                         <label class="control-label" for="{{field.name}}"
-                                               ng-hide="vm.hideTitle(field)">{{field.label}}&nbsp;</label>
+                                               ng-hide="hideTitle(field)">{{field.label}}&nbsp;</label>
 
                                         <ng-include src="getFormFieldTemplate(field.type)"></ng-include>
-
-                                        <!--<div>-->
-                                        <!--<tt>field = {{field}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.{{field.name}}.$valid = {{testForm.name.$valid}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.{{field.name}}.$error = {{testForm.name.$error}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.{{field.name}}.$valid = {{testForm.name.$valid}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.{{field.name}}.$error = {{testForm.name.$error}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.$valid = {{testForm.$valid}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.$valid = {{testForm.$valid}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.{{field.name}}.$error.required = {{!!testForm.name.$error.required}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.{{field.name}}.$error.minlength = {{!!testForm.name.$error.minlength}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.{{field.name}}.$error.maxlength = {{!!testForm.name.$error.maxlength}}</tt><br/>-->
-                                        <!--<tt>{{schema.name}}.{{field.name}}.$error.pattern = {{!!testForm.name.$error.pattern}}</tt><br/>-->
-                                        <!--</div>-->
 
                                         <div ng-show="{{schema.name}}.{{field.name}}.$invalid">
                                             <p class="help-block"

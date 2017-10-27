@@ -1,3 +1,3 @@
-<input class="form-control" name="{{field.name}}" id="{{field.name}}" placeholder="{{field.placeholder}}"
+<input class="form-control" ods-dynamic-name="field.name" id="{{field.name}}" placeholder="{{field.placeholder}}"
        title="{{field.tooltip}}" ng-model="field.value" ng-required="getRequired(field)" type="{{field.type}}"
        ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" ng-pattern="getPattern(field)"/>
