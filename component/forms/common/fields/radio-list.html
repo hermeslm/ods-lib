@@ -1,0 +1,7 @@
+<div ng-class="field.inline === true ? 'radio-inline' : 'radio'"
+     ng-repeat="option in field.options | limitTo: field.limitTo">
+    <label>
+        <input type="radio" value="{{option.id}}" ng-model="field.value"/>
+        {{option.name}}
+    </label>
+</div>

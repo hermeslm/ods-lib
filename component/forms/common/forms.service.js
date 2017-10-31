@@ -48,6 +48,7 @@
             newFieldLabelObject: newFieldLabelObject,
             newFieldCheckBoxObject: newFieldCheckBoxObject,
             newFieldCheckBoxListObject: newFieldCheckBoxListObject,
+            newFieldRadioListObject: newFieldRadioListObject,
 
             //Fields plugins creation methods
             newYesNoObject: newYesNoObject,
@@ -201,6 +202,8 @@
                             return 'forms/toolbar/components/checkbox.html';
                         case OdsFieldType.CHECKBOX_LIST:
                             return 'forms/toolbar/components/checkbox-list.html';
+                        case OdsFieldType.RADIO:
+                            return 'forms/toolbar/components/radio-list.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -243,6 +246,8 @@
                     return 'forms/schema/components/checkbox/checkbox.html';
                 case OdsFieldType.CHECKBOX_LIST:
                     return 'forms/schema/components/checkbox-list/checkbox-list.html';
+                case OdsFieldType.RADIO:
+                    return 'forms/schema/components/radio-list/radio-list.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
@@ -282,6 +287,8 @@
                     return 'forms/schema/components/checkbox/checkbox-properties.html';
                 case OdsFieldType.CHECKBOX_LIST:
                     return 'forms/schema/components/checkbox-list/checkbox-list-properties.html';
+                case OdsFieldType.RADIO:
+                    return 'forms/schema/components/radio-list/radio-list-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
@@ -323,6 +330,8 @@
                     return 'forms/common/fields/checkbox.html';
                 case OdsFieldType.CHECKBOX_LIST:
                     return 'forms/common/fields/checkbox-list.html';
+                case OdsFieldType.RADIO:
+                    return 'forms/common/fields/radio-list.html';
                 default :
                     return 'forms/common/fields/no-field.html';
             }
@@ -680,6 +689,26 @@
                 label: 'CheckBox List',
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.CHECKBOX_LIST,
+                options: [{
+                    id: 1,
+                    name: 'Option 1'
+                }, {
+                    id: 2,
+                    name: 'Option 2'
+                }, {
+                    id: 3,
+                    name: 'Option 3'
+                }],
+                value: {}
+            }
+        }
+
+        function newFieldRadioListObject() {
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Radiobutton List',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.RADIO,
                 options: [{
                     id: 1,
                     name: 'Option 1'

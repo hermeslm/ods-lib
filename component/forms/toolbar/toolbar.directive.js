@@ -55,6 +55,7 @@ function OdsFormToolbar(OdsFormService) {
                 title: 'Select input fields',
                 icon: 'fa fa-dashboard',
                 components: [
+                    OdsFormService.newFieldRadioListObject(),
                     OdsFormService.newFieldSelectObject(),
                     OdsFormService.newFieldMultiSelectObject()
 

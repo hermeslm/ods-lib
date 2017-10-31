@@ -16,7 +16,8 @@
             TABLE: 'table',
             LABEL: 'label',
             CHECKBOX: 'checkbox',
-            CHECKBOX_LIST: 'checkboxlist'
+            CHECKBOX_LIST: 'checkboxlist',
+            RADIO: 'radio'
             //You can add your new field types
         })
         .constant('OdsComponentType', {
