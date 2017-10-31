@@ -8,3 +8,13 @@
         </div>
     </div>
 </div>
+<div class="row no-vertical-margin">
+    <div class="form-group margin-bottom"
+         ng-class="{'has-error': fieldPropertiesForm.hideLabel.$invalid}">
+        <label for="hideLabel" class="col-sm-4 control-label"
+               title="Indicates if will show label or not.">Hide Label:</label>
+        <div class="col-sm-8">
+            <input type="checkbox" id="hideLabel" name="hideLabel" ng-model="field.hideLabel">
+        </div>
+    </div>
+</div>
