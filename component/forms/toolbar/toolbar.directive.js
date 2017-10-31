@@ -63,9 +63,11 @@ function OdsFormToolbar(OdsFormService) {
                 id: 3,
                 open: false,
                 disabled: false,
-                title: 'Toggle fields',
+                title: 'Check input fields',
                 icon: 'fa fa-dashboard',
                 components: [
+                    OdsFormService.newFieldCheckBoxObject(),
+                    OdsFormService.newFieldCheckBoxListObject(),
                     OdsFormService.newFieldToggleObject()
                 ]
             }, {

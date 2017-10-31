@@ -35,22 +35,19 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
                         "fields": [
                             {
                                 "componentType": "field",
-                                "label": "Password",
-                                "name": "field3729",
-                                "placeholder": "Escriba su contrsena",
-                                "type": "password",
-                                "required": false,
-                                "value": "Lolopingu.0",
+                                "label": "CheckBox",
+                                hideLabel: true,
+                                "name": "field9762",
+                                "type": "checkbox",
+                                "value": false,
+                                "popoverProps": false,
+                                "showProperties": false,
                                 "validation": {
                                     "required": true,
                                     "messages": {
-                                        "required": "Campo requerido",
-                                        "pattern": "La contrasena debe cumplir."
-                                    },
-                                    "pattern": "(?=.*\\d)(?=.*[!@#$%^&*\\-=()|?.\"';:]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$"
-                                },
-                                "patternSelect": "11",
-                                "showProperties": false
+                                        "required": "Campo requerido"
+                                    }
+                                }
                             }
                         ]
                     },

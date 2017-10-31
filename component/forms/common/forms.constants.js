@@ -14,7 +14,9 @@
             MULTI_SELECT: 'multiselect',
             IF_YES: 'if_yes',
             TABLE: 'table',
-            LABEL: 'label'
+            LABEL: 'label',
+            CHECKBOX: 'checkbox',
+            CHECKBOX_LIST: 'checkboxlist'
             //You can add your new field types
         })
         .constant('OdsComponentType', {

@@ -46,6 +46,8 @@
             newFieldToggleObject: newFieldToggleObject,
             newDateTimeObject: newDateTimeObject,
             newFieldLabelObject: newFieldLabelObject,
+            newFieldCheckBoxObject: newFieldCheckBoxObject,
+            newFieldCheckBoxListObject: newFieldCheckBoxListObject,
 
             //Fields plugins creation methods
             newYesNoObject: newYesNoObject,
@@ -133,6 +135,7 @@
         }
 
         /**
+         * @deprecated
          * Init the schema
          * @param schema
          * @returns {*}
@@ -194,6 +197,10 @@
                             return 'forms/toolbar/plugins/table.html';
                         case OdsFieldType.LABEL:
                             return 'forms/toolbar/components/label.html';
+                        case OdsFieldType.CHECKBOX:
+                            return 'forms/toolbar/components/checkbox.html';
+                        case OdsFieldType.CHECKBOX_LIST:
+                            return 'forms/toolbar/components/checkbox-list.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -232,6 +239,10 @@
                     return 'forms/schema/plugins/table/container.html';
                 case OdsFieldType.LABEL:
                     return 'forms/schema/components/label.html';
+                case OdsFieldType.CHECKBOX:
+                    return 'forms/schema/components/checkbox/checkbox.html';
+                case OdsFieldType.CHECKBOX_LIST:
+                    return 'forms/schema/components/checkbox-list/checkbox-list.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
@@ -267,6 +278,10 @@
                     return 'forms/schema/plugins/table/table-properties.html';
                 case OdsFieldType.LABEL:
                     return 'forms/schema/components/label/label-properties.html';
+                case OdsFieldType.CHECKBOX:
+                    return 'forms/schema/components/checkbox/checkbox-properties.html';
+                case OdsFieldType.CHECKBOX_LIST:
+                    return 'forms/schema/components/checkbox-list/checkbox-list-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
@@ -304,6 +319,10 @@
                     return 'forms/common/fields/plugins/table.html';
                 case OdsFieldType.LABEL:
                     return 'forms/common/fields/label-empty.html';
+                case OdsFieldType.CHECKBOX:
+                    return 'forms/common/fields/checkbox.html';
+                case OdsFieldType.CHECKBOX_LIST:
+                    return 'forms/common/fields/checkbox-list.html';
                 default :
                     return 'forms/common/fields/no-field.html';
             }
@@ -639,6 +658,39 @@
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.LABEL,
                 value: 'Label'
+            }
+        }
+
+        function newFieldCheckBoxObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'CheckBox',
+                hideLabel: true,
+                ln: false,
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.CHECKBOX,
+                value: false
+            }
+        }
+
+        function newFieldCheckBoxListObject() {
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'CheckBox List',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.CHECKBOX_LIST,
+                options: [{
+                    id: 1,
+                    name: 'Option 1'
+                }, {
+                    id: 2,
+                    name: 'Option 2'
+                }, {
+                    id: 3,
+                    name: 'Option 3'
+                }],
+                value: {}
             }
         }
 

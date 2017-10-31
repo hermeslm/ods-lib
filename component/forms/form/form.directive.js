@@ -32,6 +32,8 @@ function FormDirective(OdsFormService, $timeout) {
         $scope.clear = clear;
         $scope.save = save;
 
+        $scope.hideTitle = hideTitle;
+
         //Common field validation
         $scope.getRequired = getRequired;
         $scope.getMinLength = getMinLength;
@@ -51,6 +53,11 @@ function FormDirective(OdsFormService, $timeout) {
         $scope.removeRow = removeRow;
         $scope.removeColumn = removeColumn;
         $scope.cloneRow = cloneRow;
+
+        function hideTitle(field) {
+
+            return field.hideLabel ? true : false;
+        }
 
         /**
          * Return if field is required.
