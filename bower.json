@@ -26,7 +26,8 @@
     "angular-dialog-service": "^5.3.0",
     "angular-bootstrap-affix": "^0.2.2",
     "angular-jquery": "^0.2.1",
-    "bootstrap-ui-datetime-picker": "^2.6.0"
+    "bootstrap-ui-datetime-picker": "^2.6.0",
+    "ckeditor": "4"
   },
   "overrides": {
     "angular-jquery": {

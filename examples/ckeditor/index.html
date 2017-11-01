@@ -33,14 +33,29 @@
     <![endif]-->
 
 </head>
-<body ng-controller="FormsController">
+<body ng-controller="MainCtrl">
 <div class="container-fluid">
 
     <section class="content-header">
-        <h1>Forms Builder</h1>
+        <div class="starter-template">
+            <h1>CKEditor autocomplete plugin</h1>
+            <p>A CKEditor Plugin to Show suggestion while you type, the suggestion are defined by you and the action key to
+                trigger plugin is also developer defined.</p>
+        </div>
     </section>
     <section class="content">
-        <ods-form-builder schema="schema" debug-mode="true"></ods-form-builder>
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="color-red">Press CTRL + space to show suggestions</p>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-lg-12">
+                <textarea ng-model="content" ods-ckeditor></textarea>
+                <!--<textarea cols="80" id="ckeditorBox" name="ckeditorBox" class="editor" rows="10"></textarea>-->
+            </div>
+        </div>
     </section>
 
 </div>
@@ -74,9 +89,12 @@
 <!-- endinject -->
 <!-- inject:js -->
 <script src="../../dist/ods-lib.js"></script>
+<script src="index.js"></script>
 <script src="app.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
+
+<script src="../bower_components/ckeditor/plugins/autocomplete/plugin.js"></script>
 
 </body>
 </html>

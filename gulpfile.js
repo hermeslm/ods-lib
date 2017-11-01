@@ -104,6 +104,33 @@ gulp.task('steps-scss', function () {
         .pipe(gulp.dest('./dist/steps-indicator/'));
 });
 
+//CKEditor tasks
+gulp.task('ckeditor-inject', function () {
+    return gulp.src('./examples/ckeditor/index.html')
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {
+            name: 'bower',
+            relative: true
+        }))
+        .pipe(inject(es.merge(
+            gulp.src(['./examples/ckeditor/**/*.css', './dist/**/*.css', '!./bower_components/**'], {read: false}),
+            gulp.src(['./examples/ckeditor/**/*.js', './dist/ods-lib.js', '!./bower_components/**'])
+                .pipe(naturalSort())
+                .pipe(angularFilesort())
+        ), {relative: true}))
+        .pipe(gulp.dest('./examples/ckeditor'));
+});
+
+/**
+ *  Remember this task will add those plugins to CKEditor but will replace
+ *  default config file with the included in this folder.
+ *
+ */
+gulp.task('build-ck-plugins', function () {
+    gulp.src(['./plugins/ckeditor/**/*'])
+        .pipe(gulp.dest('./examples/bower_components/ckeditor'));
+});
+//End CKEditor tasks
+
 gulp.task('test', function () {
 
     karmaConfig({
@@ -131,7 +158,7 @@ gulp.task('ci', function () {
 // gulp.task('build', ['clean', 'templates', 'scripts']);
 gulp.task('build', function (done) {
     runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss',
-        'forms-inject', 'build-samples', function () {
+        'forms-inject', 'ckeditor-inject', 'build-samples', function () {
             // console.log('Run something else');
             done();
         })
@@ -154,7 +181,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('serve', function (done) {
-    runSequence('build', 'scss', 'forms-inject', 'build-samples', function () {
+    runSequence('build', 'forms-inject', 'build-samples', function () {
         console.log('Running serve task.');
         serve();
         done();
