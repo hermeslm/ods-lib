@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="example">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>AngularJS ODS Lib</title>
+
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+
+    <!-- Bower dependencies -->
+    <!-- build:css css/seed.min.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.css">
+    <link rel="stylesheet" href="../bower_components/nz-toggle/dist/nz-toggle.css">
+    <link rel="stylesheet" href="../bower_components/angular-confirm/dist/angular-confirm.min.css">
+    <link rel="stylesheet" href="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.css">
+    <link rel="stylesheet" href="../bower_components/angular-dialog-service/dist/dialogs.css">
+    <!-- endinject -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../dist/forms/style.css">
+    <link rel="stylesheet" href="../../dist/steps-indicator/style.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body ng-controller="MainCtrl">
+<div class="container">
+
+    <div class="starter-template">
+        <form name="example" role="form" novalidate ng-submit="submit()" show-validation>
+            <h1>J-Signature</h1>
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="submit" ng-disabled="example.$invalid" class="btn btn-primary">
+                        <span class="fa fa-floppy-o"></span>&nbsp;<span>Submit</span>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-md-6 col-lg-6">
+                    <h3>Component</h3>
+                    <div style="padding-top: 1px;">
+                        <div class="form-group" ng-class="{'has-error': example.testSig.$invalid}">
+                            <ods-signature name="testSig" ng-model="model" ng-disabled="disabled"
+                                           ng-required="required" on-change="onChange(model)"></ods-signature>
+                            <div ng-show="example.testSig.$invalid">
+                                <p class="help-block"
+                                   ng-show="example.testSig.$error.required">
+                                    This field is required.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6 col-lg-6">
+                    <h3>Result</h3>
+                    <div style="border: 1px solid #ddd;">
+                        <img ng-src="{{model.sig}}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12" style="padding-top: 10px">
+                    <button type="button" class="btn" ng-click="disableComponent()">Disable</button>
+                    <button type="button" class="btn btn-default" ng-click="enableComponent()">Enable</button>
+                    <button type="button" class="btn btn-primary" ng-click="getSignature()">Get Signature</button>
+                    <button type="button" class="btn btn-success" ng-click="setSignature()">Set Signature</button>
+                    <button type="button" class="btn btn-warning" ng-click="toggleRequired()">{{required ? 'Set not required' : 'Set required'}}</button>
+                </div>
+            </div>
+            <div class="row" style="padding-top: 10px">
+                <div class="col-lg-12">
+                    <h3>Result of 'onChange' method.</h3>
+                    <textarea class="form-control" name="selected" cols="8">
+                        {{selected}}
+                    </textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+<!-- build:js js/seed.min.js -->
+<!-- bower:js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.js"></script>
+<script src="../bower_components/jSignature/src/jSignature.js"></script>
+<script src="../bower_components/jSignature/src/plugins/jSignature.CompressorBase30.js"></script>
+<script src="../bower_components/jSignature/src/plugins/jSignature.CompressorSVG.js"></script>
+<script src="../bower_components/jSignature/src/plugins/jSignature.UndoButton.js"></script>
+<script src="../bower_components/webcam-directive/dist/webcam.min.js"></script>
+<script src="../bower_components/angular-ui-select/dist/select.js"></script>
+<script src="../bower_components/nz-toggle/dist/nz-toggle.js"></script>
+<script src="../bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+<script src="../bower_components/underscore/underscore.js"></script>
+<script src="../bower_components/angular-confirm/dist/angular-confirm.min.js"></script>
+<script src="../bower_components/angular-translate/angular-translate.js"></script>
+<script src="../bower_components/angular-jquery/dist/angular-jquery.js"></script>
+<script src="../bower_components/ckeditor/ckeditor.js"></script>
+<script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js"></script>
+<script src="../bower_components/angular-dialog-service/dist/dialogs.js"></script>
+<script src="../bower_components/angular-dialog-service/dist/dialogs-default-translations.js"></script>
+<script src="../bower_components/angular-bootstrap-affix/dist/angular-bootstrap-affix.js"></script>
+<script src="../bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../../dist/ods-lib.js"></script>
+<script src="app.js"></script>
+<!-- endinject -->
+<!-- endbuild -->
+</body>
+</html>

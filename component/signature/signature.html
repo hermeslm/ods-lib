@@ -1,0 +1,22 @@
+<div id="signature" class="{{options.cssClass}}">
+    <style type="text/css" scoped>
+        .sig-box {
+            border-radius: 4px;padding: 5px 5px 0;margin-bottom: 5px;
+        }
+        .sig-box-default {
+            border: 1px solid #ccc;"
+        }
+        .sig-box-error {
+            border: 1px solid #a94442;"
+        }
+    </style>
+    <div id="jSignature" class="sig-box" ng-class="hideRequired ? 'sig-box-default' : 'sig-box-error'">
+         <!--style=">-->
+    </div>
+    <button type="button" class="btn btn-danger" ng-click="reset()" ng-disabled="disabled">
+        <span class="glyphicon glyphicon-erase"></span>
+        <span>Clear</span>
+    </button>
+    <!--<button ng-click="getData()">getData</button>-->
+    <!--<button ng-click="setData()">setData</button>-->
+</div>

@@ -99,14 +99,12 @@ CKEDITOR.plugins.add('autocomplete', {
             multiSelect: false,
             panel:
                 {
-                    css: [editor.config.contentsCss
-                        // , CKEDITOR.getUrl(editor.skinPath + 'editor.css')
-                    ],
+                    css: [CKEDITOR.skin.getPath( 'editor' ) ].concat( editor.config.contentsCss ),
                     voiceLabel: editor.lang.format.panelVoiceLabel
                 },
 
             init: function () {
-                this.startGroup("Tokens");
+                //this.startGroup("Tokens");
                 //this.add('value', 'drop_text', 'drop_label');
                 for (var i=0; i < items.length; i++) {
                     this.add(items[i].id, items[i].label, items[i].label);
