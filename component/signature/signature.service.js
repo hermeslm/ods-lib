@@ -29,7 +29,6 @@ function OdsSignature() {
     }
 
     var service = {
-        getObject: getObject,
         exportTypes: exportTypes,
         importTypes: importTypes,
         reset: reset,
@@ -44,6 +43,7 @@ function OdsSignature() {
 
     function reset(model) {
 
+        model.sig = '';
         model.element.jSignature('reset');
     }
 
@@ -51,6 +51,9 @@ function OdsSignature() {
 
         var d = getData(model, exportTypes.NATIVE);
         if (d.length >= 1) {
+            return true;
+        }
+        if (model.sig && model.sig !== '') {
             return true;
         }
         return false;
@@ -77,6 +80,7 @@ function OdsSignature() {
 
         reset(model);
         model.element.jSignature('setData', sig);
+        model.sig = sig;
     }
 
     function disable(model) {
@@ -94,19 +98,5 @@ function OdsSignature() {
         var eventName = apinamespace + '.undo';
         element.jSignature('events');
     }
-
-    function getObject() {
-        // $('#signature').on('change', function(e){
-        //     var undef
-        //     if ($(e.target).jSignature('getData','native').length) {
-        //         $tools.find('input').prop('disabled', false)
-        //     } else {
-        //         $tools.find('input').prop('disabled', true)
-        //     }
-        //
-        // })
-        return object.element;
-    }
-
 
 }

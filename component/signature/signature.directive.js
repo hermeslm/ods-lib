@@ -68,7 +68,7 @@ function odsSignature($timeout, OdsSignature) {
 
             //Init Element
             initElement();
-            if ($scope.model && $scope.model.sig !== '') {
+            if ($scope.model && $scope.model.sig && $scope.model.sig !== '') {
                 // We set signature if it is present
                 OdsSignature.setData($scope.model, $scope.model.sig);
             }
@@ -83,14 +83,14 @@ function odsSignature($timeout, OdsSignature) {
                     // and change is called on setData
                     $timeout(function () {
                         if (isValid()) {
-                            $scope.model.sig = 'data:' +
-                                OdsSignature.getData($scope.model, OdsSignature.exportTypes.IMAGE).join(',');
                             //We update validity if is required
                             $scope.hideRequired = true;
                         } else {
                             $scope.hideRequired = !$scope.required ? true : false;
                         }
-                    }, 1, true);
+                        $scope.model.sig = 'data:' +
+                            OdsSignature.getData($scope.model, OdsSignature.exportTypes.IMAGE).join(',');
+                    }, 100, true);
                     if ($scope.onChange) {
                         $scope.onChange($scope.model);
                     }
