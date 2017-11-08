@@ -17,7 +17,8 @@
             LABEL: 'label',
             CHECKBOX: 'checkbox',
             CHECKBOX_LIST: 'checkboxlist',
-            RADIO: 'radio'
+            RADIO: 'radio',
+            CKEDITOR: 'ckeditor'
             //You can add your new field types
         })
         .constant('OdsComponentType', {

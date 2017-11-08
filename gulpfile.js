@@ -175,7 +175,7 @@ gulp.task('ci', function () {
 // gulp.task('build', ['clean', 'templates', 'scripts']);
 gulp.task('build', function (done) {
     runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss',
-        'forms-inject', 'ckeditor-inject', 'jsig-inject', 'build-samples', function () {
+        'forms-inject', 'ckeditor-inject', 'jsig-inject', 'copy-lib-to-samples', function () {
             // console.log('Run something else');
             done();
         })
@@ -188,7 +188,7 @@ gulp.task('default', function (done) {
     });
 });
 
-gulp.task('build-samples', function () {
+gulp.task('copy-lib-to-samples', function () {
     gulp.src(['./dist/**/*'])
         .pipe(gulp.dest('./examples/dist'));
 });
@@ -198,7 +198,7 @@ gulp.task('watch', function () {
 });
 
 gulp.task('serve', function (done) {
-    runSequence('build', 'forms-inject', 'build-samples', function () {
+    runSequence('build', 'forms-inject', 'copy-lib-to-samples', function () {
         console.log('Running serve task.');
         serve();
         done();

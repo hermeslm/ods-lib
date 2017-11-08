@@ -54,6 +54,7 @@
             newYesNoObject: newYesNoObject,
             newTableObject: newTableObject,
             newItemObject: newItemObject,
+            newCKEditorObject: newCKEditorObject,
 
             //Select utils methods
             getSelectFieldId: getSelectFieldId,
@@ -204,6 +205,8 @@
                             return 'forms/toolbar/components/checkbox-list.html';
                         case OdsFieldType.RADIO:
                             return 'forms/toolbar/components/radio-list.html';
+                        case OdsFieldType.CKEDITOR:
+                            return 'forms/toolbar/components/ckeditor.html';
                         default :
                             return 'forms/toolbar/components/no-component.html';
                     }
@@ -768,6 +771,27 @@
                 fields: [],
                 // width: '10px',
                 allowedTypes: [OdsComponentType.FIELD]
+            }
+        }
+
+        function newCKEditorObject() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'CKEditor',
+                name: generateName(OdsComponentType.FIELD),
+                type: OdsFieldType.CKEDITOR,
+                options: [{
+                    id: 'suggestion1',
+                    name: 'Suggestion1'
+                }, {
+                    id: 'suggestion2',
+                    name: 'Suggestion2'
+                }, {
+                    id: 'suggestion3',
+                    name: 'Suggestion3'
+                }],
+                value: null
             }
         }
 

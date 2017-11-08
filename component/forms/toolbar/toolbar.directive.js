@@ -89,7 +89,8 @@ function OdsFormToolbar(OdsFormService) {
                 components: [
                     OdsFormService.newYesNoObject(),
                     OdsFormService.newTableObject(),
-                    OdsFormService.newFieldLabelObject()
+                    OdsFormService.newFieldLabelObject(),
+                    OdsFormService.newCKEditorObject()
                 ]
             }]
         };
