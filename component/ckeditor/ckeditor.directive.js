@@ -4,36 +4,71 @@ angular
     .module('ods-lib')
     .directive('odsCkeditor', CKEditor);
 
-CKEditor.$inject = ['$uibModal'];
+CKEditor.$inject = ['OdsCkeditor'];
 
-function CKEditor($uibModal) {
+function CKEditor(OdsCkeditor) {
 
     var directive = {
         restrict: 'A',
         require: '?ngModel',
+        scope: {
+            name: '@',
+            ck: '=',
+            options: '='
+        },
         link: linkFunc
     };
 
     return directive;
 
-    function linkFunc(scope, elm, attr, ngModel) {
+    function linkFunc($scope, elm, attr, ngModel) {
 
-        var ck = CKEDITOR.replace(elm[0]);
-        if (!ngModel) return;
-        ck.on('instanceReady', function () {
-            ck.setData(ngModel.$viewValue);
+        if (!ngModel) {
+            console.error('Please define ng-model.');
+            return;
+        }
+
+        if (typeof(CKEDITOR) === 'undefined') {
+            console.error('Please include CKEditor js in your html.');
+            return;
+        }
+
+        if (!attr.id && !attr.name) {
+            $scope.name = OdsCkeditor.generateName();
+        } else {
+            $scope.name = attr.name;
+        }
+
+        $scope.ck = CKEDITOR.replace(elm[0]);
+
+        $scope.ck.on('instanceReady', function () {
+            $scope.ck.setData(ngModel.$viewValue);
+            $scope.ck.execCommand('reloadOptions', OdsCkeditor.initOptions($scope.options));
         });
+
         function updateModel() {
-            scope.$apply(function () {
-                ngModel.$setViewValue(ck.getData());
+            $scope.safeApply(function () {
+                ngModel.$setViewValue($scope.ck.getData());
             });
         }
-        ck.on('change', updateModel);
-        ck.on('key', updateModel);
-        ck.on('dataReady', updateModel);
+
+        $scope.ck.on('change', updateModel);
+        $scope.ck.on('key', updateModel);
+        $scope.ck.on('dataReady', updateModel);
 
         ngModel.$render = function (value) {
-            ck.setData(ngModel.$viewValue);
+            $scope.ck.setData(ngModel.$viewValue);
+        };
+
+        $scope.safeApply = function(fn) {
+            var phase = this.$root.$$phase;
+            if(phase == '$apply' || phase == '$digest') {
+                if(fn && (typeof(fn) === 'function')) {
+                    fn();
+                }
+            } else {
+                this.$apply(fn);
+            }
         };
     }
 

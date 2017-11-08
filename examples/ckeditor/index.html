@@ -39,7 +39,8 @@
     <section class="content-header">
         <div class="starter-template">
             <h1>CKEditor autocomplete plugin</h1>
-            <p>A CKEditor Plugin to Show suggestion while you type, the suggestion are defined by you and the action key to
+            <p>A CKEditor Plugin to Show suggestion while you type, the suggestion are defined by you and the action key
+                to
                 trigger plugin is also developer defined.</p>
         </div>
     </section>
@@ -49,11 +50,20 @@
                 <p class="color-red">Press CTRL + space to show suggestions</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="col-lg-12" style="padding-top: 10px">
+                    <button type="button" class="btn btn-primary" ng-click="changePrefixAndSuffix()">Change prefix and suffix</button>
+                    <button type="button" class="btn btn-success" ng-click="changeSuggestions()">Change Suggestions</button>
+                    <button type="button" class="btn btn-danger" ng-click="reset()">Reset</button>
+                </div>
+            </div>
+        </div>
         <br>
         <div class="row">
             <div class="col-lg-12">
-                <textarea ng-model="content" ods-ckeditor></textarea>
-                <!--<textarea cols="80" id="ckeditorBox" name="ckeditorBox" class="editor" rows="10"></textarea>-->
+                <textarea ng-model="content" id="ckeditorBox" ck="ck" name="ckeditorBox" options="options"
+                          ods-ckeditor></textarea>
             </div>
         </div>
     </section>
@@ -95,6 +105,5 @@
 <!-- endbuild -->
 
 <script src="../bower_components/ckeditor/plugins/autocomplete/plugin.js"></script>
-
 </body>
 </html>
