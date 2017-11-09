@@ -23,6 +23,7 @@
             onAdd: onAdd,
             getFieldValueAsNumber: getFieldValueAsNumber,
             copyToClipboard: copyToClipboard,
+            strSubtitutor: strSubtitutor,
 
             //Templates management
             getToolbarComponent: getToolbarComponent,
@@ -251,6 +252,8 @@
                     return 'forms/schema/components/checkbox-list/checkbox-list.html';
                 case OdsFieldType.RADIO:
                     return 'forms/schema/components/radio-list/radio-list.html';
+                case OdsFieldType.CKEDITOR:
+                    return 'forms/schema/plugins/ckeditor/ckeditor.html';
                 default :
                     return 'forms/schema/components/no-field.html';
             }
@@ -292,6 +295,8 @@
                     return 'forms/schema/components/checkbox-list/checkbox-list-properties.html';
                 case OdsFieldType.RADIO:
                     return 'forms/schema/components/radio-list/radio-list-properties.html';
+                case OdsFieldType.CKEDITOR:
+                    return 'forms/schema/plugins/ckeditor/ckeditor-properties.html';
                 default :
                     return 'forms/schema/components/no-field-properties.html';
             }
@@ -781,6 +786,7 @@
                 label: 'CKEditor',
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.CKEDITOR,
+                readonly: false,
                 options: [{
                     id: 'suggestion1',
                     name: 'Suggestion1'
@@ -967,6 +973,33 @@
                     document.body.removeChild(textarea);
                 }
             }
+        }
+
+        /**
+         * Substitute object value in a string template using pattern with prefix and suffix.
+         * @param str String to substitute.
+         * @param valuesMap Object with values.
+         * @param prefix Pattern prefix.
+         * @param suffix Pattern suffix.
+         * @returns {*} String pattern replaced with it object values.
+         */
+        function strSubtitutor(str, valuesMap, prefix, suffix) {
+
+            var strResult = str;
+
+            for (var property in valuesMap) {
+                if (valuesMap.hasOwnProperty(property)) {
+                    // do stuff
+                    var re = new RegExp(escapeRegExp(prefix + property + suffix), 'gi');
+                    strResult = strResult.replace(re, valuesMap[property]);
+                }
+            }
+
+            return strResult;
+        }
+
+        function escapeRegExp(str) {
+            return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
         }
 
         function copyJson(json) {

@@ -5,9 +5,9 @@ var app = angular.module('example', ['ods-lib']);
 
 app.controller('FormsController', FormsController);
 
-FormsController.$inject = ['$scope', 'OdsFieldType', 'OdsComponentType'];
+FormsController.$inject = ['$scope', 'OdsFieldType', 'OdsComponentType', 'OdsFormService'];
 
-function FormsController($scope, OdsFieldType, OdsComponentType) {
+function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService) {
 
     // var $scope = this;
 
@@ -609,19 +609,44 @@ function FormsController($scope, OdsFieldType, OdsComponentType) {
     };
 
     $scope.sections = [];
-    $scope.sections.push(section0);
-    $scope.sections.push($scope.section1);
-    $scope.sections.push($scope.section2);
-    $scope.sections.push($scope.section3);
-    $scope.sections.push($scope.section4);
+    // $scope.sections.push(section0);
+    // $scope.sections.push($scope.section1);
+    // $scope.sections.push($scope.section2);
+    // $scope.sections.push($scope.section3);
+    // $scope.sections.push($scope.section4);
     $scope.sections.push($scope.sectionTmp);
-    $scope.sections.push($scope.sectionLast);
+    // $scope.sections.push($scope.sectionLast);
 
     $scope.schema = {
         name: 'testForm',
         label: 'Form Test',
         description: 'Form Description',
-        layout: $scope.sections
+        layout: $scope.sections,
+        allowedTypes: ["section"],
     };
+
+    $scope.test1 = '<p>this is a sample&nbsp;&nbsp;<span class="marker">${patientName}</span>&nbsp;that I testing with&nbsp;&nbsp;<span class="marker">${patientDob}</span>&nbsp;.${patientName} is here.</p>';
+    $scope.test2 = '<p>this is a sample&nbsp;&nbsp;<span class="marker">@patientName</span>&nbsp;that I testing with&nbsp;&nbsp;<span class="marker">@patientDob</span>&nbsp;. but we must to check this @patientDobcase hermeslm@gmail.com. @patientName is here.</p>';
+
+    var patient = {
+        patientName : 'Hermes Lorenzo',
+        patientDob : '01/24/2017'
+    }
+
+    $scope.parse1 = parse1;
+    $scope.templateResult1 = '';
+
+    function parse1() {
+
+        $scope.templateResult1 = OdsFormService.strSubtitutor($scope.test1, patient, '${', '}');
+    }
+
+    $scope.parse2 = parse2;
+    $scope.templateResult2 = '';
+
+    function parse2() {
+
+        $scope.templateResult2 = OdsFormService.strSubtitutor($scope.test2, patient, '@', '');
+    }
 
 }

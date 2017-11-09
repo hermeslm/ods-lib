@@ -4,9 +4,9 @@ angular
     .module('ods-lib')
     .directive('odsCkeditor', CKEditor);
 
-CKEditor.$inject = ['OdsCkeditor'];
+CKEditor.$inject = ['$timeout', 'OdsCkeditor'];
 
-function CKEditor(OdsCkeditor) {
+function CKEditor($timeout, OdsCkeditor) {
 
     var directive = {
         restrict: 'A',
@@ -14,7 +14,8 @@ function CKEditor(OdsCkeditor) {
         scope: {
             name: '@',
             ck: '=',
-            options: '='
+            options: '=',
+            disabled: '=?ngDisabled'
         },
         link: linkFunc
     };
@@ -39,17 +40,20 @@ function CKEditor(OdsCkeditor) {
             $scope.name = attr.name;
         }
 
+        $scope.disabled = $scope.disabled ? $scope.disabled : false;
+
         $scope.ck = CKEDITOR.replace(elm[0]);
 
         $scope.ck.on('instanceReady', function () {
             $scope.ck.setData(ngModel.$viewValue);
             $scope.ck.execCommand('reloadOptions', OdsCkeditor.initOptions($scope.options));
+            OdsCkeditor.setReadOnly($scope.ck, $scope.disabled);
         });
 
         function updateModel() {
-            $scope.safeApply(function () {
+            $timeout(function () {
                 ngModel.$setViewValue($scope.ck.getData());
-            });
+            }, 0, false);
         }
 
         $scope.ck.on('change', updateModel);
@@ -60,16 +64,15 @@ function CKEditor(OdsCkeditor) {
             $scope.ck.setData(ngModel.$viewValue);
         };
 
-        $scope.safeApply = function(fn) {
-            var phase = this.$root.$$phase;
-            if(phase == '$apply' || phase == '$digest') {
-                if(fn && (typeof(fn) === 'function')) {
-                    fn();
-                }
-            } else {
-                this.$apply(fn);
-            }
-        };
+        $scope.$watch('disabled', function (disabled) {
+
+            $timeout(function () {
+                disabled = disabled ? disabled : false;
+                OdsCkeditor.setReadOnly($scope.ck, disabled);
+            }, 100, false);
+            return;
+        });
+
     }
 
 }

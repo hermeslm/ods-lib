@@ -1,0 +1,11 @@
+<div class="row no-vertical-margin">
+    <div class="form-group margin-bottom"
+         ng-class="{'has-error': fieldValidationForm.readonly.$invalid}">
+        <label for="readonly" class="col-sm-4 control-label"
+               title="Indicates if is readonly this field.">Readonly:</label>
+        <div class="col-sm-8">
+            <input type="checkbox" id="readonly" name="readonly" ng-model="field.readonly"
+                   class="ng-pristine ng-valid">
+        </div>
+    </div>
+</div>

@@ -5,6 +5,8 @@ var app = angular.module('example', ['ods-lib']);
 
 app.controller('MainCtrl', function ($scope, OdsCkeditor) {
 
+    $scope.isReadOnly = false;
+
     var defaultOptions = {
         prefix: '${',
         suffix: '}',
@@ -32,6 +34,7 @@ app.controller('MainCtrl', function ($scope, OdsCkeditor) {
 
     $scope.changePrefixAndSuffix = changePrefixAndSuffix;
     $scope.changeSuggestions = changeSuggestions;
+    $scope.toggleReadOnly = toggleReadOnly;
     $scope.reset = reset;
 
     function changeSuggestions() {
@@ -72,6 +75,13 @@ app.controller('MainCtrl', function ($scope, OdsCkeditor) {
         };
 
         OdsCkeditor.setOptions($scope.ck, options);
+    }
+
+    function toggleReadOnly() {
+
+        $scope.isReadOnly = !$scope.isReadOnly;
+        // you can set read only by service call function.
+        // OdsCkeditor.setReadOnly($scope.ck, $scope.isReadOnly);
     }
 
     function reset() {

@@ -13,6 +13,7 @@ function OdsCkeditor() {
     var service = {
         generateName: generateName,
         setOptions: setOptions,
+        setReadOnly: setReadOnly,
         initOptions: initOptions
     };
 
@@ -25,6 +26,11 @@ function OdsCkeditor() {
     function setOptions(ck, options) {
 
         ck.execCommand('reloadOptions', initOptions(options));
+    }
+
+    function setReadOnly(ck, isReadOnly) {
+
+        ck.setReadOnly( isReadOnly );
     }
 
     function initOptions(options) {
