@@ -54,7 +54,9 @@ app.controller('MainCtrl', function ($scope, OdsCkeditor) {
             ]
         };
 
-        OdsCkeditor.setOptions($scope.ck, options);
+        $scope.options = options;
+        //You can
+        // OdsCkeditor.setOptions($scope.ck, options);
     }
 
     function changePrefixAndSuffix() {

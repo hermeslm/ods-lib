@@ -60,7 +60,7 @@ function CKEditor($timeout, OdsCkeditor) {
         $scope.ck.on('key', updateModel);
         $scope.ck.on('dataReady', updateModel);
 
-        ngModel.$render = function (value) {
+        ngModel.$render = function () {
             $scope.ck.setData(ngModel.$viewValue);
         };
 
@@ -69,6 +69,14 @@ function CKEditor($timeout, OdsCkeditor) {
             $timeout(function () {
                 disabled = disabled ? disabled : false;
                 OdsCkeditor.setReadOnly($scope.ck, disabled);
+            }, 100, false);
+            return;
+        });
+
+        $scope.$watch('options', function (options) {
+
+            $timeout(function () {
+                $scope.ck.execCommand('reloadOptions', OdsCkeditor.initOptions(options));
             }, 100, false);
             return;
         });

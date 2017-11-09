@@ -781,22 +781,29 @@
 
         function newCKEditorObject() {
 
+            const CTRL = 1114112;
+
             return {
                 componentType: OdsComponentType.FIELD,
                 label: 'CKEditor',
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.CKEDITOR,
                 readonly: false,
-                options: [{
-                    id: 'suggestion1',
-                    name: 'Suggestion1'
-                }, {
-                    id: 'suggestion2',
-                    name: 'Suggestion2'
-                }, {
-                    id: 'suggestion3',
-                    name: 'Suggestion3'
-                }],
+                options: {
+                    triggerKeyCode: CTRL + 32,
+                    prefix: '${',
+                    suffix: '}',
+                    suggestions: [{
+                        id: 'suggestion1',
+                        label: 'Suggestion1'
+                    }, {
+                        id: 'suggestion2',
+                        label: 'Suggestion2'
+                    }, {
+                        id: 'suggestion3',
+                        label: 'Suggestion3'
+                    }]
+                },
                 value: null
             }
         }
