@@ -14,7 +14,8 @@ angular
         'dialogs.main',
         'dialogs.default-translations',
         'ngMessages',
-        'mgcrea.bootstrap.affix'
+        'mgcrea.bootstrap.affix',
+        'ngResource'
     ])
     .config(configFunction)
     .value('version', '1.0')

@@ -45,12 +45,15 @@ function CKEditor($timeout, OdsCkeditor) {
         $scope.ck = CKEDITOR.replace(elm[0]);
 
         $scope.ck.on('instanceReady', function () {
+
             $scope.ck.setData(ngModel.$viewValue);
-            $scope.ck.execCommand('reloadOptions', OdsCkeditor.initOptions($scope.options));
-            OdsCkeditor.setReadOnly($scope.ck, $scope.disabled);
+            OdsCkeditor.register($scope.name, $scope.ck);
+            OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
+            OdsCkeditor.setReadOnly($scope.name, $scope.disabled);
         });
 
         function updateModel() {
+
             $timeout(function () {
                 ngModel.$setViewValue($scope.ck.getData());
             }, 0, false);
@@ -64,11 +67,16 @@ function CKEditor($timeout, OdsCkeditor) {
             $scope.ck.setData(ngModel.$viewValue);
         };
 
+        $scope.$on('destroy', function () {
+
+            OdsCkeditor.unregister(name);
+        });
+
         $scope.$watch('disabled', function (disabled) {
 
             $timeout(function () {
                 disabled = disabled ? disabled : false;
-                OdsCkeditor.setReadOnly($scope.ck, disabled);
+                OdsCkeditor.setReadOnly($scope.name, disabled);
             }, 100, false);
             return;
         });
@@ -76,7 +84,7 @@ function CKEditor($timeout, OdsCkeditor) {
         $scope.$watch('options', function (options) {
 
             $timeout(function () {
-                $scope.ck.execCommand('reloadOptions', OdsCkeditor.initOptions(options));
+                OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
             }, 100, false);
             return;
         });

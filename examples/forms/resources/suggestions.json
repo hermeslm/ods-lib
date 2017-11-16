@@ -1,0 +1,22 @@
+[
+  {
+    "id": "patientName",
+    "label": "Patient Name"
+  },
+  {
+    "id": "patientDob",
+    "label": "Patient DOB"
+  },
+  {
+    "id": "patientGender",
+    "label": "Patient Gender"
+  },
+  {
+    "id": "patientMaritalStatus",
+    "label": "Patient Marital Status"
+  },
+  {
+    "id": "patientMRN",
+    "label": "Patient MRN"
+  }
+]

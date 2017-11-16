@@ -35,7 +35,7 @@
                 dnd-disable-if="row.componentType == undefined"
                 dnd-effect-allowed="move"
                 dnd-moved="section.rows.splice($index, 1)">
-                <ods-row section="section" row="row" index="$index" debug-mode="debugMode"></ods-row>
+                <ods-row section="section" row="row" config="config" index="$index" debug-mode="debugMode"></ods-row>
             </li>
         </ul>
     </div>

@@ -10,12 +10,45 @@ function OdsCkeditor() {
 
     var keyCode = CKEDITOR.CTRL + 32;
 
+    var instance_map = {};
+
     var service = {
+        register: register,
+        getInstance: getInstance,
+        unregister: unregister,
+        isReady: isReady,
         generateName: generateName,
         setOptions: setOptions,
         setReadOnly: setReadOnly,
         initOptions: initOptions
     };
+
+    function register(name, instance) {
+
+        var tmpInstance = {
+            ready: true,
+            instance: instance
+        }
+        instance_map[name] = tmpInstance;
+    }
+
+    function getInstance(name) {
+
+        return instance_map[name].instance;
+    }
+
+    function unregister(name) {
+
+        instance_map[name] = null;
+    }
+
+    function isReady(name) {
+
+        if(instance_map[name] && instance_map[name].ready) {
+            return instance_map[name].ready;
+        }else
+            return false;
+    }
 
     function generateName() {
 
@@ -23,14 +56,20 @@ function OdsCkeditor() {
         return 'ckeditor' + uniqueCounter;
     }
 
-    function setOptions(ck, options) {
+    function setOptions(name, options) {
 
-        ck.execCommand('reloadOptions', initOptions(options));
+        if(isReady(name)) {
+            var ck = getInstance(name);
+            ck.execCommand('reloadOptions', initOptions(options));
+        }
     }
 
-    function setReadOnly(ck, isReadOnly) {
+    function setReadOnly(name, isReadOnly) {
 
-        ck.setReadOnly( isReadOnly );
+        if(isReady(name)) {
+            var ck = getInstance(name);
+            ck.setReadOnly(isReadOnly);
+        }
     }
 
     function initOptions(options) {

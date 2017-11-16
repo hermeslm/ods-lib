@@ -1,2 +1,6 @@
 <div ng-include="'forms/schema/components/label.html'"></div>
-<div ng-include="'forms/common/fields/plugins/ckeditor.html'"></div>
+<div class="position-relative">
+<textarea id="{{field.name}}" name="{{field.name}}" placeholder="{{field.placeholder}}" ng-model="field.value"
+          title="{{field.tooltip}}" ck="ck" options="field.options" ods-ckeditor ng-disabled="field.readonly">
+</textarea>
+</div>

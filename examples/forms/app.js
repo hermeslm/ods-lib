@@ -391,7 +391,44 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                         "allowedTypes": [
                             "field"
                         ],
-                        "fields": []
+                        "fields": [{
+                            "componentType": "field",
+                            "label": "CKEditor",
+                            "name": "field6610",
+                            "type": "ckeditor",
+                            "readonly": false,
+                            "usedAsConsent": true,
+                            "options": {
+                                "triggerKeyCode": 1114144,
+                                "prefix": "${",
+                                "suffix": "}",
+                                "suggestionsUrl": "http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/suggestions.json",
+                                "tokensUrl": "http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/tokens.json",
+                                "locked": true,
+                                "suggestions": [
+                                    {
+                                        "id": "patientName",
+                                        "label": "Patient Name"
+                                    },
+                                    {
+                                        "id": "patientDob",
+                                        "label": "Patient DOB"
+                                    },
+                                    {
+                                        "id": "patientGender",
+                                        "label": "Patient Gender"
+                                    },
+                                    {
+                                        "id": "patientMaritalStatus",
+                                        "label": "Patient Marital Status"
+                                    }
+                                ],
+                                "tokens": null
+                            },
+                            "value": "<p>The patient&nbsp;&nbsp;<span class=\"marker\">${patientName}</span>&nbsp; with date of born&nbsp;&nbsp;<span class=\"marker\">${patientDob}</span>&nbsp;and gender&nbsp;&nbsp;<span class=\"marker\">${patientGender}</span>&nbsp;having a marital status&nbsp;&nbsp;<span class=\"marker\">${patientMaritalStatus}</span>&nbsp;:</p>\n\n<ul>\n\t<li>Case 1: This case is a test.</li>\n\t<li>Case 2: This is a second test.</li>\n</ul>\n",
+                            "popoverProps": false,
+                            "showProperties": true
+                        }]
                     }
                 ],
                 "showProperties": true

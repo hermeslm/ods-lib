@@ -1,8 +1,8 @@
-<div class="position-relative">
-<textarea id="{{field.name}}" name="{{field.name}}" placeholder="{{field.placeholder}}" ng-model="field.value"
-          title="{{field.tooltip}}" ck="ck" options="field.options" ods-ckeditor ng-disabled="field.readonly"></textarea>
+<div ng-if="field.usedAsConsent"
+     ng-bind-html="valueSubtitutor(field.value, field.options.tokens, field.options.prefix, field.options.suffix)">
 </div>
-<!--<textarea class="form-control" ods-dynamic-name="field.name" id="{{field.name}}" placeholder="{{field.placeholder}}"-->
-          <!--title="{{field.tooltip}}" ng-model="field.value" ng-required="getRequired(field)" type="{{field.type}}"-->
-          <!--ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}">-->
-<!--</textarea>-->
+<div ng-if="!field.usedAsConsent" class="position-relative">
+<textarea id="{{field.name}}" name="{{field.name}}" placeholder="{{field.placeholder}}" ng-model="field.value"
+          title="{{field.tooltip}}" ck="ck" options="field.options" ods-ckeditor
+          ng-disabled="field.readonly"></textarea>
+</div>

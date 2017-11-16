@@ -17,6 +17,7 @@ function SectionDirective(OdsFormService, dialogs) {
         scope: {
             schema: '=',
             section: '=',
+            config: '=',
             index: '=',
             debugMode: '='
         },

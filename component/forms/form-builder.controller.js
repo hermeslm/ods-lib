@@ -12,9 +12,46 @@
 
     function OdsFormBuilderController($scope, OdsFormService) {
 
+        $scope.config = {
+            ckeditor: {
+                suggestionsUrl: 'http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/suggestions.json',
+                tokensUrl: 'http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/tokens.json',
+                suggestions: [
+                    {
+                        'id': 'patientName',
+                        'label': 'Patient Name'
+                    },
+                    {
+                        'id': 'patientDob',
+                        'label': 'Patient DOB'
+                    },
+                    {
+                        'id': 'patientGender',
+                        'label': 'Patient Gender'
+                    },
+                    {
+                        'id': 'patientMaritalStatus',
+                        'label': 'Patient Marital Status'
+                    }
+                ]
+            }
+        };
+
+        $scope.runTimeConfig = {
+            ckeditor: {
+                tokens: {
+                    'patientName': 'Hermes Lorenzo',
+                    'patientDob': '01/24/1980',
+                    'patientGender': 'Male',
+                    'patientMaritalStatus': 'Single'
+                }
+            }
+        };
+
         $scope.saveForm = function(schema){
+
             var data = OdsFormService.saveFormData(schema);
-            console.log("The form data is: " + JSON.stringify(data, null, 4));
+            console.log('The form data is: ' + JSON.stringify(data, null, 4));
         }
     }
 })();

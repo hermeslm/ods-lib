@@ -7,15 +7,16 @@ angular
     .module('ods-lib')
     .directive('odsSchema', SchemaDirective);
 
-SchemaDirective.$inject = ['OdsFormService', '$timeout'];
+SchemaDirective.$inject = ['OdsFormService'];
 
-function SchemaDirective(OdsFormService, $timeout) {
+function SchemaDirective(OdsFormService) {
 
     var directive = {
         restrict: 'E',
         templateUrl: 'forms/schema/schema.html',
         scope: {
             schema: '=',
+            config: '=',
             debugMode: '='
         },
         link: linkFunc
@@ -25,7 +26,7 @@ function SchemaDirective(OdsFormService, $timeout) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         if(!$scope.schema) {
             $scope.schema = OdsFormService.newSchema();

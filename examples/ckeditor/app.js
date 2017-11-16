@@ -76,7 +76,9 @@ app.controller('MainCtrl', function ($scope, OdsCkeditor) {
             ]
         };
 
-        OdsCkeditor.setOptions($scope.ck, options);
+        $scope.options = options;
+        // you can set read only by service call function.
+        // OdsCkeditor.setOptions($scope.ck, options);
     }
 
     function toggleReadOnly() {
@@ -88,7 +90,8 @@ app.controller('MainCtrl', function ($scope, OdsCkeditor) {
 
     function reset() {
 
-        OdsCkeditor.setOptions($scope.ck, defaultOptions);
+        $scope.options = defaultOptions;
+        // OdsCkeditor.setOptions($scope.ck, defaultOptions);
     }
 })
 ;

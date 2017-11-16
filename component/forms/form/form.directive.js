@@ -16,6 +16,7 @@ function FormDirective(OdsFormService, $timeout) {
         templateUrl: 'forms/form/form.html',
         scope: {
             schema: '=',
+            config: '=',
             onSave: '&'
         },
         link: linkFunc
@@ -25,7 +26,15 @@ function FormDirective(OdsFormService, $timeout) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
+
+        if ($scope.config) {
+            //CKEditor config load.
+            if ($scope.config.ckeditor) {
+
+                OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
+            }
+        }
 
         $scope.form;
 
@@ -40,7 +49,6 @@ function FormDirective(OdsFormService, $timeout) {
         $scope.getMaxLength = getMaxLength;
         $scope.getPattern = getPattern;
 
-
         $scope.getFormFieldTemplate = getFormFieldTemplate;
 
         //Select field specific
@@ -53,6 +61,9 @@ function FormDirective(OdsFormService, $timeout) {
         $scope.removeRow = removeRow;
         $scope.removeColumn = removeColumn;
         $scope.cloneRow = cloneRow;
+
+        //CKEditor specific
+        $scope.valueSubtitutor = valueSubtitutor;
 
         function hideTitle(field) {
 
@@ -212,6 +223,15 @@ function FormDirective(OdsFormService, $timeout) {
         function cloneRow(table) {
 
             OdsFormService.cloneRow(table);
+        }
+
+        function valueSubtitutor(value, tokens, prefix, suffix) {
+
+            if (tokens) {
+                return OdsFormService.strSubtitutor(value, tokens, prefix, suffix);
+            } else {
+                return value;
+            }
         }
 
     }

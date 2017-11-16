@@ -17,6 +17,7 @@ function FieldDirective(OdsFormService, dialogs) {
         scope: {
             row: '=',
             col: '=',
+            config: '=',
             field: '=',
             popoverProps: '@',
             index: '=',

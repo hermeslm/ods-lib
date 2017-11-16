@@ -8,10 +8,10 @@
                 <ods-form-info schema="schema"></ods-form-info>
             </uib-tab>
             <uib-tab index="1" heading="Form Schema">
-                <ods-schema schema="schema" debug-mode="debugMode"></ods-schema>
+                <ods-schema schema="schema" config="config" debug-mode="debugMode"></ods-schema>
             </uib-tab>
             <uib-tab index="2" heading="Form Preview">
-                <ods-form schema="schema" on-save="saveForm(schema)"></ods-form>
+                <ods-form schema="schema" config="runTimeConfig" on-save="saveForm(schema)"></ods-form>
             </uib-tab>
             <uib-tab index="3" heading="Form Model" ng-show="debugMode">
                 <ods-model model="schema"></ods-model>

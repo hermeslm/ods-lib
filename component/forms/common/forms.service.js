@@ -8,9 +8,11 @@
         .module('ods-lib')
         .factory('OdsFormService', OdsFormService);
 
-    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs'];
+    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
+        '$resource'];
 
-    function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs) {
+    function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
+                            $resource) {
 
         var uniqueCounter = (+new Date) % 10000;
         // var schema = null;
@@ -24,6 +26,8 @@
             getFieldValueAsNumber: getFieldValueAsNumber,
             copyToClipboard: copyToClipboard,
             strSubtitutor: strSubtitutor,
+            restResource: restResource,
+            // http: http,
 
             //Templates management
             getToolbarComponent: getToolbarComponent,
@@ -67,6 +71,11 @@
             removeRow: removeRow,
             removeColumn: removeColumn,
             cloneRow: cloneRow,
+
+            //CKEditor field specific
+            setConfigToCKEditorComponent: setConfigToCKEditorComponent,
+            defaultCKEditorPrefix: defaultCKEditorPrefix,
+            defaultCKEditorSuffix: defaultCKEditorSuffix,
 
             getTimeZoneUTC: getTimeZoneUTC,
             copyJson: copyJson,
@@ -340,6 +349,8 @@
                     return 'forms/common/fields/checkbox-list.html';
                 case OdsFieldType.RADIO:
                     return 'forms/common/fields/radio-list.html';
+                case OdsFieldType.CKEDITOR:
+                    return 'forms/common/fields/plugins/ckeditor.html';
                 default :
                     return 'forms/common/fields/no-field.html';
             }
@@ -789,10 +800,14 @@
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.CKEDITOR,
                 readonly: false,
+                usedAsConsent: false,
                 options: {
                     triggerKeyCode: CTRL + 32,
-                    prefix: '${',
-                    suffix: '}',
+                    prefix: defaultCKEditorPrefix(),
+                    suffix: defaultCKEditorSuffix(),
+                    suggestionsUrl: '',
+                    tokensUrl: '',
+                    locked: true,
                     suggestions: [{
                         id: 'suggestion1',
                         label: 'Suggestion1'
@@ -802,10 +817,21 @@
                     }, {
                         id: 'suggestion3',
                         label: 'Suggestion3'
-                    }]
+                    }],
+                    tokens: null
                 },
                 value: null
             }
+        }
+
+        function defaultCKEditorPrefix() {
+
+            return '${';
+        }
+
+        function defaultCKEditorSuffix() {
+
+            return '}';
         }
 
         /**
@@ -1005,6 +1031,22 @@
             return strResult;
         }
 
+        function restResource(resourceUrl) {
+
+            return $resource(resourceUrl, {}, {
+                'query': {method: 'GET', isArray: true},
+                'get': {
+                    method: 'GET',
+                    transformResponse: function (data) {
+                        if (data) {
+                            data = angular.fromJson(data);
+                        }
+                        return data;
+                    }
+                }
+            });
+        }
+
         function escapeRegExp(str) {
             return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
         }
@@ -1113,6 +1155,42 @@
                             //     };
                             //     resultFields.push(field);
                             // }
+                        }
+                    }
+                }
+            }
+            return fields;
+        }
+
+        function setConfigToCKEditorComponent(schema, config) {
+
+            var layout = schema.layout;
+            for (var i = 0; i < layout.length; i++) {
+                var rows = layout[i].rows;
+                for (var j = 0; j < rows.length; j++) {
+                    var cols = rows[j].cols;
+                    for (var k = 0; k < cols.length; k++) {
+                        var fields = cols[k].fields;
+                        for (var l = 0; l < fields.length; l++) {
+                            if (fields[l].type == OdsFieldType.TABLE) {
+                                for (var m = 0; m < fields[l].matrix.length; m++) {
+                                    for (var p = 0; p < fields[l].matrix[m].length; p++) {
+                                        if (cols[k].fields[l].matrix[m][p].fields[0].type === OdsFieldType.CKEDITOR) {
+                                            cols[k].fields[l].matrix[m][p].fields[0].options.prefix = config.ckeditor.prefix ? config.ckeditor.prefix : defaultCKEditorPrefix();
+                                            cols[k].fields[l].matrix[m][p].fields[0].options.suffix = config.ckeditor.suffix ? config.ckeditor.suffix : defaultCKEditorSuffix();
+                                            cols[k].fields[l].matrix[m][p].fields[0].options.suggestions = config.ckeditor.suggestions ? config.ckeditor.suggestions : [];
+                                            cols[k].fields[l].matrix[m][p].fields[0].options.tokens = config.ckeditor.tokens ? config.ckeditor.tokens : null;
+                                        }
+                                    }
+                                }
+                            } else {
+                                if (cols[k].fields[l].type === OdsFieldType.CKEDITOR) {
+                                    cols[k].fields[l].options.prefix = config.ckeditor.prefix ? config.ckeditor.prefix : defaultCKEditorPrefix();
+                                    cols[k].fields[l].options.suffix = config.ckeditor.suffix ? config.ckeditor.suffix : defaultCKEditorSuffix();
+                                    cols[k].fields[l].options.suggestions = config.ckeditor.suggestions ? config.ckeditor.suggestions : [];
+                                    cols[k].fields[l].options.tokens = config.ckeditor.tokens ? config.ckeditor.tokens : null;
+                                }
+                            }
                         }
                     }
                 }

@@ -25,7 +25,7 @@
                         dnd-selected="models.selected = field"
                         dnd-moved="col.fields.splice($index, 1)"
                         ng-class="{selected: models.selected === col.fields}">
-                        <ods-field row="row" col="col" index="$index" field="field" debug-mode="debugMode"></ods-field>
+                        <ods-field row="row" col="col" config="config" index="$index" field="field" debug-mode="debugMode"></ods-field>
                     </li>
                 </ul>
             </div>

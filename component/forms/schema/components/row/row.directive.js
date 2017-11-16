@@ -17,6 +17,7 @@ function RowDirective(OdsFormService, dialogs) {
         scope: {
             section: '=',
             row: '=',
+            config: '=',
             index: '=',
             debugMode: '='
         },
