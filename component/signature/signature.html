@@ -10,7 +10,7 @@
             border: 1px solid #a94442;"
         }
     </style>
-    <div id="jSignature" class="sig-box" ng-class="hideRequired ? 'sig-box-default' : 'sig-box-error'">
+    <div id="{{name}}" class="sig-box {{requiredClass}}">
          <!--style=">-->
     </div>
     <button type="button" class="btn btn-danger" ng-click="reset()" ng-disabled="disabled">

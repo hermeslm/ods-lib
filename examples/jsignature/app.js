@@ -16,7 +16,8 @@
         $scope.selected = '';
         $scope.disabled = false;
         $scope.required = false;
-        $scope.model = {};
+        $scope.model = '';
+        $scope.name = 'testSig';
         $scope.enableComponent = enableComponent;
         $scope.disableComponent = disableComponent;
         $scope.getSignature = getSignature;
@@ -25,8 +26,18 @@
         $scope.toggleRequired = toggleRequired;
         $scope.submit = submit;
 
-        //Init with default signature
-        //setSignature();
+        $scope.selected1 = '';
+        $scope.disabled1 = false;
+        $scope.required1 = false;
+        $scope.model1 = '';
+        $scope.name1 = 'testSig1';
+        $scope.enableComponent1 = enableComponent1;
+        $scope.disableComponent1 = disableComponent1;
+        $scope.getSignature1 = getSignature1;
+        $scope.setSignature1 = setSignature1;
+        $scope.onChange1 = onChange1;
+        $scope.toggleRequired1 = toggleRequired1;
+        $scope.submit1 = submit1;
 
         function enableComponent() {
 
@@ -44,24 +55,24 @@
 
         function getSignature() {
 
-            if (!OdsSignature.getData($scope.model, OdsSignature.exportTypes.NATIVE).length) {
+            if (!OdsSignature.getData($scope.name, OdsSignature.exportTypes.NATIVE).length) {
                 alert("Please sign and then press finish!!!");
             } else {
-                $scope.selected = OdsSignature.getData($scope.model, OdsSignature.exportTypes.IMAGE).join(',');
+                $scope.selected = OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
             }
         }
 
         function setSignature() {
 
-            OdsSignature.setData($scope.model, $scope.default);
+            OdsSignature.setData($scope.name, $scope.default);
         }
 
-        function onChange(model) {
+        function onChange() {
 
-            var d = OdsSignature.getData(model, OdsSignature.exportTypes.NATIVE);
+            var d = OdsSignature.getData($scope.name, OdsSignature.exportTypes.NATIVE);
             if (d.length >= 1) {
                 console.log("There is a modification.");
-                $scope.selected = 'data:' + OdsSignature.getData(model, OdsSignature.exportTypes.IMAGE).join(',');
+                $scope.selected = 'data:' + OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
             } else {
                 console.log("There is not a modification.");
             }
@@ -74,6 +85,63 @@
         }
 
         function submit() {
+            console.log($scope.model);
+            alert("Submit form!!!");
+        }
+
+
+
+
+
+
+        //Second instance of Signature
+        function enableComponent1() {
+
+            $scope.disabled1 = false;
+            //You can call service enable too.
+            // OdsSignature.enable($scope.model);
+        }
+
+        function disableComponent1() {
+
+            $scope.disabled1 = true;
+            //You can call service disable too.
+            // OdsSignature.disable($scope.model);
+        }
+
+        function getSignature1() {
+
+            if (!OdsSignature.getData($scope.name1, OdsSignature.exportTypes.NATIVE).length) {
+                alert("Please sign and then press finish!!!");
+            } else {
+                $scope.selected1 = OdsSignature.getData($scope.name1, OdsSignature.exportTypes.IMAGE).join(',');
+            }
+        }
+
+        function setSignature1() {
+
+            OdsSignature.setData($scope.name1, $scope.default);
+        }
+
+        function onChange1() {
+
+            var d = OdsSignature.getData($scope.name1, OdsSignature.exportTypes.NATIVE);
+            if (d.length >= 1) {
+                console.log("There is a modification.");
+                $scope.selected1 = 'data:' + OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
+            } else {
+                console.log("There is not a modification.");
+            }
+
+        }
+
+        function toggleRequired1() {
+
+            $scope.required1 = !$scope.required1;
+        }
+
+        function submit1() {
+            console.log($scope.model1);
             alert("Submit form!!!");
         }
     }

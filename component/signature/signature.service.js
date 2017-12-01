@@ -18,7 +18,7 @@ function OdsSignature() {
         SVG_XML: 'image/svg+xml',
         SVG_BASE64: 'svgbase64',
         IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
-    }
+    };
 
     var importTypes = {
         NATIVE: 'native',
@@ -26,77 +26,133 @@ function OdsSignature() {
         IMAGE_PNG_BASE64: 'image/png;base64',
         IMAGE_JPEG_BASE64: 'image/jpeg;base64',
         IMAGE_JPG_BASE64: 'image/jpg;base64'
-    }
+    };
+
+    var uniqueCounter = (+new Date) % 10000;
+
+    var instance_map = {};
 
     var service = {
         exportTypes: exportTypes,
         importTypes: importTypes,
+        register: register,
+        getInstance: getInstance,
+        unregister: unregister,
         reset: reset,
         isValid: isValid,
         getData: getData,
         setData: setData,
         disable: disable,
-        enable: enable
+        enable: enable,
+        generateName: generateName
+        // setOptions: setOptions,
+        // setReadOnly: setReadOnly,
+        // initOptions: initOptions
     };
 
     return service;
 
-    function reset(model) {
+    function register(name, instance) {
 
-        model.sig = '';
-        model.element.jSignature('reset');
+        instance_map[name] = instance;
     }
 
-    function isValid(model) {
+    function getInstance(name) {
 
-        var d = getData(model, exportTypes.NATIVE);
+        if (instance_map[name])
+            return instance_map[name];
+        else
+            return false;
+    }
+
+    function unregister(name) {
+
+        instance_map[name] = null;
+    }
+
+    function generateName() {
+
+        uniqueCounter++;
+        return 'signature' + uniqueCounter;
+    }
+
+    function reset(name, model) {
+
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('reset');
+            model = '';
+        }
+    }
+
+    function isValid(name) {
+
+        var d = getData(name, exportTypes.NATIVE);
         if (d.length >= 1) {
             return true;
+        }else {
+            return false;
         }
-        if (model.sig && model.sig !== '') {
-            return true;
-        }
-        return false;
     }
 
-    function getData(model, type) {
-        // console.log('getData!!!');
-        return model.element.jSignature('getData', type);
+    function getData(name, type) {
+
+        var element = getInstance(name);
+        if (element) {
+            return element.jSignature('getData', type);
+        } else
+            return false;
     }
 
-    function getDataAsSVG(model) {
+    function getDataAsSVG(name) {
 
-        var svg = model.element.jSignature('getData', 'svg');
+        var element = getInstance(name);
+        var svg = element.jSignature('getData', 'svg');
         return svg;
     }
 
-    function getDataAsBase30(model) {
+    function getDataAsBase30(name) {
 
-        var svg = model.element.jSignature('getData', 'svg');
-        return svg;
+        var element = getInstance(name);
+        if (element) {
+            var svg = element.jSignature('getData', 'svg');
+            return svg;
+        } else
+            return false;
     }
 
-    function setData(model, sig) {
+    function setData(name, model) {
 
-        reset(model);
-        model.element.jSignature('setData', sig);
-        model.sig = sig;
+        reset(name, model);
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('setData', model);
+        }
     }
 
-    function disable(model) {
+    function disable(name) {
 
-        model.element.jSignature('disable');
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('disable');
+        }
     }
 
-    function enable(model) {
+    function enable(name) {
 
-        model.element.jSignature('enable');
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('enable');
+        }
     }
 
-    function undo(element) {
+    function undo(name) {
 
         var eventName = apinamespace + '.undo';
-        element.jSignature('events');
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('events');
+        }
     }
 
 }
