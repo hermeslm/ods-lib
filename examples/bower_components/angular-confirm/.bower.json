@@ -1,0 +1,42 @@
+{
+  "name": "angular-confirm",
+  "version": "1.1.0",
+  "homepage": "https://github.com/craftpip/angular-confirm",
+  "authors": [
+    "boniface pereira <bonifacepereira@gmail.com>"
+  ],
+  "description": "A multipurpose alert and confirm plugin",
+  "main": [
+    "css/angular-confirm.css",
+    "js/angular-confirm.js"
+  ],
+  "keywords": [
+    "angular-plugin",
+    "javascript",
+    "confirm",
+    "alert",
+    "dialog",
+    "angular"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.*",
+    "jquery": ">=1.6"
+  },
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.0",
+    "commit": "01686b979a97094346c03d87fd1ad9239c7b69a9"
+  },
+  "_source": "https://github.com/craftpip/angular-confirm.git",
+  "_target": "^1.1.0",
+  "_originalSource": "angular1-confirm"
+}
