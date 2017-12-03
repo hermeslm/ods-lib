@@ -34,6 +34,7 @@
             getSchemaField: getSchemaField,
             getSchemaFieldProperties: getSchemaFieldProperties,
             getFormFieldTemplate: getFormFieldTemplate,
+            getFormViewerTemplate: getFormViewerTemplate,
 
             getValidationPatterns: getValidationPatterns,
             getDateTimeFormats: getDateTimeFormats,
@@ -353,6 +354,51 @@
                     return 'forms/common/fields/plugins/ckeditor.html';
                 default :
                     return 'forms/common/fields/no-field.html';
+            }
+        }
+
+        /**
+         * Return field template for each field type in Form Viewer
+         * @param fieldType Field type
+         * @returns {*}
+         */
+        function getFormViewerTemplate(fieldType) {
+
+            switch (fieldType) {
+                case OdsFieldType.TEXT:
+                    return 'forms/common/viewer/input.html';
+                case OdsFieldType.NUMBER:
+                    return 'forms/common/viewer/input.html';
+                case OdsFieldType.PASSWORD:
+                    return 'forms/common/viewer/input.html';
+                case OdsFieldType.DATE:
+                    return 'forms/common/viewer/input.html';
+                case OdsFieldType.TEXTAREA:
+                    return 'forms/common/viewer/input.html';
+                case OdsFieldType.TOGGLE:
+                    return 'forms/common/viewer/toggle.html';
+                case OdsFieldType.SELECT:
+                    return 'forms/common/viewer/select.html';
+                case OdsFieldType.MULTI_SELECT:
+                    return 'forms/common/viewer/multi-select.html';
+                case OdsFieldType.DATETIME:
+                    return 'forms/common/fields/datetime.html';
+                case OdsFieldType.IF_YES:
+                    return 'forms/common/fields/plugins/if-yes.html';
+                case OdsFieldType.TABLE:
+                    return 'forms/common/fields/plugins/table.html';
+                case OdsFieldType.LABEL:
+                    return 'forms/common/fields/label-empty.html';
+                case OdsFieldType.CHECKBOX:
+                    return 'forms/common/fields/checkbox.html';
+                case OdsFieldType.CHECKBOX_LIST:
+                    return 'forms/common/fields/checkbox-list.html';
+                case OdsFieldType.RADIO:
+                    return 'forms/common/viewer/radio-list.html';
+                case OdsFieldType.CKEDITOR:
+                    return 'forms/common/viewer/plugins/ckeditor.html';
+                default :
+                    return 'forms/common/viewer/no-template.html';
             }
         }
 
@@ -792,6 +838,7 @@
 
         function newCKEditorObject() {
 
+            //Default key combination. (CTRL + SPACE)
             const CTRL = 1114112;
 
             return {
@@ -800,7 +847,7 @@
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.CKEDITOR,
                 readonly: false,
-                usedAsConsent: false,
+                printView: false,
                 options: {
                     triggerKeyCode: CTRL + 32,
                     prefix: defaultCKEditorPrefix(),
