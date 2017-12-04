@@ -382,7 +382,7 @@
                 case OdsFieldType.MULTI_SELECT:
                     return 'forms/common/viewer/multi-select.html';
                 case OdsFieldType.DATETIME:
-                    return 'forms/common/fields/datetime.html';
+                    return 'forms/common/viewer/datetime.html';
                 case OdsFieldType.IF_YES:
                     return 'forms/common/fields/plugins/if-yes.html';
                 case OdsFieldType.TABLE:
@@ -390,7 +390,7 @@
                 case OdsFieldType.LABEL:
                     return 'forms/common/fields/label-empty.html';
                 case OdsFieldType.CHECKBOX:
-                    return 'forms/common/fields/checkbox.html';
+                    return 'forms/common/viewer/checkbox.html';
                 case OdsFieldType.CHECKBOX_LIST:
                     return 'forms/common/fields/checkbox-list.html';
                 case OdsFieldType.RADIO:
@@ -712,8 +712,8 @@
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.DATETIME,
                 enableTime: false,
-                format: OdsDateTimeFormat.ShortDate,
-                selectedFormat: OdsDateTimeFormat.ShortDate,
+                format: OdsDateTimeFormat.ShortDateLongYear,
+                selectedFormat: OdsDateTimeFormat.ShortDateLongYear,
                 options: {
                     timezone: getTimeZoneUTC()
                 },

@@ -1,0 +1,8 @@
+<div class="checkbox">
+    <br ng-show="field.ln">
+    <label>
+        <input ods-dynamic-name="field.name" disabled="disabled" id="{{field.name}}" ng-model="field.value" type="{{field.type}}"
+               placeholder="{{field.placeholder}}" ng-required="{{field.required}}" title="{{field.tooltip}}"/>
+        <span class="ng-binding ng-scope">{{field.label}}</span>
+    </label>
+</div>

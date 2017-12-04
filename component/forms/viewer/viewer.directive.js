@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsViewer', ViewerDirective);
 
-ViewerDirective.$inject = ['OdsFormService'];
+ViewerDirective.$inject = ['OdsFormService', 'uibDateParser'];
 
-function ViewerDirective(OdsFormService) {
+function ViewerDirective(OdsFormService, uibDateParser) {
 
     var directive = {
         restrict: 'E',
@@ -32,6 +32,8 @@ function ViewerDirective(OdsFormService) {
         $scope.getRadioTextFromValue = getRadioTextFromValue;
         $scope.getSelectTextFromValue = getSelectTextFromValue;
         $scope.getFieldTextsFromValues = getFieldTextsFromValues;
+
+        $scope.dateTimeRender = dateTimeRender;
 
         /**
          * Return Form Viewer template for every field.
@@ -79,7 +81,7 @@ function ViewerDirective(OdsFormService) {
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
                 if(field.value) {
-                    if (value == field.value.value) {
+                    if (value == field.value[OdsFormService.getSelectFieldId(field)]) {
                         return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                     }
                 }
@@ -110,5 +112,13 @@ function ViewerDirective(OdsFormService) {
             }
         }
 
+        function dateTimeRender(field) {
+
+            if(field.format){
+                return uibDateParser.filter(field.value, field.format);
+            }else {
+                return field.value;
+            }
+        }
     }
 }

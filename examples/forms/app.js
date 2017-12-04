@@ -28,26 +28,27 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                 "cols": [
                     {
                         "name": "column9547",
-                        "cssClass": "col-lg-2",
+                        "cssClass": "col-lg-3",
                         "allowedTypes": [
                             "field"
                         ],
                         "fields": [
                             {
                                 "componentType": "field",
-                                "label": "CheckBox",
-                                hideLabel: true,
-                                "name": "field9762",
-                                "type": "checkbox",
-                                "value": false,
+                                "label": "DateTime",
+                                "name": "field8869",
+                                "type": "datetime",
+                                "enableTime": false,
+                                "format": "MM/dd/yyyy",
+                                "selectedFormat": "MM/dd/yyyy",
+                                "options": {
+                                    "timezone": "UTC/GMT"
+                                },
+                                "required": false,
+                                "value": "2017-12-04T17:15:17.743Z",
                                 "popoverProps": false,
                                 "showProperties": false,
-                                "validation": {
-                                    "required": true,
-                                    "messages": {
-                                        "required": "Campo requerido"
-                                    }
-                                }
+                                "open": false
                             }
                         ]
                     },
@@ -74,13 +75,15 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                                         "pattern": "Solo valores enteros"
                                     }
                                 },
-                                "showProperties": false
+                                "showProperties": false,
+                                "value": 12,
+                                "popoverProps": false
                             }
                         ]
                     },
                     {
                         "name": "column3153",
-                        "cssClass": "col-lg-4",
+                        "cssClass": "col-lg-3",
                         "allowedTypes": [
                             "field"
                         ],
@@ -92,10 +95,12 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                                 "placeholder": "",
                                 "type": "text",
                                 "required": false,
-                                "value": null,
+                                "value": "twertwerwe ertwertwe",
                                 "validation": {
                                     "messages": {}
-                                }
+                                },
+                                "popoverProps": false,
+                                "showProperties": false
                             }
                         ]
                     },
@@ -113,10 +118,164 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                                 "placeholder": "",
                                 "type": "text",
                                 "required": false,
-                                "value": null,
+                                "value": "werwertwer wertwert",
                                 "validation": {
                                     "messages": {}
-                                }
+                                },
+                                "popoverProps": false,
+                                "showProperties": false
+                            }
+                        ]
+                    }
+                ],
+                "showProperties": false
+            },
+            {
+                "name": "row1149",
+                "componentType": "row",
+                "cssClass": "row",
+                "displayProperties": false,
+                "cols": [
+                    {
+                        "name": "column1150",
+                        "cssClass": "col-lg-3",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Radiobutton List",
+                                "name": "field1154",
+                                "type": "radio",
+                                "options": [
+                                    {
+                                        "id": 1,
+                                        "name": "Option 1"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "Option 2"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "name": "Option 3"
+                                    }
+                                ],
+                                "value": "1"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "column1151",
+                        "cssClass": "col-lg-3",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Select",
+                                "name": "field1155",
+                                "placeholder": "",
+                                "type": "select",
+                                "required": false,
+                                "multiSelect": false,
+                                "valueField": "id",
+                                "titleField": "name",
+                                "limitTo": 10,
+                                "value": {
+                                    "id": 1,
+                                    "name": "Option 1"
+                                },
+                                "options": [
+                                    {
+                                        "id": 1,
+                                        "name": "Option 1"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "Option 2"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "name": "Option 3"
+                                    }
+                                ],
+                                "validation": {
+                                    "messages": {}
+                                },
+                                "popoverProps": false,
+                                "showProperties": false
+                            }
+                        ]
+                    },
+                    {
+                        "name": "column1152",
+                        "cssClass": "col-lg-3",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Multi select",
+                                "name": "field1156",
+                                "placeholder": "",
+                                "type": "multiselect",
+                                "required": false,
+                                "multiSelect": true,
+                                "valueField": "id",
+                                "titleField": "name",
+                                "limitTo": 10,
+                                "value": [
+                                    {
+                                        "id": "1",
+                                        "name": "sdfsdfsdf"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "name": "fgsdsdsdf"
+                                    }
+                                ],
+                                "options": [
+                                    {
+                                        "id": "1",
+                                        "name": "sdfsdfsdf"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "name": "fgsdsdsdf"
+                                    },
+                                    {
+                                        "id": "3",
+                                        "name": "fgsdfgsdfgsdf"
+                                    }
+                                ],
+                                "render": null,
+                                "validation": {
+                                    "messages": {}
+                                },
+                                "popoverProps": false,
+                                "showProperties": false
+                            }
+                        ]
+                    },
+                    {
+                        "name": "column1153",
+                        "cssClass": "col-lg-3",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "CheckBox",
+                                "hideLabel": true,
+                                "ln": false,
+                                "name": "field1157",
+                                "type": "checkbox",
+                                "value": true
                             }
                         ]
                     }
@@ -124,7 +283,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                 "showProperties": false
             }
         ],
-        "showProperties": false
+        "showProperties": true
     };
 
     $scope.section1 = {

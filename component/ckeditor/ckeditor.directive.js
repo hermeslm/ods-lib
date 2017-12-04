@@ -67,11 +67,6 @@ function CKEditor($timeout, OdsCkeditor) {
             $scope.ck.setData(ngModel.$viewValue);
         };
 
-        $scope.$on('destroy', function () {
-
-            OdsCkeditor.unregister(name);
-        });
-
         $scope.$watch('disabled', function (disabled) {
 
             $timeout(function () {
@@ -87,6 +82,10 @@ function CKEditor($timeout, OdsCkeditor) {
                 OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
             }, 100, false);
             return;
+        });
+
+        $scope.$on('$destroy', function() {
+            OdsCkeditor.unregister($scope.name);
         });
 
     }
