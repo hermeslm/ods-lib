@@ -161,7 +161,7 @@ function odsSignature($timeout, OdsSignature) {
             return;
         });
 
-        scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function() {
             OdsSignature.unregister($scope.name);
         });
     }
