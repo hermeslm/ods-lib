@@ -392,7 +392,7 @@
                 case OdsFieldType.CHECKBOX:
                     return 'forms/common/viewer/checkbox.html';
                 case OdsFieldType.CHECKBOX_LIST:
-                    return 'forms/common/fields/checkbox-list.html';
+                    return 'forms/common/viewer/checkbox-list.html';
                 case OdsFieldType.RADIO:
                     return 'forms/common/viewer/radio-list.html';
                 case OdsFieldType.CKEDITOR:

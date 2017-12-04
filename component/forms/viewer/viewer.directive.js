@@ -32,6 +32,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
         $scope.getRadioTextFromValue = getRadioTextFromValue;
         $scope.getSelectTextFromValue = getSelectTextFromValue;
         $scope.getFieldTextsFromValues = getFieldTextsFromValues;
+        $scope.getFieldChecklistFromValues = getFieldChecklistFromValues;
 
         $scope.dateTimeRender = dateTimeRender;
 
@@ -80,7 +81,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
 
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
-                if(field.value) {
+                if (field.value) {
                     if (value == field.value[OdsFormService.getSelectFieldId(field)]) {
                         return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                     }
@@ -93,7 +94,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
         function getFieldTextsFromValues(field) {
 
             var result = [];
-            if(field.value) {
+            if (field.value) {
                 for (var i = 0; i < field.value.length; i++) {
                     var value = field.value[i][OdsFormService.getSelectFieldId(field)];
                     for (var j = 0; j < field.options.length; j++) {
@@ -105,19 +106,39 @@ function ViewerDirective(OdsFormService, uibDateParser) {
                 }
             }
 
-            if(result.length > 0){
+            if (result.length > 0) {
                 return result;
-            }else {
+            } else {
                 return '';
             }
         }
 
         function dateTimeRender(field) {
 
-            if(field.format){
+            if (field.format) {
                 return uibDateParser.filter(field.value, field.format);
-            }else {
+            } else {
                 return field.value;
+            }
+        }
+
+        function getFieldChecklistFromValues(field) {
+
+            var result = [];
+            if (field.value) {
+                for (var i = 0; i < field.options.length; i++) {
+                    var id = field.value[i + 1];
+                    if (id) {
+                        var value = field.options[i].name;
+                        result.push(value);
+                    }
+                }
+            }
+
+            if (result.length > 0) {
+                return result;
+            } else {
+                return '';
             }
         }
     }

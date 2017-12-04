@@ -162,7 +162,10 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                                         "name": "Option 3"
                                     }
                                 ],
-                                "value": "1"
+                                "value": "1",
+                                "popoverProps": false,
+                                "showProperties": false,
+                                "inline": true
                             }
                         ]
                     },
@@ -271,11 +274,71 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                             {
                                 "componentType": "field",
                                 "label": "CheckBox",
-                                "hideLabel": true,
+                                "hideLabel": false,
                                 "ln": false,
                                 "name": "field1157",
                                 "type": "checkbox",
-                                "value": true
+                                "value": true,
+                                "popoverProps": false,
+                                "showProperties": false
+                            }
+                        ]
+                    }
+                ],
+                "showProperties": false
+            },
+            {
+                "name": "row6817",
+                "componentType": "row",
+                "cssClass": "row",
+                "displayProperties": false,
+                "cols": [
+                    {
+                        "name": "column6818",
+                        "cssClass": "col-lg-6",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "CheckBox List",
+                                "name": "field6820",
+                                "type": "checkboxlist",
+                                "options": [
+                                    {
+                                        "id": 1,
+                                        "name": "Option 1"
+                                    },
+                                    {
+                                        "id": 2,
+                                        "name": "Option 2"
+                                    },
+                                    {
+                                        "id": 3,
+                                        "name": "Option 3"
+                                    }
+                                ],
+                                "value": {}
+                            }
+                        ]
+                    },
+                    {
+                        "name": "column6819",
+                        "cssClass": "col-lg-6",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Toggle",
+                                "name": "field6821",
+                                "type": "toggle",
+                                "ln": false,
+                                "on": "Yes",
+                                "off": "No",
+                                "value": false
                             }
                         ]
                     }
@@ -283,7 +346,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                 "showProperties": false
             }
         ],
-        "showProperties": true
+        "showProperties": false
     };
 
     $scope.section1 = {
