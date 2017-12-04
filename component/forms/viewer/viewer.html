@@ -16,7 +16,7 @@
                                      ng-class="{'has-error': {{schema.name}}.{{field.name}}.$invalid}">
 
                                     <label class="control-label" for="{{field.name}}"
-                                           ng-hide="hideTitle(field)">{{field.label}}:&nbsp;</label>
+                                           ng-hide="hideTitle(field)">{{field.label}}&nbsp;</label>
                                     <!--ng-if="field.value"-->
 
                                     <ng-include src="getFormViewerTemplate(field.type)"></ng-include>

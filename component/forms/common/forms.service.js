@@ -384,7 +384,7 @@
                 case OdsFieldType.DATETIME:
                     return 'forms/common/viewer/datetime.html';
                 case OdsFieldType.IF_YES:
-                    return 'forms/common/fields/plugins/if-yes.html';
+                    return 'forms/common/viewer/plugins/if-yes.html';
                 case OdsFieldType.TABLE:
                     return 'forms/common/fields/plugins/table.html';
                 case OdsFieldType.LABEL:

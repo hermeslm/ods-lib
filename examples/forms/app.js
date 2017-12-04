@@ -162,7 +162,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                                         "name": "Option 3"
                                     }
                                 ],
-                                "value": "1",
+                                "value": "2",
                                 "popoverProps": false,
                                 "showProperties": false,
                                 "inline": true
@@ -319,7 +319,14 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                                         "name": "Option 3"
                                     }
                                 ],
-                                "value": {}
+                                "value": {
+                                    "1": true,
+                                    "2": true,
+                                    "3": true
+                                },
+                                "popoverProps": false,
+                                "showProperties": false,
+                                "inline": true
                             }
                         ]
                     },
@@ -338,7 +345,91 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                                 "ln": false,
                                 "on": "Yes",
                                 "off": "No",
-                                "value": false
+                                "value": true
+                            }
+                        ]
+                    }
+                ],
+                "showProperties": false
+            },
+            {
+                "name": "row2364",
+                "componentType": "row",
+                "cssClass": "row",
+                "displayProperties": false,
+                "cols": [
+                    {
+                        "name": "column2365",
+                        "cssClass": "col-lg-6",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "If yes:",
+                                "name": "field2367",
+                                "type": "if_yes",
+                                "ln": true,
+                                "on": "Yes",
+                                "off": "No",
+                                "value": {
+                                    "toggle": true,
+                                    "textarea": "gfhdfdfg dfghdfghd dfhdfgdfgh."
+                                },
+                                "placeholder": "",
+                                "validation": {
+                                    "messages": {}
+                                },
+                                "popoverProps": false,
+                                "showProperties": false
+                            }
+                        ]
+                    },
+                    {
+                        "name": "column2366",
+                        "cssClass": "col-lg-6",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "CKEditor",
+                                "name": "field2368",
+                                "type": "ckeditor",
+                                "readonly": false,
+                                "printView": false,
+                                "options": {
+                                    "triggerKeyCode": 1114144,
+                                    "prefix": "${",
+                                    "suffix": "}",
+                                    "suggestionsUrl": "",
+                                    "tokensUrl": "http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/tokens.json",
+                                    "locked": true,
+                                    "suggestions": [
+                                        {
+                                            "id": "patientName",
+                                            "label": "Patient Name"
+                                        },
+                                        {
+                                            "id": "patientDob",
+                                            "label": "Patient DOB"
+                                        },
+                                        {
+                                            "id": "patientGender",
+                                            "label": "Patient Gender"
+                                        },
+                                        {
+                                            "id": "patientMaritalStatus",
+                                            "label": "Patient Marital Status"
+                                        }
+                                    ],
+                                    "tokens": null
+                                },
+                                "value": "<p>gfdfhdfg dfgdfhdfghd dfghdfghdf dfgdfdfg</p>\n",
+                                "popoverProps": false,
+                                "showProperties": false
                             }
                         ]
                     }
@@ -346,7 +437,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                 "showProperties": false
             }
         ],
-        "showProperties": false
+        "showProperties": true
     };
 
     $scope.section1 = {
