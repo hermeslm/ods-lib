@@ -1226,13 +1226,13 @@
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     for (var p = 0; p < fields[l].matrix[m].length; p++) {
                                         if (cols[k].fields[l].matrix[m][p].fields[0].type == OdsFieldType.DATETIME) {
-                                            cols[k].fields[l].matrix[m][p].fields[0].value = Date(Date.parse(cols[k].fields[l].matrix[m][p].fields[0].value));
+                                            cols[k].fields[l].matrix[m][p].fields[0].value = new Date(Date.parse(cols[k].fields[l].matrix[m][p].fields[0].value));
                                         }
                                     }
                                 }
                             }
                             else if (fields[l].type == OdsFieldType.DATETIME) {
-                                fields[l].value = Date(Date.parse(fields[l].value));
+                                fields[l].value = new Date(Date.parse(fields[l].value));
                             }
                         }
                     }
