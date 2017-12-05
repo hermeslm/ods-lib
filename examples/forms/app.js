@@ -425,7 +425,12 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                                             "label": "Patient Marital Status"
                                         }
                                     ],
-                                    "tokens": null
+                                    "tokens": {
+                                        "patientName": "Hermes Lorenzo",
+                                        "patientDob": "01/24/1980",
+                                        "patientGender": "Male",
+                                        "patientMaritalStatus": "Single"
+                                    }
                                 },
                                 "value": "<p>gfdfhdfg dfgdfhdfghd dfghdfghdf dfgdfdfg</p>\n",
                                 "popoverProps": false,
@@ -435,9 +440,185 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                     }
                 ],
                 "showProperties": false
+            },
+            {
+                "name": "row4227",
+                "componentType": "row",
+                "cssClass": "row",
+                "displayProperties": false,
+                "cols": [
+                    {
+                        "name": "column4228",
+                        "cssClass": "col-lg-12",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Table",
+                                "name": "field4229",
+                                "type": "table",
+                                "cssClass": "table table-bordered table-responsive position-relative",
+                                "matrix": [
+                                    [
+                                        {
+                                            "name": "form4223",
+                                            "fields": [
+                                                {
+                                                    "componentType": "field",
+                                                    "label": "Label",
+                                                    "cssClass": "text-left",
+                                                    "name": "field4230",
+                                                    "type": "label",
+                                                    "value": "Label"
+                                                }
+                                            ],
+                                            "allowedTypes": [
+                                                "field"
+                                            ],
+                                            "totalLabel": "Total"
+                                        },
+                                        {
+                                            "name": "form4224",
+                                            "fields": [
+                                                {
+                                                    "componentType": "field",
+                                                    "label": "TextBox",
+                                                    "name": "field4231",
+                                                    "placeholder": "",
+                                                    "type": "text",
+                                                    "required": false,
+                                                    "value": "dfghdfghd dfghdfghdf dfghdfghdf.",
+                                                    "validation": {
+                                                        "messages": {}
+                                                    }
+                                                }
+                                            ],
+                                            "allowedTypes": [
+                                                "field"
+                                            ],
+                                            "totalLabel": "Total"
+                                        },
+                                        {
+                                            "name": "form8467",
+                                            "fields": [
+                                                {
+                                                    "componentType": "field",
+                                                    "label": "Number",
+                                                    "name": "field8468",
+                                                    "placeholder": "",
+                                                    "type": "number",
+                                                    "required": false,
+                                                    "value": 10,
+                                                    "validation": {
+                                                        "messages": {}
+                                                    }
+                                                }
+                                            ],
+                                            "allowedTypes": [
+                                                "field"
+                                            ],
+                                            "totalLabel": "Total",
+                                            "total": true
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "name": "form8469",
+                                            "fields": [
+                                                {
+                                                    "componentType": "field",
+                                                    "label": "Label",
+                                                    "cssClass": "text-left",
+                                                    "name": "field8472",
+                                                    "type": "label",
+                                                    "value": "Label"
+                                                }
+                                            ],
+                                            "allowedTypes": [
+                                                "field"
+                                            ]
+                                        },
+                                        {
+                                            "name": "form8470",
+                                            "fields": [
+                                                {
+                                                    "componentType": "field",
+                                                    "label": "Select",
+                                                    "name": "field8474",
+                                                    "placeholder": "",
+                                                    "type": "select",
+                                                    "required": false,
+                                                    "multiSelect": false,
+                                                    "valueField": "id",
+                                                    "titleField": "name",
+                                                    "limitTo": 10,
+                                                    "value": {
+                                                        "id": 3,
+                                                        "name": "Option 3"
+                                                    },
+                                                    "options": [
+                                                        {
+                                                            "id": 1,
+                                                            "name": "Option 1"
+                                                        },
+                                                        {
+                                                            "id": 2,
+                                                            "name": "Option 2"
+                                                        },
+                                                        {
+                                                            "id": 3,
+                                                            "name": "Option 3"
+                                                        }
+                                                    ],
+                                                    "validation": {
+                                                        "messages": {}
+                                                    }
+                                                }
+                                            ],
+                                            "allowedTypes": [
+                                                "field"
+                                            ]
+                                        },
+                                        {
+                                            "name": "form8471",
+                                            "fields": [
+                                                {
+                                                    "componentType": "field",
+                                                    "label": "Number",
+                                                    "name": "field8475",
+                                                    "placeholder": "",
+                                                    "type": "number",
+                                                    "required": false,
+                                                    "value": 20,
+                                                    "validation": {
+                                                        "messages": {}
+                                                    }
+                                                }
+                                            ],
+                                            "allowedTypes": [
+                                                "field"
+                                            ]
+                                        }
+                                    ]
+                                ],
+                                "validation": {
+                                    "messages": {}
+                                },
+                                "popoverProps": false,
+                                "showProperties": true,
+                                "totals": true,
+                                "rowHeader": true,
+                                "canCloneRow": false
+                            }
+                        ]
+                    }
+                ],
+                "showProperties": false
             }
         ],
-        "showProperties": true
+        "showProperties": false
     };
 
     $scope.section1 = {
