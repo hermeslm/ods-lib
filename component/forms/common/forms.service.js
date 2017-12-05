@@ -79,6 +79,7 @@
             defaultCKEditorSuffix: defaultCKEditorSuffix,
 
             getTimeZoneUTC: getTimeZoneUTC,
+            parseSchemaDateTimes: parseSchemaDateTimes,
             copyJson: copyJson,
             getDataFromComponentCode: getDataFromComponentCode,
             saveFormData: saveFormData,
@@ -1207,6 +1208,36 @@
                 }
             }
             return fields;
+        }
+
+        function parseSchemaDateTimes(schema) {
+
+            var layout = schema.layout;
+            for (var i = 0; i < layout.length; i++) {
+                var rows = layout[i].rows;
+                for (var j = 0; j < rows.length; j++) {
+                    var cols = rows[j].cols;
+                    for (var k = 0; k < cols.length; k++) {
+                        var fields = cols[k].fields;
+                        for (var l = 0; l < fields.length; l++) {
+                            if (fields[l].type == OdsFieldType.TABLE) {
+                                for (var m = 0; m < fields[l].matrix.length; m++) {
+                                    for (var p = 0; p < fields[l].matrix[m].length; p++) {
+                                        if (cols[k].fields[l].matrix[m][p].fields[0].type == OdsFieldType.DATETIME) {
+                                            cols[k].fields[l].matrix[m][p].fields[0].value = Date(Date.parse(cols[k].fields[l].matrix[m][p].fields[0].value));
+                                        }
+                                    }
+                                }
+                            }
+                            else if (fields[l].type == OdsFieldType.DATETIME) {
+                                fields[l].value = Date(Date.parse(fields[l].value));
+                            }
+                        }
+                    }
+                }
+            }
+
+            return schema;
         }
 
         function setConfigToCKEditorComponent(schema, config) {
