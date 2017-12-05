@@ -79,7 +79,7 @@
             defaultCKEditorSuffix: defaultCKEditorSuffix,
 
             getTimeZoneUTC: getTimeZoneUTC,
-            parseSchemaDateTimes: parseSchemaDateTimes,
+            convertFormSchemaFromServer: convertFormSchemaFromServer,
             copyJson: copyJson,
             getDataFromComponentCode: getDataFromComponentCode,
             saveFormData: saveFormData,
@@ -1210,7 +1210,9 @@
             return fields;
         }
 
-        function parseSchemaDateTimes(schema) {
+        function convertFormSchemaFromServer(json) {
+
+            var schema = angular.fromJson(json);
 
             var layout = schema.layout;
             for (var i = 0; i < layout.length; i++) {
