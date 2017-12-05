@@ -129,13 +129,16 @@ function odsSignature($timeout, OdsSignature) {
             controller.$setValidity('required', state);
         }
 
-        $scope.$watch('model', function (model) {
+        $scope.$watch('model', function (model, oldModel) {
 
             var valid = isValid($scope.name);
             if ($scope.required && !valid) {
                 hideRequired(false);
             } else {
                 hideRequired(true);
+            }
+            if(model !== oldModel){
+                OdsSignature.setData($scope.name, model);
             }
             return;
         });

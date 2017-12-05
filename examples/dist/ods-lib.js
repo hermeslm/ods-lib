@@ -43,9 +43,9 @@ $templateCache.put('forms/form-builder.html','<!--<div class="row">--><!--<div c
 $templateCache.put('image-upload/image-upload-dialog.html','<form name="editForm" role="form" novalidate ng-submit="vm.save()"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myImageLabel">Create or edit a Picture</h4></div><div class="modal-body"><div class="row"><div class="col-lg-5"><img data-ng-src="{{\'data:\' + vm.image.pictureContentType + \';base64,\' + vm.image.picture}}" class="img-responsive" ng-if="vm.image.picture"><div ng-if="vm.image.picture" class="help-block clearfix"><span class="pull-left">{{vm.image.pictureContentType}}, {{vm.byteSize(vm.image.picture)}}</span> <button type="button" ng-click="vm.resetUserPicture()" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></div><button type="button" ngf-select class="btn btn-default btn-block" ngf-change="vm.setPicture($file, vm.patient)" accept="image/*">Browse...</button></div><div class="col-lg-5"><div id="webcam"><webcam channel="vm.channel" on-streaming="vm.onSuccess()" on-error="vm.onError(err)" on-stream="vm.onStream(stream)"></webcam><div ng-if="vm.image.picture" class="help-block clearfix"><span class="pull-left"><button class="btn btn-default btn-xs pull-right" type="button" ng-click="vm.makeSnapshot()"><span class="glyphicon glyphicon-camera"></span></button></span></div><canvas ng-hide="true" id="snapshot" width="383" height="383"></canvas></div></div></div><!--<div class="row">--><!--<div class="col-lg-12">--><!--<img data-ng-src="{{\'data:\' + vm.image.pictureContentType + \';base64,\' + vm.image.picture}}"--><!--class="img-responsive" ng-if="vm.image.picture"/>--><!--<div ng-if="vm.image.picture" class="help-block clearfix">--><!--<span--><!--class="pull-left">{{vm.image.pictureContentType}}, {{vm.byteSize(vm.image.picture)}}</span>--><!--<button type="button" ng-click="vm.resetUserPicture()"--><!--class="btn btn-default btn-xs pull-right">--><!--<span class="glyphicon glyphicon-remove"></span>--><!--</button>--><!--</div>--><!--<button type="button" ngf-select class="btn btn-default btn-block"--><!--ngf-change="vm.setPicture($file, vm.image)" accept="image/*">--><!--Browse...--><!--</button>--><!--</div>--><!--</div>--></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Accept</span></button></div></form>');
 $templateCache.put('image-upload/image-upload.html','<img class="img-responsive {{class}}" id="imgPicture" style="{{css}}" data-ng-src="{{\'data:\' + imageType + \';base64,\' + image}}" ng-click="openModal()" style="cursor: pointer;min-height: 100px" alt="User profile picture">');
 $templateCache.put('j-signature/j-signature.html','<div id="signature"><div id="jSignature"></div><button type="button" class="btn btn-danger" ng-click="reset()"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');
-$templateCache.put('signature/signature.html','<div id="signature" class="{{options.cssClass}}"><style type="text/css" scoped>.sig-box {\n            border-radius: 4px;padding: 5px 5px 0;margin-bottom: 5px;\n        }\n        .sig-box-default {\n            border: 1px solid #ccc;"\n        }\n        .sig-box-error {\n            border: 1px solid #a94442;"\n        }</style><div id="{{name}}" class="sig-box {{requiredClass}}"><!--style=">--></div><button type="button" class="btn btn-danger" ng-click="reset()" ng-disabled="disabled"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');
 $templateCache.put('reports/params.html','<form name="paramsForm" novalidate ng-submit="vm.openReport()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myCityLabel">Report Params for:</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><h4>{{vm.report.title}}</h4><ng-include src="\'app/components/ods-lib/reports/tpl/one-col.tpl.html\'" ng-if="!vm.report.cols"></ng-include><ng-include src="\'app/components/ods-lib/reports/tpl/two-col.tpl.html\'" ng-if="vm.report.cols"></ng-include></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button ng-disabled="paramsForm.$invalid" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Open</span></button></div></form>');
 $templateCache.put('reports/reports.html','<div class="row" ng-show="infoMessage" ng-class="ng-hide"><div class="col-lg-12"><div uib-alert class="alert alert-info alert-dismissible" close="hideInfoMessage()"><h4><i class="icon fa fa-info"></i> Reports info!</h4>If don\'t have a PDF viewer plugin in the browser. No biggie... you can download it. Please select the report and download it from report preview.</div></div></div><div class="row"><div class="col-md-3"><div class="box box-solid"><div class="box-header with-border"><h3 class="box-title">{{reportsGroup.title}}</h3></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in reportsGroup.groups" ng-init="groupIndex = $index"><ul class="list-group list-group-unbordered"><li class="list-group-item" ng-repeat="report in group.reports" ng-init="reportIndex = $index"><a ng-click="openReport(groupIndex, reportIndex)"><b>{{report.title}}</b></a></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box --></div><div class="col-md-9"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">Report Preview</h3></div><!-- /.box-header --><div class="box-body" style="height: 100vh;"><div ng-show="selectReport" class="ng-hide"><p>Download report: <a ng-click="downloadReport()">{{selectReport.title}}</a></p></div><!--<object embed-src="{{vm.reportFile}}" width="100%" height="100%">--><!--</object>--><object style="height: 90vh;" type="application/pdf" data="{{reportFile}}" width="100%" height="100%"></div></div></div></div>');
+$templateCache.put('signature/signature.html','<div id="signature" class="{{options.cssClass}}"><style type="text/css" scoped>.sig-box {\n            border-radius: 4px;padding: 5px 5px 0;margin-bottom: 5px;\n        }\n        .sig-box-default {\n            border: 1px solid #ccc;"\n        }\n        .sig-box-error {\n            border: 1px solid #a94442;"\n        }</style><div id="{{name}}" class="sig-box {{requiredClass}}"><!--style=">--></div><button type="button" class="btn btn-danger" ng-click="reset()" ng-disabled="disabled"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');
 $templateCache.put('steps-indicator/template.html','<div class="ods-breadcrumb {{class}}"><a class="{{step.status}}" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</a></div>');
 $templateCache.put('forms/form/form.html','<div class=""><div class="form-header with-border"><h3 class="box-title" ng-bind-html="schema.label"></h3></div><!-- /.box-header --><!-- form start --><div ng-if="schema.layout.length !== 0"><form name="{{schema.name}}" role="form" novalidate show-validation ng-submit="save()"><div class="box-body padding-top"><div class="alert alert-success" ng-show="success"><strong>Success! </strong>{{message}}</div><div class="alert alert-danger" ng-show="error"><strong>Error! </strong>{{message}}</div><div class="alert alert-info" ng-show="info"><strong>Information! </strong>{{message}}</div><div ng-repeat="section in schema.layout"><h4 ng-bind-html="section.title"></h4><div class="{{row.cssClass}}" ng-repeat="row in section.rows"><div class="{{col.cssClass}}" ng-repeat="col in row.cols"><div class="" ng-repeat="field in col.fields"><div ng-if="field"><div class="form-group" ng-class="{\'has-error\': {{schema.name}}.{{field.name}}.$invalid}"><label class="control-label" for="{{field.name}}" ng-hide="hideTitle(field)">{{field.label}}&nbsp;</label><ng-include src="getFormFieldTemplate(field.type)"></ng-include><div ng-show="{{schema.name}}.{{field.name}}.$invalid"><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.required">{{field.validation.messages.required}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.minlength">{{field.validation.messages.minlength}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.maxlength">{{field.validation.messages.maxlength}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.pattern">{{field.validation.messages.pattern}}</p></div></div></div></div></div></div></div></div><div class="box-footer" ng-show="schema.handleSubmit"><button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="clear()"><span class="fa fa-trash-o"></span>&nbsp;<span>Clear</span></button> <button type="submit" ng-disabled="{{schema.name}}.$invalid" class="btn btn-primary"><span class="fa fa-save"></span>&nbsp;<span>Save</span></button></div></form></div></div>');
 $templateCache.put('forms/form-info/form-info.html','<form name="formInfo" role="form" novalidate ng-submit="save()" show-validation><div class="box-body padding-top"><div class="row"><div class="col-lg-6"><div class="form-group" ng-class="{\'has-error\': formSchema.formName.$invalid}"><label class="control-label" for="formName">Form name</label><input class="form-control" name="formName" id="formName" ng-model="schema.name" ng-required="true"></div></div><div class="col-lg-6"><div class="form-group" ng-class="{\'has-error\': formSchema.formLabel.$invalid}"><label class="control-label" for="formLabel">Form label</label><input class="form-control" name="formLabel" id="formLabel" ng-model="schema.label" ng-required="true"></div></div></div><div class="row"><div class="col-lg-12"><div class="form-group" ng-class="{\'has-error\': formSchema.description.$invalid}"><label class="control-label" for="description">Form description</label><textarea class="form-control" name="description" id="description" ng-model="schema.description" ng-required="false" rows="3" placeholder="Type form description...">\n                    </textarea></div></div></div><div class="row"><div class="col-lg-12"><div class="form-group" ng-class="{\'has-error\': formSchema.handleSubmit.$invalid}"><label class="control-label" for="handleSubmit">Handle submit internally: &nbsp;</label><input type="checkbox" name="handleSubmit" id="handleSubmit" ng-model="schema.handleSubmit" ng-required="false" title="Specify if submit is handle by form (in this case you must to specify submit callback) or externally"></div></div></div></div></form>');
@@ -581,6 +581,102 @@ function PropsFilter() {
     };
 }
 /**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .controller('OdsFormBuilderController', OdsFormBuilderController);
+
+    OdsFormBuilderController.$inject = ['$scope', 'OdsFormService'];
+
+    function OdsFormBuilderController($scope, OdsFormService) {
+
+        $scope.config = {
+            ckeditor: {
+                suggestionsUrl: 'http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/suggestions.json',
+                tokensUrl: 'http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/tokens.json',
+                suggestions: [
+                    {
+                        'id': 'patientName',
+                        'label': 'Patient Name'
+                    },
+                    {
+                        'id': 'patientDob',
+                        'label': 'Patient DOB'
+                    },
+                    {
+                        'id': 'patientGender',
+                        'label': 'Patient Gender'
+                    },
+                    {
+                        'id': 'patientMaritalStatus',
+                        'label': 'Patient Marital Status'
+                    }
+                ]
+            }
+        };
+
+        $scope.runTimeConfig = {
+            ckeditor: {
+                tokens: {
+                    'patientName': 'Hermes Lorenzo',
+                    'patientDob': '01/24/1980',
+                    'patientGender': 'Male',
+                    'patientMaritalStatus': 'Single'
+                }
+            }
+        };
+
+        $scope.saveForm = function(schema){
+
+            var data = OdsFormService.saveFormData(schema);
+            console.log('The form data is: ' + JSON.stringify(data, null, 4));
+        }
+
+        $scope.toggleStyle = function(){
+
+            $scope.cssClass = $scope.cssClass === 'form-print' ? 'form-print1' : 'form-print';
+        }
+    }
+})();
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsFormBuilder', OdsFormBuilder);
+
+OdsFormBuilder.$inject = ['OdsFormService', '$uibModal', '$sce', '$q'];
+
+function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/form-builder.html',
+        scope: {
+            schema: '=',
+            debugMode: '='
+        },
+        controller: 'OdsFormBuilderController',
+        controllerAs: 'vm',
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+    }
+}
+
+/**
  * Created by PpTMUnited on 2/21/2017.
  */
 (function () {
@@ -1077,102 +1173,6 @@ function Signature() {
 
 
 }
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('OdsFormBuilderController', OdsFormBuilderController);
-
-    OdsFormBuilderController.$inject = ['$scope', 'OdsFormService'];
-
-    function OdsFormBuilderController($scope, OdsFormService) {
-
-        $scope.config = {
-            ckeditor: {
-                suggestionsUrl: 'http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/suggestions.json',
-                tokensUrl: 'http://localhost:63342/ods-lib/angular-component-seed/examples/forms/resources/tokens.json',
-                suggestions: [
-                    {
-                        'id': 'patientName',
-                        'label': 'Patient Name'
-                    },
-                    {
-                        'id': 'patientDob',
-                        'label': 'Patient DOB'
-                    },
-                    {
-                        'id': 'patientGender',
-                        'label': 'Patient Gender'
-                    },
-                    {
-                        'id': 'patientMaritalStatus',
-                        'label': 'Patient Marital Status'
-                    }
-                ]
-            }
-        };
-
-        $scope.runTimeConfig = {
-            ckeditor: {
-                tokens: {
-                    'patientName': 'Hermes Lorenzo',
-                    'patientDob': '01/24/1980',
-                    'patientGender': 'Male',
-                    'patientMaritalStatus': 'Single'
-                }
-            }
-        };
-
-        $scope.saveForm = function(schema){
-
-            var data = OdsFormService.saveFormData(schema);
-            console.log('The form data is: ' + JSON.stringify(data, null, 4));
-        }
-
-        $scope.toggleStyle = function(){
-
-            $scope.cssClass = $scope.cssClass === 'form-print' ? 'form-print1' : 'form-print';
-        }
-    }
-})();
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsFormBuilder', OdsFormBuilder);
-
-OdsFormBuilder.$inject = ['OdsFormService', '$uibModal', '$sce', '$q'];
-
-function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/form-builder.html',
-        scope: {
-            schema: '=',
-            debugMode: '='
-        },
-        controller: 'OdsFormBuilderController',
-        controllerAs: 'vm',
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-    }
-}
-
 /**
  * Created by hermeslm on 3/28/17.
  */
@@ -2601,13 +2601,16 @@ function odsSignature($timeout, OdsSignature) {
             controller.$setValidity('required', state);
         }
 
-        $scope.$watch('model', function (model) {
+        $scope.$watch('model', function (model, oldModel) {
 
             var valid = isValid($scope.name);
             if ($scope.required && !valid) {
                 hideRequired(false);
             } else {
                 hideRequired(true);
+            }
+            if(model !== oldModel){
+                OdsSignature.setData($scope.name, model);
             }
             return;
         });
