@@ -8,7 +8,7 @@ Address.$inject = ['$uibModal'];
 
 function Address($uibModal) {
 
-    var directive = {
+    return {
         restrict: 'E',
         templateUrl: 'address/address.html',
         scope: {
@@ -21,13 +21,11 @@ function Address($uibModal) {
         link: linkFunc
     };
 
-    return directive;
-
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
-        $scope.openModal = function ($element) {
+        $scope.openModal = function () {
             $uibModal.open({
                 templateUrl: 'address/address-dialog.html',
                 controller: 'AddressDialogController',
