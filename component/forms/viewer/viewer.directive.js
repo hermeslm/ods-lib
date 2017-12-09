@@ -16,6 +16,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
         templateUrl: 'forms/viewer/viewer.html',
         scope: {
             schema: '=',
+            config: '=',
             cssClass: '='
         },
         link: linkFunc
@@ -24,6 +25,14 @@ function ViewerDirective(OdsFormService, uibDateParser) {
     return directive;
 
     function linkFunc($scope) {
+
+        if ($scope.config) {
+            //CKEditor config load.
+            if ($scope.config.ckeditor) {
+
+                OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
+            }
+        }
 
         //CKEditor specific
         $scope.valueSubtitutor = valueSubtitutor;
@@ -46,12 +55,12 @@ function ViewerDirective(OdsFormService, uibDateParser) {
             return OdsFormService.getFormViewerTemplate(fieldType);
         }
 
-        function valueSubtitutor(value, tokens, prefix, suffix) {
+        function valueSubtitutor(field) {
 
-            if (tokens) {
-                return OdsFormService.strSubtitutor(value, tokens, prefix, suffix);
+            if (field.options.tokens && field.printView) {
+                return OdsFormService.strSubtitutor(field.value, field.options.tokens, field.options.prefix, field.options.suffix);
             } else {
-                return value;
+                return field.value;
             }
         }
 

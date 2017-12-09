@@ -13,7 +13,7 @@ function CKEditor($timeout, OdsCkeditor) {
         require: '?ngModel',
         scope: {
             name: '@',
-            ck: '=',
+            ngModel: '=',
             options: '=',
             disabled: '=?ngDisabled'
         },
@@ -22,9 +22,9 @@ function CKEditor($timeout, OdsCkeditor) {
 
     return directive;
 
-    function linkFunc($scope, elm, attr, ngModel) {
+    function linkFunc($scope, elm, attr) {
 
-        if (!ngModel) {
+        if (!$scope.ngModel) {
             console.error('Please define ng-model.');
             return;
         }
@@ -40,51 +40,56 @@ function CKEditor($timeout, OdsCkeditor) {
             $scope.name = attr.name;
         }
 
-        $scope.disabled = $scope.disabled ? $scope.disabled : false;
+        //We check if an instance exists.
+        $scope.ck = OdsCkeditor.getInstance($scope.name);
 
-        $scope.ck = CKEDITOR.replace(elm[0]);
+        if (!$scope.ck) {
+            $scope.ck = CKEDITOR.replace(elm[0]);
+            OdsCkeditor.register($scope.name, $scope.ck);
+        }
+
+        $scope.disabled = $scope.disabled ? $scope.disabled : false;
 
         $scope.ck.on('instanceReady', function () {
 
-            $scope.ck.setData(ngModel.$viewValue);
-            OdsCkeditor.register($scope.name, $scope.ck);
+            OdsCkeditor.setData($scope.name, $scope.ngModel);
             OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
-            OdsCkeditor.setReadOnly($scope.name, $scope.disabled);
         });
 
-        function updateModel() {
-
+        $scope.ck.on('pasteState', function () {
             $timeout(function () {
-                ngModel.$setViewValue($scope.ck.getData());
+                $scope.ngModel = OdsCkeditor.getData($scope.name);
             }, 0, false);
-        }
+        });
 
-        $scope.ck.on('change', updateModel);
-        $scope.ck.on('key', updateModel);
-        $scope.ck.on('dataReady', updateModel);
-
-        ngModel.$render = function () {
-            $scope.ck.setData(ngModel.$viewValue);
-        };
-
-        $scope.$watch('disabled', function (disabled) {
+        $scope.$watch('disabled', function (newValue, oldValue) {
 
             $timeout(function () {
-                disabled = disabled ? disabled : false;
-                OdsCkeditor.setReadOnly($scope.name, disabled);
-            }, 100, false);
+                if (newValue !== oldValue) {
+                    newValue = newValue ? newValue : false;
+                    OdsCkeditor.setReadOnly($scope.name, newValue);
+                }
+            }, 0, false);
             return;
         });
 
         $scope.$watch('options', function (options) {
 
             $timeout(function () {
-                OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
-            }, 100, false);
+                OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions(options));
+            }, 0, false);
             return;
         });
 
-        $scope.$on('$destroy', function() {
+        $scope.$watch('ngModel', function (model) {
+
+            $timeout(function () {
+                OdsCkeditor.setData($scope.name, model);
+            }, 0, false);
+            return;
+        });
+
+        $scope.$on('$destroy', function () {
             OdsCkeditor.unregister($scope.name);
         });
 

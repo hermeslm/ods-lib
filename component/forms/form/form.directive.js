@@ -181,10 +181,6 @@ function FormDirective(OdsFormService, $timeout) {
             }, 5000);
         }
 
-        // $scope.$watch('schema', function(schema) {
-        //     console.log('Schema changed.');
-        // }, true);
-
         /**
          * Open and close Calendar popup
          * @param field
@@ -225,12 +221,13 @@ function FormDirective(OdsFormService, $timeout) {
             OdsFormService.cloneRow(table);
         }
 
-        function valueSubtitutor(value, tokens, prefix, suffix) {
+        function valueSubtitutor(field) {
 
-            if (tokens) {
-                return OdsFormService.strSubtitutor(value, tokens, prefix, suffix);
+            if (field.options.tokens && field.printView) {
+                return OdsFormService.strSubtitutor(field.value, field.options.tokens,
+                    field.options.prefix, field.options.suffix);
             } else {
-                return value;
+                return field.value;
             }
         }
 

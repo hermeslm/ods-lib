@@ -20,338 +20,338 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
             "row"
         ],
         "rows": [
-            {
-                "name": "row9545",
-                "componentType": "row",
-                "cssClass": "row",
-                "displayProperties": false,
-                "cols": [
-                    {
-                        "name": "column9547",
-                        "cssClass": "col-lg-3",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "DateTime",
-                                "name": "field8869",
-                                "type": "datetime",
-                                "enableTime": false,
-                                "format": "MM/dd/yyyy",
-                                "selectedFormat": "MM/dd/yyyy",
-                                "options": {
-                                    "timezone": "UTC/GMT"
-                                },
-                                "required": false,
-                                "value": "2017-12-04T17:15:17.743Z",
-                                "popoverProps": false,
-                                "showProperties": false,
-                                "open": false
-                            }
-                        ]
-                    },
-                    {
-                        "name": "column9547",
-                        "cssClass": "col-lg-3",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "Number",
-                                "name": "field3872",
-                                "placeholder": "",
-                                "type": "number",
-                                "required": false,
-                                "patternSelect": "4",
-                                "validation": {
-                                    "pattern": "^-{0,1}\\d+$",
-                                    "required": true,
-                                    "messages": {
-                                        "required": "Numero requerido",
-                                        "pattern": "Solo valores enteros"
-                                    }
-                                },
-                                "showProperties": false,
-                                "value": 12,
-                                "popoverProps": false
-                            }
-                        ]
-                    },
-                    {
-                        "name": "column3153",
-                        "cssClass": "col-lg-3",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "TextBox",
-                                "name": "field3155",
-                                "placeholder": "",
-                                "type": "text",
-                                "required": false,
-                                "value": "twertwerwe ertwertwe",
-                                "validation": {
-                                    "messages": {}
-                                },
-                                "popoverProps": false,
-                                "showProperties": false
-                            }
-                        ]
-                    },
-                    {
-                        "name": "column3154",
-                        "cssClass": "col-lg-3",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "TextBox",
-                                "name": "field3156",
-                                "placeholder": "",
-                                "type": "text",
-                                "required": false,
-                                "value": "werwertwer wertwert",
-                                "validation": {
-                                    "messages": {}
-                                },
-                                "popoverProps": false,
-                                "showProperties": false
-                            }
-                        ]
-                    }
-                ],
-                "showProperties": false
-            },
-            {
-                "name": "row1149",
-                "componentType": "row",
-                "cssClass": "row",
-                "displayProperties": false,
-                "cols": [
-                    {
-                        "name": "column1150",
-                        "cssClass": "col-lg-3",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "Radiobutton List",
-                                "name": "field1154",
-                                "type": "radio",
-                                "options": [
-                                    {
-                                        "id": 1,
-                                        "name": "Option 1"
-                                    },
-                                    {
-                                        "id": 2,
-                                        "name": "Option 2"
-                                    },
-                                    {
-                                        "id": 3,
-                                        "name": "Option 3"
-                                    }
-                                ],
-                                "value": "2",
-                                "popoverProps": false,
-                                "showProperties": false,
-                                "inline": true
-                            }
-                        ]
-                    },
-                    {
-                        "name": "column1151",
-                        "cssClass": "col-lg-3",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "Select",
-                                "name": "field1155",
-                                "placeholder": "",
-                                "type": "select",
-                                "required": false,
-                                "multiSelect": false,
-                                "valueField": "id",
-                                "titleField": "name",
-                                "limitTo": 10,
-                                "value": {
-                                    "id": 1,
-                                    "name": "Option 1"
-                                },
-                                "options": [
-                                    {
-                                        "id": 1,
-                                        "name": "Option 1"
-                                    },
-                                    {
-                                        "id": 2,
-                                        "name": "Option 2"
-                                    },
-                                    {
-                                        "id": 3,
-                                        "name": "Option 3"
-                                    }
-                                ],
-                                "validation": {
-                                    "messages": {}
-                                },
-                                "popoverProps": false,
-                                "showProperties": false
-                            }
-                        ]
-                    },
-                    {
-                        "name": "column1152",
-                        "cssClass": "col-lg-3",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "Multi select",
-                                "name": "field1156",
-                                "placeholder": "",
-                                "type": "multiselect",
-                                "required": false,
-                                "multiSelect": true,
-                                "valueField": "id",
-                                "titleField": "name",
-                                "limitTo": 10,
-                                "value": [
-                                    {
-                                        "id": "1",
-                                        "name": "sdfsdfsdf"
-                                    },
-                                    {
-                                        "id": "2",
-                                        "name": "fgsdsdsdf"
-                                    }
-                                ],
-                                "options": [
-                                    {
-                                        "id": "1",
-                                        "name": "sdfsdfsdf"
-                                    },
-                                    {
-                                        "id": "2",
-                                        "name": "fgsdsdsdf"
-                                    },
-                                    {
-                                        "id": "3",
-                                        "name": "fgsdfgsdfgsdf"
-                                    }
-                                ],
-                                "render": null,
-                                "validation": {
-                                    "messages": {}
-                                },
-                                "popoverProps": false,
-                                "showProperties": false
-                            }
-                        ]
-                    },
-                    {
-                        "name": "column1153",
-                        "cssClass": "col-lg-3",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "CheckBox",
-                                "hideLabel": false,
-                                "ln": false,
-                                "name": "field1157",
-                                "type": "checkbox",
-                                "value": true,
-                                "popoverProps": false,
-                                "showProperties": false
-                            }
-                        ]
-                    }
-                ],
-                "showProperties": false
-            },
-            {
-                "name": "row6817",
-                "componentType": "row",
-                "cssClass": "row",
-                "displayProperties": false,
-                "cols": [
-                    {
-                        "name": "column6818",
-                        "cssClass": "col-lg-6",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "CheckBox List",
-                                "name": "field6820",
-                                "type": "checkboxlist",
-                                "options": [
-                                    {
-                                        "id": 1,
-                                        "name": "Option 1"
-                                    },
-                                    {
-                                        "id": 2,
-                                        "name": "Option 2"
-                                    },
-                                    {
-                                        "id": 3,
-                                        "name": "Option 3"
-                                    }
-                                ],
-                                "value": {
-                                    "1": true,
-                                    "2": true,
-                                    "3": true
-                                },
-                                "popoverProps": false,
-                                "showProperties": false,
-                                "inline": true
-                            }
-                        ]
-                    },
-                    {
-                        "name": "column6819",
-                        "cssClass": "col-lg-6",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "Toggle",
-                                "name": "field6821",
-                                "type": "toggle",
-                                "ln": false,
-                                "on": "Yes",
-                                "off": "No",
-                                "value": true
-                            }
-                        ]
-                    }
-                ],
-                "showProperties": false
-            },
+            // {
+            //     "name": "row9545",
+            //     "componentType": "row",
+            //     "cssClass": "row",
+            //     "displayProperties": false,
+            //     "cols": [
+            //         {
+            //             "name": "column9547",
+            //             "cssClass": "col-lg-3",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "DateTime",
+            //                     "name": "field8869",
+            //                     "type": "datetime",
+            //                     "enableTime": false,
+            //                     "format": "MM/dd/yyyy",
+            //                     "selectedFormat": "MM/dd/yyyy",
+            //                     "options": {
+            //                         "timezone": "UTC/GMT"
+            //                     },
+            //                     "required": false,
+            //                     "value": "2017-12-04T17:15:17.743Z",
+            //                     "popoverProps": false,
+            //                     "showProperties": false,
+            //                     "open": false
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "name": "column9547",
+            //             "cssClass": "col-lg-3",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "Number",
+            //                     "name": "field3872",
+            //                     "placeholder": "",
+            //                     "type": "number",
+            //                     "required": false,
+            //                     "patternSelect": "4",
+            //                     "validation": {
+            //                         "pattern": "^-{0,1}\\d+$",
+            //                         "required": true,
+            //                         "messages": {
+            //                             "required": "Numero requerido",
+            //                             "pattern": "Solo valores enteros"
+            //                         }
+            //                     },
+            //                     "showProperties": false,
+            //                     "value": 12,
+            //                     "popoverProps": false
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "name": "column3153",
+            //             "cssClass": "col-lg-3",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "TextBox",
+            //                     "name": "field3155",
+            //                     "placeholder": "",
+            //                     "type": "text",
+            //                     "required": false,
+            //                     "value": "twertwerwe ertwertwe",
+            //                     "validation": {
+            //                         "messages": {}
+            //                     },
+            //                     "popoverProps": false,
+            //                     "showProperties": false
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "name": "column3154",
+            //             "cssClass": "col-lg-3",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "TextBox",
+            //                     "name": "field3156",
+            //                     "placeholder": "",
+            //                     "type": "text",
+            //                     "required": false,
+            //                     "value": "werwertwer wertwert",
+            //                     "validation": {
+            //                         "messages": {}
+            //                     },
+            //                     "popoverProps": false,
+            //                     "showProperties": false
+            //                 }
+            //             ]
+            //         }
+            //     ],
+            //     "showProperties": false
+            // },
+            // {
+            //     "name": "row1149",
+            //     "componentType": "row",
+            //     "cssClass": "row",
+            //     "displayProperties": false,
+            //     "cols": [
+            //         {
+            //             "name": "column1150",
+            //             "cssClass": "col-lg-3",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "Radiobutton List",
+            //                     "name": "field1154",
+            //                     "type": "radio",
+            //                     "options": [
+            //                         {
+            //                             "id": 1,
+            //                             "name": "Option 1"
+            //                         },
+            //                         {
+            //                             "id": 2,
+            //                             "name": "Option 2"
+            //                         },
+            //                         {
+            //                             "id": 3,
+            //                             "name": "Option 3"
+            //                         }
+            //                     ],
+            //                     "value": "2",
+            //                     "popoverProps": false,
+            //                     "showProperties": false,
+            //                     "inline": true
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "name": "column1151",
+            //             "cssClass": "col-lg-3",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "Select",
+            //                     "name": "field1155",
+            //                     "placeholder": "",
+            //                     "type": "select",
+            //                     "required": false,
+            //                     "multiSelect": false,
+            //                     "valueField": "id",
+            //                     "titleField": "name",
+            //                     "limitTo": 10,
+            //                     "value": {
+            //                         "id": 1,
+            //                         "name": "Option 1"
+            //                     },
+            //                     "options": [
+            //                         {
+            //                             "id": 1,
+            //                             "name": "Option 1"
+            //                         },
+            //                         {
+            //                             "id": 2,
+            //                             "name": "Option 2"
+            //                         },
+            //                         {
+            //                             "id": 3,
+            //                             "name": "Option 3"
+            //                         }
+            //                     ],
+            //                     "validation": {
+            //                         "messages": {}
+            //                     },
+            //                     "popoverProps": false,
+            //                     "showProperties": false
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "name": "column1152",
+            //             "cssClass": "col-lg-3",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "Multi select",
+            //                     "name": "field1156",
+            //                     "placeholder": "",
+            //                     "type": "multiselect",
+            //                     "required": false,
+            //                     "multiSelect": true,
+            //                     "valueField": "id",
+            //                     "titleField": "name",
+            //                     "limitTo": 10,
+            //                     "value": [
+            //                         {
+            //                             "id": "1",
+            //                             "name": "sdfsdfsdf"
+            //                         },
+            //                         {
+            //                             "id": "2",
+            //                             "name": "fgsdsdsdf"
+            //                         }
+            //                     ],
+            //                     "options": [
+            //                         {
+            //                             "id": "1",
+            //                             "name": "sdfsdfsdf"
+            //                         },
+            //                         {
+            //                             "id": "2",
+            //                             "name": "fgsdsdsdf"
+            //                         },
+            //                         {
+            //                             "id": "3",
+            //                             "name": "fgsdfgsdfgsdf"
+            //                         }
+            //                     ],
+            //                     "render": null,
+            //                     "validation": {
+            //                         "messages": {}
+            //                     },
+            //                     "popoverProps": false,
+            //                     "showProperties": false
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "name": "column1153",
+            //             "cssClass": "col-lg-3",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "CheckBox",
+            //                     "hideLabel": false,
+            //                     "ln": false,
+            //                     "name": "field1157",
+            //                     "type": "checkbox",
+            //                     "value": true,
+            //                     "popoverProps": false,
+            //                     "showProperties": false
+            //                 }
+            //             ]
+            //         }
+            //     ],
+            //     "showProperties": false
+            // },
+            // {
+            //     "name": "row6817",
+            //     "componentType": "row",
+            //     "cssClass": "row",
+            //     "displayProperties": false,
+            //     "cols": [
+            //         {
+            //             "name": "column6818",
+            //             "cssClass": "col-lg-6",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "CheckBox List",
+            //                     "name": "field6820",
+            //                     "type": "checkboxlist",
+            //                     "options": [
+            //                         {
+            //                             "id": 1,
+            //                             "name": "Option 1"
+            //                         },
+            //                         {
+            //                             "id": 2,
+            //                             "name": "Option 2"
+            //                         },
+            //                         {
+            //                             "id": 3,
+            //                             "name": "Option 3"
+            //                         }
+            //                     ],
+            //                     "value": {
+            //                         "1": true,
+            //                         "2": true,
+            //                         "3": true
+            //                     },
+            //                     "popoverProps": false,
+            //                     "showProperties": false,
+            //                     "inline": true
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             "name": "column6819",
+            //             "cssClass": "col-lg-6",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "Toggle",
+            //                     "name": "field6821",
+            //                     "type": "toggle",
+            //                     "ln": false,
+            //                     "on": "Yes",
+            //                     "off": "No",
+            //                     "value": true
+            //                 }
+            //             ]
+            //         }
+            //     ],
+            //     "showProperties": false
+            // },
             {
                 "name": "row2364",
                 "componentType": "row",
@@ -440,183 +440,183 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
                     }
                 ],
                 "showProperties": false
-            },
-            {
-                "name": "row4227",
-                "componentType": "row",
-                "cssClass": "row",
-                "displayProperties": false,
-                "cols": [
-                    {
-                        "name": "column4228",
-                        "cssClass": "col-lg-12",
-                        "allowedTypes": [
-                            "field"
-                        ],
-                        "fields": [
-                            {
-                                "componentType": "field",
-                                "label": "Table",
-                                "name": "field4229",
-                                "type": "table",
-                                "cssClass": "table table-bordered table-responsive position-relative",
-                                "matrix": [
-                                    [
-                                        {
-                                            "name": "form4223",
-                                            "fields": [
-                                                {
-                                                    "componentType": "field",
-                                                    "label": "Label",
-                                                    "cssClass": "text-left",
-                                                    "name": "field4230",
-                                                    "type": "label",
-                                                    "value": "Label"
-                                                }
-                                            ],
-                                            "allowedTypes": [
-                                                "field"
-                                            ],
-                                            "totalLabel": "Total"
-                                        },
-                                        {
-                                            "name": "form4224",
-                                            "fields": [
-                                                {
-                                                    "componentType": "field",
-                                                    "label": "TextBox",
-                                                    "name": "field4231",
-                                                    "placeholder": "",
-                                                    "type": "text",
-                                                    "required": false,
-                                                    "value": "dfghdfghd dfghdfghdf dfghdfghdf.",
-                                                    "validation": {
-                                                        "messages": {}
-                                                    }
-                                                }
-                                            ],
-                                            "allowedTypes": [
-                                                "field"
-                                            ],
-                                            "totalLabel": "Total"
-                                        },
-                                        {
-                                            "name": "form8467",
-                                            "fields": [
-                                                {
-                                                    "componentType": "field",
-                                                    "label": "Number",
-                                                    "name": "field8468",
-                                                    "placeholder": "",
-                                                    "type": "number",
-                                                    "required": false,
-                                                    "value": 10,
-                                                    "validation": {
-                                                        "messages": {}
-                                                    }
-                                                }
-                                            ],
-                                            "allowedTypes": [
-                                                "field"
-                                            ],
-                                            "totalLabel": "Total",
-                                            "total": true
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "name": "form8469",
-                                            "fields": [
-                                                {
-                                                    "componentType": "field",
-                                                    "label": "Label",
-                                                    "cssClass": "text-left",
-                                                    "name": "field8472",
-                                                    "type": "label",
-                                                    "value": "Label"
-                                                }
-                                            ],
-                                            "allowedTypes": [
-                                                "field"
-                                            ]
-                                        },
-                                        {
-                                            "name": "form8470",
-                                            "fields": [
-                                                {
-                                                    "componentType": "field",
-                                                    "label": "Select",
-                                                    "name": "field8474",
-                                                    "placeholder": "",
-                                                    "type": "select",
-                                                    "required": false,
-                                                    "multiSelect": false,
-                                                    "valueField": "id",
-                                                    "titleField": "name",
-                                                    "limitTo": 10,
-                                                    "value": {
-                                                        "id": 3,
-                                                        "name": "Option 3"
-                                                    },
-                                                    "options": [
-                                                        {
-                                                            "id": 1,
-                                                            "name": "Option 1"
-                                                        },
-                                                        {
-                                                            "id": 2,
-                                                            "name": "Option 2"
-                                                        },
-                                                        {
-                                                            "id": 3,
-                                                            "name": "Option 3"
-                                                        }
-                                                    ],
-                                                    "validation": {
-                                                        "messages": {}
-                                                    }
-                                                }
-                                            ],
-                                            "allowedTypes": [
-                                                "field"
-                                            ]
-                                        },
-                                        {
-                                            "name": "form8471",
-                                            "fields": [
-                                                {
-                                                    "componentType": "field",
-                                                    "label": "Number",
-                                                    "name": "field8475",
-                                                    "placeholder": "",
-                                                    "type": "number",
-                                                    "required": false,
-                                                    "value": 20,
-                                                    "validation": {
-                                                        "messages": {}
-                                                    }
-                                                }
-                                            ],
-                                            "allowedTypes": [
-                                                "field"
-                                            ]
-                                        }
-                                    ]
-                                ],
-                                "validation": {
-                                    "messages": {}
-                                },
-                                "popoverProps": false,
-                                "showProperties": true,
-                                "totals": true,
-                                "rowHeader": true,
-                                "canCloneRow": false
-                            }
-                        ]
-                    }
-                ],
-                "showProperties": false
-            }
+            }//,
+            // {
+            //     "name": "row4227",
+            //     "componentType": "row",
+            //     "cssClass": "row",
+            //     "displayProperties": false,
+            //     "cols": [
+            //         {
+            //             "name": "column4228",
+            //             "cssClass": "col-lg-12",
+            //             "allowedTypes": [
+            //                 "field"
+            //             ],
+            //             "fields": [
+            //                 {
+            //                     "componentType": "field",
+            //                     "label": "Table",
+            //                     "name": "field4229",
+            //                     "type": "table",
+            //                     "cssClass": "table table-bordered table-responsive position-relative",
+            //                     "matrix": [
+            //                         [
+            //                             {
+            //                                 "name": "form4223",
+            //                                 "fields": [
+            //                                     {
+            //                                         "componentType": "field",
+            //                                         "label": "Label",
+            //                                         "cssClass": "text-left",
+            //                                         "name": "field4230",
+            //                                         "type": "label",
+            //                                         "value": "Label"
+            //                                     }
+            //                                 ],
+            //                                 "allowedTypes": [
+            //                                     "field"
+            //                                 ],
+            //                                 "totalLabel": "Total"
+            //                             },
+            //                             {
+            //                                 "name": "form4224",
+            //                                 "fields": [
+            //                                     {
+            //                                         "componentType": "field",
+            //                                         "label": "TextBox",
+            //                                         "name": "field4231",
+            //                                         "placeholder": "",
+            //                                         "type": "text",
+            //                                         "required": false,
+            //                                         "value": "dfghdfghd dfghdfghdf dfghdfghdf.",
+            //                                         "validation": {
+            //                                             "messages": {}
+            //                                         }
+            //                                     }
+            //                                 ],
+            //                                 "allowedTypes": [
+            //                                     "field"
+            //                                 ],
+            //                                 "totalLabel": "Total"
+            //                             },
+            //                             {
+            //                                 "name": "form8467",
+            //                                 "fields": [
+            //                                     {
+            //                                         "componentType": "field",
+            //                                         "label": "Number",
+            //                                         "name": "field8468",
+            //                                         "placeholder": "",
+            //                                         "type": "number",
+            //                                         "required": false,
+            //                                         "value": 10,
+            //                                         "validation": {
+            //                                             "messages": {}
+            //                                         }
+            //                                     }
+            //                                 ],
+            //                                 "allowedTypes": [
+            //                                     "field"
+            //                                 ],
+            //                                 "totalLabel": "Total",
+            //                                 "total": true
+            //                             }
+            //                         ],
+            //                         [
+            //                             {
+            //                                 "name": "form8469",
+            //                                 "fields": [
+            //                                     {
+            //                                         "componentType": "field",
+            //                                         "label": "Label",
+            //                                         "cssClass": "text-left",
+            //                                         "name": "field8472",
+            //                                         "type": "label",
+            //                                         "value": "Label"
+            //                                     }
+            //                                 ],
+            //                                 "allowedTypes": [
+            //                                     "field"
+            //                                 ]
+            //                             },
+            //                             {
+            //                                 "name": "form8470",
+            //                                 "fields": [
+            //                                     {
+            //                                         "componentType": "field",
+            //                                         "label": "Select",
+            //                                         "name": "field8474",
+            //                                         "placeholder": "",
+            //                                         "type": "select",
+            //                                         "required": false,
+            //                                         "multiSelect": false,
+            //                                         "valueField": "id",
+            //                                         "titleField": "name",
+            //                                         "limitTo": 10,
+            //                                         "value": {
+            //                                             "id": 3,
+            //                                             "name": "Option 3"
+            //                                         },
+            //                                         "options": [
+            //                                             {
+            //                                                 "id": 1,
+            //                                                 "name": "Option 1"
+            //                                             },
+            //                                             {
+            //                                                 "id": 2,
+            //                                                 "name": "Option 2"
+            //                                             },
+            //                                             {
+            //                                                 "id": 3,
+            //                                                 "name": "Option 3"
+            //                                             }
+            //                                         ],
+            //                                         "validation": {
+            //                                             "messages": {}
+            //                                         }
+            //                                     }
+            //                                 ],
+            //                                 "allowedTypes": [
+            //                                     "field"
+            //                                 ]
+            //                             },
+            //                             {
+            //                                 "name": "form8471",
+            //                                 "fields": [
+            //                                     {
+            //                                         "componentType": "field",
+            //                                         "label": "Number",
+            //                                         "name": "field8475",
+            //                                         "placeholder": "",
+            //                                         "type": "number",
+            //                                         "required": false,
+            //                                         "value": 20,
+            //                                         "validation": {
+            //                                             "messages": {}
+            //                                         }
+            //                                     }
+            //                                 ],
+            //                                 "allowedTypes": [
+            //                                     "field"
+            //                                 ]
+            //                             }
+            //                         ]
+            //                     ],
+            //                     "validation": {
+            //                         "messages": {}
+            //                     },
+            //                     "popoverProps": false,
+            //                     "showProperties": true,
+            //                     "totals": true,
+            //                     "rowHeader": true,
+            //                     "canCloneRow": false
+            //                 }
+            //             ]
+            //         }
+            //     ],
+            //     "showProperties": false
+            // }
         ],
         "showProperties": false
     };
@@ -1141,10 +1141,10 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
 
     $scope.sections = [];
     $scope.sections.push(section0);
-    $scope.sections.push($scope.section1);
-    $scope.sections.push($scope.section2);
-    $scope.sections.push($scope.section3);
-    $scope.sections.push($scope.section4);
+    // $scope.sections.push($scope.section1);
+    // $scope.sections.push($scope.section2);
+    // $scope.sections.push($scope.section3);
+    // $scope.sections.push($scope.section4);
     $scope.sections.push($scope.sectionTmp);
     // $scope.sections.push($scope.sectionLast);
 
@@ -1153,7 +1153,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
         label: 'Form Test',
         description: 'Form Description',
         layout: $scope.sections,
-        allowedTypes: ["section"],
+        allowedTypes: ["section"]
     };
 
     $scope.test1 = '<p>this is a sample&nbsp;&nbsp;<span class="marker">${patientName}</span>&nbsp;that I testing with&nbsp;&nbsp;<span class="marker">${patientDob}</span>&nbsp;.${patientName} is here.</p>';
@@ -1162,7 +1162,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
     var patient = {
         patientName : 'Hermes Lorenzo',
         patientDob : '01/24/2017'
-    }
+    };
 
     $scope.parse1 = parse1;
     $scope.templateResult1 = '';
