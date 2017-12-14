@@ -76,31 +76,29 @@ function OdsSignature() {
         return 'signature' + uniqueCounter;
     }
 
-    function reset(name, model) {
+    function reset(name) {
 
         var element = getInstance(name);
         if (element) {
             element.jSignature('reset');
-            model = '';
         }
     }
 
     function isValid(name) {
 
         var d = getData(name, exportTypes.NATIVE);
-        if (d.length >= 1) {
+        if (d.length >= 1)
             return true;
-        }else {
+        else
             return false;
-        }
     }
 
     function getData(name, type) {
 
         var element = getInstance(name);
-        if (element) {
+        if (element)
             return element.jSignature('getData', type);
-        } else
+        else
             return false;
     }
 
@@ -125,7 +123,7 @@ function OdsSignature() {
 
         reset(name, model);
         var element = getInstance(name);
-        if (element) {
+        if (element && model && model !== '') {
             element.jSignature('setData', model);
         }
     }

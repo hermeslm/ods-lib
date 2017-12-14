@@ -111,7 +111,8 @@ function odsSignature($timeout, OdsSignature) {
 
         function reset() {
 
-            OdsSignature.reset($scope.name, $scope.model);
+            $scope.model = '';
+            OdsSignature.reset($scope.name);
         }
 
         function isValid() {
