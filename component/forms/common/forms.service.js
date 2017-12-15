@@ -94,7 +94,7 @@
                 name: generateName(OdsComponentType.FORM),
                 label: 'New Form',
                 description: 'New Form Description',
-                layout: [],
+                layout: [newSectionObject()],
                 allowedTypes: [OdsComponentType.SECTION]
             };
         }

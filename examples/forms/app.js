@@ -1140,12 +1140,12 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
     };
 
     $scope.sections = [];
-    $scope.sections.push(section0);
+    // $scope.sections.push(section0);
     // $scope.sections.push($scope.section1);
     // $scope.sections.push($scope.section2);
     // $scope.sections.push($scope.section3);
     // $scope.sections.push($scope.section4);
-    $scope.sections.push($scope.sectionTmp);
+    // $scope.sections.push($scope.sectionTmp);
     // $scope.sections.push($scope.sectionLast);
 
     $scope.schema = {
