@@ -44,7 +44,8 @@ function RowDirective(OdsFormService, dialogs) {
         function onAdd(item, type) {
 
             OdsFormService.onAdd(item, type);
-        };
+            $scope.section.rows.push(OdsFormService.newRowObject());
+        }
 
         /**
          * Toggle Row properties options.
