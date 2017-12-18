@@ -2,7 +2,6 @@
  * Created by hermeslm on 3/28/17.
  */
 'use strict';
-
 angular
     .module('ods-lib')
     .directive('odsField', FieldDirective);

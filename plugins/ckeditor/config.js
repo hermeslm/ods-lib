@@ -38,4 +38,6 @@ CKEDITOR.editorConfig = function( config ) {
 
 	// Here we add ours plugins
     config.extraPlugins = 'autocomplete';
+
+    config.disableNativeSpellChecker = false;
 };

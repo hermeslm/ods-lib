@@ -44,6 +44,8 @@ function CKEditor($timeout, OdsCkeditor) {
         $scope.ck = OdsCkeditor.getInstance($scope.name);
 
         if (!$scope.ck) {
+            elm[0].name = $scope.name;
+            elm[0].id = $scope.name;
             $scope.ck = CKEDITOR.replace(elm[0]);
             OdsCkeditor.register($scope.name, $scope.ck);
         }
@@ -92,7 +94,5 @@ function CKEditor($timeout, OdsCkeditor) {
         $scope.$on('$destroy', function () {
             OdsCkeditor.unregister($scope.name);
         });
-
     }
-
 }

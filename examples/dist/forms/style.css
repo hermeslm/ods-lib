@@ -1,3 +1,8 @@
+[data-resize="disabled"] {
+  overflow: auto;
+  resize: none;
+}
+
 .table-td {
   vertical-align: middle !important;
 }

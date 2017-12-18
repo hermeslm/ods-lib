@@ -15,7 +15,6 @@
                             $resource) {
 
         var uniqueCounter = (+new Date) % 10000;
-        // var schema = null;
 
         var service = {
             //Utils methods
