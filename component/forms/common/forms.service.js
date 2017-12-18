@@ -1065,13 +1065,17 @@
          */
         function strSubtitutor(str, valuesMap, prefix, suffix) {
 
-            var strResult = str;
+            var strResult = '';
 
-            for (var property in valuesMap) {
-                if (valuesMap.hasOwnProperty(property)) {
-                    // do stuff
-                    var re = new RegExp(escapeRegExp(prefix + property + suffix), 'gi');
-                    strResult = strResult.replace(re, valuesMap[property]);
+            if(str) {
+                strResult = str;
+
+                for (var property in valuesMap) {
+                    if (valuesMap.hasOwnProperty(property)) {
+                        // do stuff
+                        var re = new RegExp(escapeRegExp(prefix + property + suffix), 'gi');
+                        strResult = strResult.replace(re, valuesMap[property]);
+                    }
                 }
             }
 
