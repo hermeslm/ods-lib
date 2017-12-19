@@ -16,7 +16,7 @@
     <div class="box-field-container padding">
         <div class="box-body no-padding">
             <div class="box-row {{col.cssClass}}" ng-repeat="col in row.cols">
-                <ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1"
+                <ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" dnd-drop="dropCallback(index, item, external, type)"
                     dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)">
                     <li class="box-field" ng-repeat="field in col.fields"
                         dnd-draggable="field"

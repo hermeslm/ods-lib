@@ -7,15 +7,16 @@ angular
     .module('ods-lib')
     .directive('odsViewer', ViewerDirective);
 
-ViewerDirective.$inject = ['OdsFormService'];
+ViewerDirective.$inject = ['OdsFormService', 'uibDateParser'];
 
-function ViewerDirective(OdsFormService) {
+function ViewerDirective(OdsFormService, uibDateParser) {
 
     var directive = {
         restrict: 'E',
         templateUrl: 'forms/viewer/viewer.html',
         scope: {
             schema: '=',
+            config: '=',
             cssClass: '='
         },
         link: linkFunc
@@ -25,6 +26,14 @@ function ViewerDirective(OdsFormService) {
 
     function linkFunc($scope) {
 
+        if ($scope.config) {
+            //CKEditor config load.
+            if ($scope.config.ckeditor) {
+
+                OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
+            }
+        }
+
         //CKEditor specific
         $scope.valueSubtitutor = valueSubtitutor;
         $scope.getFormViewerTemplate = getFormViewerTemplate;
@@ -32,6 +41,9 @@ function ViewerDirective(OdsFormService) {
         $scope.getRadioTextFromValue = getRadioTextFromValue;
         $scope.getSelectTextFromValue = getSelectTextFromValue;
         $scope.getFieldTextsFromValues = getFieldTextsFromValues;
+        $scope.getFieldChecklistFromValues = getFieldChecklistFromValues;
+
+        $scope.dateTimeRender = dateTimeRender;
 
         /**
          * Return Form Viewer template for every field.
@@ -43,12 +55,12 @@ function ViewerDirective(OdsFormService) {
             return OdsFormService.getFormViewerTemplate(fieldType);
         }
 
-        function valueSubtitutor(value, tokens, prefix, suffix) {
+        function valueSubtitutor(field) {
 
-            if (tokens) {
-                return OdsFormService.strSubtitutor(value, tokens, prefix, suffix);
+            if (field.options.tokens && field.printView) {
+                return OdsFormService.strSubtitutor(field.value, field.options.tokens, field.options.prefix, field.options.suffix);
             } else {
-                return value;
+                return field.value;
             }
         }
 
@@ -78,8 +90,8 @@ function ViewerDirective(OdsFormService) {
 
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
-                if(field.value) {
-                    if (value == field.value.value) {
+                if (field.value) {
+                    if (value == field.value[OdsFormService.getSelectFieldId(field)]) {
                         return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                     }
                 }
@@ -91,7 +103,7 @@ function ViewerDirective(OdsFormService) {
         function getFieldTextsFromValues(field) {
 
             var result = [];
-            if(field.value) {
+            if (field.value) {
                 for (var i = 0; i < field.value.length; i++) {
                     var value = field.value[i][OdsFormService.getSelectFieldId(field)];
                     for (var j = 0; j < field.options.length; j++) {
@@ -103,12 +115,40 @@ function ViewerDirective(OdsFormService) {
                 }
             }
 
-            if(result.length > 0){
+            if (result.length > 0) {
                 return result;
-            }else {
+            } else {
                 return '';
             }
         }
 
+        function dateTimeRender(field) {
+
+            if (field.format) {
+                return uibDateParser.filter(field.value, field.format);
+            } else {
+                return field.value;
+            }
+        }
+
+        function getFieldChecklistFromValues(field) {
+
+            var result = [];
+            if (field.value) {
+                for (var i = 0; i < field.options.length; i++) {
+                    var id = field.value[i + 1];
+                    if (id) {
+                        var value = field.options[i].name;
+                        result.push(value);
+                    }
+                }
+            }
+
+            if (result.length > 0) {
+                return result;
+            } else {
+                return '';
+            }
+        }
     }
 }

@@ -4,10 +4,10 @@
             <div class="box-body padding-top">
                 <div class="row no-vertical-margin">
                     <div class="form-group margin-bottom"
-                         ng-class="{'has-error': sectionPropertiesForm.name.$invalid}">
-                        <label for="name" class="col-sm-2 control-label">Name:</label>
+                         ng-class="{'has-error': sectionPropertiesForm.sectionName.$invalid}">
+                        <label for="sectionName" class="col-sm-2 control-label">Name:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="name" name="name"
+                            <input type="text" class="form-control" id="sectionName" name="sectionName"
                                    placeholder="Name..." ng-model="section.name"
                                    ng-required="true">
                         </div>
@@ -42,6 +42,6 @@
         </form>
     </uib-tab>
     <uib-tab index="3" heading="Debug" ng-show="debugMode">
-        <div ng-include="'forms/schema/components/base-properties/model-properties.html'"></div>
+        <ods-model model="section"></ods-model>
     </uib-tab>
 </uib-tabset>

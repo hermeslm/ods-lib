@@ -25,7 +25,7 @@ function ModelDirective(OdsFormService) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.copy = copy;
 

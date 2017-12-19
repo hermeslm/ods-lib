@@ -99,8 +99,11 @@ function odsSignature($timeout, OdsSignature) {
                     // $timeout, 100, true because event happens outside angular's digest cycle
                     // and change is called on setData
                     $timeout(function () {
-                        $scope.model = 'data:' +
-                            OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
+                        var valid = isValid($scope.name);
+                        if (valid) {
+                            $scope.model = 'data:' +
+                                OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
+                        }
                     }, 100, true);
                     if ($scope.onChange) {
                         $scope.onChange();
@@ -111,7 +114,8 @@ function odsSignature($timeout, OdsSignature) {
 
         function reset() {
 
-            OdsSignature.reset($scope.name, $scope.model);
+            $scope.model = '';
+            OdsSignature.reset($scope.name);
         }
 
         function isValid() {
@@ -129,13 +133,16 @@ function odsSignature($timeout, OdsSignature) {
             controller.$setValidity('required', state);
         }
 
-        $scope.$watch('model', function (model) {
+        $scope.$watch('model', function (model, oldModel) {
 
             var valid = isValid($scope.name);
             if ($scope.required && !valid) {
                 hideRequired(false);
             } else {
                 hideRequired(true);
+            }
+            if(model !== oldModel){
+                OdsSignature.setData($scope.name, model);
             }
             return;
         });
@@ -159,6 +166,10 @@ function odsSignature($timeout, OdsSignature) {
                 hideRequired(true);
             }
             return;
+        });
+
+        $scope.$on('$destroy', function() {
+            OdsSignature.unregister($scope.name);
         });
     }
 }

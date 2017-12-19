@@ -16,8 +16,9 @@ function OdsCkeditor() {
         register: register,
         getInstance: getInstance,
         unregister: unregister,
-        isReady: isReady,
         generateName: generateName,
+        getData: getData,
+        setData: setData,
         setOptions: setOptions,
         setReadOnly: setReadOnly,
         initOptions: initOptions
@@ -25,29 +26,20 @@ function OdsCkeditor() {
 
     function register(name, instance) {
 
-        var tmpInstance = {
-            ready: true,
-            instance: instance
-        }
-        instance_map[name] = tmpInstance;
+        instance_map[name] = instance;
     }
 
     function getInstance(name) {
 
-        return instance_map[name].instance;
+        if (instance_map[name])
+            return instance_map[name];
+        else
+            return false;
     }
 
     function unregister(name) {
 
         instance_map[name] = null;
-    }
-
-    function isReady(name) {
-
-        if(instance_map[name] && instance_map[name].ready) {
-            return instance_map[name].ready;
-        }else
-            return false;
     }
 
     function generateName() {
@@ -56,18 +48,36 @@ function OdsCkeditor() {
         return 'ckeditor' + uniqueCounter;
     }
 
+    function getData(name) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            return ck.getData();
+        }else {
+            return '';
+        }
+    }
+
+    function setData(name, model) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            ck.setData(model);
+        }
+    }
+
     function setOptions(name, options) {
 
-        if(isReady(name)) {
-            var ck = getInstance(name);
+        var ck = getInstance(name);
+        if (ck) {
             ck.execCommand('reloadOptions', initOptions(options));
         }
     }
 
     function setReadOnly(name, isReadOnly) {
 
-        if(isReady(name)) {
-            var ck = getInstance(name);
+        var ck = getInstance(name);
+        if (ck) {
             ck.setReadOnly(isReadOnly);
         }
     }

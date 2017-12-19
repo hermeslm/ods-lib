@@ -21,7 +21,7 @@
                 <ods-form schema="schema" config="runTimeConfig" on-save="saveForm(schema)"></ods-form>
             </uib-tab>
             <uib-tab index="3" heading="Form Print View">
-                <ods-viewer schema="schema" css-class="cssClass"></ods-viewer>
+                <ods-viewer schema="schema" config="runTimeConfig" css-class="cssClass"></ods-viewer>
             </uib-tab>
             <uib-tab index="4" heading="Form Model" ng-show="debugMode">
                 <ods-model model="schema"></ods-model>

@@ -1,3 +1,4 @@
+<br ng-if="field.inline">
 <div ng-class="field.inline === true ? 'radio-inline' : 'radio'"
      ng-repeat="option in field.options | limitTo: field.limitTo">
     <label>

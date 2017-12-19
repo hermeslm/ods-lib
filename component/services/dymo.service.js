@@ -2,11 +2,11 @@
 
 angular
     .module('ods-lib')
-    .factory('DYMO', DYMO);
+    .factory('odsDymo', OdsDymo);
 
-DYMO.$inject = ['XMLConfig', 'Base64', 'moment'];
+OdsDymo.$inject = ['XMLConfig', 'Base64', 'moment'];
 
-function DYMO(XMLConfig, Base64, moment) {
+function OdsDymo(XMLConfig, Base64, moment) {
     var service = {
         loadPrinters: loadPrinters,
         loadDYMOOrderTemplate: loadDYMOOrderTemplate,

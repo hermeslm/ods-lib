@@ -15,7 +15,6 @@
                             $resource) {
 
         var uniqueCounter = (+new Date) % 10000;
-        // var schema = null;
 
         var service = {
             //Utils methods
@@ -79,6 +78,7 @@
             defaultCKEditorSuffix: defaultCKEditorSuffix,
 
             getTimeZoneUTC: getTimeZoneUTC,
+            convertFormSchemaFromServer: convertFormSchemaFromServer,
             copyJson: copyJson,
             getDataFromComponentCode: getDataFromComponentCode,
             saveFormData: saveFormData,
@@ -93,7 +93,7 @@
                 name: generateName(OdsComponentType.FORM),
                 label: 'New Form',
                 description: 'New Form Description',
-                layout: [],
+                layout: [newSectionObject()],
                 allowedTypes: [OdsComponentType.SECTION]
             };
         }
@@ -382,17 +382,17 @@
                 case OdsFieldType.MULTI_SELECT:
                     return 'forms/common/viewer/multi-select.html';
                 case OdsFieldType.DATETIME:
-                    return 'forms/common/fields/datetime.html';
+                    return 'forms/common/viewer/datetime.html';
                 case OdsFieldType.IF_YES:
-                    return 'forms/common/fields/plugins/if-yes.html';
+                    return 'forms/common/viewer/plugins/if-yes.html';
                 case OdsFieldType.TABLE:
-                    return 'forms/common/fields/plugins/table.html';
+                    return 'forms/common/viewer/plugins/table.html';
                 case OdsFieldType.LABEL:
                     return 'forms/common/fields/label-empty.html';
                 case OdsFieldType.CHECKBOX:
-                    return 'forms/common/fields/checkbox.html';
+                    return 'forms/common/viewer/checkbox.html';
                 case OdsFieldType.CHECKBOX_LIST:
-                    return 'forms/common/fields/checkbox-list.html';
+                    return 'forms/common/viewer/checkbox-list.html';
                 case OdsFieldType.RADIO:
                     return 'forms/common/viewer/radio-list.html';
                 case OdsFieldType.CKEDITOR:
@@ -712,8 +712,8 @@
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.DATETIME,
                 enableTime: false,
-                format: OdsDateTimeFormat.ShortDate,
-                selectedFormat: OdsDateTimeFormat.ShortDate,
+                format: OdsDateTimeFormat.ShortDateLongYear,
+                selectedFormat: OdsDateTimeFormat.ShortDateLongYear,
                 options: {
                     timezone: getTimeZoneUTC()
                 },
@@ -1065,13 +1065,17 @@
          */
         function strSubtitutor(str, valuesMap, prefix, suffix) {
 
-            var strResult = str;
+            var strResult = '';
 
-            for (var property in valuesMap) {
-                if (valuesMap.hasOwnProperty(property)) {
-                    // do stuff
-                    var re = new RegExp(escapeRegExp(prefix + property + suffix), 'gi');
-                    strResult = strResult.replace(re, valuesMap[property]);
+            if(str) {
+                strResult = str;
+
+                for (var property in valuesMap) {
+                    if (valuesMap.hasOwnProperty(property)) {
+                        // do stuff
+                        var re = new RegExp(escapeRegExp(prefix + property + suffix), 'gi');
+                        strResult = strResult.replace(re, valuesMap[property]);
+                    }
                 }
             }
 
@@ -1207,6 +1211,45 @@
                 }
             }
             return fields;
+        }
+
+        function convertFormSchemaFromServer(json) {
+
+            var schema = angular.fromJson(json);
+
+            var layout = schema.layout;
+            //For each section
+            for (var i = 0; i < layout.length; i++) {
+                //For each row
+                var rows = layout[i].rows;
+                for (var j = 0; j < rows.length; j++) {
+                    //For each column
+                    var cols = rows[j].cols;
+                    for (var k = 0; k < cols.length; k++) {
+                        //For each field
+                        var fields = cols[k].fields;
+                        for (var l = 0; l < fields.length; l++) {
+                            //If field is a table we must to loop through each table cell
+                            if (fields[l].type == OdsFieldType.TABLE) {
+                                for (var m = 0; m < fields[l].matrix.length; m++) {
+                                    for (var p = 0; p < fields[l].matrix[m].length; p++) {
+                                        //If field is datetime we set Date object from string
+                                        if (cols[k].fields[l].matrix[m][p].fields[0].type == OdsFieldType.DATETIME) {
+                                            cols[k].fields[l].matrix[m][p].fields[0].value = new Date(Date.parse(cols[k].fields[l].matrix[m][p].fields[0].value));
+                                        }
+                                    }
+                                }
+                            }
+                            //If field is datetime we set Date object from string
+                            else if (fields[l].type == OdsFieldType.DATETIME) {
+                                fields[l].value = new Date(Date.parse(fields[l].value));
+                            }
+                        }
+                    }
+                }
+            }
+
+            return schema;
         }
 
         function setConfigToCKEditorComponent(schema, config) {

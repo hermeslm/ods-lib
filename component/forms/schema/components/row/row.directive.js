@@ -35,6 +35,13 @@ function RowDirective(OdsFormService, dialogs) {
         $scope.addColumn = addColumn;
         $scope.removeColumn = removeColumn;
         $scope.onAdd = onAdd;
+        $scope.dropCallback = dropCallback;
+
+        function dropCallback(index, item, external, type) {
+
+            var newObject = OdsFormService.onAdd(item, type);
+            return newObject;
+        }
 
         /**
          * Catch onAdd event in drag and drop for setting field properties
@@ -43,8 +50,12 @@ function RowDirective(OdsFormService, dialogs) {
          */
         function onAdd(item, type) {
 
-            OdsFormService.onAdd(item, type);
-        };
+            var tmp = $scope.section.rows[$scope.section.rows.length - 1];
+            if (tmp.cols.length > 0) {
+                if (tmp.cols[0].fields.length > 0)
+                    $scope.section.rows.push(OdsFormService.newRowObject());
+            }
+        }
 
         /**
          * Toggle Row properties options.

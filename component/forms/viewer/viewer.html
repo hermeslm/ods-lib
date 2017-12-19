@@ -15,8 +15,9 @@
                                 <div class="form-group"
                                      ng-class="{'has-error': {{schema.name}}.{{field.name}}.$invalid}">
 
-                                    <label class="control-label" for="{{field.name}}" ng-if="field.value"
-                                           ng-hide="hideTitle(field)">{{field.label}}:&nbsp;</label>
+                                    <label class="control-label" for="{{field.name}}"
+                                           ng-hide="hideTitle(field)">{{field.label}}&nbsp;</label>
+                                    <!--ng-if="field.value"-->
 
                                     <ng-include src="getFormViewerTemplate(field.type)"></ng-include>
 
@@ -46,12 +47,12 @@
             </div>
         </div>
         <!--<div class="box-footer" ng-show="schema.handleSubmit">-->
-            <!--<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="clear()">-->
-                <!--<span class="fa fa-trash-o"></span>&nbsp;<span>Clear</span>-->
-            <!--</button>-->
-            <!--<button type="submit" ng-disabled="{{schema.name}}.$invalid" class="btn btn-primary">-->
-                <!--<span class="fa fa-save"></span>&nbsp;<span>Save</span>-->
-            <!--</button>-->
+        <!--<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="clear()">-->
+        <!--<span class="fa fa-trash-o"></span>&nbsp;<span>Clear</span>-->
+        <!--</button>-->
+        <!--<button type="submit" ng-disabled="{{schema.name}}.$invalid" class="btn btn-primary">-->
+        <!--<span class="fa fa-save"></span>&nbsp;<span>Save</span>-->
+        <!--</button>-->
         <!--</div>-->
     </div>
 </div>
