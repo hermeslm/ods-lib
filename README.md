@@ -2,10 +2,14 @@
 
 [![Build Status](https://travis-ci.org/refactorthis/angular-component-seed.svg?branch=master)](https://travis-ci.org/refactorthis/angular-component-seed)
 
-This project is tools lib for a common use in software development, It include some useful Directives, Services and a Tools Set.
+This project is tools lib for a common use in software development, It include some useful Directives, Services and a Toolset.
 
 This project was developed from the application template seed here
 [https://github.com/refactorthis/angular-component-seed](https://github.com/refactorthis/angular-component-seed)
+
+## Demos
+
+[Demos](https://hermeslm.github.io/demo/)
 
 ## Getting Started
 
@@ -61,6 +65,7 @@ bower update
 
 For more information on AngularJS please check out http://angularjs.org/
 
+[demo]: https://hermeslm.github.io/demo/
 [git]: http://git-scm.com/
 [bower]: http://bower.io
 [npm]: https://www.npmjs.org/
