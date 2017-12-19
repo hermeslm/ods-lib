@@ -92,6 +92,7 @@
             return {
                 name: generateName(OdsComponentType.FORM),
                 label: 'New Form',
+                hideLabel: true,
                 description: 'New Form Description',
                 layout: [newSectionObject()],
                 allowedTypes: [OdsComponentType.SECTION]
