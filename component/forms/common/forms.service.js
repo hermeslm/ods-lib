@@ -15,6 +15,7 @@
                             $resource) {
 
         var uniqueCounter = (+new Date) % 10000;
+        var clipBoard = [];
 
         var service = {
             //Utils methods
@@ -26,6 +27,9 @@
             copyToClipboard: copyToClipboard,
             strSubtitutor: strSubtitutor,
             restResource: restResource,
+            getClipBoard: getClipBoard,
+            setClipBoard: setClipBoard,
+            addToClipBoard: addToClipBoard,
             // http: http,
 
             //Templates management
@@ -1068,7 +1072,7 @@
 
             var strResult = '';
 
-            if(str) {
+            if (str) {
                 strResult = str;
 
                 for (var property in valuesMap) {
@@ -1097,6 +1101,21 @@
                     }
                 }
             });
+        }
+
+        function getClipBoard() {
+
+            return clipBoard;
+        }
+
+        function setClipBoard(cb) {
+
+            clipBoard = cb;
+        }
+
+        function addToClipBoard(item) {
+
+            clipBoard.push(item);
         }
 
         function escapeRegExp(str) {
