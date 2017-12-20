@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsFormToolbar', OdsFormToolbar);
 
-OdsFormToolbar.$inject = ['OdsFormService'];
+OdsFormToolbar.$inject = ['OdsFormService', '$sessionStorage'];
 
-function OdsFormToolbar(OdsFormService) {
+function OdsFormToolbar(OdsFormService, $sessionStorage) {
 
     var directive = {
         restrict: 'E',
@@ -21,9 +21,17 @@ function OdsFormToolbar(OdsFormService) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.getToolbarComponent = getToolbarComponent;
+        $scope.clipBoard = [];
+
+        if ($sessionStorage.clipBoard) {
+            OdsFormService.setClipBoard($sessionStorage.clipBoard);
+            $scope.clipBoard = $sessionStorage.clipBoard;
+        } else {
+            $scope.clipBoard = [];
+        }
 
         $scope.toolbar = {
             title: 'Fields Toolbar',
@@ -92,12 +100,18 @@ function OdsFormToolbar(OdsFormService) {
                     OdsFormService.newFieldLabelObject(),
                     OdsFormService.newCKEditorObject()
                 ]
+            }, {
+                id: 6,
+                open: false,
+                disabled: false,
+                title: 'Clipboard',
+                icon: 'fa fa-dashboard',
+                components: $scope.clipBoard
             }]
         };
 
         function getToolbarComponent(componentType) {
             return OdsFormService.getToolbarComponent(componentType);
         }
-
     }
 }

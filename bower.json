@@ -28,7 +28,8 @@
     "angular-bootstrap-affix": "^0.2.2",
     "angular-jquery": "^0.2.1",
     "bootstrap-ui-datetime-picker": "^2.6.0",
-    "ckeditor": "4"
+    "ckeditor": "4",
+    "ngstorage": "^0.3.11"
   },
   "overrides": {
     "angular-jquery": {

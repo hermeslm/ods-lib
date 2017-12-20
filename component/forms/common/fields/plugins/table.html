@@ -8,7 +8,7 @@
         </td>
         <td ng-show="field.manageRows" width="20px">
             <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
-                    ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right">
+                    ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right">
                 <span class="fa fa-trash"></span>
             </button>
         </td>
@@ -30,6 +30,6 @@
     </tr>
     </tbody>
 </table>
-<div class="btn-edit position-relative">
+<div class="btn-edit position-relative" ng-show="field.canCloneRow">
     <button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button>
 </div>

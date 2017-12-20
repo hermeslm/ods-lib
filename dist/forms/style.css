@@ -244,6 +244,7 @@
 .fixed-height {
   overflow-y: auto;
   max-height: 350px;
+  white-space: pre-wrap;
 }
 
 .no-padding {

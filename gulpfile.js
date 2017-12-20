@@ -67,8 +67,8 @@ gulp.task('forms-inject', function () {
             relative: true
         }))
         .pipe(inject(es.merge(
-            gulp.src(['./examples/forms/**/*.css', './dist/**/*.css', '!./bower_components/**'], {read: false}),
-            gulp.src(['./examples/forms/**/*.js', './dist/ods-lib.js', '!./bower_components/**'])
+            gulp.src(['./examples/forms/**/*.css', './examples/dist/**/*.css', '!./bower_components/**'], {read: false}),
+            gulp.src(['./examples/forms/**/*.js', './examples/dist/ods-lib.js', '!./bower_components/**'])
                 .pipe(naturalSort())
                 .pipe(angularFilesort())
         ), {relative: true}))
@@ -112,8 +112,8 @@ gulp.task('ckeditor-inject', function () {
             relative: true
         }))
         .pipe(inject(es.merge(
-            gulp.src(['./examples/ckeditor/**/*.css', './dist/**/*.css', '!./bower_components/**'], {read: false}),
-            gulp.src(['./examples/ckeditor/**/*.js', './dist/ods-lib.js', '!./bower_components/**'])
+            gulp.src(['./examples/ckeditor/**/*.css', './examples/dist/**/*.css', '!./bower_components/**'], {read: false}),
+            gulp.src(['./examples/ckeditor/**/*.js', './examples/dist/ods-lib.js', '!./bower_components/**'])
                 .pipe(naturalSort())
                 .pipe(angularFilesort())
         ), {relative: true}))
@@ -139,8 +139,8 @@ gulp.task('jsig-inject', function () {
             relative: true
         }))
         .pipe(inject(es.merge(
-            gulp.src(['./examples/jsignature/**/*.css', './dist/**/*.css', '!./bower_components/**'], {read: false}),
-            gulp.src(['./examples/jsignature/**/*.js', './dist/ods-lib.js', '!./bower_components/**'])
+            gulp.src(['./examples/jsignature/**/*.css', './examples/dist/**/*.css', '!./bower_components/**'], {read: false}),
+            gulp.src(['./examples/jsignature/**/*.js', './examples/dist/ods-lib.js', '!./bower_components/**'])
                 .pipe(naturalSort())
                 .pipe(angularFilesort())
         ), {relative: true}))
