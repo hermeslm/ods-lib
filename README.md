@@ -7,7 +7,21 @@ This project is tools lib for a common use in software development, It include s
 This project was developed from the application template seed here
 [https://github.com/refactorthis/angular-component-seed](https://github.com/refactorthis/angular-component-seed)
 
-## Demos
+## Components and Directives.
+
+This repository contains a set of native AngularJS directives based on Bootstrap's markup and CSS.
+
+1. **ODS-Forms-builder:** Drag and drop dynamic bootstrap forms with angular, this component is inspired in [angular-form-gen](https://github.com/McNull/angular-form-gen). 
+                          An extendable angular module that allows you create, design and render render forms Bootstrap based. 
+                          Field components can be dragged from a field toolbar onto a canvas, you can add fields validations. 
+                          Ease way to extend by adding custom field components and validation patterns.
+2. **ODS-CKEditor:** CKEditor directive for Angular including autocompletion plugin.
+3. **ODS-Signature:** AngularJs Directive for jSignature library. It is a JavaScript widget (a jQuery plugin) that simplifies creation 
+                      of a signature capture field in a browser window, allowing a user to draw a signature using mouse, pen, or finger.
+4. **ODS-Address:** Useful directive that allow to have an address management adding an input group field. It open a modal windows where you 
+                    can handle all address fields.                         
+
+## Demos.
 
 [Demos](https://hermeslm.github.io/demo/)
 
@@ -55,11 +69,24 @@ npm update
 
 This will find the latest versions that match the version ranges specified in the `package.json` file.
 
-You can update the Angular dependencies by running:
+You can install and update the Angular dependencies by running:
 
+install dependencies:
+```
+bower install
+```
+update dependencies:
 ```
 bower update
 ```
+
+## Build the library and samples
+
+If you want to build a distribution of this library just run a gulp task, this is the default task.
+
+```
+gulp build
+``` 
 
 ## Contact
 
