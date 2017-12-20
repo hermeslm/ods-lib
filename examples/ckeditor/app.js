@@ -7,6 +7,8 @@ app.controller('MainCtrl', function ($scope, OdsCkeditor) {
 
     $scope.isReadOnly = false;
 
+    // $scope.content = '';
+
     var defaultOptions = {
         prefix: '${',
         suffix: '}',

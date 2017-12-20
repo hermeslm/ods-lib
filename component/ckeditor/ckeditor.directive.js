@@ -25,8 +25,7 @@ function CKEditor($timeout, OdsCkeditor) {
     function linkFunc($scope, elm, attr) {
 
         if (typeof($scope.ngModel) === 'undefined') {
-            console.error('Please define ng-model.');
-            return;
+            $scope.ngModel = '';
         }
 
         if (typeof(CKEDITOR) === 'undefined') {
