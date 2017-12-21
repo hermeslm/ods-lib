@@ -37,6 +37,8 @@ function FieldDirective(OdsFormService, dialogs) {
          */
         $scope.fieldDisabled = true;
 
+        $scope.dev = '-dev';
+
         $scope.toggleFieldProperties = toggleFieldProperties;
         $scope.getSchemaField = getSchemaField;
         $scope.getSchemaFieldProperties = getSchemaFieldProperties;
