@@ -132,7 +132,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
                 {size: 'sm'}).result.then(function () {
 
                 $scope.toolbar.groups[clipboardIndex].components.splice(index, 1);
-                $sessionStorage.clipBoard.splice(index, 1);
+                $sessionStorage.clipBoard = $scope.toolbar.groups[clipboardIndex].components;
             });
         }
 

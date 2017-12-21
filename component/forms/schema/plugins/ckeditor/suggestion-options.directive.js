@@ -16,7 +16,8 @@ function SuggestionOptionsDirective(OdsFormService, OdsCkeditor, $timeout) {
         templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
         scope: {
             field: '=',
-            config: '='
+            config: '=',
+            profile: '='
         },
         link: linkFunc
     };
@@ -74,6 +75,7 @@ function SuggestionOptionsDirective(OdsFormService, OdsCkeditor, $timeout) {
         function refreshOption() {
 
             OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
+            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
         }
 
         function loadSuggestions(url) {
@@ -81,7 +83,6 @@ function SuggestionOptionsDirective(OdsFormService, OdsCkeditor, $timeout) {
             OdsFormService.restResource(url).query(function (result) {
                 $scope.options = result;
             });
-
         }
 
         function loadTokens(url) {
