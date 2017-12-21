@@ -15,9 +15,12 @@
                             $resource) {
 
         var uniqueCounter = (+new Date) % 10000;
+
         var clipBoard = [];
+        var callbacks = [];
 
         var service = {
+
             //Utils methods
             newSchema: newSchema,
             initSchema: initSchema,
@@ -30,6 +33,8 @@
             getClipBoard: getClipBoard,
             setClipBoard: setClipBoard,
             addToClipBoard: addToClipBoard,
+            onAddToClipBoard: onAddToClipBoard,
+            renameComponent: renameComponent,
             // http: http,
 
             //Templates management
@@ -1111,14 +1116,27 @@
         function setClipBoard(cb) {
 
             clipBoard = cb;
+            //notify if there are any listeners
+            for (var i = 0; i < callbacks.length; i++)
+                callbacks[i](clipBoard);
         }
 
         function addToClipBoard(item) {
 
-            clipBoard.push(item);
+            var comp = renameComponent(item);
+            clipBoard.push(comp);
+            //notify if there are any listeners
+            for (var i = 0; i < callbacks.length; i++)
+                callbacks[i](clipBoard);
+        }
+
+        function onAddToClipBoard(callback) {
+
+            callbacks.push(callback);
         }
 
         function escapeRegExp(str) {
+
             return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
         }
 
@@ -1127,6 +1145,38 @@
             // $window.prompt('Copy to clipboard: Ctrl+C, Enter', json);
             copyToClipboard(json);
             $window.alert('Code copied to clipboard!!!');
+        }
+
+        function renameComponent(component) {
+
+            var comp = angular.copy(component);
+
+            switch (comp.componentType) {
+                // case OdsComponentType.FORM:
+                //     return 'form' + uniqueCounter;
+                // case OdsComponentType.SECTION:
+                //     return 'section' + uniqueCounter;
+                // case OdsComponentType.ROW:
+                //     return 'row' + uniqueCounter;
+                // case OdsComponentType.COLUMN:
+                //     return 'column' + uniqueCounter;
+                case OdsComponentType.FIELD:
+                    comp.name = generateName(comp.componentType);
+                    if (comp.type === OdsFieldType.TABLE) {
+                        for (var i = 0; i < comp.matrix.length; i++) {
+                            for (var j = 0; j < comp.matrix[i].length; j++) {
+                                comp.matrix[i][j].name = generateName(comp.matrix[i][j].componentType);
+                            }
+                        }
+                    }
+                    return comp;
+                // case OdsComponentType.ITEM:
+                //     return 'item' + uniqueCounter;
+                // case OdsComponentType.PLUGIN:
+                //     return 'plugin' + uniqueCounter;
+                default :
+                    return uniqueCounter;
+            }
         }
 
         //TODO add get values from table field, not implemented at the moment.

@@ -58,6 +58,8 @@ function FieldDirective(OdsFormService, dialogs) {
         $scope.showCustomFormat = $scope.field.selectedFormat === 'custom' ? true : false;
         $scope.onSelectFormat = onSelectFormat;
 
+        $scope.addToClipboard = OdsFormService.addToClipBoard;
+
         /**
          * Toggle Row properties options.
          * @param field Current field to show properties options.
@@ -184,5 +186,6 @@ function FieldDirective(OdsFormService, dialogs) {
                 $scope.field.format = selectedFormat;
             }
         }
+
     }
 }

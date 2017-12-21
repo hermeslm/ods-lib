@@ -1,7 +1,10 @@
 <div class="box-draggable" ng-class="{ 'error': object.invalid}">
     <div class="box-overlay">
         <div class="btn-toolbar btn-toolbar-right">
-            <!--We have two settings button if it is popover or not-->
+            <button class="btn btn-default btn-xs" type="button" title="Copy component to Clipboard."
+                    ng-click="addToClipboard(field)">
+                <span class="fa fa-clipboard"></span>
+            </button>
             <button class="btn btn-default btn-xs" type="button"
                     ng-class="{ 'active': field.showProperties }"
                     ng-click="toggleFieldProperties(field)"
@@ -13,12 +16,12 @@
                 <span class="fa fa-wrench"></span>
             </button>
             <!--<button class="btn btn-default btn-xs" type="button"-->
-                    <!--ng-show="field.popoverProps"-->
-                    <!--title="Configure this field."-->
-                    <!--uib-popover-template="'forms/schema/components/field/properties.html'"-->
-                    <!--popover-append-to-body='true' popover-placement='auto bottom'-->
-                    <!--popover-trigger="outsideClick" popover-title="Field config">-->
-                <!--<span class="fa fa-wrench"></span>-->
+            <!--ng-show="field.popoverProps"-->
+            <!--title="Configure this field."-->
+            <!--uib-popover-template="'forms/schema/components/field/properties.html'"-->
+            <!--popover-append-to-body='true' popover-placement='auto bottom'-->
+            <!--popover-trigger="outsideClick" popover-title="Field config">-->
+            <!--<span class="fa fa-wrench"></span>-->
             <!--</button>-->
 
             <!--<button class="btn btn-default btn-xs" type="button"-->
@@ -43,7 +46,7 @@
         </div>
     </div>
     <div class="box-properties-container" ng-class="{ visible: field.showProperties }">
-        <div class="padding">
+        <div class="padding" ng-if="field.showProperties" >
             <div ng-include="'forms/schema/components/field/properties.html'"></div>
         </div>
     </div>
