@@ -103,6 +103,9 @@ $templateCache.put('forms/common/fields/plugins/table.html','<table class="{{fie
 $templateCache.put('forms/common/viewer/plugins/ckeditor.html','<div ng-bind-html="valueSubtitutor(field)"></div>');
 $templateCache.put('forms/common/viewer/plugins/if-yes.html','<!--<br ng-if="field.ln">--><div ng-bind-html="field.value.toggle ? field.on : field.off"></div><div ng-bind-html="field.value.textarea" ng-if="field.value.toggle"></div>');
 $templateCache.put('forms/common/viewer/plugins/table.html','<table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}"><div class="col-lg-12" ng-repeat="field in col.fields"><ng-include src="getFormViewerTemplate(field.type)"></ng-include></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr></tbody></table>');
+$templateCache.put('forms/schema/components/checkbox/checkbox-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/checkbox/ln-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div></div></form></uib-tab><!--<uib-tab index="1" heading="Validation">--><!--<form name="fieldValidationForm" class="form-horizontal">--><!--<div class="box-body padding-top">--><!--<div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div>--><!--</div>--><!--</form>--><!--</uib-tab>--><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/components/checkbox/checkbox.html','<label class="control-label" for="{{field.name}}">Checkbox</label><div ng-include="\'forms/common/fields/checkbox.html\'"></div>');
+$templateCache.put('forms/schema/components/checkbox/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/common-properties.html','<div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/placeholder-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div>');
 $templateCache.put('forms/schema/components/base-properties/label-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.label.$invalid}"><label for="label" class="col-sm-4 control-label">Label:</label><div class="col-sm-8"><input type="text" class="form-control" id="label" name="label" placeholder="Label..." ng-model="field.label" ng-required="false"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.hideLabel.$invalid}"><label for="hideLabel" class="col-sm-4 control-label" title="Indicates if will show label or not.">Hide Label:</label><div class="col-sm-8"><input type="checkbox" id="hideLabel" name="hideLabel" ng-model="field.hideLabel"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/maxlength-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.maxLength.$invalid}"><label for="maxLength" class="col-sm-4 control-label">Max Length:</label><div class="col-sm-8"><input type="number" class="form-control" id="maxLength" name="maxLength" placeholder="Max Length..." ng-model="field.validation.maxlength" ng-required="false" ng-change="onChangeMaxLength()"></div></div></div><div class="row no-vertical-margin" ng-show="field.validation.maxlength"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.minLengthMessage.$invalid}"><label for="maxLengthMessage" class="col-sm-4 control-label">Message</label><div class="col-sm-8"><input type="text" class="form-control" id="maxLengthMessage" name="maxLengthMessage" placeholder="Max length message..." ng-model="field.validation.messages.maxlength" ng-required="false"></div></div></div>');
@@ -115,9 +118,6 @@ $templateCache.put('forms/schema/components/base-properties/readonly-properties.
 $templateCache.put('forms/schema/components/base-properties/required-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.required.$invalid}"><label for="required" class="col-sm-4 control-label" title="Indicates if a value is required for this field.">Required:</label><div class="col-sm-8"><input type="checkbox" id="required" name="required" ng-model="field.validation.required" class="ng-pristine ng-valid" ng-change="onChangeRequired()"></div></div></div><div class="row no-vertical-margin" ng-show="field.validation.required"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.requiredMessage.$invalid}"><label for="requiredMessage" class="col-sm-4 control-label">Required Message</label><div class="col-sm-8"><input type="text" class="form-control" id="requiredMessage" name="requiredMessage" placeholder="Required Message..." ng-model="field.validation.messages.required" ng-required="false"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/tooltip-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.tooltip.$invalid}"><label for="tooltip" class="col-sm-4 control-label">Tooltip:</label><div class="col-sm-8"><input type="text" class="form-control" id="tooltip" name="tooltip" placeholder="Tooltip..." ng-model="field.tooltip" ng-required="false"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/value-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.value.$invalid}"><label for="value" class="col-sm-4 control-label">Value:</label><div class="col-sm-8"><input type="text" class="form-control" id="value" name="value" placeholder="Value..." ng-model="field.value" ng-required="false"></div></div></div>');
-$templateCache.put('forms/schema/components/checkbox/checkbox-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/checkbox/ln-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div></div></form></uib-tab><!--<uib-tab index="1" heading="Validation">--><!--<form name="fieldValidationForm" class="form-horizontal">--><!--<div class="box-body padding-top">--><!--<div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div>--><!--</div>--><!--</form>--><!--</uib-tab>--><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/components/checkbox/checkbox.html','<label class="control-label" for="{{field.name}}">Checkbox</label><div ng-include="\'forms/common/fields/checkbox.html\'"></div>');
-$templateCache.put('forms/schema/components/checkbox/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/checkbox-list/checkbox-list-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.inline.$invalid}"><label for="inline" class="col-sm-4 control-label" title="Indicates if will show inline or not.">Inline:</label><div class="col-sm-8"><input type="checkbox" id="inline" name="inline" ng-model="field.inline"></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-checkboxlist-options field="field"></ods-field-checkboxlist-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/checkbox-list/checkbox-list.html','<label class="control-label" for="{{field.name}}">{{field.label}}</label><div ng-include="\'forms/common/fields/checkbox-list.html\'"></div>');
 $templateCache.put('forms/schema/components/checkbox-list/checkboxlist-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="limitTo" name="limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><table class="table table-condensed position-relative" style="position: relative;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="checkbox" name="{{field.name}}Selected[]" ng-model="field.value[option.id]"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" ng-required="true"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table>');
@@ -150,7 +150,7 @@ $templateCache.put('forms/schema/components/toggle/toggle-properties.html','<uib
 $templateCache.put('forms/schema/components/toggle/toggle.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/toggle.html\'"></div>');
 $templateCache.put('forms/schema/plugins/ckeditor/ckeditor-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.locked.$invalid}"><label for="locked" class="col-sm-4 control-label" title="Indicates if suggestions are locked in this field.">Suggestions locked:</label><div class="col-sm-8"><input type="checkbox" id="locked" name="locked" ng-model="field.options.locked" class="ng-pristine ng-valid"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.printView.$invalid}"><label for="printView" class="col-sm-4 control-label" title="Indicates if CKEditor will show as print view.">Print View:</label><div class="col-sm-8"><input type="checkbox" id="printView" name="printView" ng-model="field.printView" class="ng-pristine ng-valid"></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.prefix.$invalid}"><label for="prefix" class="col-sm-2 control-label">Prefix:</label><div class="col-sm-2"><input type="text" class="form-control" id="prefix" name="prefix" placeholder="Prefix..." ng-model="field.options.prefix" ng-required="true"></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suffix.$invalid}"><label for="suffix" class="col-sm-2 control-label">Suffix:</label><div class="col-sm-2"><input type="text" class="form-control" id="suffix" name="suffix" placeholder="Suffix..." ng-model="field.options.suffix" ng-required="true"></div></div></div></div><ods-suggestion-options field="field" config="config" profile="dev"></ods-suggestion-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/plugins/ckeditor/ckeditor.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div class="position-relative"><textarea id="{{field.name + dev}}" name="{{field.name + dev}}" placeholder="{{field.placeholder}}" ng-model="field.value" title="{{field.tooltip}}" options="field.options" ods-ckeditor ng-disabled="field.readonly">\n</textarea></div>');
-$templateCache.put('forms/schema/plugins/ckeditor/suggestion-options-properties.html','<div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suggestionsUrl.$invalid}"><label for="suggestionsUrl" class="col-sm-2 control-label">Suggestions Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="suggestionsUrl" id="suggestionsUrl" placeholder="Suggestion Url..." ng-model="field.options.suggestionsUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadSuggestions(field.options.suggestionsUrl)">Load Suggestions</button></span></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"><button class="btn btn-info" type="button" ng-click="refreshOption()" title="Update options in CKEditor">Update <span class="fa fa-refresh"></span></button></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.tokensUrl.$invalid}"><label for="tokensUrl" class="col-sm-2 control-label">Tokens Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="tokensUrl" id="tokensUrl" placeholder="Tokens Url..." ng-model="field.options.tokensUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadTokens(field.options.tokensUrl)">Load Tokens</button></span></div></div></div></div><table class="table table-condensed position-relative" style="position: relative;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option" ng-disabled="field.options.locked"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required" ng-disabled="field.options.locked"></td><td><input type="text" ng-model="option.label" class="form-control" ng-required="true"></td><td><button class="btn btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table>');
+$templateCache.put('forms/schema/plugins/ckeditor/suggestion-options-properties.html','<div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suggestionsUrl.$invalid}"><label for="suggestionsUrl" class="col-sm-2 control-label">Suggestions Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="suggestionsUrl" id="suggestionsUrl" placeholder="Suggestion Url..." ng-model="field.options.suggestionsUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadSuggestions(field.options.suggestionsUrl)">Load Suggestions</button></span></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"><button class="btn btn-info" type="button" ng-click="refreshOption()" title="Update options in CKEditor">Update <span class="fa fa-refresh"></span></button></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.tokensUrl.$invalid}"><label for="tokensUrl" class="col-sm-2 control-label">Tokens Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="tokensUrl" id="tokensUrl" placeholder="Tokens Url..." ng-model="field.options.tokensUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadTokens(field.options.tokensUrl)">Load Tokens</button></span></div></div></div></div><table class="table table-condensed position-relative" style="position: relative;max-height: 250px;overflow-y: auto;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option" ng-disabled="field.options.locked"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required" ng-disabled="field.options.locked"></td><td><input type="text" ng-model="option.label" class="form-control" ng-required="true"></td><td><button class="btn btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table>');
 $templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs-custom"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.toggleValue.$invalid}"><label for="toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="toggleValue" name="toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.textValue.$invalid}"><label for="textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="textValue" name="textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/plugins/if-yes/if-yes.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes.html\'"></div>');
 $templateCache.put('forms/schema/plugins/table/container.html','<div ng-include="\'forms/schema/components/label.html\'"></div><ods-table field="field" mode="edit"></ods-table>');
@@ -337,11 +337,17 @@ function CKEditor($timeout, OdsCkeditor) {
             OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
         });
 
-        $scope.ck.on('pasteState', function () {
+        $scope.ck.on('change', function () {
             $timeout(function () {
                 $scope.ngModel = OdsCkeditor.getData($scope.name);
             }, 0, false);
         });
+
+        // ['dataReady', 'change', 'blur', 'saveSnapshot'].forEach(function (event) {
+        //     controller.onCKEvent(event, function syncView() {
+        //         ngModelController.$setViewValue(controller.instance.getData() || '');
+        //     });
+        // });
 
         $scope.$watch('disabled', function (newValue, oldValue) {
 
@@ -689,251 +695,6 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
     }
 }
 
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('jSignature', Signature);
-
-jSignature.$inject = ['$timeout', 'JSignature'];
-
-function jSignature($timeout, JSignature) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'j-signature/j-signature.html',
-        scope: {
-            sig: '=',
-            width: '@',
-            height: '@',
-            color: '@',
-            bgColor: '@',
-            lineWidth: '@',
-            cssclass: '@',
-            undo: '@',
-            save: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        console.log('jSignatureDirective: link');
-        console.dir($scope, $element);
-
-        var options = {
-            width: $scope.width,
-            height: $scope.height,
-            color: $scope.color,
-            'background-color': $scope.bgColor,
-            lineWidth: $scope.lineWidth,
-            cssClass: $scope.cssClass,
-            UndoButton: $scope.undo
-        };
-
-        JSignature.initialize($scope, options);
-
-        $scope.reset = function () {
-            JSignature.reset();
-        };
-
-//             $scope.initialized = false;
-//
-//             var options = {
-//                 width: $scope.width,
-//                 height: $scope.height,
-//                 color: $scope.color,
-//                 'background-color': $scope.bgColor,
-//                 lineWidth: $scope.lineWidth,
-//                 cssclass: $scope.cssclass
-//             };
-//
-//             $scope.initialize = function() {
-//                 if (!$scope.initialized) {
-//                     $element.find('#jSignature').jSignature(options);
-//                     $scope.initialized = true;
-//                 }
-//             };
-//
-//             $scope.reset = function() {
-//                 console.log('reset!!!');
-//                 $element.jSignature('reset');
-//             };
-//
-//             $scope.getData = function() {
-//                 console.log('getData!!!');
-//                 var datapair = $element.jSignature('getData', 'base30');
-//                 var svg = $element.jSignature('getData', 'svg');
-//                 console.dir(datapair);
-//                 //alert(datapair);
-//                 //              alert(svg);
-//                 $scope.save(svg);
-//             };
-//
-//             $scope.setData = function(sig) {
-//                 console.log('setData!!!');
-//
-//
-//
-//                 if (sig) {
-//                     datapair = sig;
-//                 }
-//                 console.log(datapair);
-//                 $element.jSignature('setData', 'data:' + datapair.join(','));
-//             };
-//
-//
-//             $scope.initialize();
-// //            $scope.setData();
-//
-//
-//             $scope.$watch('sig', function(sig) {
-//                 if (sig) {
-//                     console.log('watch if ' + sig);
-//                     $scope.setData(sig);
-//                     //alert('watch if ' + sig);
-//
-//                     return;
-//                 }
-//                 console.log('watch else');
-//
-//             });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('Signature', Signature);
-
-function Signature() {
-
-    var apinamespace = 'jSignature';
-
-    var exportTypes = {
-        DEFAULT: 'default',
-        NATIVE: 'native',
-        IMAGE: 'image',
-        BASE30: 'base30',
-        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
-        SVG: 'svg',
-        SVG_XML: 'image/svg+xml',
-        SVG_BASE64: 'svgbase64',
-        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
-    }
-
-    var importTypes = {
-        NATIVE: 'native',
-        IMAGE: 'image',
-        IMAGE_PNG_BASE64: 'image/png;base64',
-        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
-        IMAGE_JPG_BASE64: 'image/jpg;base64'
-    }
-
-    var object = {
-        initialized: false,
-        options: {
-            width: null,
-            height: null,
-            color: null,
-            'background-color': null,
-            lineWidth: null,
-            cssclass: null,
-            UndoButton: false
-        },
-        element: null
-    };
-
-    var service = {
-        getObject: getObject,
-        exportTypes: exportTypes,
-        importTypes: importTypes,
-        initialize: initialize,
-        reset: reset,
-        getData: getData,
-        // setData: setData,
-        disable: disable,
-        enable: enable
-    };
-
-    return service;
-
-    function initialize(element, options) {
-
-        object.initialized = false;
-
-        if (!object.initialized) {
-            // object.element = element.find('#jSignature').jSignature(options);
-            object.element = $('#jSignature');
-            object.initialized = true;
-            object.element.jSignature(options);
-        }
-    };
-
-    function reset() {
-        // console.log('reset!!!');
-        object.element.jSignature('reset');
-    };
-
-    function getData(type) {
-        // console.log('getData!!!');
-        return object.element.jSignature('getData', type);
-    };
-
-    function getDataAsSVG() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function getDataAsBase30() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function setData(sig) {
-        // console.log('setData!!!');
-        // console.log(sig);
-        object.element.jSignature('setData', 'data:' + sig.join(','));
-    };
-
-    function disable() {
-        // console.log('Disable!!!');
-        object.element.jSignature('disable');
-    };
-
-    function enable() {
-        // console.log('Enable!!!');
-        object.element.jSignature('enable');
-    };
-
-    function undo() {
-        var eventName = apinamespace + '.undo'
-        object.element.jSignature('events');
-    };
-
-    function getObject() {
-        // $('#signature').on('change', function(e){
-        //     var undef
-        //     if ($(e.target).jSignature('getData','native').length) {
-        //         $tools.find('input').prop('disabled', false)
-        //     } else {
-        //         $tools.find('input').prop('disabled', true)
-        //     }
-        //
-        // })
-        return object.element;
-    }
-
-
-}
 /**
  * Created by PpTMUnited on 2/21/2017.
  */
@@ -1186,6 +947,251 @@ function ImageUploadService() {
     }
 }
 
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('jSignature', Signature);
+
+jSignature.$inject = ['$timeout', 'JSignature'];
+
+function jSignature($timeout, JSignature) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'j-signature/j-signature.html',
+        scope: {
+            sig: '=',
+            width: '@',
+            height: '@',
+            color: '@',
+            bgColor: '@',
+            lineWidth: '@',
+            cssclass: '@',
+            undo: '@',
+            save: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        console.log('jSignatureDirective: link');
+        console.dir($scope, $element);
+
+        var options = {
+            width: $scope.width,
+            height: $scope.height,
+            color: $scope.color,
+            'background-color': $scope.bgColor,
+            lineWidth: $scope.lineWidth,
+            cssClass: $scope.cssClass,
+            UndoButton: $scope.undo
+        };
+
+        JSignature.initialize($scope, options);
+
+        $scope.reset = function () {
+            JSignature.reset();
+        };
+
+//             $scope.initialized = false;
+//
+//             var options = {
+//                 width: $scope.width,
+//                 height: $scope.height,
+//                 color: $scope.color,
+//                 'background-color': $scope.bgColor,
+//                 lineWidth: $scope.lineWidth,
+//                 cssclass: $scope.cssclass
+//             };
+//
+//             $scope.initialize = function() {
+//                 if (!$scope.initialized) {
+//                     $element.find('#jSignature').jSignature(options);
+//                     $scope.initialized = true;
+//                 }
+//             };
+//
+//             $scope.reset = function() {
+//                 console.log('reset!!!');
+//                 $element.jSignature('reset');
+//             };
+//
+//             $scope.getData = function() {
+//                 console.log('getData!!!');
+//                 var datapair = $element.jSignature('getData', 'base30');
+//                 var svg = $element.jSignature('getData', 'svg');
+//                 console.dir(datapair);
+//                 //alert(datapair);
+//                 //              alert(svg);
+//                 $scope.save(svg);
+//             };
+//
+//             $scope.setData = function(sig) {
+//                 console.log('setData!!!');
+//
+//
+//
+//                 if (sig) {
+//                     datapair = sig;
+//                 }
+//                 console.log(datapair);
+//                 $element.jSignature('setData', 'data:' + datapair.join(','));
+//             };
+//
+//
+//             $scope.initialize();
+// //            $scope.setData();
+//
+//
+//             $scope.$watch('sig', function(sig) {
+//                 if (sig) {
+//                     console.log('watch if ' + sig);
+//                     $scope.setData(sig);
+//                     //alert('watch if ' + sig);
+//
+//                     return;
+//                 }
+//                 console.log('watch else');
+//
+//             });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .factory('Signature', Signature);
+
+function Signature() {
+
+    var apinamespace = 'jSignature';
+
+    var exportTypes = {
+        DEFAULT: 'default',
+        NATIVE: 'native',
+        IMAGE: 'image',
+        BASE30: 'base30',
+        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
+        SVG: 'svg',
+        SVG_XML: 'image/svg+xml',
+        SVG_BASE64: 'svgbase64',
+        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
+    }
+
+    var importTypes = {
+        NATIVE: 'native',
+        IMAGE: 'image',
+        IMAGE_PNG_BASE64: 'image/png;base64',
+        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
+        IMAGE_JPG_BASE64: 'image/jpg;base64'
+    }
+
+    var object = {
+        initialized: false,
+        options: {
+            width: null,
+            height: null,
+            color: null,
+            'background-color': null,
+            lineWidth: null,
+            cssclass: null,
+            UndoButton: false
+        },
+        element: null
+    };
+
+    var service = {
+        getObject: getObject,
+        exportTypes: exportTypes,
+        importTypes: importTypes,
+        initialize: initialize,
+        reset: reset,
+        getData: getData,
+        // setData: setData,
+        disable: disable,
+        enable: enable
+    };
+
+    return service;
+
+    function initialize(element, options) {
+
+        object.initialized = false;
+
+        if (!object.initialized) {
+            // object.element = element.find('#jSignature').jSignature(options);
+            object.element = $('#jSignature');
+            object.initialized = true;
+            object.element.jSignature(options);
+        }
+    };
+
+    function reset() {
+        // console.log('reset!!!');
+        object.element.jSignature('reset');
+    };
+
+    function getData(type) {
+        // console.log('getData!!!');
+        return object.element.jSignature('getData', type);
+    };
+
+    function getDataAsSVG() {
+        // console.log('getData!!!');
+        // var datapair = object.element.jSignature('getData', 'base30');
+        var svg = object.element.jSignature('getData', 'svg');
+        return svg;
+    };
+
+    function getDataAsBase30() {
+        // console.log('getData!!!');
+        // var datapair = object.element.jSignature('getData', 'base30');
+        var svg = object.element.jSignature('getData', 'svg');
+        return svg;
+    };
+
+    function setData(sig) {
+        // console.log('setData!!!');
+        // console.log(sig);
+        object.element.jSignature('setData', 'data:' + sig.join(','));
+    };
+
+    function disable() {
+        // console.log('Disable!!!');
+        object.element.jSignature('disable');
+    };
+
+    function enable() {
+        // console.log('Enable!!!');
+        object.element.jSignature('enable');
+    };
+
+    function undo() {
+        var eventName = apinamespace + '.undo'
+        object.element.jSignature('events');
+    };
+
+    function getObject() {
+        // $('#signature').on('change', function(e){
+        //     var undef
+        //     if ($(e.target).jSignature('getData','native').length) {
+        //         $tools.find('input').prop('disabled', false)
+        //     } else {
+        //         $tools.find('input').prop('disabled', true)
+        //     }
+        //
+        // })
+        return object.element;
+    }
+
+
+}
 /**
  * Created by hermeslm on 3/28/17.
  */
@@ -5832,7 +5838,6 @@ function SuggestionOptionsDirective(OdsFormService, OdsCkeditor, $timeout) {
         }, true);
     }
 }
-
 /**
  * Created by hermeslm on 3/28/17.
  */
