@@ -88,10 +88,12 @@ function CKEditor($timeout, OdsCkeditor) {
             return;
         });
 
-        $scope.$watch('ngModel', function (model) {
+        $scope.$watch('ngModel', function (model, oldModel) {
 
             $timeout(function () {
-                OdsCkeditor.setData($scope.name, model);
+                if(model !== oldModel){
+                    OdsCkeditor.setData($scope.name, model);
+                }
             }, 0, false);
             return;
         });

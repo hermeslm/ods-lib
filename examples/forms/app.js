@@ -1148,13 +1148,14 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
     // $scope.sections.push($scope.sectionTmp);
     // $scope.sections.push($scope.sectionLast);
 
-    $scope.schema = {
-        name: 'testForm',
-        label: 'Form Test',
-        description: 'Form Description',
-        layout: $scope.sections,
-        allowedTypes: ["section"]
-    };
+    $scope.schema = OdsFormService.newSchema();
+    //     {
+    //     name: 'testForm',
+    //     label: 'Form Test',
+    //     description: 'Form Description',
+    //     layout: $scope.sections,
+    //     allowedTypes: ["section"]
+    // };
 
     $scope.test1 = '<p>this is a sample&nbsp;&nbsp;<span class="marker">${patientName}</span>&nbsp;that I testing with&nbsp;&nbsp;<span class="marker">${patientDob}</span>&nbsp;.${patientName} is here.</p>';
     $scope.test2 = '<p>this is a sample&nbsp;&nbsp;<span class="marker">@patientName</span>&nbsp;that I testing with&nbsp;&nbsp;<span class="marker">@patientDob</span>&nbsp;. but we must to check this @patientDobcase hermeslm@gmail.com. @patientName is here.</p>';
