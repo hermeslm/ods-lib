@@ -1,9 +1,9 @@
 <div class="row no-vertical-margin">
     <div class="form-group margin-bottom"
-         ng-class="{'has-error': fieldPropertiesForm.value.$invalid}">
-        <label for="value" class="col-sm-4 control-label">Value:</label>
+         ng-class="{'has-error': fieldPropertiesForm.{{field.name}}-value.$invalid}">
+        <label for="{{field.name}}-value" class="col-sm-4 control-label">Value:</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" id="value" name="value"
+            <input type="text" class="form-control" id="{{field.name}}-value" name="{{field.name}}-value"
                    placeholder="Value..." ng-model="field.value" ng-required="false">
         </div>
     </div>
