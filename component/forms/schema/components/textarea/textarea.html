@@ -1,5 +1,5 @@
 <div ng-include="'forms/schema/components/label.html'"></div>
-<textarea class="form-control" name="{{field.name}}" id="{{field.name}}" ng-required="{{field.required}}"
+<textarea class="form-control" name="{{field.name}}" id="{{field.name + dev}}" ng-required="{{field.required}}"
           title="{{field.tooltip}}" rows="{{field.rows}}" placeholder="{{field.placeholder}}" ng-model="field.value"
           data-resize="disabled">
 </textarea>
