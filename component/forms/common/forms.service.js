@@ -1334,21 +1334,30 @@
                         for (var l = 0; l < fields.length; l++) {
                             if (fields[l].type == OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
-                                    for (var p = 0; p < fields[l].matrix[m].length; p++) {
-                                        if (cols[k].fields[l].matrix[m][p].fields[0].type === OdsFieldType.CKEDITOR) {
-                                            cols[k].fields[l].matrix[m][p].fields[0].options.prefix = config.ckeditor.prefix ? config.ckeditor.prefix : defaultCKEditorPrefix();
-                                            cols[k].fields[l].matrix[m][p].fields[0].options.suffix = config.ckeditor.suffix ? config.ckeditor.suffix : defaultCKEditorSuffix();
-                                            cols[k].fields[l].matrix[m][p].fields[0].options.suggestions = config.ckeditor.suggestions ? config.ckeditor.suggestions : [];
-                                            cols[k].fields[l].matrix[m][p].fields[0].options.tokens = config.ckeditor.tokens ? config.ckeditor.tokens : null;
+                                    var matrixRow = fields[l].matrix[m];
+                                    for (var p = 0; p < matrixRow.length; p++) {
+                                        if (matrixRow[p].fields[0].type === OdsFieldType.CKEDITOR) {
+                                            matrixRow[p].fields[0].options.prefix = config.ckeditor.prefix ?
+                                                config.ckeditor.prefix : defaultCKEditorPrefix();
+                                            matrixRow[p].fields[0].options.suffix = config.ckeditor.suffix ?
+                                                config.ckeditor.suffix : defaultCKEditorSuffix();
+                                            matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions ?
+                                                config.ckeditor.suggestions : [];
+                                            matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens ?
+                                                config.ckeditor.tokens : null;
                                         }
                                     }
                                 }
                             } else {
-                                if (cols[k].fields[l].type === OdsFieldType.CKEDITOR) {
-                                    cols[k].fields[l].options.prefix = config.ckeditor.prefix ? config.ckeditor.prefix : defaultCKEditorPrefix();
-                                    cols[k].fields[l].options.suffix = config.ckeditor.suffix ? config.ckeditor.suffix : defaultCKEditorSuffix();
-                                    cols[k].fields[l].options.suggestions = config.ckeditor.suggestions ? config.ckeditor.suggestions : [];
-                                    cols[k].fields[l].options.tokens = config.ckeditor.tokens ? config.ckeditor.tokens : null;
+                                if (fields[l].type === OdsFieldType.CKEDITOR) {
+                                    fields[l].options.prefix = config.ckeditor.prefix ?
+                                        config.ckeditor.prefix : defaultCKEditorPrefix();
+                                    fields[l].options.suffix = config.ckeditor.suffix ?
+                                        config.ckeditor.suffix : defaultCKEditorSuffix();
+                                    fields[l].options.suggestions = config.ckeditor.suggestions ?
+                                        config.ckeditor.suggestions : [];
+                                    fields[l].options.tokens = config.ckeditor.tokens ?
+                                        config.ckeditor.tokens : null;
                                 }
                             }
                         }
