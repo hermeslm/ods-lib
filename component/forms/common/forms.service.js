@@ -1336,15 +1336,17 @@
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     var matrixRow = fields[l].matrix[m];
                                     for (var p = 0; p < matrixRow.length; p++) {
-                                        if (matrixRow[p].fields[0].type === OdsFieldType.CKEDITOR) {
-                                            matrixRow[p].fields[0].options.prefix = config.ckeditor.prefix ?
-                                                config.ckeditor.prefix : defaultCKEditorPrefix();
-                                            matrixRow[p].fields[0].options.suffix = config.ckeditor.suffix ?
-                                                config.ckeditor.suffix : defaultCKEditorSuffix();
-                                            matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions ?
-                                                config.ckeditor.suggestions : [];
-                                            matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens ?
-                                                config.ckeditor.tokens : null;
+                                        if(matrixRow[p].fields.length > 0) {
+                                            if (matrixRow[p].fields[0].type === OdsFieldType.CKEDITOR) {
+                                                matrixRow[p].fields[0].options.prefix = config.ckeditor.prefix ?
+                                                    config.ckeditor.prefix : defaultCKEditorPrefix();
+                                                matrixRow[p].fields[0].options.suffix = config.ckeditor.suffix ?
+                                                    config.ckeditor.suffix : defaultCKEditorSuffix();
+                                                matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions ?
+                                                    config.ckeditor.suggestions : [];
+                                                matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens ?
+                                                    config.ckeditor.tokens : null;
+                                            }
                                         }
                                     }
                                 }
