@@ -53,7 +53,7 @@ function OdsCkeditor() {
         var ck = getInstance(name);
         if (ck) {
             return ck.getData();
-        }else {
+        } else {
             return '';
         }
     }
@@ -63,6 +63,16 @@ function OdsCkeditor() {
         var ck = getInstance(name);
         if (ck) {
             ck.setData(model);
+
+            // ck.focus();
+            // var selection = ck.getSelection();
+            // if (selection) {
+            //     var range = selection.getRanges()[0];
+            //     var pCon = range.startContainer.getAscendant({p: 2}, true); //getAscendant('p',true);
+            //     var newRange = new CKEDITOR.dom.range(range.document);
+            //     newRange.moveToPosition(pCon, CKEDITOR.POSITION_BEFORE_START);
+            //     newRange.select();
+            // }
         }
     }
 

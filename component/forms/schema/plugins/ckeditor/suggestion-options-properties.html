@@ -6,7 +6,8 @@
              ng-class="{'has-error': fieldPropertiesForm.suggestionsUrl.$invalid}">
             <label for="suggestionsUrl" class="col-sm-2 control-label">Suggestions Url:</label>
             <div class="input-group col-sm-10" style="padding-left: 15px;">
-                <input type="text" class="form-control" name="suggestionsUrl" id="suggestionsUrl" placeholder="Suggestion Url..."
+                <input type="text" class="form-control" name="suggestionsUrl" id="suggestionsUrl"
+                       placeholder="Suggestion Url..."
                        ng-model="field.options.suggestionsUrl">
                 <span class="input-group-btn">
                     <button class="btn btn-primary" type="button"
@@ -38,35 +39,37 @@
         </div>
     </div>
 </div>
-<table class="table table-condensed position-relative" style="position: relative;">
-    <thead>
-    <tr>
-        <th></th>
-        <th>Value</th>
-        <th>Text</th>
-        <th>
-            <button class="btn btn-xs btn-success" type="button" ng-click="addOption()"
-                    title="Add a new option" ng-disabled="field.options.locked"><span class="fa fa-plus"></span>
-            </button>
-        </th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ 'error': fieldOptionForm.$invalid }">
-        <td>
-            <input type="text" name="optionValue" ng-model="option.id" ng-required="true"
-                   class="form-control" required="required" ng-disabled="field.options.locked"/>
-        </td>
-        <td>
-            <input type="text" ng-model="option.label" class="form-control" ng-required="true"/>
-        </td>
-        <td>
-            <button class="btn btn-xs btn-danger" type="button" ng-click="removeOption($index)"
-                    title="Remove this option"><span class="fa fa-trash"></span>
-            </button>
-        </td>
-        <td></td>
-    </tr>
-    </tbody>
-</table>
+<div class="table-responsive" style="max-height: 300px;overflow-y: auto;margin-top: 20px;">
+    <table class="table table-condensed position-relative">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Value</th>
+            <th>Text</th>
+            <th>
+                <button class="btn btn-xs btn-success" type="button" ng-click="addOption()"
+                        title="Add a new option" ng-disabled="field.options.locked"><span class="fa fa-plus"></span>
+                </button>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ 'error': fieldOptionForm.$invalid }">
+            <td>
+                <input type="text" name="optionValue" ng-model="option.id" ng-required="true"
+                       class="form-control" required="required" ng-disabled="field.options.locked"/>
+            </td>
+            <td>
+                <input type="text" ng-model="option.label" class="form-control" ng-required="true"/>
+            </td>
+            <td>
+                <button class="btn btn-xs btn-danger" type="button" ng-click="removeOption($index)"
+                        title="Remove this option"><span class="fa fa-trash"></span>
+                </button>
+            </td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -37,6 +37,8 @@ function FieldDirective(OdsFormService, dialogs) {
          */
         $scope.fieldDisabled = true;
 
+        $scope.dev = '-dev';
+
         $scope.toggleFieldProperties = toggleFieldProperties;
         $scope.getSchemaField = getSchemaField;
         $scope.getSchemaFieldProperties = getSchemaFieldProperties;
@@ -57,6 +59,8 @@ function FieldDirective(OdsFormService, dialogs) {
         $scope.formats.push({value: 'custom', option: 'Custom format'});
         $scope.showCustomFormat = $scope.field.selectedFormat === 'custom' ? true : false;
         $scope.onSelectFormat = onSelectFormat;
+
+        $scope.addToClipboard = OdsFormService.addToClipBoard;
 
         /**
          * Toggle Row properties options.
@@ -184,5 +188,6 @@ function FieldDirective(OdsFormService, dialogs) {
                 $scope.field.format = selectedFormat;
             }
         }
+
     }
 }

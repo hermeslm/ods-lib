@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsFormToolbar', OdsFormToolbar);
 
-OdsFormToolbar.$inject = ['OdsFormService', '$sessionStorage'];
+OdsFormToolbar.$inject = ['OdsFormService', '$sessionStorage', 'dialogs'];
 
-function OdsFormToolbar(OdsFormService, $sessionStorage) {
+function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
 
     var directive = {
         restrict: 'E',
@@ -24,14 +24,9 @@ function OdsFormToolbar(OdsFormService, $sessionStorage) {
     function linkFunc($scope) {
 
         $scope.getToolbarComponent = getToolbarComponent;
-        $scope.clipBoard = [];
+        $scope.removeFromClipboard = removeFromClipboard;
 
-        if ($sessionStorage.clipBoard) {
-            OdsFormService.setClipBoard($sessionStorage.clipBoard);
-            $scope.clipBoard = $sessionStorage.clipBoard;
-        } else {
-            $scope.clipBoard = [];
-        }
+        var clipboardIndex = 6;
 
         $scope.toolbar = {
             title: 'Fields Toolbar',
@@ -41,6 +36,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage) {
                 disabled: false,
                 title: 'Layout',
                 icon: 'fa fa-dashboard',
+                allowDelete: false,
                 components: [
                     OdsFormService.newSectionObject()
                 ]
@@ -50,6 +46,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage) {
                 disabled: false,
                 title: 'Text input fields',
                 icon: 'fa fa-dashboard',
+                allowDelete: false,
                 components: [
                     OdsFormService.newFieldTextObject(),
                     OdsFormService.newFieldNumberObject(),
@@ -62,6 +59,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage) {
                 disabled: false,
                 title: 'Select input fields',
                 icon: 'fa fa-dashboard',
+                allowDelete: false,
                 components: [
                     OdsFormService.newFieldRadioListObject(),
                     OdsFormService.newFieldSelectObject(),
@@ -74,6 +72,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage) {
                 disabled: false,
                 title: 'Check input fields',
                 icon: 'fa fa-dashboard',
+                allowDelete: false,
                 components: [
                     OdsFormService.newFieldCheckBoxObject(),
                     OdsFormService.newFieldCheckBoxListObject(),
@@ -85,6 +84,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage) {
                 disabled: false,
                 title: 'DateTime fields',
                 icon: 'fa fa-dashboard',
+                allowDelete: false,
                 components: [
                     OdsFormService.newDateTimeObject()
                 ]
@@ -94,6 +94,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage) {
                 disabled: false,
                 title: 'Plugins',
                 icon: 'fa fa-dashboard',
+                allowDelete: false,
                 components: [
                     OdsFormService.newYesNoObject(),
                     OdsFormService.newTableObject(),
@@ -106,11 +107,37 @@ function OdsFormToolbar(OdsFormService, $sessionStorage) {
                 disabled: false,
                 title: 'Clipboard',
                 icon: 'fa fa-dashboard',
-                components: $scope.clipBoard
+                allowDelete: true,
+                components: []
             }]
         };
 
+        //We register the update clipboard callback
+        OdsFormService.onAddToClipBoard(function (items) {
+
+            $scope.toolbar.groups[clipboardIndex].components = items;
+            $sessionStorage.clipBoard = items;
+        });
+
+        if ($sessionStorage.clipBoard) {
+            OdsFormService.setClipBoard($sessionStorage.clipBoard);
+        } else {
+            $scope.toolbar.groups[clipboardIndex].components = [];
+            $sessionStorage.clipBoard = [];
+        }
+
+        function removeFromClipboard(index) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want to remove the component from clipboard?',
+                {size: 'sm'}).result.then(function () {
+
+                $scope.toolbar.groups[clipboardIndex].components.splice(index, 1);
+                $sessionStorage.clipBoard = $scope.toolbar.groups[clipboardIndex].components;
+            });
+        }
+
         function getToolbarComponent(componentType) {
+
             return OdsFormService.getToolbarComponent(componentType);
         }
     }

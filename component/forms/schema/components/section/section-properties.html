@@ -4,10 +4,11 @@
             <div class="box-body padding-top">
                 <div class="row no-vertical-margin">
                     <div class="form-group margin-bottom"
-                         ng-class="{'has-error': sectionPropertiesForm.sectionName.$invalid}">
-                        <label for="sectionName" class="col-sm-2 control-label">Name:</label>
+                         ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-sectionName.$invalid}">
+                        <label for="{{section.name}}-sectionName" class="col-sm-2 control-label">Name:</label>
                         <div class="col-sm-4">
-                            <input type="text" class="form-control" id="sectionName" name="sectionName"
+                            <input type="text" class="form-control" id="{{section.name}}-sectionName"
+                                   name="{{section.name}}-sectionName"
                                    placeholder="Name..." ng-model="section.name"
                                    ng-required="true">
                         </div>
@@ -15,10 +16,11 @@
                 </div>
                 <div class="row no-vertical-margin">
                     <div class="form-group margin-bottom"
-                         ng-class="{'has-error': sectionPropertiesForm.rows.$invalid}">
-                        <label for="rows" class="col-sm-2 control-label">Rows:</label>
+                         ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-rows.$invalid}">
+                        <label for="{{section.name}}-rows" class="col-sm-2 control-label">Rows:</label>
                         <div class="col-sm-4">
-                            <input type="number" class="form-control" id="rows" name="rows"
+                            <input type="number" class="form-control" id="{{section.name}}-rows"
+                                   name="{{section.name}}-rows"
                                    placeholder="Rows..." ng-model="section.rows.length"
                                    ng-required="false" ng-disabled="true">
                         </div>
@@ -29,10 +31,11 @@
                 </div>
                 <div class="row no-vertical-margin">
                     <div class="form-group margin-bottom"
-                         ng-class="{'has-error': sectionPropertiesForm.title.$invalid}">
-                        <label for="title" class="col-sm-2 control-label">Title:</label>
+                         ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-title.$invalid}">
+                        <label for="{{section.name}}-title" class="col-sm-2 control-label">Title:</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="title" name="title"
+                            <input type="text" class="form-control" id="{{section.name}}-title"
+                                   name="{{section.name}}-title"
                                    placeholder="Title..." ng-model="section.title"
                                    ng-required="false">
                         </div>

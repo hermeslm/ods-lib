@@ -15,9 +15,12 @@
                             $resource) {
 
         var uniqueCounter = (+new Date) % 10000;
+
         var clipBoard = [];
+        var callbacks = [];
 
         var service = {
+
             //Utils methods
             newSchema: newSchema,
             initSchema: initSchema,
@@ -30,6 +33,8 @@
             getClipBoard: getClipBoard,
             setClipBoard: setClipBoard,
             addToClipBoard: addToClipBoard,
+            onAddToClipBoard: onAddToClipBoard,
+            renameComponent: renameComponent,
             // http: http,
 
             //Templates management
@@ -821,7 +826,7 @@
                 label: 'Table',
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.TABLE,
-                cssClass: 'table table-bordered table-responsive position-relative',
+                cssClass: 'table table-bordered',
                 matrix: [
                     [newItemObject(), newItemObject()]
                 ],
@@ -1111,14 +1116,27 @@
         function setClipBoard(cb) {
 
             clipBoard = cb;
+            //notify if there are any listeners
+            for (var i = 0; i < callbacks.length; i++)
+                callbacks[i](clipBoard);
         }
 
         function addToClipBoard(item) {
 
-            clipBoard.push(item);
+            var comp = renameComponent(item);
+            clipBoard.push(comp);
+            //notify if there are any listeners
+            for (var i = 0; i < callbacks.length; i++)
+                callbacks[i](clipBoard);
+        }
+
+        function onAddToClipBoard(callback) {
+
+            callbacks.push(callback);
         }
 
         function escapeRegExp(str) {
+
             return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
         }
 
@@ -1127,6 +1145,38 @@
             // $window.prompt('Copy to clipboard: Ctrl+C, Enter', json);
             copyToClipboard(json);
             $window.alert('Code copied to clipboard!!!');
+        }
+
+        function renameComponent(component) {
+
+            var comp = angular.copy(component);
+
+            switch (comp.componentType) {
+                // case OdsComponentType.FORM:
+                //     return 'form' + uniqueCounter;
+                // case OdsComponentType.SECTION:
+                //     return 'section' + uniqueCounter;
+                // case OdsComponentType.ROW:
+                //     return 'row' + uniqueCounter;
+                // case OdsComponentType.COLUMN:
+                //     return 'column' + uniqueCounter;
+                case OdsComponentType.FIELD:
+                    comp.name = generateName(comp.componentType);
+                    if (comp.type === OdsFieldType.TABLE) {
+                        for (var i = 0; i < comp.matrix.length; i++) {
+                            for (var j = 0; j < comp.matrix[i].length; j++) {
+                                comp.matrix[i][j].name = generateName(comp.matrix[i][j].componentType);
+                            }
+                        }
+                    }
+                    return comp;
+                // case OdsComponentType.ITEM:
+                //     return 'item' + uniqueCounter;
+                // case OdsComponentType.PLUGIN:
+                //     return 'plugin' + uniqueCounter;
+                default :
+                    return uniqueCounter;
+            }
         }
 
         //TODO add get values from table field, not implemented at the moment.
@@ -1284,21 +1334,32 @@
                         for (var l = 0; l < fields.length; l++) {
                             if (fields[l].type == OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
-                                    for (var p = 0; p < fields[l].matrix[m].length; p++) {
-                                        if (cols[k].fields[l].matrix[m][p].fields[0].type === OdsFieldType.CKEDITOR) {
-                                            cols[k].fields[l].matrix[m][p].fields[0].options.prefix = config.ckeditor.prefix ? config.ckeditor.prefix : defaultCKEditorPrefix();
-                                            cols[k].fields[l].matrix[m][p].fields[0].options.suffix = config.ckeditor.suffix ? config.ckeditor.suffix : defaultCKEditorSuffix();
-                                            cols[k].fields[l].matrix[m][p].fields[0].options.suggestions = config.ckeditor.suggestions ? config.ckeditor.suggestions : [];
-                                            cols[k].fields[l].matrix[m][p].fields[0].options.tokens = config.ckeditor.tokens ? config.ckeditor.tokens : null;
+                                    var matrixRow = fields[l].matrix[m];
+                                    for (var p = 0; p < matrixRow.length; p++) {
+                                        if(matrixRow[p].fields.length > 0) {
+                                            if (matrixRow[p].fields[0].type === OdsFieldType.CKEDITOR) {
+                                                matrixRow[p].fields[0].options.prefix = config.ckeditor.prefix ?
+                                                    config.ckeditor.prefix : defaultCKEditorPrefix();
+                                                matrixRow[p].fields[0].options.suffix = config.ckeditor.suffix ?
+                                                    config.ckeditor.suffix : defaultCKEditorSuffix();
+                                                matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions ?
+                                                    config.ckeditor.suggestions : [];
+                                                matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens ?
+                                                    config.ckeditor.tokens : null;
+                                            }
                                         }
                                     }
                                 }
                             } else {
-                                if (cols[k].fields[l].type === OdsFieldType.CKEDITOR) {
-                                    cols[k].fields[l].options.prefix = config.ckeditor.prefix ? config.ckeditor.prefix : defaultCKEditorPrefix();
-                                    cols[k].fields[l].options.suffix = config.ckeditor.suffix ? config.ckeditor.suffix : defaultCKEditorSuffix();
-                                    cols[k].fields[l].options.suggestions = config.ckeditor.suggestions ? config.ckeditor.suggestions : [];
-                                    cols[k].fields[l].options.tokens = config.ckeditor.tokens ? config.ckeditor.tokens : null;
+                                if (fields[l].type === OdsFieldType.CKEDITOR) {
+                                    fields[l].options.prefix = config.ckeditor.prefix ?
+                                        config.ckeditor.prefix : defaultCKEditorPrefix();
+                                    fields[l].options.suffix = config.ckeditor.suffix ?
+                                        config.ckeditor.suffix : defaultCKEditorSuffix();
+                                    fields[l].options.suggestions = config.ckeditor.suggestions ?
+                                        config.ckeditor.suggestions : [];
+                                    fields[l].options.tokens = config.ckeditor.tokens ?
+                                        config.ckeditor.tokens : null;
                                 }
                             }
                         }

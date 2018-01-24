@@ -11,8 +11,8 @@ This project was developed from the application template seed here
 
 This repository contains a set of native AngularJS directives based on Bootstrap's markup and CSS.
 
-1. **ODS-Forms-builder:** Drag and drop dynamic bootstrap forms with angular, this component is inspired in [angular-form-gen](https://github.com/McNull/angular-form-gen). 
-                          An extendable angular module that allows you create, design and render render forms Bootstrap based. 
+1. **ODS-Forms-builder:** Drag and drop dynamic bootstrap forms builder using angular, this component is inspired in [angular-form-gen](https://github.com/McNull/angular-form-gen). 
+                          An extendable angular module that allows you create, design and render forms Bootstrap based. 
                           Field components can be dragged from a field toolbar onto a canvas, you can add fields validations. 
                           Ease way to extend by adding custom field components and validation patterns.
 2. **ODS-CKEditor:** CKEditor directive for Angular including autocompletion plugin.

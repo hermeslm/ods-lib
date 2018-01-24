@@ -57,11 +57,17 @@ function CKEditor($timeout, OdsCkeditor) {
             OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
         });
 
-        $scope.ck.on('pasteState', function () {
+        $scope.ck.on('change', function () {
             $timeout(function () {
                 $scope.ngModel = OdsCkeditor.getData($scope.name);
             }, 0, false);
         });
+
+        // ['dataReady', 'change', 'blur', 'saveSnapshot'].forEach(function (event) {
+        //     controller.onCKEvent(event, function syncView() {
+        //         ngModelController.$setViewValue(controller.instance.getData() || '');
+        //     });
+        // });
 
         $scope.$watch('disabled', function (newValue, oldValue) {
 
@@ -82,10 +88,12 @@ function CKEditor($timeout, OdsCkeditor) {
             return;
         });
 
-        $scope.$watch('ngModel', function (model) {
+        $scope.$watch('ngModel', function (model, oldModel) {
 
             $timeout(function () {
-                OdsCkeditor.setData($scope.name, model);
+                if(model !== oldModel){
+                    OdsCkeditor.setData($scope.name, model);
+                }
             }, 0, false);
             return;
         });

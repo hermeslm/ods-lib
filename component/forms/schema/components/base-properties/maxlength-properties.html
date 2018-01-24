@@ -1,9 +1,9 @@
 <div class="row no-vertical-margin">
     <div class="form-group margin-bottom"
-         ng-class="{'has-error': fieldValidationForm.maxLength.$invalid}">
-        <label for="maxLength" class="col-sm-4 control-label">Max Length:</label>
+         ng-class="{'has-error': fieldValidationForm.{{field.name}}-maxLength.$invalid}">
+        <label for="{{field.name}}-maxLength" class="col-sm-4 control-label">Max Length:</label>
         <div class="col-sm-8">
-            <input type="number" class="form-control" id="maxLength" name="maxLength"
+            <input type="number" class="form-control" id="{{field.name}}-maxLength" name="{{field.name}}-maxLength"
                    placeholder="Max Length..." ng-model="field.validation.maxlength"
                    ng-required="false" ng-change="onChangeMaxLength()">
         </div>
@@ -11,10 +11,11 @@
 </div>
 <div class="row no-vertical-margin" ng-show="field.validation.maxlength">
     <div class="form-group margin-bottom"
-         ng-class="{'has-error': fieldValidationForm.minLengthMessage.$invalid}">
-        <label for="maxLengthMessage" class="col-sm-4 control-label">Message</label>
+         ng-class="{'has-error': fieldValidationForm.{{field.name}}-minLengthMessage.$invalid}">
+        <label for="{{field.name}}-maxLengthMessage" class="col-sm-4 control-label">Message</label>
         <div class="col-sm-8">
-            <input type="text" class="form-control" id="maxLengthMessage" name="maxLengthMessage"
+            <input type="text" class="form-control" id="{{field.name}}-maxLengthMessage"
+                   name="{{field.name}}-maxLengthMessage"
                    placeholder="Max length message..." ng-model="field.validation.messages.maxlength"
                    ng-required="false">
         </div>

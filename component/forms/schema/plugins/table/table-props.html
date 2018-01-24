@@ -1,11 +1,11 @@
-<div class="container padding-top">
+<div class="padding-top">
     <div class="row">
         <form name="fieldPropsForm" class="form-horizontal">
             <div class="col-md-4 col-sm-4 col-xs-12">
-                <div class="form-group" ng-class="{'has-error': fieldPropsForm.rows.$invalid}">
-                    <label for="rows" class="control-label col-sm-5">Rows:</label>
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-rows.$invalid}">
+                    <label for="{{field.name}}-rows" class="control-label col-sm-5">Rows:</label>
                     <div class="col-sm-3">
-                        <input type="number" class="form-control" id="rows" name="rows"
+                        <input type="number" class="form-control" id="{{field.name}}-rows" name="{{field.name}}-rows"
                                placeholder="Rows..." ng-model="field.matrix.length"
                                ng-required="false" ng-disabled="true">
                     </div>
@@ -15,87 +15,96 @@
                         </button>
                     </div>
                 </div>
-                <div class="form-group" ng-class="{'has-error': fieldPropsForm.cols.$invalid}">
-                    <label for="cols" class="control-label col-sm-5">Cols:</label>
-                    <div class="col-lg-3">
-                        <input type="number" class="form-control" id="cols" name="cols"
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-cols.$invalid}">
+                    <label for="{{field.name}}-cols" class="control-label col-sm-5">Cols:</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" id="{{field.name}}-cols" name="{{field.name}}-cols"
                                placeholder="Cols..." ng-model="field.matrix[0].length"
                                ng-required="false" ng-disabled="true">
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-sm-3">
                         <button type="button" class="btn btn-primary" ng-click="addColumn()" title="Add column">
                             Add
                         </button>
                     </div>
                 </div>
-                <div class="form-group" ng-class="{'has-error': fieldPropsForm.totals.$invalid}">
-                    <label for="rowHeader" class="control-label col-sm-5">Row Header:</label>
-                    <input class="col-sm-1" type="checkbox" id="rowHeader" name="rowHeader"
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-totals.$invalid}">
+                    <label for="{{field.name}}-rowHeader" class="control-label col-sm-5">Row Header:</label>
+                    <input class="col-sm-1" type="checkbox" id="{{field.name}}-rowHeader"
+                           name="{{field.name}}-rowHeader"
                            ng-model="field.rowHeader">
                 </div>
-                <div class="form-group" ng-class="{'has-error': fieldPropsForm.canClone.$invalid}">
-                    <label for="colHeader" class="control-label col-sm-5">Col Header:</label>
-                    <input class="col-sm-1" type="checkbox" id="colHeader" name="colHeader"
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-canClone.$invalid}">
+                    <label for="{{field.name}}-colHeader" class="control-label col-sm-5">Col Header:</label>
+                    <input class="col-sm-1" type="checkbox" id="{{field.name}}-colHeader"
+                           name="{{field.name}}-colHeader"
                            ng-model="field.colHeader">
                 </div>
-                <div class="form-group" ng-class="{'has-error': fieldPropsForm.totals.$invalid}">
-                    <label for="totals" class="control-label col-sm-5">Show Totals:</label>
-                    <input class="col-sm-1" type="checkbox" id="totals" name="totals"
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-totals.$invalid}">
+                    <label for="{{field.name}}-totals" class="control-label col-sm-5">Show Totals:</label>
+                    <input class="col-sm-1" type="checkbox" id="{{field.name}}-totals" name="{{field.name}}-totals"
                            ng-model="field.totals">
                 </div>
-                <div class="form-group" ng-class="{'has-error': fieldPropsForm.canClone.$invalid}">
-                    <label for="canClone" class="control-label col-sm-5">Can clone row:</label>
-                    <input class="col-sm-1" type="checkbox" id="canClone" name="canClone"
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-canClone.$invalid}">
+                    <label for="{{field.name}}-canClone" class="control-label col-sm-5">Can clone row:</label>
+                    <input class="col-sm-1" type="checkbox" id="{{field.name}}-canClone" name="{{field.name}}-canClone"
                            ng-model="field.canCloneRow">
                 </div>
-                <div class="form-group" ng-class="{'has-error': fieldPropsForm.manageRows.$invalid}">
-                    <label for="manageRows" class="control-label col-sm-5">Manage rows:</label>
-                    <input class="col-sm-1" type="checkbox" id="manageRows" name="manageRows"
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-manageRows.$invalid}">
+                    <label for="{{field.name}}-manageRows" class="control-label col-sm-5">Manage rows:</label>
+                    <input class="col-sm-1" type="checkbox" id="{{field.name}}-manageRows"
+                           name="{{field.name}}-manageRows"
                            ng-model="field.manageRows">
                 </div>
-                <div class="form-group" ng-class="{'has-error': fieldPropsForm.manageColumns.$invalid}">
-                    <label for="manageColumns" class="control-label col-sm-5">Manage columns:</label>
-                    <input class="col-sm-1" type="checkbox" id="manageColumns" name="manageColumns"
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-manageColumns.$invalid}">
+                    <label for="{{field.name}}-manageColumns" class="control-label col-sm-5">Manage columns:</label>
+                    <input class="col-sm-1" type="checkbox" id="{{field.name}}-manageColumns"
+                           name="{{field.name}}-manageColumns"
                            ng-model="field.manageColumns">
                 </div>
             </div>
             <div class="col-md-8 col-sm-8 col-xs-12">
                 <h3>Columns configuration</h3>
-                <table class="table table-bordered table-responsive">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>CSS class</th>
-                        <th>Width</th>
-                        <th>Total</th>
-                        <th>Total Label</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="col in field.matrix[0]">
-                        <td>
-                            {{$index + 1}}
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" id="col{{$index}}" name="col{{$index}}"
-                                   placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" id="width{{$index}}" name="width{{$index}}"
-                                   placeholder="width..." ng-model="col.width">
-                        </td>
-                        <td>
-                            <input type="checkbox" id="total{{$index}}" name="total{{$index}}"
-                                   title="Add total to this column" ng-model="col.total">
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" id="totalLabel{{$index}}"
-                                   name="totalLabel{{$index}}" placeholder="Total label..."
-                                   ng-model="field.matrix[0][$index].totalLabel">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div class="table-responsive" style="max-height: 300px">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>CSS class</th>
+                            <th>Width</th>
+                            <th>Total</th>
+                            <th>Total Label</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="col in field.matrix[0]">
+                            <td>
+                                {{$index + 1}}
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="{{field.name}}-col{{$index}}"
+                                       name="{{field.name}}-col{{$index}}"
+                                       placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="{{field.name}}-width{{$index}}"
+                                       name="{{field.name}}-width{{$index}}"
+                                       placeholder="width..." ng-model="col.width">
+                            </td>
+                            <td>
+                                <input type="checkbox" id="{{field.name}}-total{{$index}}"
+                                       name="{{field.name}}-total{{$index}}"
+                                       title="Add total to this column" ng-model="col.total">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="{{field.name}}-totalLabel{{$index}}"
+                                       name="{{field.name}}-totalLabel{{$index}}" placeholder="Total label..."
+                                       ng-model="field.matrix[0][$index].totalLabel">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </form>
     </div>
