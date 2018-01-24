@@ -1,32 +1,34 @@
-<table class="{{field.cssClass}}" id="{{field.name}}">
-    <tbody>
-    <tr ng-repeat="row in field.matrix">
-        <td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}">
-            <div class="col-lg-12" ng-repeat="field in col.fields">
-                <ng-include src="getFormViewerTemplate(field.type)"></ng-include>
-            </div>
-        </td>
-        <td ng-show="field.manageRows" width="20px">
-            <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
-                    ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right">
-                <span class="fa fa-trash"></span>
-            </button>
-        </td>
-    </tr>
-    <tr ng-show="field.manageColumns">
-        <td ng-repeat="col in field.matrix[0]">
-            <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
-                    ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right">
-                <span class="fa fa-trash"></span>
-            </button>
-        </td>
-    </tr>
-    <tr ng-show="field.totals">
-        <td ng-repeat="col in field.matrix[0]">
-            <div ng-show="col.total" class="pull-right">
-                <ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total>
-            </div>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<div class="table-responsive position-relative">
+    <table class="{{field.cssClass}}" id="{{field.name}}">
+        <tbody>
+        <tr ng-repeat="row in field.matrix">
+            <td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}">
+                <div class="col-lg-12" ng-repeat="field in col.fields">
+                    <ng-include src="getFormViewerTemplate(field.type)"></ng-include>
+                </div>
+            </td>
+            <td ng-show="field.manageRows" width="20px">
+                <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
+                        ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right">
+                    <span class="fa fa-trash"></span>
+                </button>
+            </td>
+        </tr>
+        <tr ng-show="field.manageColumns">
+            <td ng-repeat="col in field.matrix[0]">
+                <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
+                        ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right">
+                    <span class="fa fa-trash"></span>
+                </button>
+            </td>
+        </tr>
+        <tr ng-show="field.totals">
+            <td ng-repeat="col in field.matrix[0]">
+                <div ng-show="col.total" class="pull-right">
+                    <ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

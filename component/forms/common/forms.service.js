@@ -826,7 +826,7 @@
                 label: 'Table',
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.TABLE,
-                cssClass: 'table table-bordered table-responsive position-relative',
+                cssClass: 'table table-bordered',
                 matrix: [
                     [newItemObject(), newItemObject()]
                 ],

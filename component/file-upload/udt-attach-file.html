@@ -1,0 +1,52 @@
+<div class="box-footer">
+    <ul class="mailbox-attachments clearfix">
+        <li ng-repeat="item in files track by item.id" data-id="{{item.id}}" ng-hide="item.hide">
+
+            <span class="pull-right" style="margin-right: 5px; cursor: hand" ng-click="deleteFile(item.id)" ng-if="!disableAttach"
+                  uib-tooltip="Delete file">
+                <i class="fa fa-remove" style="color: #a20000"></i>
+
+            </span>
+            <!--<span class="pull-right" style="margin-right: 5px;">-->
+            <!--<button class="btn-circle btn-danger btn-circle-xxs"><i class="fa fa-remove"></i></button>-->
+            <!--</span>-->
+            <!---->
+            <span class="mailbox-attachment-icon">
+                <i ng-if="(item.type.split('/')[0] == applicationType)" class="fa fa-file-pdf-o"
+                   ng-click="getFileAttached(item.type, item.id)"></i>
+                <!--<i ng-if="(item.type.split('/')[0] == imageType)" class="fa fa-picture-o"></i>-->
+                <a ng-if="(item.type.split('/')[0] == imageType)" ng-click="imageDetail(item.id, item.type);" uib-tooltip="Click to view the image">
+                    <i class="fa fa-picture-o"></i>
+                </a>
+                <i ng-if="!item.type" class="fa fa-file-pdf-o"
+                   ng-click="getFileAttached(item.type, item.id)"></i>
+            </span>
+
+            <div class="mailbox-attachment-info">
+                <p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i>
+                    {{item.name?item.name.split('')[0]:'default'}}</p>
+                <span class="mailbox-attachment-size">
+                          {{item.size}}
+                </span>
+            </div>
+        </li>
+        <li ng-show="!isSigned && !disableAttach" >
+            <span class="mailbox-attachment-icon">
+                <button type="button" ngf-select style="background-color: white; border: aliceblue;"
+                        uib-tooltip="Add attachment"
+                        ngf-change="attachFile($file, attachFileData)" accept="image/*,pdf,csv">
+                    <i class="fa fa-paperclip"></i>
+                </button>
+            </span>
+
+            <div class="mailbox-attachment-info">
+                <p class="mailbox-attachment-name"> Add New Attachment </p>
+            </div>
+        </li>
+        <li ng-if="files.length == 0 && disableAttach">
+            <div class="col-xs-12 block-mt5">
+                <p>No attachments.</p>
+            </div>
+        </li>
+    </ul>
+</div>
