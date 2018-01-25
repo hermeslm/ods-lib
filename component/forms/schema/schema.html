@@ -9,7 +9,7 @@
                 from the <strong>toolbar</strong> down to this <strong>canvas</strong>.</p>
         </div>
     </div>
-    <ul dnd-list="schema.layout" dnd-allowed-types="schema.allowedTypes">
+    <ul dnd-list="schema.layout" dnd-allowed-types="schema.allowedTypes" dnd-inserted="onAdd(item, type)">
         <li class="box-schema-section" ng-repeat="section in schema.layout"
             dnd-draggable="section"
             dnd-disable-if="section.componentType == undefined"
