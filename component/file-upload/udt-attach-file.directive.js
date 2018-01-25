@@ -6,7 +6,7 @@
 
     angular
         .module('ods-lib')
-        .directive('udtAttach', Attach);
+        .directive('udtAttach1', Attach);
 
     Attach.$inject = ['$state', 'File', '$sessionStorage', 'CoreService', 'toastr', 'fancyboxService'];
 

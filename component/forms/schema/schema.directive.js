@@ -28,9 +28,22 @@ function SchemaDirective(OdsFormService) {
 
     function linkFunc($scope) {
 
-        if(!$scope.schema) {
+        $scope.onAdd = onAdd;
+
+        if (!$scope.schema) {
             $scope.schema = OdsFormService.newSchema();
             // $scope.schema = OdsFormService.initSchema($scope.schema);
         }
+
+        /**
+         * Catch onAdd event in drag and drop for setting field properties
+         * @param item Field
+         * @param type Field type.
+         */
+        function onAdd(item, type) {
+
+            $scope.schema.layout.push(OdsFormService.newSectionObject());
+        }
+
     }
 }

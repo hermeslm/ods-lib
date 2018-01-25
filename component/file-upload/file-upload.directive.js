@@ -2,11 +2,11 @@
 
 angular
     .module('ods-lib')
-    .directive('address', Address);
+    .directive('odsFileUpload', OdsFileUpload);
 
-Address.$inject = ['$uibModal'];
+OdsFileUpload.$inject = ['$uibModal'];
 
-function Address($uibModal) {
+function OdsFileUpload($uibModal) {
 
     return {
         restrict: 'E',
