@@ -65,6 +65,11 @@ function FormDirective(OdsFormService, $timeout) {
         //CKEditor specific
         $scope.valueSubtitutor = valueSubtitutor;
 
+        /**
+         * Hide title or label from component
+         * @param field Component
+         * @returns {boolean}
+         */
         function hideTitle(field) {
 
             return field.hideLabel ? true : false;

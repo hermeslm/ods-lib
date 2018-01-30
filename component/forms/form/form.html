@@ -17,7 +17,7 @@
                     <strong>Information! </strong>{{message}}
                 </div>
                 <div ng-repeat="section in schema.layout">
-                    <h4 ng-bind-html="section.title"></h4>
+                    <h4 ng-bind-html="section.title" ng-hide="hideTitle(section)"></h4>
                     <div class="{{row.cssClass}}" ng-repeat="row in section.rows">
                         <div class="{{col.cssClass}}" ng-repeat="col in row.cols">
                             <div class="" ng-repeat="field in col.fields">

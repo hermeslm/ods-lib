@@ -36,6 +36,7 @@ function RowDirective(OdsFormService, dialogs) {
         $scope.removeColumn = removeColumn;
         $scope.onAdd = onAdd;
         $scope.dropCallback = dropCallback;
+        $scope.onChangeColWith = onChangeColWith;
 
         function dropCallback(index, item, external, type) {
 
@@ -111,8 +112,17 @@ function RowDirective(OdsFormService, dialogs) {
                 {size: 'sm'}).result.then(function (btn) {
 
                 $scope.row.cols.splice(index, 1);
-                $scope.tableParams.reload();
             });
+        }
+
+        /**
+         * Change col width.
+         * @param col Column to change width.
+         */
+        function onChangeColWith(col) {
+
+            col.cssClass = ' col-xs-' + col.width + ' col-sm-' + col.width +
+                ' col-md-' + col.width + ' col-lg-' + col.width;
         }
     }
 }
