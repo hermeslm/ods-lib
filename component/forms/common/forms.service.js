@@ -542,7 +542,7 @@
 
             return {
                 name: generateName(OdsComponentType.COLUMN),
-                cssClass: 'col-lg-' + colWidth,
+                cssClass: ' col-xs-' + colWidth + ' col-sm-' + colWidth + ' col-md-' + colWidth + ' col-lg-' + colWidth,
                 allowedTypes: [
                     OdsComponentType.FIELD
                 ],
@@ -1336,7 +1336,7 @@
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     var matrixRow = fields[l].matrix[m];
                                     for (var p = 0; p < matrixRow.length; p++) {
-                                        if(matrixRow[p].fields.length > 0) {
+                                        if (matrixRow[p].fields.length > 0) {
                                             if (matrixRow[p].fields[0].type === OdsFieldType.CKEDITOR) {
                                                 matrixRow[p].fields[0].options.prefix = config.ckeditor.prefix ?
                                                     config.ckeditor.prefix : defaultCKEditorPrefix();

@@ -46,6 +46,7 @@
                                 <tr>
                                     <th>Columns #</th>
                                     <th>CSS class</th>
+                                    <th width="20px">Width</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -56,7 +57,11 @@
                                     </td>
                                     <td>
                                         <input type="text" name="cssClass" ng-model="col.cssClass"
-                                               class="form-control input-sm" required/>
+                                               class="form-control input-sm" required readonly/>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="width" class="form-control input-sm"
+                                               max="12" min="1" ng-model="col.width" ng-change="onChangeColWith(col)"/>
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-danger btn-sm"

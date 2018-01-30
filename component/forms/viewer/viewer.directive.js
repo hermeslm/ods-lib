@@ -44,6 +44,17 @@ function ViewerDirective(OdsFormService, uibDateParser) {
         $scope.getFieldChecklistFromValues = getFieldChecklistFromValues;
 
         $scope.dateTimeRender = dateTimeRender;
+        $scope.hideTitle = hideTitle;
+
+        /**
+         * Hide title or label from component
+         * @param field Component
+         * @returns {boolean}
+         */
+        function hideTitle(field) {
+
+            return field.hideLabel ? true : false;
+        }
 
         /**
          * Return Form Viewer template for every field.
