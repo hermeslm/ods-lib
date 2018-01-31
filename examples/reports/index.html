@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>AngularJS ODS Lib</title>
 
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
 
@@ -36,40 +37,12 @@
 
 </head>
 <body ng-controller="MainCtrl">
-<div class="container-fluid">
+<div class="container">
 
-    <section class="content-header">
-        <div class="starter-template">
-            <h1>CKEditor autocomplete plugin</h1>
-            <p>A CKEditor Plugin to Show suggestion while you type, the suggestion are defined by you and the action key
-                to
-                trigger plugin is also developer defined.</p>
-        </div>
-    </section>
-    <section class="content">
-        <div class="row">
-            <div class="col-lg-12">
-                <p class="color-red">Press CTRL + space to show suggestions</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-12">
-                <button type="button" class="btn btn-primary" ng-click="changePrefixAndSuffix()">Change prefix and
-                    suffix
-                </button>
-                <button type="button" class="btn btn-success" ng-click="changeSuggestions()">Change Suggestions</button>
-                <button type="button" class="btn btn-info" ng-click="toggleReadOnly()">Toggle read only</button>
-                <button type="button" class="btn btn-danger" ng-click="reset()">Reset</button>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-lg-12">
-                <textarea ng-model="content" id="ckeditorBox" ck="ck" name="ckeditorBox" options="options"
-                          ods-ckeditor ng-disabled="isReadOnly"></textarea>
-            </div>
-        </div>
-    </section>
+    <div class="starter-template">
+        <h1>Report-View Directive</h1>
+        <ods-reports reports-group="reportsGroup"></ods-reports>
+    </div>
 
 </div>
 
@@ -120,11 +93,8 @@
 <!-- endinject -->
 <!-- inject:js -->
 <script src="../dist/ods-lib.js"></script>
-<script src="index.js"></script>
 <script src="app.js"></script>
 <!-- endinject -->
 <!-- endbuild -->
-
-<script src="../bower_components/ckeditor/plugins/autocomplete/plugin.js"></script>
 </body>
 </html>

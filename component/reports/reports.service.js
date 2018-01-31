@@ -8,9 +8,9 @@
         .module('ods-lib')
         .factory('OdsReportsService', OdsReportsService);
 
-    OdsReportsService.$inject = ['$q', '$http', 'moment', 'OdsParamType', 'DateUtils', '$window'];
+    OdsReportsService.$inject = ['$q', '$http', 'moment', 'OdsParamType', 'OdsDateUtils', '$window'];
 
-    function OdsReportsService($q, $http, moment, OdsParamType, DateUtils, $window) {
+    function OdsReportsService($q, $http, moment, OdsParamType, OdsDateUtils, $window) {
 
         var pdfFooter = function (currentPage, pageCount) {
             return {
@@ -43,7 +43,7 @@
                         switch (report.params[i].type) {
                             case OdsParamType.DATE:
                                 filters += report.params[i].title + ': ' +
-                                    DateUtils.formatter(report.params[i].value, 'MM/dd/yyyy') + '\n';
+                                    OdsDateUtils.formatter(report.params[i].value, 'MM/dd/yyyy') + '\n';
                                 break;
                             // case ParamType.NUMBER:
                             //     filters += report.params[i].title + ': ' + report.params[i].value + '\n';
@@ -256,7 +256,7 @@
                 var value;
                 switch (report.params[i].type) {
                     case OdsParamType.DATE:
-                        value = DateUtils.convertLocalDateToServer(report.params[i].value);
+                        value = OdsDateUtils.convertLocalDateToServer(report.params[i].value);
                         break;
                     default:
                         value = report.params[i].value;
@@ -279,7 +279,7 @@
                 };
                 switch (report.params[i].type) {
                     case OdsParamType.DATE:
-                        param.value = [DateUtils.convertLocalDateToServer(report.params[i].value)];
+                        param.value = [OdsDateUtils.convertLocalDateToServer(report.params[i].value)];
                         break;
                     case OdsParamType.LIST:
                         param.value = [report.params[i].value];

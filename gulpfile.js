@@ -164,6 +164,22 @@ gulp.task('address-inject', function () {
         .pipe(gulp.dest('./examples/address'));
 });
 
+//Reports tasks
+gulp.task('reports-inject', function () {
+    return gulp.src('./examples/reports/index.html')
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {
+            name: 'bower',
+            relative: true
+        }))
+        .pipe(inject(es.merge(
+            gulp.src(['./examples/reports/**/*.css', './examples/dist/**/*.css', '!./bower_components/**'], {read: false}),
+            gulp.src(['./examples/reports/**/*.js', './examples/dist/ods-lib.js', '!./bower_components/**'])
+                .pipe(naturalSort())
+                .pipe(angularFilesort())
+        ), {relative: true}))
+        .pipe(gulp.dest('./examples/reports'));
+});
+
 gulp.task('test', function () {
 
     karmaConfig({
@@ -190,8 +206,8 @@ gulp.task('ci', function () {
 
 // gulp.task('build', ['clean', 'templates', 'scripts']);
 gulp.task('build', function (done) {
-    runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss',
-        'forms-inject', 'ckeditor-inject', 'jsig-inject', 'address-inject', 'copy-lib-to-samples', function () {
+    runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss', 'forms-inject',
+        'ckeditor-inject', 'jsig-inject', 'address-inject', 'reports-inject', 'copy-lib-to-samples', function () {
             // console.log('Run something else');
             done();
         })
