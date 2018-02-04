@@ -15,7 +15,7 @@
             scope: {//all this scope value defined, are attr for the directive. Can be used like is explained below
                 image: '=',//modal field for the image value
                 typeImage: '=',//modal field form the image type
-                class: '@',//form for the image component. Can be square or circle[e.g: class="img-circle/img-square"]
+                cssClass: '@',//form for the image component. Can be square or circle[e.g: class="img-circle/img-square"]
                 css: '@',
                 ngModel: '='
             },
