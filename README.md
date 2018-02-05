@@ -19,7 +19,9 @@ This repository contains a set of native AngularJS directives based on Bootstrap
 3. **ODS-Signature:** AngularJs Directive for jSignature library. It is a JavaScript widget (a jQuery plugin) that simplifies creation 
                       of a signature capture field in a browser window, allowing a user to draw a signature using mouse, pen, or finger.
 4. **ODS-Address:** Useful directive that allow to have an address management adding an input group field. It open a modal windows where you 
-                    can handle all address fields.                         
+                    can handle all address fields.
+5. **ODS-Img-Upload:** Useful directive that allow to upload images(profile images, logo images) and edit using a crop tool. 
+                                             
 
 ## Demos.
 

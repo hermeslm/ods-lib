@@ -293,6 +293,224 @@ function Address($uibModal) {
 
 angular
     .module('ods-lib')
+    .directive('odsFileUpload', OdsFileUpload);
+
+OdsFileUpload.$inject = ['$uibModal'];
+
+function OdsFileUpload($uibModal) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'address/address.html',
+        scope: {
+            label: '@',
+            address: '=',
+            countries: '=',
+            states: '=',
+            ngModel: '='
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.openModal = function () {
+            $uibModal.open({
+                templateUrl: 'address/address-dialog.html',
+                controller: 'AddressDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    address: function () {
+                        if ($scope.ngModel !== null) {
+                            return $scope.ngModel;
+                            // {
+                            //     address: $scope.ngModel.address,
+                            //     address2: $scope.ngModel.address2,
+                            //     city: $scope.ngModel.city,
+                            //     state: $scope.ngModel.state,
+                            //     zip: $scope.ngModel.zip,
+                            //     // country: $scope.ngModel.country,
+                            //     phone: $scope.ngModel.phone,
+                            //     mobile: $scope.ngModel.mobile,
+                            //     fax: $scope.ngModel.fax,
+                            //     email: $scope.ngModel.email,
+                            //     notes: $scope.ngModel.notes
+                            // }
+                        } else {
+                            return null;
+                        }
+                    },
+                    countries: function () {
+                        return $scope.countries;
+                    },
+                    states: function () {
+                        return $scope.states;
+                    }
+
+                }
+            }).result.then(function (result) {
+                // $element.
+                updateValue(result);
+                //$state.go($state.current.name, null, {reload: $state.current.name});
+            }, function (result) {
+                //$state.go($state.current.name);
+            });
+        };
+
+        $scope.printName = printName;
+
+        function printName(address) {
+            if (address != null) {
+                return address.street + ' ' +
+                    address.street2 + ' ' +
+                    address.city + ',' +
+                    address.state.name + ' ' +
+                    address.zip
+            } else {
+                return '';
+            }
+        }
+
+        function updateValue(value) {
+            // var input = $element[0].getElementsByTagName('input');
+            $scope.ngModel = value;
+        }
+
+    }
+}
+/**
+ * Created by PpTMUnited on 5/23/2017.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .directive('udtAttach1', Attach);
+
+    Attach.$inject = ['$state', 'File', '$sessionStorage', 'CoreService', 'toastr', 'fancyboxService'];
+
+    function Attach($state, File, $sessionStorage, CoreService, toastr, fancyboxService) {
+
+        var directive = {
+            restrict: 'E',
+            templateUrl: 'app/components/udt/udt-attach-file/udt-attach-file.html',
+            scope: {//all this scope value defined, are attr for the directive. Can be used like is explained below
+                formId: '@',//id of the form you wanna find the attachments
+                isSigned: '=',//if is already signed, don't add more files
+                disableAttach: '=',//if we dont want to attach anything, just view the files
+                redirect: '=',//if we want to redirect to an state
+                attach: '&', //You must define attach method
+                delete: '&', //You must define delete method
+                list: '&'
+            },
+            link: linkFunc
+        };
+
+        return directive;
+
+        /* private helper methods*/
+
+        function linkFunc($scope, element) {
+            $scope.imageType = 'image';
+            $scope.applicationType = 'application';
+            $scope.attachFileData = {};
+
+            // loadAllFiles();
+            //
+            // function loadAllFiles() {
+            //     if ($scope.formId && $scope.formId !== "") {
+            //         File.byOwner({id: $scope.formId}, function (result) {
+            //             $scope.files = result;
+            //         });
+            //     } else {
+            //         console.log('Not Form Id ');
+            //     }
+            // }
+
+            $scope.list()().then(function (data) {
+                $scope.files = data;
+            });
+
+            $scope.imageDetail = function (id, type) {
+                File.findFileById({id: id}).$promise
+                    .then(function (data) {
+                        if (data && data.file) {
+                            fancyboxService.fancyboxPlus()({
+                                // 'padding': 0,
+                                'href': 'data:' + type + ';base64,' + data.file,
+                                'title': data.name,
+                                // 'titlePosition'  : 'over',
+                                'transitionIn': 'elastic',
+                                'transitionOut': 'elastic'
+                            });
+                        } else {
+                            toastr.warning("The file was not found.");
+                        }
+                    });
+            }
+
+
+            $scope.getFileAttached = function (fileType, id) {
+                $sessionStorage.typeFile = fileType;
+                File.findFile({id: id});
+            };
+
+            /**
+             * Attach a file
+             * @param file
+             * @param data
+             */
+            $scope.attachFile = function (file, data) {
+                CoreService.attachment(file, data).then(function (result) {
+                    result.id = $scope.formId;
+                    $scope.attach()(result, successResult, errorResult);
+                    // SystemService.attachConsent(result, successResult, errorResult);
+                });
+            };
+
+            /**
+             * Delete a file
+             * @param fileId
+             */
+            $scope.deleteFile = function (fileId) {
+                $scope.delete()(fileId).then(function (data) {
+                    $scope.files.map(function (file) {
+                        if (file.id == fileId) {
+                            file.hide = true;
+                        }
+                    })
+                    // $('li[data-id="' + fileId + '"]').detach();
+                });
+            };
+
+            var successResult = function (result) {
+                if ($scope.redirect) {
+                    $state.go($state.current, {}, {reload: true});
+                } else {
+                    // loadAllFiles();
+                    $scope.list()().then(function (data) {
+                        $scope.files = data;
+                    });
+                }
+            };
+
+            var errorResult = function (error) {
+                console.log(error)
+            };
+
+        }
+    }
+})();
+
+'use strict';
+
+angular
+    .module('ods-lib')
     .directive('odsCkeditor', CKEditor);
 
 CKEditor.$inject = ['$timeout', 'OdsCkeditor'];
@@ -511,224 +729,6 @@ function OdsCkeditor() {
 
     return service;
 }
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsFileUpload', OdsFileUpload);
-
-OdsFileUpload.$inject = ['$uibModal'];
-
-function OdsFileUpload($uibModal) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'address/address.html',
-        scope: {
-            label: '@',
-            address: '=',
-            countries: '=',
-            states: '=',
-            ngModel: '='
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.openModal = function () {
-            $uibModal.open({
-                templateUrl: 'address/address-dialog.html',
-                controller: 'AddressDialogController',
-                controllerAs: 'vm',
-                backdrop: 'static',
-                size: 'lg',
-                resolve: {
-                    address: function () {
-                        if ($scope.ngModel !== null) {
-                            return $scope.ngModel;
-                            // {
-                            //     address: $scope.ngModel.address,
-                            //     address2: $scope.ngModel.address2,
-                            //     city: $scope.ngModel.city,
-                            //     state: $scope.ngModel.state,
-                            //     zip: $scope.ngModel.zip,
-                            //     // country: $scope.ngModel.country,
-                            //     phone: $scope.ngModel.phone,
-                            //     mobile: $scope.ngModel.mobile,
-                            //     fax: $scope.ngModel.fax,
-                            //     email: $scope.ngModel.email,
-                            //     notes: $scope.ngModel.notes
-                            // }
-                        } else {
-                            return null;
-                        }
-                    },
-                    countries: function () {
-                        return $scope.countries;
-                    },
-                    states: function () {
-                        return $scope.states;
-                    }
-
-                }
-            }).result.then(function (result) {
-                // $element.
-                updateValue(result);
-                //$state.go($state.current.name, null, {reload: $state.current.name});
-            }, function (result) {
-                //$state.go($state.current.name);
-            });
-        };
-
-        $scope.printName = printName;
-
-        function printName(address) {
-            if (address != null) {
-                return address.street + ' ' +
-                    address.street2 + ' ' +
-                    address.city + ',' +
-                    address.state.name + ' ' +
-                    address.zip
-            } else {
-                return '';
-            }
-        }
-
-        function updateValue(value) {
-            // var input = $element[0].getElementsByTagName('input');
-            $scope.ngModel = value;
-        }
-
-    }
-}
-/**
- * Created by PpTMUnited on 5/23/2017.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .directive('udtAttach1', Attach);
-
-    Attach.$inject = ['$state', 'File', '$sessionStorage', 'CoreService', 'toastr', 'fancyboxService'];
-
-    function Attach($state, File, $sessionStorage, CoreService, toastr, fancyboxService) {
-
-        var directive = {
-            restrict: 'E',
-            templateUrl: 'app/components/udt/udt-attach-file/udt-attach-file.html',
-            scope: {//all this scope value defined, are attr for the directive. Can be used like is explained below
-                formId: '@',//id of the form you wanna find the attachments
-                isSigned: '=',//if is already signed, don't add more files
-                disableAttach: '=',//if we dont want to attach anything, just view the files
-                redirect: '=',//if we want to redirect to an state
-                attach: '&', //You must define attach method
-                delete: '&', //You must define delete method
-                list: '&'
-            },
-            link: linkFunc
-        };
-
-        return directive;
-
-        /* private helper methods*/
-
-        function linkFunc($scope, element) {
-            $scope.imageType = 'image';
-            $scope.applicationType = 'application';
-            $scope.attachFileData = {};
-
-            // loadAllFiles();
-            //
-            // function loadAllFiles() {
-            //     if ($scope.formId && $scope.formId !== "") {
-            //         File.byOwner({id: $scope.formId}, function (result) {
-            //             $scope.files = result;
-            //         });
-            //     } else {
-            //         console.log('Not Form Id ');
-            //     }
-            // }
-
-            $scope.list()().then(function (data) {
-                $scope.files = data;
-            });
-
-            $scope.imageDetail = function (id, type) {
-                File.findFileById({id: id}).$promise
-                    .then(function (data) {
-                        if (data && data.file) {
-                            fancyboxService.fancyboxPlus()({
-                                // 'padding': 0,
-                                'href': 'data:' + type + ';base64,' + data.file,
-                                'title': data.name,
-                                // 'titlePosition'  : 'over',
-                                'transitionIn': 'elastic',
-                                'transitionOut': 'elastic'
-                            });
-                        } else {
-                            toastr.warning("The file was not found.");
-                        }
-                    });
-            }
-
-
-            $scope.getFileAttached = function (fileType, id) {
-                $sessionStorage.typeFile = fileType;
-                File.findFile({id: id});
-            };
-
-            /**
-             * Attach a file
-             * @param file
-             * @param data
-             */
-            $scope.attachFile = function (file, data) {
-                CoreService.attachment(file, data).then(function (result) {
-                    result.id = $scope.formId;
-                    $scope.attach()(result, successResult, errorResult);
-                    // SystemService.attachConsent(result, successResult, errorResult);
-                });
-            };
-
-            /**
-             * Delete a file
-             * @param fileId
-             */
-            $scope.deleteFile = function (fileId) {
-                $scope.delete()(fileId).then(function (data) {
-                    $scope.files.map(function (file) {
-                        if (file.id == fileId) {
-                            file.hide = true;
-                        }
-                    })
-                    // $('li[data-id="' + fileId + '"]').detach();
-                });
-            };
-
-            var successResult = function (result) {
-                if ($scope.redirect) {
-                    $state.go($state.current, {}, {reload: true});
-                } else {
-                    // loadAllFiles();
-                    $scope.list()().then(function (data) {
-                        $scope.files = data;
-                    });
-                }
-            };
-
-            var errorResult = function (error) {
-                console.log(error)
-            };
-
-        }
-    }
-})();
-
 'use strict';
 
 angular
@@ -5555,6 +5555,341 @@ function ModelDirective(OdsFormService) {
 
 angular
     .module('ods-lib')
+    .directive('odsSuggestionOptions', SuggestionOptionsDirective);
+
+SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor', '$timeout'];
+
+function SuggestionOptionsDirective(OdsFormService, OdsCkeditor, $timeout) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
+        scope: {
+            field: '=',
+            config: '=',
+            profile: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        if ($scope.config && $scope.config.ckeditor) {
+            $scope.field.options.prefix = $scope.config.ckeditor.prefix ?
+                $scope.config.ckeditor.prefix : OdsFormService.defaultCKEditorPrefix();
+            $scope.field.options.suffix = $scope.config.ckeditor.suffix ?
+                $scope.config.ckeditor.suffix : OdsFormService.defaultCKEditorSuffix();
+            $scope.field.options.tokensUrl = $scope.config.ckeditor.tokensUrl ?
+                $scope.config.ckeditor.tokensUrl : '';
+            $scope.field.options.suggestions = $scope.config.ckeditor.suggestions ?
+                $scope.config.ckeditor.suggestions : [];
+        }
+
+        $scope.options = initOptions();
+        $scope.addOption = addOption;
+        $scope.removeOption = removeOption;
+        $scope.refreshOption = refreshOption;
+        $scope.loadSuggestions = loadSuggestions;
+        $scope.loadTokens = loadTokens;
+
+        function initOptions() {
+
+            var options = [];
+            for (var i = 0; i < $scope.field.options.suggestions.length; i++) {
+                var option = {
+                    id: $scope.field.options.suggestions[i].id,
+                    label: $scope.field.options.suggestions[i].label
+                };
+                options.push(option);
+            }
+            return options;
+        }
+
+        function addOption() {
+
+            var option = {
+                id: '',
+                label: ''
+            };
+
+            $scope.options.push(option);
+        }
+
+        function removeOption(index) {
+
+            $scope.options.suggestions.splice(index, 1);
+        }
+
+        function refreshOption() {
+
+            OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
+            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
+        }
+
+        function loadSuggestions(url) {
+
+            OdsFormService.restResource(url).query(function (result) {
+                $scope.options = result;
+            });
+        }
+
+        function loadTokens(url) {
+
+            OdsFormService.restResource(url).get(function (result) {
+                $scope.field.options.tokens = result;
+            });
+        }
+
+        $scope.$watch('options', function (model) {
+
+            var options = [];
+            for (var i = 0; i < model.length; i++) {
+                var option = {};
+                option.id = model[i].id;
+                option.label = model[i].label;
+                options.push(option);
+            }
+            $scope.field.options.suggestions = options;
+        }, true);
+    }
+}
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableProps', TablePropsDirective);
+
+TablePropsDirective.$inject = ['OdsFormService'];
+
+function TablePropsDirective(OdsFormService) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table-props.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope, $element) {
+
+        $scope.addRow = addRow;
+        $scope.addColumn = addColumn;
+
+        /**
+         * Add row to the table
+         */
+        function addRow() {
+            var columnLength = $scope.field.matrix[0].length;
+            var row = [];
+            for (var i = 0; i < columnLength; i++) {
+                row.push(OdsFormService.newItemObject());
+            }
+            $scope.field.matrix.push(row);
+        }
+
+        /**
+         * Add column to the table.
+         * @param row Row to add column.
+         */
+        function addColumn() {
+            for (var i = 0; i < $scope.field.matrix.length; i++) {
+                $scope.field.matrix[i].push(OdsFormService.newItemObject());
+            }
+        }
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTable', TableDirective);
+
+TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
+
+function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element) {
+
+        $scope.removeRow = removeRow;
+        $scope.removeColumn = removeColumn;
+        $scope.onAdd = onAdd;
+        $scope.cloneRow = cloneRow;
+        $scope.swapRow = swapRow;
+        $scope.swapColumn = swapColumn;
+        $scope.checkItem = checkItem;
+
+        function checkItem(index, item, external, type) {
+
+            //We prevent add recursively a table inside other.
+            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
+                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.',
+                    {size: 'sm'});
+                return false;
+            } else return item;
+
+        }
+
+        function onAdd(item, type) {
+
+            OdsFormService.onAdd(item, type);
+        };
+
+        /**
+         * Remove row from section.
+         * @param table Table to remove row
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            OdsFormService.removeRow(table, index);
+        }
+
+        /**
+         * Add column to current row.
+         * @param table Table to remove column
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            OdsFormService.removeColumn(table, index);
+        }
+
+        function cloneRow(table) {
+
+            OdsFormService.cloneRow(table);
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapRow(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
+                {size: 'sm'}).result.then(function (btn) {
+
+                // var _previousValue = [];
+                // angular.copy($scope.field.matrix, _previousValue);
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix.length ||
+                    idx2 >= $scope.field.matrix.length) {
+
+                    return;
+                }
+                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
+
+            });
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapColumn(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
+                {size: 'sm'}).result.then(function (btn) {
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix[idx1].length ||
+                    idx2 >= $scope.field.matrix[idx2].length) {
+
+                    return;
+                }
+                for (var i = 0; i < $scope.field.matrix.length; i++) {
+                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
+                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
+                    $scope.field.matrix[i][idx1] = tmp;
+                }
+            });
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableTotal', TableTotalDirective);
+
+TableTotalDirective.$inject = ['OdsFormService'];
+
+function TableTotalDirective(OdsFormService) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/total.html',
+        scope: {
+            field: '=',
+            label: '=',
+            colIndex: '='
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.total = 0;
+        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
+
+        $scope.$watch('field', function (model) {
+            $scope.total = total(model);
+        }, true);
+
+        function total(model) {
+            var index = $scope.colIndex;
+            var total = 0;
+            for (var i = 0; i < model.matrix.length; i++) {
+
+                if (model.matrix[i][index].fields.length > 0) {
+                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
+                }
+            }
+            return total;
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
     .directive('odsFieldCheckboxlistOptions', FieldCheckboxlistOptionsDirective);
 
 FieldCheckboxlistOptionsDirective.$inject = ['OdsFormService'];
@@ -6264,341 +6599,6 @@ function FieldSelectOptionsDirective(OdsFormService) {
             }
             $scope.field.options = options;
         }, true);
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsSuggestionOptions', SuggestionOptionsDirective);
-
-SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor', '$timeout'];
-
-function SuggestionOptionsDirective(OdsFormService, OdsCkeditor, $timeout) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
-        scope: {
-            field: '=',
-            config: '=',
-            profile: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope) {
-
-        if ($scope.config && $scope.config.ckeditor) {
-            $scope.field.options.prefix = $scope.config.ckeditor.prefix ?
-                $scope.config.ckeditor.prefix : OdsFormService.defaultCKEditorPrefix();
-            $scope.field.options.suffix = $scope.config.ckeditor.suffix ?
-                $scope.config.ckeditor.suffix : OdsFormService.defaultCKEditorSuffix();
-            $scope.field.options.tokensUrl = $scope.config.ckeditor.tokensUrl ?
-                $scope.config.ckeditor.tokensUrl : '';
-            $scope.field.options.suggestions = $scope.config.ckeditor.suggestions ?
-                $scope.config.ckeditor.suggestions : [];
-        }
-
-        $scope.options = initOptions();
-        $scope.addOption = addOption;
-        $scope.removeOption = removeOption;
-        $scope.refreshOption = refreshOption;
-        $scope.loadSuggestions = loadSuggestions;
-        $scope.loadTokens = loadTokens;
-
-        function initOptions() {
-
-            var options = [];
-            for (var i = 0; i < $scope.field.options.suggestions.length; i++) {
-                var option = {
-                    id: $scope.field.options.suggestions[i].id,
-                    label: $scope.field.options.suggestions[i].label
-                };
-                options.push(option);
-            }
-            return options;
-        }
-
-        function addOption() {
-
-            var option = {
-                id: '',
-                label: ''
-            };
-
-            $scope.options.push(option);
-        }
-
-        function removeOption(index) {
-
-            $scope.options.suggestions.splice(index, 1);
-        }
-
-        function refreshOption() {
-
-            OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
-            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
-        }
-
-        function loadSuggestions(url) {
-
-            OdsFormService.restResource(url).query(function (result) {
-                $scope.options = result;
-            });
-        }
-
-        function loadTokens(url) {
-
-            OdsFormService.restResource(url).get(function (result) {
-                $scope.field.options.tokens = result;
-            });
-        }
-
-        $scope.$watch('options', function (model) {
-
-            var options = [];
-            for (var i = 0; i < model.length; i++) {
-                var option = {};
-                option.id = model[i].id;
-                option.label = model[i].label;
-                options.push(option);
-            }
-            $scope.field.options.suggestions = options;
-        }, true);
-    }
-}
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableProps', TablePropsDirective);
-
-TablePropsDirective.$inject = ['OdsFormService'];
-
-function TablePropsDirective(OdsFormService) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table-props.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope, $element) {
-
-        $scope.addRow = addRow;
-        $scope.addColumn = addColumn;
-
-        /**
-         * Add row to the table
-         */
-        function addRow() {
-            var columnLength = $scope.field.matrix[0].length;
-            var row = [];
-            for (var i = 0; i < columnLength; i++) {
-                row.push(OdsFormService.newItemObject());
-            }
-            $scope.field.matrix.push(row);
-        }
-
-        /**
-         * Add column to the table.
-         * @param row Row to add column.
-         */
-        function addColumn() {
-            for (var i = 0; i < $scope.field.matrix.length; i++) {
-                $scope.field.matrix[i].push(OdsFormService.newItemObject());
-            }
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTable', TableDirective);
-
-TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
-
-function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.removeRow = removeRow;
-        $scope.removeColumn = removeColumn;
-        $scope.onAdd = onAdd;
-        $scope.cloneRow = cloneRow;
-        $scope.swapRow = swapRow;
-        $scope.swapColumn = swapColumn;
-        $scope.checkItem = checkItem;
-
-        function checkItem(index, item, external, type) {
-
-            //We prevent add recursively a table inside other.
-            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
-                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.',
-                    {size: 'sm'});
-                return false;
-            } else return item;
-
-        }
-
-        function onAdd(item, type) {
-
-            OdsFormService.onAdd(item, type);
-        };
-
-        /**
-         * Remove row from section.
-         * @param table Table to remove row
-         * @param index Row index to remove.
-         */
-        function removeRow(table, index) {
-
-            OdsFormService.removeRow(table, index);
-        }
-
-        /**
-         * Add column to current row.
-         * @param table Table to remove column
-         * @param row Row to add column.
-         */
-        function removeColumn(table, index) {
-
-            OdsFormService.removeColumn(table, index);
-        }
-
-        function cloneRow(table) {
-
-            OdsFormService.cloneRow(table);
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapRow(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                // var _previousValue = [];
-                // angular.copy($scope.field.matrix, _previousValue);
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix.length ||
-                    idx2 >= $scope.field.matrix.length) {
-
-                    return;
-                }
-                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
-
-            });
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapColumn(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix[idx1].length ||
-                    idx2 >= $scope.field.matrix[idx2].length) {
-
-                    return;
-                }
-                for (var i = 0; i < $scope.field.matrix.length; i++) {
-                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
-                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
-                    $scope.field.matrix[i][idx1] = tmp;
-                }
-            });
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableTotal', TableTotalDirective);
-
-TableTotalDirective.$inject = ['OdsFormService'];
-
-function TableTotalDirective(OdsFormService) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/total.html',
-        scope: {
-            field: '=',
-            label: '=',
-            colIndex: '='
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.total = 0;
-        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
-
-        $scope.$watch('field', function (model) {
-            $scope.total = total(model);
-        }, true);
-
-        function total(model) {
-            var index = $scope.colIndex;
-            var total = 0;
-            for (var i = 0; i < model.matrix.length; i++) {
-
-                if (model.matrix[i][index].fields.length > 0) {
-                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
-                }
-            }
-            return total;
-        }
     }
 }
 
