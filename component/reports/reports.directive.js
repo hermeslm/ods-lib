@@ -13,7 +13,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
 
     var directive = {
         restrict: 'E',
-        templateUrl: 'app/components/ods-lib/reports/reports.html',
+        templateUrl: 'reports/reports.html',
         scope: {
             reportsGroup: '=',
         },
@@ -57,7 +57,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
                     }
                 }).length > 0) {
                 $uibModal.open({
-                    templateUrl: 'app/components/ods-lib/reports/params.html',
+                    templateUrl: 'reports/params.html',
                     controller: 'OdsParamsController',
                     controllerAs: 'vm',
                     backdrop: 'static',

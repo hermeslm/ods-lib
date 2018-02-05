@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -11,5 +11,10 @@
             "SINGLE_SELECT": "SINGLE_SELECT",
             "MULTI_SELECT": "MULTI_SELECT",
             "TABLE_SELECT": "TABLE_SELECT"
+        })
+        .constant('OdsPageOrientation', {
+            "PORTRAIT": "Portrait",
+            "LANDSCAPE": "Landscape"
         });
+
 })();

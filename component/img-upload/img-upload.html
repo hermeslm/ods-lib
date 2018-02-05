@@ -1,0 +1,19 @@
+<div ng-if="displayImage">
+    <img class="img-responsive {{cssClass}}" id="imgPicture"
+         ng-src="{{ngModel}}"
+         ng-if="ngModel"
+         ng-click="openModal()" style="cursor: pointer;min-height: 100px">
+    <img class="img-responsive {{cssClass}}" id="imgPictureDefault"
+         ng-src="{{original}}"
+         ng-if="!ngModel && original"
+         ng-click="openModal()" style="cursor: pointer;min-height: 100px">
+</div>
+<a href="" class="footer-link"
+   ng-if="!displayImage"
+   ng-click="openModal()">
+    {{uploadText}}&nbsp;
+    <i class="fa fa-plus-circle" aria-hidden="true"
+       ng-if="mode === 'insert'"></i>
+    <i class="fa fa-edit" aria-hidden="true"
+       ng-if="mode === 'edit'"></i>
+</a>

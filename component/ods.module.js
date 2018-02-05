@@ -16,10 +16,17 @@ angular
         'ngMessages',
         'mgcrea.bootstrap.affix',
         'ngResource',
-        'ngStorage'
+        'ngStorage',
+        'angularMoment',
+        'datatables',
+        'datatables.factory',
+        'datatables.bootstrap',
+        'datatables.colreorder',
+        'uiCropper',
+        'ngFileUpload'
     ])
     .config(configFunction)
-    .value('version', '1.0')
+    .value('version', '2.0.1')
     .run(function (/*editableOptions */) {
         // editableOptions.theme = 'bs3';
     });

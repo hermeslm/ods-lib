@@ -8,8 +8,8 @@
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <h4>{{vm.report.title}}</h4>
-        <ng-include src="'app/components/ods-lib/reports/tpl/one-col.tpl.html'" ng-if="!vm.report.cols"></ng-include>
-        <ng-include src="'app/components/ods-lib/reports/tpl/two-col.tpl.html'" ng-if="vm.report.cols"></ng-include>
+        <ng-include src="'reports/tpl/one-col.tpl.html'" ng-if="!vm.report.multiCols"></ng-include>
+        <ng-include src="'reports/tpl/two-col.tpl.html'" ng-if="vm.report.multiCols"></ng-include>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
