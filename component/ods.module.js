@@ -21,7 +21,9 @@ angular
         'datatables',
         'datatables.factory',
         'datatables.bootstrap',
-        'datatables.colreorder'
+        'datatables.colreorder',
+        'uiCropper',
+        'ngFileUpload'
     ])
     .config(configFunction)
     .value('version', '2.0.1')
