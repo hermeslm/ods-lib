@@ -41,7 +41,7 @@ You need git to clone the git ods-lib repository. You can get git from
 We also use a number of node.js tools to initialize and test angular-component-seed. You must have node.js and
 its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
 
-### Install Dependencies
+### Dependencies
 
 We have two kinds of dependencies in this project: tools and angular framework code.  The tools help
 us manage and test the application.
@@ -85,10 +85,10 @@ bower update
 ## Build the library and samples
 
 If you want to build a distribution of this library just run a gulp task, this is the default task.
-
 ```
 gulp build
 ``` 
+You can check the `gulpfile.js` and check all defined gulp task.
 
 ## Contact
 

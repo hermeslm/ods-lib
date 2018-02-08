@@ -24,7 +24,7 @@ function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType)
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.removeRow = removeRow;
         $scope.removeColumn = removeColumn;
@@ -38,17 +38,18 @@ function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType)
 
             //We prevent add recursively a table inside other.
             if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
-                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.',
-                    {size: 'sm'});
+                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.', {size: 'sm'});
                 return false;
-            } else return item;
+            } else {
+                return item;
+            }
 
         }
 
         function onAdd(item, type) {
 
             OdsFormService.onAdd(item, type);
-        };
+        }
 
         /**
          * Remove row from section.
@@ -82,7 +83,7 @@ function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType)
         function swapRow(idx1, idx2) {
 
             dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
-                {size: 'sm'}).result.then(function (btn) {
+                {size: 'sm'}).result.then(function () {
 
                 // var _previousValue = [];
                 // angular.copy($scope.field.matrix, _previousValue);
@@ -105,7 +106,7 @@ function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType)
         function swapColumn(idx1, idx2) {
 
             dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
-                {size: 'sm'}).result.then(function (btn) {
+                {size: 'sm'}).result.then(function () {
 
                 if (idx1 <= -1 || idx2 <= -1 ||
                     idx1 >= $scope.field.matrix[idx1].length ||

@@ -12,24 +12,40 @@
 
     function OdsReportsService($q, $http, moment, OdsParamType, OdsDateUtils, $window) {
 
-        var pdfFooter = function (currentPage, pageCount) {
-            return {
-                columns: [
-                    {
-                        text: 'Report filter used',
-                        margin: [20, 0],
-                        fontSize: 10
-                    },
-                    {
-                        text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
-                        'Page ' + currentPage.toString() + ' of ' + pageCount,
-                        alignment: 'right',
-                        margin: [0, 0, 20, 0],
-                        fontSize: 10
-                    }
-                ]
-            };
+        // var pdfContent = [];
+
+        var service = {
+            getHttpResource: getHttpResource,
+            postHttpResource: postHttpResource,
+            getReport: getReport,
+            downloadReport: downloadReport,
+            downloadReportFromSource: downloadReportFromSource,
+            getSourceReport: getSourceReport,
+            isMimeSupported: isMimeSupported,
+            forceDownload: forceDownload,
+            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject
         };
+
+        return service;
+
+        // var pdfFooter = function (currentPage, pageCount) {
+        //     return {
+        //         columns: [
+        //             {
+        //                 text: 'Report filter used',
+        //                 margin: [20, 0],
+        //                 fontSize: 10
+        //             },
+        //             {
+        //                 text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
+        //                 'Page ' + currentPage.toString() + ' of ' + pageCount,
+        //                 alignment: 'right',
+        //                 margin: [0, 0, 20, 0],
+        //                 fontSize: 10
+        //             }
+        //         ]
+        //     };
+        // };
 
         function pdfFooterWithFilters(report) {
 
@@ -101,20 +117,6 @@
 
         }
 
-        var pdfContent = [];
-
-        var service = {
-            getHttpResource: getHttpResource,
-            postHttpResource: postHttpResource,
-            getReport: getReport,
-            downloadReport: downloadReport,
-            downloadReportFromSource: downloadReportFromSource,
-            getSourceReport: getSourceReport,
-            isMimeSupported: isMimeSupported,
-            forceDownload: forceDownload,
-            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject
-        };
-
         function postHttpResource(url, data) {
             var dataPromise = $http.post(url, data);
             return dataPromise;
@@ -125,11 +127,9 @@
             return dataPromise;
         }
 
-        return service;
-
         function getReport(report) {
 
-            return $q(function (resolve, reject) {
+            return $q(function (resolve) {
 
                 var postReport = buildPost(report);
 
@@ -206,7 +206,7 @@
 
         function getSourceReport(report) {
 
-            return $q(function (resolve, reject) {
+            return $q(function (resolve) {
 
                 var postReport = buildPost(report);
 
@@ -249,23 +249,23 @@
             }
         }
 
-        function buildUrl(report) {
-
-            var url = report.url;
-            for (var i = 0; i < report.params.length; i++) {
-                var value;
-                switch (report.params[i].type) {
-                    case OdsParamType.DATE:
-                        value = OdsDateUtils.convertLocalDateToServer(report.params[i].value);
-                        break;
-                    default:
-                        value = report.params[i].value;
-                        break;
-                }
-                url += '/' + value;
-            }
-            return url;
-        }
+        // function buildUrl(report) {
+        //
+        //     var url = report.url;
+        //     for (var i = 0; i < report.params.length; i++) {
+        //         var value;
+        //         switch (report.params[i].type) {
+        //             case OdsParamType.DATE:
+        //                 value = OdsDateUtils.convertLocalDateToServer(report.params[i].value);
+        //                 break;
+        //             default:
+        //                 value = report.params[i].value;
+        //                 break;
+        //         }
+        //         url += '/' + value;
+        //     }
+        //     return url;
+        // }
 
         function buildPost(report) {
 
@@ -277,6 +277,8 @@
                     type: report.params[i].type,
                     value: null
                 };
+                var tmpParams = [];
+                var idField;
                 switch (report.params[i].type) {
                     case OdsParamType.DATE:
                         param.value = [OdsDateUtils.convertLocalDateToServer(report.params[i].value)];
@@ -285,26 +287,36 @@
                         param.value = [report.params[i].value];
                         break;
                     case OdsParamType.SINGLE_SELECT:
-                        var idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
+                        idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
                         param.value = [report.params[i].value[idField]];
                         break;
                     case OdsParamType.MULTI_SELECT:
-                        var tmpParams = [];
+                        tmpParams = [];
                         for (var j = 0; j < report.params[i].value.length; j++) {
-                            var idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
+                            idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
                             tmpParams.push(report.params[i].value[j][idField]);
                         }
                         param.value = tmpParams;
                         break;
                     case OdsParamType.TABLE_SELECT:
-                        var tmpParams = [];
+                        tmpParams = [];
                         for (var key in report.params[i].value) {
-                            if (key === 'length' || !report.params[i].value.hasOwnProperty(key)) continue;
+                            if (key === 'length' || !report.params[i].value.hasOwnProperty(key)) {
+                                continue;
+                            }
                             var value = key;
                             if (report.params[i].value[key]) {
                                 tmpParams.push(value);
                             }
 
+                        }
+                        param.value = tmpParams;
+                        break;
+                    case OdsParamType.DRAG_AND_DROP:
+                        tmpParams = [];
+                        for (var j = 0; j < report.params[i].value.length; j++) {
+                            idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
+                            tmpParams.push(report.params[i].value[j][idField]);
                         }
                         param.value = tmpParams;
                         break;
@@ -332,18 +344,18 @@
                 var contentDisp = response.headers('Content-Disposition');
                 var index = contentDisp.indexOf('filename="');
 
-                var filename = "filename";
+                var filename = 'filename';
 
-                if (index != -1) {
+                if (index !== -1) {
                     var i = index + 10;
-                    while (contentDisp[i] != '"') {
+                    while (contentDisp[i] !== '"') {
                         i++;
                     }
 
                     filename = contentDisp.substring(index + 10, i);
                 }
 
-                var a = document.createElement("a");
+                var a = document.createElement('a');
                 a.href = URL.createObjectURL(new Blob([response.data], {type: contentType}));
                 a.download = filename;
                 a.click();

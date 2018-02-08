@@ -17,7 +17,7 @@
 
         vm.image = {};
         vm.image.picture = image;
-        vm.image.pictureContentType = typeImage
+        vm.image.pictureContentType = typeImage;
         vm.imageTmp = {};
         angular.copy(vm.image, vm.imageTmp);
         vm.clear = clear;
@@ -40,7 +40,7 @@
             $uibModalInstance.dismiss(vm.image);
         }
 
-        vm.setPicture = function ($file, image) {
+        vm.setPicture = function ($file) {
             if ($file && $file.$error === 'pattern') {
                 return;
             }
@@ -87,14 +87,16 @@
             });
         };
 
-        vm.onStream = function (stream) {
+        vm.onStream = function () {
             // You could do something manually with the stream.
         };
 
         vm.makeSnapshot = function () {
             if (_video) {
                 var patCanvas = document.querySelector('#snapshot');
-                if (!patCanvas) return;
+                if (!patCanvas) {
+                    return;
+                }
 
                 patCanvas.width = _video.width;
                 patCanvas.height = _video.height;
@@ -103,7 +105,7 @@
                 var idata = getVideoData(vm.patOpts.x, vm.patOpts.y, vm.patOpts.w, vm.patOpts.h);
                 ctxPat.putImageData(idata, 0, 0);
 
-                sendSnapshotToServer(patCanvas.toDataURL().split("base64,")[1]);
+                sendSnapshotToServer(patCanvas.toDataURL().split('base64,')[1]);
 
                 patData = idata;
             }

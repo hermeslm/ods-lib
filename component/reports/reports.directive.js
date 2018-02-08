@@ -15,7 +15,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
         restrict: 'E',
         templateUrl: 'reports/reports.html',
         scope: {
-            reportsGroup: '=',
+            reportsGroup: '='
         },
         link: linkFunc
     };
@@ -24,7 +24,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.infoMessage = true;
         $scope.selectReport = null;
@@ -49,7 +49,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
             var size = report.modalSize ? report.modalSize : 'sm';
 
             if (report.params.length > 0 &&
-                $.grep(report.params, function (param, i) {
+                $.grep(report.params, function (param) {
                     if (param.hidden) {
                         return param.hidden === false;
                     } else {

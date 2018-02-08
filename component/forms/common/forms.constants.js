@@ -22,6 +22,7 @@
             //You can add your new field types
         })
         .constant('OdsComponentType', {
+            FORM: 'form', //Do not edit this type
             SECTION: 'section', //Do not edit this type
             ROW: 'row', //Do not edit this type
             COLUMN: 'column', //Do not edit this type

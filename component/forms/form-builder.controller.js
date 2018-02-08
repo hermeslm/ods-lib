@@ -52,11 +52,11 @@
 
             var data = OdsFormService.saveFormData(schema);
             console.log('The form data is: ' + JSON.stringify(data, null, 4));
-        }
+        };
 
         $scope.toggleStyle = function(){
 
             $scope.cssClass = $scope.cssClass === 'form-print' ? 'form-print1' : 'form-print';
-        }
+        };
     }
 })();

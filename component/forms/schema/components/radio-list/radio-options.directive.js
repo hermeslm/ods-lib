@@ -22,7 +22,7 @@ function FieldRadioOptionsDirective(OdsFormService) {
 
     return directive;
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.options = initOptions();
         $scope.addOption = addOption;

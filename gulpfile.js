@@ -94,7 +94,7 @@ gulp.task('form-scss', function () {
 
 //Task to process Sass files in the 'scss' folder
 gulp.task('steps-scss', function () {
-    return gulp.src('./component/steps-indicator/style.css')
+    return gulp.src('./component/steps-indicator/style.scss')
         .pipe(sourcemap.init())
         .pipe(scss({outputStyle: 'expanded'}).on('error', scss.logError))
         .pipe(autoprefixer(autoprefixer({
@@ -180,6 +180,18 @@ gulp.task('reports-inject', function () {
         .pipe(gulp.dest('./examples/reports'));
 });
 
+//Task to process Sass files in the 'scss' folder
+gulp.task('report-scss', function () {
+    return gulp.src('./component/reports/style.scss')
+        .pipe(sourcemap.init())
+        .pipe(scss({outputStyle: 'expanded'}).on('error', scss.logError))
+        .pipe(autoprefixer(autoprefixer({
+            browsers: ['> 1%', 'last 5 versions', 'ie > 10']
+        })))
+        .pipe(sourcemap.write('.'))
+        .pipe(gulp.dest('./dist/reports/'));
+});
+
 //Img upload tasks
 gulp.task('img-upload-inject', function () {
     return gulp.src('./examples/img-upload/index.html')
@@ -222,7 +234,7 @@ gulp.task('ci', function () {
 
 // gulp.task('build', ['clean', 'templates', 'scripts']);
 gulp.task('build', function (done) {
-    runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss', 'forms-inject',
+    runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss', 'report-scss', 'forms-inject',
         'ckeditor-inject', 'jsig-inject', 'address-inject', 'reports-inject', 'img-upload-inject',
         'copy-lib-to-samples', function () {
             // console.log('Run something else');

@@ -33,7 +33,7 @@ function odsSignature($timeout, OdsSignature) {
         const showRequiredClass = 'sig-box-error';
 
         //If model not present we will exit.
-        if ($scope.model == null) {
+        if ($scope.model === null) {
             console.error('Please define a model using "ng-model" attribute!!!');
             return;
         }
@@ -94,7 +94,7 @@ function odsSignature($timeout, OdsSignature) {
             }
 
             //Init on change event
-            $scope.element.bind('change', function (event) {
+            $scope.element.bind('change', function () {
 
                     // $timeout, 100, true because event happens outside angular's digest cycle
                     // and change is called on setData

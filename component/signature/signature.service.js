@@ -6,7 +6,7 @@ angular
 
 function OdsSignature() {
 
-    var apinamespace = 'jSignature';
+    // var apinamespace = 'jSignature';
 
     var exportTypes = {
         DEFAULT: 'default',
@@ -28,9 +28,9 @@ function OdsSignature() {
         IMAGE_JPG_BASE64: 'image/jpg;base64'
     };
 
-    var uniqueCounter = (+new Date) % 10000;
+    var uniqueCounter = (+new Date()) % 10000;
 
-    var instance_map = {};
+    var instanceMap = {};
 
     var service = {
         exportTypes: exportTypes,
@@ -54,20 +54,21 @@ function OdsSignature() {
 
     function register(name, instance) {
 
-        instance_map[name] = instance;
+        instanceMap[name] = instance;
     }
 
     function getInstance(name) {
 
-        if (instance_map[name])
-            return instance_map[name];
-        else
+        if (instanceMap[name]) {
+            return instanceMap[name];
+        } else {
             return false;
+        }
     }
 
     function unregister(name) {
 
-        instance_map[name] = null;
+        instanceMap[name] = null;
     }
 
     function generateName() {
@@ -87,37 +88,40 @@ function OdsSignature() {
     function isValid(name) {
 
         var d = getData(name, exportTypes.NATIVE);
-        if (d.length >= 1)
+        if (d.length >= 1) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     function getData(name, type) {
 
         var element = getInstance(name);
-        if (element)
-            return element.jSignature('getData', type);
-        else
-            return false;
-    }
-
-    function getDataAsSVG(name) {
-
-        var element = getInstance(name);
-        var svg = element.jSignature('getData', 'svg');
-        return svg;
-    }
-
-    function getDataAsBase30(name) {
-
-        var element = getInstance(name);
         if (element) {
-            var svg = element.jSignature('getData', 'svg');
-            return svg;
-        } else
+            return element.jSignature('getData', type);
+        } else {
             return false;
+        }
     }
+
+    // function getDataAsSVG(name) {
+    //
+    //     var element = getInstance(name);
+    //     var svg = element.jSignature('getData', 'svg');
+    //     return svg;
+    // }
+    //
+    // function getDataAsBase30(name) {
+    //
+    //     var element = getInstance(name);
+    //     if (element) {
+    //         var svg = element.jSignature('getData', 'svg');
+    //         return svg;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     function setData(name, model) {
 
@@ -144,13 +148,12 @@ function OdsSignature() {
         }
     }
 
-    function undo(name) {
-
-        var eventName = apinamespace + '.undo';
-        var element = getInstance(name);
-        if (element) {
-            element.jSignature('events');
-        }
-    }
-
+    // function undo(name) {
+    //
+    //     var eventName = apinamespace + '.undo';
+    //     var element = getInstance(name);
+    //     if (element) {
+    //         element.jSignature('events');
+    //     }
+    // }
 }

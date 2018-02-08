@@ -54,9 +54,9 @@ $templateCache.put('image-upload/image-upload-dialog.html','<form name="editForm
 $templateCache.put('image-upload/image-upload.html','<img class="img-responsive {{cssClass}}" id="imgPicture" data-ng-src="{{\'data:\' + imageType + \';base64,\' + image}}" ng-click="openModal()" style="cursor: pointer;min-height: 100px;{{css}}" alt="User profile picture"><!--<div class="o_form_image_controls" style="--><!--position: absolute;--><!--top: 0;--><!--left: 10px;--><!--bottom: auto;--><!--right: 10px;--><!--width: 80%;--><!--color: #f4f4f4;--><!--background-color: #00a09d;--><!--/* opacity: 0; */--><!--transition: opacity ease 400ms;">--><!--<span class="fa fa-pencil fa-lg pull-left o_select_file_button" title="Edit" style="--><!--margin: 5px;--><!--cursor: pointer;"></span>--><!--<span class="fa fa-trash-o fa-lg pull-right o_clear_file_button" title="Clear" style="--><!--margin: 5px;--><!--cursor: pointer;"></span>--><!--</div>-->');
 $templateCache.put('img-upload/img-upload-dialog.html','<form name="editForm" role="form" novalidate ng-submit="vm.save()"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myImageLabel">Change/Edit Image</h4></div><div class="modal-body"><div class="row"><div class="col-lg-6" style="text-align: center;"><div class="img-responsive img-thumbnail"><ui-cropper image="vm.original" area-type="{{vm.areaType}}" chargement="\'Loading\'" result-image-size="vm.croppedImageSize" result-image="vm.model" canvas-scalemode="true" change-on-fly="true"></ui-cropper></div></div><div class="col-lg-6" style="text-align: center;"><img class="img-responsive img-thumbnail" ng-src="{{vm.model}}"></div></div><br><div class="row"><div class="col-lg-6"><button type="button" class="btn btn-warning btn-block" ngf-select ngf-change="vm.handleFileSelect($event, $file)" accept="image/*"><i class="fa fa-image" aria-hidden="true"></i> Browse...</button></div></div><!--<div class="cropper-wrapper">--><!--<div class="crop-area" ng-class="!originalImage?\'default-img\':\'\'">--><!--<ui-cropper image="vm.originalImage"--><!--area-type="{{vm.areaType}}"--><!--chargement="\'Loading\'"--><!--result-image-size="vm.resultImageSize"--><!--result-image="vm.myCroppedImage"--><!--canvas-scalemode="true"--><!--change-on-fly="true">--><!--</ui-cropper>--><!--<div class="load-button">--><!--<button type="button" class="btn btn-warning btn-block"--><!--ngf-select--><!--ngf-change="vm.handleFileSelect($event, $file)"--><!--accept="image/*">--><!--<i class="fa fa-image" aria-hidden="true"></i> Browse...--><!--</button>--><!--</div>--><!--</div>--><!--<div class="cropped-image">--><!--<img ng-src="{{vm.myCroppedImage}}">--><!--</div>--><!--</div>--></div><div class="modal-footer"><button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true"></i> Save</button> <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.clear()"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button></div></form>');
 $templateCache.put('img-upload/img-upload.html','<div ng-if="displayImage"><img class="img-responsive {{cssClass}}" id="imgPicture" ng-src="{{ngModel}}" ng-if="ngModel" ng-click="openModal()" style="cursor: pointer;min-height: 100px"> <img class="img-responsive {{cssClass}}" id="imgPictureDefault" ng-src="{{original}}" ng-if="!ngModel && original" ng-click="openModal()" style="cursor: pointer;min-height: 100px"></div><a href="" class="footer-link" ng-if="!displayImage" ng-click="openModal()">{{uploadText}}&nbsp; <i class="fa fa-plus-circle" aria-hidden="true" ng-if="mode === \'insert\'"></i> <i class="fa fa-edit" aria-hidden="true" ng-if="mode === \'edit\'"></i></a>');
-$templateCache.put('j-signature/j-signature.html','<div id="signature"><div id="jSignature"></div><button type="button" class="btn btn-danger" ng-click="reset()"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');
+$templateCache.put('reports/param.html','<div class="form-group" ng-class="{\'has-error\': paramsForm.{{param.name}}.$invalid}"><div ng-switch="param.type"><label class="control-label" for="{{param.name}}" ng-hide="hideTitle(param)">{{param.title}}</label><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)" ng-switch-when="NUMBER" type="number"> <input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)" ng-switch-when="TEXT"><div class="input-group" ng-switch-when="DATE" ng-hide="hideParam(param)"><input id="{{param.name}}" class="form-control" name="{{param.name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="getRequired(param)" ng-model="param.value" is-open="param.datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="openCalendar(param)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" ng-model="param.value" ui-select-required="vm.getRequired(param)" close-on-select="true" title="{{param.title}}"><ui-select-match placeholder="{{param.placeholder}}">{{getSelectTitleField(param, $select.selected)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search | limitTo: 500"><div ng-bind-html="getSelectTitleField(param, element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-switch-when="LIST" ng-model="param.value" ng-options="item.id as item.name for item in param.list" ng-required="getRequired(param)"></select><div ng-switch-when="MULTI_SELECT" ng-hide="hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" multiple="multiple" ng-model="param.value" close-on-select="false" title="{{param.title}}" ui-select-required="getRequired(param)"><ui-select-match placeholder="{{param.placeholder}}">{{getSelectTitleField(param, $item)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search">{{getSelectTitleField(param, element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="hideParam(param)"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="param.searchQuery" id="searchQueryrpt-metadata" placeholder="{{param.placeholder}}" ng-change="search(param)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="getDtOptions(param)" dt-columns="getDtColumns(param)" dt-instance="param.dtInstance" class="table table-striped table-bordered table-condensed"></table></div><div ng-switch-when="DRAG_AND_DROP" ng-hide="hideParam(param)"><div class="row"><div class="col-md-6"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title ng-binding">{{param.sourceTitle}}</h3></div><div class="panel-body source-sections"><ul dnd-list="param.list"><li ng-repeat="item in param.list" dnd-draggable="item" dnd-moved="param.list.splice($index, 1)" dnd-effect-allowed="move">{{getSelectTitleField(param, item)}}</li></ul></div></div></div><div class="col-md-6"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title ng-binding">{{param.targetTitle}}</h3></div><div class="panel-body selected-sections"><ul dnd-list="param.value"><li ng-repeat="item in param.value" dnd-draggable="item" dnd-moved="param.value.splice($index, 1)" dnd-effect-allowed="move">{{getSelectTitleField(param, item)}}</li></ul></div></div></div></div><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)" ng-switch-default><div ng-show="paramsForm.{{param.name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{param.name}}.$error.required">This field is required.</p></div></div></div></div>');
 $templateCache.put('reports/params.html','<form name="paramsForm" novalidate ng-submit="vm.openReport()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myCityLabel">Report Params for:</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><h4>{{vm.report.title}}</h4><ng-include src="\'reports/tpl/one-col.tpl.html\'" ng-if="!vm.report.multiCols"></ng-include><ng-include src="\'reports/tpl/two-col.tpl.html\'" ng-if="vm.report.multiCols"></ng-include></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button ng-disabled="paramsForm.$invalid" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Open</span></button></div></form>');
-$templateCache.put('reports/reports.html','<div class="row" ng-show="infoMessage" ng-class="ng-hide"><div class="col-lg-12"><div uib-alert class="alert alert-info alert-dismissible" close="hideInfoMessage()"><h4><i class="icon fa fa-info"></i> Reports info!</h4>If don\'t have a PDF viewer plugin in the browser. No biggie... you can download it. Please select the report and download it from report preview.</div></div></div><div class="row"><div class="col-md-3"><div class="box box-solid"><div class="box-header with-border"><h3 class="box-title">{{reportsGroup.title}}</h3></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in reportsGroup.groups" ng-init="groupIndex = $index"><ul class="list-group list-group-unbordered"><li class="list-group-item" ng-repeat="report in group.reports" ng-init="reportIndex = $index"><a ng-click="openReport(groupIndex, reportIndex)"><b>{{report.title}}</b></a></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box --></div><div class="col-md-9"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">Report Preview</h3></div><!-- /.box-header --><div class="box-body" style="height: 100vh;"><div ng-show="selectReport" class="ng-hide"><p>Download report: <a ng-click="downloadReport()">{{selectReport.title}}</a></p></div><!--<object embed-src="{{vm.reportFile}}" width="100%" height="100%">--><!--</object>--><object style="height: 90vh;" type="application/pdf" data="{{reportFile}}" width="100%" height="100%"></div></div></div></div>');
+$templateCache.put('reports/reports.html','<div class="row" ng-show="infoMessage" ng-class="ng-hide"><div class="col-lg-12"><div uib-alert class="alert alert-info alert-dismissible" close="hideInfoMessage()"><h4><i class="icon fa fa-info"></i> Reports info!</h4>If don\'t have a PDF viewer plugin in the browser. No biggie... you can download it. Please select the report and download it from report preview.</div></div></div><div class="row"><div class="col-md-3"><div class="box box-solid"><div class="box-header with-border"><h3 class="box-title">{{reportsGroup.title}}</h3></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in reportsGroup.groups" ng-init="groupIndex = $index"><ul class="list-group list-group-unbordered"><li class="list-group-item" ng-repeat="report in group.reports" ng-init="reportIndex = $index"><a href="" ng-click="openReport(groupIndex, reportIndex)"><b>{{report.title}}</b></a></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box --></div><div class="col-md-9"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">Report Preview</h3></div><!-- /.box-header --><div class="box-body" style="height: 100vh;"><div ng-show="selectReport" class="ng-hide"><p>Download report: <a ng-click="downloadReport()">{{selectReport.title}}</a></p></div><!--<object embed-src="{{vm.reportFile}}" width="100%" height="100%">--><!--</object>--><object style="height: 90vh;" type="application/pdf" data="{{reportFile}}" width="100%" height="100%"></div></div></div></div>');
 $templateCache.put('signature/signature.html','<div id="signature" class="{{options.cssClass}}"><style type="text/css" scoped>.sig-box {\n            border-radius: 4px;padding: 5px 5px 0;margin-bottom: 5px;\n        }\n        .sig-box-default {\n            border: 1px solid #ccc;"\n        }\n        .sig-box-error {\n            border: 1px solid #a94442;"\n        }</style><div id="{{name}}" class="sig-box {{requiredClass}}"><!--style=">--></div><button type="button" class="btn btn-danger" ng-click="reset()" ng-disabled="disabled"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');
 $templateCache.put('steps-indicator/template.html','<div class="ods-breadcrumb {{class}}"><a class="{{step.status}} {{step.disabled ? \'disabled\': \'\'}}" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</a></div>');
 $templateCache.put('forms/form/form.html','<div class=""><div class="form-header with-border"><h3 class="box-title" ng-hide="schema.hideLabel" ng-bind-html="schema.label"></h3></div><!-- /.box-header --><!-- form start --><div ng-if="schema.layout.length !== 0"><form name="{{schema.name}}" role="form" novalidate show-validation ng-submit="save()"><div class="box-body padding-top"><div class="alert alert-success" ng-show="success"><strong>Success! </strong>{{message}}</div><div class="alert alert-danger" ng-show="error"><strong>Error! </strong>{{message}}</div><div class="alert alert-info" ng-show="info"><strong>Information! </strong>{{message}}</div><div ng-repeat="section in schema.layout"><h4 ng-bind-html="section.title" ng-hide="hideTitle(section)"></h4><div class="{{row.cssClass}}" ng-repeat="row in section.rows"><div class="{{col.cssClass}}" ng-repeat="col in row.cols"><div class="" ng-repeat="field in col.fields"><div ng-if="field"><div class="form-group" ng-class="{\'has-error\': {{schema.name}}.{{field.name}}.$invalid}"><label class="control-label" for="{{field.name}}" ng-hide="hideTitle(field)">{{field.label}}&nbsp;</label><ng-include src="getFormFieldTemplate(field.type)"></ng-include><div ng-show="{{schema.name}}.{{field.name}}.$invalid"><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.required">{{field.validation.messages.required}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.minlength">{{field.validation.messages.minlength}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.maxlength">{{field.validation.messages.maxlength}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.pattern">{{field.validation.messages.pattern}}</p></div></div></div></div></div></div></div></div><div class="box-footer" ng-show="schema.handleSubmit"><button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="clear()"><span class="fa fa-trash-o"></span>&nbsp;<span>Clear</span></button> <button type="submit" ng-disabled="{{schema.name}}.$invalid" class="btn btn-primary"><span class="fa fa-save"></span>&nbsp;<span>Save</span></button></div></form></div></div>');
@@ -65,8 +65,9 @@ $templateCache.put('forms/schema/schema.html','<div class="box-schema"><div clas
 $templateCache.put('forms/toolbar/field-to-delete.html','<div class="box-draggable"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs btn-primary" type="button" ng-click="vm.addField(field)" title="Add this field."><span class="fa fa-hand-pointer-o"></span></button></div></div><label class="control-label" for="{{field.name}}">{{field.title}}</label><input class="form-control" name="{{field.name}}" id="{{field.name}}">');
 $templateCache.put('forms/toolbar/toolbar.html','<div class="toolbar-container box-solid" bs-affix data-offset-top="10" data-offset-bottom="0"><div class="form-header with-border"><h3 class="box-title">{{toolbar.title}}</h3></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" panel-class="panel-toolbar" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in toolbar.groups" ng-init="groupIndex = $index"><ul class="list-group no-margin-bottom"><li class="toolbar-component padding-bottom no-padding-top" ng-repeat="component in group.components"><div class="box-toolbar" dnd-draggable="component" dnd-type="component.componentType" dnd-effect-allowed="copy" ng-include="\'forms/toolbar/components/component.html\'"></div></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box -->');
 $templateCache.put('forms/viewer/viewer.html','<div class="{{cssClass}}"><div class="form-header with-border"><h3 class="box-title" ng-hide="schema.hideLabel" ng-bind-html="schema.label"></h3></div><!-- /.box-header --><!-- form start --><div ng-if="schema.layout.length !== 0"><div class="box-body padding-top"><div ng-repeat="section in schema.layout"><h4 ng-bind-html="section.title" ng-hide="hideTitle(section)"></h4><div class="{{row.cssClass}}" ng-repeat="row in section.rows"><div class="{{col.cssClass}}" ng-repeat="col in row.cols"><div class="" ng-repeat="field in col.fields"><div ng-if="field"><div class="form-group" ng-class="{\'has-error\': {{schema.name}}.{{field.name}}.$invalid}"><label class="control-label" for="{{field.name}}" ng-hide="hideTitle(field)">{{field.label}}&nbsp;</label><!--ng-if="field.value"--><ng-include src="getFormViewerTemplate(field.type)"></ng-include><div ng-show="{{schema.name}}.{{field.name}}.$invalid"><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.required">{{field.validation.messages.required}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.minlength">{{field.validation.messages.minlength}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.maxlength">{{field.validation.messages.maxlength}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.pattern">{{field.validation.messages.pattern}}</p></div></div></div></div></div></div></div></div><!--<div class="box-footer" ng-show="schema.handleSubmit">--><!--<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="clear()">--><!--<span class="fa fa-trash-o"></span>&nbsp;<span>Clear</span>--><!--</button>--><!--<button type="submit" ng-disabled="{{schema.name}}.$invalid" class="btn btn-primary">--><!--<span class="fa fa-save"></span>&nbsp;<span>Save</span>--><!--</button>--><!--</div>--></div></div>');
-$templateCache.put('reports/tpl/one-col.tpl.html','<div class="form-group" ng-repeat="param in vm.report.params" ng-switch="param.type" ng-class="{\'has-error\': paramsForm.{{param.name}}.$invalid}"><label class="control-label" for="{{param.name}}" ng-hide="vm.hideTitle(param)">{{param.title}}</label><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-when="NUMBER" type="number"> <input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-when="TEXT"><div class="input-group" ng-switch-when="DATE" ng-hide="vm.hideParam(param)"><input id="{{param.name}}" class="form-control" name="{{param.name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(param)" ng-model="param.value" is-open="param.datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="vm.openCalendar($index)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="vm.hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" ng-model="param.value" ui-select-required="vm.getRequired(param)" close-on-select="true" title="{{param.title}}"><ui-select-match placeholder="{{param.placeholder}}">{{vm.getSelectTitleField(param, $select.selected)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search | limitTo: 500"><div ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-switch-when="LIST" ng-model="param.value" ng-options="item.id as item.name for item in param.list" ng-required="vm.getRequired(param)"></select><div ng-switch-when="MULTI_SELECT" ng-hide="vm.hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" multiple="multiple" ng-model="param.value" close-on-select="false" title="{{param.title}}" ui-select-required="vm.getRequired(param)"><ui-select-match placeholder="{{param.placeholder}}">{{vm.getSelectTitleField(param, $item)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search">{{vm.getSelectTitleField(param, element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="vm.hideParam(param)"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="param.searchQuery" id="searchQueryrpt-metadata" placeholder="{{param.placeholder}}" ng-change="vm.search($index)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="vm.getDtOptions(param, $index)" dt-columns="vm.getDtColumns(param, $index)" dt-instance="param.dtInstance" class="table table-striped table-bordered table-condensed"></table></div><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-default><div ng-show="paramsForm.{{param.name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{param.name}}.$error.required">This field is required.</p></div></div>');
-$templateCache.put('reports/tpl/two-col.tpl.html','<div class="row" ng-repeat="(indexp, param) in vm.report.params" ng-if="$index % 2 == 0"><div class="col-lg-6"><div class="form-group" ng-switch="param.type" ng-class="{\'has-error\': paramsForm.{{param.name}}.$invalid}"><label class="control-label" for="{{param.name}}" ng-hide="vm.hideTitle(param)">{{param.title}}</label><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-when="NUMBER" type="number"> <input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-when="TEXT"><div class="input-group" ng-switch-when="DATE" ng-hide="vm.hideParam(param)"><input id="{{param.name}}" class="form-control" name="{{param.name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(param)" ng-model="param.value" is-open="param.datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="vm.openCalendar($index)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="vm.hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" ng-model="param.value" ui-select-required="vm.getRequired(param)" close-on-select="true" title="{{param.title}}"><ui-select-match placeholder="{{param.placeholder}}">{{vm.getSelectTitleField(param, $select.selected)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search | limitTo: 500"><div ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-switch-when="LIST" ng-model="param.value" ng-options="item.id as item.name for item in param.list" ng-required="vm.getRequired(param)"></select><div ng-switch-when="MULTI_SELECT" ng-hide="vm.hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" multiple="multiple" ng-model="param.value" close-on-select="false" title="{{param.title}}" ui-select-required="vm.getRequired(param)"><ui-select-match placeholder="{{param.placeholder}}">{{vm.getSelectTitleField(param, $item)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search">{{vm.getSelectTitleField(param, element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="vm.hideParam(param)"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="param.searchQuery" id="searchQueryrpt-metadata" placeholder="{{param.placeholder}}" ng-change="vm.search($index)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="vm.getDtOptions(param, $index)" dt-columns="vm.getDtColumns(param, $index)" dt-instance="param.dtInstance" class="table table-striped table-bordered table-condensed"></table></div><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-default><div ng-show="paramsForm.{{param.name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{param.name}}.$error.required">This field is required.</p></div></div></div><div class="col-lg-6" ng-if="$index + 1 < vm.report.params.length"><div class="form-group" ng-switch="vm.report.params[$index + 1].type" ng-class="{\'has-error\': paramsForm.{{vm.report.params[$index + 1].name}}.$invalid}"><label class="control-label" for="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideTitle(vm.report.params[$index + 1])">{{vm.report.params[$index + 1].title}}</label><input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-when="NUMBER" type="number"> <input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-when="TEXT"><div class="input-group" ng-switch-when="DATE" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><input id="{{vm.report.params[$index + 1].name}}" class="form-control" name="{{vm.report.params[$index + 1].name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" is-open="vm.report.params[$index + 1].datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="vm.openCalendar($index + 1)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><ui-select name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-model="vm.report.params[$index + 1].value" ui-select-required="vm.getRequired(vm.report.params[$index + 1])" close-on-select="true" title="{{vm.report.params[$index + 1].title}}"><ui-select-match placeholder="{{vm.report.params[$index + 1].placeholder}}">{{vm.getSelectTitleField(vm.report.params[$index + 1], $select.selected)}}</ui-select-match><ui-select-choices repeat="element in vm.report.params[$index + 1].list | filter:$select.search | limitTo: 500"><div ng-bind-html="vm.getSelectTitleField(vm.report.params[$index + 1], element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-switch-when="LIST" ng-model="vm.report.params[$index + 1].value" ng-options="item.id as item.name for item in vm.report.params[$index + 1].list" ng-required="vm.getRequired(vm.report.params[$index + 1])"></select><div ng-switch-when="MULTI_SELECT" ng-hide="vm.hideParam(vm.report.params[indexp + 1])"><ui-select name="{{vm.report.params[indexp + 1].name}}" id="{{vm.report.params[indexp + 1].name}}" multiple="multiple" ng-model="vm.report.params[indexp + 1].value" close-on-select="false" title="{{vm.report.params[indexp + 1].title}}" ui-select-required="vm.getRequired(vm.report.params[indexp + 1])"><ui-select-match placeholder="{{vm.report.params[indexp + 1].placeholder}}">{{vm.getSelectTitleField(vm.report.params[indexp + 1], $item)}}</ui-select-match><ui-select-choices repeat="element in vm.report.params[indexp + 1].list | filter:$select.search">{{vm.getSelectTitleField(vm.report.params[indexp + 1], element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="vm.report.params[$index + 1].searchQuery" id="searchQueryrpt-metadata" placeholder="{{vm.report.params[$index + 1].placeholder}}" ng-change="vm.search($index)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="vm.getDtOptions(vm.report.params[$index + 1], $index)" dt-columns="vm.getDtColumns(vm.report.params[$index + 1], $index)" dt-instance="vm.report.params[$index + 1].dtInstance" class="table table-striped table-bordered table-condensed"></table></div><input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-default><div ng-show="paramsForm.{{vm.report.params[$index + 1].name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{vm.report.params[$index + 1].name}}.$error.required">This field is required.</p></div></div></div></div>');
+$templateCache.put('reports/tpl/one-col.tpl.html','<div ng-repeat="param in vm.report.params"><ods-param param="param"></ods-param></div>');
+$templateCache.put('reports/tpl/two-col.tpl.html','<div class="row" ng-repeat="(indexp, param) in vm.report.params" ng-if="$index % 2 == 0"><div class="col-lg-6"><ods-param param="vm.report.params[$index]"></ods-param></div><div class="col-lg-6"><ods-param param="vm.report.params[$index + 1]"></ods-param></div></div>');
+$templateCache.put('reports/tpl/two-col.tpl1.html','<div class="row" ng-repeat="(indexp, param) in vm.report.params" ng-if="$index % 2 == 0"><div class="col-lg-6"><div class="form-group" ng-switch="param.type" ng-class="{\'has-error\': paramsForm.{{param.name}}.$invalid}"><label class="control-label" for="{{param.name}}" ng-hide="vm.hideTitle(param)">{{param.title}}</label><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-when="NUMBER" type="number"> <input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-when="TEXT"><div class="input-group" ng-switch-when="DATE" ng-hide="vm.hideParam(param)"><input id="{{param.name}}" class="form-control" name="{{param.name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(param)" ng-model="param.value" is-open="param.datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="vm.openCalendar($index)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="vm.hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" ng-model="param.value" ui-select-required="vm.getRequired(param)" close-on-select="true" title="{{param.title}}"><ui-select-match placeholder="{{param.placeholder}}">{{vm.getSelectTitleField(param, $select.selected)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search | limitTo: 500"><div ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-switch-when="LIST" ng-model="param.value" ng-options="item.id as item.name for item in param.list" ng-required="vm.getRequired(param)"></select><div ng-switch-when="MULTI_SELECT" ng-hide="vm.hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" multiple="multiple" ng-model="param.value" close-on-select="false" title="{{param.title}}" ui-select-required="vm.getRequired(param)"><ui-select-match placeholder="{{param.placeholder}}">{{vm.getSelectTitleField(param, $item)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search">{{vm.getSelectTitleField(param, element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="vm.hideParam(param)"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="param.searchQuery" id="searchQueryrpt-metadata" placeholder="{{param.placeholder}}" ng-change="vm.search($index)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="vm.getDtOptions(param, $index)" dt-columns="vm.getDtColumns(param, $index)" dt-instance="param.dtInstance" class="table table-striped table-bordered table-condensed"></table></div><div ng-switch-when="DRAG_AND_DROP" ng-hide="vm.hideParam(param)"><div class="row"><div class="col-md-6"><label class="control-label">Items Sections</label><br><div class="report-sections"><ul dnd-list="param.list"><li ng-repeat="item in param.list" dnd-draggable="item" dnd-moved="param.list.splice($index, 1)" dnd-effect-allowed="move">{{item.name}}</li><!--dnd-selected="vm.reportSectionsModels.selected = item"--></ul></div></div><div class="col-md-6"><label class="control-label">Items Selected</label><br><div class="report-selected-sections"><ul dnd-list="param.value"><li ng-repeat="item in param.value" dnd-draggable="item" dnd-moved="param.value.splice($index, 1)" dnd-effect-allowed="move">{{item.name}}</li><!--dnd-selected="vm.reportSectionsModels.selected = item"--></ul></div></div></div></div><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-default><div ng-show="paramsForm.{{param.name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{param.name}}.$error.required">This field is required.</p></div></div></div><div class="col-lg-6" ng-if="$index + 1 < vm.report.params.length"><div class="form-group" ng-switch="vm.report.params[$index + 1].type" ng-class="{\'has-error\': paramsForm.{{vm.report.params[$index + 1].name}}.$invalid}"><label class="control-label" for="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideTitle(vm.report.params[$index + 1])">{{vm.report.params[$index + 1].title}}</label><input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-when="NUMBER" type="number"> <input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-when="TEXT"><div class="input-group" ng-switch-when="DATE" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><input id="{{vm.report.params[$index + 1].name}}" class="form-control" name="{{vm.report.params[$index + 1].name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" is-open="vm.report.params[$index + 1].datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="vm.openCalendar($index + 1)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><ui-select name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-model="vm.report.params[$index + 1].value" ui-select-required="vm.getRequired(vm.report.params[$index + 1])" close-on-select="true" title="{{vm.report.params[$index + 1].title}}"><ui-select-match placeholder="{{vm.report.params[$index + 1].placeholder}}">{{vm.getSelectTitleField(vm.report.params[$index + 1], $select.selected)}}</ui-select-match><ui-select-choices repeat="element in vm.report.params[$index + 1].list | filter:$select.search | limitTo: 500"><div ng-bind-html="vm.getSelectTitleField(vm.report.params[$index + 1], element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-switch-when="LIST" ng-model="vm.report.params[$index + 1].value" ng-options="item.id as item.name for item in vm.report.params[$index + 1].list" ng-required="vm.getRequired(vm.report.params[$index + 1])"></select><div ng-switch-when="MULTI_SELECT" ng-hide="vm.hideParam(vm.report.params[indexp + 1])"><ui-select name="{{vm.report.params[indexp + 1].name}}" id="{{vm.report.params[indexp + 1].name}}" multiple="multiple" ng-model="vm.report.params[indexp + 1].value" close-on-select="false" title="{{vm.report.params[indexp + 1].title}}" ui-select-required="vm.getRequired(vm.report.params[indexp + 1])"><ui-select-match placeholder="{{vm.report.params[indexp + 1].placeholder}}">{{vm.getSelectTitleField(vm.report.params[indexp + 1], $item)}}</ui-select-match><ui-select-choices repeat="element in vm.report.params[indexp + 1].list | filter:$select.search">{{vm.getSelectTitleField(vm.report.params[indexp + 1], element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="vm.report.params[$index + 1].searchQuery" id="searchQueryrpt-metadata" placeholder="{{vm.report.params[$index + 1].placeholder}}" ng-change="vm.search($index)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="vm.getDtOptions(vm.report.params[$index + 1], $index)" dt-columns="vm.getDtColumns(vm.report.params[$index + 1], $index)" dt-instance="vm.report.params[$index + 1].dtInstance" class="table table-striped table-bordered table-condensed"></table></div><input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-default><div ng-show="paramsForm.{{vm.report.params[$index + 1].name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{vm.report.params[$index + 1].name}}.$error.required">This field is required.</p></div></div></div></div>');
 $templateCache.put('forms/common/fields/checkbox-list.html','<br ng-if="field.inline"><div ng-class="field.inline === true ? \'checkbox-inline\' : \'checkbox\'" ng-repeat="option in field.options"><label><input type="checkbox" value="{{option.id}}" ng-model="field.value[option.id]"> {{option.name}}</label></div>');
 $templateCache.put('forms/common/fields/checkbox.html','<div class="checkbox"><br ng-show="field.ln"><label><input ods-dynamic-name="field.name" id="{{field.name}}" ng-model="field.value" type="{{field.type}}" placeholder="{{field.placeholder}}" ng-required="{{field.required}}" title="{{field.tooltip}}"> <span class="ng-binding ng-scope">{{field.label}}</span></label></div>');
 $templateCache.put('forms/common/fields/datetime.html','<div class="input-group"><input id="{{field.name + dev}}" class="form-control" ods-dynamic-name="field.name" type="text" enable-time="field.enableTime" datetime-picker="{{field.format}}" ng-required="getRequired(field)" ng-model="field.value" is-open="field.open" model-options="field.options"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="openCalendar(field)"><i class="fa fa-calendar"></i></button></span></div>');
@@ -175,9 +176,9 @@ angular
     .module('ods-lib')
     .controller('AddressDialogController', AddressDialogController);
 
-AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states', '$filter'];
+AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states'];
 
-function AddressDialogController($uibModalInstance, address, countries, states, $filter) {
+function AddressDialogController($uibModalInstance, address, countries, states) {
     var vm = this;
 
     vm.address = address;
@@ -263,7 +264,7 @@ function Address($uibModal) {
                 // $element.
                 updateValue(result);
                 //$state.go($state.current.name, null, {reload: $state.current.name});
-            }, function (result) {
+            }, function () {
                 //$state.go($state.current.name);
             });
         };
@@ -271,12 +272,12 @@ function Address($uibModal) {
         $scope.printName = printName;
 
         function printName(address) {
-            if (address != null) {
+            if (address !== null) {
                 return address.street + ' ' +
                     address.street2 + ' ' +
                     address.city + ',' +
                     address.state.name + ' ' +
-                    address.zip
+                    address.zip;
             } else {
                 return '';
             }
@@ -288,6 +289,230 @@ function Address($uibModal) {
         }
 
     }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsCkeditor', CKEditor);
+
+CKEditor.$inject = ['$timeout', 'OdsCkeditor'];
+
+function CKEditor($timeout, OdsCkeditor) {
+
+    var directive = {
+        restrict: 'A',
+        require: '?ngModel',
+        scope: {
+            name: '@',
+            ngModel: '=',
+            options: '=',
+            disabled: '=?ngDisabled'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope, elm, attr) {
+
+        if (typeof($scope.ngModel) === 'undefined') {
+            $scope.ngModel = '';
+        }
+
+        if (typeof(CKEDITOR) === 'undefined') {
+            console.error('Please include CKEditor js in your html.');
+            return;
+        }
+
+        if (!attr.id && !attr.name) {
+            $scope.name = OdsCkeditor.generateName();
+        } else {
+            $scope.name = attr.name;
+        }
+
+        //We check if an instance exists.
+        $scope.ck = OdsCkeditor.getInstance($scope.name);
+
+        if (!$scope.ck) {
+            elm[0].name = $scope.name;
+            elm[0].id = $scope.name;
+            $scope.ck = CKEDITOR.replace(elm[0]);
+            OdsCkeditor.register($scope.name, $scope.ck);
+        }
+
+        $scope.disabled = $scope.disabled ? $scope.disabled : false;
+
+        $scope.ck.on('instanceReady', function () {
+
+            OdsCkeditor.setData($scope.name, $scope.ngModel);
+            OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
+        });
+
+        $scope.ck.on('change', function () {
+            $timeout(function () {
+                $scope.ngModel = OdsCkeditor.getData($scope.name);
+            }, 0, false);
+        });
+
+        // ['dataReady', 'change', 'blur', 'saveSnapshot'].forEach(function (event) {
+        //     controller.onCKEvent(event, function syncView() {
+        //         ngModelController.$setViewValue(controller.instance.getData() || '');
+        //     });
+        // });
+
+        $scope.$watch('disabled', function (newValue, oldValue) {
+
+            $timeout(function () {
+                if (newValue !== oldValue) {
+                    newValue = newValue ? newValue : false;
+                    OdsCkeditor.setReadOnly($scope.name, newValue);
+                }
+            }, 0, false);
+            return;
+        });
+
+        $scope.$watch('options', function (options) {
+
+            $timeout(function () {
+                OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions(options));
+            }, 0, false);
+            return;
+        });
+
+        $scope.$watch('ngModel', function (model, oldModel) {
+
+            $timeout(function () {
+                if(model !== oldModel){
+                    OdsCkeditor.setData($scope.name, model);
+                }
+            }, 0, false);
+            return;
+        });
+
+        $scope.$on('$destroy', function () {
+            OdsCkeditor.unregister($scope.name);
+        });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .factory('OdsCkeditor', OdsCkeditor);
+
+function OdsCkeditor() {
+
+    var uniqueCounter = (+new Date()) % 10000;
+
+    var keyCode = CKEDITOR.CTRL + 32;
+
+    var instanceMap = {};
+
+    var service = {
+        register: register,
+        getInstance: getInstance,
+        unregister: unregister,
+        generateName: generateName,
+        getData: getData,
+        setData: setData,
+        setOptions: setOptions,
+        setReadOnly: setReadOnly,
+        initOptions: initOptions
+    };
+
+    function register(name, instance) {
+
+        instanceMap[name] = instance;
+    }
+
+    function getInstance(name) {
+
+        if (instanceMap[name]) {
+            return instanceMap[name];
+        } else {
+            return false;
+        }
+    }
+
+    function unregister(name) {
+
+        instanceMap[name] = null;
+    }
+
+    function generateName() {
+
+        uniqueCounter++;
+        return 'ckeditor' + uniqueCounter;
+    }
+
+    function getData(name) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            return ck.getData();
+        } else {
+            return '';
+        }
+    }
+
+    function setData(name, model) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            ck.setData(model);
+
+            // ck.focus();
+            // var selection = ck.getSelection();
+            // if (selection) {
+            //     var range = selection.getRanges()[0];
+            //     var pCon = range.startContainer.getAscendant({p: 2}, true); //getAscendant('p',true);
+            //     var newRange = new CKEDITOR.dom.range(range.document);
+            //     newRange.moveToPosition(pCon, CKEDITOR.POSITION_BEFORE_START);
+            //     newRange.select();
+            // }
+        }
+    }
+
+    function setOptions(name, options) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            ck.execCommand('reloadOptions', initOptions(options));
+        }
+    }
+
+    function setReadOnly(name, isReadOnly) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            ck.setReadOnly(isReadOnly);
+        }
+    }
+
+    function initOptions(options) {
+
+        var tmp = {};
+        if (options) {
+            tmp = {
+                triggerKeyCode: !options.triggerKeyCode ? keyCode : options.triggerKeyCode,
+                prefix: !options.prefix ? '${' : options.prefix,
+                suffix: !options.suffix ? '}' : options.suffix,
+                suggestions: options.suggestions
+            };
+            return tmp;
+        } else {
+            tmp = {
+                triggerKeyCode: keyCode,
+                prefix: '${',
+                suffix: '}',
+                suggestions: []
+            };
+            return tmp;
+        }
+    }
+
+    return service;
 }
 'use strict';
 
@@ -356,7 +581,7 @@ function OdsFileUpload($uibModal) {
                 // $element.
                 updateValue(result);
                 //$state.go($state.current.name, null, {reload: $state.current.name});
-            }, function (result) {
+            }, function () {
                 //$state.go($state.current.name);
             });
         };
@@ -364,12 +589,12 @@ function OdsFileUpload($uibModal) {
         $scope.printName = printName;
 
         function printName(address) {
-            if (address != null) {
+            if (address !== null) {
                 return address.street + ' ' +
                     address.street2 + ' ' +
                     address.city + ',' +
                     address.state.name + ' ' +
-                    address.zip
+                    address.zip;
             } else {
                 return '';
             }
@@ -511,228 +736,6 @@ function OdsFileUpload($uibModal) {
 
 angular
     .module('ods-lib')
-    .directive('odsCkeditor', CKEditor);
-
-CKEditor.$inject = ['$timeout', 'OdsCkeditor'];
-
-function CKEditor($timeout, OdsCkeditor) {
-
-    var directive = {
-        restrict: 'A',
-        require: '?ngModel',
-        scope: {
-            name: '@',
-            ngModel: '=',
-            options: '=',
-            disabled: '=?ngDisabled'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope, elm, attr) {
-
-        if (typeof($scope.ngModel) === 'undefined') {
-            $scope.ngModel = '';
-        }
-
-        if (typeof(CKEDITOR) === 'undefined') {
-            console.error('Please include CKEditor js in your html.');
-            return;
-        }
-
-        if (!attr.id && !attr.name) {
-            $scope.name = OdsCkeditor.generateName();
-        } else {
-            $scope.name = attr.name;
-        }
-
-        //We check if an instance exists.
-        $scope.ck = OdsCkeditor.getInstance($scope.name);
-
-        if (!$scope.ck) {
-            elm[0].name = $scope.name;
-            elm[0].id = $scope.name;
-            $scope.ck = CKEDITOR.replace(elm[0]);
-            OdsCkeditor.register($scope.name, $scope.ck);
-        }
-
-        $scope.disabled = $scope.disabled ? $scope.disabled : false;
-
-        $scope.ck.on('instanceReady', function () {
-
-            OdsCkeditor.setData($scope.name, $scope.ngModel);
-            OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
-        });
-
-        $scope.ck.on('change', function () {
-            $timeout(function () {
-                $scope.ngModel = OdsCkeditor.getData($scope.name);
-            }, 0, false);
-        });
-
-        // ['dataReady', 'change', 'blur', 'saveSnapshot'].forEach(function (event) {
-        //     controller.onCKEvent(event, function syncView() {
-        //         ngModelController.$setViewValue(controller.instance.getData() || '');
-        //     });
-        // });
-
-        $scope.$watch('disabled', function (newValue, oldValue) {
-
-            $timeout(function () {
-                if (newValue !== oldValue) {
-                    newValue = newValue ? newValue : false;
-                    OdsCkeditor.setReadOnly($scope.name, newValue);
-                }
-            }, 0, false);
-            return;
-        });
-
-        $scope.$watch('options', function (options) {
-
-            $timeout(function () {
-                OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions(options));
-            }, 0, false);
-            return;
-        });
-
-        $scope.$watch('ngModel', function (model, oldModel) {
-
-            $timeout(function () {
-                if(model !== oldModel){
-                    OdsCkeditor.setData($scope.name, model);
-                }
-            }, 0, false);
-            return;
-        });
-
-        $scope.$on('$destroy', function () {
-            OdsCkeditor.unregister($scope.name);
-        });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('OdsCkeditor', OdsCkeditor);
-
-function OdsCkeditor() {
-
-    var uniqueCounter = (+new Date) % 10000;
-
-    var keyCode = CKEDITOR.CTRL + 32;
-
-    var instance_map = {};
-
-    var service = {
-        register: register,
-        getInstance: getInstance,
-        unregister: unregister,
-        generateName: generateName,
-        getData: getData,
-        setData: setData,
-        setOptions: setOptions,
-        setReadOnly: setReadOnly,
-        initOptions: initOptions
-    };
-
-    function register(name, instance) {
-
-        instance_map[name] = instance;
-    }
-
-    function getInstance(name) {
-
-        if (instance_map[name])
-            return instance_map[name];
-        else
-            return false;
-    }
-
-    function unregister(name) {
-
-        instance_map[name] = null;
-    }
-
-    function generateName() {
-
-        uniqueCounter++;
-        return 'ckeditor' + uniqueCounter;
-    }
-
-    function getData(name) {
-
-        var ck = getInstance(name);
-        if (ck) {
-            return ck.getData();
-        } else {
-            return '';
-        }
-    }
-
-    function setData(name, model) {
-
-        var ck = getInstance(name);
-        if (ck) {
-            ck.setData(model);
-
-            // ck.focus();
-            // var selection = ck.getSelection();
-            // if (selection) {
-            //     var range = selection.getRanges()[0];
-            //     var pCon = range.startContainer.getAscendant({p: 2}, true); //getAscendant('p',true);
-            //     var newRange = new CKEDITOR.dom.range(range.document);
-            //     newRange.moveToPosition(pCon, CKEDITOR.POSITION_BEFORE_START);
-            //     newRange.select();
-            // }
-        }
-    }
-
-    function setOptions(name, options) {
-
-        var ck = getInstance(name);
-        if (ck) {
-            ck.execCommand('reloadOptions', initOptions(options));
-        }
-    }
-
-    function setReadOnly(name, isReadOnly) {
-
-        var ck = getInstance(name);
-        if (ck) {
-            ck.setReadOnly(isReadOnly);
-        }
-    }
-
-    function initOptions(options) {
-
-        if (options) {
-            var tmp = {
-                triggerKeyCode: !options.triggerKeyCode ? keyCode : options.triggerKeyCode,
-                prefix: !options.prefix ? '${' : options.prefix,
-                suffix: !options.suffix ? '}' : options.suffix,
-                suggestions: options.suggestions
-            }
-            return tmp;
-        } else {
-            var tmp = {
-                triggerKeyCode: keyCode,
-                prefix: '${',
-                suffix: '}',
-                suggestions: []
-            }
-            return tmp;
-        }
-    }
-
-    return service;
-}
-'use strict';
-
-angular
-    .module('ods-lib')
     .filter('DateFilter', DateFilter);
 
 DateFilter.$inject = ['moment'];
@@ -789,12 +792,12 @@ function Phone() {
         }
 
         if (country === 1) {
-            country = "";
+            country = '';
         }
 
         number = number.slice(0, 3) + '-' + number.slice(3);
 
-        return (country + " (" + city + ") " + number).trim();
+        return (country + ' (' + city + ') ' + number).trim();
     };
 }
 'use strict';
@@ -894,12 +897,12 @@ function PropsFilter() {
 
             var data = OdsFormService.saveFormData(schema);
             console.log('The form data is: ' + JSON.stringify(data, null, 4));
-        }
+        };
 
         $scope.toggleStyle = function(){
 
             $scope.cssClass = $scope.cssClass === 'form-print' ? 'form-print1' : 'form-print';
-        }
+        };
     }
 })();
 /**
@@ -911,9 +914,9 @@ angular
     .module('ods-lib')
     .directive('odsFormBuilder', OdsFormBuilder);
 
-OdsFormBuilder.$inject = ['OdsFormService', '$uibModal', '$sce', '$q'];
+OdsFormBuilder.$inject = [];
 
-function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
+function OdsFormBuilder() {
 
     var directive = {
         restrict: 'E',
@@ -931,7 +934,7 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc() {
 
     }
 }
@@ -955,7 +958,7 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
 
         vm.image = {};
         vm.image.picture = image;
-        vm.image.pictureContentType = typeImage
+        vm.image.pictureContentType = typeImage;
         vm.imageTmp = {};
         angular.copy(vm.image, vm.imageTmp);
         vm.clear = clear;
@@ -978,7 +981,7 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
             $uibModalInstance.dismiss(vm.image);
         }
 
-        vm.setPicture = function ($file, image) {
+        vm.setPicture = function ($file) {
             if ($file && $file.$error === 'pattern') {
                 return;
             }
@@ -1025,14 +1028,16 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
             });
         };
 
-        vm.onStream = function (stream) {
+        vm.onStream = function () {
             // You could do something manually with the stream.
         };
 
         vm.makeSnapshot = function () {
             if (_video) {
                 var patCanvas = document.querySelector('#snapshot');
-                if (!patCanvas) return;
+                if (!patCanvas) {
+                    return;
+                }
 
                 patCanvas.width = _video.width;
                 patCanvas.height = _video.height;
@@ -1041,7 +1046,7 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
                 var idata = getVideoData(vm.patOpts.x, vm.patOpts.y, vm.patOpts.w, vm.patOpts.h);
                 ctxPat.putImageData(idata, 0, 0);
 
-                sendSnapshotToServer(patCanvas.toDataURL().split("base64,")[1]);
+                sendSnapshotToServer(patCanvas.toDataURL().split('base64,')[1]);
 
                 patData = idata;
             }
@@ -1104,9 +1109,9 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
         .module('ods-lib')
         .directive('imageUpload', imageUpload);
 
-    imageUpload.$inject = ['$uibModal', '$state'];
+    imageUpload.$inject = ['$uibModal'];
 
-    function imageUpload($uibModal, $state) {
+    function imageUpload($uibModal) {
 
         var directive = {
             restrict: 'E',
@@ -1125,8 +1130,8 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
 
         /* private helper methods*/
 
-        function linkFunc($scope, element) {
-            $scope.openModal = function (element) {
+        function linkFunc($scope) {
+            $scope.openModal = function () {
                 $uibModal.open({
                     templateUrl: 'image-upload/image-upload-dialog.html',
                     controller: 'ImageUploadDialogController',
@@ -1144,7 +1149,7 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
                             return $scope.typeImage;
                         }
                     }
-                }).result.then(function (result) {}, function (result) {
+                }).result.then(function () {}, function (result) {
                     updateValue(result);
                 });
             };
@@ -1175,11 +1180,11 @@ function ImageUploadService() {
     return service;
 
     function getDefaultUserPicture() {
-        return "/9j/4AAQSkZJRgABAQEAYABgAAD/4QHGRXhpZgAATU0AKgAAAAgABFEAAAQAAAABAAAAAFEBAAMAAAABAAEAAFECAAEAAAGAAAAAPlEDAAEAAAABAAAAAAAAAADn5+fBwcHAwMC/v7+5ubm8vLzm5ubo6Oi+vr64uLi9vb27u7u6urq3t7fCwsLAwsHCwMHk5OTl5eW2trbf39/V1dXOzs7h4eHj4+Pi4uLa2trFxcXPz8/S0tLc3NzHx8fLy8vW1tbIyMjDw8PKysrExMTX19fMzMzZ2dnR0dHe3t7d3d3Nzc3Q0NDg4ODU1NTGxsbY2NjT09PBwb/b29vBwcPJycnCwb/BwL7Bv8DAwcPCwMPAwr+/wcDCwsDBw8LCwsTBw8C6uLng3t/DwcTBwMXEwL+/wb7AwcXAwMLCwb3b293i4+Xd3tnf4eDBwsTZ3d7AwL68vLrZ3dy7vbzo6Oq9uLzDwcLb29nn5+W5t7i8urvj4eK4ure/w8LFwMS+w7/c2tu5ubvBv8Tn5+nDwsDp5+jp6em7u726vLkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAF/AX8DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9nKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorH8aeOdP8C6W1zfTBWIPlRKcyTH0A/r0FeT6X+0drU2rxNcQ2K2TTDzAI23LHu5wc9QO+KAPcKKRHWRAykMrDII7iloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiqer+ItP0CPdfXlraLjP72UJn6Z60AXKK4PXf2ivD+lblt2udRkHQQx7Vz7s2P0BriPEP7RutauGTT7eDTY243f62T8z8v6UAe06xrtn4etDcX11Dawj+KR9ufYep9hXmHjb9pRFDW+gweY3T7TOuFH+6vU/U4+hrzC+kvfEF59ovrme6mb+KVyx/DPT6VNb6csYoAjvri88S6i13f3E1zcSdXkbP4D0HsOKsQ2ixLipVUJ0paAPZvgn4q/t7wqLWVs3GmkRHJ5KfwH8hj/gNdlmvAfh94qbwd4pt7ot/o7nypx6oep/Dg/hXvwbeNw5B5B9aACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoqG/v4NLs5Li5mjt4Yhl5JGCqo9ya8r8b/tJBXa30CASEcfaplO3/gKf1P5UAer3FzHaQtJNJHFGoyzOwVR+JrmtV+M3hnR2ZZNWglZe0Aab9VBH614HrGr6p4tuvO1G8uLps5AdvlX6L0H4CmRaQAOeaAPXtT/ab0e24tbK/um7Fgsan8ck/pXN6t+0tq95kWOn2dqvrIWlYfjwP0ri005F7VKtsq0AW9U+JfifXwwm1a6jVv4YSIR9PlA/WsT+zZLiQySM0jtyWY5JrSEajtTqAKcWlKvarCWqp2qSigAAxRRRQAUUUUABG4Yr6A+Ht0954I0uSTlvs6qSe+Bj+lfP+M17r8J9Rj1DwHY+WwLQqYnH91ge/wCGD+NAHR0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVj+NfG9j4E0dry+kx/DFEv35m9FH9egrSv76LTLGa4ncRw26GR2PRVAyTXzX418W3PxF8TyXsxZYQdkERPESdh9T1J9aAJPG3xA1P4lahuuW8q0RsxWyH5I/c/3m9z+nSqNppyxjkVNbWywp0qagBqoFHFOoooAKKKKACiiigAooooAKKKKACiiigArofhv49fwNrm6Qs2n3RCzqP4fRx7j9R+Fc9Qw3DFAH0rbXEd3bxyxOskcihkZTlWB6EU+vJPgn8Q20u8XRb1z9mnbFs5/wCWTn+H6Ht6H68et0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwf7RWsyaZ8P/JjyPt9wkDEf3cFj+e0D8TXi+m2wSKvXP2mRnwjp/8A1/L/AOgPXldsMRCgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooADkEMpKspyCOxr6G8Ias2u+F7C8b/AFk8Cs/+9jn9c18817x8LTnwBpn/AFzP/oRoA6CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA83/AGmP+RR0/wD6/l/9AevK7b/UrXq/7S0e7wXYt/dv0z7fI9eUW3+pWgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK96+GS7PAWl/8AXHP6mvBa+g/A1ubXwZpaH732WMkemVBoA1aKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDn/inp0OpfD7VlmjWRYbZ5lz/CyKWBH4ivAbKTfEPpX0R48XzPA+sr/esZx/5DavnLSz+5WgC3RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAOij82VVHViBX0pBCttCka/djUKPoK+b9PG6/gHrIv86+kqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAzvGCeZ4S1Rf71pKP8Axw182aUf3Qr6Y8Rr5nh6/X+9byD/AMdNfM2knMdAF2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAktZPJuo37KwP619KCvmc8ivffhxqr614I064kJaRotjE9WKkrn8cUAbdFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRQaAMPx/4w0/whoEr303l/aEaOJANzyNjsPxHPQV876T/q61Pih4jm8aePbyR2P2e1kNvAvZUUkfqcn8faqdtB5KUASUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXuvwlRY/h7poVg3yuSR6l2J/nXhVeifs/wCvzJql3pbNut2jNwgP8DAgHH1yPyoA9UooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPmnxFZfYfGurQ/8APO8lA+m84ptbHxcsP7O+KOpDHyzlJl98oM/qDWPQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXYfA1tvjtf8AagkH16GuPrtPgRAZfG7N/wA8rZ2P5qP60AeyUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHjv7R2l/Z/E+m3wHy3MBhJHqjZ/k/6VxKnKivcPi34Jbxt4UaOAZvLV/OgH94gEFfxH6gV4cEaFmjkVo5IztZWGCp7gigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr0b9nqwLX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";
+        return '/9j/4AAQSkZJRgABAQEAYABgAAD/4QHGRXhpZgAATU0AKgAAAAgABFEAAAQAAAABAAAAAFEBAAMAAAABAAEAAFECAAEAAAGAAAAAPlEDAAEAAAABAAAAAAAAAADn5+fBwcHAwMC/v7+5ubm8vLzm5ubo6Oi+vr64uLi9vb27u7u6urq3t7fCwsLAwsHCwMHk5OTl5eW2trbf39/V1dXOzs7h4eHj4+Pi4uLa2trFxcXPz8/S0tLc3NzHx8fLy8vW1tbIyMjDw8PKysrExMTX19fMzMzZ2dnR0dHe3t7d3d3Nzc3Q0NDg4ODU1NTGxsbY2NjT09PBwb/b29vBwcPJycnCwb/BwL7Bv8DAwcPCwMPAwr+/wcDCwsDBw8LCwsTBw8C6uLng3t/DwcTBwMXEwL+/wb7AwcXAwMLCwb3b293i4+Xd3tnf4eDBwsTZ3d7AwL68vLrZ3dy7vbzo6Oq9uLzDwcLb29nn5+W5t7i8urvj4eK4ure/w8LFwMS+w7/c2tu5ubvBv8Tn5+nDwsDp5+jp6em7u726vLkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAF/AX8DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9nKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorH8aeOdP8C6W1zfTBWIPlRKcyTH0A/r0FeT6X+0drU2rxNcQ2K2TTDzAI23LHu5wc9QO+KAPcKKRHWRAykMrDII7iloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiqer+ItP0CPdfXlraLjP72UJn6Z60AXKK4PXf2ivD+lblt2udRkHQQx7Vz7s2P0BriPEP7RutauGTT7eDTY243f62T8z8v6UAe06xrtn4etDcX11Dawj+KR9ufYep9hXmHjb9pRFDW+gweY3T7TOuFH+6vU/U4+hrzC+kvfEF59ovrme6mb+KVyx/DPT6VNb6csYoAjvri88S6i13f3E1zcSdXkbP4D0HsOKsQ2ixLipVUJ0paAPZvgn4q/t7wqLWVs3GmkRHJ5KfwH8hj/gNdlmvAfh94qbwd4pt7ot/o7nypx6oep/Dg/hXvwbeNw5B5B9aACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoqG/v4NLs5Li5mjt4Yhl5JGCqo9ya8r8b/tJBXa30CASEcfaplO3/gKf1P5UAer3FzHaQtJNJHFGoyzOwVR+JrmtV+M3hnR2ZZNWglZe0Aab9VBH614HrGr6p4tuvO1G8uLps5AdvlX6L0H4CmRaQAOeaAPXtT/ab0e24tbK/um7Fgsan8ck/pXN6t+0tq95kWOn2dqvrIWlYfjwP0ri005F7VKtsq0AW9U+JfifXwwm1a6jVv4YSIR9PlA/WsT+zZLiQySM0jtyWY5JrSEajtTqAKcWlKvarCWqp2qSigAAxRRRQAUUUUABG4Yr6A+Ht0954I0uSTlvs6qSe+Bj+lfP+M17r8J9Rj1DwHY+WwLQqYnH91ge/wCGD+NAHR0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVj+NfG9j4E0dry+kx/DFEv35m9FH9egrSv76LTLGa4ncRw26GR2PRVAyTXzX418W3PxF8TyXsxZYQdkERPESdh9T1J9aAJPG3xA1P4lahuuW8q0RsxWyH5I/c/3m9z+nSqNppyxjkVNbWywp0qagBqoFHFOoooAKKKKACiiigAooooAKKKKACiiigArofhv49fwNrm6Qs2n3RCzqP4fRx7j9R+Fc9Qw3DFAH0rbXEd3bxyxOskcihkZTlWB6EU+vJPgn8Q20u8XRb1z9mnbFs5/wCWTn+H6Ht6H68et0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwf7RWsyaZ8P/JjyPt9wkDEf3cFj+e0D8TXi+m2wSKvXP2mRnwjp/8A1/L/AOgPXldsMRCgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooADkEMpKspyCOxr6G8Ias2u+F7C8b/AFk8Cs/+9jn9c18817x8LTnwBpn/AFzP/oRoA6CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA83/AGmP+RR0/wD6/l/9AevK7b/UrXq/7S0e7wXYt/dv0z7fI9eUW3+pWgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK96+GS7PAWl/8AXHP6mvBa+g/A1ubXwZpaH732WMkemVBoA1aKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDn/inp0OpfD7VlmjWRYbZ5lz/CyKWBH4ivAbKTfEPpX0R48XzPA+sr/esZx/5DavnLSz+5WgC3RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAOij82VVHViBX0pBCttCka/djUKPoK+b9PG6/gHrIv86+kqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAzvGCeZ4S1Rf71pKP8Axw182aUf3Qr6Y8Rr5nh6/X+9byD/AMdNfM2knMdAF2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAktZPJuo37KwP619KCvmc8ivffhxqr614I064kJaRotjE9WKkrn8cUAbdFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRQaAMPx/4w0/whoEr303l/aEaOJANzyNjsPxHPQV876T/q61Pih4jm8aePbyR2P2e1kNvAvZUUkfqcn8faqdtB5KUASUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXuvwlRY/h7poVg3yuSR6l2J/nXhVeifs/wCvzJql3pbNut2jNwgP8DAgHH1yPyoA9UooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPmnxFZfYfGurQ/8APO8lA+m84ptbHxcsP7O+KOpDHyzlJl98oM/qDWPQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXYfA1tvjtf8AagkH16GuPrtPgRAZfG7N/wA8rZ2P5qP60AeyUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHjv7R2l/Z/E+m3wHy3MBhJHqjZ/k/6VxKnKivcPi34Jbxt4UaOAZvLV/OgH94gEFfxH6gV4cEaFmjkVo5IztZWGCp7gigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr0b9nqwLX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';
     }
 
     function getDefaultUserPictureContentType() {
-        return "image/jpeg";
+        return 'image/jpeg';
     }
 
     function resetUserPicture(object){
@@ -1314,9 +1319,10 @@ function ImageUploadService() {
                 }).result.then(function () {
                     // console.log('close');
                 }, function (result) {
-                    if (result && (typeof(result) == 'object')) {
-                        if ($scope.ngModel == null)
+                    if (result && (typeof(result) === 'object')) {
+                        if ($scope.ngModel === null) {
                             $scope.ngModel = {};
+                        }
                         $scope.ngModel = result.model;
                         $scope.original = result.original;
                         $scope.onSave();
@@ -1327,434 +1333,92 @@ function ImageUploadService() {
     }
 })();
 
+/**
+ * Created by hermeslm on 3/28/17.
+ */
 'use strict';
 
 angular
     .module('ods-lib')
-    .directive('jSignature', Signature);
+    .directive('odsParam', odsParamDirective);
 
-jSignature.$inject = ['$timeout', 'JSignature'];
+odsParamDirective.$inject = ['OdsParamType', 'DTOptionsBuilder', 'DTColumnBuilder', '$q', '$filter', '$compile'];
 
-function jSignature($timeout, JSignature) {
+function odsParamDirective(OdsParamType, DTOptionsBuilder, DTColumnBuilder, $q, $filter, $compile) {
 
     var directive = {
         restrict: 'E',
-        templateUrl: 'j-signature/j-signature.html',
+        templateUrl: 'reports/param.html',
         scope: {
-            sig: '=',
-            width: '@',
-            height: '@',
-            color: '@',
-            bgColor: '@',
-            lineWidth: '@',
-            cssclass: '@',
-            undo: '@',
-            save: '='
+            param: '='
         },
         link: linkFunc
     };
 
     return directive;
 
-    /* private helper methods*/
+    function linkFunc($scope) {
 
-    function linkFunc($scope, $element) {
-
-        console.log('jSignatureDirective: link');
-        console.dir($scope, $element);
-
-        var options = {
-            width: $scope.width,
-            height: $scope.height,
-            color: $scope.color,
-            'background-color': $scope.bgColor,
-            lineWidth: $scope.lineWidth,
-            cssClass: $scope.cssClass,
-            UndoButton: $scope.undo
-        };
-
-        JSignature.initialize($scope, options);
-
-        $scope.reset = function () {
-            JSignature.reset();
-        };
-
-//             $scope.initialized = false;
-//
-//             var options = {
-//                 width: $scope.width,
-//                 height: $scope.height,
-//                 color: $scope.color,
-//                 'background-color': $scope.bgColor,
-//                 lineWidth: $scope.lineWidth,
-//                 cssclass: $scope.cssclass
-//             };
-//
-//             $scope.initialize = function() {
-//                 if (!$scope.initialized) {
-//                     $element.find('#jSignature').jSignature(options);
-//                     $scope.initialized = true;
-//                 }
-//             };
-//
-//             $scope.reset = function() {
-//                 console.log('reset!!!');
-//                 $element.jSignature('reset');
-//             };
-//
-//             $scope.getData = function() {
-//                 console.log('getData!!!');
-//                 var datapair = $element.jSignature('getData', 'base30');
-//                 var svg = $element.jSignature('getData', 'svg');
-//                 console.dir(datapair);
-//                 //alert(datapair);
-//                 //              alert(svg);
-//                 $scope.save(svg);
-//             };
-//
-//             $scope.setData = function(sig) {
-//                 console.log('setData!!!');
-//
-//
-//
-//                 if (sig) {
-//                     datapair = sig;
-//                 }
-//                 console.log(datapair);
-//                 $element.jSignature('setData', 'data:' + datapair.join(','));
-//             };
-//
-//
-//             $scope.initialize();
-// //            $scope.setData();
-//
-//
-//             $scope.$watch('sig', function(sig) {
-//                 if (sig) {
-//                     console.log('watch if ' + sig);
-//                     $scope.setData(sig);
-//                     //alert('watch if ' + sig);
-//
-//                     return;
-//                 }
-//                 console.log('watch else');
-//
-//             });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('Signature', Signature);
-
-function Signature() {
-
-    var apinamespace = 'jSignature';
-
-    var exportTypes = {
-        DEFAULT: 'default',
-        NATIVE: 'native',
-        IMAGE: 'image',
-        BASE30: 'base30',
-        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
-        SVG: 'svg',
-        SVG_XML: 'image/svg+xml',
-        SVG_BASE64: 'svgbase64',
-        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
-    }
-
-    var importTypes = {
-        NATIVE: 'native',
-        IMAGE: 'image',
-        IMAGE_PNG_BASE64: 'image/png;base64',
-        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
-        IMAGE_JPG_BASE64: 'image/jpg;base64'
-    }
-
-    var object = {
-        initialized: false,
-        options: {
-            width: null,
-            height: null,
-            color: null,
-            'background-color': null,
-            lineWidth: null,
-            cssclass: null,
-            UndoButton: false
-        },
-        element: null
-    };
-
-    var service = {
-        getObject: getObject,
-        exportTypes: exportTypes,
-        importTypes: importTypes,
-        initialize: initialize,
-        reset: reset,
-        getData: getData,
-        // setData: setData,
-        disable: disable,
-        enable: enable
-    };
-
-    return service;
-
-    function initialize(element, options) {
-
-        object.initialized = false;
-
-        if (!object.initialized) {
-            // object.element = element.find('#jSignature').jSignature(options);
-            object.element = $('#jSignature');
-            object.initialized = true;
-            object.element.jSignature(options);
-        }
-    };
-
-    function reset() {
-        // console.log('reset!!!');
-        object.element.jSignature('reset');
-    };
-
-    function getData(type) {
-        // console.log('getData!!!');
-        return object.element.jSignature('getData', type);
-    };
-
-    function getDataAsSVG() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function getDataAsBase30() {
-        // console.log('getData!!!');
-        // var datapair = object.element.jSignature('getData', 'base30');
-        var svg = object.element.jSignature('getData', 'svg');
-        return svg;
-    };
-
-    function setData(sig) {
-        // console.log('setData!!!');
-        // console.log(sig);
-        object.element.jSignature('setData', 'data:' + sig.join(','));
-    };
-
-    function disable() {
-        // console.log('Disable!!!');
-        object.element.jSignature('disable');
-    };
-
-    function enable() {
-        // console.log('Enable!!!');
-        object.element.jSignature('enable');
-    };
-
-    function undo() {
-        var eventName = apinamespace + '.undo'
-        object.element.jSignature('events');
-    };
-
-    function getObject() {
-        // $('#signature').on('change', function(e){
-        //     var undef
-        //     if ($(e.target).jSignature('getData','native').length) {
-        //         $tools.find('input').prop('disabled', false)
-        //     } else {
-        //         $tools.find('input').prop('disabled', true)
-        //     }
-        //
-        // })
-        return object.element;
-    }
-
-
-}
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('OdsParamsController', OdsParamsController);
-
-    OdsParamsController.$inject = ['OdsParamType', 'report', '$uibModalInstance', '$q',
-        'DTOptionsBuilder', 'DTColumnBuilder', '$filter', '$compile', 'moment', '$scope'];
-
-    function OdsParamsController(OdsParamType, report, $uibModalInstance, $q,
-                                 DTOptionsBuilder, DTColumnBuilder, $filter, $compile, moment, $scope) {
-
-        var vm = this;
-
-        vm.clear = clear;
-        vm.openReport = openReport;
-        vm.openCalendar = openCalendar;
-        vm.paramType = OdsParamType;
-        vm.report = report;
-        vm.getSelectTitleField = getSelectTitleField;
-        vm.getRequired = getRequired;
-        vm.hideParam = hideParam;
-        vm.hideTitle = hideTitle;
+        $scope.hideTitle = hideTitle;
+        $scope.hideParam = hideParam;
+        $scope.getRequired = getRequired;
+        $scope.openCalendar = openCalendar;
+        $scope.getSelectTitleField = getSelectTitleField;
 
         //TABLE_SELECT
-        // vm.selected = {};
-        // vm.selectAll = false;
-        vm.toggleAll = toggleAll;
-        vm.toggleOne = toggleOne;
-        vm.getDtOptions = getDtOptions;
-        vm.getDtColumns = getDtColumns;
-        vm.search = search;
-        initTables();
+        $scope.search = search;
+        $scope.getDtOptions = getDtOptions;
+        $scope.getDtColumns = getDtColumns;
+        $scope.toggleAll = toggleAll;
+        $scope.toggleOne = toggleOne;
 
-        function initTables() {
-            for (var i = 0; i < vm.report.params.length; i++) {
-                if (vm.report.params[i].type === OdsParamType.TABLE_SELECT) {
-                    vm.report.params[i].dtInstance = {};
-                    vm.report.params[i].dtOptions = undefined;
-                    vm.report.params[i].dtColumns = undefined;
-                    vm.report.params[i].isFilter = false;
-                    vm.report.params[i].selected = [];
-                    vm.report.params[i].selectedAll = false;
-                    //init pre-selections
-                    var valueField = vm.report.params[i].valueField;
-                    var gridOptions = vm.report.params[i].gridOptions;
-                    for (var j = 0; j < gridOptions.preSelected.length; j++) {
-                        var preSelectedId = gridOptions.preSelected[j][valueField];
-                        vm.report.params[i].selected[preSelectedId] = true;
-                    }
-                }
-            }
-        }
+        initTableParam($scope.param);
+        initDateParam($scope.param);
 
-        function getDtOptions(param, index) {
+        function initTableParam(param) {
 
-            if (param.dtOptions === undefined) {
-                //We set the new dtOptions into array
-                vm.report.params[index].dtOptions = DTOptionsBuilder.fromFnPromise(function () {
-                    var defer = $q.defer();
-                    if (param.isFilter) {
-                        defer.resolve(param.gridOptions.data);
-                        vm.report.params[index].isFilter = false;
-                    } else if (!vm.report.params[index].searchQuery || vm.report.params[index].searchQuery === '') {
-                        defer.resolve(param.gridOptions.data);
-                    } else {
-                        defer.resolve($filter('filter')(param.gridOptions.data, vm.report.params[index].searchQuery, undefined));
-                    }
-                    return defer.promise;
-                }).withPaginationType('full_numbers').withBootstrap().withDOM('tip').withOption('aaSorting', [[1, 'asc']])
-                    .withOption('createdRow', function (row, data, dataIndex) {
-                        $compile(angular.element(row).contents())($scope);
-                    })
-                    .withOption('headerCallback', function (header) {
-                        if (!vm.headerCompiled) {
-                            vm.headerCompiled = true;
-                            $compile(angular.element(header).contents())($scope);
-                        }
-                    });
-                return vm.report.params[index].dtOptions;
-            } else {
-                return vm.report.params[index].dtOptions;
-            }
-        }
-
-        function getDtColumns(param, index) {
-
-            if (param.dtColumns === undefined) {
-                //We build all columns
-                var gridOptions = param.gridOptions;
-                var columns = [];
-                for (var i = 0; i < gridOptions.columnDef.length; i++) {
-                    var columnDef = gridOptions.columnDef[i];
-                    if (columnDef.id) {
-                        columns.push(DTColumnBuilder.newColumn(null).withTitle(
-                            '<input type="checkbox" ng-model="vm.report.params[' + index + '].selectedAll" ng-change="vm.toggleAll(' + index + ')">')
-                            .notSortable()
-                            .renderWith(function (data, type, full, meta) {
-                                return '<input type="checkbox" ng-model="vm.report.params[' + index + '].selected[' + data[param.valueField] + ']" ng-click="vm.toggleOne(' + index + ')">';
-                            }));
-                    } else {
-                        if (columnDef.render === undefined) {
-                            var column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title);
-                            columns.push(column);
-                        } else {
-                            var column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title)
-                                .renderWith(columnDef.render);
-                            columns.push(column);
-                        }
-                    }
-                }
-
-                vm.report.params[index].dtColumns = columns;
-                return vm.report.params[index].dtColumns;
-            } else {
-                return vm.report.params[index].dtColumns;
-            }
-        }
-
-        function search(index) {
-            vm.report.params[index].dtInstance.reloadData();
-        }
-
-        function toggleAll(index) {
-
-            var param = vm.report.params[index];
-
-            for (var i = 0; i < param.gridOptions.data.length; i++) {
+            if (param.type === OdsParamType.TABLE_SELECT) {
+                param.dtInstance = {};
+                param.dtOptions = undefined;
+                param.dtColumns = undefined;
+                param.isFilter = false;
+                param.selected = [];
+                param.selectedAll = false;
+                //init pre-selections
                 var valueField = param.valueField;
-                var value = param.gridOptions.data[i][valueField];
-                vm.report.params[index].selected[value] = vm.report.params[index].selectedAll;
-            }
-
-            vm.report.params[index].value = vm.report.params[index].selected;
-        }
-
-        function toggleOne(index) {
-            for (var id in vm.report.params[index].selected) {
-                if (vm.report.params[index].selected.hasOwnProperty(id)) {
-                    if (!vm.report.params[index].selected[id]) {
-                        vm.report.params[index].selectedAll = false;
-                        return;
-                    }
-                }
-            }
-            vm.report.params[index].selectedAll = true;
-            vm.report.params[index].value = vm.report.params[index].selected;
-        }
-
-        initDateParams(vm.report);
-
-        function initDateParams(report) {
-            for (var i = 0; i < report.params.length; i++) {
-                if (vm.report.params[i].type === OdsParamType.DATE) {
-                    vm.report.params[i].datePickerOpenStatus = false;
+                var gridOptions = param.gridOptions;
+                for (var j = 0; j < gridOptions.preSelected.length; j++) {
+                    var preSelectedId = gridOptions.preSelected[j][valueField];
+                    param.selected[preSelectedId] = true;
                 }
             }
         }
 
-        function openCalendar(index) {
-            vm.report.params[index].datePickerOpenStatus = true;
-        }
+        function initDateParam(param) {
 
-        function hideParam(param) {
-
-            return param.hidden ? true : false;
+            if (param.type === OdsParamType.DATE) {
+                param.datePickerOpenStatus = false;
+            }
         }
 
         function hideTitle(param) {
 
-            return param.hidden || param.hideTitle ? true : false;
+            return !!(param.hidden || param.hideTitle);
         }
 
-        function clear() {
-            $uibModalInstance.dismiss('cancel');
+        function hideParam(param) {
+
+            return !!param.hidden;
         }
 
-        function openReport() {
-            $uibModalInstance.close(vm.report);
+        function getRequired(param) {
+
+            return param.required !== undefined ? param.required : false;
+        }
+
+        function openCalendar(param) {
+
+            param.datePickerOpenStatus = true;
         }
 
         function getSelectTitleField(param, element) {
@@ -1770,11 +1434,127 @@ function Signature() {
             }
         }
 
-        function getRequired(param) {
-
-            return param.required !== undefined ? param.required : false;
+        function search(param) {
+            param.dtInstance.reloadData();
         }
 
+        function getDtOptions(param) {
+
+            if (param.dtOptions === undefined) {
+                //We set the new dtOptions into array
+                param.dtOptions = DTOptionsBuilder.fromFnPromise(function () {
+                    var defer = $q.defer();
+                    if (param.isFilter) {
+                        defer.resolve(param.gridOptions.data);
+                        param.isFilter = false;
+                    } else if (!param.searchQuery || param.searchQuery === '') {
+                        defer.resolve(param.gridOptions.data);
+                    } else {
+                        defer.resolve($filter('filter')(param.gridOptions.data, param.searchQuery, undefined));
+                    }
+                    return defer.promise;
+                }).withPaginationType('full_numbers').withBootstrap().withDOM('tip').withOption('aaSorting', [[1, 'asc']])
+                    .withOption('createdRow', function (row) {
+                        $compile(angular.element(row).contents())($scope);
+                    })
+                    .withOption('headerCallback', function (header) {
+                        $compile(angular.element(header).contents())($scope);
+                    });
+                return param.dtOptions;
+            } else {
+                return param.dtOptions;
+            }
+        }
+
+        function getDtColumns(param) {
+
+            if (param.dtColumns === undefined) {
+                //We build all columns
+                var gridOptions = param.gridOptions;
+                var columns = [];
+                for (var i = 0; i < gridOptions.columnDef.length; i++) {
+                    var columnDef = gridOptions.columnDef[i];
+                    if (columnDef.id) {
+                        columns.push(DTColumnBuilder.newColumn(null).withTitle(
+                            '<input type="checkbox" ng-model="param.selectedAll" ng-change="toggleAll(' + param + ')">')
+                            .notSortable()
+                            .renderWith(function (data) {
+                                return '<input type="checkbox" ng-model="param.selected[' + data[param.valueField] + ']" ng-click="toggleOne(' + param + ')">';
+                            }));
+                    } else {
+                        var column;
+                        if (columnDef.render === undefined) {
+                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title);
+                            columns.push(column);
+                        } else {
+                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title)
+                                .renderWith(columnDef.render);
+                            columns.push(column);
+                        }
+                    }
+                }
+                param.dtColumns = columns;
+            }
+
+            return param.dtColumns;
+        }
+
+        function toggleAll(param) {
+
+            for (var i = 0; i < param.gridOptions.data.length; i++) {
+                var valueField = param.valueField;
+                var value = param.gridOptions.data[i][valueField];
+                param.selected[value] = param.selectedAll;
+            }
+
+            param.value = param.selected;
+        }
+
+        function toggleOne(param) {
+            for (var id in param.selected) {
+                if (param.selected.hasOwnProperty(id)) {
+                    if (!param.selected[id]) {
+                        param.selectedAll = false;
+                        return;
+                    }
+                }
+            }
+            param.selectedAll = true;
+            param.value = param.selected;
+        }
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .controller('OdsParamsController', OdsParamsController);
+
+    OdsParamsController.$inject = ['OdsReportsService', 'OdsParamType', 'report', '$uibModalInstance'];
+
+    function OdsParamsController(OdsReportsService, OdsParamType, report, $uibModalInstance) {
+
+        var vm = this;
+
+        vm.clear = clear;
+        vm.openReport = openReport;
+        vm.paramType = OdsParamType;
+        vm.report = report;
+
+        function clear() {
+            $uibModalInstance.dismiss('cancel');
+        }
+
+        function openReport() {
+            $uibModalInstance.close(vm.report);
+        }
+        
     }
 })();
 
@@ -1784,17 +1564,18 @@ function Signature() {
     angular
         .module('ods-lib')
         .constant('OdsParamType', {
-            "DATE": "DATE",
-            "TEXT": "TEXT",
-            "NUMBER": "NUMBER",
-            "LIST": "LIST",
-            "SINGLE_SELECT": "SINGLE_SELECT",
-            "MULTI_SELECT": "MULTI_SELECT",
-            "TABLE_SELECT": "TABLE_SELECT"
+            'DATE': 'DATE',
+            'TEXT': 'TEXT',
+            'NUMBER': 'NUMBER',
+            'LIST': 'LIST',
+            'SINGLE_SELECT': 'SINGLE_SELECT',
+            'MULTI_SELECT': 'MULTI_SELECT',
+            'TABLE_SELECT': 'TABLE_SELECT',
+            'DRAG_AND_DROP': 'DRAG_AND_DROP'
         })
         .constant('OdsPageOrientation', {
-            "PORTRAIT": "Portrait",
-            "LANDSCAPE": "Landscape"
+            'PORTRAIT': 'Portrait',
+            'LANDSCAPE': 'Landscape'
         });
 
 })();
@@ -1816,7 +1597,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
         restrict: 'E',
         templateUrl: 'reports/reports.html',
         scope: {
-            reportsGroup: '=',
+            reportsGroup: '='
         },
         link: linkFunc
     };
@@ -1825,7 +1606,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.infoMessage = true;
         $scope.selectReport = null;
@@ -1850,7 +1631,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
             var size = report.modalSize ? report.modalSize : 'sm';
 
             if (report.params.length > 0 &&
-                $.grep(report.params, function (param, i) {
+                $.grep(report.params, function (param) {
                     if (param.hidden) {
                         return param.hidden === false;
                     } else {
@@ -1917,24 +1698,40 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
 
     function OdsReportsService($q, $http, moment, OdsParamType, OdsDateUtils, $window) {
 
-        var pdfFooter = function (currentPage, pageCount) {
-            return {
-                columns: [
-                    {
-                        text: 'Report filter used',
-                        margin: [20, 0],
-                        fontSize: 10
-                    },
-                    {
-                        text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
-                        'Page ' + currentPage.toString() + ' of ' + pageCount,
-                        alignment: 'right',
-                        margin: [0, 0, 20, 0],
-                        fontSize: 10
-                    }
-                ]
-            };
+        // var pdfContent = [];
+
+        var service = {
+            getHttpResource: getHttpResource,
+            postHttpResource: postHttpResource,
+            getReport: getReport,
+            downloadReport: downloadReport,
+            downloadReportFromSource: downloadReportFromSource,
+            getSourceReport: getSourceReport,
+            isMimeSupported: isMimeSupported,
+            forceDownload: forceDownload,
+            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject
         };
+
+        return service;
+
+        // var pdfFooter = function (currentPage, pageCount) {
+        //     return {
+        //         columns: [
+        //             {
+        //                 text: 'Report filter used',
+        //                 margin: [20, 0],
+        //                 fontSize: 10
+        //             },
+        //             {
+        //                 text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
+        //                 'Page ' + currentPage.toString() + ' of ' + pageCount,
+        //                 alignment: 'right',
+        //                 margin: [0, 0, 20, 0],
+        //                 fontSize: 10
+        //             }
+        //         ]
+        //     };
+        // };
 
         function pdfFooterWithFilters(report) {
 
@@ -2006,20 +1803,6 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
 
         }
 
-        var pdfContent = [];
-
-        var service = {
-            getHttpResource: getHttpResource,
-            postHttpResource: postHttpResource,
-            getReport: getReport,
-            downloadReport: downloadReport,
-            downloadReportFromSource: downloadReportFromSource,
-            getSourceReport: getSourceReport,
-            isMimeSupported: isMimeSupported,
-            forceDownload: forceDownload,
-            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject
-        };
-
         function postHttpResource(url, data) {
             var dataPromise = $http.post(url, data);
             return dataPromise;
@@ -2030,11 +1813,9 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
             return dataPromise;
         }
 
-        return service;
-
         function getReport(report) {
 
-            return $q(function (resolve, reject) {
+            return $q(function (resolve) {
 
                 var postReport = buildPost(report);
 
@@ -2111,7 +1892,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
 
         function getSourceReport(report) {
 
-            return $q(function (resolve, reject) {
+            return $q(function (resolve) {
 
                 var postReport = buildPost(report);
 
@@ -2154,23 +1935,23 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
             }
         }
 
-        function buildUrl(report) {
-
-            var url = report.url;
-            for (var i = 0; i < report.params.length; i++) {
-                var value;
-                switch (report.params[i].type) {
-                    case OdsParamType.DATE:
-                        value = OdsDateUtils.convertLocalDateToServer(report.params[i].value);
-                        break;
-                    default:
-                        value = report.params[i].value;
-                        break;
-                }
-                url += '/' + value;
-            }
-            return url;
-        }
+        // function buildUrl(report) {
+        //
+        //     var url = report.url;
+        //     for (var i = 0; i < report.params.length; i++) {
+        //         var value;
+        //         switch (report.params[i].type) {
+        //             case OdsParamType.DATE:
+        //                 value = OdsDateUtils.convertLocalDateToServer(report.params[i].value);
+        //                 break;
+        //             default:
+        //                 value = report.params[i].value;
+        //                 break;
+        //         }
+        //         url += '/' + value;
+        //     }
+        //     return url;
+        // }
 
         function buildPost(report) {
 
@@ -2182,6 +1963,8 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
                     type: report.params[i].type,
                     value: null
                 };
+                var tmpParams = [];
+                var idField;
                 switch (report.params[i].type) {
                     case OdsParamType.DATE:
                         param.value = [OdsDateUtils.convertLocalDateToServer(report.params[i].value)];
@@ -2190,26 +1973,36 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
                         param.value = [report.params[i].value];
                         break;
                     case OdsParamType.SINGLE_SELECT:
-                        var idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
+                        idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
                         param.value = [report.params[i].value[idField]];
                         break;
                     case OdsParamType.MULTI_SELECT:
-                        var tmpParams = [];
+                        tmpParams = [];
                         for (var j = 0; j < report.params[i].value.length; j++) {
-                            var idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
+                            idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
                             tmpParams.push(report.params[i].value[j][idField]);
                         }
                         param.value = tmpParams;
                         break;
                     case OdsParamType.TABLE_SELECT:
-                        var tmpParams = [];
+                        tmpParams = [];
                         for (var key in report.params[i].value) {
-                            if (key === 'length' || !report.params[i].value.hasOwnProperty(key)) continue;
+                            if (key === 'length' || !report.params[i].value.hasOwnProperty(key)) {
+                                continue;
+                            }
                             var value = key;
                             if (report.params[i].value[key]) {
                                 tmpParams.push(value);
                             }
 
+                        }
+                        param.value = tmpParams;
+                        break;
+                    case OdsParamType.DRAG_AND_DROP:
+                        tmpParams = [];
+                        for (var j = 0; j < report.params[i].value.length; j++) {
+                            idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
+                            tmpParams.push(report.params[i].value[j][idField]);
                         }
                         param.value = tmpParams;
                         break;
@@ -2237,18 +2030,18 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
                 var contentDisp = response.headers('Content-Disposition');
                 var index = contentDisp.indexOf('filename="');
 
-                var filename = "filename";
+                var filename = 'filename';
 
-                if (index != -1) {
+                if (index !== -1) {
                     var i = index + 10;
-                    while (contentDisp[i] != '"') {
+                    while (contentDisp[i] !== '"') {
                         i++;
                     }
 
                     filename = contentDisp.substring(index + 10, i);
                 }
 
-                var a = document.createElement("a");
+                var a = document.createElement('a');
                 a.href = URL.createObjectURL(new Blob([response.data], {type: contentType}));
                 a.download = filename;
                 a.click();
@@ -2332,6 +2125,7 @@ angular
 OdsDymo.$inject = ['XMLConfig', 'Base64', 'moment'];
 
 function OdsDymo(XMLConfig, Base64, moment) {
+
     var service = {
         loadPrinters: loadPrinters,
         loadDYMOOrderTemplate: loadDYMOOrderTemplate,
@@ -2344,16 +2138,17 @@ function OdsDymo(XMLConfig, Base64, moment) {
         testEnvironmentalLabel: testEnvironmentalLabel
     };
 
-    return service;
-
     var printersSelect = '';
     var orderTemplate;
     var envOrdertemplate;
 
     loadPrinters();
+
+    return service;
+
     function loadPrinters() {
         var printers = dymo.label.framework.getLabelWriterPrinters();
-        if (printers.length == 0) {
+        if (printers.length === 0) {
             // alert("No DYMO printers are installed. Install DYMO printers.");
             return false;
         }
@@ -2383,8 +2178,8 @@ function OdsDymo(XMLConfig, Base64, moment) {
 
         orderTemplate.setObjectText('barcode', data.barcode);
         orderTemplate.setObjectText('name', data.name);
-        orderTemplate.setObjectText('dob', moment(data.dob).format("MM/DD/Y"));
-        orderTemplate.setObjectText('collectedDate', moment(data.collectedDate).format("MM/DD/Y"));
+        orderTemplate.setObjectText('dob', moment(data.dob).format('MM/DD/Y'));
+        orderTemplate.setObjectText('collectedDate', moment(data.collectedDate).format('MM/DD/Y'));
         orderTemplate.setObjectText('tube', data.tube);
 
         orderTemplate.print(printersSelect);
@@ -2397,7 +2192,7 @@ function OdsDymo(XMLConfig, Base64, moment) {
 
         envOrdertemplate.setObjectText('barcode', data.barcode);
         envOrdertemplate.setObjectText('name', data.machine);
-        envOrdertemplate.setObjectText('collectedDate', moment(data.collectedDate).format("MM/DD/Y"));
+        envOrdertemplate.setObjectText('collectedDate', moment(data.collectedDate).format('MM/DD/Y'));
         envOrdertemplate.setObjectText('tube', data.tube);
 
         envOrdertemplate.print(printersSelect);
@@ -2405,7 +2200,7 @@ function OdsDymo(XMLConfig, Base64, moment) {
 
     function loadDefaultDYMOOrderTemplate() {
         XMLConfig.patient().$promise.then(function (data) {
-            orderTemplate = dymo.label.framework.openLabelXml(Base64.decode(data.file.replace("77u/", "")));
+            orderTemplate = dymo.label.framework.openLabelXml(Base64.decode(data.file.replace('77u/', '')));
         }, function () {
             orderTemplate = dymo.label.framework.openLabelXml('<?xml version="1.0" encoding="utf-8"?><DieCutLabel Version="8.0" Units="twips"><PaperOrientation>Landscape</PaperOrientation><Id>Address</Id><IsOutlined>false</IsOutlined><PaperName>30252 Address</PaperName><DrawCommands><RoundRectangle X="0" Y="0" Width="1581" Height="5040" Rx="270" Ry="270" /></DrawCommands><ObjectInfo><BarcodeObject><Name>barcode</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>True</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><Text>1234567890</Text><Type>Code128Auto</Type><Size>Medium</Size><TextPosition>Bottom</TextPosition><TextFont Family="Arial" Size="7.3125" Bold="False" Italic="False" Underline="False" Strikeout="False" /><CheckSumFont Family="Arial" Size="7.3125" Bold="False" Italic="False" Underline="False" Strikeout="False" /><TextEmbedding>None</TextEmbedding><ECLevel>0</ECLevel><HorizontalAlignment>Center</HorizontalAlignment><QuietZonesPadding Left="0" Top="0" Right="0" Bottom="0" /></BarcodeObject><Bounds X="331" Y="150.600006103516" Width="2672" Height="750" /></ObjectInfo><ObjectInfo><TextObject><Name>name</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">Jhon Doe</String><Attributes><Font Family="Arial" Size="8" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="1601" Y="953" Width="1940" Height="230" /></ObjectInfo><ObjectInfo><TextObject><Name>dob</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">01/01/2016</String><Attributes><Font Family="Arial" Size="8" Bold="False" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="751" Y="1178" Width="870" Height="270" /></ObjectInfo><ObjectInfo><TextObject><Name>collectedDate</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">01/01/2016</String><Attributes><Font Family="Arial" Size="8" Bold="False" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="738.000000000001" Y="953" Width="870.000000000002" Height="270" /></ObjectInfo><ObjectInfo><TextObject><Name>compendium</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">test te test</String><Attributes><Font Family="Tahoma" Size="8" Bold="False" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="1998" Y="1163" Width="2250" Height="270" /></ObjectInfo><ObjectInfo><TextObject><Name>TEXTO____1</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">COL:</String><Attributes><Font Family="Arial" Size="8" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="331" Y="953" Width="445.000000000001" Height="270" /></ObjectInfo><ObjectInfo><TextObject><Name>TEXTO_____1</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">Test:</String><Attributes><Font Family="Arial" Size="8" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="1606" Y="1178" Width="435.000000000001" Height="270" /></ObjectInfo><ObjectInfo><TextObject><Name>TEXTO__2</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">DOB:</String><Attributes><Font Family="Arial" Size="8" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="331" Y="1178" Width="584.999999999999" Height="270" /></ObjectInfo></DieCutLabel>');
         });
@@ -2413,7 +2208,7 @@ function OdsDymo(XMLConfig, Base64, moment) {
 
     function loadDefaultDYMOEnvOrderTemplate() {
         XMLConfig.environmental().$promise.then(function (data) {
-            envOrdertemplate = dymo.label.framework.openLabelXml(Base64.decode(data.file.replace("77u/", "")));
+            envOrdertemplate = dymo.label.framework.openLabelXml(Base64.decode(data.file.replace('77u/', '')));
         }, function () {
             envOrdertemplate = dymo.label.framework.openLabelXml('<?xml version="1.0" encoding="utf-8"?><DieCutLabel Version="8.0" Units="twips"><PaperOrientation>Landscape</PaperOrientation><Id>Address</Id><IsOutlined>false</IsOutlined><PaperName>30252 Address</PaperName><DrawCommands><RoundRectangle X="0" Y="0" Width="1581" Height="5040" Rx="270" Ry="270" /></DrawCommands><ObjectInfo><BarcodeObject><Name>barcode</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>True</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><Text>1234567890</Text><Type>Code128Auto</Type><Size>Medium</Size><TextPosition>Bottom</TextPosition><TextFont Family="Arial" Size="7.3125" Bold="False" Italic="False" Underline="False" Strikeout="False" /><CheckSumFont Family="Arial" Size="7.3125" Bold="False" Italic="False" Underline="False" Strikeout="False" /><TextEmbedding>None</TextEmbedding><ECLevel>0</ECLevel><HorizontalAlignment>Center</HorizontalAlignment><QuietZonesPadding Left="0" Top="0" Right="0" Bottom="0" /></BarcodeObject><Bounds X="331" Y="150.600006103516" Width="2672" Height="580" /></ObjectInfo><ObjectInfo><TextObject><Name>name</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">Jhon Doe</String><Attributes><Font Family="Arial" Size="8" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="331" Y="798" Width="1740" Height="220" /></ObjectInfo><ObjectInfo><TextObject><Name>collectedDate</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">01/01/2016</String><Attributes><Font Family="Arial" Size="8" Bold="False" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="753.000000000001" Y="998" Width="1290" Height="270" /></ObjectInfo><ObjectInfo><TextObject><Name>tube</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">test te test</String><Attributes><Font Family="Tahoma" Size="8" Bold="False" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="332.999999999999" Y="1223" Width="2250" Height="270" /></ObjectInfo><ObjectInfo><TextObject><Name>TEXTO____1</Name><ForeColor Alpha="255" Red="0" Green="0" Blue="0" /><BackColor Alpha="0" Red="255" Green="255" Blue="255" /><LinkedObjectName /><Rotation>Rotation0</Rotation><IsMirrored>False</IsMirrored><IsVariable>False</IsVariable><GroupID>-1</GroupID><IsOutlined>False</IsOutlined><HorizontalAlignment>Left</HorizontalAlignment><VerticalAlignment>Top</VerticalAlignment><TextFitMode>ShrinkToFit</TextFitMode><UseFullFontHeight>True</UseFullFontHeight><Verticalized>False</Verticalized><StyledText><Element><String xml:space="preserve">COL:</String><Attributes><Font Family="Arial" Size="8" Bold="True" Italic="False" Underline="False" Strikeout="False" /><ForeColor Alpha="255" Red="0" Green="0" Blue="0" HueScale="100" /></Attributes></Element></StyledText></TextObject><Bounds X="331" Y="1013" Width="945" Height="270" /></ObjectInfo></DieCutLabel>');
         });
@@ -2422,15 +2217,15 @@ function OdsDymo(XMLConfig, Base64, moment) {
     function testPatientLabel(xml) {
         var template;
         if (xml) {
-            template = dymo.label.framework.openLabelXml(Base64.decode(xml.replace("77u/", "")));
+            template = dymo.label.framework.openLabelXml(Base64.decode(xml.replace('77u/', '')));
         } else {
             template = orderTemplate;
         }
 
         template.setObjectText('barcode', 'P000001');
         template.setObjectText('name', 'Jhon Doe');
-        template.setObjectText('dob', moment(new Date()).format("MM/DD/Y"));
-        template.setObjectText('collectedDate', moment(new Date()).format("MM/DD/Y"));
+        template.setObjectText('dob', moment(new Date()).format('MM/DD/Y'));
+        template.setObjectText('collectedDate', moment(new Date()).format('MM/DD/Y'));
         template.setObjectText('tube', 'Some tube name');
 
         template.print(printersSelect);
@@ -2439,30 +2234,28 @@ function OdsDymo(XMLConfig, Base64, moment) {
     function testEnvironmentalLabel(xml) {
         var template;
         if (xml) {
-            template = dymo.label.framework.openLabelXml(Base64.decode(xml.replace("77u/", "")));
+            template = dymo.label.framework.openLabelXml(Base64.decode(xml.replace('77u/', '')));
         } else {
             template = envOrdertemplate;
         }
 
         template.setObjectText('barcode', 'E000001');
         template.setObjectText('name', 'TheMachinen');
-        template.setObjectText('collectedDate', moment(new Date()).format("MM/DD/Y"));
+        template.setObjectText('collectedDate', moment(new Date()).format('MM/DD/Y'));
         template.setObjectText('tube', 'Some tube name');
 
         template.print(printersSelect);
     }
-};
+}
 'use strict';
 
 angular
     .module('ods-lib')
     .factory('ModalEntity', ModalEntity);
 
-ModalEntity.$inject = ['$uibModal', '$rootScope', '$state'];
+ModalEntity.$inject = ['$uibModal'];
 
-function ModalEntity($uibModal, $rootScope, $state) {
-
-    var modals = [];
+function ModalEntity($uibModal) {
 
     var service = {
         openModalEntity: openModalEntity
@@ -2612,8 +2405,9 @@ function OdsUtils() {
                     break;
                 }
                 case 'delete': {
-                    if (stButtons.length != 0)
-                        stButtons += '&nbsp;'
+                    if (stButtons.length !== 0) {
+                        stButtons += '&nbsp;';
+                    }
 
                     stButtons += '<a class="btn-sm btn-danger" ui-sref="' + entity + '.delete({id:' + data.id + '})"  href="#/' + entity + '/' + data.id + '/delete">' +
                         '<span class="glyphicon glyphicon-trash"></span></a>';
@@ -2644,7 +2438,7 @@ function OdsUtils() {
     function getStatusTemplate(label, type) {
 
         var index = statusTypes.indexOf(type);
-        if (index != -1) {
+        if (index !== -1) {
             return '<small class="label label-' + statusTypes[index] + '">' + label + '</small>';
         } else {
             return '<small class="label label-' + statusTypes[0] + '">' + label + '</small>';
@@ -2659,7 +2453,7 @@ function OdsUtils() {
     function expandWeekCodeString(weekCode, separator) {
         var days = '';
         for (var i = 0; i < weekCode.length; i++) {
-            if (weekCode[i] != '0') {
+            if (weekCode[i] !== '0') {
                 if ((days.length > 0) && (i > 0)) {
                     days += separator;
                 }
@@ -2699,7 +2493,7 @@ function OdsUtils() {
     function weekCodeStringToDays(weekCode) {
         var days = [];
         for (var i = 0; i < weekCode.length; i++) {
-            if (weekCode.charAt(i) == '1') {
+            if (weekCode.charAt(i) === '1') {
                 switch (i) {
                     case 0:
                         days.push('MON');
@@ -2733,7 +2527,7 @@ function OdsUtils() {
         var code = '0000000';
 
         if (days) {
-            code = code.split("");
+            code = code.split('');
 
             for (var i = 0; i < days.length; i++) {
                 switch (days[i]) {
@@ -2761,7 +2555,7 @@ function OdsUtils() {
                 }
             }
 
-            return code.join("");
+            return code.join('');
         }
 
         return code;
@@ -2774,7 +2568,7 @@ function OdsUtils() {
     function monthsCodeStringToMonths(monthCode) {
         var days = [];
         for (var i = 0; i < monthCode.length; i++) {
-            if (monthCode.charAt(i) == '1') {
+            if (monthCode.charAt(i) === '1') {
                 switch (i) {
                     case 0:
                         days.push('JAN');
@@ -2823,7 +2617,7 @@ function OdsUtils() {
         var code = '000000000000';
 
         if (months) {
-            code = code.split("");
+            code = code.split('');
 
             for (var i = 0; i < months.length; i++) {
                 switch (months[i]) {
@@ -2866,7 +2660,7 @@ function OdsUtils() {
                 }
             }
 
-            return code.join("");
+            return code.join('');
         }
 
         return code;
@@ -2887,14 +2681,14 @@ function OdsUtils() {
         link += recepient;//window.encodeURIComponent(recepient);
         var params = [];
         angular.forEach(opts, function (value, key) {
-            params.push(key.toLowerCase() + "=" + window.encodeURIComponent(value));
+            params.push(key.toLowerCase() + '=' + window.encodeURIComponent(value));
         });
         if (params.length > 0) {
-            link += "?" + params.join("&");
+            link += '?' + params.join('&');
         }
         link += '">' + recepient + '</a>';
         return link;
-    };
+    }
 
     /**
      * Return object fields as array
@@ -2912,11 +2706,11 @@ function OdsUtils() {
     }
 
     function getDefaultUserPicture() {
-        return "/9j/4AAQSkZJRgABAQEAYABgAAD/4QHGRXhpZgAATU0AKgAAAAgABFEAAAQAAAABAAAAAFEBAAMAAAABAAEAAFECAAEAAAGAAAAAPlEDAAEAAAABAAAAAAAAAADn5+fBwcHAwMC/v7+5ubm8vLzm5ubo6Oi+vr64uLi9vb27u7u6urq3t7fCwsLAwsHCwMHk5OTl5eW2trbf39/V1dXOzs7h4eHj4+Pi4uLa2trFxcXPz8/S0tLc3NzHx8fLy8vW1tbIyMjDw8PKysrExMTX19fMzMzZ2dnR0dHe3t7d3d3Nzc3Q0NDg4ODU1NTGxsbY2NjT09PBwb/b29vBwcPJycnCwb/BwL7Bv8DAwcPCwMPAwr+/wcDCwsDBw8LCwsTBw8C6uLng3t/DwcTBwMXEwL+/wb7AwcXAwMLCwb3b293i4+Xd3tnf4eDBwsTZ3d7AwL68vLrZ3dy7vbzo6Oq9uLzDwcLb29nn5+W5t7i8urvj4eK4ure/w8LFwMS+w7/c2tu5ubvBv8Tn5+nDwsDp5+jp6em7u726vLkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAF/AX8DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9nKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorH8aeOdP8C6W1zfTBWIPlRKcyTH0A/r0FeT6X+0drU2rxNcQ2K2TTDzAI23LHu5wc9QO+KAPcKKRHWRAykMrDII7iloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiqer+ItP0CPdfXlraLjP72UJn6Z60AXKK4PXf2ivD+lblt2udRkHQQx7Vz7s2P0BriPEP7RutauGTT7eDTY243f62T8z8v6UAe06xrtn4etDcX11Dawj+KR9ufYep9hXmHjb9pRFDW+gweY3T7TOuFH+6vU/U4+hrzC+kvfEF59ovrme6mb+KVyx/DPT6VNb6csYoAjvri88S6i13f3E1zcSdXkbP4D0HsOKsQ2ixLipVUJ0paAPZvgn4q/t7wqLWVs3GmkRHJ5KfwH8hj/gNdlmvAfh94qbwd4pt7ot/o7nypx6oep/Dg/hXvwbeNw5B5B9aACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoqG/v4NLs5Li5mjt4Yhl5JGCqo9ya8r8b/tJBXa30CASEcfaplO3/gKf1P5UAer3FzHaQtJNJHFGoyzOwVR+JrmtV+M3hnR2ZZNWglZe0Aab9VBH614HrGr6p4tuvO1G8uLps5AdvlX6L0H4CmRaQAOeaAPXtT/ab0e24tbK/um7Fgsan8ck/pXN6t+0tq95kWOn2dqvrIWlYfjwP0ri005F7VKtsq0AW9U+JfifXwwm1a6jVv4YSIR9PlA/WsT+zZLiQySM0jtyWY5JrSEajtTqAKcWlKvarCWqp2qSigAAxRRRQAUUUUABG4Yr6A+Ht0954I0uSTlvs6qSe+Bj+lfP+M17r8J9Rj1DwHY+WwLQqYnH91ge/wCGD+NAHR0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVj+NfG9j4E0dry+kx/DFEv35m9FH9egrSv76LTLGa4ncRw26GR2PRVAyTXzX418W3PxF8TyXsxZYQdkERPESdh9T1J9aAJPG3xA1P4lahuuW8q0RsxWyH5I/c/3m9z+nSqNppyxjkVNbWywp0qagBqoFHFOoooAKKKKACiiigAooooAKKKKACiiigArofhv49fwNrm6Qs2n3RCzqP4fRx7j9R+Fc9Qw3DFAH0rbXEd3bxyxOskcihkZTlWB6EU+vJPgn8Q20u8XRb1z9mnbFs5/wCWTn+H6Ht6H68et0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwf7RWsyaZ8P/JjyPt9wkDEf3cFj+e0D8TXi+m2wSKvXP2mRnwjp/8A1/L/AOgPXldsMRCgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooADkEMpKspyCOxr6G8Ias2u+F7C8b/AFk8Cs/+9jn9c18817x8LTnwBpn/AFzP/oRoA6CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA83/AGmP+RR0/wD6/l/9AevK7b/UrXq/7S0e7wXYt/dv0z7fI9eUW3+pWgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK96+GS7PAWl/8AXHP6mvBa+g/A1ubXwZpaH732WMkemVBoA1aKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDn/inp0OpfD7VlmjWRYbZ5lz/CyKWBH4ivAbKTfEPpX0R48XzPA+sr/esZx/5DavnLSz+5WgC3RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAOij82VVHViBX0pBCttCka/djUKPoK+b9PG6/gHrIv86+kqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAzvGCeZ4S1Rf71pKP8Axw182aUf3Qr6Y8Rr5nh6/X+9byD/AMdNfM2knMdAF2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAktZPJuo37KwP619KCvmc8ivffhxqr614I064kJaRotjE9WKkrn8cUAbdFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRQaAMPx/4w0/whoEr303l/aEaOJANzyNjsPxHPQV876T/q61Pih4jm8aePbyR2P2e1kNvAvZUUkfqcn8faqdtB5KUASUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXuvwlRY/h7poVg3yuSR6l2J/nXhVeifs/wCvzJql3pbNut2jNwgP8DAgHH1yPyoA9UooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPmnxFZfYfGurQ/8APO8lA+m84ptbHxcsP7O+KOpDHyzlJl98oM/qDWPQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXYfA1tvjtf8AagkH16GuPrtPgRAZfG7N/wA8rZ2P5qP60AeyUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHjv7R2l/Z/E+m3wHy3MBhJHqjZ/k/6VxKnKivcPi34Jbxt4UaOAZvLV/OgH94gEFfxH6gV4cEaFmjkVo5IztZWGCp7gigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr0b9nqwLX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";
+        return '/9j/4AAQSkZJRgABAQEAYABgAAD/4QHGRXhpZgAATU0AKgAAAAgABFEAAAQAAAABAAAAAFEBAAMAAAABAAEAAFECAAEAAAGAAAAAPlEDAAEAAAABAAAAAAAAAADn5+fBwcHAwMC/v7+5ubm8vLzm5ubo6Oi+vr64uLi9vb27u7u6urq3t7fCwsLAwsHCwMHk5OTl5eW2trbf39/V1dXOzs7h4eHj4+Pi4uLa2trFxcXPz8/S0tLc3NzHx8fLy8vW1tbIyMjDw8PKysrExMTX19fMzMzZ2dnR0dHe3t7d3d3Nzc3Q0NDg4ODU1NTGxsbY2NjT09PBwb/b29vBwcPJycnCwb/BwL7Bv8DAwcPCwMPAwr+/wcDCwsDBw8LCwsTBw8C6uLng3t/DwcTBwMXEwL+/wb7AwcXAwMLCwb3b293i4+Xd3tnf4eDBwsTZ3d7AwL68vLrZ3dy7vbzo6Oq9uLzDwcLb29nn5+W5t7i8urvj4eK4ure/w8LFwMS+w7/c2tu5ubvBv8Tn5+nDwsDp5+jp6em7u726vLkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAF/AX8DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9nKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorH8aeOdP8C6W1zfTBWIPlRKcyTH0A/r0FeT6X+0drU2rxNcQ2K2TTDzAI23LHu5wc9QO+KAPcKKRHWRAykMrDII7iloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiqer+ItP0CPdfXlraLjP72UJn6Z60AXKK4PXf2ivD+lblt2udRkHQQx7Vz7s2P0BriPEP7RutauGTT7eDTY243f62T8z8v6UAe06xrtn4etDcX11Dawj+KR9ufYep9hXmHjb9pRFDW+gweY3T7TOuFH+6vU/U4+hrzC+kvfEF59ovrme6mb+KVyx/DPT6VNb6csYoAjvri88S6i13f3E1zcSdXkbP4D0HsOKsQ2ixLipVUJ0paAPZvgn4q/t7wqLWVs3GmkRHJ5KfwH8hj/gNdlmvAfh94qbwd4pt7ot/o7nypx6oep/Dg/hXvwbeNw5B5B9aACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoqG/v4NLs5Li5mjt4Yhl5JGCqo9ya8r8b/tJBXa30CASEcfaplO3/gKf1P5UAer3FzHaQtJNJHFGoyzOwVR+JrmtV+M3hnR2ZZNWglZe0Aab9VBH614HrGr6p4tuvO1G8uLps5AdvlX6L0H4CmRaQAOeaAPXtT/ab0e24tbK/um7Fgsan8ck/pXN6t+0tq95kWOn2dqvrIWlYfjwP0ri005F7VKtsq0AW9U+JfifXwwm1a6jVv4YSIR9PlA/WsT+zZLiQySM0jtyWY5JrSEajtTqAKcWlKvarCWqp2qSigAAxRRRQAUUUUABG4Yr6A+Ht0954I0uSTlvs6qSe+Bj+lfP+M17r8J9Rj1DwHY+WwLQqYnH91ge/wCGD+NAHR0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVj+NfG9j4E0dry+kx/DFEv35m9FH9egrSv76LTLGa4ncRw26GR2PRVAyTXzX418W3PxF8TyXsxZYQdkERPESdh9T1J9aAJPG3xA1P4lahuuW8q0RsxWyH5I/c/3m9z+nSqNppyxjkVNbWywp0qagBqoFHFOoooAKKKKACiiigAooooAKKKKACiiigArofhv49fwNrm6Qs2n3RCzqP4fRx7j9R+Fc9Qw3DFAH0rbXEd3bxyxOskcihkZTlWB6EU+vJPgn8Q20u8XRb1z9mnbFs5/wCWTn+H6Ht6H68et0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwf7RWsyaZ8P/JjyPt9wkDEf3cFj+e0D8TXi+m2wSKvXP2mRnwjp/8A1/L/AOgPXldsMRCgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooADkEMpKspyCOxr6G8Ias2u+F7C8b/AFk8Cs/+9jn9c18817x8LTnwBpn/AFzP/oRoA6CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA83/AGmP+RR0/wD6/l/9AevK7b/UrXq/7S0e7wXYt/dv0z7fI9eUW3+pWgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK96+GS7PAWl/8AXHP6mvBa+g/A1ubXwZpaH732WMkemVBoA1aKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDn/inp0OpfD7VlmjWRYbZ5lz/CyKWBH4ivAbKTfEPpX0R48XzPA+sr/esZx/5DavnLSz+5WgC3RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAOij82VVHViBX0pBCttCka/djUKPoK+b9PG6/gHrIv86+kqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAzvGCeZ4S1Rf71pKP8Axw182aUf3Qr6Y8Rr5nh6/X+9byD/AMdNfM2knMdAF2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAktZPJuo37KwP619KCvmc8ivffhxqr614I064kJaRotjE9WKkrn8cUAbdFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRQaAMPx/4w0/whoEr303l/aEaOJANzyNjsPxHPQV876T/q61Pih4jm8aePbyR2P2e1kNvAvZUUkfqcn8faqdtB5KUASUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXuvwlRY/h7poVg3yuSR6l2J/nXhVeifs/wCvzJql3pbNut2jNwgP8DAgHH1yPyoA9UooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPmnxFZfYfGurQ/8APO8lA+m84ptbHxcsP7O+KOpDHyzlJl98oM/qDWPQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXYfA1tvjtf8AagkH16GuPrtPgRAZfG7N/wA8rZ2P5qP60AeyUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHjv7R2l/Z/E+m3wHy3MBhJHqjZ/k/6VxKnKivcPi34Jbxt4UaOAZvLV/OgH94gEFfxH6gV4cEaFmjkVo5IztZWGCp7gigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr0b9nqwLX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';
     }
 
     function getDefaultUserPictureContentType() {
-        return "image/jpeg";
+        return 'image/jpeg';
     }
 
     function resetUserPicture(patient) {
@@ -2967,7 +2761,7 @@ function odsSignature($timeout, OdsSignature) {
         const showRequiredClass = 'sig-box-error';
 
         //If model not present we will exit.
-        if ($scope.model == null) {
+        if ($scope.model === null) {
             console.error('Please define a model using "ng-model" attribute!!!');
             return;
         }
@@ -3028,7 +2822,7 @@ function odsSignature($timeout, OdsSignature) {
             }
 
             //Init on change event
-            $scope.element.bind('change', function (event) {
+            $scope.element.bind('change', function () {
 
                     // $timeout, 100, true because event happens outside angular's digest cycle
                     // and change is called on setData
@@ -3115,7 +2909,7 @@ angular
 
 function OdsSignature() {
 
-    var apinamespace = 'jSignature';
+    // var apinamespace = 'jSignature';
 
     var exportTypes = {
         DEFAULT: 'default',
@@ -3137,9 +2931,9 @@ function OdsSignature() {
         IMAGE_JPG_BASE64: 'image/jpg;base64'
     };
 
-    var uniqueCounter = (+new Date) % 10000;
+    var uniqueCounter = (+new Date()) % 10000;
 
-    var instance_map = {};
+    var instanceMap = {};
 
     var service = {
         exportTypes: exportTypes,
@@ -3163,20 +2957,21 @@ function OdsSignature() {
 
     function register(name, instance) {
 
-        instance_map[name] = instance;
+        instanceMap[name] = instance;
     }
 
     function getInstance(name) {
 
-        if (instance_map[name])
-            return instance_map[name];
-        else
+        if (instanceMap[name]) {
+            return instanceMap[name];
+        } else {
             return false;
+        }
     }
 
     function unregister(name) {
 
-        instance_map[name] = null;
+        instanceMap[name] = null;
     }
 
     function generateName() {
@@ -3196,37 +2991,40 @@ function OdsSignature() {
     function isValid(name) {
 
         var d = getData(name, exportTypes.NATIVE);
-        if (d.length >= 1)
+        if (d.length >= 1) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     function getData(name, type) {
 
         var element = getInstance(name);
-        if (element)
-            return element.jSignature('getData', type);
-        else
-            return false;
-    }
-
-    function getDataAsSVG(name) {
-
-        var element = getInstance(name);
-        var svg = element.jSignature('getData', 'svg');
-        return svg;
-    }
-
-    function getDataAsBase30(name) {
-
-        var element = getInstance(name);
         if (element) {
-            var svg = element.jSignature('getData', 'svg');
-            return svg;
-        } else
+            return element.jSignature('getData', type);
+        } else {
             return false;
+        }
     }
+
+    // function getDataAsSVG(name) {
+    //
+    //     var element = getInstance(name);
+    //     var svg = element.jSignature('getData', 'svg');
+    //     return svg;
+    // }
+    //
+    // function getDataAsBase30(name) {
+    //
+    //     var element = getInstance(name);
+    //     if (element) {
+    //         var svg = element.jSignature('getData', 'svg');
+    //         return svg;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 
     function setData(name, model) {
 
@@ -3253,15 +3051,14 @@ function OdsSignature() {
         }
     }
 
-    function undo(name) {
-
-        var eventName = apinamespace + '.undo';
-        var element = getInstance(name);
-        if (element) {
-            element.jSignature('events');
-        }
-    }
-
+    // function undo(name) {
+    //
+    //     var eventName = apinamespace + '.undo';
+    //     var element = getInstance(name);
+    //     if (element) {
+    //         element.jSignature('events');
+    //     }
+    // }
 }
 'use strict';
 
@@ -3329,7 +3126,7 @@ function StepsIndicator() {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.changeStatus = changeStatus;
 
@@ -3394,8 +3191,9 @@ function StepsIndicator() {
 
     function isEmpty(obj) {
         for (var key in obj) {
-            if (obj.hasOwnProperty(key))
+            if (obj.hasOwnProperty(key)) {
                 return false;
+            }
         }
         return true;
     }
@@ -3425,7 +3223,7 @@ function DynamicNameDirective($compile, $parse) {
             elem.attr('name', name);
             $compile(elem)(scope);
         }
-    }
+    };
 }
 
 (function () {
@@ -3452,6 +3250,7 @@ function DynamicNameDirective($compile, $parse) {
             //You can add your new field types
         })
         .constant('OdsComponentType', {
+            FORM: 'form', //Do not edit this type
             SECTION: 'section', //Do not edit this type
             ROW: 'row', //Do not edit this type
             COLUMN: 'column', //Do not edit this type
@@ -3494,7 +3293,7 @@ function DynamicNameDirective($compile, $parse) {
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
                             $resource) {
 
-        var uniqueCounter = (+new Date) % 10000;
+        var uniqueCounter = (+new Date()) % 10000;
 
         var clipBoard = [];
         var callbacks = [];
@@ -3659,9 +3458,9 @@ function DynamicNameDirective($compile, $parse) {
                         }
                     }
                 }
-                this.schema = schema;
+                // this.schema = schema;
             } else {
-                alert('Please specify a schema!!!');
+                console.error('Please specify a schema!!!');
             }
             return schema;
         }
@@ -3995,7 +3794,7 @@ function DynamicNameDirective($compile, $parse) {
                     OdsComponentType.ROW
                 ],
                 rows: [newRowObject()]
-            }
+            };
         }
 
         /**
@@ -4010,7 +3809,7 @@ function DynamicNameDirective($compile, $parse) {
                 cssClass: 'row',
                 displayProperties: false,
                 cols: [newColumnObject(12)]
-            }
+            };
         }
 
         /**
@@ -4027,7 +3826,7 @@ function DynamicNameDirective($compile, $parse) {
                     OdsComponentType.FIELD
                 ],
                 fields: []
-            }
+            };
         }
 
         /**
@@ -4046,11 +3845,12 @@ function DynamicNameDirective($compile, $parse) {
                 value: null,
                 validation: {
                     messages: {}
-                },
-                getValue: function () {
-                    return value;
                 }
-            }
+                // ,
+                // getValue: function () {
+                //     return value;
+                // }
+            };
         }
 
         /**
@@ -4070,7 +3870,7 @@ function DynamicNameDirective($compile, $parse) {
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -4090,7 +3890,7 @@ function DynamicNameDirective($compile, $parse) {
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -4111,7 +3911,7 @@ function DynamicNameDirective($compile, $parse) {
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -4145,7 +3945,7 @@ function DynamicNameDirective($compile, $parse) {
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -4171,7 +3971,7 @@ function DynamicNameDirective($compile, $parse) {
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -4189,7 +3989,7 @@ function DynamicNameDirective($compile, $parse) {
                 on: 'Yes',
                 off: 'No',
                 value: false
-            }
+            };
         }
 
         function newDateTimeObject() {
@@ -4210,7 +4010,7 @@ function DynamicNameDirective($compile, $parse) {
                 // utc: true,
                 required: false,
                 value: date
-            }
+            };
         }
 
         function newFieldLabelObject() {
@@ -4222,7 +4022,7 @@ function DynamicNameDirective($compile, $parse) {
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.LABEL,
                 value: 'Label'
-            }
+            };
         }
 
         function newFieldCheckBoxObject() {
@@ -4235,7 +4035,7 @@ function DynamicNameDirective($compile, $parse) {
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.CHECKBOX,
                 value: false
-            }
+            };
         }
 
         function newFieldCheckBoxListObject() {
@@ -4255,7 +4055,7 @@ function DynamicNameDirective($compile, $parse) {
                     name: 'Option 3'
                 }],
                 value: {}
-            }
+            };
         }
 
         function newFieldRadioListObject() {
@@ -4275,7 +4075,7 @@ function DynamicNameDirective($compile, $parse) {
                     name: 'Option 3'
                 }],
                 value: {}
-            }
+            };
         }
 
         function newYesNoObject() {
@@ -4296,7 +4096,7 @@ function DynamicNameDirective($compile, $parse) {
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         function newTableObject() {
@@ -4313,7 +4113,7 @@ function DynamicNameDirective($compile, $parse) {
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         function newItemObject() {
@@ -4323,7 +4123,7 @@ function DynamicNameDirective($compile, $parse) {
                 fields: [],
                 // width: '10px',
                 allowedTypes: [OdsComponentType.FIELD]
-            }
+            };
         }
 
         function newCKEditorObject() {
@@ -4358,7 +4158,7 @@ function DynamicNameDirective($compile, $parse) {
                     tokens: null
                 },
                 value: null
-            }
+            };
         }
 
         function defaultCKEditorPrefix() {
@@ -4439,6 +4239,7 @@ function DynamicNameDirective($compile, $parse) {
         function getFieldValueAsNumber(field) {
 
             var value = 0;
+            var id;
             switch (field.type) {
                 case OdsFieldType.TEXT:
                     if (field.value) {
@@ -4452,13 +4253,13 @@ function DynamicNameDirective($compile, $parse) {
                     break;
                 case OdsFieldType.SELECT:
                     if (field.value) {
-                        var id = getSelectFieldId(field);
+                        id = getSelectFieldId(field);
                         value += Number(field.value[id]);
                     }
                     break;
                 case OdsFieldType.MULTI_SELECT:
                     if (field.value) {
-                        var id = getSelectFieldId(field);
+                        id = getSelectFieldId(field);
                         for (var i = 0; i < field.value.length; i++) {
                             value += Number(field.value[i][id]);
                         }
@@ -4526,18 +4327,18 @@ function DynamicNameDirective($compile, $parse) {
         function copyToClipboard(text) {
             if (window.clipboardData && window.clipboardData.setData) {
                 // IE specific code path to prevent textarea being shown while dialog is visible.
-                return clipboardData.setData("Text", text);
+                return window.clipboardData.setData('Text', text);
 
-            } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-                var textarea = document.createElement("textarea");
+            } else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+                var textarea = document.createElement('textarea');
                 textarea.textContent = text;
-                textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+                textarea.style.position = 'fixed';  // Prevent scrolling to bottom of page in MS Edge.
                 document.body.appendChild(textarea);
                 textarea.select();
                 try {
-                    return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+                    return document.execCommand('copy');  // Security exception may be thrown by some browsers.
                 } catch (ex) {
-                    console.warn("Copy to clipboard failed.", ex);
+                    console.warn('Copy to clipboard failed.', ex);
                     return false;
                 } finally {
                     document.body.removeChild(textarea);
@@ -4597,8 +4398,9 @@ function DynamicNameDirective($compile, $parse) {
 
             clipBoard = cb;
             //notify if there are any listeners
-            for (var i = 0; i < callbacks.length; i++)
+            for (var i = 0; i < callbacks.length; i++) {
                 callbacks[i](clipBoard);
+            }
         }
 
         function addToClipBoard(item) {
@@ -4606,8 +4408,9 @@ function DynamicNameDirective($compile, $parse) {
             var comp = renameComponent(item);
             clipBoard.push(comp);
             //notify if there are any listeners
-            for (var i = 0; i < callbacks.length; i++)
+            for (var i = 0; i < callbacks.length; i++) {
                 callbacks[i](clipBoard);
+            }
         }
 
         function onAddToClipBoard(callback) {
@@ -4617,7 +4420,7 @@ function DynamicNameDirective($compile, $parse) {
 
         function escapeRegExp(str) {
 
-            return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+            return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
         }
 
         function copyJson(json) {
@@ -4669,7 +4472,9 @@ function DynamicNameDirective($compile, $parse) {
                 fields: []
             };
 
+            var field;
             var layout = schema.layout;
+
             for (var i = 0; i < layout.length; i++) {
                 var rows = layout[i].rows;
                 for (var j = 0; j < rows.length; j++) {
@@ -4677,10 +4482,10 @@ function DynamicNameDirective($compile, $parse) {
                     for (var k = 0; k < cols.length; k++) {
                         var fields = cols[k].fields;
                         for (var l = 0; l < fields.length; l++) {
-                            if (fields[l].type == OdsFieldType.TABLE) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     for (var p = 0; p < fields[l].matrix[m].length; p++) {
-                                        var field = {
+                                        field = {
                                             name: cols[k].fields[l].matrix[m][p].fields[0].name,
                                             type: cols[k].fields[l].matrix[m][p].fields[0].type,
                                             code: cols[k].fields[l].matrix[m][p].fields[0].code,
@@ -4690,7 +4495,7 @@ function DynamicNameDirective($compile, $parse) {
                                     }
                                 }
                             } else {
-                                var field = {
+                                field = {
                                     name: cols[k].fields[l].name,
                                     type: cols[k].fields[l].type,
                                     code: cols[k].fields[l].code,
@@ -4714,19 +4519,22 @@ function DynamicNameDirective($compile, $parse) {
 
             var resultFields = [];
 
+            var field;
             var layout = schema.layout;
+            var fields;
+
             for (var i = 0; i < layout.length; i++) {
                 var rows = layout[i].rows;
                 for (var j = 0; j < rows.length; j++) {
                     var cols = rows[j].cols;
                     for (var k = 0; k < cols.length; k++) {
-                        var fields = cols[k].fields;
+                        fields = cols[k].fields;
                         for (var l = 0; l < fields.length; l++) {
-                            if (fields[l].type == OdsFieldType.TABLE) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     for (var p = 0; p < fields[l].matrix[m].length; p++) {
                                         if (cols[k].fields[l].matrix[m][p].fields[0].code === code) {
-                                            var field = {
+                                            field = {
                                                 name: cols[k].fields[l].matrix[m][p].fields[0].name,
                                                 type: cols[k].fields[l].matrix[m][p].fields[0].type,
                                                 code: cols[k].fields[l].matrix[m][p].fields[0].code,
@@ -4738,7 +4546,7 @@ function DynamicNameDirective($compile, $parse) {
                                 }
                             } else {
                                 if (cols[k].fields[l].code === code) {
-                                    var field = {
+                                    field = {
                                         name: cols[k].fields[l].name,
                                         type: cols[k].fields[l].type,
                                         code: cols[k].fields[l].code,
@@ -4780,18 +4588,18 @@ function DynamicNameDirective($compile, $parse) {
                         var fields = cols[k].fields;
                         for (var l = 0; l < fields.length; l++) {
                             //If field is a table we must to loop through each table cell
-                            if (fields[l].type == OdsFieldType.TABLE) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     for (var p = 0; p < fields[l].matrix[m].length; p++) {
                                         //If field is datetime we set Date object from string
-                                        if (cols[k].fields[l].matrix[m][p].fields[0].type == OdsFieldType.DATETIME) {
+                                        if (cols[k].fields[l].matrix[m][p].fields[0].type === OdsFieldType.DATETIME) {
                                             cols[k].fields[l].matrix[m][p].fields[0].value = new Date(Date.parse(cols[k].fields[l].matrix[m][p].fields[0].value));
                                         }
                                     }
                                 }
                             }
                             //If field is datetime we set Date object from string
-                            else if (fields[l].type == OdsFieldType.DATETIME) {
+                            else if (fields[l].type === OdsFieldType.DATETIME) {
                                 fields[l].value = new Date(Date.parse(fields[l].value));
                             }
                         }
@@ -4804,15 +4612,17 @@ function DynamicNameDirective($compile, $parse) {
 
         function setConfigToCKEditorComponent(schema, config) {
 
+            var fields;
             var layout = schema.layout;
+
             for (var i = 0; i < layout.length; i++) {
                 var rows = layout[i].rows;
                 for (var j = 0; j < rows.length; j++) {
                     var cols = rows[j].cols;
                     for (var k = 0; k < cols.length; k++) {
-                        var fields = cols[k].fields;
+                        fields = cols[k].fields;
                         for (var l = 0; l < fields.length; l++) {
-                            if (fields[l].type == OdsFieldType.TABLE) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     var matrixRow = fields[l].matrix[m];
                                     for (var p = 0; p < matrixRow.length; p++) {
@@ -4890,8 +4700,6 @@ function FormDirective(OdsFormService, $timeout) {
                 OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
             }
         }
-
-        $scope.form;
 
         $scope.clear = clear;
         $scope.save = save;
@@ -4994,7 +4802,7 @@ function FormDirective(OdsFormService, $timeout) {
 
         function clear() {
             //TODO confirm if you want to clear al fields.
-            showInfo("Form cleared!!!");
+            showInfo('Form cleared!!!');
         }
 
         /**
@@ -5021,15 +4829,15 @@ function FormDirective(OdsFormService, $timeout) {
             }, 5000);
         }
 
-        function showSuccess(message) {
-
-            $scope.success = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.success = false;
-                $scope.message = '';
-            }, 5000);
-        }
+        // function showSuccess(message) {
+        //
+        //     $scope.success = true;
+        //     $scope.message = message;
+        //     $timeout(function () {
+        //         $scope.success = false;
+        //         $scope.message = '';
+        //     }, 5000);
+        // }
 
         function showInfo(message) {
 
@@ -5097,34 +4905,15 @@ function FormDirective(OdsFormService, $timeout) {
 /**
  * Created by hermeslm on 3/28/17.
  */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('OdsSchemaController', OdsSchemaController);
-
-    OdsSchemaController.$inject = ['OdsFormService'];
-
-    function OdsSchemaController(OdsFormService) {
-
-        var vm = this;
-
-    }
-})();
-
-/**
- * Created by hermeslm on 3/28/17.
- */
 'use strict';
 
 angular
     .module('ods-lib')
     .directive('odsFormInfo', OdsFormInfoDirective);
 
-OdsFormInfoDirective.$inject = ['OdsFormService'];
+OdsFormInfoDirective.$inject = [];
 
-function OdsFormInfoDirective(OdsFormService) {
+function OdsFormInfoDirective() {
 
     var directive = {
         restrict: 'E',
@@ -5132,8 +4921,6 @@ function OdsFormInfoDirective(OdsFormService) {
         scope: {
             schema: '='
         },
-        // controller: 'OdsSchemaController',
-        // controllerAs: 'vm',
         link: linkFunc
     };
 
@@ -5141,7 +4928,7 @@ function OdsFormInfoDirective(OdsFormService) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc() {
 
     }
 }
@@ -5185,10 +4972,8 @@ function SchemaDirective(OdsFormService) {
 
         /**
          * Catch onAdd event in drag and drop for setting field properties
-         * @param item Field
-         * @param type Field type.
          */
-        function onAdd(item, type) {
+        function onAdd() {
 
             $scope.schema.layout.push(OdsFormService.newSectionObject());
         }
@@ -5427,7 +5212,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
 
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
-                if (value == field.value) {
+                if (value === field.value) {
                     return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                 }
             }
@@ -5445,7 +5230,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
                 if (field.value) {
-                    if (value == field.value[OdsFormService.getSelectFieldId(field)]) {
+                    if (value === field.value[OdsFormService.getSelectFieldId(field)]) {
                         return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                     }
                 }
@@ -5462,7 +5247,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
                     var value = field.value[i][OdsFormService.getSelectFieldId(field)];
                     for (var j = 0; j < field.options.length; j++) {
                         var current = field.options[j][OdsFormService.getSelectFieldId(field)];
-                        if (value == current) {
+                        if (value === current) {
                             result.push(field.options[j][OdsFormService.getSelectFieldTitle(field)]);
                         }
                     }
@@ -5555,341 +5340,6 @@ function ModelDirective(OdsFormService) {
 
 angular
     .module('ods-lib')
-    .directive('odsSuggestionOptions', SuggestionOptionsDirective);
-
-SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor', '$timeout'];
-
-function SuggestionOptionsDirective(OdsFormService, OdsCkeditor, $timeout) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
-        scope: {
-            field: '=',
-            config: '=',
-            profile: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope) {
-
-        if ($scope.config && $scope.config.ckeditor) {
-            $scope.field.options.prefix = $scope.config.ckeditor.prefix ?
-                $scope.config.ckeditor.prefix : OdsFormService.defaultCKEditorPrefix();
-            $scope.field.options.suffix = $scope.config.ckeditor.suffix ?
-                $scope.config.ckeditor.suffix : OdsFormService.defaultCKEditorSuffix();
-            $scope.field.options.tokensUrl = $scope.config.ckeditor.tokensUrl ?
-                $scope.config.ckeditor.tokensUrl : '';
-            $scope.field.options.suggestions = $scope.config.ckeditor.suggestions ?
-                $scope.config.ckeditor.suggestions : [];
-        }
-
-        $scope.options = initOptions();
-        $scope.addOption = addOption;
-        $scope.removeOption = removeOption;
-        $scope.refreshOption = refreshOption;
-        $scope.loadSuggestions = loadSuggestions;
-        $scope.loadTokens = loadTokens;
-
-        function initOptions() {
-
-            var options = [];
-            for (var i = 0; i < $scope.field.options.suggestions.length; i++) {
-                var option = {
-                    id: $scope.field.options.suggestions[i].id,
-                    label: $scope.field.options.suggestions[i].label
-                };
-                options.push(option);
-            }
-            return options;
-        }
-
-        function addOption() {
-
-            var option = {
-                id: '',
-                label: ''
-            };
-
-            $scope.options.push(option);
-        }
-
-        function removeOption(index) {
-
-            $scope.options.suggestions.splice(index, 1);
-        }
-
-        function refreshOption() {
-
-            OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
-            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
-        }
-
-        function loadSuggestions(url) {
-
-            OdsFormService.restResource(url).query(function (result) {
-                $scope.options = result;
-            });
-        }
-
-        function loadTokens(url) {
-
-            OdsFormService.restResource(url).get(function (result) {
-                $scope.field.options.tokens = result;
-            });
-        }
-
-        $scope.$watch('options', function (model) {
-
-            var options = [];
-            for (var i = 0; i < model.length; i++) {
-                var option = {};
-                option.id = model[i].id;
-                option.label = model[i].label;
-                options.push(option);
-            }
-            $scope.field.options.suggestions = options;
-        }, true);
-    }
-}
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableProps', TablePropsDirective);
-
-TablePropsDirective.$inject = ['OdsFormService'];
-
-function TablePropsDirective(OdsFormService) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table-props.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope, $element) {
-
-        $scope.addRow = addRow;
-        $scope.addColumn = addColumn;
-
-        /**
-         * Add row to the table
-         */
-        function addRow() {
-            var columnLength = $scope.field.matrix[0].length;
-            var row = [];
-            for (var i = 0; i < columnLength; i++) {
-                row.push(OdsFormService.newItemObject());
-            }
-            $scope.field.matrix.push(row);
-        }
-
-        /**
-         * Add column to the table.
-         * @param row Row to add column.
-         */
-        function addColumn() {
-            for (var i = 0; i < $scope.field.matrix.length; i++) {
-                $scope.field.matrix[i].push(OdsFormService.newItemObject());
-            }
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTable', TableDirective);
-
-TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
-
-function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.removeRow = removeRow;
-        $scope.removeColumn = removeColumn;
-        $scope.onAdd = onAdd;
-        $scope.cloneRow = cloneRow;
-        $scope.swapRow = swapRow;
-        $scope.swapColumn = swapColumn;
-        $scope.checkItem = checkItem;
-
-        function checkItem(index, item, external, type) {
-
-            //We prevent add recursively a table inside other.
-            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
-                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.',
-                    {size: 'sm'});
-                return false;
-            } else return item;
-
-        }
-
-        function onAdd(item, type) {
-
-            OdsFormService.onAdd(item, type);
-        };
-
-        /**
-         * Remove row from section.
-         * @param table Table to remove row
-         * @param index Row index to remove.
-         */
-        function removeRow(table, index) {
-
-            OdsFormService.removeRow(table, index);
-        }
-
-        /**
-         * Add column to current row.
-         * @param table Table to remove column
-         * @param row Row to add column.
-         */
-        function removeColumn(table, index) {
-
-            OdsFormService.removeColumn(table, index);
-        }
-
-        function cloneRow(table) {
-
-            OdsFormService.cloneRow(table);
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapRow(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                // var _previousValue = [];
-                // angular.copy($scope.field.matrix, _previousValue);
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix.length ||
-                    idx2 >= $scope.field.matrix.length) {
-
-                    return;
-                }
-                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
-
-            });
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapColumn(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix[idx1].length ||
-                    idx2 >= $scope.field.matrix[idx2].length) {
-
-                    return;
-                }
-                for (var i = 0; i < $scope.field.matrix.length; i++) {
-                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
-                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
-                    $scope.field.matrix[i][idx1] = tmp;
-                }
-            });
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableTotal', TableTotalDirective);
-
-TableTotalDirective.$inject = ['OdsFormService'];
-
-function TableTotalDirective(OdsFormService) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/total.html',
-        scope: {
-            field: '=',
-            label: '=',
-            colIndex: '='
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.total = 0;
-        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
-
-        $scope.$watch('field', function (model) {
-            $scope.total = total(model);
-        }, true);
-
-        function total(model) {
-            var index = $scope.colIndex;
-            var total = 0;
-            for (var i = 0; i < model.matrix.length; i++) {
-
-                if (model.matrix[i][index].fields.length > 0) {
-                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
-                }
-            }
-            return total;
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
     .directive('odsFieldCheckboxlistOptions', FieldCheckboxlistOptionsDirective);
 
 FieldCheckboxlistOptionsDirective.$inject = ['OdsFormService'];
@@ -5907,7 +5357,7 @@ function FieldCheckboxlistOptionsDirective(OdsFormService) {
 
     return directive;
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.options = initOptions();
         $scope.addOption = addOption;
@@ -6067,7 +5517,7 @@ function FieldDirective(OdsFormService, dialogs) {
         function removeField(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this field?',
-                {size: 'sm'}).result.then(function (btn) {
+                {size: 'sm'}).result.then(function () {
 
                 $scope.col.fields.splice(index, 1);
             });
@@ -6086,7 +5536,7 @@ function FieldDirective(OdsFormService, dialogs) {
             } else {
                 var pattern = {
                     pattern: $scope.patterns[$scope.field.patternSelect].pattern
-                }
+                };
                 $scope.field.validation = pattern;
             }
         }
@@ -6173,7 +5623,7 @@ function FieldMultiSelectOptionsDirective(OdsFormService) {
 
     return directive;
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.options = initOptions();
         $scope.addOption = addOption;
@@ -6261,7 +5711,7 @@ function FieldRadioOptionsDirective(OdsFormService) {
 
     return directive;
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.options = initOptions();
         $scope.addOption = addOption;
@@ -6306,135 +5756,6 @@ function FieldRadioOptionsDirective(OdsFormService) {
             }
             $scope.field.options = options;
         }, true);
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsRow', RowDirective);
-
-RowDirective.$inject = ['OdsFormService', 'dialogs'];
-
-function RowDirective(OdsFormService, dialogs) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/components/row/row.html',
-        scope: {
-            section: '=',
-            row: '=',
-            config: '=',
-            index: '=',
-            debugMode: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element) {
-
-        $scope.toggleRowProperties = toggleRowProperties;
-        $scope.removeRow = removeRow;
-        $scope.addColumn = addColumn;
-        $scope.removeColumn = removeColumn;
-        $scope.onAdd = onAdd;
-        $scope.dropCallback = dropCallback;
-        $scope.onChangeColWith = onChangeColWith;
-
-        function dropCallback(index, item, external, type) {
-
-            var newObject = OdsFormService.onAdd(item, type);
-            return newObject;
-        }
-
-        /**
-         * Catch onAdd event in drag and drop for setting field properties
-         * @param item Field
-         * @param type Field type.
-         */
-        function onAdd(item, type) {
-
-            var tmp = $scope.section.rows[$scope.section.rows.length - 1];
-            if (tmp.cols.length > 0) {
-                if (tmp.cols[0].fields.length > 0)
-                    $scope.section.rows.push(OdsFormService.newRowObject());
-            }
-        }
-
-        /**
-         * Toggle Row properties options.
-         * @param row Current row to show properties options.
-         */
-        function toggleRowProperties(row) {
-
-            row.showProperties = !row.showProperties;
-        }
-
-        /**
-         * Remove row from section.
-         * @param index Row index to remove.
-         */
-        function removeRow(index) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                $scope.section.rows.splice(index, 1);
-            });
-        }
-
-        /**
-         * Add column to current row.
-         * @param row Row to add column.
-         */
-        function addColumn(row) {
-
-            var gridSize = 0;
-            for (var i = 0; i < row.cols.length; i++) {
-
-                var size = row.cols[i].cssClass.substr(row.cols[i].cssClass.length - 2);
-                size = parseInt(size.replace(/-/g, ''));
-                gridSize = eval(gridSize + size);
-            }
-            if (gridSize < 12) {
-                row.cols.push(OdsFormService.newColumnObject(12 - gridSize));
-            } else {
-                dialogs.notify('Notification', 'Columns can\'t be greater than 12 columns, please fix it!!!',
-                    {size: 'sm'}).result.then(function (btn) {
-                });
-            }
-        }
-
-        /**
-         * Add column to current row.
-         * @param row Row to add column.
-         */
-        function removeColumn(index) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
-                {size: 'sm'}).result.then(function (btn) {
-
-                $scope.row.cols.splice(index, 1);
-            });
-        }
-
-        /**
-         * Change col width.
-         * @param col Column to change width.
-         */
-        function onChangeColWith(col) {
-
-            col.cssClass = ' col-xs-' + col.width + ' col-sm-' + col.width +
-                ' col-md-' + col.width + ' col-lg-' + col.width;
-        }
     }
 }
 
@@ -6468,7 +5789,7 @@ function SectionDirective(OdsFormService, dialogs) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.toggleProperties = toggleProperties;
         $scope.remove = remove;
@@ -6491,7 +5812,7 @@ function SectionDirective(OdsFormService, dialogs) {
         function remove(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this section?',
-                {size: 'sm'}).result.then(function (btn) {
+                {size: 'sm'}).result.then(function () {
                 $scope.schema.layout.splice(index, 1);
             });
         }
@@ -6503,7 +5824,7 @@ function SectionDirective(OdsFormService, dialogs) {
         function swap(idx1, idx2) {
 
             dialogs.confirm('Confirm!!!', 'Do you want swap this section?',
-                {size: 'sm'}).result.then(function (btn) {
+                {size: 'sm'}).result.then(function () {
 
                 var _previousValue = [];
                 angular.copy($scope.schema.layout, _previousValue);
@@ -6537,6 +5858,136 @@ function SectionDirective(OdsFormService, dialogs) {
 
 angular
     .module('ods-lib')
+    .directive('odsRow', RowDirective);
+
+RowDirective.$inject = ['OdsFormService', 'dialogs'];
+
+function RowDirective(OdsFormService, dialogs) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/components/row/row.html',
+        scope: {
+            section: '=',
+            row: '=',
+            config: '=',
+            index: '=',
+            debugMode: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.toggleRowProperties = toggleRowProperties;
+        $scope.removeRow = removeRow;
+        $scope.addColumn = addColumn;
+        $scope.removeColumn = removeColumn;
+        $scope.onAdd = onAdd;
+        $scope.dropCallback = dropCallback;
+        $scope.onChangeColWith = onChangeColWith;
+
+        function dropCallback(index, item, external, type) {
+
+            var newObject = OdsFormService.onAdd(item, type);
+            return newObject;
+        }
+
+        /**
+         * Catch onAdd event in drag and drop for setting field properties
+         * @param item Field
+         * @param type Field type.
+         */
+        function onAdd() {
+
+            var tmp = $scope.section.rows[$scope.section.rows.length - 1];
+            if (tmp.cols.length > 0) {
+                if (tmp.cols[0].fields.length > 0) {
+                    $scope.section.rows.push(OdsFormService.newRowObject());
+                }
+            }
+        }
+
+        /**
+         * Toggle Row properties options.
+         * @param row Current row to show properties options.
+         */
+        function toggleRowProperties(row) {
+
+            row.showProperties = !row.showProperties;
+        }
+
+        /**
+         * Remove row from section.
+         * @param index Row index to remove.
+         */
+        function removeRow(index) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
+                {size: 'sm'}).result.then(function () {
+
+                $scope.section.rows.splice(index, 1);
+            });
+        }
+
+        /**
+         * Add column to current row.
+         * @param row Row to add column.
+         */
+        function addColumn(row) {
+
+            var gridSize = 0;
+            for (var i = 0; i < row.cols.length; i++) {
+
+                var size = row.cols[i].cssClass.substr(row.cols[i].cssClass.length - 2);
+                size = parseInt(size.replace(/-/g, ''));
+                gridSize = eval(gridSize + size);
+            }
+            if (gridSize < 12) {
+                row.cols.push(OdsFormService.newColumnObject(12 - gridSize));
+            } else {
+                dialogs.notify('Notification', 'Columns can\'t be greater than 12 columns, please fix it!!!',
+                    {size: 'sm'}).result.then(function () {
+                });
+            }
+        }
+
+        /**
+         * Add column to current row.
+         * @param row Row to add column.
+         */
+        function removeColumn(index) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
+                {size: 'sm'}).result.then(function () {
+
+                $scope.row.cols.splice(index, 1);
+            });
+        }
+
+        /**
+         * Change col width.
+         * @param col Column to change width.
+         */
+        function onChangeColWith(col) {
+
+            col.cssClass = ' col-xs-' + col.width + ' col-sm-' + col.width +
+                ' col-md-' + col.width + ' col-lg-' + col.width;
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
     .directive('odsFieldSelectOptions', FieldSelectOptionsDirective);
 
 FieldSelectOptionsDirective.$inject = ['OdsFormService'];
@@ -6554,7 +6005,7 @@ function FieldSelectOptionsDirective(OdsFormService) {
 
     return directive;
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.options = initOptions();
         $scope.addOption = addOption;
@@ -6599,6 +6050,342 @@ function FieldSelectOptionsDirective(OdsFormService) {
             }
             $scope.field.options = options;
         }, true);
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsSuggestionOptions', SuggestionOptionsDirective);
+
+SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor'];
+
+function SuggestionOptionsDirective(OdsFormService, OdsCkeditor) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
+        scope: {
+            field: '=',
+            config: '=',
+            profile: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        if ($scope.config && $scope.config.ckeditor) {
+            $scope.field.options.prefix = $scope.config.ckeditor.prefix ?
+                $scope.config.ckeditor.prefix : OdsFormService.defaultCKEditorPrefix();
+            $scope.field.options.suffix = $scope.config.ckeditor.suffix ?
+                $scope.config.ckeditor.suffix : OdsFormService.defaultCKEditorSuffix();
+            $scope.field.options.tokensUrl = $scope.config.ckeditor.tokensUrl ?
+                $scope.config.ckeditor.tokensUrl : '';
+            $scope.field.options.suggestions = $scope.config.ckeditor.suggestions ?
+                $scope.config.ckeditor.suggestions : [];
+        }
+
+        $scope.options = initOptions();
+        $scope.addOption = addOption;
+        $scope.removeOption = removeOption;
+        $scope.refreshOption = refreshOption;
+        $scope.loadSuggestions = loadSuggestions;
+        $scope.loadTokens = loadTokens;
+
+        function initOptions() {
+
+            var options = [];
+            for (var i = 0; i < $scope.field.options.suggestions.length; i++) {
+                var option = {
+                    id: $scope.field.options.suggestions[i].id,
+                    label: $scope.field.options.suggestions[i].label
+                };
+                options.push(option);
+            }
+            return options;
+        }
+
+        function addOption() {
+
+            var option = {
+                id: '',
+                label: ''
+            };
+
+            $scope.options.push(option);
+        }
+
+        function removeOption(index) {
+
+            $scope.options.suggestions.splice(index, 1);
+        }
+
+        function refreshOption() {
+
+            OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
+            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
+        }
+
+        function loadSuggestions(url) {
+
+            OdsFormService.restResource(url).query(function (result) {
+                $scope.options = result;
+            });
+        }
+
+        function loadTokens(url) {
+
+            OdsFormService.restResource(url).get(function (result) {
+                $scope.field.options.tokens = result;
+            });
+        }
+
+        $scope.$watch('options', function (model) {
+
+            var options = [];
+            for (var i = 0; i < model.length; i++) {
+                var option = {};
+                option.id = model[i].id;
+                option.label = model[i].label;
+                options.push(option);
+            }
+            $scope.field.options.suggestions = options;
+        }, true);
+    }
+}
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableProps', TablePropsDirective);
+
+TablePropsDirective.$inject = ['OdsFormService'];
+
+function TablePropsDirective(OdsFormService) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table-props.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        $scope.addRow = addRow;
+        $scope.addColumn = addColumn;
+
+        /**
+         * Add row to the table
+         */
+        function addRow() {
+            var columnLength = $scope.field.matrix[0].length;
+            var row = [];
+            for (var i = 0; i < columnLength; i++) {
+                row.push(OdsFormService.newItemObject());
+            }
+            $scope.field.matrix.push(row);
+        }
+
+        /**
+         * Add column to the table.
+         * @param row Row to add column.
+         */
+        function addColumn() {
+            for (var i = 0; i < $scope.field.matrix.length; i++) {
+                $scope.field.matrix[i].push(OdsFormService.newItemObject());
+            }
+        }
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTable', TableDirective);
+
+TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
+
+function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.removeRow = removeRow;
+        $scope.removeColumn = removeColumn;
+        $scope.onAdd = onAdd;
+        $scope.cloneRow = cloneRow;
+        $scope.swapRow = swapRow;
+        $scope.swapColumn = swapColumn;
+        $scope.checkItem = checkItem;
+
+        function checkItem(index, item, external, type) {
+
+            //We prevent add recursively a table inside other.
+            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
+                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.', {size: 'sm'});
+                return false;
+            } else {
+                return item;
+            }
+
+        }
+
+        function onAdd(item, type) {
+
+            OdsFormService.onAdd(item, type);
+        }
+
+        /**
+         * Remove row from section.
+         * @param table Table to remove row
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            OdsFormService.removeRow(table, index);
+        }
+
+        /**
+         * Add column to current row.
+         * @param table Table to remove column
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            OdsFormService.removeColumn(table, index);
+        }
+
+        function cloneRow(table) {
+
+            OdsFormService.cloneRow(table);
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapRow(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
+                {size: 'sm'}).result.then(function () {
+
+                // var _previousValue = [];
+                // angular.copy($scope.field.matrix, _previousValue);
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix.length ||
+                    idx2 >= $scope.field.matrix.length) {
+
+                    return;
+                }
+                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
+
+            });
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapColumn(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
+                {size: 'sm'}).result.then(function () {
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix[idx1].length ||
+                    idx2 >= $scope.field.matrix[idx2].length) {
+
+                    return;
+                }
+                for (var i = 0; i < $scope.field.matrix.length; i++) {
+                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
+                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
+                    $scope.field.matrix[i][idx1] = tmp;
+                }
+            });
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableTotal', TableTotalDirective);
+
+TableTotalDirective.$inject = ['OdsFormService'];
+
+function TableTotalDirective(OdsFormService) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/total.html',
+        scope: {
+            field: '=',
+            label: '=',
+            colIndex: '='
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.total = 0;
+        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
+
+        $scope.$watch('field', function (model) {
+            $scope.total = total(model);
+        }, true);
+
+        function total(model) {
+            var index = $scope.colIndex;
+            var total = 0;
+            for (var i = 0; i < model.matrix.length; i++) {
+
+                if (model.matrix[i][index].fields.length > 0) {
+                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
+                }
+            }
+            return total;
+        }
     }
 }
 

@@ -22,5 +22,5 @@ function DynamicNameDirective($compile, $parse) {
             elem.attr('name', name);
             $compile(elem)(scope);
         }
-    }
+    };
 }

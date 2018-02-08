@@ -64,9 +64,10 @@
                 }).result.then(function () {
                     // console.log('close');
                 }, function (result) {
-                    if (result && (typeof(result) == 'object')) {
-                        if ($scope.ngModel == null)
+                    if (result && (typeof(result) === 'object')) {
+                        if ($scope.ngModel === null) {
                             $scope.ngModel = {};
+                        }
                         $scope.ngModel = result.model;
                         $scope.original = result.original;
                         $scope.onSave();
