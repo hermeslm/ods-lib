@@ -65,7 +65,7 @@ function Address($uibModal) {
                 // $element.
                 updateValue(result);
                 //$state.go($state.current.name, null, {reload: $state.current.name});
-            }, function (result) {
+            }, function () {
                 //$state.go($state.current.name);
             });
         };
@@ -73,12 +73,12 @@ function Address($uibModal) {
         $scope.printName = printName;
 
         function printName(address) {
-            if (address != null) {
+            if (address !== null) {
                 return address.street + ' ' +
                     address.street2 + ' ' +
                     address.city + ',' +
                     address.state.name + ' ' +
-                    address.zip
+                    address.zip;
             } else {
                 return '';
             }

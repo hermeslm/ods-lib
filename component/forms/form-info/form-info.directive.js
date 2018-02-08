@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsFormInfo', OdsFormInfoDirective);
 
-OdsFormInfoDirective.$inject = ['OdsFormService'];
+OdsFormInfoDirective.$inject = [];
 
-function OdsFormInfoDirective(OdsFormService) {
+function OdsFormInfoDirective() {
 
     var directive = {
         restrict: 'E',
@@ -17,8 +17,6 @@ function OdsFormInfoDirective(OdsFormService) {
         scope: {
             schema: '='
         },
-        // controller: 'OdsSchemaController',
-        // controllerAs: 'vm',
         link: linkFunc
     };
 
@@ -26,7 +24,7 @@ function OdsFormInfoDirective(OdsFormService) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc() {
 
     }
 }

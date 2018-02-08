@@ -110,7 +110,7 @@ function FieldDirective(OdsFormService, dialogs) {
         function removeField(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this field?',
-                {size: 'sm'}).result.then(function (btn) {
+                {size: 'sm'}).result.then(function () {
 
                 $scope.col.fields.splice(index, 1);
             });
@@ -129,7 +129,7 @@ function FieldDirective(OdsFormService, dialogs) {
             } else {
                 var pattern = {
                     pattern: $scope.patterns[$scope.field.patternSelect].pattern
-                }
+                };
                 $scope.field.validation = pattern;
             }
         }

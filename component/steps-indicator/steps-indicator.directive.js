@@ -64,7 +64,7 @@ function StepsIndicator() {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.changeStatus = changeStatus;
 

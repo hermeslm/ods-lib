@@ -28,7 +28,7 @@ function SectionDirective(OdsFormService, dialogs) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.toggleProperties = toggleProperties;
         $scope.remove = remove;
@@ -51,7 +51,7 @@ function SectionDirective(OdsFormService, dialogs) {
         function remove(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this section?',
-                {size: 'sm'}).result.then(function (btn) {
+                {size: 'sm'}).result.then(function () {
                 $scope.schema.layout.splice(index, 1);
             });
         }
@@ -63,7 +63,7 @@ function SectionDirective(OdsFormService, dialogs) {
         function swap(idx1, idx2) {
 
             dialogs.confirm('Confirm!!!', 'Do you want swap this section?',
-                {size: 'sm'}).result.then(function (btn) {
+                {size: 'sm'}).result.then(function () {
 
                 var _previousValue = [];
                 angular.copy($scope.schema.layout, _previousValue);

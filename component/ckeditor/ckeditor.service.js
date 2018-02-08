@@ -6,11 +6,11 @@ angular
 
 function OdsCkeditor() {
 
-    var uniqueCounter = (+new Date) % 10000;
+    var uniqueCounter = (+new Date()) % 10000;
 
     var keyCode = CKEDITOR.CTRL + 32;
 
-    var instance_map = {};
+    var instanceMap = {};
 
     var service = {
         register: register,
@@ -26,20 +26,21 @@ function OdsCkeditor() {
 
     function register(name, instance) {
 
-        instance_map[name] = instance;
+        instanceMap[name] = instance;
     }
 
     function getInstance(name) {
 
-        if (instance_map[name])
-            return instance_map[name];
-        else
+        if (instanceMap[name]) {
+            return instanceMap[name];
+        } else {
             return false;
+        }
     }
 
     function unregister(name) {
 
-        instance_map[name] = null;
+        instanceMap[name] = null;
     }
 
     function generateName() {
@@ -94,21 +95,22 @@ function OdsCkeditor() {
 
     function initOptions(options) {
 
+        var tmp = {};
         if (options) {
-            var tmp = {
+            tmp = {
                 triggerKeyCode: !options.triggerKeyCode ? keyCode : options.triggerKeyCode,
                 prefix: !options.prefix ? '${' : options.prefix,
                 suffix: !options.suffix ? '}' : options.suffix,
                 suggestions: options.suggestions
-            }
+            };
             return tmp;
         } else {
-            var tmp = {
+            tmp = {
                 triggerKeyCode: keyCode,
                 prefix: '${',
                 suffix: '}',
                 suggestions: []
-            }
+            };
             return tmp;
         }
     }

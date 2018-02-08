@@ -22,7 +22,7 @@ function TablePropsDirective(OdsFormService) {
 
     return directive;
 
-    function linkFunc($scope, $element) {
+    function linkFunc($scope) {
 
         $scope.addRow = addRow;
         $scope.addColumn = addColumn;

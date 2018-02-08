@@ -96,6 +96,30 @@ app.controller('MainCtrl', function ($scope, OdsParamType, OdsPageOrientation) {
                         required: true,
                         type: OdsParamType.DATE,
                         value: new Date()//new Date(1980, 0, 24) way to pass default value in params
+                    }, {
+                        title: 'Drag and Drop Param',
+                        name: 'param6',
+                        placeholder: 'Select Param...',
+                        sourceTitle: 'Available Sections',
+                        targetTitle: 'Items Selected',
+                        type: OdsParamType.DRAG_AND_DROP,
+                        valueField: 'value',
+                        titleField: 'text',
+                        required: false,
+                        value: [{
+                            value: 4,
+                            text: 'Value 4'
+                        }],
+                        list: [{
+                            value: 1,
+                            text: 'Value 1'
+                        }, {
+                            value: 2,
+                            text: 'Value 2'
+                        }, {
+                            value: 3,
+                            text: 'Value 3'
+                        }]
                     }]
                 }
             ]
@@ -133,16 +157,16 @@ app.controller('MainCtrl', function ($scope, OdsParamType, OdsPageOrientation) {
                 }]
             }, {
                 id: 0,
-                title: 'Report 4',
+                title: 'Multi Columns',
                 url: '/api/report/report1',
-                multiCols: false,
+                modalSize: 'lg',
+                multiCols: true,
                 params: [{
-                    title: 'Hidden Param',
-                    name: 'hidden_id',
-                    type: OdsParamType.NUMBER,
-                    value: 1,
+                    title: 'Text',
+                    name: 'text_param',
                     required: true,
-                    hidden: true
+                    type: OdsParamType.TEXT,
+                    value: ''
                 }, {
                     title: 'Select Param',
                     name: 'param2',
@@ -168,6 +192,13 @@ app.controller('MainCtrl', function ($scope, OdsParamType, OdsPageOrientation) {
                     required: true,
                     type: OdsParamType.DATE,
                     value: new Date()//new Date(1980, 0, 24) way to pass default value in params
+                }, {
+                    title: 'Hidden Param',
+                    name: 'hidden_id',
+                    type: OdsParamType.NUMBER,
+                    value: 1,
+                    required: true,
+                    hidden: true
                 }]
             }]
         }]

@@ -4,11 +4,9 @@ angular
     .module('ods-lib')
     .factory('ModalEntity', ModalEntity);
 
-ModalEntity.$inject = ['$uibModal', '$rootScope', '$state'];
+ModalEntity.$inject = ['$uibModal'];
 
-function ModalEntity($uibModal, $rootScope, $state) {
-
-    var modals = [];
+function ModalEntity($uibModal) {
 
     var service = {
         openModalEntity: openModalEntity

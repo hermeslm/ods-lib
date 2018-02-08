@@ -5,9 +5,9 @@
         .module('ods-lib')
         .directive('imageUpload', imageUpload);
 
-    imageUpload.$inject = ['$uibModal', '$state'];
+    imageUpload.$inject = ['$uibModal'];
 
-    function imageUpload($uibModal, $state) {
+    function imageUpload($uibModal) {
 
         var directive = {
             restrict: 'E',
@@ -26,8 +26,8 @@
 
         /* private helper methods*/
 
-        function linkFunc($scope, element) {
-            $scope.openModal = function (element) {
+        function linkFunc($scope) {
+            $scope.openModal = function () {
                 $uibModal.open({
                     templateUrl: 'image-upload/image-upload-dialog.html',
                     controller: 'ImageUploadDialogController',
@@ -45,7 +45,7 @@
                             return $scope.typeImage;
                         }
                     }
-                }).result.then(function (result) {}, function (result) {
+                }).result.then(function () {}, function (result) {
                     updateValue(result);
                 });
             };

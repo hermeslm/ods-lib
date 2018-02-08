@@ -36,8 +36,6 @@ function FormDirective(OdsFormService, $timeout) {
             }
         }
 
-        $scope.form;
-
         $scope.clear = clear;
         $scope.save = save;
 
@@ -139,7 +137,7 @@ function FormDirective(OdsFormService, $timeout) {
 
         function clear() {
             //TODO confirm if you want to clear al fields.
-            showInfo("Form cleared!!!");
+            showInfo('Form cleared!!!');
         }
 
         /**
@@ -166,15 +164,15 @@ function FormDirective(OdsFormService, $timeout) {
             }, 5000);
         }
 
-        function showSuccess(message) {
-
-            $scope.success = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.success = false;
-                $scope.message = '';
-            }, 5000);
-        }
+        // function showSuccess(message) {
+        //
+        //     $scope.success = true;
+        //     $scope.message = message;
+        //     $timeout(function () {
+        //         $scope.success = false;
+        //         $scope.message = '';
+        //     }, 5000);
+        // }
 
         function showInfo(message) {
 

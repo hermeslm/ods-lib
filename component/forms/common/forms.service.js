@@ -14,7 +14,7 @@
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
                             $resource) {
 
-        var uniqueCounter = (+new Date) % 10000;
+        var uniqueCounter = (+new Date()) % 10000;
 
         var clipBoard = [];
         var callbacks = [];
@@ -179,9 +179,9 @@
                         }
                     }
                 }
-                this.schema = schema;
+                // this.schema = schema;
             } else {
-                alert('Please specify a schema!!!');
+                console.error('Please specify a schema!!!');
             }
             return schema;
         }
@@ -515,7 +515,7 @@
                     OdsComponentType.ROW
                 ],
                 rows: [newRowObject()]
-            }
+            };
         }
 
         /**
@@ -530,7 +530,7 @@
                 cssClass: 'row',
                 displayProperties: false,
                 cols: [newColumnObject(12)]
-            }
+            };
         }
 
         /**
@@ -547,7 +547,7 @@
                     OdsComponentType.FIELD
                 ],
                 fields: []
-            }
+            };
         }
 
         /**
@@ -566,11 +566,12 @@
                 value: null,
                 validation: {
                     messages: {}
-                },
-                getValue: function () {
-                    return value;
                 }
-            }
+                // ,
+                // getValue: function () {
+                //     return value;
+                // }
+            };
         }
 
         /**
@@ -590,7 +591,7 @@
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -610,7 +611,7 @@
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -631,7 +632,7 @@
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -665,7 +666,7 @@
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -691,7 +692,7 @@
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         /**
@@ -709,7 +710,7 @@
                 on: 'Yes',
                 off: 'No',
                 value: false
-            }
+            };
         }
 
         function newDateTimeObject() {
@@ -730,7 +731,7 @@
                 // utc: true,
                 required: false,
                 value: date
-            }
+            };
         }
 
         function newFieldLabelObject() {
@@ -742,7 +743,7 @@
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.LABEL,
                 value: 'Label'
-            }
+            };
         }
 
         function newFieldCheckBoxObject() {
@@ -755,7 +756,7 @@
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.CHECKBOX,
                 value: false
-            }
+            };
         }
 
         function newFieldCheckBoxListObject() {
@@ -775,7 +776,7 @@
                     name: 'Option 3'
                 }],
                 value: {}
-            }
+            };
         }
 
         function newFieldRadioListObject() {
@@ -795,7 +796,7 @@
                     name: 'Option 3'
                 }],
                 value: {}
-            }
+            };
         }
 
         function newYesNoObject() {
@@ -816,7 +817,7 @@
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         function newTableObject() {
@@ -833,7 +834,7 @@
                 validation: {
                     messages: {}
                 }
-            }
+            };
         }
 
         function newItemObject() {
@@ -843,7 +844,7 @@
                 fields: [],
                 // width: '10px',
                 allowedTypes: [OdsComponentType.FIELD]
-            }
+            };
         }
 
         function newCKEditorObject() {
@@ -878,7 +879,7 @@
                     tokens: null
                 },
                 value: null
-            }
+            };
         }
 
         function defaultCKEditorPrefix() {
@@ -959,6 +960,7 @@
         function getFieldValueAsNumber(field) {
 
             var value = 0;
+            var id;
             switch (field.type) {
                 case OdsFieldType.TEXT:
                     if (field.value) {
@@ -972,13 +974,13 @@
                     break;
                 case OdsFieldType.SELECT:
                     if (field.value) {
-                        var id = getSelectFieldId(field);
+                        id = getSelectFieldId(field);
                         value += Number(field.value[id]);
                     }
                     break;
                 case OdsFieldType.MULTI_SELECT:
                     if (field.value) {
-                        var id = getSelectFieldId(field);
+                        id = getSelectFieldId(field);
                         for (var i = 0; i < field.value.length; i++) {
                             value += Number(field.value[i][id]);
                         }
@@ -1046,18 +1048,18 @@
         function copyToClipboard(text) {
             if (window.clipboardData && window.clipboardData.setData) {
                 // IE specific code path to prevent textarea being shown while dialog is visible.
-                return clipboardData.setData("Text", text);
+                return window.clipboardData.setData('Text', text);
 
-            } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-                var textarea = document.createElement("textarea");
+            } else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+                var textarea = document.createElement('textarea');
                 textarea.textContent = text;
-                textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+                textarea.style.position = 'fixed';  // Prevent scrolling to bottom of page in MS Edge.
                 document.body.appendChild(textarea);
                 textarea.select();
                 try {
-                    return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+                    return document.execCommand('copy');  // Security exception may be thrown by some browsers.
                 } catch (ex) {
-                    console.warn("Copy to clipboard failed.", ex);
+                    console.warn('Copy to clipboard failed.', ex);
                     return false;
                 } finally {
                     document.body.removeChild(textarea);
@@ -1117,8 +1119,9 @@
 
             clipBoard = cb;
             //notify if there are any listeners
-            for (var i = 0; i < callbacks.length; i++)
+            for (var i = 0; i < callbacks.length; i++) {
                 callbacks[i](clipBoard);
+            }
         }
 
         function addToClipBoard(item) {
@@ -1126,8 +1129,9 @@
             var comp = renameComponent(item);
             clipBoard.push(comp);
             //notify if there are any listeners
-            for (var i = 0; i < callbacks.length; i++)
+            for (var i = 0; i < callbacks.length; i++) {
                 callbacks[i](clipBoard);
+            }
         }
 
         function onAddToClipBoard(callback) {
@@ -1137,7 +1141,7 @@
 
         function escapeRegExp(str) {
 
-            return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+            return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
         }
 
         function copyJson(json) {
@@ -1189,7 +1193,9 @@
                 fields: []
             };
 
+            var field;
             var layout = schema.layout;
+
             for (var i = 0; i < layout.length; i++) {
                 var rows = layout[i].rows;
                 for (var j = 0; j < rows.length; j++) {
@@ -1197,10 +1203,10 @@
                     for (var k = 0; k < cols.length; k++) {
                         var fields = cols[k].fields;
                         for (var l = 0; l < fields.length; l++) {
-                            if (fields[l].type == OdsFieldType.TABLE) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     for (var p = 0; p < fields[l].matrix[m].length; p++) {
-                                        var field = {
+                                        field = {
                                             name: cols[k].fields[l].matrix[m][p].fields[0].name,
                                             type: cols[k].fields[l].matrix[m][p].fields[0].type,
                                             code: cols[k].fields[l].matrix[m][p].fields[0].code,
@@ -1210,7 +1216,7 @@
                                     }
                                 }
                             } else {
-                                var field = {
+                                field = {
                                     name: cols[k].fields[l].name,
                                     type: cols[k].fields[l].type,
                                     code: cols[k].fields[l].code,
@@ -1234,19 +1240,22 @@
 
             var resultFields = [];
 
+            var field;
             var layout = schema.layout;
+            var fields;
+
             for (var i = 0; i < layout.length; i++) {
                 var rows = layout[i].rows;
                 for (var j = 0; j < rows.length; j++) {
                     var cols = rows[j].cols;
                     for (var k = 0; k < cols.length; k++) {
-                        var fields = cols[k].fields;
+                        fields = cols[k].fields;
                         for (var l = 0; l < fields.length; l++) {
-                            if (fields[l].type == OdsFieldType.TABLE) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     for (var p = 0; p < fields[l].matrix[m].length; p++) {
                                         if (cols[k].fields[l].matrix[m][p].fields[0].code === code) {
-                                            var field = {
+                                            field = {
                                                 name: cols[k].fields[l].matrix[m][p].fields[0].name,
                                                 type: cols[k].fields[l].matrix[m][p].fields[0].type,
                                                 code: cols[k].fields[l].matrix[m][p].fields[0].code,
@@ -1258,7 +1267,7 @@
                                 }
                             } else {
                                 if (cols[k].fields[l].code === code) {
-                                    var field = {
+                                    field = {
                                         name: cols[k].fields[l].name,
                                         type: cols[k].fields[l].type,
                                         code: cols[k].fields[l].code,
@@ -1300,18 +1309,18 @@
                         var fields = cols[k].fields;
                         for (var l = 0; l < fields.length; l++) {
                             //If field is a table we must to loop through each table cell
-                            if (fields[l].type == OdsFieldType.TABLE) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     for (var p = 0; p < fields[l].matrix[m].length; p++) {
                                         //If field is datetime we set Date object from string
-                                        if (cols[k].fields[l].matrix[m][p].fields[0].type == OdsFieldType.DATETIME) {
+                                        if (cols[k].fields[l].matrix[m][p].fields[0].type === OdsFieldType.DATETIME) {
                                             cols[k].fields[l].matrix[m][p].fields[0].value = new Date(Date.parse(cols[k].fields[l].matrix[m][p].fields[0].value));
                                         }
                                     }
                                 }
                             }
                             //If field is datetime we set Date object from string
-                            else if (fields[l].type == OdsFieldType.DATETIME) {
+                            else if (fields[l].type === OdsFieldType.DATETIME) {
                                 fields[l].value = new Date(Date.parse(fields[l].value));
                             }
                         }
@@ -1324,15 +1333,17 @@
 
         function setConfigToCKEditorComponent(schema, config) {
 
+            var fields;
             var layout = schema.layout;
+
             for (var i = 0; i < layout.length; i++) {
                 var rows = layout[i].rows;
                 for (var j = 0; j < rows.length; j++) {
                     var cols = rows[j].cols;
                     for (var k = 0; k < cols.length; k++) {
-                        var fields = cols[k].fields;
+                        fields = cols[k].fields;
                         for (var l = 0; l < fields.length; l++) {
-                            if (fields[l].type == OdsFieldType.TABLE) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
                                 for (var m = 0; m < fields[l].matrix.length; m++) {
                                     var matrixRow = fields[l].matrix[m];
                                     for (var p = 0; p < matrixRow.length; p++) {

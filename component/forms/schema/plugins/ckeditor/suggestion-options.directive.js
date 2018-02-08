@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsSuggestionOptions', SuggestionOptionsDirective);
 
-SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor', '$timeout'];
+SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor'];
 
-function SuggestionOptionsDirective(OdsFormService, OdsCkeditor, $timeout) {
+function SuggestionOptionsDirective(OdsFormService, OdsCkeditor) {
 
     var directive = {
         restrict: 'E',

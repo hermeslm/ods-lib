@@ -37,10 +37,8 @@ function SchemaDirective(OdsFormService) {
 
         /**
          * Catch onAdd event in drag and drop for setting field properties
-         * @param item Field
-         * @param type Field type.
          */
-        function onAdd(item, type) {
+        function onAdd() {
 
             $scope.schema.layout.push(OdsFormService.newSectionObject());
         }

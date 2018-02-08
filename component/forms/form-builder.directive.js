@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsFormBuilder', OdsFormBuilder);
 
-OdsFormBuilder.$inject = ['OdsFormService', '$uibModal', '$sce', '$q'];
+OdsFormBuilder.$inject = [];
 
-function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
+function OdsFormBuilder() {
 
     var directive = {
         restrict: 'E',
@@ -27,7 +27,7 @@ function OdsFormBuilder(OdsFormService, $uibModal, $sce, $q) {
 
     /* private helper methods*/
 
-    function linkFunc($scope, $element) {
+    function linkFunc() {
 
     }
 }

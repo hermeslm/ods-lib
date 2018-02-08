@@ -84,7 +84,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
 
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
-                if (value == field.value) {
+                if (value === field.value) {
                     return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                 }
             }
@@ -102,7 +102,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
                 if (field.value) {
-                    if (value == field.value[OdsFormService.getSelectFieldId(field)]) {
+                    if (value === field.value[OdsFormService.getSelectFieldId(field)]) {
                         return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                     }
                 }
@@ -119,7 +119,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
                     var value = field.value[i][OdsFormService.getSelectFieldId(field)];
                     for (var j = 0; j < field.options.length; j++) {
                         var current = field.options[j][OdsFormService.getSelectFieldId(field)];
-                        if (value == current) {
+                        if (value === current) {
                             result.push(field.options[j][OdsFormService.getSelectFieldTitle(field)]);
                         }
                     }
