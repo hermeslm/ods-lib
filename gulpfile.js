@@ -208,6 +208,34 @@ gulp.task('img-upload-inject', function () {
         .pipe(gulp.dest('./examples/img-upload'));
 });
 
+//Wizard Steps tasks
+gulp.task('wizard-steps-inject', function () {
+    return gulp.src('./examples/wizard-steps/index.html')
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {
+            name: 'bower',
+            relative: true
+        }))
+        .pipe(inject(es.merge(
+            gulp.src(['./examples/wizard-steps/**/*.css', './examples/dist/wizard-steps/**/*.css', '!./bower_components/**'], {read: false}),
+            gulp.src(['./examples/wizard-steps/**/*.js', './examples/dist/ods-lib.js', '!./bower_components/**'])
+                .pipe(naturalSort())
+                .pipe(angularFilesort())
+        ), {relative: true}))
+        .pipe(gulp.dest('./examples/wizard-steps'));
+});
+
+//Task to process Sass files in the 'scss' folder
+gulp.task('wizard-steps-scss', function () {
+    return gulp.src('./component/wizard-steps/style.scss')
+        .pipe(sourcemap.init())
+        .pipe(scss({outputStyle: 'expanded'}).on('error', scss.logError))
+        .pipe(autoprefixer(autoprefixer({
+            browsers: ['> 1%', 'last 5 versions', 'ie > 10']
+        })))
+        .pipe(sourcemap.write('.'))
+        .pipe(gulp.dest('./dist/wizard-steps/'));
+});
+
 gulp.task('test', function () {
 
     karmaConfig({
@@ -234,9 +262,9 @@ gulp.task('ci', function () {
 
 // gulp.task('build', ['clean', 'templates', 'scripts']);
 gulp.task('build', function (done) {
-    runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss', 'report-scss', 'forms-inject',
-        'ckeditor-inject', 'jsig-inject', 'address-inject', 'reports-inject', 'img-upload-inject',
-        'copy-lib-to-samples', function () {
+    runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss', 'report-scss', 'wizard-steps-scss',
+        'forms-inject', 'ckeditor-inject', 'jsig-inject', 'address-inject', 'reports-inject', 'img-upload-inject',
+        'wizard-steps-inject', 'copy-lib-to-samples', function () {
             // console.log('Run something else');
             done();
         })
