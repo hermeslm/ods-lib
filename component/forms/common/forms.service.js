@@ -1328,38 +1328,6 @@
                 }
             }
 
-
-            //For each section
-            // for (var i = 0; i < layout.length; i++) {
-            //     //For each row
-            //     var rows = layout[i].rows;
-            //     for (var j = 0; j < rows.length; j++) {
-            //         //For each column
-            //         var cols = rows[j].cols;
-            //         for (var k = 0; k < cols.length; k++) {
-            //             //For each field
-            //             var fields = cols[k].fields;
-            //             for (var l = 0; l < fields.length; l++) {
-            //                 //If field is a table we must to loop through each table cell
-            //                 if (fields[l].type === OdsFieldType.TABLE) {
-            //                     for (var m = 0; m < fields[l].matrix.length; m++) {
-            //                         for (var p = 0; p < fields[l].matrix[m].length; p++) {
-            //                             //If field is datetime we set Date object from string
-            //                             if (cols[k].fields[l].matrix[m][p].fields[0].type === OdsFieldType.DATETIME) {
-            //                                 cols[k].fields[l].matrix[m][p].fields[0].value = new Date(Date.parse(cols[k].fields[l].matrix[m][p].fields[0].value));
-            //                             }
-            //                         }
-            //                     }
-            //                 }
-            //                 //If field is datetime we set Date object from string
-            //                 else if (fields[l].type === OdsFieldType.DATETIME) {
-            //                     fields[l].value = new Date(Date.parse(fields[l].value));
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
-
             return schema;
         }
 

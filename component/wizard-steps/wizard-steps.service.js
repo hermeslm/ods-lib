@@ -47,6 +47,38 @@
             }
         }
 
+        function stepIdx(steps, step) {
+
+            var idx = 0;
+            var res = -1;
+            angular.forEach(getEnabledSteps(steps), function(currStep) {
+                if (currStep === step) {
+                    res = idx;
+                }
+                idx++;
+            });
+            return res;
+        }
+
+        function getEnabledSteps(steps) {
+
+            return steps.filter(function(step){
+                return step && step.disabled !== 'true';
+            });
+        }
+
+        //unSelect All Steps
+        function unselectAll(steps) {
+
+            //traverse steps array and set each "selected" property to false
+            angular.forEach(getEnabledSteps(steps), function (step) {
+                step.selected = false;
+            });
+
+            //set selectedStep variable to null
+            // $scope.selectedStep = null;
+        }
+
         return service;
     }
 })();
