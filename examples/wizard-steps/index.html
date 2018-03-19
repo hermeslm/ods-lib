@@ -24,9 +24,6 @@
     <link rel="stylesheet" href="../bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css">
     <!-- endinject -->
     <!-- inject:css -->
-    <link rel="stylesheet" href="../dist/forms/style.css">
-    <link rel="stylesheet" href="../dist/reports/style.css">
-    <link rel="stylesheet" href="../dist/steps-indicator/style.css">
     <link rel="stylesheet" href="../dist/wizard-steps/style.css">
     <!-- endinject -->
     <!-- endbuild -->
@@ -39,12 +36,14 @@
     <![endif]-->
 
 </head>
-<body ng-controller="MainCtrl">
-<div class="container">
+<body ng-controller="WizardCtrl">
+<div class="container-fluid">
 
     <div class="starter-template">
-        <h1>Report-View Directive</h1>
-        <ods-reports reports-group="reportsGroup"></ods-reports>
+        <h1>Wizard Steps</h1>
+        <form>
+            <wizard-steps ng-model="steps"></wizard-steps>
+        </form>
     </div>
 
 </div>
