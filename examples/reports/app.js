@@ -134,6 +134,7 @@ app.controller('MainCtrl', function ($scope, OdsParamType, OdsPageOrientation) {
                 title: 'Report 3',
                 url: '/api/report/report1',
                 multiCols: false,
+                modalSize: 'lg',
                 params: [{
                     id: 1,
                     title: 'Language',
@@ -154,6 +155,25 @@ app.controller('MainCtrl', function ($scope, OdsParamType, OdsPageOrientation) {
                     required: true,
                     type: OdsParamType.DATE,
                     value: new Date()//new Date(1980, 0, 24) way to pass default value in params
+                }, {
+                    title: 'Select Care & Delivery Template',
+                    name: 'checkList',
+                    hideInFooter: true,
+                    type: OdsParamType.CHECK_LIST,
+                    valueField: 'value',
+                    titleField: 'text',
+                    required: false,
+                    height: 200,
+                    value: [],
+                    list: [{
+                        value: '1',
+                        text: 'Intake',
+                        selected: false
+                    }, {
+                        value: '2',
+                        text: 'Progress Note',
+                        selected: false
+                    }]
                 }]
             }, {
                 id: 0,

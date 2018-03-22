@@ -291,12 +291,7 @@
                         param.value = [report.params[i].value[idField]];
                         break;
                     case OdsParamType.MULTI_SELECT:
-                        tmpParams = [];
-                        for (var j = 0; j < report.params[i].value.length; j++) {
-                            idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
-                            tmpParams.push(report.params[i].value[j][idField]);
-                        }
-                        param.value = tmpParams;
+                        param.value = getListValue(report.params[i]);
                         break;
                     case OdsParamType.TABLE_SELECT:
                         tmpParams = [];
@@ -313,12 +308,10 @@
                         param.value = tmpParams;
                         break;
                     case OdsParamType.DRAG_AND_DROP:
-                        tmpParams = [];
-                        for (var j = 0; j < report.params[i].value.length; j++) {
-                            idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
-                            tmpParams.push(report.params[i].value[j][idField]);
-                        }
-                        param.value = tmpParams;
+                        param.value = getListValue(report.params[i]);
+                        break;
+                    case OdsParamType.CHECK_LIST:
+                        param.value = getListValue(report.params[i]);
                         break;
                     default:
                         param.value = [report.params[i].value];
@@ -334,6 +327,17 @@
             };
 
             return postReport;
+        }
+
+        function getListValue(param) {
+
+            var tmpValue = [];
+            var idField;
+            for (var i = 0; i < param.value.length; i++) {
+                idField = param.valueField !== undefined ? param.valueField : 'id';
+                tmpValue.push(param.value[i][idField]);
+            }
+            return tmpValue;
         }
 
         function forceDownload(report) {
