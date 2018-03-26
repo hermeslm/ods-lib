@@ -16,7 +16,7 @@
     <hr style="margin-top: -2px; margin-bottom: 5px">
     <div id="checkbox-list-container">
         <label id="checkbox-list" ng-repeat="element in list">
-            <input type="checkbox" ng-model="element.selected" ng-change="selectOne(element)">{{element.text}}
+            <input type="checkbox" ng-model="element.selected" ng-change="toggleOne(element)">{{element.text}}
         </label>
     </div>
 </div>
