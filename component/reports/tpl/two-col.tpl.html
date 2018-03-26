@@ -2,7 +2,7 @@
     <div class="col-lg-6">
         <ods-param param="vm.report.params[$index]"></ods-param>
     </div>
-    <div class="col-lg-6">
+    <div class="col-lg-6" ng-if="$index + 1 < vm.report.params.length">
         <ods-param param="vm.report.params[$index + 1]"></ods-param>
     </div>
 </div>
