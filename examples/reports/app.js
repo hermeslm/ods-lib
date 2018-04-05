@@ -157,6 +157,12 @@ app.controller('MainCtrl', function ($scope, OdsParamType, OdsPageOrientation) {
                     type: OdsParamType.DATE,
                     value: new Date()//new Date(1980, 0, 24) way to pass default value in params
                 }, {
+                    title: 'Date not required Param',
+                    name: 'end_date',
+                    required: false,
+                    type: OdsParamType.DATE,
+                    value: new Date()//new Date(1980, 0, 24) way to pass default value in params
+                }, {
                     title: 'Select Care & Delivery Template',
                     name: 'checkList',
                     hideInFooter: true,

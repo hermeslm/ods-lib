@@ -7,6 +7,7 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>AngularJS ODS Lib</title>
 
+    <!-- Bootstrap -->
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
 
@@ -20,13 +21,14 @@
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.css">
     <link rel="stylesheet" href="../bower_components/angular-dialog-service/dist/dialogs.css">
-    <link rel="stylesheet" href="../bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css">
+    <link rel="stylesheet"
+          href="../bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css">
     <!-- endinject -->
     <!-- inject:css -->
+    <link rel="stylesheet" href="../dist/forms/style.css">
     <link rel="stylesheet" href="../dist/reports/style.css">
     <link rel="stylesheet" href="../dist/steps-indicator/style.css">
     <link rel="stylesheet" href="../dist/wizard-steps/style.css">
-    <link rel="stylesheet" href="../dist/forms/style.css">
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -41,110 +43,23 @@
 <body ng-controller="MainCtrl">
 <div class="container">
 
-    <div class="starter-template">
-        <form name="example" role="form" novalidate ng-submit="submit()" show-validation>
-            <h1>J-Signature Wrapper Directive.</h1>
-            <div class="row">
-                <div class="col-lg-12">
-                    <button type="submit" ng-disabled="example.$invalid" class="btn btn-primary">
-                        <span class="fa fa-floppy-o"></span>&nbsp;<span>Submit</span>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4 col-md-4 col-lg-4">
-                    <h3>Component</h3>
-                    <div style="padding-top: 1px;">
-                        <div class="form-group" ng-class="{'has-error': example.testSig.$invalid}">
-                            <ods-signature name="testSig" ng-model="model" ng-disabled="disabled"
-                                           ng-required="required" on-change="onChange()"></ods-signature>
-                            <div ng-show="example.testSig.$invalid">
-                                <p class="help-block"
-                                   ng-show="example.testSig.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4 col-md-4 col-lg-4">
-                    <h3>Result</h3>
-                    <div style="border: 1px solid #ddd;">
-                        <img ng-src="{{model}}" alt="">
-                    </div>
-                </div>
-                <div class="col-xs-4 col-md-4 col-lg-4">
-                    <h3>Result of 'onChange' method.</h3>
-                    <textarea class="form-control" name="selected" rows="8">
-                        {{selected}}
-                    </textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12" style="padding-top: 10px">
-                    <button type="button" class="btn" ng-click="disableComponent()">Disable</button>
-                    <button type="button" class="btn btn-default" ng-click="enableComponent()">Enable</button>
-                    <button type="button" class="btn btn-primary" ng-click="getSignature()">Get Signature</button>
-                    <button type="button" class="btn btn-success" ng-click="setSignature()">Set Signature</button>
-                    <button type="button" class="btn btn-warning" ng-click="toggleRequired()">{{required ? 'Set not
-                        required' : 'Set required'}}
-                    </button>
-                </div>
-            </div>
-        </form>
+    <div class="row">
         <br>
-        <br>
-        <form name="example1" role="form" novalidate ng-submit="submit1()" show-validation>
-            <div class="row">
-                <div class="col-lg-12">
-                    <button type="submit" ng-disabled="example1.$invalid" class="btn btn-primary">
-                        <span class="fa fa-floppy-o"></span>&nbsp;<span>Submit1</span>
-                    </button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4 col-md-4 col-lg-4">
-                    <h3>Component</h3>
-                    <div style="padding-top: 1px;">
-                        <div class="form-group" ng-class="{'has-error': example1.testSig1.$invalid}">
-                            <ods-signature name="testSig1" ng-model="model1" ng-disabled="disabled1"
-                                           ng-required="required1" on-change="onChange1()"></ods-signature>
-                            <div ng-show="example1.testSig1.$invalid">
-                                <p class="help-block"
-                                   ng-show="example1.testSig1.$error.required">
-                                    This field is required.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4 col-md-4 col-lg-4">
-                    <h3>Result</h3>
-                    <div style="border: 1px solid #ddd;">
-                        <img ng-src="{{model1}}" alt="">
-                    </div>
-                </div>
-                <div class="col-xs-4 col-md-4 col-lg-4">
-                    <h3>Result of 'onChange' method.</h3>
-                    <textarea class="form-control" name="selected" rows="8">
-                        {{selected1}}
-                    </textarea>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12" style="padding-top: 10px">
-                    <button type="button" class="btn" ng-click="disableComponent1()">Disable</button>
-                    <button type="button" class="btn btn-default" ng-click="enableComponent1()">Enable</button>
-                    <button type="button" class="btn btn-primary" ng-click="getSignature1()">Get Signature</button>
-                    <button type="button" class="btn btn-success" ng-click="setSignature1()">Set Signature</button>
-                    <button type="button" class="btn btn-warning" ng-click="toggleRequired1()">{{required1 ? 'Set not required' : 'Set required'}}
-                    </button>
-                </div>
-            </div>
-        </form>
     </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-4">
+            <select-filtered ng-model="selectdWorkingWeek" label="Working Weeks" placeholder="Select a working week..."
+                             list="list" filters="filters" tooltip="Working Weeks"></select-filtered>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            {{selectdWorkingWeek}}
+        </div>
+        <div class="col-lg-4 col-md-4">
 
+        </div>
+    </div>
 </div>
+
 <!-- build:js js/seed.min.js -->
 <!-- bower:js -->
 <script src="../bower_components/jquery/dist/jquery.js"></script>
