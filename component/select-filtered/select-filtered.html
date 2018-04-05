@@ -1,5 +1,5 @@
 <!--<div class="form-group">-->
-    <label for="{{name}}">{{label}}</label>
+    <label for="{{name}}" ng-if="!hideLabel">{{label}}</label>
     <div class="input-group">
         <ui-select name="{{name}}" id="{{name}}" ng-model="selected.value" ng-disabled="{{ngDisabled}}"
                    ui-select-required="ngRequired" close-on-select="true" title="{{tooltip}}">

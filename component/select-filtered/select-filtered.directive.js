@@ -13,6 +13,7 @@ function selectFiltered($filter) {
         templateUrl: 'select-filtered/select-filtered.html',
         scope: {
             label: '@',
+            hideLabel: '=',
             placeholder: '@',
             ngModel: '=',
             titleProperty: '=?',
