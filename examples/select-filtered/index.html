@@ -49,7 +49,8 @@
     <div class="row">
         <div class="col-lg-4 col-md-4">
             <select-filtered ng-model="selectdWorkingWeek" label="Working Weeks" placeholder="Select a working week..."
-                             list="list" filters="filters" tooltip="Working Weeks"></select-filtered>
+                             list="list" filters="filters" tooltip="Working Weeks"
+                             on-select="onSelect()"></select-filtered>
         </div>
         <div class="col-lg-4 col-md-4">
             {{selectdWorkingWeek}}

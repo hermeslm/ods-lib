@@ -28,9 +28,7 @@ app.controller('MainCtrl', function ($scope, $q) {
         }
     ];
 
-    $scope.list = [];
-
-    $scope.listTmp = [
+    $scope.list = [
         {
             "id": 1,
             "name": "1-Week(1/01/2017-1/07/2017)",
@@ -65,18 +63,9 @@ app.controller('MainCtrl', function ($scope, $q) {
             "endDate": "2018-02-04"
         }];
 
-    function asyncList() {
-        // perform some asynchronous operation, resolve or reject the promise when appropriate.
-        return $q(function (resolve) {
-            setTimeout(function () {
-                resolve($scope.listTmp);
-            }, 1000);
-        });
-    }
+    $scope.onSelect = function () {
 
-    var promise = asyncList();
-    promise.then(function (response) {
-        $scope.list = response;
-    });
+        alert($scope.selectdWorkingWeek.name);
+    }
 
 });

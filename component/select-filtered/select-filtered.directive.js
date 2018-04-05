@@ -21,7 +21,8 @@ function selectFiltered($filter) {
             ngRequired: '=?',
             tooltip: '@',
             list: '=',
-            filters: '='
+            filters: '=',
+            onSelect: '&'
         },
         link: linkFunc
     };
@@ -35,6 +36,7 @@ function selectFiltered($filter) {
         $scope.name = generateName();
         $scope.toggleFilter = toggleFilter;
         $scope.getSelectTitleValue = getSelectTitleValue;
+        $scope.onSelectFn = onSelectFn;
 
         init();
 
@@ -82,6 +84,15 @@ function selectFiltered($filter) {
 
             counter++;
             return 'select-filtered' + counter;
+        }
+
+        function onSelectFn() {
+
+            if ($scope.onSelect) {
+                $scope.onSelect();
+            } else {
+                console.log('You must to to define onSelect() function.');
+            }
         }
 
         $scope.$watch('selected', function (newValue) {
