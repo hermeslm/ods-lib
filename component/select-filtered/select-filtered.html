@@ -17,7 +17,7 @@
                         ng-disabled="disabled">
                     <span class="fa fa-filter"></span>
                 </button>
-                <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                     <li role="menuitem" ng-repeat="filter in filters" ng-click="toggleFilter(filter)"><a href="">
                         <span ng-class="filter.active ? 'fa fa-check-circle' : 'fa fa-times-circle'"></span>
                         {{filter.title}}</a></li>
