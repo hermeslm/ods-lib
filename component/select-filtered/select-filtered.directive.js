@@ -89,5 +89,10 @@ function selectFiltered($filter) {
             $scope.ngModel = newValue.value;
         }, true);
 
+        $scope.$watch('list', function (newList) {
+
+            $scope.list = newList;
+        }, true);
+
     }
 }
