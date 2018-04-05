@@ -89,9 +89,9 @@ function selectFiltered($filter) {
             $scope.ngModel = newValue.value;
         }, true);
 
-        $scope.$watch('list', function (newList) {
+        $scope.$watch('list', function () {
 
-            $scope.list = newList;
+            doFilter();
         }, true);
 
     }

@@ -3,7 +3,8 @@
  */
 var app = angular.module('example', ['ods-lib']);
 
-app.controller('MainCtrl', function ($scope) {
+app.$inject = ['$scope', '$q'];
+app.controller('MainCtrl', function ($scope, $q) {
 
     $scope.selectdWorkingWeek = {
         "deleted": false,
@@ -27,7 +28,9 @@ app.controller('MainCtrl', function ($scope) {
         }
     ];
 
-    $scope.list = [
+    $scope.list = [];
+
+    $scope.listTmp = [
         {
             "id": 1,
             "name": "1-Week(1/01/2017-1/07/2017)",
@@ -61,5 +64,19 @@ app.controller('MainCtrl', function ($scope) {
             "startDate": "2018-01-29",
             "endDate": "2018-02-04"
         }];
+
+    function asyncList() {
+        // perform some asynchronous operation, resolve or reject the promise when appropriate.
+        return $q(function (resolve) {
+            setTimeout(function () {
+                resolve($scope.listTmp);
+            }, 1000);
+        });
+    }
+
+    var promise = asyncList();
+    promise.then(function (response) {
+        $scope.list = response;
+    });
 
 });
