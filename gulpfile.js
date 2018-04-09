@@ -224,6 +224,22 @@ gulp.task('wizard-steps-inject', function () {
         .pipe(gulp.dest('./examples/wizard-steps'));
 });
 
+//Wizard Steps tasks
+gulp.task('selected-filtered', function () {
+    return gulp.src('./examples/selected-filtered/index.html')
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {
+            name: 'bower',
+            relative: true
+        }))
+        .pipe(inject(es.merge(
+            gulp.src(['./examples/selected-filtered/**/*.css', './examples/dist/selected-filtered/**/*.css', '!./bower_components/**'], {read: false}),
+            gulp.src(['./examples/selected-filtered/**/*.js', './examples/dist/ods-lib.js', '!./bower_components/**'])
+                .pipe(naturalSort())
+                .pipe(angularFilesort())
+        ), {relative: true}))
+        .pipe(gulp.dest('./examples/selected-filtered'));
+});
+
 //Task to process Sass files in the 'scss' folder
 gulp.task('wizard-steps-scss', function () {
     return gulp.src('./component/wizard-steps/style.scss')
@@ -264,7 +280,7 @@ gulp.task('ci', function () {
 gulp.task('build', function (done) {
     runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss', 'report-scss', 'wizard-steps-scss',
         'forms-inject', 'ckeditor-inject', 'jsig-inject', 'address-inject', 'reports-inject', 'img-upload-inject',
-        'wizard-steps-inject', 'copy-lib-to-samples', function () {
+        'wizard-steps-inject', 'selected-filtered', 'copy-lib-to-samples', function () {
             // console.log('Run something else');
             done();
         })
