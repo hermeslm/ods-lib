@@ -116,6 +116,7 @@ function odsSignature($timeout, OdsSignature) {
             if ($scope.model && $scope.model !== '') {
                 // We set signature if it is present
                 OdsSignature.setData($scope.name, $scope.model);
+                hideRequired(true);
             }
         }
 
@@ -142,13 +143,13 @@ function odsSignature($timeout, OdsSignature) {
 
         $scope.$watch('model', function (model, oldModel) {
 
-            if (model !== oldModel) {
-                setValue();
-            }
             if ($scope.required && !isValid()) {
                 hideRequired(false);
             } else {
                 hideRequired(true);
+            }
+            if (model !== oldModel) {
+                setValue();
             }
             return;
         });
