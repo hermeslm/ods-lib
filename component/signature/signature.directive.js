@@ -166,7 +166,13 @@ function odsSignature($timeout, OdsSignature) {
 
             var valid = isValid($scope.name);
             if (required && !valid) {
-                hideRequired(false);
+                //We set this patch in case required option change and model is valid too
+                if ($scope.model && $scope.model !== '') {
+                    // We set signature if it is present
+                    hideRequired(true);
+                } else {
+                    hideRequired(false);
+                }
             } else {
                 hideRequired(true);
             }
