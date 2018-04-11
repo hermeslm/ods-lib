@@ -86,7 +86,7 @@ function odsSignature($timeout, OdsSignature) {
             //Init Element
             initElement();
             //Set value
-            setValue();
+            // setValue();
 
             if ($scope.options.disabled) {
                 OdsSignature.disable($scope.name, $scope.options);
