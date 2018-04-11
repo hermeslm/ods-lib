@@ -148,9 +148,7 @@ function odsSignature($timeout, OdsSignature) {
             } else {
                 hideRequired(true);
             }
-            if (model !== oldModel) {
-                setValue();
-            }
+            setValue();
             return;
         });
 
