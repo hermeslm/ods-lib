@@ -111,11 +111,10 @@ function odsSignature($timeout, OdsSignature) {
             );
         }
 
-        function setValue(value) {
+        function setValue() {
 
-            if (value && value !== '') {
+            if ($scope.model && $scope.model !== '') {
                 // We set signature if it is present
-                $scope.model = value;
                 OdsSignature.setData($scope.name, $scope.model);
             }
         }
