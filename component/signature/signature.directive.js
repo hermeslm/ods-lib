@@ -29,8 +29,8 @@ function odsSignature($timeout, OdsSignature) {
 
     function linkFunc($scope, $element, attrs, controller) {
 
-        const hideRequiredClass = 'sig-box-default';
-        const showRequiredClass = 'sig-box-error';
+        var hideRequiredClass = 'sig-box-default';
+        var showRequiredClass = 'sig-box-error';
 
         //If model not present we will exit.
         if ($scope.model === null) {
@@ -70,9 +70,9 @@ function odsSignature($timeout, OdsSignature) {
             }
 
             //Init name
-            if(!$scope.name) {
+            if (!$scope.name) {
                 $scope.name = OdsSignature.generateName();
-            }else {
+            } else {
                 if (OdsSignature.getInstance($scope.name)) {
                     console.error('Name already defined in another Signature instance, please pick another name!!!');
                     return;
@@ -85,10 +85,9 @@ function odsSignature($timeout, OdsSignature) {
 
             //Init Element
             initElement();
-            if ($scope.model && $scope.model !== '') {
-                // We set signature if it is present
-                OdsSignature.setData($scope.name, $scope.model);
-            }
+            //Set value
+            setValue();
+
             if ($scope.options.disabled) {
                 OdsSignature.disable($scope.name, $scope.options);
             }
@@ -112,6 +111,15 @@ function odsSignature($timeout, OdsSignature) {
             );
         }
 
+        function setValue(value) {
+
+            if (value && value !== '') {
+                // We set signature if it is present
+                $scope.model = value;
+                OdsSignature.setData($scope.name, $scope.model);
+            }
+        }
+
         function reset() {
 
             $scope.model = '';
@@ -125,9 +133,9 @@ function odsSignature($timeout, OdsSignature) {
 
         function hideRequired(state) {
 
-            if(state){
+            if (state) {
                 $scope.requiredClass = hideRequiredClass;
-            }else {
+            } else {
                 $scope.requiredClass = showRequiredClass;
             }
             controller.$setValidity('required', state);
@@ -135,14 +143,13 @@ function odsSignature($timeout, OdsSignature) {
 
         $scope.$watch('model', function (model, oldModel) {
 
-            var valid = isValid($scope.name);
-            if ($scope.required && !valid) {
+            if (model !== oldModel) {
+                setValue();
+            }
+            if ($scope.required && !isValid()) {
                 hideRequired(false);
             } else {
                 hideRequired(true);
-            }
-            if(model !== oldModel){
-                OdsSignature.setData($scope.name, model);
             }
             return;
         });
@@ -168,7 +175,7 @@ function odsSignature($timeout, OdsSignature) {
             return;
         });
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
             OdsSignature.unregister($scope.name);
         });
     }
