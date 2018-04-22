@@ -134,7 +134,8 @@
                     <label class="control-label" for="field_email">Email</label>
                     <div class="input-group">
                     <span class="input-group-addon" uib-tooltip="Mark it if you don't have email">
-                        <input type="checkbox" ng-model="vm.nonEmail" ng-click="vm.toggleEmail()">
+                        <input type="checkbox" id="field_nonEmail" name="field_nonEmail" ng-model="vm.nonEmail"
+                               ng-click="vm.toggleEmail()">
                     </span>
                         <input type="email" class="form-control" name="email" id="field_email" ng-required="true"
                                ng-model="vm.address.email" placeholder="Email..." tabindex="10"
