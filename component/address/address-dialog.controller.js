@@ -10,6 +10,8 @@ function AddressDialogController($uibModalInstance, address, countries, states) 
 
     var vm = this;
 
+    var nonEmail = "non-email@domain.com";
+
     vm.address = address;
     vm.countries = countries;
     vm.states = states;
@@ -30,8 +32,23 @@ function AddressDialogController($uibModalInstance, address, countries, states) 
 
     function toggleEmail() {
 
+
+
         if (vm.nonEmail) {
-            vm.address.email = "non-email@domain.com";
+            if(vm.address){
+                if(vm.address.email){
+                    vm.address.email = nonEmail;
+                }else {
+                    vm.address = {
+                        email : nonEmail
+                    }
+                }
+            }else {
+                vm.address = {
+                    email : nonEmail
+                }
+            }
+
         }
     }
 }
