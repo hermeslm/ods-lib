@@ -32,8 +32,6 @@ function AddressDialogController($uibModalInstance, address, countries, states) 
 
     function toggleEmail() {
 
-
-
         if (vm.nonEmail) {
             if(vm.address){
                 if(vm.address.email){
@@ -48,7 +46,6 @@ function AddressDialogController($uibModalInstance, address, countries, states) 
                     email : nonEmail
                 }
             }
-
         }
     }
 }
