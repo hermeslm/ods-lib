@@ -73,7 +73,6 @@ $templateCache.put('reports/directives/checklist.html','<style>#checkbox-list {\
 $templateCache.put('reports/tpl/one-col.tpl.html','<div ng-repeat="param in vm.report.params"><ods-param param="param"></ods-param></div>');
 $templateCache.put('reports/tpl/two-col.tpl.html','<div class="row" ng-repeat="(indexp, param) in vm.report.params" ng-if="$index % 2 == 0"><div class="col-lg-6"><ods-param param="vm.report.params[$index]"></ods-param></div><div class="col-lg-6" ng-if="$index + 1 < vm.report.params.length"><ods-param param="vm.report.params[$index + 1]"></ods-param></div></div>');
 $templateCache.put('reports/tpl/two-col.tpl1.html','<div class="row" ng-repeat="(indexp, param) in vm.report.params" ng-if="$index % 2 == 0"><div class="col-lg-6"><div class="form-group" ng-switch="param.type" ng-class="{\'has-error\': paramsForm.{{param.name}}.$invalid}"><label class="control-label" for="{{param.name}}" ng-hide="vm.hideTitle(param)">{{param.title}}</label><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-when="NUMBER" type="number"> <input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-when="TEXT"><div class="input-group" ng-switch-when="DATE" ng-hide="vm.hideParam(param)"><input id="{{param.name}}" class="form-control" name="{{param.name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(param)" ng-model="param.value" is-open="param.datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="vm.openCalendar($index)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="vm.hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" ng-model="param.value" ui-select-required="vm.getRequired(param)" close-on-select="true" title="{{param.title}}"><ui-select-match placeholder="{{param.placeholder}}">{{vm.getSelectTitleField(param, $select.selected)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search | limitTo: 500"><div ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-switch-when="LIST" ng-model="param.value" ng-options="item.id as item.name for item in param.list" ng-required="vm.getRequired(param)"></select><div ng-switch-when="MULTI_SELECT" ng-hide="vm.hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" multiple="multiple" ng-model="param.value" close-on-select="false" title="{{param.title}}" ui-select-required="vm.getRequired(param)"><ui-select-match placeholder="{{param.placeholder}}">{{vm.getSelectTitleField(param, $item)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search">{{vm.getSelectTitleField(param, element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="vm.hideParam(param)"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="param.searchQuery" id="searchQueryrpt-metadata" placeholder="{{param.placeholder}}" ng-change="vm.search($index)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="vm.getDtOptions(param, $index)" dt-columns="vm.getDtColumns(param, $index)" dt-instance="param.dtInstance" class="table table-striped table-bordered table-condensed"></table></div><div ng-switch-when="DRAG_AND_DROP" ng-hide="vm.hideParam(param)"><div class="row"><div class="col-md-6"><label class="control-label">Items Sections</label><br><div class="report-sections"><ul dnd-list="param.list"><li ng-repeat="item in param.list" dnd-draggable="item" dnd-moved="param.list.splice($index, 1)" dnd-effect-allowed="move">{{item.name}}</li><!--dnd-selected="vm.reportSectionsModels.selected = item"--></ul></div></div><div class="col-md-6"><label class="control-label">Items Selected</label><br><div class="report-selected-sections"><ul dnd-list="param.value"><li ng-repeat="item in param.value" dnd-draggable="item" dnd-moved="param.value.splice($index, 1)" dnd-effect-allowed="move">{{item.name}}</li><!--dnd-selected="vm.reportSectionsModels.selected = item"--></ul></div></div></div></div><input class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="vm.hideParam(param)" ng-model="param.value" ng-required="vm.getRequired(param)" ng-switch-default><div ng-show="paramsForm.{{param.name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{param.name}}.$error.required">This field is required.</p></div></div></div><div class="col-lg-6" ng-if="$index + 1 < vm.report.params.length"><div class="form-group" ng-switch="vm.report.params[$index + 1].type" ng-class="{\'has-error\': paramsForm.{{vm.report.params[$index + 1].name}}.$invalid}"><label class="control-label" for="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideTitle(vm.report.params[$index + 1])">{{vm.report.params[$index + 1].title}}</label><input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-when="NUMBER" type="number"> <input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-when="TEXT"><div class="input-group" ng-switch-when="DATE" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><input id="{{vm.report.params[$index + 1].name}}" class="form-control" name="{{vm.report.params[$index + 1].name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" is-open="vm.report.params[$index + 1].datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="vm.openCalendar($index + 1)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><ui-select name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-model="vm.report.params[$index + 1].value" ui-select-required="vm.getRequired(vm.report.params[$index + 1])" close-on-select="true" title="{{vm.report.params[$index + 1].title}}"><ui-select-match placeholder="{{vm.report.params[$index + 1].placeholder}}">{{vm.getSelectTitleField(vm.report.params[$index + 1], $select.selected)}}</ui-select-match><ui-select-choices repeat="element in vm.report.params[$index + 1].list | filter:$select.search | limitTo: 500"><div ng-bind-html="vm.getSelectTitleField(vm.report.params[$index + 1], element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-switch-when="LIST" ng-model="vm.report.params[$index + 1].value" ng-options="item.id as item.name for item in vm.report.params[$index + 1].list" ng-required="vm.getRequired(vm.report.params[$index + 1])"></select><div ng-switch-when="MULTI_SELECT" ng-hide="vm.hideParam(vm.report.params[indexp + 1])"><ui-select name="{{vm.report.params[indexp + 1].name}}" id="{{vm.report.params[indexp + 1].name}}" multiple="multiple" ng-model="vm.report.params[indexp + 1].value" close-on-select="false" title="{{vm.report.params[indexp + 1].title}}" ui-select-required="vm.getRequired(vm.report.params[indexp + 1])"><ui-select-match placeholder="{{vm.report.params[indexp + 1].placeholder}}">{{vm.getSelectTitleField(vm.report.params[indexp + 1], $item)}}</ui-select-match><ui-select-choices repeat="element in vm.report.params[indexp + 1].list | filter:$select.search">{{vm.getSelectTitleField(vm.report.params[indexp + 1], element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="vm.hideParam(vm.report.params[$index + 1])"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="vm.report.params[$index + 1].searchQuery" id="searchQueryrpt-metadata" placeholder="{{vm.report.params[$index + 1].placeholder}}" ng-change="vm.search($index)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="vm.getDtOptions(vm.report.params[$index + 1], $index)" dt-columns="vm.getDtColumns(vm.report.params[$index + 1], $index)" dt-instance="vm.report.params[$index + 1].dtInstance" class="table table-striped table-bordered table-condensed"></table></div><input class="form-control" name="{{vm.report.params[$index + 1].name}}" id="{{vm.report.params[$index + 1].name}}" ng-hide="vm.hideParam(vm.report.params[$index + 1])" ng-model="vm.report.params[$index + 1].value" ng-required="vm.getRequired(vm.report.params[$index + 1])" ng-switch-default><div ng-show="paramsForm.{{vm.report.params[$index + 1].name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{vm.report.params[$index + 1].name}}.$error.required">This field is required.</p></div></div></div></div>');
-$templateCache.put('forms/common/model/model.html','<div class="jsonify padding"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" title="Copy the json data." ng-click="copy()"><span class="fa fa-clipboard"></span></button><!--<button class="btn btn-default btn-xs" type="button" title="Display hidden properties."--><!--ng-click="displayHidden = !displayHidden" ng-class="{ \'active\': displayHidden }"><span--><!--class="fa fa-eye"></span></button>--></div><pre class="{{cssClass}}">{{modelAsJson}}</pre></div>');
 $templateCache.put('forms/common/fields/checkbox-list.html','<br ng-if="field.inline"><div ng-class="field.inline === true ? \'checkbox-inline\' : \'checkbox\'" ng-repeat="option in field.options"><label><input type="checkbox" value="{{option.id}}" ng-model="field.value[option.id]"> {{option.name}}</label></div>');
 $templateCache.put('forms/common/fields/checkbox.html','<div class="checkbox"><br ng-show="field.ln"><label><input ods-dynamic-name="field.name" id="{{field.name}}" ng-model="field.value" type="{{field.type}}" placeholder="{{field.placeholder}}" ng-required="{{field.required}}" title="{{field.tooltip}}"> <span class="ng-binding ng-scope">{{field.label}}</span></label></div>');
 $templateCache.put('forms/common/fields/datetime.html','<div class="input-group"><input id="{{field.name + dev}}" class="form-control" ods-dynamic-name="field.name" type="text" enable-time="field.enableTime" datetime-picker="{{field.format}}" ng-required="getRequired(field)" ng-model="field.value" is-open="field.open" model-options="field.options"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="openCalendar(field)"><i class="fa fa-calendar"></i></button></span></div>');
@@ -86,6 +85,7 @@ $templateCache.put('forms/common/fields/select.html','<select class="form-contro
 $templateCache.put('forms/common/fields/select2.html','<ui-select ods-dynamic-name="field.name" name="{{field.name}}" id="{{field.name}}" ng-model="field.value" ng-disabled="{{fieldDisabled}}" ui-select-required="getRequired(field)" close-on-select="true" title="{{field.tooltip}}"><ui-select-match placeholder="{{field.placeholder}}">{{getSelectFieldTitleValue(field, $select.selected)}}</ui-select-match><ui-select-choices repeat="element in field.options | filter:$select.search | limitTo: field.limitTo"><div ng-bind-html="getSelectFieldTitleValue(field, element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select>');
 $templateCache.put('forms/common/fields/textarea.html','<textarea class="form-control" ods-dynamic-name="field.name" id="{{field.name + dev}}" placeholder="{{field.placeholder}}" title="{{field.tooltip}}" ng-model="field.value" ng-required="getRequired(field)" type="{{field.type}}" ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" data-resize="disabled">\n</textarea>');
 $templateCache.put('forms/common/fields/toggle.html','<br ng-if="field.ln"><toggle name="{{field.name}}" id="{{field.name}}" on="{{field.on}}" off="{{field.off}}" ng-model="field.value"></toggle>');
+$templateCache.put('forms/common/model/model.html','<div class="jsonify padding"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" title="Copy the json data." ng-click="copy()"><span class="fa fa-clipboard"></span></button><!--<button class="btn btn-default btn-xs" type="button" title="Display hidden properties."--><!--ng-click="displayHidden = !displayHidden" ng-class="{ \'active\': displayHidden }"><span--><!--class="fa fa-eye"></span></button>--></div><pre class="{{cssClass}}">{{modelAsJson}}</pre></div>');
 $templateCache.put('forms/common/viewer/checkbox-list.html','<div>{{getFieldChecklistFromValues(field)}}</div>');
 $templateCache.put('forms/common/viewer/checkbox.html','<div class="checkbox"><br ng-show="field.ln"><label><input ods-dynamic-name="field.name" disabled="disabled" id="{{field.name}}" ng-model="field.value" type="{{field.type}}" placeholder="{{field.placeholder}}" ng-required="{{field.required}}" title="{{field.tooltip}}"> <span class="ng-binding ng-scope">{{field.label}}</span></label></div>');
 $templateCache.put('forms/common/viewer/datetime.html','<div ng-bind-html="dateTimeRender(field)"></div>');
@@ -544,6 +544,117 @@ function OdsFileUpload($uibModal) {
 
 angular
     .module('ods-lib')
+    .filter('DateFilter', DateFilter);
+
+DateFilter.$inject = ['moment'];
+
+function DateFilter(moment) {
+    return function (input, momentFn /*, param1, param2, ...param n */) {
+        var args = Array.prototype.slice.call(arguments, 2),
+            momentObj = moment(input);
+        return momentObj[momentFn].apply(momentObj, args);
+    };
+}
+
+'use strict';
+
+angular
+    .module('ods-lib')
+    .filter('Phone', Phone);
+
+function Phone() {
+    return function (phone) {
+        if (!phone) {
+            return '';
+        }
+
+        var value = phone.toString().trim().replace(/^\+/, '');
+
+        if (value.match(/[^0-9]/)) {
+            return phone;
+        }
+
+        var country, city, number;
+
+        switch (value.length) {
+            case 10: // +1PPP####### -> C (PPP) ###-####
+                country = 1;
+                city = value.slice(0, 3);
+                number = value.slice(3);
+                break;
+
+            case 11: // +CPPP####### -> CCC (PP) ###-####
+                country = value[0];
+                city = value.slice(1, 4);
+                number = value.slice(4);
+                break;
+
+            case 12: // +CCCPP####### -> CCC (PP) ###-####
+                country = value.slice(0, 3);
+                city = value.slice(3, 5);
+                number = value.slice(5);
+                break;
+
+            default:
+                return phone;
+        }
+
+        if (country === 1) {
+            country = '';
+        }
+
+        number = number.slice(0, 3) + '-' + number.slice(3);
+
+        return (country + ' (' + city + ') ' + number).trim();
+    };
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .filter('PropsFilter', PropsFilter);
+
+/**
+ * AngularJS default filter with the following expression:
+ * "person in people | filter: {name: $select.search, age: $select.search}"
+ * performs an AND between 'name: $select.search' and 'age: $select.search'.
+ * We want to perform an OR.
+ */
+function PropsFilter() {
+    return function (items, props) {
+        var out = [];
+
+        if (angular.isArray(items)) {
+            var keys = Object.keys(props);
+
+            items.forEach(function (item) {
+                var itemMatches = false;
+
+                for (var i = 0; i < keys.length; i++) {
+                    var prop = keys[i];
+                    var text = props[prop].toLowerCase();
+                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+                        itemMatches = true;
+                        break;
+                    }
+                }
+
+                if (itemMatches) {
+                    out.push(item);
+                }
+            });
+        } else {
+            // Let the output be the input untouched
+            out = items;
+        }
+
+        return out;
+    };
+}
+'use strict';
+
+angular
+    .module('ods-lib')
     .directive('odsCkeditor', CKEditor);
 
 CKEditor.$inject = ['$timeout', 'OdsCkeditor'];
@@ -763,117 +874,6 @@ function OdsCkeditor() {
     }
 
     return service;
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .filter('DateFilter', DateFilter);
-
-DateFilter.$inject = ['moment'];
-
-function DateFilter(moment) {
-    return function (input, momentFn /*, param1, param2, ...param n */) {
-        var args = Array.prototype.slice.call(arguments, 2),
-            momentObj = moment(input);
-        return momentObj[momentFn].apply(momentObj, args);
-    };
-}
-
-'use strict';
-
-angular
-    .module('ods-lib')
-    .filter('Phone', Phone);
-
-function Phone() {
-    return function (phone) {
-        if (!phone) {
-            return '';
-        }
-
-        var value = phone.toString().trim().replace(/^\+/, '');
-
-        if (value.match(/[^0-9]/)) {
-            return phone;
-        }
-
-        var country, city, number;
-
-        switch (value.length) {
-            case 10: // +1PPP####### -> C (PPP) ###-####
-                country = 1;
-                city = value.slice(0, 3);
-                number = value.slice(3);
-                break;
-
-            case 11: // +CPPP####### -> CCC (PP) ###-####
-                country = value[0];
-                city = value.slice(1, 4);
-                number = value.slice(4);
-                break;
-
-            case 12: // +CCCPP####### -> CCC (PP) ###-####
-                country = value.slice(0, 3);
-                city = value.slice(3, 5);
-                number = value.slice(5);
-                break;
-
-            default:
-                return phone;
-        }
-
-        if (country === 1) {
-            country = '';
-        }
-
-        number = number.slice(0, 3) + '-' + number.slice(3);
-
-        return (country + ' (' + city + ') ' + number).trim();
-    };
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .filter('PropsFilter', PropsFilter);
-
-/**
- * AngularJS default filter with the following expression:
- * "person in people | filter: {name: $select.search, age: $select.search}"
- * performs an AND between 'name: $select.search' and 'age: $select.search'.
- * We want to perform an OR.
- */
-function PropsFilter() {
-    return function (items, props) {
-        var out = [];
-
-        if (angular.isArray(items)) {
-            var keys = Object.keys(props);
-
-            items.forEach(function (item) {
-                var itemMatches = false;
-
-                for (var i = 0; i < keys.length; i++) {
-                    var prop = keys[i];
-                    var text = props[prop].toLowerCase();
-                    if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
-                        itemMatches = true;
-                        break;
-                    }
-                }
-
-                if (itemMatches) {
-                    out.push(item);
-                }
-            });
-        } else {
-            // Let the output be the input untouched
-            out = items;
-        }
-
-        return out;
-    };
 }
 /**
  * Created by hermeslm on 3/28/17.
@@ -2878,95 +2878,6 @@ function OdsUtils() {
 
 angular
     .module('ods-lib')
-    .directive('stepsIndicator', StepsIndicator);
-
-StepsIndicator.$inject = [];
-
-/**
- *  steps = [
- *    {
- *        name: 'DRAFT',
- *        label: 'Draft',
- *        status: 'active',
- *        callback: function (elem) {
- *            // Prompt for status change
- *        }
- *    },
- *    {
- *        name: 'READY',
- *        label: 'Ready',
- *        status: '',
- *        callback: function (elem) {
- *            // Prompt for status change
- *        }
- *    },
- *    {
- *        name: 'JOINED',
- *        label: 'Joined',
- *        status: '',
- *        callback: function (elem) {
- *            // Prompt for status change
- *        }
- *    },
- *    {
- *        name: 'DISCHARGED',
- *        label: 'Discharged',
- *        status: '',
- *        callback: function (elem) {
- *            // Prompt for status change
- *        }
- *    }];
- *
- *
- *
- * @returns {{restrict: string, templateUrl: string, scope: {ngModel: string, class: string, type: string}, link: linkFunc}}
- * @constructor
- */
-
-function StepsIndicator() {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'steps-indicator/template.html',
-        scope: {
-            ngModel: '=',
-            class: '@',
-            type: '@'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.changeStatus = changeStatus;
-
-        function changeStatus(elem) {
-
-            if ($scope.type === 'multiselect') {
-                if (elem.callback) {
-                    elem.callback(elem);
-                }
-            } else {
-                if (elem.callback) {
-                    for (var i = 0; i < $scope.ngModel.length; i++) {
-                        $scope.ngModel[i].status = '';
-                    }
-                    elem.callback(elem);
-                }
-            }
-            var elementPos = $scope.ngModel.map(function(x) {return x.name; }).indexOf(elem.name);
-            $scope.ngModel[elementPos].status = 'active';
-        }
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
     .directive('odsSignature', odsSignature);
 
 odsSignature.$inject = ['$timeout', 'OdsSignature'];
@@ -3307,6 +3218,95 @@ function OdsSignature() {
     //         element.jSignature('events');
     //     }
     // }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('stepsIndicator', StepsIndicator);
+
+StepsIndicator.$inject = [];
+
+/**
+ *  steps = [
+ *    {
+ *        name: 'DRAFT',
+ *        label: 'Draft',
+ *        status: 'active',
+ *        callback: function (elem) {
+ *            // Prompt for status change
+ *        }
+ *    },
+ *    {
+ *        name: 'READY',
+ *        label: 'Ready',
+ *        status: '',
+ *        callback: function (elem) {
+ *            // Prompt for status change
+ *        }
+ *    },
+ *    {
+ *        name: 'JOINED',
+ *        label: 'Joined',
+ *        status: '',
+ *        callback: function (elem) {
+ *            // Prompt for status change
+ *        }
+ *    },
+ *    {
+ *        name: 'DISCHARGED',
+ *        label: 'Discharged',
+ *        status: '',
+ *        callback: function (elem) {
+ *            // Prompt for status change
+ *        }
+ *    }];
+ *
+ *
+ *
+ * @returns {{restrict: string, templateUrl: string, scope: {ngModel: string, class: string, type: string}, link: linkFunc}}
+ * @constructor
+ */
+
+function StepsIndicator() {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'steps-indicator/template.html',
+        scope: {
+            ngModel: '=',
+            class: '@',
+            type: '@'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.changeStatus = changeStatus;
+
+        function changeStatus(elem) {
+
+            if ($scope.type === 'multiselect') {
+                if (elem.callback) {
+                    elem.callback(elem);
+                }
+            } else {
+                if (elem.callback) {
+                    for (var i = 0; i < $scope.ngModel.length; i++) {
+                        $scope.ngModel[i].status = '';
+                    }
+                    elem.callback(elem);
+                }
+            }
+            var elementPos = $scope.ngModel.map(function(x) {return x.name; }).indexOf(elem.name);
+            $scope.ngModel[elementPos].status = 'active';
+        }
+    }
 }
 (function () {
     'use strict';
@@ -5581,7 +5581,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
 
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
-                if (value === field.value) {
+                if (value == field.value) {
                     return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                 }
             }
@@ -5780,342 +5780,6 @@ function ModelDirective(OdsFormService) {
 
         function copy() {
             OdsFormService.copyJson(angular.toJson($scope.model, true));
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsSuggestionOptions', SuggestionOptionsDirective);
-
-SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor'];
-
-function SuggestionOptionsDirective(OdsFormService, OdsCkeditor) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
-        scope: {
-            field: '=',
-            config: '=',
-            profile: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope) {
-
-        if ($scope.config && $scope.config.ckeditor) {
-            $scope.field.options.prefix = $scope.config.ckeditor.prefix ?
-                $scope.config.ckeditor.prefix : OdsFormService.defaultCKEditorPrefix();
-            $scope.field.options.suffix = $scope.config.ckeditor.suffix ?
-                $scope.config.ckeditor.suffix : OdsFormService.defaultCKEditorSuffix();
-            $scope.field.options.tokensUrl = $scope.config.ckeditor.tokensUrl ?
-                $scope.config.ckeditor.tokensUrl : '';
-            $scope.field.options.suggestions = $scope.config.ckeditor.suggestions ?
-                $scope.config.ckeditor.suggestions : [];
-        }
-
-        $scope.options = initOptions();
-        $scope.addOption = addOption;
-        $scope.removeOption = removeOption;
-        $scope.refreshOption = refreshOption;
-        $scope.loadSuggestions = loadSuggestions;
-        $scope.loadTokens = loadTokens;
-
-        function initOptions() {
-
-            var options = [];
-            for (var i = 0; i < $scope.field.options.suggestions.length; i++) {
-                var option = {
-                    id: $scope.field.options.suggestions[i].id,
-                    label: $scope.field.options.suggestions[i].label
-                };
-                options.push(option);
-            }
-            return options;
-        }
-
-        function addOption() {
-
-            var option = {
-                id: '',
-                label: ''
-            };
-
-            $scope.options.push(option);
-        }
-
-        function removeOption(index) {
-
-            $scope.options.suggestions.splice(index, 1);
-        }
-
-        function refreshOption() {
-
-            OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
-            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
-        }
-
-        function loadSuggestions(url) {
-
-            OdsFormService.restResource(url).query(function (result) {
-                $scope.options = result;
-            });
-        }
-
-        function loadTokens(url) {
-
-            OdsFormService.restResource(url).get(function (result) {
-                $scope.field.options.tokens = result;
-            });
-        }
-
-        $scope.$watch('options', function (model) {
-
-            var options = [];
-            for (var i = 0; i < model.length; i++) {
-                var option = {};
-                option.id = model[i].id;
-                option.label = model[i].label;
-                options.push(option);
-            }
-            $scope.field.options.suggestions = options;
-        }, true);
-    }
-}
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableProps', TablePropsDirective);
-
-TablePropsDirective.$inject = ['OdsFormService'];
-
-function TablePropsDirective(OdsFormService) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table-props.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope) {
-
-        $scope.addRow = addRow;
-        $scope.addColumn = addColumn;
-
-        /**
-         * Add row to the table
-         */
-        function addRow() {
-            var columnLength = $scope.field.matrix[0].length;
-            var row = [];
-            for (var i = 0; i < columnLength; i++) {
-                row.push(OdsFormService.newItemObject());
-            }
-            $scope.field.matrix.push(row);
-        }
-
-        /**
-         * Add column to the table.
-         * @param row Row to add column.
-         */
-        function addColumn() {
-            for (var i = 0; i < $scope.field.matrix.length; i++) {
-                $scope.field.matrix[i].push(OdsFormService.newItemObject());
-            }
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTable', TableDirective);
-
-TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
-
-function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.removeRow = removeRow;
-        $scope.removeColumn = removeColumn;
-        $scope.onAdd = onAdd;
-        $scope.cloneRow = cloneRow;
-        $scope.swapRow = swapRow;
-        $scope.swapColumn = swapColumn;
-        $scope.checkItem = checkItem;
-
-        function checkItem(index, item, external, type) {
-
-            //We prevent add recursively a table inside other.
-            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
-                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.', {size: 'sm'});
-                return false;
-            } else {
-                return item;
-            }
-
-        }
-
-        function onAdd(item, type) {
-
-            OdsFormService.onAdd(item, type);
-        }
-
-        /**
-         * Remove row from section.
-         * @param table Table to remove row
-         * @param index Row index to remove.
-         */
-        function removeRow(table, index) {
-
-            OdsFormService.removeRow(table, index);
-        }
-
-        /**
-         * Add column to current row.
-         * @param table Table to remove column
-         * @param row Row to add column.
-         */
-        function removeColumn(table, index) {
-
-            OdsFormService.removeColumn(table, index);
-        }
-
-        function cloneRow(table) {
-
-            OdsFormService.cloneRow(table);
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapRow(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
-                {size: 'sm'}).result.then(function () {
-
-                // var _previousValue = [];
-                // angular.copy($scope.field.matrix, _previousValue);
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix.length ||
-                    idx2 >= $scope.field.matrix.length) {
-
-                    return;
-                }
-                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
-
-            });
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapColumn(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
-                {size: 'sm'}).result.then(function () {
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix[idx1].length ||
-                    idx2 >= $scope.field.matrix[idx2].length) {
-
-                    return;
-                }
-                for (var i = 0; i < $scope.field.matrix.length; i++) {
-                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
-                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
-                    $scope.field.matrix[i][idx1] = tmp;
-                }
-            });
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableTotal', TableTotalDirective);
-
-TableTotalDirective.$inject = ['OdsFormService'];
-
-function TableTotalDirective(OdsFormService) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/total.html',
-        scope: {
-            field: '=',
-            label: '=',
-            colIndex: '='
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.total = 0;
-        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
-
-        $scope.$watch('field', function (model) {
-            $scope.total = total(model);
-        }, true);
-
-        function total(model) {
-            var index = $scope.colIndex;
-            var total = 0;
-            for (var i = 0; i < model.matrix.length; i++) {
-
-                if (model.matrix[i][index].fields.length > 0) {
-                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
-                }
-            }
-            return total;
         }
     }
 }
@@ -6837,6 +6501,342 @@ function FieldSelectOptionsDirective(OdsFormService) {
             }
             $scope.field.options = options;
         }, true);
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsSuggestionOptions', SuggestionOptionsDirective);
+
+SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor'];
+
+function SuggestionOptionsDirective(OdsFormService, OdsCkeditor) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
+        scope: {
+            field: '=',
+            config: '=',
+            profile: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        if ($scope.config && $scope.config.ckeditor) {
+            $scope.field.options.prefix = $scope.config.ckeditor.prefix ?
+                $scope.config.ckeditor.prefix : OdsFormService.defaultCKEditorPrefix();
+            $scope.field.options.suffix = $scope.config.ckeditor.suffix ?
+                $scope.config.ckeditor.suffix : OdsFormService.defaultCKEditorSuffix();
+            $scope.field.options.tokensUrl = $scope.config.ckeditor.tokensUrl ?
+                $scope.config.ckeditor.tokensUrl : '';
+            $scope.field.options.suggestions = $scope.config.ckeditor.suggestions ?
+                $scope.config.ckeditor.suggestions : [];
+        }
+
+        $scope.options = initOptions();
+        $scope.addOption = addOption;
+        $scope.removeOption = removeOption;
+        $scope.refreshOption = refreshOption;
+        $scope.loadSuggestions = loadSuggestions;
+        $scope.loadTokens = loadTokens;
+
+        function initOptions() {
+
+            var options = [];
+            for (var i = 0; i < $scope.field.options.suggestions.length; i++) {
+                var option = {
+                    id: $scope.field.options.suggestions[i].id,
+                    label: $scope.field.options.suggestions[i].label
+                };
+                options.push(option);
+            }
+            return options;
+        }
+
+        function addOption() {
+
+            var option = {
+                id: '',
+                label: ''
+            };
+
+            $scope.options.push(option);
+        }
+
+        function removeOption(index) {
+
+            $scope.options.suggestions.splice(index, 1);
+        }
+
+        function refreshOption() {
+
+            OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
+            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
+        }
+
+        function loadSuggestions(url) {
+
+            OdsFormService.restResource(url).query(function (result) {
+                $scope.options = result;
+            });
+        }
+
+        function loadTokens(url) {
+
+            OdsFormService.restResource(url).get(function (result) {
+                $scope.field.options.tokens = result;
+            });
+        }
+
+        $scope.$watch('options', function (model) {
+
+            var options = [];
+            for (var i = 0; i < model.length; i++) {
+                var option = {};
+                option.id = model[i].id;
+                option.label = model[i].label;
+                options.push(option);
+            }
+            $scope.field.options.suggestions = options;
+        }, true);
+    }
+}
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableProps', TablePropsDirective);
+
+TablePropsDirective.$inject = ['OdsFormService'];
+
+function TablePropsDirective(OdsFormService) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table-props.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        $scope.addRow = addRow;
+        $scope.addColumn = addColumn;
+
+        /**
+         * Add row to the table
+         */
+        function addRow() {
+            var columnLength = $scope.field.matrix[0].length;
+            var row = [];
+            for (var i = 0; i < columnLength; i++) {
+                row.push(OdsFormService.newItemObject());
+            }
+            $scope.field.matrix.push(row);
+        }
+
+        /**
+         * Add column to the table.
+         * @param row Row to add column.
+         */
+        function addColumn() {
+            for (var i = 0; i < $scope.field.matrix.length; i++) {
+                $scope.field.matrix[i].push(OdsFormService.newItemObject());
+            }
+        }
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTable', TableDirective);
+
+TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
+
+function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.removeRow = removeRow;
+        $scope.removeColumn = removeColumn;
+        $scope.onAdd = onAdd;
+        $scope.cloneRow = cloneRow;
+        $scope.swapRow = swapRow;
+        $scope.swapColumn = swapColumn;
+        $scope.checkItem = checkItem;
+
+        function checkItem(index, item, external, type) {
+
+            //We prevent add recursively a table inside other.
+            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
+                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.', {size: 'sm'});
+                return false;
+            } else {
+                return item;
+            }
+
+        }
+
+        function onAdd(item, type) {
+
+            OdsFormService.onAdd(item, type);
+        }
+
+        /**
+         * Remove row from section.
+         * @param table Table to remove row
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            OdsFormService.removeRow(table, index);
+        }
+
+        /**
+         * Add column to current row.
+         * @param table Table to remove column
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            OdsFormService.removeColumn(table, index);
+        }
+
+        function cloneRow(table) {
+
+            OdsFormService.cloneRow(table);
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapRow(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
+                {size: 'sm'}).result.then(function () {
+
+                // var _previousValue = [];
+                // angular.copy($scope.field.matrix, _previousValue);
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix.length ||
+                    idx2 >= $scope.field.matrix.length) {
+
+                    return;
+                }
+                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
+
+            });
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapColumn(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
+                {size: 'sm'}).result.then(function () {
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix[idx1].length ||
+                    idx2 >= $scope.field.matrix[idx2].length) {
+
+                    return;
+                }
+                for (var i = 0; i < $scope.field.matrix.length; i++) {
+                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
+                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
+                    $scope.field.matrix[i][idx1] = tmp;
+                }
+            });
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableTotal', TableTotalDirective);
+
+TableTotalDirective.$inject = ['OdsFormService'];
+
+function TableTotalDirective(OdsFormService) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/total.html',
+        scope: {
+            field: '=',
+            label: '=',
+            colIndex: '='
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.total = 0;
+        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
+
+        $scope.$watch('field', function (model) {
+            $scope.total = total(model);
+        }, true);
+
+        function total(model) {
+            var index = $scope.colIndex;
+            var total = 0;
+            for (var i = 0; i < model.matrix.length; i++) {
+
+                if (model.matrix[i][index].fields.length > 0) {
+                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
+                }
+            }
+            return total;
+        }
     }
 }
 
