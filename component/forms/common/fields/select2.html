@@ -1,0 +1,11 @@
+<ui-select ods-dynamic-name="field.name" name="{{field.name}}" id="{{field.name}}" ng-model="field.value" ng-disabled="{{fieldDisabled}}"
+           ui-select-required="getRequired(field)" close-on-select="true" title="{{field.tooltip}}">
+    <ui-select-match placeholder="{{field.placeholder}}">
+        {{getSelectFieldTitleValue(field, $select.selected)}}
+    </ui-select-match>
+    <ui-select-choices repeat="element in field.options | filter:$select.search | limitTo: field.limitTo">
+        <div ng-bind-html="getSelectFieldTitleValue(field, element) | highlight: $select.search"></div>
+        <!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>-->
+        <!--{{vm.getSelectTitleField(param, element)}}-->
+    </ui-select-choices>
+</ui-select>

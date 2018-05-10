@@ -1,0 +1,26 @@
+<uib-tabset class="nav-tabs-custom">
+    <uib-tab index="0" heading="Properties">
+        <form name="fieldPropertiesForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <div ng-include="'forms/schema/components/base-properties/common-properties.html'"></div>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="1" heading="Options">
+        <form name="fieldValidationForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <ods-field-select-options field="field"></ods-field-select-options>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="2" heading="Validation">
+        <form name="fieldValidationForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <div ng-include="'forms/schema/components/base-properties/required-properties.html'"></div>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="3" heading="Debug" ng-show="debugMode">
+        <div ng-include="'forms/schema/components/base-properties/model-properties.html'"></div>
+    </uib-tab>
+</uib-tabset>

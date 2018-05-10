@@ -11,6 +11,7 @@
             TEXTAREA: 'textarea',
             TOGGLE: 'toggle',
             SELECT: 'select',
+            SELECT2: 'select2',
             MULTI_SELECT: 'multiselect',
             IF_YES: 'if_yes',
             TABLE: 'table',
