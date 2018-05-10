@@ -42,10 +42,11 @@
                 <div ng-show="selectReport" class="ng-hide">
                     <p>Download report: <a ng-click="downloadReport()">{{selectReport.title}}</a></p>
                 </div>
+                <pdfjs-viewer data="reportFile"></pdfjs-viewer>
                 <!--<object embed-src="{{vm.reportFile}}" width="100%" height="100%">-->
                 <!--</object>-->
-                <object style="height: 90vh;" type="application/pdf" data="{{reportFile}}" width="100%"
-                        height="100%"/>
+                <!--<object style="height: 90vh;" type="application/pdf" data="{{reportFile}}" width="100%"-->
+                        <!--height="100%"/>-->
             </div>
         </div>
     </div>

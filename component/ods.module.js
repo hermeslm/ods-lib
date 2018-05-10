@@ -23,7 +23,8 @@ angular
         'datatables.bootstrap',
         'datatables.colreorder',
         'uiCropper',
-        'ngFileUpload'
+        'ngFileUpload',
+        'pdfjsViewer'
     ])
     .config(configFunction)
     .value('version', '2.0.1')

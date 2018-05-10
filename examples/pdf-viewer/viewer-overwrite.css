@@ -1,0 +1,21 @@
+
+body {
+    background-color: transparent;
+    background-image: none;
+}
+
+.toolbar {
+    z-index: 100;
+}
+
+#toolbarViewerLeft, #toolbarViewerRight {
+    float: left;
+}
+
+#toolbarViewerMiddle {
+    top: 0;
+}
+
+.toolbarButton, .dropdownToolbarButton, .secondaryToolbarButton, .overlayButton {
+    top: -5px;
+}
