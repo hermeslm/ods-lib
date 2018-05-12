@@ -1,46 +1,48 @@
-<uib-tabset class="nav-tabs-custom">
+<uib-tabset class="nav-tabs">
     <uib-tab index="0" heading="Properties">
         <form name="sectionPropertiesForm" class="form form-horizontal">
-            <div class="form-group"
-                 ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-sectionName.$invalid}">
-                <label for="{{section.name}}-sectionName" class="col-sm-5 control-label">Name:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" id="{{section.name}}-sectionName"
-                           name="{{section.name}}-sectionName"
-                           placeholder="Name..." ng-model="section.name"
-                           ng-required="true">
+            <div class="padding-top">
+                <div class="form-group"
+                     ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-sectionName.$invalid}">
+                    <label for="{{section.name}}-sectionName" class="col-sm-5 control-label">Name:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="{{section.name}}-sectionName"
+                               name="{{section.name}}-sectionName"
+                               placeholder="Name..." ng-model="section.name"
+                               ng-required="true">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group"
-                 ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-rows.$invalid}">
-                <label for="{{section.name}}-rows" class="col-sm-5 control-label">Rows:</label>
-                <div class="col-sm-3">
-                    <input type="number" class="form-control" id="{{section.name}}-rows"
-                           name="{{section.name}}-rows"
-                           placeholder="Rows..." ng-model="section.rows.length"
-                           ng-required="false" ng-disabled="true">
+                <div class="form-group"
+                     ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-rows.$invalid}">
+                    <label for="{{section.name}}-rows" class="col-sm-5 control-label">Rows:</label>
+                    <div class="col-sm-3">
+                        <input type="number" class="form-control" id="{{section.name}}-rows"
+                               name="{{section.name}}-rows"
+                               placeholder="Rows..." ng-model="section.rows.length"
+                               ng-required="false" ng-disabled="true">
+                    </div>
+                    <div class="col-lg-4">
+                        <button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>
+                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>
+                <div class="form-group"
+                     ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-title.$invalid}">
+                    <label for="{{section.name}}-title" class="col-sm-5 control-label">Title:</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control" id="{{section.name}}-title"
+                               name="{{section.name}}-title"
+                               placeholder="Title..." ng-model="section.title"
+                               ng-required="false">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group"
-                 ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-title.$invalid}">
-                <label for="{{section.name}}-title" class="col-sm-5 control-label">Title:</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control" id="{{section.name}}-title"
-                           name="{{section.name}}-title"
-                           placeholder="Title..." ng-model="section.title"
-                           ng-required="false">
-                </div>
-            </div>
-            <div class="form-group"
-                 ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-hideLabel.$invalid}">
-                <label for="{{section.name}}-hideLabel" class="col-sm-5 control-label"
-                       title="Indicates if will show title or not.">Hide Title:</label>
-                <div class="col-sm-7">
-                    <input type="checkbox" id="{{section.name}}-hideLabel" name="{{section.name}}-hideLabel"
-                           ng-model="section.hideLabel">
+                <div class="form-group"
+                     ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-hideLabel.$invalid}">
+                    <label for="{{section.name}}-hideLabel" class="col-sm-5 control-label"
+                           title="Indicates if will show title or not.">Hide Title:</label>
+                    <div class="col-sm-7">
+                        <input type="checkbox" id="{{section.name}}-hideLabel" name="{{section.name}}-hideLabel"
+                               ng-model="section.hideLabel">
+                    </div>
                 </div>
             </div>
         </form>
