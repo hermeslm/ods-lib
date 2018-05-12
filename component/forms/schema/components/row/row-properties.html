@@ -1,11 +1,11 @@
 <uib-tabset class="nav-tabs-custom">
     <uib-tab index="0" heading="Properties">
-        <form name="sectionPropertiesForm" class="form form-horizontal">
+        <form name="rowPropertiesForm" class="form form-horizontal">
             <div class="padding-top">
                 <div class="row">
                     <div class="col-md-4 col-sm-4 col-xs-12">
                         <div class="form-group"
-                             ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-rowName.$invalid}">
+                             ng-class="{'has-error': rowPropertiesForm.{{row.name}}-rowName.$invalid}">
                             <label for="{{row.name}}-rowName" class="col-sm-5 control-label">Name:</label>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="{{row.name}}-rowName"
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="form-group"
-                             ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-cssClass.$invalid}">
+                             ng-class="{'has-error': rowPropertiesForm.{{row.name}}-cssClass.$invalid}">
                             <label for="{{row.name}}-cssClass" class="col-sm-5 control-label">Class Name:</label>
                             <div class="col-sm-7">
                                 <input type="text" class="form-control" id="{{row.name}}-cssClass"
@@ -25,7 +25,7 @@
                             </div>
                         </div>
                         <div class="form-group"
-                             ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-cols.$invalid}">
+                             ng-class="{'has-error': rowPropertiesForm.{{row.name}}-cols.$invalid}">
                             <label for="{{row.name}}-cols" class="col-sm-5 control-label">Cols:</label>
                             <div class="col-sm-7">
                                 <input type="number" class="form-control" id="{{row.name}}-cols"
