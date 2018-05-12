@@ -2,87 +2,85 @@
     <uib-tab index="0" heading="Properties">
         <form name="sectionPropertiesForm" class="form form-horizontal">
             <div class="padding-top">
-                <div class="row">
-                    <div class="col-md-4 col-sm-4 col-xs-12">
-                        <div class="form-group"
-                             ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-rowName.$invalid}">
-                            <label for="{{row.name}}-rowName" class="col-sm-5 control-label">Name:</label>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" id="{{row.name}}-rowName"
-                                       name="{{row.name}}-rowName"
-                                       placeholder="Name..." ng-model="row.name"
-                                       ng-required="true">
-                            </div>
-                        </div>
-                        <div class="form-group"
-                             ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-cssClass.$invalid}">
-                            <label for="{{row.name}}-cssClass" class="col-sm-5 control-label">Class Name:</label>
-                            <div class="col-sm-7">
-                                <input type="text" class="form-control" id="{{row.name}}-cssClass"
-                                       name="{{row.name}}-cssClass"
-                                       placeholder="Css Class..." ng-model="row.cssClass"
-                                       ng-required="true">
-                            </div>
-                        </div>
-                        <div class="form-group"
-                             ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-cols.$invalid}">
-                            <label for="{{row.name}}-cols" class="col-sm-5 control-label">Cols:</label>
-                            <div class="col-sm-7">
-                                <input type="number" class="form-control" id="{{row.name}}-cols"
-                                       name="{{row.name}}-cols"
-                                       placeholder="Cols..." ng-model="row.cols.length"
-                                       ng-required="false" ng-disabled="true">
-                            </div>
-                            <!--<div class="col-lg-3">-->
-                            <!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>-->
-                            <!--</div>-->
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="form-group"
+                         ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-rowName.$invalid}">
+                        <label for="{{row.name}}-rowName" class="col-sm-5 control-label">Name:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="{{row.name}}-rowName"
+                                   name="{{row.name}}-rowName"
+                                   placeholder="Name..." ng-model="row.name"
+                                   ng-required="true">
                         </div>
                     </div>
-                    <div class="col-md-8 col-sm-8 col-xs-12">
-                        <!--<h3>Columns configuration</h3>-->
-                        <div class="table-responsive" style="max-height: 200px">
-                            <table class="table table-condensed table-striped">
-                                <thead>
-                                <tr>
-                                    <th>Columns #</th>
-                                    <th>CSS class</th>
-                                    <th width="20px">Width</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr ng-repeat="col in row.cols">
-                                    <td>
-                                        {{$index + 1}}
-                                    </td>
-                                    <td>
-                                        <input type="text" name="cssClass" ng-model="col.cssClass"
-                                               class="form-control input-sm" required readonly/>
-                                    </td>
-                                    <td>
-                                        <input type="number" name="width" class="form-control input-sm"
-                                               max="12" min="1" ng-model="col.width" ng-change="onChangeColWith(col)"/>
-                                    </td>
-                                    <td>
-                                        <button type="button" class="btn btn-danger btn-sm"
-                                                ng-click="removeColumn($index)"
-                                                ng-if="!row.isEditing">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>
-                                        <button type="button" class="btn btn-primary" ng-click="addColumn(row)">Add
-                                            column
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                    <div class="form-group"
+                         ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-cssClass.$invalid}">
+                        <label for="{{row.name}}-cssClass" class="col-sm-5 control-label">Class Name:</label>
+                        <div class="col-sm-7">
+                            <input type="text" class="form-control" id="{{row.name}}-cssClass"
+                                   name="{{row.name}}-cssClass"
+                                   placeholder="Css Class..." ng-model="row.cssClass"
+                                   ng-required="true">
                         </div>
+                    </div>
+                    <div class="form-group"
+                         ng-class="{'has-error': sectionPropertiesForm.{{row.name}}-cols.$invalid}">
+                        <label for="{{row.name}}-cols" class="col-sm-5 control-label">Cols:</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control" id="{{row.name}}-cols"
+                                   name="{{row.name}}-cols"
+                                   placeholder="Cols..." ng-model="row.cols.length"
+                                   ng-required="false" ng-disabled="true">
+                        </div>
+                        <!--<div class="col-lg-3">-->
+                        <!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                    <!--<h3>Columns configuration</h3>-->
+                    <div class="table-responsive" style="max-height: 200px">
+                        <table class="table table-condensed table-striped">
+                            <thead>
+                            <tr>
+                                <th>Columns #</th>
+                                <th>CSS class</th>
+                                <th width="20px">Width</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="col in row.cols">
+                                <td>
+                                    {{$index + 1}}
+                                </td>
+                                <td>
+                                    <input type="text" name="cssClass" ng-model="col.cssClass"
+                                           class="form-control input-sm" required readonly/>
+                                </td>
+                                <td>
+                                    <input type="number" name="width" class="form-control input-sm"
+                                           max="12" min="1" ng-model="col.width" ng-change="onChangeColWith(col)"/>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                            ng-click="removeColumn($index)"
+                                            ng-if="!row.isEditing">
+                                        <span class="glyphicon glyphicon-trash"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" ng-click="addColumn(row)">Add
+                                        column
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
