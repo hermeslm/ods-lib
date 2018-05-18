@@ -6,13 +6,16 @@ var app = angular.module('example', ['ods-lib']);
 app.$inject = ['$scope', '$q'];
 app.controller('MainCtrl', function ($scope, $q) {
 
-    $scope.selectdWorkingWeek = {
+    $scope.selectedWorkingWeek = {
         "deleted": false,
         "id": 3,
         "name": "3-Week(1/15/2018-1/21/2018)",
         "startDate": "2018-01-15",
         "endDate": "2018-01-21"
     };
+
+    $scope.required = true;
+    $scope.disabled = false;
 
     // var vm = this;
     $scope.filters = [
@@ -66,6 +69,16 @@ app.controller('MainCtrl', function ($scope, $q) {
     $scope.onSelect = function () {
 
         alert($scope.selectdWorkingWeek.name);
+    }
+
+    $scope.toggleRequired = function () {
+
+        $scope.required = !$scope.required;
+    }
+
+    $scope.toggleDisabled = function () {
+
+        $scope.disabled = !$scope.disabled;
     }
 
 });

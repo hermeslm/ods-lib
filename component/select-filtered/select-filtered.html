@@ -1,7 +1,7 @@
 <!--<div class="form-group">-->
     <label for="{{name}}" ng-if="!hideLabel">{{label}}</label>
     <div class="input-group">
-        <ui-select name="{{name}}" id="{{name}}" ng-model="selected.value" ng-disabled="{{ngDisabled}}"
+        <ui-select name="{{name}}" id="{{name}}" ng-model="selected.value" ng-disabled="ngDisabled"
                    ui-select-required="ngRequired" close-on-select="true" title="{{tooltip}}"
                    on-select="onSelectFn()">
             <ui-select-match placeholder="{{placeholder}}">

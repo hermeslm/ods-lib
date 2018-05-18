@@ -13,6 +13,7 @@ function selectFiltered($filter) {
         templateUrl: 'select-filtered/select-filtered.html',
         scope: {
             label: '@',
+            name: '@',
             hideLabel: '=',
             placeholder: '@',
             ngModel: '=',
@@ -31,9 +32,6 @@ function selectFiltered($filter) {
 
     function linkFunc($scope) {
 
-        var counter = (+new Date()) % 10000;
-
-        $scope.name = generateName();
         $scope.toggleFilter = toggleFilter;
         $scope.getSelectTitleValue = getSelectTitleValue;
         $scope.onSelectFn = onSelectFn;
@@ -78,12 +76,6 @@ function selectFiltered($filter) {
             } else {
                 return $scope.placeholder;
             }
-        }
-
-        function generateName() {
-
-            counter++;
-            return 'select-filtered' + counter;
         }
 
         function onSelectFn() {

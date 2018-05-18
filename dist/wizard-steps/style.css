@@ -84,7 +84,7 @@
 .ods-wizard-content .ods-wizard > .steps > ul > li.disabled a:focus,
 .ods-wizard-content .ods-wizard > .steps > ul > li.disabled a:hover {
   color: #999;
-  cursor: default;
+  cursor: not-allowed;
 }
 
 .ods-wizard-content .ods-wizard > .steps > ul > li.done a,
