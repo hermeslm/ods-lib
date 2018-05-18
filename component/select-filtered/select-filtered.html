@@ -1,0 +1,30 @@
+<!--<div class="form-group">-->
+    <label for="{{name}}" ng-if="!hideLabel">{{label}}</label>
+    <div class="input-group">
+        <ui-select name="{{name}}" id="{{name}}" ng-model="selected.value" ng-disabled="ngDisabled"
+                   ui-select-required="ngRequired" close-on-select="true" title="{{tooltip}}"
+                   on-select="onSelectFn()">
+            <ui-select-match placeholder="{{placeholder}}">
+                {{getSelectTitleValue($select.selected)}}
+            </ui-select-match>
+            <ui-select-choices repeat="item in filtered | filter:$select.search">
+                <div ng-bind-html="getSelectTitleValue(item) | highlight: $select.search"></div>
+            </ui-select-choices>
+        </ui-select>
+        <div class="input-group-btn">
+            <div class="btn-group" uib-dropdown is-open="isOpen">
+                <button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle
+                        ng-disabled="disabled">
+                    <span class="fa fa-filter"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                    <li role="menuitem" ng-repeat="filter in filters" ng-click="toggleFilter(filter)"><a href="">
+                        <span ng-class="filter.active ? 'fa fa-check-circle' : 'fa fa-times-circle'"></span>
+                        {{filter.title}}</a></li>
+                    <!--<li class="divider"></li>-->
+                    <!--<li role="menuitem"><a href="#">Separated link</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+<!--</div>-->

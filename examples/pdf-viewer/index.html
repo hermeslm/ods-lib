@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="example">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>AngularJS ODS Lib</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+
+    <!-- Bower dependencies -->
+    <!-- build:css css/seed.min.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="../bower_components/angular-ui-select/dist/select.css">
+    <link rel="stylesheet" href="../bower_components/nz-toggle/dist/nz-toggle.css">
+    <link rel="stylesheet" href="../bower_components/angular-confirm/dist/angular-confirm.min.css">
+    <link rel="stylesheet" href="../bower_components/ui-cropper/compile/minified/ui-cropper.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.css">
+    <link rel="stylesheet" href="../bower_components/angular-dialog-service/dist/dialogs.css">
+    <link rel="stylesheet"
+          href="../bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css">
+    <!-- endinject -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../dist/forms/style.css">
+    <link rel="stylesheet" href="../dist/wizard-steps/style.css">
+    <link rel="stylesheet" href="../dist/reports/style.css">
+    <link rel="stylesheet" href="../dist/steps-indicator/style.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+
+    <!--<link rel="stylesheet" href="web/viewer.css">-->
+    <link rel="stylesheet" href="viewer.css">
+    <link rel="stylesheet" href="style.css">
+    <!--<link rel="stylesheet" href="viewer-overwrite.css">-->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body ng-controller="MainCtrl">
+<div class="container-fluid">
+
+    <h1>Report-View Directive</h1>
+    <div class="row" ng-show="infoMessage" ng-class="ng-hide">
+        <div class="col-lg-12">
+            <div uib-alert class="alert alert-info alert-dismissible" close="hideInfoMessage()">
+                <h4><i class="icon fa fa-info"> </i> Reports info! </h4>
+                If don't have a PDF viewer plugin in the browser. No biggie... you can download it.
+                Please select the report and download it from report preview.
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{reportsGroup.title}}</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <uib-accordion close-others="true">
+                        <div uib-accordion-group class="panel-default" heading="{{group.title}}" is-open="group.open"
+                             is-disabled="group.disabled" ng-repeat="group in reportsGroup.groups"
+                             ng-init="groupIndex = $index">
+                            <ul class="list-group list-group-unbordered">
+                                <li class="list-group-item" ng-repeat="report in group.reports"
+                                    ng-init="reportIndex = $index">
+                                    <a href=""
+                                       ng-click="openReport(groupIndex, reportIndex)"><b>{{report.title}}</b></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </uib-accordion>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Report Preview</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" style="height: 100vh;">
+                    <div ng-show="selectReport" class="ng-hide">
+                        <p>Download report: <a ng-click="downloadReport()">{{selectReport.title}}</a></p>
+                    </div>
+
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <!-- Brand and toggle get grouped for better mobile display -->
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" id="pdf-viewer-title" href=""></a>
+                            </div>
+
+                            <!-- Collect the nav links, forms, and other content for toggling -->
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <form class="navbar-form navbar-left">
+                                    <button type="submit" class="btn btn-default" id="pdf-viewer-previous">
+                                        <span class="fa fa-angle-up" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="submit" class="btn btn-default" id="pdf-viewer-next">
+                                        <span class="fa fa-angle-down" aria-hidden="true"></span>
+                                    </button>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="pdf-viewer-pageNumber"
+                                               value="1" size="3" min="1">
+                                    </div>
+                                    <span>/</span>
+                                    <span>14</span>
+                                </form>
+                                <form class="navbar-form navbar-left">
+                                    <button type="submit" class="btn btn-default" id="pdf-viewer-zoomOut">-</button>
+                                    <button type="submit" class="btn btn-default" id="pdf-viewer-zoomIn">+</button>
+                                    <div class="form-group">
+                                        <select id="scaleSelect" class="form-control" title="Zoom" tabindex="23">
+                                            <option id="pageAutoOption" title="" value="auto" selected="selected"
+                                                    data-l10n-id="page_scale_auto">Automatic Zoom
+                                            </option>
+                                            <option id="pageActualOption" title="" value="page-actual"
+                                                    data-l10n-id="page_scale_actual">Actual Size
+                                            </option>
+                                            <option id="pageFitOption" title="" value="page-fit"
+                                                    data-l10n-id="page_scale_fit">Page Fit
+                                            </option>
+                                            <option id="pageWidthOption" title="" value="page-width"
+                                                    data-l10n-id="page_scale_width">Page Width
+                                            </option>
+                                            <option id="customScaleOption" title="" value="custom" disabled="disabled"
+                                                    hidden="true"></option>
+                                            <option title="" value="0.5" data-l10n-id="page_scale_percent"
+                                                    data-l10n-args='{ "scale": 50 }'>50%
+                                            </option>
+                                            <option title="" value="0.75" data-l10n-id="page_scale_percent"
+                                                    data-l10n-args='{ "scale": 75 }'>75%
+                                            </option>
+                                            <option title="" value="1" data-l10n-id="page_scale_percent"
+                                                    data-l10n-args='{ "scale": 100 }'>100%
+                                            </option>
+                                            <option title="" value="1.25" data-l10n-id="page_scale_percent"
+                                                    data-l10n-args='{ "scale": 125 }'>125%
+                                            </option>
+                                            <option title="" value="1.5" data-l10n-id="page_scale_percent"
+                                                    data-l10n-args='{ "scale": 150 }'>150%
+                                            </option>
+                                            <option title="" value="2" data-l10n-id="page_scale_percent"
+                                                    data-l10n-args='{ "scale": 200 }'>200%
+                                            </option>
+                                            <option title="" value="3" data-l10n-id="page_scale_percent"
+                                                    data-l10n-args='{ "scale": 300 }'>300%
+                                            </option>
+                                            <option title="" value="4" data-l10n-id="page_scale_percent"
+                                                    data-l10n-args='{ "scale": 400 }'>400%
+                                            </option>
+                                        </select>
+                                    </div>
+                                </form>
+                                <form class="navbar-form navbar-right">
+                                    <button type="submit" class="btn btn-default" id="pdf-viewer-print">
+                                        <span class="fa fa-print"></span>
+                                    </button>
+                                    <button type="submit" class="btn btn-default" id="pdf-viewer-download">
+                                        <span class="fa fa-download"></span>
+                                    </button>
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="fa fa-angle-double-right"></span>
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Action</a></li>
+                                            <li><a href="#">Another action</a></li>
+                                            <li><a href="#">Something else here</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="#">Separated link</a></li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div><!-- /.navbar-collapse -->
+                        </div><!-- /.container-fluid -->
+                    </nav>
+
+                    <div class="viewerContainer" id="viewerContainer">
+                        <div class="pdfViewer" id="viewer"></div>
+                    </div>
+
+                    <div id="loadingBar">
+                        <div class="progress"></div>
+                        <div class="glimmer"></div>
+                    </div>
+
+                    <div id="errorWrapper" hidden="true">
+                        <div id="errorMessageLeft">
+                            <span id="errorMessage"></span>
+                            <button id="errorShowMore">
+                                More Information
+                            </button>
+                            <button id="errorShowLess">
+                                Less Information
+                            </button>
+                        </div>
+                        <div id="errorMessageRight">
+                            <button id="errorClose">
+                                Close
+                            </button>
+                        </div>
+                        <div class="clearBoth"></div>
+                        <textarea id="errorMoreInfo" hidden="true" readonly="readonly"></textarea>
+                    </div>
+
+                    <!--<div id="outerContainer">-->
+
+                    <!--<div id="sidebarContainer">-->
+                    <!--<div id="toolbarSidebar">-->
+                    <!--<div class="splitToolbarButton toggled">-->
+                    <!--<button id="viewThumbnail" class="toolbarButton toggled" title="Show Thumbnails"-->
+                    <!--tabindex="2" data-l10n-id="thumbs">-->
+                    <!--<span data-l10n-id="thumbs_label">Thumbnails</span>-->
+                    <!--</button>-->
+                    <!--<button id="viewOutline" class="toolbarButton"-->
+                    <!--title="Show Document Outline (double-click to expand/collapse all items)"-->
+                    <!--tabindex="3" data-l10n-id="document_outline">-->
+                    <!--<span data-l10n-id="document_outline_label">Document Outline</span>-->
+                    <!--</button>-->
+                    <!--<button id="viewAttachments" class="toolbarButton" title="Show Attachments"-->
+                    <!--tabindex="4" data-l10n-id="attachments">-->
+                    <!--<span data-l10n-id="attachments_label">Attachments</span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div id="sidebarContent">-->
+                    <!--<div id="thumbnailView">-->
+                    <!--</div>-->
+                    <!--<div id="outlineView" class="hidden">-->
+                    <!--</div>-->
+                    <!--<div id="attachmentsView" class="hidden">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div id="sidebarResizer" class="hidden"></div>-->
+                    <!--</div>  &lt;!&ndash; sidebarContainer &ndash;&gt;-->
+
+                    <!--<div id="mainContainer">-->
+                    <!--<div class="findbar hidden doorHanger" id="findbar">-->
+                    <!--<div id="findbarInputContainer">-->
+                    <!--<input id="findInput" class="toolbarField" title="Find"-->
+                    <!--placeholder="Find in document…" tabindex="91" data-l10n-id="find_input">-->
+                    <!--<div class="splitToolbarButton">-->
+                    <!--<button id="findPrevious" class="toolbarButton findPrevious"-->
+                    <!--title="Find the previous occurrence of the phrase" tabindex="92"-->
+                    <!--data-l10n-id="find_previous">-->
+                    <!--<span data-l10n-id="find_previous_label">Previous</span>-->
+                    <!--</button>-->
+                    <!--<div class="splitToolbarButtonSeparator"></div>-->
+                    <!--<button id="findNext" class="toolbarButton findNext"-->
+                    <!--title="Find the next occurrence of the phrase" tabindex="93"-->
+                    <!--data-l10n-id="find_next">-->
+                    <!--<span data-l10n-id="find_next_label">Next</span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div id="findbarOptionsContainer">-->
+                    <!--<input type="checkbox" id="findHighlightAll" class="toolbarField" tabindex="94">-->
+                    <!--<label for="findHighlightAll" class="toolbarLabel" data-l10n-id="find_highlight">Highlight-->
+                    <!--all</label>-->
+                    <!--<input type="checkbox" id="findMatchCase" class="toolbarField" tabindex="95">-->
+                    <!--<label for="findMatchCase" class="toolbarLabel"-->
+                    <!--data-l10n-id="find_match_case_label">Match case</label>-->
+                    <!--<span id="findResultsCount" class="toolbarLabel hidden"></span>-->
+                    <!--</div>-->
+
+                    <!--<div id="findbarMessageContainer">-->
+                    <!--<span id="findMsg" class="toolbarLabel"></span>-->
+                    <!--</div>-->
+                    <!--</div>  &lt;!&ndash; findbar &ndash;&gt;-->
+
+                    <!--<div id="secondaryToolbar" class="secondaryToolbar hidden doorHangerRight">-->
+                    <!--<div id="secondaryToolbarButtonContainer">-->
+                    <!--<button id="secondaryPresentationMode"-->
+                    <!--class="secondaryToolbarButton presentationMode visibleLargeView"-->
+                    <!--title="Switch to Presentation Mode" tabindex="51"-->
+                    <!--data-l10n-id="presentation_mode">-->
+                    <!--<span data-l10n-id="presentation_mode_label">Presentation Mode</span>-->
+                    <!--</button>-->
+
+                    <!--<button id="secondaryOpenFile"-->
+                    <!--class="secondaryToolbarButton openFile visibleLargeView" title="Open File"-->
+                    <!--tabindex="52" data-l10n-id="open_file">-->
+                    <!--<span data-l10n-id="open_file_label">Open</span>-->
+                    <!--</button>-->
+
+                    <!--<button id="secondaryPrint" class="secondaryToolbarButton print visibleMediumView"-->
+                    <!--title="Print" tabindex="53" data-l10n-id="print">-->
+                    <!--<span data-l10n-id="print_label">Print</span>-->
+                    <!--</button>-->
+
+                    <!--<button id="secondaryDownload"-->
+                    <!--class="secondaryToolbarButton download visibleMediumView" title="Download"-->
+                    <!--tabindex="54" data-l10n-id="download">-->
+                    <!--<span data-l10n-id="download_label">Download</span>-->
+                    <!--</button>-->
+
+                    <!--<a href="#" id="secondaryViewBookmark"-->
+                    <!--class="secondaryToolbarButton bookmark visibleSmallView"-->
+                    <!--title="Current view (copy or open in new window)" tabindex="55"-->
+                    <!--data-l10n-id="bookmark">-->
+                    <!--<span data-l10n-id="bookmark_label">Current View</span>-->
+                    <!--</a>-->
+
+                    <!--<div class="horizontalToolbarSeparator visibleLargeView"></div>-->
+
+                    <!--<button id="firstPage" class="secondaryToolbarButton firstPage"-->
+                    <!--title="Go to First Page" tabindex="56" data-l10n-id="first_page">-->
+                    <!--<span data-l10n-id="first_page_label">Go to First Page</span>-->
+                    <!--</button>-->
+                    <!--<button id="lastPage" class="secondaryToolbarButton lastPage"-->
+                    <!--title="Go to Last Page" tabindex="57" data-l10n-id="last_page">-->
+                    <!--<span data-l10n-id="last_page_label">Go to Last Page</span>-->
+                    <!--</button>-->
+
+                    <!--<div class="horizontalToolbarSeparator"></div>-->
+
+                    <!--<button id="pageRotateCw" class="secondaryToolbarButton rotateCw"-->
+                    <!--title="Rotate Clockwise" tabindex="58" data-l10n-id="page_rotate_cw">-->
+                    <!--<span data-l10n-id="page_rotate_cw_label">Rotate Clockwise</span>-->
+                    <!--</button>-->
+                    <!--<button id="pageRotateCcw" class="secondaryToolbarButton rotateCcw"-->
+                    <!--title="Rotate Counterclockwise" tabindex="59"-->
+                    <!--data-l10n-id="page_rotate_ccw">-->
+                    <!--<span data-l10n-id="page_rotate_ccw_label">Rotate Counterclockwise</span>-->
+                    <!--</button>-->
+
+                    <!--<div class="horizontalToolbarSeparator"></div>-->
+
+                    <!--<button id="cursorSelectTool" class="secondaryToolbarButton selectTool toggled"-->
+                    <!--title="Enable Text Selection Tool" tabindex="60"-->
+                    <!--data-l10n-id="cursor_text_select_tool">-->
+                    <!--<span data-l10n-id="cursor_text_select_tool_label">Text Selection Tool</span>-->
+                    <!--</button>-->
+                    <!--<button id="cursorHandTool" class="secondaryToolbarButton handTool"-->
+                    <!--title="Enable Hand Tool" tabindex="61" data-l10n-id="cursor_hand_tool">-->
+                    <!--<span data-l10n-id="cursor_hand_tool_label">Hand Tool</span>-->
+                    <!--</button>-->
+
+                    <!--<div class="horizontalToolbarSeparator"></div>-->
+
+                    <!--<button id="documentProperties" class="secondaryToolbarButton documentProperties"-->
+                    <!--title="Document Properties…" tabindex="62"-->
+                    <!--data-l10n-id="document_properties">-->
+                    <!--<span data-l10n-id="document_properties_label">Document Properties…</span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--</div>  &lt;!&ndash; secondaryToolbar &ndash;&gt;-->
+
+                    <!--<div class="toolbar">-->
+                    <!--<div id="toolbarContainer">-->
+                    <!--<div id="toolbarViewer">-->
+                    <!--<div id="toolbarViewerLeft">-->
+                    <!--<button id="sidebarToggle" class="toolbarButton" title="Toggle Sidebar"-->
+                    <!--tabindex="11" data-l10n-id="toggle_sidebar">-->
+                    <!--<span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>-->
+                    <!--</button>-->
+                    <!--<div class="toolbarButtonSpacer"></div>-->
+                    <!--<button id="viewFind" class="toolbarButton" title="Find in Document"-->
+                    <!--tabindex="12" data-l10n-id="findbar">-->
+                    <!--<span data-l10n-id="findbar_label">Find</span>-->
+                    <!--</button>-->
+                    <!--<div class="splitToolbarButton hiddenSmallView">-->
+                    <!--<button class="toolbarButton pageUp" title="Previous Page" id="previous"-->
+                    <!--tabindex="13" data-l10n-id="previous">-->
+                    <!--<span data-l10n-id="previous_label">Previous</span>-->
+                    <!--</button>-->
+                    <!--<div class="splitToolbarButtonSeparator"></div>-->
+                    <!--<button class="toolbarButton pageDown" title="Next Page" id="next"-->
+                    <!--tabindex="14" data-l10n-id="next">-->
+                    <!--<span data-l10n-id="next_label">Next</span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--<input type="number" id="pageNumber" class="toolbarField pageNumber"-->
+                    <!--title="Page" value="1" size="4" min="1" tabindex="15"-->
+                    <!--data-l10n-id="page">-->
+                    <!--<span id="numPages" class="toolbarLabel"></span>-->
+                    <!--</div>-->
+                    <!--<div id="toolbarViewerRight">-->
+                    <!--<button id="presentationMode"-->
+                    <!--class="toolbarButton presentationMode hiddenLargeView"-->
+                    <!--title="Switch to Presentation Mode" tabindex="31"-->
+                    <!--data-l10n-id="presentation_mode">-->
+                    <!--<span data-l10n-id="presentation_mode_label">Presentation Mode</span>-->
+                    <!--</button>-->
+
+                    <!--<button id="openFile" class="toolbarButton openFile hiddenLargeView"-->
+                    <!--title="Open File" tabindex="32" data-l10n-id="open_file">-->
+                    <!--<span data-l10n-id="open_file_label">Open</span>-->
+                    <!--</button>-->
+
+                    <!--<button id="print" class="toolbarButton print hiddenMediumView"-->
+                    <!--title="Print" tabindex="33" data-l10n-id="print">-->
+                    <!--<span data-l10n-id="print_label">Print</span>-->
+                    <!--</button>-->
+
+                    <!--<button id="download" class="toolbarButton download hiddenMediumView"-->
+                    <!--title="Download" tabindex="34" data-l10n-id="download">-->
+                    <!--<span data-l10n-id="download_label">Download</span>-->
+                    <!--</button>-->
+                    <!--<a href="#" id="viewBookmark" class="toolbarButton bookmark hiddenSmallView"-->
+                    <!--title="Current view (copy or open in new window)" tabindex="35"-->
+                    <!--data-l10n-id="bookmark">-->
+                    <!--<span data-l10n-id="bookmark_label">Current View</span>-->
+                    <!--</a>-->
+
+                    <!--<div class="verticalToolbarSeparator hiddenSmallView"></div>-->
+
+                    <!--<button id="secondaryToolbarToggle" class="toolbarButton" title="Tools"-->
+                    <!--tabindex="36" data-l10n-id="tools">-->
+                    <!--<span data-l10n-id="tools_label">Tools</span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--<div id="toolbarViewerMiddle">-->
+                    <!--<div class="splitToolbarButton">-->
+                    <!--<button id="zoomOut" class="toolbarButton zoomOut" title="Zoom Out"-->
+                    <!--tabindex="21" data-l10n-id="zoom_out">-->
+                    <!--<span data-l10n-id="zoom_out_label">Zoom Out</span>-->
+                    <!--</button>-->
+                    <!--<div class="splitToolbarButtonSeparator"></div>-->
+                    <!--<button id="zoomIn" class="toolbarButton zoomIn" title="Zoom In"-->
+                    <!--tabindex="22" data-l10n-id="zoom_in">-->
+                    <!--<span data-l10n-id="zoom_in_label">Zoom In</span>-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--<span id="scaleSelectContainer" class="dropdownToolbarButton">-->
+                    <!--<select id="scaleSelect" title="Zoom" tabindex="23" data-l10n-id="zoom">-->
+                    <!--<option id="pageAutoOption" title="" value="auto" selected="selected"-->
+                    <!--data-l10n-id="page_scale_auto">Automatic Zoom</option>-->
+                    <!--<option id="pageActualOption" title="" value="page-actual" data-l10n-id="page_scale_actual">Actual Size</option>-->
+                    <!--<option id="pageFitOption" title="" value="page-fit" data-l10n-id="page_scale_fit">Page Fit</option>-->
+                    <!--<option id="pageWidthOption" title="" value="page-width"-->
+                    <!--data-l10n-id="page_scale_width">Page Width</option>-->
+                    <!--<option id="customScaleOption" title="" value="custom" disabled="disabled" hidden="true"></option>-->
+                    <!--<option title="" value="0.5" data-l10n-id="page_scale_percent"-->
+                    <!--data-l10n-args='{ "scale": 50 }'>50%</option>-->
+                    <!--<option title="" value="0.75" data-l10n-id="page_scale_percent"-->
+                    <!--data-l10n-args='{ "scale": 75 }'>75%</option>-->
+                    <!--<option title="" value="1" data-l10n-id="page_scale_percent"-->
+                    <!--data-l10n-args='{ "scale": 100 }'>100%</option>-->
+                    <!--<option title="" value="1.25" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 125 }'>125%</option>-->
+                    <!--<option title="" value="1.5" data-l10n-id="page_scale_percent" data-l10n-args='{ "scale": 150 }'>150%</option>-->
+                    <!--<option title="" value="2" data-l10n-id="page_scale_percent"-->
+                    <!--data-l10n-args='{ "scale": 200 }'>200%</option>-->
+                    <!--<option title="" value="3" data-l10n-id="page_scale_percent"-->
+                    <!--data-l10n-args='{ "scale": 300 }'>300%</option>-->
+                    <!--<option title="" value="4" data-l10n-id="page_scale_percent"-->
+                    <!--data-l10n-args='{ "scale": 400 }'>400%</option>-->
+                    <!--</select>-->
+                    <!--</span>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div id="loadingBar">-->
+                    <!--<div class="progress">-->
+                    <!--<div class="glimmer">-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<menu type="context" id="viewerContextMenu">-->
+                    <!--<menuitem id="contextFirstPage" label="First Page"-->
+                    <!--data-l10n-id="first_page"></menuitem>-->
+                    <!--<menuitem id="contextLastPage" label="Last Page"-->
+                    <!--data-l10n-id="last_page"></menuitem>-->
+                    <!--<menuitem id="contextPageRotateCw" label="Rotate Clockwise"-->
+                    <!--data-l10n-id="page_rotate_cw"></menuitem>-->
+                    <!--<menuitem id="contextPageRotateCcw" label="Rotate Counter-Clockwise"-->
+                    <!--data-l10n-id="page_rotate_ccw"></menuitem>-->
+                    <!--</menu>-->
+
+                    <!--<div id="viewerContainer" tabindex="0">-->
+                    <!--<div id="viewer" class="pdfViewer"></div>-->
+                    <!--</div>-->
+
+                    <!--<div id="errorWrapper" hidden='true'>-->
+                    <!--<div id="errorMessageLeft">-->
+                    <!--<span id="errorMessage"></span>-->
+                    <!--<button id="errorShowMore" data-l10n-id="error_more_info">-->
+                    <!--More Information-->
+                    <!--</button>-->
+                    <!--<button id="errorShowLess" data-l10n-id="error_less_info" hidden='true'>-->
+                    <!--Less Information-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--<div id="errorMessageRight">-->
+                    <!--<button id="errorClose" data-l10n-id="error_close">-->
+                    <!--Close-->
+                    <!--</button>-->
+                    <!--</div>-->
+                    <!--<div class="clearBoth"></div>-->
+                    <!--<textarea id="errorMoreInfo" hidden='true' readonly="readonly"></textarea>-->
+                    <!--</div>-->
+                    <!--</div> &lt;!&ndash; mainContainer &ndash;&gt;-->
+
+                    <!--<div id="overlayContainer" class="hidden">-->
+                    <!--<div id="passwordOverlay" class="container hidden">-->
+                    <!--<div class="dialog">-->
+                    <!--<div class="row">-->
+                    <!--<p id="passwordText" data-l10n-id="password_label">Enter the password to open-->
+                    <!--this PDF file:</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<input type="password" id="password" class="toolbarField">-->
+                    <!--</div>-->
+                    <!--<div class="buttonRow">-->
+                    <!--<button id="passwordCancel" class="overlayButton"><span-->
+                    <!--data-l10n-id="password_cancel">Cancel</span></button>-->
+                    <!--<button id="passwordSubmit" class="overlayButton"><span-->
+                    <!--data-l10n-id="password_ok">OK</span></button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div id="documentPropertiesOverlay" class="container hidden">-->
+                    <!--<div class="dialog">-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_file_name">File name:</span>-->
+                    <!--<p id="fileNameField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_file_size">File size:</span>-->
+                    <!--<p id="fileSizeField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="separator"></div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_title">Title:</span>-->
+                    <!--<p id="titleField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_author">Author:</span>-->
+                    <!--<p id="authorField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_subject">Subject:</span>-->
+                    <!--<p id="subjectField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_keywords">Keywords:</span>-->
+                    <!--<p id="keywordsField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_creation_date">Creation Date:</span>-->
+                    <!--<p id="creationDateField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_modification_date">Modification Date:</span>-->
+                    <!--<p id="modificationDateField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_creator">Creator:</span>-->
+                    <!--<p id="creatorField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="separator"></div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_producer">PDF Producer:</span>-->
+                    <!--<p id="producerField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_version">PDF Version:</span>-->
+                    <!--<p id="versionField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_page_count">Page Count:</span>-->
+                    <!--<p id="pageCountField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="document_properties_page_size">Page Size:</span>-->
+                    <!--<p id="pageSizeField">-</p>-->
+                    <!--</div>-->
+                    <!--<div class="buttonRow">-->
+                    <!--<button id="documentPropertiesClose" class="overlayButton"><span-->
+                    <!--data-l10n-id="document_properties_close">Close</span></button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--<div id="printServiceOverlay" class="container hidden">-->
+                    <!--<div class="dialog">-->
+                    <!--<div class="row">-->
+                    <!--<span data-l10n-id="print_progress_message">Preparing document for printing…</span>-->
+                    <!--</div>-->
+                    <!--<div class="row">-->
+                    <!--<progress value="0" max="100"></progress>-->
+                    <!--<span data-l10n-id="print_progress_percent" data-l10n-args='{ "progress": 0 }'-->
+                    <!--class="relative-progress">0%</span>-->
+                    <!--</div>-->
+                    <!--<div class="buttonRow">-->
+                    <!--<button id="printCancel" class="overlayButton"><span-->
+                    <!--data-l10n-id="print_progress_close">Cancel</span></button>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>  &lt;!&ndash; overlayContainer &ndash;&gt;-->
+
+                    <!--</div> &lt;!&ndash; outerContainer &ndash;&gt;-->
+                    <!--<div id="printContainer"></div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- build:js js/seed.min.js -->
+<!-- bower:js -->
+<script src="../bower_components/jquery/dist/jquery.js"></script>
+<script src="../bower_components/angular/angular.js"></script>
+<script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="../bower_components/angular-messages/angular-messages.js"></script>
+<script src="../bower_components/angular-resource/angular-resource.js"></script>
+<script src="../bower_components/jSignature/src/jSignature.js"></script>
+<script src="../bower_components/jSignature/src/plugins/jSignature.CompressorBase30.js"></script>
+<script src="../bower_components/jSignature/src/plugins/jSignature.CompressorSVG.js"></script>
+<script src="../bower_components/jSignature/src/plugins/jSignature.UndoButton.js"></script>
+<script src="../bower_components/webcam-directive/dist/webcam.min.js"></script>
+<script src="../bower_components/angular-ui-select/dist/select.js"></script>
+<script src="../bower_components/nz-toggle/dist/nz-toggle.js"></script>
+<script src="../bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
+<script src="../bower_components/underscore/underscore.js"></script>
+<script src="../bower_components/angular-confirm/dist/angular-confirm.min.js"></script>
+<script src="../bower_components/angular-translate/angular-translate.js"></script>
+<script src="../bower_components/angular-jquery/dist/angular-jquery.js"></script>
+<script src="../bower_components/ckeditor/ckeditor.js"></script>
+<script src="../bower_components/ngstorage/ngStorage.js"></script>
+<script src="../bower_components/moment/moment.js"></script>
+<script src="../bower_components/datatables.net/js/jquery.dataTables.js"></script>
+<script src="../bower_components/pdfmake/build/pdfmake.js"></script>
+<script src="../bower_components/pdfmake/build/vfs_fonts.js"></script>
+<script src="../bower_components/ui-cropper/compile/minified/ui-cropper.js"></script>
+<script src="../bower_components/ng-file-upload/ng-file-upload.js"></script>
+<script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js"></script>
+<script src="../bower_components/angular-dialog-service/dist/dialogs.js"></script>
+<script src="../bower_components/angular-dialog-service/dist/dialogs-default-translations.js"></script>
+<script src="../bower_components/angular-bootstrap-affix/dist/angular-bootstrap-affix.js"></script>
+<script src="../bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
+<script src="../bower_components/angular-moment/angular-moment.js"></script>
+<script src="../bower_components/angular-datatables/dist/angular-datatables.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/colreorder/angular-datatables.colreorder.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/light-columnfilter/angular-datatables.light-columnfilter.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/colvis/angular-datatables.colvis.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/fixedcolumns/angular-datatables.fixedcolumns.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/fixedheader/angular-datatables.fixedheader.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/scroller/angular-datatables.scroller.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/tabletools/angular-datatables.tabletools.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/buttons/angular-datatables.buttons.js"></script>
+<script src="../bower_components/angular-datatables/dist/plugins/select/angular-datatables.select.js"></script>
+<!-- endinject -->
+<!-- inject:js -->
+<script src="../dist/ods-lib.js"></script>
+<script src="build/pdf.js"></script>
+<script src="web/pdf_viewer.js"></script>
+<script src="viewer.js"></script>
+<script src="app.js"></script>
+<!-- endinject -->
+<!-- endbuild -->
+</body>
+</html>

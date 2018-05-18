@@ -2,7 +2,7 @@
 
 angular
     .module('ods-lib')
-    .directive('address', Address);
+    .directive('odsAddress', Address);
 
 Address.$inject = ['$uibModal'];
 
@@ -73,7 +73,7 @@ function Address($uibModal) {
         $scope.printName = printName;
 
         function printName(address) {
-            if (address !== null) {
+            if (address) {
                 return address.street + ' ' +
                     address.street2 + ' ' +
                     address.city + ',' +

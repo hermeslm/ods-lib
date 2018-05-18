@@ -26,6 +26,20 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
 
     function linkFunc($scope) {
 
+        var BASE64_MARKER = ';base64,';
+
+        function convertDataURIToBinary(uri, buffer) {
+
+            var marker = ';base64,',
+                raw = window.atob(uri.substring(uri.indexOf(marker) + marker.length)),
+                n = raw.length,
+                a = new Uint8Array(new ArrayBuffer(n));
+            for(var i = 0; i < n ; i++){
+                a[i] = raw.charCodeAt(i);
+            }
+            return buffer ? a.buffer : a;
+        }
+
         $scope.infoMessage = true;
         $scope.selectReport = null;
         $scope.reportFile = getUrlReport();
@@ -85,7 +99,7 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
                 forceDownload();
             } else {
                 OdsReportsService.getReport(report).then(function (outReport) {
-                    $scope.reportFile = getUrlReport(outReport);
+                    $scope.reportFile = convertDataURIToBinary(outReport);//getUrlReport(outReport);
                 }, function () {
 
                 });

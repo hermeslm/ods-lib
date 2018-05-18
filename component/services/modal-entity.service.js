@@ -16,12 +16,15 @@ function ModalEntity($uibModal) {
 
     /**
      * Return a Action Template for grid bootstrap based
-     * @param data
-     * @param entity
-     * @param buttons
-     * @returns {string}
+     * @param templateUrl Template URL
+     * @param controller Controller name
+     * @param controllerAs Controller as name.
+     * @param size Modal size.
+     * @param entity Entity Resolver.
+     * @param translateNames Array of Translates Names to include
+     * @returns
      */
-    function openModalEntity(templateUrl, controller, controllerAs, size, entity) {
+    function openModalEntity(templateUrl, controller, controllerAs, size, entity, translateNames) {
 
         return $uibModal.open({
                 templateUrl: templateUrl,
@@ -33,31 +36,19 @@ function ModalEntity($uibModal) {
                     entity: function () {
                         return entity;
                     },
-                    translatePartialLoader: ['$translate', '$translatePartialLoader', function ($translate, $translatePartialLoader) {
-                        $translatePartialLoader.addPart('country');
-                        $translatePartialLoader.addPart('global');
-                        return $translate.refresh();
-                    }]
+                    translatePartialLoader: ['$translate', '$translatePartialLoader',
+                        function ($translate, $translatePartialLoader) {
+
+                            if (translateNames && translateNames.length > 0) {
+                                for (var i = 0; i < translateNames; i++) {
+                                    $translatePartialLoader.addPart(translateNames[i]);
+                                    $translatePartialLoader.addPart(translateNames[i]);
+                                }
+                            }
+                            return $translate.refresh();
+                        }]
                 }
             }
         ).result;
-
-
-// $uibModal.open({
-//     templateUrl: 'app/entities/country/country-dialog.html',
-//     controller: 'CountryDialogController',
-//     controllerAs: 'vm',
-//     backdrop: 'static',
-//     size: 'lg',
-//     resolve: {
-//         entity: ['Country', function (Country) {
-//             return Country.get({id: $stateParams.id}).$promise;
-//         }]
-//     }
-// }).result.then(function () {
-//     $state.go('^', {}, {reload: false});
-// }, function () {
-//     $state.go('^');
-// });
     }
 }

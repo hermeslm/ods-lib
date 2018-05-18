@@ -27,13 +27,15 @@ function odsCheckListDirective() {
     function linkFunc($scope) {
 
         $scope.toggleAll = toggleAll;
-        $scope.selectOne = selectOne;
+        $scope.toggleOne = toggleOne;
+
+        init();
 
         function init() {
 
             $scope.allSelected = true;
             for (var i = 0; i < $scope.list.length; i++) {
-                if(!$scope.list[i].selected){
+                if (!$scope.list[i].selected) {
                     $scope.allSelected = false;
                 }
             }
@@ -44,15 +46,35 @@ function odsCheckListDirective() {
             $scope.model = [];
             for (var i = 0; i < $scope.list.length; i++) {
                 $scope.list[i].selected = $scope.allSelected;
-                $scope.model.push($scope.list[i]);
+                if($scope.allSelected) {
+                    $scope.model.push($scope.list[i]);
+                }
             }
         }
 
-        function selectOne(element) {
+        function toggleOne(element) {
 
             if (!element.selected) {
                 $scope.allSelected = false;
+                //remove from model
+                var index = findInModel(element);
+                if (index !== -1) {
+                    $scope.model.splice(index, 1);
+                }
+            } else {
+                $scope.model.push(element);
             }
+        }
+
+        function findInModel(element) {
+
+            var index = -1;
+            for (var i = 0; i < $scope.model.length; i++) {
+                if ($scope.model[i].value === element.value) {
+                    index = i;
+                }
+            }
+            return index;
         }
 
     }

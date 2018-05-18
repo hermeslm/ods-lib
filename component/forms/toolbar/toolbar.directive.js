@@ -63,6 +63,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
                 components: [
                     OdsFormService.newFieldRadioListObject(),
                     OdsFormService.newFieldSelectObject(),
+                    OdsFormService.newFieldSelect2Object(),
                     OdsFormService.newFieldMultiSelectObject()
 
                 ]

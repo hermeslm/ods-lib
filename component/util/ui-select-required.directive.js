@@ -14,21 +14,17 @@
             link: function (scope, element, attrs, ctrl) {
 
                 //console.log($scope.required);
-                scope.riquired = $parse(attrs.uiSelectRequired)(scope);//JSON.parse(attrs.ngRequired);
+                scope.required = $parse(attrs.uiSelectRequired)(scope);//JSON.parse(attrs.ngRequired);
 
                 ctrl.$validators.uiSelectRequired = function (modelValue, viewValue) {
 
-                    if (scope.riquired) {
+                    if (scope.required) {
                         var determineVal;
                         if (angular.isArray(modelValue)) {
                             determineVal = modelValue;
                         } else if (angular.isArray(viewValue)) {
                             determineVal = viewValue;
-                        } else if (isEmpty(modelValue)) {
-                            return false;
-                        } else {
-                            return true;
-                        }
+                        } else return !isEmpty(modelValue);
                         return determineVal.length > 0;
                     } else {
                         return true;

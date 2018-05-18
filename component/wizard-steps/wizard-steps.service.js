@@ -8,75 +8,65 @@
         .module('ods-lib')
         .factory('OdsWizardService', OdsWizardService);
 
-    OdsWizardService.$inject = [];
+    OdsWizardService.$inject = ['OdsWizardState'];
 
-    function OdsWizardService() {
+    function OdsWizardService(OdsWizardState) {
 
         var service = {
 
+            setEnable: setEnable,
+            setDisable: setDisable,
+            setDone: setDone,
+            setCurrent: setCurrent,
+            setError: setError,
             goToStep: goToStep
 
         };
 
-        function goToStep(steps, name) {
+        function goToStep(steps, index) {
 
-            var selected = null;
-            for (var i = 0; i < steps.length; i++) {
-                if (steps[i].name === name) {
-                    selected = i;
-                    steps[i].current = true;
-                    steps[i].done = false;
-                } else {
-                    if (selected && i === selected + 1) {
-                        steps[i].current = false;
-                        steps[i].done = false;
-                        steps[i].disable = false;
-                    } else {
-                        if (selected && i > selected) {
-                            if (!steps[i].disable) {
-                                steps[i].done = false;
-                                steps[i].current = false;
-                            }
-                        } else {
-                            steps[i].done = true;
-                            steps[i].current = false;
-                            steps[i].disable = true;
-                        }
-                    }
+            if (steps.length > index) {
+                if (steps[index].status !== OdsWizardState.DISABLED) {
+                    // clearCurrent(steps);
+                    setDone(steps[index - 1]);
+                    setCurrent(steps[index]);
                 }
             }
         }
 
-        function stepIdx(steps, step) {
+        function setEnable(step) {
 
-            var idx = 0;
-            var res = -1;
-            angular.forEach(getEnabledSteps(steps), function(currStep) {
-                if (currStep === step) {
-                    res = idx;
-                }
-                idx++;
-            });
-            return res;
+            if (step) {
+                step.status = "";
+            }
         }
 
-        function getEnabledSteps(steps) {
+        function setDisable(step) {
 
-            return steps.filter(function(step){
-                return step && step.disabled !== 'true';
-            });
+            if (step) {
+                step.status = OdsWizardState.DISABLED;
+            }
         }
 
-        //unSelect All Steps
-        function unselectAll(steps) {
+        function setDone(step) {
 
-            //traverse steps array and set each "selected" property to false
-            angular.forEach(getEnabledSteps(steps), function (step) {
-                step.selected = false;
-            });
+            if (step) {
+                step.status = OdsWizardState.DONE;
+            }
+        }
 
-            //set selectedStep variable to null
-            // $scope.selectedStep = null;
+        function setCurrent(step) {
+
+            if (step) {
+                step.status = OdsWizardState.CURRENT;
+            }
+        }
+
+        function setError(step) {
+
+            if (step) {
+                step.status = OdsWizardState.ERROR;
+            }
         }
 
         return service;

@@ -2,8 +2,8 @@
     <div class="ods-wizard-circle ods-wizard clearfix">
         <div class="steps clearfix">
             <ul>
-                <li class="" ng-repeat="step in ngModel"
-                    ng-class="{ 'first': $index === 0, 'done': step.done, 'last': $index === ngModel.length -1, 'disabled': step.disabled, 'current': step.current}"
+                <li class="{{step.status}}" ng-repeat="step in ngModel"
+                    ng-class="{ 'first': $index === 0, 'done': step.done, 'last': $index === ngModel.length -1}"
                     ng-show="step.visible">
                     <a href="" ng-click="step.callback()"><span class="step">{{step.label}}</span></a>
                 </li>

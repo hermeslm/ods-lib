@@ -56,6 +56,7 @@
             newFieldPasswordObject: newFieldPasswordObject,
             newFieldTextareaObject: newFieldTextareaObject,
             newFieldSelectObject: newFieldSelectObject,
+            newFieldSelect2Object: newFieldSelect2Object,
             newFieldMultiSelectObject: newFieldMultiSelectObject,
             newFieldToggleObject: newFieldToggleObject,
             newDateTimeObject: newDateTimeObject,
@@ -208,6 +209,8 @@
                             return 'forms/toolbar/components/textarea.html';
                         case OdsFieldType.SELECT:
                             return 'forms/toolbar/components/select.html';
+                        case OdsFieldType.SELECT2:
+                            return 'forms/toolbar/components/select.html';
                         case OdsFieldType.MULTI_SELECT:
                             return 'forms/toolbar/components/multi-select.html';
                         case OdsFieldType.TOGGLE:
@@ -254,6 +257,8 @@
                     return 'forms/schema/components/textarea/textarea.html';
                 case OdsFieldType.SELECT:
                     return 'forms/schema/components/select/select.html';
+                case OdsFieldType.SELECT2:
+                    return 'forms/schema/components/select2/select2.html';
                 case OdsFieldType.MULTI_SELECT:
                     return 'forms/schema/components/multi-select/multi-select.html';
                 case OdsFieldType.TOGGLE:
@@ -296,6 +301,8 @@
                 case OdsFieldType.TEXTAREA:
                     return 'forms/schema/components/textarea/textarea-properties.html';
                 case OdsFieldType.SELECT:
+                    return 'forms/schema/components/select/select-properties.html';
+                case OdsFieldType.SELECT2:
                     return 'forms/schema/components/select/select-properties.html';
                 case OdsFieldType.MULTI_SELECT:
                     return 'forms/schema/components/multi-select/multi-select-properties.html';
@@ -344,6 +351,8 @@
                     return 'forms/common/fields/toggle.html';
                 case OdsFieldType.SELECT:
                     return 'forms/common/fields/select.html';
+                case OdsFieldType.SELECT2:
+                    return 'forms/common/fields/select2.html';
                 case OdsFieldType.MULTI_SELECT:
                     return 'forms/common/fields/multi-select.html';
                 case OdsFieldType.DATETIME:
@@ -388,6 +397,8 @@
                 case OdsFieldType.TOGGLE:
                     return 'forms/common/viewer/toggle.html';
                 case OdsFieldType.SELECT:
+                    return 'forms/common/viewer/select.html';
+                case OdsFieldType.SELECT2:
                     return 'forms/common/viewer/select.html';
                 case OdsFieldType.MULTI_SELECT:
                     return 'forms/common/viewer/multi-select.html';
@@ -647,6 +658,39 @@
                 name: generateName(OdsComponentType.FIELD),
                 placeholder: '',
                 type: OdsFieldType.SELECT,
+                required: false,
+                valueField: 'id',
+                titleField: 'name',
+                limitTo: 10,
+                value: null,
+                options: [{
+                    id: 1,
+                    name: 'Option 1'
+                }, {
+                    id: 2,
+                    name: 'Option 2'
+                }, {
+                    id: 3,
+                    name: 'Option 3'
+                }],
+                validation: {
+                    messages: {}
+                }
+            };
+        }
+
+        /**
+         * Create a new Field Select2 Object
+         * @returns Field Select2 Object
+         */
+        function newFieldSelect2Object() {
+
+            return {
+                componentType: OdsComponentType.FIELD,
+                label: 'Select2',
+                name: generateName(OdsComponentType.FIELD),
+                placeholder: '',
+                type: OdsFieldType.SELECT2,
                 required: false,
                 multiSelect: false,
                 valueField: 'id',
