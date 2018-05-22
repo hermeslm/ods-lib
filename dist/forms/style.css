@@ -32,6 +32,11 @@
 
 .form-header {
   margin-left: 10px;
+  margin-right: 10px;
+}
+
+.accordion-button-right {
+  padding-top: 12px;
 }
 
 .toolbar-container {

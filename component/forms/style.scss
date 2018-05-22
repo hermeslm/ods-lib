@@ -33,6 +33,11 @@
 
 .form-header {
   margin-left: 10px;
+  margin-right: 10px;
+}
+
+.accordion-button-right {
+  padding-top: 12px;
 }
 
 //Toolbar section
@@ -270,7 +275,7 @@
   overflow-y: auto;
   max-height: 350px;
   white-space: pre-wrap;
-  
+
 }
 
 .no-padding {

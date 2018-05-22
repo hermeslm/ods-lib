@@ -45,9 +45,9 @@ function WizardCtrl($scope, OdsWizardService, OdsWizardState) {
             callback: function () {
 
                 OdsWizardService.goToStep($scope.steps, 2);
-                if(this.status !== OdsWizardState.DISABLED){
-                    OdsWizardService.setEnable($scope.steps[3]);
-                }
+                // if(this.status !== OdsWizardState.DISABLED){
+                //     OdsWizardService.setEnable($scope.steps[3]);
+                // }
             }
         },
         {
@@ -59,9 +59,9 @@ function WizardCtrl($scope, OdsWizardService, OdsWizardState) {
             callback: function () {
 
                 OdsWizardService.goToStep($scope.steps, 3);
-                if(this.status !== OdsWizardState.DISABLED){
-                    OdsWizardService.setEnable($scope.steps[4]);
-                }
+                // if(this.status !== OdsWizardState.DISABLED){
+                //     OdsWizardService.setEnable($scope.steps[4]);
+                // }
             }
         },
         {
@@ -73,9 +73,9 @@ function WizardCtrl($scope, OdsWizardService, OdsWizardState) {
             callback: function () {
 
                 OdsWizardService.goToStep($scope.steps, 4);
-                if(this.status !== OdsWizardState.DISABLED){
-                    OdsWizardService.setEnable($scope.steps[5]);
-                }
+                // if(this.status !== OdsWizardState.DISABLED){
+                //     OdsWizardService.setEnable($scope.steps[5]);
+                // }
             }
         },
         {
@@ -87,9 +87,9 @@ function WizardCtrl($scope, OdsWizardService, OdsWizardState) {
             callback: function () {
 
                 OdsWizardService.goToStep($scope.steps, 5);
-                if(this.status !== OdsWizardState.DISABLED){
-                    OdsWizardService.setEnable($scope.steps[6]);
-                }
+                // if(this.status !== OdsWizardState.DISABLED){
+                //     OdsWizardService.setEnable($scope.steps[6]);
+                // }
             }
         },
         {

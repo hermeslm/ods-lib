@@ -26,6 +26,9 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
         $scope.getToolbarComponent = getToolbarComponent;
         $scope.removeFromClipboard = removeFromClipboard;
 
+        $scope.import = importSchema;
+        $scope.export = exportSchema;
+
         var clipboardIndex = 6;
 
         $scope.toolbar = {
@@ -140,6 +143,14 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
         function getToolbarComponent(componentType) {
 
             return OdsFormService.getToolbarComponent(componentType);
+        }
+
+        function importSchema() {
+
+        }
+
+        function exportSchema() {
+
         }
     }
 }

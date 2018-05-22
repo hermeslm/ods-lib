@@ -27,9 +27,9 @@
 
             if (steps.length > index) {
                 if (steps[index].status !== OdsWizardState.DISABLED) {
-                    // clearCurrent(steps);
                     setDone(steps[index - 1]);
                     setCurrent(steps[index]);
+                    keepDone(steps, index);
                 }
             }
         }
@@ -66,6 +66,15 @@
 
             if (step) {
                 step.status = OdsWizardState.ERROR;
+            }
+        }
+
+        function keepDone(steps, index) {
+
+            for (var i = index; i < steps.length; i++) {
+                if(steps[index].status === OdsWizardState.DONE){
+                    setDone(steps[index]);
+                }
             }
         }
 
