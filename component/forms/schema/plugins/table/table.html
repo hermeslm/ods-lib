@@ -44,7 +44,7 @@
             </td>
         </tr>
         <tr ng-show="field.manageColumns">
-            <td ng-repeat="col in field.matrix[0]">
+            <td ng-repeat="col in field.matrix[0]" style="position: relative">
                 <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
                         ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right">
                     <span class="fa fa-trash"></span>
