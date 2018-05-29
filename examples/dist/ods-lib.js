@@ -67,7 +67,7 @@ $templateCache.put('forms/form/form.html','<div class=""><div class="form-header
 $templateCache.put('forms/form-info/form-info.html','<form name="formInfo" role="form" novalidate ng-submit="save()" show-validation><div class="box-body padding-top"><div class="row"><div class="col-lg-6"><div class="form-group" ng-class="{\'has-error\': formInfo.formName.$invalid}"><label class="control-label" for="formName">Form name</label><input class="form-control" name="formName" id="formName" ng-model="schema.name" ng-required="true"></div></div><div class="col-lg-6"><div class="form-group" ng-class="{\'has-error\': formInfo.formLabel.$invalid}"><label class="control-label" for="formLabel">Form label</label><input class="form-control" name="formLabel" id="formLabel" ng-model="schema.label" ng-required="true"></div></div></div><div class="row"><div class="col-lg-12"><div class="form-group" ng-class="{\'has-error\': formInfo.description.$invalid}"><label class="control-label" for="description">Form description</label><textarea class="form-control" name="description" id="description" ng-model="schema.description" ng-required="false" rows="3" placeholder="Type form description...">\n                    </textarea></div></div></div><div class="row"><div class="col-lg-3"><div class="form-group" ng-class="{\'has-error\': formInfo.handleSubmit.$invalid}"><label class="control-label" for="handleSubmit">Handle submit internally: &nbsp;</label><input type="checkbox" name="handleSubmit" id="handleSubmit" ng-model="schema.handleSubmit" ng-required="false" title="Specify if submit is handle by form (in this case you must to specify submit callback) or externally"></div></div><div class="col-lg-9"><div class="form-group" ng-class="{\'has-error\': formInfo.handleSubmit.$invalid}"><label class="control-label" for="hideLabel">Hide form label: &nbsp;</label><input type="checkbox" name="hideLabel" id="hideLabel" ng-model="schema.hideLabel" ng-required="false" title="This allow to hide the form title."></div></div></div></div></form>');
 $templateCache.put('forms/schema/schema.html','<div class="box-schema"><div class="alert alert-danger" ng-show="vm.error"><strong>An error has occurred!</strong> Error in schema.</div><div class="container" ng-if="schema.layout.length === 0" style="width: 100%;"><div class="col-lg-12 alert alert-info text-center"><p class="box-schema-area-empty-x"><span class="fa fa-arrow-down"></span></p><p class="lead hidden-phone">To start <strong>Drag</strong> a <strong>section</strong> from the <strong>toolbar</strong> down to this <strong>canvas</strong>.</p></div></div><ul dnd-list="schema.layout" dnd-allowed-types="schema.allowedTypes" dnd-inserted="onAdd(item, type)"><li class="box-schema-section" ng-repeat="section in schema.layout" dnd-draggable="section" dnd-disable-if="section.componentType == undefined" dnd-effect-allowed="move" dnd-moved="schema.layout.splice($index, 1)"><ods-section schema="schema" section="section" config="config" index="$index" debug-mode="debugMode"></ods-section></li></ul></div>');
 $templateCache.put('forms/toolbar/field-to-delete.html','<div class="box-draggable"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs btn-primary" type="button" ng-click="vm.addField(field)" title="Add this field."><span class="fa fa-hand-pointer-o"></span></button></div></div><label class="control-label" for="{{field.name}}">{{field.title}}</label><input class="form-control" name="{{field.name}}" id="{{field.name}}">');
-$templateCache.put('forms/toolbar/toolbar.html','<div class="toolbar-container box-solid" bs-affix data-offset-top="10" data-offset-bottom="0"><div class="form-header with-border"><div class="row" style="margin: 0"><div class="col-lg-6"><h3 class="box-title">{{toolbar.title}}</h3></div><div class="col-lg-6 accordion-button-right"><button class="btn btn-success btn-sm" title="Import schema" ng-click="import()"><i class="fa fa-upload"></i> Import</button> <button class="btn btn-primary btn-sm" title="Export schema" ng-click="export()"><i class="fa fa-download"></i> Export</button></div></div></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" panel-class="panel-toolbar" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in toolbar.groups" ng-init="groupIndex = $index"><ul class="list-group no-margin-bottom"><li class="toolbar-component padding-bottom no-padding-top" ng-repeat="component in group.components"><div class="box-toolbar" dnd-draggable="component" dnd-type="component.componentType" dnd-effect-allowed="copy" ng-include="\'forms/toolbar/components/component.html\'"></div></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box -->');
+$templateCache.put('forms/toolbar/toolbar.html','<div class="toolbar-container box-solid" bs-affix data-offset-top="10" data-offset-bottom="0"><div class="form-header with-border"><div class="row" style="margin: 0"><div class="col-lg-6"><h3 class="box-title">{{toolbar.title}}</h3></div><div class="col-lg-6 accordion-button-right"><label class="btn btn-success btn-sm" title="Import schema"><i class="fa fa-upload"></i> Import <input type="file" hidden ng-model="importFile" accept=".json" ods-file-upload></label><!--<button class="btn btn-primary btn-sm" title="Export schema" ng-click="export()">--><!--<i class="fa fa-download"></i>--><!--Export--><!--</button>--> <button class="btn btn-primary btn-sm" title="Export schema" ng-click="export()"><i class="fa fa-download"></i> Export</button></div></div></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" panel-class="panel-toolbar" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in toolbar.groups" ng-init="groupIndex = $index"><ul class="list-group no-margin-bottom"><li class="toolbar-component padding-bottom no-padding-top" ng-repeat="component in group.components"><div class="box-toolbar" dnd-draggable="component" dnd-type="component.componentType" dnd-effect-allowed="copy" ng-include="\'forms/toolbar/components/component.html\'"></div></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box -->');
 $templateCache.put('forms/viewer/viewer.html','<div class="{{cssClass}}"><div class="form-header with-border"><h3 class="box-title" ng-hide="schema.hideLabel" ng-bind-html="schema.label"></h3></div><!-- /.box-header --><!-- form start --><div ng-if="schema.layout.length !== 0"><div class="box-body padding-top"><div ng-repeat="section in schema.layout"><h4 ng-bind-html="section.title" ng-hide="hideTitle(section)"></h4><div class="{{row.cssClass}}" ng-repeat="row in section.rows"><div class="{{col.cssClass}}" ng-repeat="col in row.cols"><div class="" ng-repeat="field in col.fields"><div ng-if="field"><div class="form-group" ng-class="{\'has-error\': {{schema.name}}.{{field.name}}.$invalid}"><label class="control-label" for="{{field.name}}" ng-hide="hideTitle(field)">{{field.label}}&nbsp;</label><!--ng-if="field.value"--><ng-include src="getFormViewerTemplate(field.type)"></ng-include></div></div></div></div></div></div></div><!--<div class="box-footer" ng-show="schema.handleSubmit">--><!--<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="clear()">--><!--<span class="fa fa-trash-o"></span>&nbsp;<span>Clear</span>--><!--</button>--><!--<button type="submit" ng-disabled="{{schema.name}}.$invalid" class="btn btn-primary">--><!--<span class="fa fa-save"></span>&nbsp;<span>Save</span>--><!--</button>--><!--</div>--></div></div>');
 $templateCache.put('reports/directives/checklist.html','<style>#checkbox-list {\n        display: block;\n    }\n\n    #checkbox-list-container {\n        height: {{height}}px;\n        overflow-y: scroll;\n    }</style><div id="checkbox-list-component"><label>{{label}}</label><div style="display: block"><input type="checkbox" ng-click="toggleAll()" ng-model="allSelected">Select all</div><hr style="margin-top: -2px; margin-bottom: 5px"><div id="checkbox-list-container"><label id="checkbox-list" ng-repeat="element in list"><input type="checkbox" ng-model="element.selected" ng-change="toggleOne(element)">{{element.text}}</label></div></div>');
 $templateCache.put('reports/tpl/one-col.tpl.html','<div ng-repeat="param in vm.report.params"><ods-param param="param"></ods-param></div>');
@@ -121,9 +121,6 @@ $templateCache.put('forms/common/fields/plugins/table.html','<div class="table-r
 $templateCache.put('forms/common/viewer/plugins/ckeditor.html','<div ng-bind-html="valueSubtitutor(field)"></div>');
 $templateCache.put('forms/common/viewer/plugins/if-yes.html','<!--<br ng-if="field.ln">--><div ng-bind-html="field.value.toggle ? field.on : field.off"></div><div ng-bind-html="field.value.textarea" ng-if="field.value.toggle"></div>');
 $templateCache.put('forms/common/viewer/plugins/table.html','<div class="table-responsive position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}"><div class="col-lg-12" ng-repeat="field in col.fields"><ng-include src="getFormViewerTemplate(field.type)"></ng-include></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr></tbody></table></div>');
-$templateCache.put('forms/schema/components/checkbox/checkbox-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/checkbox/ln-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div></div></form></uib-tab><!--<uib-tab index="1" heading="Validation">--><!--<form name="fieldValidationForm" class="form-horizontal">--><!--<div class="box-body padding-top">--><!--<div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div>--><!--</div>--><!--</form>--><!--</uib-tab>--><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/components/checkbox/checkbox.html','<label class="control-label" for="{{field.name}}">Checkbox</label><div ng-include="\'forms/common/fields/checkbox.html\'"></div>');
-$templateCache.put('forms/schema/components/checkbox/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/common-properties.html','<div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/placeholder-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div>');
 $templateCache.put('forms/schema/components/base-properties/label-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-label.$invalid}"><label for="{{field.name}}-label" class="col-sm-4 control-label">Label:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-label" name="{{field.name}}-label" placeholder="Label..." ng-model="field.label" ng-required="false"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-hideLabel.$invalid}"><label for="{{field.name}}-hideLabel" class="col-sm-4 control-label" title="Indicates if will show label or not.">Hide Label:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-hideLabel" name="{{field.name}}-hideLabel" ng-model="field.hideLabel"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/maxlength-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.{{field.name}}-maxLength.$invalid}"><label for="{{field.name}}-maxLength" class="col-sm-4 control-label">Max Length:</label><div class="col-sm-8"><input type="number" class="form-control" id="{{field.name}}-maxLength" name="{{field.name}}-maxLength" placeholder="Max Length..." ng-model="field.validation.maxlength" ng-required="false" ng-change="onChangeMaxLength()"></div></div></div><div class="row no-vertical-margin" ng-show="field.validation.maxlength"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.{{field.name}}-minLengthMessage.$invalid}"><label for="{{field.name}}-maxLengthMessage" class="col-sm-4 control-label">Message</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-maxLengthMessage" name="{{field.name}}-maxLengthMessage" placeholder="Max length message..." ng-model="field.validation.messages.maxlength" ng-required="false"></div></div></div>');
@@ -136,6 +133,9 @@ $templateCache.put('forms/schema/components/base-properties/readonly-properties.
 $templateCache.put('forms/schema/components/base-properties/required-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.{{field.name}}-required.$invalid}"><label for="{{field.name}}-required" class="col-sm-4 control-label" title="Indicates if a value is required for this field.">Required:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-required" name="{{field.name}}-required" ng-model="field.validation.required" class="ng-pristine ng-valid" ng-change="onChangeRequired()"></div></div></div><div class="row no-vertical-margin" ng-show="field.validation.required"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.{{field.name}}-requiredMessage.$invalid}"><label for="{{field.name}}-requiredMessage" class="col-sm-4 control-label">Required Message</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-requiredMessage" name="{{field.name}}-requiredMessage" placeholder="Required Message..." ng-model="field.validation.messages.required" ng-required="false"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/tooltip-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-tooltip.$invalid}"><label for="{{field.name}}-tooltip" class="col-sm-4 control-label">Tooltip:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-tooltip" name="{{field.name}}-tooltip" placeholder="Tooltip..." ng-model="field.tooltip" ng-required="false"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/value-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-value.$invalid}"><label for="{{field.name}}-value" class="col-sm-4 control-label">Value:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-value" name="{{field.name}}-value" placeholder="Value..." ng-model="field.value" ng-required="false"></div></div></div>');
+$templateCache.put('forms/schema/components/checkbox/checkbox-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/checkbox/ln-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div></div></form></uib-tab><!--<uib-tab index="1" heading="Validation">--><!--<form name="fieldValidationForm" class="form-horizontal">--><!--<div class="box-body padding-top">--><!--<div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div>--><!--</div>--><!--</form>--><!--</uib-tab>--><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/components/checkbox/checkbox.html','<label class="control-label" for="{{field.name}}">Checkbox</label><div ng-include="\'forms/common/fields/checkbox.html\'"></div>');
+$templateCache.put('forms/schema/components/checkbox/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/checkbox-list/checkbox-list-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.inline.$invalid}"><label for="{{field.name}}-inline" class="col-sm-4 control-label" title="Indicates if will show inline or not.">Inline:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-inline" name="{{field.name}}-inline" ng-model="field.inline"></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-checkboxlist-options field="field"></ods-field-checkboxlist-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/checkbox-list/checkbox-list.html','<label class="control-label" for="{{field.name}}">{{field.label}}</label><div ng-include="\'forms/common/fields/checkbox-list.html\'"></div>');
 $templateCache.put('forms/schema/components/checkbox-list/checkboxlist-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="{{field.name}}-limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="{{field.name}}-limitTo" name="{{field.name}}-limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><div class="table-responsive" style="max-height: 250px"><table class="table table-condensed position-relative" style="position: relative;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'has-error\': fieldOptionForm.$invalid }"><td><input type="checkbox" name="{{field.name}}Selected[]" ng-model="field.value[option.id]"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" ng-required="true"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
@@ -150,11 +150,11 @@ $templateCache.put('forms/schema/components/multi-select/multi-select-properties
 $templateCache.put('forms/schema/components/multi-select/multi-select.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/multi-select.html\'"></div>');
 $templateCache.put('forms/schema/components/number/number-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/password/password-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/components/row/row-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="rowPropertiesForm" class="form form-horizontal"><div class="padding-top"><div class="row"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': rowPropertiesForm.{{row.name}}-rowName.$invalid}"><label for="{{row.name}}-rowName" class="col-sm-5 control-label">Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="{{row.name}}-rowName" name="{{row.name}}-rowName" placeholder="Name..." ng-model="row.name" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': rowPropertiesForm.{{row.name}}-cssClass.$invalid}"><label for="{{row.name}}-cssClass" class="col-sm-5 control-label">Class Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="{{row.name}}-cssClass" name="{{row.name}}-cssClass" placeholder="Css Class..." ng-model="row.cssClass" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': rowPropertiesForm.{{row.name}}-cols.$invalid}"><label for="{{row.name}}-cols" class="col-sm-5 control-label">Cols:</label><div class="col-sm-7"><input type="number" class="form-control" id="{{row.name}}-cols" name="{{row.name}}-cols" placeholder="Cols..." ng-model="row.cols.length" ng-required="false" ng-disabled="true"></div><!--<div class="col-lg-3">--><!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>--><!--</div>--></div></div><div class="col-md-8 col-sm-8 col-xs-12"><!--<h3>Columns configuration</h3>--><div class="table-responsive" style="max-height: 200px"><table class="table table-condensed table-striped"><thead><tr><th>Columns #</th><th>CSS class</th><th width="20px">Width</th><th>Actions</th></tr></thead><tbody><tr ng-repeat="col in row.cols"><td>{{$index + 1}}</td><td><input type="text" name="cssClass" ng-model="col.cssClass" class="form-control input-sm" required readonly="readonly"></td><td><input type="number" name="width" class="form-control input-sm" max="12" min="1" ng-model="col.width" ng-change="onChangeColWith(col)"></td><td><button type="button" class="btn btn-danger btn-sm" ng-click="removeColumn($index)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button></td></tr><tr><td></td><td></td><td><button type="button" class="btn btn-primary" ng-click="addColumn(row)">Add column</button></td></tr></tbody></table></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Debug" ng-show="debugMode"><ods-model model="row" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/components/row/row.html','<div class="box-draggable" ng-class="{ \'error\': row.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" ng-disabled="section.showProperties && section.invalid" ng-class="{ \'active\': section.showProperties }" title="Configure this Section." ng-click="toggleRowProperties(row)"><span class="fa fa-wrench"></span></button> <button class="btn btn-xs btn-danger" type="button" title="Remove" ng-click="removeRow(index)"><span class="fa fa-trash"></span></button></div></div><div class="box-field-container padding"><div class="box-body no-padding"><div class="box-row {{col.cssClass}}" ng-repeat="col in row.cols"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" dnd-drop="dropCallback(index, item, external, type)" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" config="config" index="$index" field="field" debug-mode="debugMode"></ods-field></li></ul></div></div><!-- /.box-body --></div><div class="box-properties-container" ng-class="{ visible: row.showProperties }"><div class="padding"><div ng-include="\'forms/schema/components/row/row-properties.html\'"></div></div></div></div>');
 $templateCache.put('forms/schema/components/radio-list/radio-list-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.inline.$invalid}"><label for="inline" class="col-sm-4 control-label" title="Indicates if will show inline or not.">Inline:</label><div class="col-sm-8"><input type="checkbox" id="inline" name="inline" ng-model="field.inline"></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-radio-options field="field"></ods-field-radio-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/radio-list/radio-list.html','<label class="control-label" for="{{field.name}}">{{field.label}}</label><div ng-include="\'forms/common/fields/radio-list.html\'"></div>');
 $templateCache.put('forms/schema/components/radio-list/radio-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="{{field.name}}-limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="{{field.name}}-limitTo" name="{{field.name}}-limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><div class="table-responsive" style="max-height: 250px"><table class="table table-condensed position-relative" style="position: relative;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'has-error\': fieldOptionForm.$invalid }"><td><input type="radio" name="{{field.name}}Selected[]" ng-value="option.id" ng-model="field.value"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" required="required"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
-$templateCache.put('forms/schema/components/row/row-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="rowPropertiesForm" class="form form-horizontal"><div class="padding-top"><div class="row"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': rowPropertiesForm.{{row.name}}-rowName.$invalid}"><label for="{{row.name}}-rowName" class="col-sm-5 control-label">Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="{{row.name}}-rowName" name="{{row.name}}-rowName" placeholder="Name..." ng-model="row.name" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': rowPropertiesForm.{{row.name}}-cssClass.$invalid}"><label for="{{row.name}}-cssClass" class="col-sm-5 control-label">Class Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="{{row.name}}-cssClass" name="{{row.name}}-cssClass" placeholder="Css Class..." ng-model="row.cssClass" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': rowPropertiesForm.{{row.name}}-cols.$invalid}"><label for="{{row.name}}-cols" class="col-sm-5 control-label">Cols:</label><div class="col-sm-7"><input type="number" class="form-control" id="{{row.name}}-cols" name="{{row.name}}-cols" placeholder="Cols..." ng-model="row.cols.length" ng-required="false" ng-disabled="true"></div><!--<div class="col-lg-3">--><!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>--><!--</div>--></div></div><div class="col-md-8 col-sm-8 col-xs-12"><!--<h3>Columns configuration</h3>--><div class="table-responsive" style="max-height: 200px"><table class="table table-condensed table-striped"><thead><tr><th>Columns #</th><th>CSS class</th><th width="20px">Width</th><th>Actions</th></tr></thead><tbody><tr ng-repeat="col in row.cols"><td>{{$index + 1}}</td><td><input type="text" name="cssClass" ng-model="col.cssClass" class="form-control input-sm" required readonly="readonly"></td><td><input type="number" name="width" class="form-control input-sm" max="12" min="1" ng-model="col.width" ng-change="onChangeColWith(col)"></td><td><button type="button" class="btn btn-danger btn-sm" ng-click="removeColumn($index)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button></td></tr><tr><td></td><td></td><td><button type="button" class="btn btn-primary" ng-click="addColumn(row)">Add column</button></td></tr></tbody></table></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Debug" ng-show="debugMode"><ods-model model="row" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/components/row/row.html','<div class="box-draggable" ng-class="{ \'error\': row.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" ng-disabled="section.showProperties && section.invalid" ng-class="{ \'active\': section.showProperties }" title="Configure this Section." ng-click="toggleRowProperties(row)"><span class="fa fa-wrench"></span></button> <button class="btn btn-xs btn-danger" type="button" title="Remove" ng-click="removeRow(index)"><span class="fa fa-trash"></span></button></div></div><div class="box-field-container padding"><div class="box-body no-padding"><div class="box-row {{col.cssClass}}" ng-repeat="col in row.cols"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" dnd-drop="dropCallback(index, item, external, type)" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" config="config" index="$index" field="field" debug-mode="debugMode"></ods-field></li></ul></div></div><!-- /.box-body --></div><div class="box-properties-container" ng-class="{ visible: row.showProperties }"><div class="padding"><div ng-include="\'forms/schema/components/row/row-properties.html\'"></div></div></div></div>');
 $templateCache.put('forms/schema/components/section/section-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="sectionPropertiesForm" class="form form-horizontal"><div class="padding-top"><div class="row"><div class="col-lg-6 col-md-6 col-sm-12 col-xs-12"><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.{{section.name}}-sectionName.$invalid}"><label for="{{section.name}}-sectionName" class="col-sm-5 control-label">Name:</label><div class="col-sm-7"><input type="text" class="form-control" id="{{section.name}}-sectionName" name="{{section.name}}-sectionName" placeholder="Name..." ng-model="section.name" ng-required="true"></div></div><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.{{section.name}}-title.$invalid}"><label for="{{section.name}}-title" class="col-sm-5 control-label">Title:</label><div class="col-sm-7"><input type="text" class="form-control" id="{{section.name}}-title" name="{{section.name}}-title" placeholder="Title..." ng-model="section.title" ng-required="false"></div></div><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.{{section.name}}-rows.$invalid}"><label for="{{section.name}}-rows" class="col-sm-5 control-label">Rows:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{section.name}}-rows" name="{{section.name}}-rows" placeholder="Rows..." ng-model="section.rows.length" ng-required="false" ng-disabled="true"></div><div class="col-lg-4"><button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button></div></div><div class="form-group" ng-class="{\'has-error\': sectionPropertiesForm.{{section.name}}-hideLabel.$invalid}"><label for="{{section.name}}-hideLabel" class="col-sm-5 control-label" title="Indicates if will show title or not.">Hide Title:</label><div class="col-sm-7"><input type="checkbox" id="{{section.name}}-hideLabel" name="{{section.name}}-hideLabel" ng-model="section.hideLabel"></div></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Debug" ng-show="debugMode"><ods-model model="section" css-class="fixed-height"></ods-model></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/section/section.html','<div class="box-draggable" ng-class="{ \'error\': object.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" ng-disabled="section.showProperties && section.invalid" ng-class="{ \'active\': section.showProperties }" ng-click="toggleProperties(section)" title="Configure this Section."><span class="fa fa-wrench"></span></button> <button class="btn btn-default btn-xs" type="button" ng-click="swap(index - 1, index)" ng-disabled="index === 0" title="Move up"><span class="fa fa-arrow-up"></span></button> <button class="btn btn-default btn-xs" type="button" ng-click="swap(index, index + 1)" title="Move down" ng-disabled="index === schema.layout.length - 1"><span class="fa fa-arrow-down"></span></button> <button class="btn btn-xs btn-danger" type="button" ng-click="remove(index)" title="Remove"><span class="fa fa-trash"></span></button></div></div><div class="box-header with-border"><h4 class="box-title" ng-bind-html="section.title"></h4></div><div class="box-body"><ul dnd-list="section.rows" dnd-allowed-types="section.allowedTypes"><li class="{{row.cssClass}} padding-top" ng-repeat="row in section.rows" dnd-draggable="row" dnd-type="row.componentType" dnd-disable-if="row.componentType == undefined" dnd-effect-allowed="move" dnd-moved="section.rows.splice($index, 1)"><ods-row section="section" row="row" config="config" index="$index" debug-mode="debugMode"></ods-row></li></ul></div><div class="box-properties-container" ng-class="{ visible: section.showProperties }"><div class="padding"><div ng-include="\'forms/schema/components/section/section-properties.html\'"></div></div></div></div>');
 $templateCache.put('forms/schema/components/select/select-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="{{field.name}}-limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="{{field.name}}-limitTo" name="{{field.name}}-limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><div class="table-responsive" style="max-height: 250px"><table class="table table-condensed position-relative" style="position: relative;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'has-error\': fieldOptionForm.$invalid }"><td><input type="radio" name="{{field.name}}Selected[]" ng-value="field.options[$index]" ng-model="field.value"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" ng-required="true"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
@@ -2206,6 +2206,351 @@ function selectFiltered($filter) {
     }
 }
 
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsSignature', odsSignature);
+
+odsSignature.$inject = ['$timeout', 'OdsSignature'];
+
+function odsSignature($timeout, OdsSignature) {
+
+    var directive = {
+        restrict: 'E',
+        require: '?ngModel',
+        templateUrl: 'signature/signature.html',
+        scope: {
+            model: '=ngModel',
+            name: '@',
+            options: '=?',
+            disabled: '=ngDisabled',
+            required: '=?ngRequired',
+            onChange: '&'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element, attrs, controller) {
+
+        var hideRequiredClass = 'sig-box-default';
+        var showRequiredClass = 'sig-box-error';
+
+        //If model not present we will exit.
+        if ($scope.model === null) {
+            console.error('Please define a model using "ng-model" attribute!!!');
+            return;
+        }
+
+        $scope.reset = reset;
+
+        init();
+
+        function initOptions() {
+
+            $scope.options = {
+                width: 'ratio',
+                height: 'ratio',
+                color: '#00008B',
+                'background-color': '#EEEEEE',
+                lineWidth: 0,
+                cssClass: ''
+            };
+        }
+
+        function initElement() {
+
+            $scope.element = $element.children('div').children('div').jSignature($scope.options);
+            // $element.find('#sig').jSignature($scope.options);
+            $scope.element.initialized = true;
+            OdsSignature.register($scope.name, $scope.element);
+        }
+
+        function init() {
+
+            //Init options
+            if (!$scope.options) {
+                initOptions();
+            }
+
+            //Init name
+            if (!$scope.name) {
+                $scope.name = OdsSignature.generateName();
+            } else {
+                if (OdsSignature.getInstance($scope.name)) {
+                    console.error('Name already defined in another Signature instance, please pick another name!!!');
+                    return;
+                }
+            }
+
+            //Init required field
+            $scope.requiredClass = hideRequiredClass;
+            $scope.required = !!$scope.required;
+
+            //Init Element
+            initElement();
+            //Set value
+            // setValue();
+
+            if ($scope.options.disabled) {
+                OdsSignature.disable($scope.name, $scope.options);
+            }
+
+            //Init on change event
+            $scope.element.bind('change', function () {
+
+                    // $timeout, 100, true because event happens outside angular's digest cycle
+                    // and change is called on setData
+                    $timeout(function () {
+                        var valid = isValid($scope.name);
+                        if (valid) {
+                            $scope.model = 'data:' +
+                                OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
+                        }
+                    }, 100, true);
+                    if ($scope.onChange) {
+                        $scope.onChange();
+                    }
+                }
+            );
+        }
+
+        function setValue() {
+
+            if ($scope.model && $scope.model !== '') {
+                // We set signature if it is present
+                OdsSignature.setData($scope.name, $scope.model);
+                hideRequired(true);
+            }
+        }
+
+        function reset() {
+
+            $scope.model = '';
+            OdsSignature.reset($scope.name);
+        }
+
+        function isValid() {
+
+            return OdsSignature.isValid($scope.name);
+        }
+
+        function hideRequired(state) {
+
+            if (state) {
+                $scope.requiredClass = hideRequiredClass;
+            } else {
+                $scope.requiredClass = showRequiredClass;
+            }
+            controller.$setValidity('required', state);
+        }
+
+        $scope.$watch('model', function (model, oldModel) {
+
+            if ($scope.required && !isValid()) {
+                hideRequired(false);
+            } else {
+                hideRequired(true);
+            }
+            setValue();
+            return;
+        });
+
+        $scope.$watch('disabled', function (disabled) {
+
+            if (disabled) {
+                OdsSignature.disable($scope.name);
+            } else {
+                OdsSignature.enable($scope.name);
+            }
+            return;
+        });
+
+        $scope.$watch('required', function (required) {
+
+            var valid = isValid($scope.name);
+            if (required && !valid) {
+                //We set this patch in case required option change and model is valid too
+                if ($scope.model && $scope.model !== '') {
+                    // We set signature if it is present
+                    hideRequired(true);
+                } else {
+                    hideRequired(false);
+                }
+            } else {
+                hideRequired(true);
+            }
+            return;
+        });
+
+        $scope.$on('$destroy', function () {
+            OdsSignature.unregister($scope.name);
+        });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .factory('OdsSignature', OdsSignature);
+
+function OdsSignature() {
+
+    // var apinamespace = 'jSignature';
+
+    var exportTypes = {
+        DEFAULT: 'default',
+        NATIVE: 'native',
+        IMAGE: 'image',
+        BASE30: 'base30',
+        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
+        SVG: 'svg',
+        SVG_XML: 'image/svg+xml',
+        SVG_BASE64: 'svgbase64',
+        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
+    };
+
+    var importTypes = {
+        NATIVE: 'native',
+        IMAGE: 'image',
+        IMAGE_PNG_BASE64: 'image/png;base64',
+        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
+        IMAGE_JPG_BASE64: 'image/jpg;base64'
+    };
+
+    var uniqueCounter = (+new Date()) % 10000;
+
+    var instanceMap = {};
+
+    var service = {
+        exportTypes: exportTypes,
+        importTypes: importTypes,
+        register: register,
+        getInstance: getInstance,
+        unregister: unregister,
+        reset: reset,
+        isValid: isValid,
+        getData: getData,
+        setData: setData,
+        disable: disable,
+        enable: enable,
+        generateName: generateName
+        // setOptions: setOptions,
+        // setReadOnly: setReadOnly,
+        // initOptions: initOptions
+    };
+
+    return service;
+
+    function register(name, instance) {
+
+        instanceMap[name] = instance;
+    }
+
+    function getInstance(name) {
+
+        if (instanceMap[name]) {
+            return instanceMap[name];
+        } else {
+            return false;
+        }
+    }
+
+    function unregister(name) {
+
+        instanceMap[name] = null;
+    }
+
+    function generateName() {
+
+        uniqueCounter++;
+        return 'signature' + uniqueCounter;
+    }
+
+    function reset(name) {
+
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('reset');
+        }
+    }
+
+    function isValid(name) {
+
+        var d = getData(name, exportTypes.NATIVE);
+        if (d.length >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getData(name, type) {
+
+        var element = getInstance(name);
+        if (element) {
+            return element.jSignature('getData', type);
+        } else {
+            return false;
+        }
+    }
+
+    // function getDataAsSVG(name) {
+    //
+    //     var element = getInstance(name);
+    //     var svg = element.jSignature('getData', 'svg');
+    //     return svg;
+    // }
+    //
+    // function getDataAsBase30(name) {
+    //
+    //     var element = getInstance(name);
+    //     if (element) {
+    //         var svg = element.jSignature('getData', 'svg');
+    //         return svg;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    function setData(name, model) {
+
+        reset(name, model);
+        var element = getInstance(name);
+        if (element && model && model !== '') {
+            element.jSignature('setData', model);
+        }
+    }
+
+    function disable(name) {
+
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('disable');
+        }
+    }
+
+    function enable(name) {
+
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('enable');
+        }
+    }
+
+    // function undo(name) {
+    //
+    //     var eventName = apinamespace + '.undo';
+    //     var element = getInstance(name);
+    //     if (element) {
+    //         element.jSignature('events');
+    //     }
+    // }
+}
 (function() {
     'use strict';
 
@@ -2921,351 +3266,6 @@ function OdsUtils() {
 
 angular
     .module('ods-lib')
-    .directive('odsSignature', odsSignature);
-
-odsSignature.$inject = ['$timeout', 'OdsSignature'];
-
-function odsSignature($timeout, OdsSignature) {
-
-    var directive = {
-        restrict: 'E',
-        require: '?ngModel',
-        templateUrl: 'signature/signature.html',
-        scope: {
-            model: '=ngModel',
-            name: '@',
-            options: '=?',
-            disabled: '=ngDisabled',
-            required: '=?ngRequired',
-            onChange: '&'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element, attrs, controller) {
-
-        var hideRequiredClass = 'sig-box-default';
-        var showRequiredClass = 'sig-box-error';
-
-        //If model not present we will exit.
-        if ($scope.model === null) {
-            console.error('Please define a model using "ng-model" attribute!!!');
-            return;
-        }
-
-        $scope.reset = reset;
-
-        init();
-
-        function initOptions() {
-
-            $scope.options = {
-                width: 'ratio',
-                height: 'ratio',
-                color: '#00008B',
-                'background-color': '#EEEEEE',
-                lineWidth: 0,
-                cssClass: ''
-            };
-        }
-
-        function initElement() {
-
-            $scope.element = $element.children('div').children('div').jSignature($scope.options);
-            // $element.find('#sig').jSignature($scope.options);
-            $scope.element.initialized = true;
-            OdsSignature.register($scope.name, $scope.element);
-        }
-
-        function init() {
-
-            //Init options
-            if (!$scope.options) {
-                initOptions();
-            }
-
-            //Init name
-            if (!$scope.name) {
-                $scope.name = OdsSignature.generateName();
-            } else {
-                if (OdsSignature.getInstance($scope.name)) {
-                    console.error('Name already defined in another Signature instance, please pick another name!!!');
-                    return;
-                }
-            }
-
-            //Init required field
-            $scope.requiredClass = hideRequiredClass;
-            $scope.required = !!$scope.required;
-
-            //Init Element
-            initElement();
-            //Set value
-            // setValue();
-
-            if ($scope.options.disabled) {
-                OdsSignature.disable($scope.name, $scope.options);
-            }
-
-            //Init on change event
-            $scope.element.bind('change', function () {
-
-                    // $timeout, 100, true because event happens outside angular's digest cycle
-                    // and change is called on setData
-                    $timeout(function () {
-                        var valid = isValid($scope.name);
-                        if (valid) {
-                            $scope.model = 'data:' +
-                                OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
-                        }
-                    }, 100, true);
-                    if ($scope.onChange) {
-                        $scope.onChange();
-                    }
-                }
-            );
-        }
-
-        function setValue() {
-
-            if ($scope.model && $scope.model !== '') {
-                // We set signature if it is present
-                OdsSignature.setData($scope.name, $scope.model);
-                hideRequired(true);
-            }
-        }
-
-        function reset() {
-
-            $scope.model = '';
-            OdsSignature.reset($scope.name);
-        }
-
-        function isValid() {
-
-            return OdsSignature.isValid($scope.name);
-        }
-
-        function hideRequired(state) {
-
-            if (state) {
-                $scope.requiredClass = hideRequiredClass;
-            } else {
-                $scope.requiredClass = showRequiredClass;
-            }
-            controller.$setValidity('required', state);
-        }
-
-        $scope.$watch('model', function (model, oldModel) {
-
-            if ($scope.required && !isValid()) {
-                hideRequired(false);
-            } else {
-                hideRequired(true);
-            }
-            setValue();
-            return;
-        });
-
-        $scope.$watch('disabled', function (disabled) {
-
-            if (disabled) {
-                OdsSignature.disable($scope.name);
-            } else {
-                OdsSignature.enable($scope.name);
-            }
-            return;
-        });
-
-        $scope.$watch('required', function (required) {
-
-            var valid = isValid($scope.name);
-            if (required && !valid) {
-                //We set this patch in case required option change and model is valid too
-                if ($scope.model && $scope.model !== '') {
-                    // We set signature if it is present
-                    hideRequired(true);
-                } else {
-                    hideRequired(false);
-                }
-            } else {
-                hideRequired(true);
-            }
-            return;
-        });
-
-        $scope.$on('$destroy', function () {
-            OdsSignature.unregister($scope.name);
-        });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('OdsSignature', OdsSignature);
-
-function OdsSignature() {
-
-    // var apinamespace = 'jSignature';
-
-    var exportTypes = {
-        DEFAULT: 'default',
-        NATIVE: 'native',
-        IMAGE: 'image',
-        BASE30: 'base30',
-        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
-        SVG: 'svg',
-        SVG_XML: 'image/svg+xml',
-        SVG_BASE64: 'svgbase64',
-        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
-    };
-
-    var importTypes = {
-        NATIVE: 'native',
-        IMAGE: 'image',
-        IMAGE_PNG_BASE64: 'image/png;base64',
-        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
-        IMAGE_JPG_BASE64: 'image/jpg;base64'
-    };
-
-    var uniqueCounter = (+new Date()) % 10000;
-
-    var instanceMap = {};
-
-    var service = {
-        exportTypes: exportTypes,
-        importTypes: importTypes,
-        register: register,
-        getInstance: getInstance,
-        unregister: unregister,
-        reset: reset,
-        isValid: isValid,
-        getData: getData,
-        setData: setData,
-        disable: disable,
-        enable: enable,
-        generateName: generateName
-        // setOptions: setOptions,
-        // setReadOnly: setReadOnly,
-        // initOptions: initOptions
-    };
-
-    return service;
-
-    function register(name, instance) {
-
-        instanceMap[name] = instance;
-    }
-
-    function getInstance(name) {
-
-        if (instanceMap[name]) {
-            return instanceMap[name];
-        } else {
-            return false;
-        }
-    }
-
-    function unregister(name) {
-
-        instanceMap[name] = null;
-    }
-
-    function generateName() {
-
-        uniqueCounter++;
-        return 'signature' + uniqueCounter;
-    }
-
-    function reset(name) {
-
-        var element = getInstance(name);
-        if (element) {
-            element.jSignature('reset');
-        }
-    }
-
-    function isValid(name) {
-
-        var d = getData(name, exportTypes.NATIVE);
-        if (d.length >= 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function getData(name, type) {
-
-        var element = getInstance(name);
-        if (element) {
-            return element.jSignature('getData', type);
-        } else {
-            return false;
-        }
-    }
-
-    // function getDataAsSVG(name) {
-    //
-    //     var element = getInstance(name);
-    //     var svg = element.jSignature('getData', 'svg');
-    //     return svg;
-    // }
-    //
-    // function getDataAsBase30(name) {
-    //
-    //     var element = getInstance(name);
-    //     if (element) {
-    //         var svg = element.jSignature('getData', 'svg');
-    //         return svg;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    function setData(name, model) {
-
-        reset(name, model);
-        var element = getInstance(name);
-        if (element && model && model !== '') {
-            element.jSignature('setData', model);
-        }
-    }
-
-    function disable(name) {
-
-        var element = getInstance(name);
-        if (element) {
-            element.jSignature('disable');
-        }
-    }
-
-    function enable(name) {
-
-        var element = getInstance(name);
-        if (element) {
-            element.jSignature('enable');
-        }
-    }
-
-    // function undo(name) {
-    //
-    //     var eventName = apinamespace + '.undo';
-    //     var element = getInstance(name);
-    //     if (element) {
-    //         element.jSignature('events');
-    //     }
-    // }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
     .directive('stepsIndicator', StepsIndicator);
 
 StepsIndicator.$inject = [];
@@ -3351,6 +3351,71 @@ function StepsIndicator() {
         }
     }
 }
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .directive('odsFileUpload', odsFileUpload);
+
+    odsFileUpload.$inject = ['$q'];
+
+    function odsFileUpload($q) {
+
+        var slice = Array.prototype.slice;
+
+        var directive = {
+            restrict: 'A',
+            require: '?ngModel',
+            onLoad: '&',
+            link: linkFunc
+        };
+
+        return directive;
+
+        /* private helper methods*/
+
+        function linkFunc($scope, element, attrs, ngModel) {
+
+            if (!ngModel) return;
+
+            ngModel.$render = function () {
+            };
+
+            element.bind('change', function (e) {
+                var element = e.target;
+
+                $q.all(slice.call(element.files, 0).map(readFile))
+                    .then(function (values) {
+                        if (element.multiple) ngModel.$setViewValue(values);
+                        else ngModel.$setViewValue(values.length ? values[0] : null);
+                    });
+
+                function readFile(file) {
+                    var deferred = $q.defer();
+
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        if ($scope.onLoad) {
+                            $scope.onLoad(e.target.result);
+                        }
+                        deferred.resolve(e.target.result);
+                    };
+
+                    reader.onerror = function (e) {
+                        deferred.reject(e);
+                    };
+
+                    reader.readAsDataURL(file);
+
+                    return deferred.promise;
+                }
+            }); //change
+        } //link
+    }
+})();
+
 (function () {
     'use strict';
 
@@ -3668,10 +3733,10 @@ function DynamicNameDirective($compile, $parse) {
         .factory('OdsFormService', OdsFormService);
 
     OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
-        '$resource'];
+        '$resource', '$document'];
 
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-                            $resource) {
+                            $resource, $document) {
 
         var uniqueCounter = (+new Date()) % 10000;
 
@@ -3702,6 +3767,7 @@ function DynamicNameDirective($compile, $parse) {
             renameComponent: renameComponent,
             importSchema: importSchema,
             exportSchema: exportSchema,
+            checkUpload: checkUpload,
             // http: http,
 
             //Templates management
@@ -3779,15 +3845,15 @@ function DynamicNameDirective($compile, $parse) {
         /**
          * Import Schema.
          */
-        function importSchema(schema) {
-            return {
-                name: generateName(OdsComponentType.FORM),
-                label: 'New Form',
-                hideLabel: true,
-                description: 'New Form Description',
-                layout: [newSectionObject()],
-                allowedTypes: [OdsComponentType.SECTION]
-            };
+        function importSchema(file) {
+
+            var base64result = file.substr(file.indexOf(',') + 1);
+            var decodedString = atob(base64result);
+            if (decodedString && decodedString !== "") {
+                return angular.fromJson(decodedString);
+            } else {
+                console.error("Not valid JSON file!!!")
+            }
         }
 
         /**
@@ -3815,6 +3881,18 @@ function DynamicNameDirective($compile, $parse) {
             downloadAnchorNode.setAttribute('download', exportName + '.json');
             downloadAnchorNode.click();
             downloadAnchorNode.remove();
+        }
+
+        function checkUpload() {
+
+            // Check for the various File API support.
+            if ($window.File && $window.FileReader && $window.FileList && $window.Blob) {
+                // Great success! All the File APIs are supported.
+                return true;
+            } else {
+                alert('The File APIs are not fully supported in this browser.');
+                return false;
+            }
         }
 
         /**
@@ -4611,7 +4689,7 @@ function DynamicNameDirective($compile, $parse) {
         function newCKEditorObject() {
 
             //Default key combination. (CTRL + SPACE)
-            const CTRL = 1114112;
+            var CTRL = 1114112;
 
             return {
                 componentType: OdsComponentType.FIELD,
@@ -5152,6 +5230,37 @@ function DynamicNameDirective($compile, $parse) {
 
 angular
     .module('ods-lib')
+    .directive('odsFormInfo', OdsFormInfoDirective);
+
+OdsFormInfoDirective.$inject = [];
+
+function OdsFormInfoDirective() {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/form-info/form-info.html',
+        scope: {
+            schema: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc() {
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
     .directive('odsForm', FormDirective);
 
 FormDirective.$inject = ['OdsFormService', '$timeout', 'EventDataFactory', 'OdsEvent'];
@@ -5174,8 +5283,6 @@ function FormDirective(OdsFormService, $timeout, EventDataFactory, OdsEvent) {
     /* private helper methods*/
 
     function linkFunc($scope) {
-
-        EventDataFactory.registerObserver(OdsEvent.IMPORT_SCHEMA, this);
 
         if ($scope.config) {
             //CKEditor config load.
@@ -5393,37 +5500,6 @@ function FormDirective(OdsFormService, $timeout, EventDataFactory, OdsEvent) {
 
 angular
     .module('ods-lib')
-    .directive('odsFormInfo', OdsFormInfoDirective);
-
-OdsFormInfoDirective.$inject = [];
-
-function OdsFormInfoDirective() {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/form-info/form-info.html',
-        scope: {
-            schema: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc() {
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
     .directive('odsSchema', SchemaDirective);
 
 SchemaDirective.$inject = ['OdsFormService'];
@@ -5476,10 +5552,10 @@ function SchemaDirective(OdsFormService) {
          */
         function onImportSchema(data) {
 
-            alert('Fue el evento Import: ' + data);
+            $scope.schema = data.schema;
         }
 
-        function onExportSchema(data){
+        function onExportSchema(){
 
             OdsFormService.exportSchema($scope.schema);
         }
@@ -5515,8 +5591,11 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
         $scope.getToolbarComponent = getToolbarComponent;
         $scope.removeFromClipboard = removeFromClipboard;
 
-        $scope.import = importSchema;
         $scope.export = exportSchema;
+
+        $scope.onLoad = onLoad;
+
+        $scope.importFile = null;
 
         var clipboardIndex = 6;
 
@@ -5634,9 +5713,9 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
             return OdsFormService.getToolbarComponent(componentType);
         }
 
-        function importSchema() {
+        function onLoad(file) {
 
-            EventDataFactory.setData(OdsEvent.IMPORT_SCHEMA, "Viste pepe, eres un melon!!!!");
+            EventDataFactory.setData(OdsEvent.IMPORT_SCHEMA, OdsFormService.importSchema(file));
         }
 
         function exportSchema() {

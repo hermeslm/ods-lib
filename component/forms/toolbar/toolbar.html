@@ -5,10 +5,14 @@
                 <h3 class="box-title">{{toolbar.title}}</h3>
             </div>
             <div class="col-lg-6 accordion-button-right">
-                <button class="btn btn-success btn-sm" title="Import schema" ng-click="import()">
+                <label class="btn btn-success btn-sm" title="Import schema">
                     <i class="fa fa-upload"></i>
-                    Import
-                </button>
+                    Import <input type="file" hidden ng-model="importFile" accept=".json" ods-file-upload>
+                </label>
+                <!--<button class="btn btn-primary btn-sm" title="Export schema" ng-click="export()">-->
+                    <!--<i class="fa fa-download"></i>-->
+                    <!--Export-->
+                <!--</button>-->
                 <button class="btn btn-primary btn-sm" title="Export schema" ng-click="export()">
                     <i class="fa fa-download"></i>
                     Export

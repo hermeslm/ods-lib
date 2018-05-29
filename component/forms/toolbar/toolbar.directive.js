@@ -26,8 +26,11 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
         $scope.getToolbarComponent = getToolbarComponent;
         $scope.removeFromClipboard = removeFromClipboard;
 
-        $scope.import = importSchema;
         $scope.export = exportSchema;
+
+        $scope.onLoad = onLoad;
+
+        $scope.importFile = null;
 
         var clipboardIndex = 6;
 
@@ -145,9 +148,9 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
             return OdsFormService.getToolbarComponent(componentType);
         }
 
-        function importSchema() {
+        function onLoad(file) {
 
-            EventDataFactory.setData(OdsEvent.IMPORT_SCHEMA, "Viste pepe, eres un melon!!!!");
+            EventDataFactory.setData(OdsEvent.IMPORT_SCHEMA, OdsFormService.importSchema(file));
         }
 
         function exportSchema() {

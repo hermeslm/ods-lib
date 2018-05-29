@@ -57,10 +57,10 @@ function SchemaDirective(OdsFormService) {
          */
         function onImportSchema(data) {
 
-            alert('Fue el evento Import: ' + data);
+            $scope.schema = data.schema;
         }
 
-        function onExportSchema(data){
+        function onExportSchema(){
 
             OdsFormService.exportSchema($scope.schema);
         }

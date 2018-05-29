@@ -42,6 +42,10 @@
 
 //Toolbar section
 
+[hidden] {
+  display: none !important;
+}
+
 .toolbar-container {
   margin-top: 10px;
   background-color: #fff;

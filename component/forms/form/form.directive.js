@@ -28,8 +28,6 @@ function FormDirective(OdsFormService, $timeout, EventDataFactory, OdsEvent) {
 
     function linkFunc($scope) {
 
-        EventDataFactory.registerObserver(OdsEvent.IMPORT_SCHEMA, this);
-
         if ($scope.config) {
             //CKEditor config load.
             if ($scope.config.ckeditor) {

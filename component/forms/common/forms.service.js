@@ -9,10 +9,10 @@
         .factory('OdsFormService', OdsFormService);
 
     OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
-        '$resource'];
+        '$resource', '$document'];
 
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-                            $resource) {
+                            $resource, $document) {
 
         var uniqueCounter = (+new Date()) % 10000;
 
@@ -43,6 +43,7 @@
             renameComponent: renameComponent,
             importSchema: importSchema,
             exportSchema: exportSchema,
+            checkUpload: checkUpload,
             // http: http,
 
             //Templates management
@@ -120,15 +121,15 @@
         /**
          * Import Schema.
          */
-        function importSchema(schema) {
-            return {
-                name: generateName(OdsComponentType.FORM),
-                label: 'New Form',
-                hideLabel: true,
-                description: 'New Form Description',
-                layout: [newSectionObject()],
-                allowedTypes: [OdsComponentType.SECTION]
-            };
+        function importSchema(file) {
+
+            var base64result = file.substr(file.indexOf(',') + 1);
+            var decodedString = atob(base64result);
+            if (decodedString && decodedString !== "") {
+                return angular.fromJson(decodedString);
+            } else {
+                console.error("Not valid JSON file!!!")
+            }
         }
 
         /**
@@ -156,6 +157,18 @@
             downloadAnchorNode.setAttribute('download', exportName + '.json');
             downloadAnchorNode.click();
             downloadAnchorNode.remove();
+        }
+
+        function checkUpload() {
+
+            // Check for the various File API support.
+            if ($window.File && $window.FileReader && $window.FileList && $window.Blob) {
+                // Great success! All the File APIs are supported.
+                return true;
+            } else {
+                alert('The File APIs are not fully supported in this browser.');
+                return false;
+            }
         }
 
         /**
@@ -952,7 +965,7 @@
         function newCKEditorObject() {
 
             //Default key combination. (CTRL + SPACE)
-            const CTRL = 1114112;
+            var CTRL = 1114112;
 
             return {
                 componentType: OdsComponentType.FIELD,
