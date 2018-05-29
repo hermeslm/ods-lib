@@ -1,8 +1,8 @@
-<div class="checkbox">
+<div>
     <br ng-show="field.ln">
-    <label>
-        <input ods-dynamic-name="field.name" disabled="disabled" id="{{field.name}}" ng-model="field.value" type="{{field.type}}"
-               placeholder="{{field.placeholder}}" ng-required="{{field.required}}" title="{{field.tooltip}}"/>
-        <span class="ng-binding ng-scope">{{field.label}}</span>
-    </label>
+    <div class="form-check">
+        <i class="form-check-input fa fa-square-o" ng-if="!field.value"></i>
+        <i class="form-check-input fa fa-check-square-o" ng-if="field.value"></i>
+        <span class="form-check-label" ng-bind-html="field.label"></span>
+    </div>
 </div>

@@ -19,7 +19,13 @@ function SchemaDirective(OdsFormService) {
             config: '=',
             debugMode: '='
         },
-        link: linkFunc
+        link: linkFunc,
+        controller: ['$scope', 'EventDataFactory', 'OdsEvent', function ($scope, EventDataFactory, OdsEvent) {
+
+            EventDataFactory.registerObserver(OdsEvent.IMPORT_SCHEMA, $scope);
+            EventDataFactory.registerObserver(OdsEvent.EXPORT_SCHEMA, $scope);
+
+        }]
     };
 
     return directive;
@@ -29,6 +35,8 @@ function SchemaDirective(OdsFormService) {
     function linkFunc($scope) {
 
         $scope.onAdd = onAdd;
+        $scope.onImportSchema = onImportSchema;
+        $scope.onExportSchema = onExportSchema;
 
         if (!$scope.schema) {
             $scope.schema = OdsFormService.newSchema();
@@ -41,6 +49,20 @@ function SchemaDirective(OdsFormService) {
         function onAdd() {
 
             $scope.schema.layout.push(OdsFormService.newSectionObject());
+        }
+
+        /**
+         * Event change schema notify
+         * @param data New Schema
+         */
+        function onImportSchema(data) {
+
+            alert('Fue el evento Import: ' + data);
+        }
+
+        function onExportSchema(data){
+
+            OdsFormService.exportSchema($scope.schema);
         }
 
     }

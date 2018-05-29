@@ -47,6 +47,10 @@
             // LongTime: 'g:i:s A',
             // UniversalSortableDateTime: 'Y-m-d H:i:sO',
             // YearMonth: 'F, Y'
+        })
+        .constant('OdsEvent', {
+            IMPORT_SCHEMA: 'importSchema',
+            EXPORT_SCHEMA: 'exportSchema'
         });
 
 })();

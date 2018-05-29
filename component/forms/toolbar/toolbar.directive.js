@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsFormToolbar', OdsFormToolbar);
 
-OdsFormToolbar.$inject = ['OdsFormService', '$sessionStorage', 'dialogs'];
+OdsFormToolbar.$inject = ['OdsFormService', '$sessionStorage', 'dialogs', 'EventDataFactory', 'OdsEvent'];
 
-function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
+function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFactory, OdsEvent) {
 
     var directive = {
         restrict: 'E',
@@ -147,10 +147,12 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
 
         function importSchema() {
 
+            EventDataFactory.setData(OdsEvent.IMPORT_SCHEMA, "Viste pepe, eres un melon!!!!");
         }
 
         function exportSchema() {
 
+            EventDataFactory.setData(OdsEvent.EXPORT_SCHEMA, "");
         }
     }
 }

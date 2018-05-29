@@ -8,28 +8,40 @@ EventDataFactory.$inject = [];
 
 function EventDataFactory() {
 
-    var observers = [];
-    var data = {};
+    var observersMap = {};
+    var dataMap = {};
 
-    var registerObserver = function (observer) {
-        observers.push(observer);
+    var registerObserver = function (name, observer) {
+
+        if(!Array.isArray(observersMap[name])){
+            observersMap[name] = [];
+        }
+        observersMap[name].push(observer);
     };
 
-    var notifyObservers = function () {
-        for (var index = 0; index < observers.length; ++index)
-            observers[index].notify();
+    var notifyObservers = function (name) {
+
+        for (var index = 0; index < observersMap[name].length; ++index)
+            observersMap[name][index]["on" + name.replace(/^./, function(str){ return str.toUpperCase(); })](dataMap[name]);
     };
 
-    var setData = function (data) {
-        this.data = data;
-        notifyObservers();
+    var setData = function (name, data) {
+
+        dataMap[name] = data;
+        notifyObservers(name);
     };
 
-    var getData = function () {
-        return this.data;
+    var getData = function (name) {
+
+        if(dataMap[name]) {
+            return dataMap[name];
+        }else {
+            return null;
+        }
     };
 
     return {
+
         registerObserver: registerObserver,
         setData: setData,
         getData: getData

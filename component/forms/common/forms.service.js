@@ -16,6 +16,12 @@
 
         var uniqueCounter = (+new Date()) % 10000;
 
+        var version = '1.0';
+
+        var formats = {
+            JSON: 'json'
+        };
+
         var clipBoard = [];
         var callbacks = [];
 
@@ -35,6 +41,8 @@
             addToClipBoard: addToClipBoard,
             onAddToClipBoard: onAddToClipBoard,
             renameComponent: renameComponent,
+            importSchema: importSchema,
+            exportSchema: exportSchema,
             // http: http,
 
             //Templates management
@@ -107,6 +115,47 @@
                 layout: [newSectionObject()],
                 allowedTypes: [OdsComponentType.SECTION]
             };
+        }
+
+        /**
+         * Import Schema.
+         */
+        function importSchema(schema) {
+            return {
+                name: generateName(OdsComponentType.FORM),
+                label: 'New Form',
+                hideLabel: true,
+                description: 'New Form Description',
+                layout: [newSectionObject()],
+                allowedTypes: [OdsComponentType.SECTION]
+            };
+        }
+
+        /**
+         * Export Schema.
+         */
+        function exportSchema(schema) {
+
+            var exportObject = {
+                format: formats.JSON,
+                version: version,
+                schema: schema
+            };
+
+            var now = new Date();
+
+            downloadObjectAsJson(exportObject, 'schema-' + now.getFullYear() + '-' +
+                now.getMonth() + '-' + now.getDate());
+        }
+
+        function downloadObjectAsJson(exportObj, exportName) {
+
+            var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj));
+            var downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute('href', dataStr);
+            downloadAnchorNode.setAttribute('download', exportName + '.json');
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
         }
 
         /**
