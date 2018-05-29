@@ -24,7 +24,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ 'error': fieldOptionForm.$invalid }">
+        <tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ 'has-error': fieldOptionForm.$invalid }">
             <td>
                 <input type="radio" name="{{field.name}}Selected[]" ng-value="field.options[$index]"
                        ng-model="field.value"/>
