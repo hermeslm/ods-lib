@@ -140,7 +140,7 @@
                     </span>
                         <input type="email" class="form-control" name="email" id="field_email" ng-required="true"
                                ng-model="vm.address.email" placeholder="Email..." tabindex="10"
-                               autocomplete="email"/>
+                               autocomplete="email" ng-change="vm.emailChanged()"/>
                     </div>
                     <div ng-show="addressForm.email.$invalid">
                         <p class="help-block"
