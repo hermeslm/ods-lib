@@ -9,10 +9,10 @@
         .factory('OdsFormService', OdsFormService);
 
     OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
-        '$resource', '$document'];
+        '$resource'];
 
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-                            $resource, $document) {
+                            $resource) {
 
         var uniqueCounter = (+new Date()) % 10000;
 
@@ -125,10 +125,10 @@
 
             var base64result = file.substr(file.indexOf(',') + 1);
             var decodedString = atob(base64result);
-            if (decodedString && decodedString !== "") {
+            if (decodedString && decodedString !== '') {
                 return angular.fromJson(decodedString);
             } else {
-                console.error("Not valid JSON file!!!")
+                console.error('Not valid JSON file!!!')
             }
         }
 
@@ -145,7 +145,7 @@
 
             var now = new Date();
 
-            downloadObjectAsJson(exportObject, 'schema-' + now.getFullYear() + '-' +
+            downloadObjectAsJson(exportObject, schema.label + now.getFullYear() + '-' +
                 now.getMonth() + '-' + now.getDate());
         }
 
