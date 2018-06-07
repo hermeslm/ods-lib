@@ -145,10 +145,15 @@
 
             var now = new Date();
 
-            downloadObjectAsJson(exportObject, schema.label + now.getFullYear() + '-' +
+            downloadObjectAsJson(exportObject, schema.label + ' ' + now.getFullYear() + '-' +
                 now.getMonth() + '-' + now.getDate());
         }
 
+        /**
+         * Download schema as JSON
+         * @param exportObj
+         * @param exportName
+         */
         function downloadObjectAsJson(exportObj, exportName) {
 
             var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj));
