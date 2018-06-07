@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsSchema', SchemaDirective);
 
-SchemaDirective.$inject = ['OdsFormService'];
+SchemaDirective.$inject = ['OdsFormService', 'EventDataFactory', 'OdsEvent'];
 
-function SchemaDirective(OdsFormService) {
+function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
 
     var directive = {
         restrict: 'E',
@@ -64,6 +64,12 @@ function SchemaDirective(OdsFormService) {
 
             OdsFormService.exportSchema($scope.schema);
         }
+
+        $scope.$on('$destroy', function() {
+
+            EventDataFactory.unRegisterObserver(OdsEvent.IMPORT_SCHEMA, $scope, '$id');
+            EventDataFactory.unRegisterObserver(OdsEvent.EXPORT_SCHEMA, $scope, '$id');
+        });
 
     }
 }

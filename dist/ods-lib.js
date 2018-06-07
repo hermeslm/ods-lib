@@ -160,9 +160,9 @@ $templateCache.put('forms/schema/components/section/section.html','<div class="b
 $templateCache.put('forms/schema/components/select/select-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="{{field.name}}-limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="{{field.name}}-limitTo" name="{{field.name}}-limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><div class="table-responsive" style="max-height: 250px"><table class="table table-condensed position-relative" style="position: relative;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'has-error\': fieldOptionForm.$invalid }"><td><input type="radio" name="{{field.name}}Selected[]" ng-value="field.options[$index]" ng-model="field.value"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" ng-required="true"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
 $templateCache.put('forms/schema/components/select/select-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-select-options field="field"></ods-field-select-options></div></form></uib-tab><uib-tab index="2" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/select/select.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/select.html\'"></div>');
-$templateCache.put('forms/schema/components/text/text-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/select2/select-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-select-options field="field"></ods-field-select-options></div></form></uib-tab><uib-tab index="2" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/select2/select2.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/select2.html\'"></div>');
+$templateCache.put('forms/schema/components/text/text-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/textarea/textarea-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/textarea/textarea.html','<div ng-include="\'forms/schema/components/label.html\'"></div><textarea class="form-control" name="{{field.name}}" id="{{field.name + dev}}" ng-required="{{field.required}}" title="{{field.tooltip}}" rows="{{field.rows}}" placeholder="{{field.placeholder}}" ng-model="field.value" data-resize="disabled">\n</textarea>');
 $templateCache.put('forms/schema/components/toggle/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
@@ -331,6 +331,224 @@ function Address($uibModal) {
 
     }
 }
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsFileUpload', OdsFileUpload);
+
+OdsFileUpload.$inject = ['$uibModal'];
+
+function OdsFileUpload($uibModal) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'address/address.html',
+        scope: {
+            label: '@',
+            address: '=',
+            countries: '=',
+            states: '=',
+            ngModel: '='
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.openModal = function () {
+            $uibModal.open({
+                templateUrl: 'address/address-dialog.html',
+                controller: 'AddressDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    address: function () {
+                        if ($scope.ngModel !== null) {
+                            return $scope.ngModel;
+                            // {
+                            //     address: $scope.ngModel.address,
+                            //     address2: $scope.ngModel.address2,
+                            //     city: $scope.ngModel.city,
+                            //     state: $scope.ngModel.state,
+                            //     zip: $scope.ngModel.zip,
+                            //     // country: $scope.ngModel.country,
+                            //     phone: $scope.ngModel.phone,
+                            //     mobile: $scope.ngModel.mobile,
+                            //     fax: $scope.ngModel.fax,
+                            //     email: $scope.ngModel.email,
+                            //     notes: $scope.ngModel.notes
+                            // }
+                        } else {
+                            return null;
+                        }
+                    },
+                    countries: function () {
+                        return $scope.countries;
+                    },
+                    states: function () {
+                        return $scope.states;
+                    }
+
+                }
+            }).result.then(function (result) {
+                // $element.
+                updateValue(result);
+                //$state.go($state.current.name, null, {reload: $state.current.name});
+            }, function () {
+                //$state.go($state.current.name);
+            });
+        };
+
+        $scope.printName = printName;
+
+        function printName(address) {
+            if (address !== null) {
+                return address.street + ' ' +
+                    address.street2 + ' ' +
+                    address.city + ',' +
+                    address.state.name + ' ' +
+                    address.zip;
+            } else {
+                return '';
+            }
+        }
+
+        function updateValue(value) {
+            // var input = $element[0].getElementsByTagName('input');
+            $scope.ngModel = value;
+        }
+
+    }
+}
+/**
+ * Created by PpTMUnited on 5/23/2017.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .directive('udtAttach1', Attach);
+
+    Attach.$inject = ['$state', 'File', '$sessionStorage', 'CoreService', 'toastr', 'fancyboxService'];
+
+    function Attach($state, File, $sessionStorage, CoreService, toastr, fancyboxService) {
+
+        var directive = {
+            restrict: 'E',
+            templateUrl: 'app/components/udt/udt-attach-file/udt-attach-file.html',
+            scope: {//all this scope value defined, are attr for the directive. Can be used like is explained below
+                formId: '@',//id of the form you wanna find the attachments
+                isSigned: '=',//if is already signed, don't add more files
+                disableAttach: '=',//if we dont want to attach anything, just view the files
+                redirect: '=',//if we want to redirect to an state
+                attach: '&', //You must define attach method
+                delete: '&', //You must define delete method
+                list: '&'
+            },
+            link: linkFunc
+        };
+
+        return directive;
+
+        /* private helper methods*/
+
+        function linkFunc($scope, element) {
+            $scope.imageType = 'image';
+            $scope.applicationType = 'application';
+            $scope.attachFileData = {};
+
+            // loadAllFiles();
+            //
+            // function loadAllFiles() {
+            //     if ($scope.formId && $scope.formId !== "") {
+            //         File.byOwner({id: $scope.formId}, function (result) {
+            //             $scope.files = result;
+            //         });
+            //     } else {
+            //         console.log('Not Form Id ');
+            //     }
+            // }
+
+            $scope.list()().then(function (data) {
+                $scope.files = data;
+            });
+
+            $scope.imageDetail = function (id, type) {
+                File.findFileById({id: id}).$promise
+                    .then(function (data) {
+                        if (data && data.file) {
+                            fancyboxService.fancyboxPlus()({
+                                // 'padding': 0,
+                                'href': 'data:' + type + ';base64,' + data.file,
+                                'title': data.name,
+                                // 'titlePosition'  : 'over',
+                                'transitionIn': 'elastic',
+                                'transitionOut': 'elastic'
+                            });
+                        } else {
+                            toastr.warning("The file was not found.");
+                        }
+                    });
+            }
+
+
+            $scope.getFileAttached = function (fileType, id) {
+                $sessionStorage.typeFile = fileType;
+                File.findFile({id: id});
+            };
+
+            /**
+             * Attach a file
+             * @param file
+             * @param data
+             */
+            $scope.attachFile = function (file, data) {
+                CoreService.attachment(file, data).then(function (result) {
+                    result.id = $scope.formId;
+                    $scope.attach()(result, successResult, errorResult);
+                    // SystemService.attachConsent(result, successResult, errorResult);
+                });
+            };
+
+            /**
+             * Delete a file
+             * @param fileId
+             */
+            $scope.deleteFile = function (fileId) {
+                $scope.delete()(fileId).then(function (data) {
+                    $scope.files.map(function (file) {
+                        if (file.id == fileId) {
+                            file.hide = true;
+                        }
+                    })
+                    // $('li[data-id="' + fileId + '"]').detach();
+                });
+            };
+
+            var successResult = function (result) {
+                if ($scope.redirect) {
+                    $state.go($state.current, {}, {reload: true});
+                } else {
+                    // loadAllFiles();
+                    $scope.list()().then(function (data) {
+                        $scope.files = data;
+                    });
+                }
+            };
+
+            var errorResult = function (error) {
+                console.log(error)
+            };
+
+        }
+    }
+})();
+
 'use strict';
 
 angular
@@ -555,224 +773,6 @@ function OdsCkeditor() {
 
     return service;
 }
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsFileUpload', OdsFileUpload);
-
-OdsFileUpload.$inject = ['$uibModal'];
-
-function OdsFileUpload($uibModal) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'address/address.html',
-        scope: {
-            label: '@',
-            address: '=',
-            countries: '=',
-            states: '=',
-            ngModel: '='
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.openModal = function () {
-            $uibModal.open({
-                templateUrl: 'address/address-dialog.html',
-                controller: 'AddressDialogController',
-                controllerAs: 'vm',
-                backdrop: 'static',
-                size: 'lg',
-                resolve: {
-                    address: function () {
-                        if ($scope.ngModel !== null) {
-                            return $scope.ngModel;
-                            // {
-                            //     address: $scope.ngModel.address,
-                            //     address2: $scope.ngModel.address2,
-                            //     city: $scope.ngModel.city,
-                            //     state: $scope.ngModel.state,
-                            //     zip: $scope.ngModel.zip,
-                            //     // country: $scope.ngModel.country,
-                            //     phone: $scope.ngModel.phone,
-                            //     mobile: $scope.ngModel.mobile,
-                            //     fax: $scope.ngModel.fax,
-                            //     email: $scope.ngModel.email,
-                            //     notes: $scope.ngModel.notes
-                            // }
-                        } else {
-                            return null;
-                        }
-                    },
-                    countries: function () {
-                        return $scope.countries;
-                    },
-                    states: function () {
-                        return $scope.states;
-                    }
-
-                }
-            }).result.then(function (result) {
-                // $element.
-                updateValue(result);
-                //$state.go($state.current.name, null, {reload: $state.current.name});
-            }, function () {
-                //$state.go($state.current.name);
-            });
-        };
-
-        $scope.printName = printName;
-
-        function printName(address) {
-            if (address !== null) {
-                return address.street + ' ' +
-                    address.street2 + ' ' +
-                    address.city + ',' +
-                    address.state.name + ' ' +
-                    address.zip;
-            } else {
-                return '';
-            }
-        }
-
-        function updateValue(value) {
-            // var input = $element[0].getElementsByTagName('input');
-            $scope.ngModel = value;
-        }
-
-    }
-}
-/**
- * Created by PpTMUnited on 5/23/2017.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .directive('udtAttach1', Attach);
-
-    Attach.$inject = ['$state', 'File', '$sessionStorage', 'CoreService', 'toastr', 'fancyboxService'];
-
-    function Attach($state, File, $sessionStorage, CoreService, toastr, fancyboxService) {
-
-        var directive = {
-            restrict: 'E',
-            templateUrl: 'app/components/udt/udt-attach-file/udt-attach-file.html',
-            scope: {//all this scope value defined, are attr for the directive. Can be used like is explained below
-                formId: '@',//id of the form you wanna find the attachments
-                isSigned: '=',//if is already signed, don't add more files
-                disableAttach: '=',//if we dont want to attach anything, just view the files
-                redirect: '=',//if we want to redirect to an state
-                attach: '&', //You must define attach method
-                delete: '&', //You must define delete method
-                list: '&'
-            },
-            link: linkFunc
-        };
-
-        return directive;
-
-        /* private helper methods*/
-
-        function linkFunc($scope, element) {
-            $scope.imageType = 'image';
-            $scope.applicationType = 'application';
-            $scope.attachFileData = {};
-
-            // loadAllFiles();
-            //
-            // function loadAllFiles() {
-            //     if ($scope.formId && $scope.formId !== "") {
-            //         File.byOwner({id: $scope.formId}, function (result) {
-            //             $scope.files = result;
-            //         });
-            //     } else {
-            //         console.log('Not Form Id ');
-            //     }
-            // }
-
-            $scope.list()().then(function (data) {
-                $scope.files = data;
-            });
-
-            $scope.imageDetail = function (id, type) {
-                File.findFileById({id: id}).$promise
-                    .then(function (data) {
-                        if (data && data.file) {
-                            fancyboxService.fancyboxPlus()({
-                                // 'padding': 0,
-                                'href': 'data:' + type + ';base64,' + data.file,
-                                'title': data.name,
-                                // 'titlePosition'  : 'over',
-                                'transitionIn': 'elastic',
-                                'transitionOut': 'elastic'
-                            });
-                        } else {
-                            toastr.warning("The file was not found.");
-                        }
-                    });
-            }
-
-
-            $scope.getFileAttached = function (fileType, id) {
-                $sessionStorage.typeFile = fileType;
-                File.findFile({id: id});
-            };
-
-            /**
-             * Attach a file
-             * @param file
-             * @param data
-             */
-            $scope.attachFile = function (file, data) {
-                CoreService.attachment(file, data).then(function (result) {
-                    result.id = $scope.formId;
-                    $scope.attach()(result, successResult, errorResult);
-                    // SystemService.attachConsent(result, successResult, errorResult);
-                });
-            };
-
-            /**
-             * Delete a file
-             * @param fileId
-             */
-            $scope.deleteFile = function (fileId) {
-                $scope.delete()(fileId).then(function (data) {
-                    $scope.files.map(function (file) {
-                        if (file.id == fileId) {
-                            file.hide = true;
-                        }
-                    })
-                    // $('li[data-id="' + fileId + '"]').detach();
-                });
-            };
-
-            var successResult = function (result) {
-                if ($scope.redirect) {
-                    $state.go($state.current, {}, {reload: true});
-                } else {
-                    // loadAllFiles();
-                    $scope.list()().then(function (data) {
-                        $scope.files = data;
-                    });
-                }
-            };
-
-            var errorResult = function (error) {
-                console.log(error)
-            };
-
-        }
-    }
-})();
-
 'use strict';
 
 angular
@@ -2113,453 +2113,6 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
     }
 })();
 
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('selectFiltered', selectFiltered);
-
-selectFiltered.$inject = ['$filter'];
-
-function selectFiltered($filter) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'select-filtered/select-filtered.html',
-        scope: {
-            label: '@',
-            name: '@',
-            hideLabel: '=',
-            placeholder: '@',
-            ngModel: '=',
-            titleProperty: '=?',
-            ngDisabled: '=?',
-            ngRequired: '=?',
-            tooltip: '@',
-            list: '=',
-            filters: '=',
-            onSelect: '&'
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.toggleFilter = toggleFilter;
-        $scope.getSelectTitleValue = getSelectTitleValue;
-        $scope.onSelectFn = onSelectFn;
-
-        init();
-
-        function init() {
-
-            var tmpModel = angular.copy($scope.ngModel);
-            $scope.selected = {
-                value : tmpModel ? tmpModel : null
-            };
-            $scope.ngDisabled = !!$scope.ngDisabled;
-            $scope.ngRequired = !!$scope.ngRequired;
-            $scope.titleProperty = $scope.titleProperty ? $scope.titleProperty : 'name';
-            doFilter();
-        }
-
-        function doFilter() {
-
-            $scope.filtered = angular.copy($scope.list);
-            if ($scope.filters && $scope.filters.length > 0) {
-                for (var i = 0; i < $scope.filters.length; i++) {
-                    if ($scope.filters[i].active) {
-                        // $scope.selected.value = null;
-                        $scope.filtered = $filter('filter')($scope.filtered, $scope.filters[i].pattern, undefined);
-                    }
-                }
-            }
-        }
-
-        function toggleFilter(filter) {
-
-            filter.active = !filter.active;
-            doFilter();
-        }
-
-        function getSelectTitleValue(element) {
-
-            if (element && element.constructor !== Array) {
-                return element[$scope.titleProperty];
-            } else {
-                return $scope.placeholder;
-            }
-        }
-
-        function onSelectFn() {
-
-            if ($scope.onSelect) {
-                $scope.onSelect();
-            } else {
-                console.log('You must to to define onSelect() function.');
-            }
-        }
-
-        $scope.$watch('selected', function (newValue) {
-
-            $scope.ngModel = newValue.value;
-        }, true);
-
-        $scope.$watch('list', function () {
-
-            doFilter();
-        }, true);
-
-    }
-}
-
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsSignature', odsSignature);
-
-odsSignature.$inject = ['$timeout', 'OdsSignature'];
-
-function odsSignature($timeout, OdsSignature) {
-
-    var directive = {
-        restrict: 'E',
-        require: '?ngModel',
-        templateUrl: 'signature/signature.html',
-        scope: {
-            model: '=ngModel',
-            name: '@',
-            options: '=?',
-            disabled: '=ngDisabled',
-            required: '=?ngRequired',
-            onChange: '&'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope, $element, attrs, controller) {
-
-        var hideRequiredClass = 'sig-box-default';
-        var showRequiredClass = 'sig-box-error';
-
-        //If model not present we will exit.
-        if ($scope.model === null) {
-            console.error('Please define a model using "ng-model" attribute!!!');
-            return;
-        }
-
-        $scope.reset = reset;
-
-        init();
-
-        function initOptions() {
-
-            $scope.options = {
-                width: 'ratio',
-                height: 'ratio',
-                color: '#00008B',
-                'background-color': '#EEEEEE',
-                lineWidth: 0,
-                cssClass: ''
-            };
-        }
-
-        function initElement() {
-
-            $scope.element = $element.children('div').children('div').jSignature($scope.options);
-            // $element.find('#sig').jSignature($scope.options);
-            $scope.element.initialized = true;
-            OdsSignature.register($scope.name, $scope.element);
-        }
-
-        function init() {
-
-            //Init options
-            if (!$scope.options) {
-                initOptions();
-            }
-
-            //Init name
-            if (!$scope.name) {
-                $scope.name = OdsSignature.generateName();
-            } else {
-                if (OdsSignature.getInstance($scope.name)) {
-                    console.error('Name already defined in another Signature instance, please pick another name!!!');
-                    return;
-                }
-            }
-
-            //Init required field
-            $scope.requiredClass = hideRequiredClass;
-            $scope.required = !!$scope.required;
-
-            //Init Element
-            initElement();
-            //Set value
-            // setValue();
-
-            if ($scope.options.disabled) {
-                OdsSignature.disable($scope.name, $scope.options);
-            }
-
-            //Init on change event
-            $scope.element.bind('change', function () {
-
-                    // $timeout, 100, true because event happens outside angular's digest cycle
-                    // and change is called on setData
-                    $timeout(function () {
-                        var valid = isValid($scope.name);
-                        if (valid) {
-                            $scope.model = 'data:' +
-                                OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
-                        }
-                    }, 100, true);
-                    if ($scope.onChange) {
-                        $scope.onChange();
-                    }
-                }
-            );
-        }
-
-        function setValue() {
-
-            if ($scope.model && $scope.model !== '') {
-                // We set signature if it is present
-                OdsSignature.setData($scope.name, $scope.model);
-                hideRequired(true);
-            }
-        }
-
-        function reset() {
-
-            $scope.model = '';
-            OdsSignature.reset($scope.name);
-        }
-
-        function isValid() {
-
-            return OdsSignature.isValid($scope.name);
-        }
-
-        function hideRequired(state) {
-
-            if (state) {
-                $scope.requiredClass = hideRequiredClass;
-            } else {
-                $scope.requiredClass = showRequiredClass;
-            }
-            controller.$setValidity('required', state);
-        }
-
-        $scope.$watch('model', function (model, oldModel) {
-
-            if ($scope.required && !isValid()) {
-                hideRequired(false);
-            } else {
-                hideRequired(true);
-            }
-            setValue();
-            return;
-        });
-
-        $scope.$watch('disabled', function (disabled) {
-
-            if (disabled) {
-                OdsSignature.disable($scope.name);
-            } else {
-                OdsSignature.enable($scope.name);
-            }
-            return;
-        });
-
-        $scope.$watch('required', function (required) {
-
-            var valid = isValid($scope.name);
-            if (required && !valid) {
-                //We set this patch in case required option change and model is valid too
-                if ($scope.model && $scope.model !== '') {
-                    // We set signature if it is present
-                    hideRequired(true);
-                } else {
-                    hideRequired(false);
-                }
-            } else {
-                hideRequired(true);
-            }
-            return;
-        });
-
-        $scope.$on('$destroy', function () {
-            OdsSignature.unregister($scope.name);
-        });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('OdsSignature', OdsSignature);
-
-function OdsSignature() {
-
-    // var apinamespace = 'jSignature';
-
-    var exportTypes = {
-        DEFAULT: 'default',
-        NATIVE: 'native',
-        IMAGE: 'image',
-        BASE30: 'base30',
-        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
-        SVG: 'svg',
-        SVG_XML: 'image/svg+xml',
-        SVG_BASE64: 'svgbase64',
-        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
-    };
-
-    var importTypes = {
-        NATIVE: 'native',
-        IMAGE: 'image',
-        IMAGE_PNG_BASE64: 'image/png;base64',
-        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
-        IMAGE_JPG_BASE64: 'image/jpg;base64'
-    };
-
-    var uniqueCounter = (+new Date()) % 10000;
-
-    var instanceMap = {};
-
-    var service = {
-        exportTypes: exportTypes,
-        importTypes: importTypes,
-        register: register,
-        getInstance: getInstance,
-        unregister: unregister,
-        reset: reset,
-        isValid: isValid,
-        getData: getData,
-        setData: setData,
-        disable: disable,
-        enable: enable,
-        generateName: generateName
-        // setOptions: setOptions,
-        // setReadOnly: setReadOnly,
-        // initOptions: initOptions
-    };
-
-    return service;
-
-    function register(name, instance) {
-
-        instanceMap[name] = instance;
-    }
-
-    function getInstance(name) {
-
-        if (instanceMap[name]) {
-            return instanceMap[name];
-        } else {
-            return false;
-        }
-    }
-
-    function unregister(name) {
-
-        instanceMap[name] = null;
-    }
-
-    function generateName() {
-
-        uniqueCounter++;
-        return 'signature' + uniqueCounter;
-    }
-
-    function reset(name) {
-
-        var element = getInstance(name);
-        if (element) {
-            element.jSignature('reset');
-        }
-    }
-
-    function isValid(name) {
-
-        var d = getData(name, exportTypes.NATIVE);
-        if (d.length >= 1) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    function getData(name, type) {
-
-        var element = getInstance(name);
-        if (element) {
-            return element.jSignature('getData', type);
-        } else {
-            return false;
-        }
-    }
-
-    // function getDataAsSVG(name) {
-    //
-    //     var element = getInstance(name);
-    //     var svg = element.jSignature('getData', 'svg');
-    //     return svg;
-    // }
-    //
-    // function getDataAsBase30(name) {
-    //
-    //     var element = getInstance(name);
-    //     if (element) {
-    //         var svg = element.jSignature('getData', 'svg');
-    //         return svg;
-    //     } else {
-    //         return false;
-    //     }
-    // }
-
-    function setData(name, model) {
-
-        reset(name, model);
-        var element = getInstance(name);
-        if (element && model && model !== '') {
-            element.jSignature('setData', model);
-        }
-    }
-
-    function disable(name) {
-
-        var element = getInstance(name);
-        if (element) {
-            element.jSignature('disable');
-        }
-    }
-
-    function enable(name) {
-
-        var element = getInstance(name);
-        if (element) {
-            element.jSignature('enable');
-        }
-    }
-
-    // function undo(name) {
-    //
-    //     var eventName = apinamespace + '.undo';
-    //     var element = getInstance(name);
-    //     if (element) {
-    //         element.jSignature('events');
-    //     }
-    // }
-}
 (function() {
     'use strict';
 
@@ -2766,16 +2319,35 @@ function EventDataFactory() {
 
     var registerObserver = function (name, observer) {
 
-        if(!Array.isArray(observersMap[name])){
+        if (!Array.isArray(observersMap[name])) {
             observersMap[name] = [];
         }
         observersMap[name].push(observer);
     };
 
+    var unRegisterObserver = function (name, observer, key) {
+
+        if (Array.isArray(observersMap[name])) {
+            var index = search(key, observer[key], observersMap[name]);
+            observersMap[name].splice(index, 1);
+        }
+    };
+
+    function search(key, value, list) {
+
+        for (var i = 0; i < list.length; i++) {
+            if (list[i][key] === value) {
+                return i;
+            }
+        }
+    }
+
     var notifyObservers = function (name) {
 
         for (var index = 0; index < observersMap[name].length; ++index)
-            observersMap[name][index]["on" + name.replace(/^./, function(str){ return str.toUpperCase(); })](dataMap[name]);
+            observersMap[name][index]["on" + name.replace(/^./, function (str) {
+                return str.toUpperCase();
+            })](dataMap[name]);
     };
 
     var setData = function (name, data) {
@@ -2786,9 +2358,9 @@ function EventDataFactory() {
 
     var getData = function (name) {
 
-        if(dataMap[name]) {
+        if (dataMap[name]) {
             return dataMap[name];
-        }else {
+        } else {
             return null;
         }
     };
@@ -2796,6 +2368,7 @@ function EventDataFactory() {
     return {
 
         registerObserver: registerObserver,
+        unRegisterObserver: unRegisterObserver,
         setData: setData,
         getData: getData
     };
@@ -3275,6 +2848,453 @@ function OdsUtils() {
 
 angular
     .module('ods-lib')
+    .directive('selectFiltered', selectFiltered);
+
+selectFiltered.$inject = ['$filter'];
+
+function selectFiltered($filter) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'select-filtered/select-filtered.html',
+        scope: {
+            label: '@',
+            name: '@',
+            hideLabel: '=',
+            placeholder: '@',
+            ngModel: '=',
+            titleProperty: '=?',
+            ngDisabled: '=?',
+            ngRequired: '=?',
+            tooltip: '@',
+            list: '=',
+            filters: '=',
+            onSelect: '&'
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.toggleFilter = toggleFilter;
+        $scope.getSelectTitleValue = getSelectTitleValue;
+        $scope.onSelectFn = onSelectFn;
+
+        init();
+
+        function init() {
+
+            var tmpModel = angular.copy($scope.ngModel);
+            $scope.selected = {
+                value : tmpModel ? tmpModel : null
+            };
+            $scope.ngDisabled = !!$scope.ngDisabled;
+            $scope.ngRequired = !!$scope.ngRequired;
+            $scope.titleProperty = $scope.titleProperty ? $scope.titleProperty : 'name';
+            doFilter();
+        }
+
+        function doFilter() {
+
+            $scope.filtered = angular.copy($scope.list);
+            if ($scope.filters && $scope.filters.length > 0) {
+                for (var i = 0; i < $scope.filters.length; i++) {
+                    if ($scope.filters[i].active) {
+                        // $scope.selected.value = null;
+                        $scope.filtered = $filter('filter')($scope.filtered, $scope.filters[i].pattern, undefined);
+                    }
+                }
+            }
+        }
+
+        function toggleFilter(filter) {
+
+            filter.active = !filter.active;
+            doFilter();
+        }
+
+        function getSelectTitleValue(element) {
+
+            if (element && element.constructor !== Array) {
+                return element[$scope.titleProperty];
+            } else {
+                return $scope.placeholder;
+            }
+        }
+
+        function onSelectFn() {
+
+            if ($scope.onSelect) {
+                $scope.onSelect();
+            } else {
+                console.log('You must to to define onSelect() function.');
+            }
+        }
+
+        $scope.$watch('selected', function (newValue) {
+
+            $scope.ngModel = newValue.value;
+        }, true);
+
+        $scope.$watch('list', function () {
+
+            doFilter();
+        }, true);
+
+    }
+}
+
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsSignature', odsSignature);
+
+odsSignature.$inject = ['$timeout', 'OdsSignature'];
+
+function odsSignature($timeout, OdsSignature) {
+
+    var directive = {
+        restrict: 'E',
+        require: '?ngModel',
+        templateUrl: 'signature/signature.html',
+        scope: {
+            model: '=ngModel',
+            name: '@',
+            options: '=?',
+            disabled: '=ngDisabled',
+            required: '=?ngRequired',
+            onChange: '&'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope, $element, attrs, controller) {
+
+        var hideRequiredClass = 'sig-box-default';
+        var showRequiredClass = 'sig-box-error';
+
+        //If model not present we will exit.
+        if ($scope.model === null) {
+            console.error('Please define a model using "ng-model" attribute!!!');
+            return;
+        }
+
+        $scope.reset = reset;
+
+        init();
+
+        function initOptions() {
+
+            $scope.options = {
+                width: 'ratio',
+                height: 'ratio',
+                color: '#00008B',
+                'background-color': '#EEEEEE',
+                lineWidth: 0,
+                cssClass: ''
+            };
+        }
+
+        function initElement() {
+
+            $scope.element = $element.children('div').children('div').jSignature($scope.options);
+            // $element.find('#sig').jSignature($scope.options);
+            $scope.element.initialized = true;
+            OdsSignature.register($scope.name, $scope.element);
+        }
+
+        function init() {
+
+            //Init options
+            if (!$scope.options) {
+                initOptions();
+            }
+
+            //Init name
+            if (!$scope.name) {
+                $scope.name = OdsSignature.generateName();
+            } else {
+                if (OdsSignature.getInstance($scope.name)) {
+                    console.error('Name already defined in another Signature instance, please pick another name!!!');
+                    return;
+                }
+            }
+
+            //Init required field
+            $scope.requiredClass = hideRequiredClass;
+            $scope.required = !!$scope.required;
+
+            //Init Element
+            initElement();
+            //Set value
+            // setValue();
+
+            if ($scope.options.disabled) {
+                OdsSignature.disable($scope.name, $scope.options);
+            }
+
+            //Init on change event
+            $scope.element.bind('change', function () {
+
+                    // $timeout, 100, true because event happens outside angular's digest cycle
+                    // and change is called on setData
+                    $timeout(function () {
+                        var valid = isValid($scope.name);
+                        if (valid) {
+                            $scope.model = 'data:' +
+                                OdsSignature.getData($scope.name, OdsSignature.exportTypes.IMAGE).join(',');
+                        }
+                    }, 100, true);
+                    if ($scope.onChange) {
+                        $scope.onChange();
+                    }
+                }
+            );
+        }
+
+        function setValue() {
+
+            if ($scope.model && $scope.model !== '') {
+                // We set signature if it is present
+                OdsSignature.setData($scope.name, $scope.model);
+                hideRequired(true);
+            }
+        }
+
+        function reset() {
+
+            $scope.model = '';
+            OdsSignature.reset($scope.name);
+        }
+
+        function isValid() {
+
+            return OdsSignature.isValid($scope.name);
+        }
+
+        function hideRequired(state) {
+
+            if (state) {
+                $scope.requiredClass = hideRequiredClass;
+            } else {
+                $scope.requiredClass = showRequiredClass;
+            }
+            controller.$setValidity('required', state);
+        }
+
+        $scope.$watch('model', function (model, oldModel) {
+
+            if ($scope.required && !isValid()) {
+                hideRequired(false);
+            } else {
+                hideRequired(true);
+            }
+            setValue();
+            return;
+        });
+
+        $scope.$watch('disabled', function (disabled) {
+
+            if (disabled) {
+                OdsSignature.disable($scope.name);
+            } else {
+                OdsSignature.enable($scope.name);
+            }
+            return;
+        });
+
+        $scope.$watch('required', function (required) {
+
+            var valid = isValid($scope.name);
+            if (required && !valid) {
+                //We set this patch in case required option change and model is valid too
+                if ($scope.model && $scope.model !== '') {
+                    // We set signature if it is present
+                    hideRequired(true);
+                } else {
+                    hideRequired(false);
+                }
+            } else {
+                hideRequired(true);
+            }
+            return;
+        });
+
+        $scope.$on('$destroy', function () {
+            OdsSignature.unregister($scope.name);
+        });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .factory('OdsSignature', OdsSignature);
+
+function OdsSignature() {
+
+    // var apinamespace = 'jSignature';
+
+    var exportTypes = {
+        DEFAULT: 'default',
+        NATIVE: 'native',
+        IMAGE: 'image',
+        BASE30: 'base30',
+        IMAGE_SIGNATURE_BASE30: 'image/jsignature;base30',
+        SVG: 'svg',
+        SVG_XML: 'image/svg+xml',
+        SVG_BASE64: 'svgbase64',
+        IMAGE_SVG_XML_BASE64: 'image/svg+xml;base64'
+    };
+
+    var importTypes = {
+        NATIVE: 'native',
+        IMAGE: 'image',
+        IMAGE_PNG_BASE64: 'image/png;base64',
+        IMAGE_JPEG_BASE64: 'image/jpeg;base64',
+        IMAGE_JPG_BASE64: 'image/jpg;base64'
+    };
+
+    var uniqueCounter = (+new Date()) % 10000;
+
+    var instanceMap = {};
+
+    var service = {
+        exportTypes: exportTypes,
+        importTypes: importTypes,
+        register: register,
+        getInstance: getInstance,
+        unregister: unregister,
+        reset: reset,
+        isValid: isValid,
+        getData: getData,
+        setData: setData,
+        disable: disable,
+        enable: enable,
+        generateName: generateName
+        // setOptions: setOptions,
+        // setReadOnly: setReadOnly,
+        // initOptions: initOptions
+    };
+
+    return service;
+
+    function register(name, instance) {
+
+        instanceMap[name] = instance;
+    }
+
+    function getInstance(name) {
+
+        if (instanceMap[name]) {
+            return instanceMap[name];
+        } else {
+            return false;
+        }
+    }
+
+    function unregister(name) {
+
+        instanceMap[name] = null;
+    }
+
+    function generateName() {
+
+        uniqueCounter++;
+        return 'signature' + uniqueCounter;
+    }
+
+    function reset(name) {
+
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('reset');
+        }
+    }
+
+    function isValid(name) {
+
+        var d = getData(name, exportTypes.NATIVE);
+        if (d.length >= 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    function getData(name, type) {
+
+        var element = getInstance(name);
+        if (element) {
+            return element.jSignature('getData', type);
+        } else {
+            return false;
+        }
+    }
+
+    // function getDataAsSVG(name) {
+    //
+    //     var element = getInstance(name);
+    //     var svg = element.jSignature('getData', 'svg');
+    //     return svg;
+    // }
+    //
+    // function getDataAsBase30(name) {
+    //
+    //     var element = getInstance(name);
+    //     if (element) {
+    //         var svg = element.jSignature('getData', 'svg');
+    //         return svg;
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
+    function setData(name, model) {
+
+        reset(name, model);
+        var element = getInstance(name);
+        if (element && model && model !== '') {
+            element.jSignature('setData', model);
+        }
+    }
+
+    function disable(name) {
+
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('disable');
+        }
+    }
+
+    function enable(name) {
+
+        var element = getInstance(name);
+        if (element) {
+            element.jSignature('enable');
+        }
+    }
+
+    // function undo(name) {
+    //
+    //     var eventName = apinamespace + '.undo';
+    //     var element = getInstance(name);
+    //     if (element) {
+    //         element.jSignature('events');
+    //     }
+    // }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
     .directive('stepsIndicator', StepsIndicator);
 
 StepsIndicator.$inject = [];
@@ -3646,6 +3666,245 @@ function wizardSteps() {
         return service;
     }
 })();
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsForm', FormDirective);
+
+FormDirective.$inject = ['OdsFormService', '$timeout', 'EventDataFactory', 'OdsEvent'];
+
+function FormDirective(OdsFormService, $timeout, EventDataFactory, OdsEvent) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/form/form.html',
+        scope: {
+            schema: '=',
+            config: '=',
+            onSave: '&'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        if ($scope.config) {
+            //CKEditor config load.
+            if ($scope.config.ckeditor) {
+
+                OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
+            }
+        }
+
+        $scope.clear = clear;
+        $scope.save = save;
+
+        $scope.hideTitle = hideTitle;
+
+        //Common field validation
+        $scope.getRequired = getRequired;
+        $scope.getMinLength = getMinLength;
+        $scope.getMaxLength = getMaxLength;
+        $scope.getPattern = getPattern;
+
+        $scope.getFormFieldTemplate = getFormFieldTemplate;
+
+        //Select field specific
+        $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
+
+        //Calendar field specific
+        $scope.openCalendar = openCalendar;
+
+        //Table field specific
+        $scope.removeRow = removeRow;
+        $scope.removeColumn = removeColumn;
+        $scope.cloneRow = cloneRow;
+
+        //CKEditor specific
+        $scope.valueSubtitutor = valueSubtitutor;
+
+        /**
+         * Hide title or label from component
+         * @param field Component
+         * @returns {boolean}
+         */
+        function hideTitle(field) {
+
+            return field.hideLabel ? true : false;
+        }
+
+        /**
+         * Return if field is required.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getRequired(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.required &&
+            field.validation.required !== undefined ? field.validation.required : false;
+        }
+
+        /**
+         * Return if field has min length.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getMinLength(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.minlength &&
+            field.validation.minlength !== undefined ? field.validation.minlength : null;
+        }
+
+        /**
+         * Return if field has a pattern.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getPattern(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.pattern &&
+            field.validation.pattern !== undefined ? field.validation.pattern : null;
+        }
+
+        /**
+         * Return if field has max length.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getMaxLength(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.maxlength &&
+            field.validation.maxlength !== undefined ? field.validation.maxlength : null;
+        }
+
+        function getFormFieldTemplate(fieldType) {
+
+            return OdsFormService.getFormFieldTemplate(fieldType);
+        }
+
+        function getSelectFieldTitleValue(field, element) {
+
+            return OdsFormService.getSelectFieldTitleValue(field, element);
+        }
+
+        function clear() {
+            //TODO confirm if you want to clear al fields.
+            showInfo('Form cleared!!!');
+        }
+
+        /**
+         * Call to external callback if it is specified, show error message if not defined.
+         */
+        function save() {
+
+            if ($scope.schema.handleSubmit) {
+                if ($scope.onSave) {
+                    $scope.onSave();
+                } else {
+                    showError('You must to to define onSave() function.');
+                }
+            }
+        }
+
+        function showError(message) {
+
+            $scope.error = true;
+            $scope.message = message;
+            $timeout(function () {
+                $scope.error = false;
+                $scope.message = '';
+            }, 5000);
+        }
+
+        // function showSuccess(message) {
+        //
+        //     $scope.success = true;
+        //     $scope.message = message;
+        //     $timeout(function () {
+        //         $scope.success = false;
+        //         $scope.message = '';
+        //     }, 5000);
+        // }
+
+        function showInfo(message) {
+
+            $scope.info = true;
+            $scope.message = message;
+            $timeout(function () {
+                $scope.info = false;
+                $scope.message = '';
+            }, 5000);
+        }
+
+        /**
+         * Open and close Calendar popup
+         * @param field
+         * @returns {boolean|*}
+         */
+        function openCalendar(field) {
+
+            field.open = !field.open;
+            return field.open;
+        }
+
+        /**
+         * Remove row from section.
+         * @param table Table to remove row
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            OdsFormService.removeRow(table, index);
+        }
+
+        /**
+         * Add column to current row.
+         * @param table Table to remove column
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            OdsFormService.removeColumn(table, index);
+        }
+
+        /**
+         * Clone the last row in table and add it as a new row.
+         * @param table Table
+         */
+        function cloneRow(table) {
+
+            OdsFormService.cloneRow(table);
+        }
+
+        function valueSubtitutor(field) {
+
+            if (field.options.tokens && field.printView) {
+                return OdsFormService.strSubtitutor(field.value, field.options.tokens,
+                    field.options.prefix, field.options.suffix);
+            } else {
+                return field.value;
+            }
+        }
+
+    }
+}
 
 /**
  * Created by hermeslm on 3/28/17.
@@ -5239,245 +5498,6 @@ function DynamicNameDirective($compile, $parse) {
 
 angular
     .module('ods-lib')
-    .directive('odsForm', FormDirective);
-
-FormDirective.$inject = ['OdsFormService', '$timeout', 'EventDataFactory', 'OdsEvent'];
-
-function FormDirective(OdsFormService, $timeout, EventDataFactory, OdsEvent) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/form/form.html',
-        scope: {
-            schema: '=',
-            config: '=',
-            onSave: '&'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        if ($scope.config) {
-            //CKEditor config load.
-            if ($scope.config.ckeditor) {
-
-                OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
-            }
-        }
-
-        $scope.clear = clear;
-        $scope.save = save;
-
-        $scope.hideTitle = hideTitle;
-
-        //Common field validation
-        $scope.getRequired = getRequired;
-        $scope.getMinLength = getMinLength;
-        $scope.getMaxLength = getMaxLength;
-        $scope.getPattern = getPattern;
-
-        $scope.getFormFieldTemplate = getFormFieldTemplate;
-
-        //Select field specific
-        $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
-
-        //Calendar field specific
-        $scope.openCalendar = openCalendar;
-
-        //Table field specific
-        $scope.removeRow = removeRow;
-        $scope.removeColumn = removeColumn;
-        $scope.cloneRow = cloneRow;
-
-        //CKEditor specific
-        $scope.valueSubtitutor = valueSubtitutor;
-
-        /**
-         * Hide title or label from component
-         * @param field Component
-         * @returns {boolean}
-         */
-        function hideTitle(field) {
-
-            return field.hideLabel ? true : false;
-        }
-
-        /**
-         * Return if field is required.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getRequired(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.required &&
-            field.validation.required !== undefined ? field.validation.required : false;
-        }
-
-        /**
-         * Return if field has min length.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getMinLength(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.minlength &&
-            field.validation.minlength !== undefined ? field.validation.minlength : null;
-        }
-
-        /**
-         * Return if field has a pattern.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getPattern(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.pattern &&
-            field.validation.pattern !== undefined ? field.validation.pattern : null;
-        }
-
-        /**
-         * Return if field has max length.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getMaxLength(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.maxlength &&
-            field.validation.maxlength !== undefined ? field.validation.maxlength : null;
-        }
-
-        function getFormFieldTemplate(fieldType) {
-
-            return OdsFormService.getFormFieldTemplate(fieldType);
-        }
-
-        function getSelectFieldTitleValue(field, element) {
-
-            return OdsFormService.getSelectFieldTitleValue(field, element);
-        }
-
-        function clear() {
-            //TODO confirm if you want to clear al fields.
-            showInfo('Form cleared!!!');
-        }
-
-        /**
-         * Call to external callback if it is specified, show error message if not defined.
-         */
-        function save() {
-
-            if ($scope.schema.handleSubmit) {
-                if ($scope.onSave) {
-                    $scope.onSave();
-                } else {
-                    showError('You must to to define onSave() function.');
-                }
-            }
-        }
-
-        function showError(message) {
-
-            $scope.error = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.error = false;
-                $scope.message = '';
-            }, 5000);
-        }
-
-        // function showSuccess(message) {
-        //
-        //     $scope.success = true;
-        //     $scope.message = message;
-        //     $timeout(function () {
-        //         $scope.success = false;
-        //         $scope.message = '';
-        //     }, 5000);
-        // }
-
-        function showInfo(message) {
-
-            $scope.info = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.info = false;
-                $scope.message = '';
-            }, 5000);
-        }
-
-        /**
-         * Open and close Calendar popup
-         * @param field
-         * @returns {boolean|*}
-         */
-        function openCalendar(field) {
-
-            field.open = !field.open;
-            return field.open;
-        }
-
-        /**
-         * Remove row from section.
-         * @param table Table to remove row
-         * @param index Row index to remove.
-         */
-        function removeRow(table, index) {
-
-            OdsFormService.removeRow(table, index);
-        }
-
-        /**
-         * Add column to current row.
-         * @param table Table to remove column
-         * @param row Row to add column.
-         */
-        function removeColumn(table, index) {
-
-            OdsFormService.removeColumn(table, index);
-        }
-
-        /**
-         * Clone the last row in table and add it as a new row.
-         * @param table Table
-         */
-        function cloneRow(table) {
-
-            OdsFormService.cloneRow(table);
-        }
-
-        function valueSubtitutor(field) {
-
-            if (field.options.tokens && field.printView) {
-                return OdsFormService.strSubtitutor(field.value, field.options.tokens,
-                    field.options.prefix, field.options.suffix);
-            } else {
-                return field.value;
-            }
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
     .directive('odsFormInfo', OdsFormInfoDirective);
 
 OdsFormInfoDirective.$inject = [];
@@ -5511,9 +5531,9 @@ angular
     .module('ods-lib')
     .directive('odsSchema', SchemaDirective);
 
-SchemaDirective.$inject = ['OdsFormService'];
+SchemaDirective.$inject = ['OdsFormService', 'EventDataFactory', 'OdsEvent'];
 
-function SchemaDirective(OdsFormService) {
+function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
 
     var directive = {
         restrict: 'E',
@@ -5568,6 +5588,12 @@ function SchemaDirective(OdsFormService) {
 
             OdsFormService.exportSchema($scope.schema);
         }
+
+        $scope.$on('$destroy', function() {
+
+            EventDataFactory.unRegisterObserver(OdsEvent.IMPORT_SCHEMA, $scope, '$id');
+            EventDataFactory.unRegisterObserver(OdsEvent.EXPORT_SCHEMA, $scope, '$id');
+        });
 
     }
 }
@@ -6384,78 +6410,6 @@ function FieldMultiSelectOptionsDirective(OdsFormService) {
 
 angular
     .module('ods-lib')
-    .directive('odsFieldRadioOptions', FieldRadioOptionsDirective);
-
-FieldRadioOptionsDirective.$inject = ['OdsFormService'];
-
-function FieldRadioOptionsDirective(OdsFormService) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/components/radio-list/radio-options-properties.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope) {
-
-        $scope.options = initOptions();
-        $scope.addOption = addOption;
-        $scope.removeOption = removeOption;
-
-        function initOptions() {
-
-            var options = [];
-            for (var i = 0; i < $scope.field.options.length; i++) {
-                var option = {
-                    id: OdsFormService.getSelectFieldIdValue($scope.field, $scope.field.options[i]),
-                    name: OdsFormService.getSelectFieldTitleValue($scope.field, $scope.field.options[i])
-                };
-                options.push(option);
-            }
-            return options;
-        }
-
-        function addOption() {
-
-            var option = {
-                id: '',
-                name: ''
-            };
-
-            $scope.options.push(option);
-        }
-
-        function removeOption(index) {
-
-            $scope.options.splice(index, 1);
-        }
-
-        $scope.$watch('options', function (model) {
-
-            var options = [];
-            for (var i = 0; i < model.length; i++) {
-                var option = {};
-                option[OdsFormService.getSelectFieldId($scope.field)] = model[i].id;
-                option[OdsFormService.getSelectFieldTitle($scope.field)] = model[i].name;
-                options.push(option);
-            }
-            $scope.field.options = options;
-        }, true);
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
     .directive('odsRow', RowDirective);
 
 RowDirective.$inject = ['OdsFormService', 'dialogs'];
@@ -6576,6 +6530,78 @@ function RowDirective(OdsFormService, dialogs) {
             col.cssClass = ' col-xs-' + col.width + ' col-sm-' + col.width +
                 ' col-md-' + col.width + ' col-lg-' + col.width;
         }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsFieldRadioOptions', FieldRadioOptionsDirective);
+
+FieldRadioOptionsDirective.$inject = ['OdsFormService'];
+
+function FieldRadioOptionsDirective(OdsFormService) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/components/radio-list/radio-options-properties.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        $scope.options = initOptions();
+        $scope.addOption = addOption;
+        $scope.removeOption = removeOption;
+
+        function initOptions() {
+
+            var options = [];
+            for (var i = 0; i < $scope.field.options.length; i++) {
+                var option = {
+                    id: OdsFormService.getSelectFieldIdValue($scope.field, $scope.field.options[i]),
+                    name: OdsFormService.getSelectFieldTitleValue($scope.field, $scope.field.options[i])
+                };
+                options.push(option);
+            }
+            return options;
+        }
+
+        function addOption() {
+
+            var option = {
+                id: '',
+                name: ''
+            };
+
+            $scope.options.push(option);
+        }
+
+        function removeOption(index) {
+
+            $scope.options.splice(index, 1);
+        }
+
+        $scope.$watch('options', function (model) {
+
+            var options = [];
+            for (var i = 0; i < model.length; i++) {
+                var option = {};
+                option[OdsFormService.getSelectFieldId($scope.field)] = model[i].id;
+                option[OdsFormService.getSelectFieldTitle($scope.field)] = model[i].name;
+                options.push(option);
+            }
+            $scope.field.options = options;
+        }, true);
     }
 }
 
