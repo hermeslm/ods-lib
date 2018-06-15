@@ -9,10 +9,10 @@
         .factory('OdsFormService', OdsFormService);
 
     OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
-        '$resource'];
+        '$resource', 'OdsPosition'];
 
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-                            $resource) {
+                            $resource, OdsPosition) {
 
         var uniqueCounter = (+new Date()) % 10000;
 
@@ -41,10 +41,13 @@
             addToClipBoard: addToClipBoard,
             onAddToClipBoard: onAddToClipBoard,
             renameComponent: renameComponent,
-            importSchema: importSchema,
-            exportSchema: exportSchema,
+            importForm: importForm,
+            exportForm: exportForm,
+            importSubForm: importSubForm,
+            downloadObjectAsJson: downloadObjectAsJson,
+            loadSubForm: loadSubForm,
             checkUpload: checkUpload,
-            // http: http,
+            getExportables: getExportables,
 
             //Templates management
             getToolbarComponent: getToolbarComponent,
@@ -98,6 +101,7 @@
 
             getTimeZoneUTC: getTimeZoneUTC,
             convertFormSchemaFromServer: convertFormSchemaFromServer,
+            setReadOnlyStatus: setReadOnlyStatus,
             copyJson: copyJson,
             getDataFromComponentCode: getDataFromComponentCode,
             saveFormData: saveFormData,
@@ -121,7 +125,7 @@
         /**
          * Import Schema.
          */
-        function importSchema(file) {
+        function importForm(file) {
 
             var base64result = file.substr(file.indexOf(',') + 1);
             var decodedString = atob(base64result);
@@ -135,12 +139,12 @@
         /**
          * Export Schema.
          */
-        function exportSchema(schema) {
+        function exportForm(schema) {
 
             var exportObject = {
                 format: formats.JSON,
                 version: version,
-                schema: schema
+                form: schema
             };
 
             var now = new Date();
@@ -174,6 +178,16 @@
                 alert('The File APIs are not fully supported in this browser.');
                 return false;
             }
+        }
+
+        /**
+         * This method allows to import a subform into th schema
+         * @param subForm
+         */
+        function importSubForm(subForm) {
+
+            //TODO check subform syntax.
+            EventDataFactory.setData(OdsEvent.LOAD_SUB_FORM, subForm);
         }
 
         /**
@@ -588,6 +602,7 @@
                 name: generateName(OdsComponentType.SECTION),
                 componentType: OdsComponentType.SECTION,
                 title: 'Section',
+                isExportable: false,
                 displayProperties: false,
                 allowedTypes: [
                     OdsComponentType.ROW
@@ -1082,16 +1097,6 @@
             var value = 0;
             var id;
             switch (field.type) {
-                case OdsFieldType.TEXT:
-                    if (field.value) {
-                        value += Number(field.value);
-                    }
-                    break;
-                case OdsFieldType.NUMBER:
-                    if (field.value) {
-                        value += Number(field.value);
-                    }
-                    break;
                 case OdsFieldType.SELECT:
                     if (field.value) {
                         id = getSelectFieldId(field);
@@ -1106,7 +1111,7 @@
                         }
                     }
                     break;
-                case OdsFieldType.TEXTAREA:
+                default:
                     if (field.value) {
                         value += Number(field.value);
                     }
@@ -1356,6 +1361,44 @@
             return schema;
         }
 
+        /**
+         * Return all exportable elements as array.
+         */
+        function getExportables(schema) {
+
+            var exportables = [];
+            var layout = schema.layout;
+            for (var i = 0; i < layout.length; i++) {
+                var content = layout[i];
+                if (content && content.exportable) {
+                    exportables.push(content);
+                }
+            }
+
+            return exportables;
+        }
+
+        /**
+         * Load a subform into the schema
+         *
+         * @return Boolean Return True if the operation is successful or False if an error occur.
+         */
+        function loadSubForm(schema, subForm, position) {
+
+            var layout = schema.layout;
+            if (Array.isArray(layout)) {
+                if (position === OdsPosition.TOP) {
+                    layout.unshift(subForm);
+                } else {
+                    layout.push(subForm);
+                }
+
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         function getDataFromComponentCode(schema, code) {
 
             var resultFields = [];
@@ -1442,6 +1485,46 @@
                                 if (fields[l].type === OdsFieldType.DATETIME) {
                                     fields[l].value = new Date(Date.parse(fields[l].value));
                                 }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return schema;
+        }
+
+        /**
+         * This method make all fields in the schema read only or not.
+         * @param json
+         * @param status
+         * @return {Object|Array|string|number}
+         */
+        function setReadOnlyStatus(json, status) {
+
+            var schema = angular.fromJson(json);
+
+            var fields;
+            var layout = schema.layout;
+
+            for (var i = 0; i < layout.length; i++) {
+                var rows = layout[i].rows;
+                for (var j = 0; j < rows.length; j++) {
+                    var cols = rows[j].cols;
+                    for (var k = 0; k < cols.length; k++) {
+                        fields = cols[k].fields;
+                        for (var l = 0; l < fields.length; l++) {
+                            if (fields[l].type === OdsFieldType.TABLE) {
+                                for (var m = 0; m < fields[l].matrix.length; m++) {
+                                    var matrixRow = fields[l].matrix[m];
+                                    for (var p = 0; p < matrixRow.length; p++) {
+                                        if (matrixRow[p].fields.length > 0) {
+                                            matrixRow[p].fields[0].readonly = status;
+                                        }
+                                    }
+                                }
+                            } else {
+                                fields[l].readonly = status;
                             }
                         }
                     }

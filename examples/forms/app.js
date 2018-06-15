@@ -1181,4 +1181,107 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
         $scope.templateResult2 = OdsFormService.strSubtitutor($scope.test2, patient, '@', '');
     }
 
+    $scope.copyExportables = copyExportables;
+    function copyExportables() {
+
+        var schema = OdsFormService.newSchema();
+        schema.layout.push(OdsFormService.getExportables($scope.schema));
+        OdsFormService.downloadObjectAsJson(schema, 'SubForms');
+    }
+
+    $scope.subform = {
+        "name": "section9342",
+        "componentType": "section",
+        "title": "Section",
+        "isExportable": true,
+        "displayProperties": false,
+        "allowedTypes": [
+            "row"
+        ],
+        "rows": [
+            {
+                "name": "row9343",
+                "componentType": "row",
+                "cssClass": "row",
+                "displayProperties": false,
+                "cols": [
+                    {
+                        "name": "column9344",
+                        "cssClass": " col-xs-4 col-sm-4 col-md-4 col-lg-4",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Subform 1",
+                                "name": "field9371",
+                                "placeholder": "",
+                                "type": "text",
+                                "required": false,
+                                "value": null,
+                                "validation": {
+                                    "messages": {}
+                                },
+                                "popoverProps": false,
+                                "showProperties": false
+                            }
+                        ],
+                        "width": 4
+                    },
+                    {
+                        "name": "column9369",
+                        "cssClass": " col-xs-4 col-sm-4 col-md-4 col-lg-4",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Subform 2",
+                                "name": "field9374",
+                                "placeholder": "",
+                                "type": "text",
+                                "required": false,
+                                "value": null,
+                                "validation": {
+                                    "messages": {}
+                                },
+                                "popoverProps": false,
+                                "showProperties": false
+                            }
+                        ],
+                        "width": 4
+                    },
+                    {
+                        "name": "column9370",
+                        "cssClass": " col-xs-4 col-sm-4 col-md-4 col-lg-4",
+                        "allowedTypes": [
+                            "field"
+                        ],
+                        "fields": [
+                            {
+                                "componentType": "field",
+                                "label": "Subform 3",
+                                "name": "field9375",
+                                "placeholder": "",
+                                "type": "text",
+                                "required": false,
+                                "value": null,
+                                "validation": {
+                                    "messages": {}
+                                },
+                                "popoverProps": false,
+                                "showProperties": false
+                            }
+                        ],
+                        "width": 4
+                    }
+                ],
+                "showProperties": false
+            }
+        ],
+        "showProperties": true
+    }
+
 }

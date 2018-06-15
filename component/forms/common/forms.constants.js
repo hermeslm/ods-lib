@@ -49,8 +49,13 @@
             // YearMonth: 'F, Y'
         })
         .constant('OdsEvent', {
-            IMPORT_SCHEMA: 'importSchema',
-            EXPORT_SCHEMA: 'exportSchema'
+            IMPORT_FORM: 'importForm',
+            EXPORT_FORM: 'exportForm',
+            LOAD_SUB_FORM: 'loadSubForm'
+        })
+        .constant('OdsPosition', {
+            TOP: 'top',
+            DOWN: 'down'
         });
 
 })();

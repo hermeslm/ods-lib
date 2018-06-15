@@ -46,6 +46,15 @@
                                        ng-model="section.hideLabel">
                             </div>
                         </div>
+                        <div class="form-group"
+                             ng-class="{'has-error': sectionPropertiesForm.{{section.name}}-exportable.$invalid}">
+                            <label for="{{section.name}}-exportable" class="col-sm-5 control-label"
+                                   title="Indicates if will show title or not.">Exportable:</label>
+                            <div class="col-sm-7">
+                                <input type="checkbox" id="{{section.name}}-exportable" name="{{section.name}}-exportable"
+                                       ng-model="section.exportable">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

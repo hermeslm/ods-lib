@@ -150,12 +150,12 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
 
         function onLoad(file) {
 
-            EventDataFactory.setData(OdsEvent.IMPORT_SCHEMA, OdsFormService.importSchema(file));
+            EventDataFactory.setData(OdsEvent.IMPORT_FORM, OdsFormService.importForm(file));
         }
 
         function exportSchema() {
 
-            EventDataFactory.setData(OdsEvent.EXPORT_SCHEMA, "");
+            EventDataFactory.setData(OdsEvent.EXPORT_FORM, "");
         }
     }
 }

@@ -22,8 +22,9 @@ function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
         link: linkFunc,
         controller: ['$scope', 'EventDataFactory', 'OdsEvent', function ($scope, EventDataFactory, OdsEvent) {
 
-            EventDataFactory.registerObserver(OdsEvent.IMPORT_SCHEMA, $scope);
-            EventDataFactory.registerObserver(OdsEvent.EXPORT_SCHEMA, $scope);
+            EventDataFactory.registerObserver(OdsEvent.IMPORT_FORM, $scope);
+            EventDataFactory.registerObserver(OdsEvent.EXPORT_FORM, $scope);
+            EventDataFactory.registerObserver(OdsEvent.LOAD_SUB_FORM, $scope);
 
         }]
     };
@@ -35,8 +36,8 @@ function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
     function linkFunc($scope) {
 
         $scope.onAdd = onAdd;
-        $scope.onImportSchema = onImportSchema;
-        $scope.onExportSchema = onExportSchema;
+        $scope.onImportForm = onImportForm;
+        $scope.onExportForm = onExportForm;
 
         if (!$scope.schema) {
             $scope.schema = OdsFormService.newSchema();
@@ -53,22 +54,28 @@ function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
 
         /**
          * Event change schema notify
-         * @param data New Schema
+         * @param data New Form
          */
-        function onImportSchema(data) {
+        function onImportForm(data) {
 
-            $scope.schema = data.schema;
+            $scope.schema = data.form;
         }
 
-        function onExportSchema(){
+        function onExportForm(){
 
-            OdsFormService.exportSchema($scope.schema);
+            OdsFormService.exportForm($scope.schema);
+        }
+
+        function onLoadSubForm(subForm, position){
+
+            OdsFormService.loadSubForm($scope.schema, subForm, position);
         }
 
         $scope.$on('$destroy', function() {
 
-            EventDataFactory.unRegisterObserver(OdsEvent.IMPORT_SCHEMA, $scope, '$id');
-            EventDataFactory.unRegisterObserver(OdsEvent.EXPORT_SCHEMA, $scope, '$id');
+            EventDataFactory.unRegisterObserver(OdsEvent.IMPORT_FORM, $scope, '$id');
+            EventDataFactory.unRegisterObserver(OdsEvent.EXPORT_FORM, $scope, '$id');
+            EventDataFactory.unRegisterObserver(OdsEvent.LOAD_SUB_FORM, $scope, '$id');
         });
 
     }
