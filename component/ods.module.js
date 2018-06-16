@@ -12,7 +12,7 @@ angular
         'ngSanitize',
         'cp.ngConfirm',
         'dialogs.main',
-        'dialogs.default-translations',
+        // 'dialogs.default-translations',
         'ngMessages',
         'mgcrea.bootstrap.affix',
         'ngResource',
@@ -58,4 +58,5 @@ function configFunction($rootScopeProvider, $localStorageProvider, $translatePro
         DIALOGS_NO: "No"
     });
 
+    $translateProvider.preferredLanguage('en-US');
 }
