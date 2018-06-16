@@ -1,21 +1,16 @@
 <div class="toolbar-container box-solid" bs-affix data-offset-top="10" data-offset-bottom="0">
     <div class="form-header with-border">
         <div class="row" style="margin: 0">
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <h3 class="box-title">{{toolbar.title}}</h3>
             </div>
-            <div class="col-lg-6 accordion-button-right">
-                <label class="btn btn-success btn-sm" title="Import schema">
+            <div class="col-lg-4 accordion-button-right">
+                <button class="btn btn-success"  title="Import Form">
                     <i class="fa fa-upload"></i>
-                    Import <input type="file" hidden ng-model="importFile" accept=".json" ods-file-upload>
-                </label>
-                <!--<button class="btn btn-primary btn-sm" title="Export schema" ng-click="export()">-->
-                    <!--<i class="fa fa-download"></i>-->
-                    <!--Export-->
-                <!--</button>-->
-                <button class="btn btn-primary btn-sm" title="Export schema" ng-click="export()">
+                    <input type="file" hidden ng-model="importFile" accept=".json" ods-file-upload>
+                </button>
+                <button class="btn btn-primary" title="Export Form" ng-click="export()">
                     <i class="fa fa-download"></i>
-                    Export
                 </button>
             </div>
         </div>
