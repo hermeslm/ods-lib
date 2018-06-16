@@ -21,7 +21,7 @@
             <div uib-accordion-group class="panel-default" panel-class="panel-toolbar" heading="{{group.title}}"
                  is-open="group.open" is-disabled="group.disabled" ng-repeat="group in toolbar.groups"
                  ng-init="groupIndex = $index">
-                <ul class="list-group no-margin-bottom">
+                <ul class="toolbar-list list-group no-margin-bottom">
                     <li class="toolbar-component padding-bottom no-padding-top"
                         ng-repeat="component in group.components">
                         <div class="box-toolbar"
