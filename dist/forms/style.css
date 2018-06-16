@@ -260,6 +260,10 @@
   white-space: pre-wrap;
 }
 
+.pad {
+  padding: 10px;
+}
+
 .no-padding {
   padding: 0px;
 }
