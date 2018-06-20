@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsForm', FormDirective);
 
-FormDirective.$inject = ['OdsFormService', '$timeout', 'EventDataFactory', 'OdsEvent'];
+FormDirective.$inject = ['OdsFormService', '$timeout'];
 
-function FormDirective(OdsFormService, $timeout, EventDataFactory, OdsEvent) {
+function FormDirective(OdsFormService, $timeout) {
 
     var directive = {
         restrict: 'E',
@@ -27,6 +27,8 @@ function FormDirective(OdsFormService, $timeout, EventDataFactory, OdsEvent) {
     /* private helper methods*/
 
     function linkFunc($scope) {
+
+        $scope.name = $scope.schema.name;
 
         if ($scope.config) {
             //CKEditor config load.
