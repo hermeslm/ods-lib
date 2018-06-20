@@ -28,7 +28,12 @@ function FormDirective(OdsFormService, $timeout) {
 
     function linkFunc($scope) {
 
-        $scope.name = $scope.schema && $scope.schema.name ? $scope.schema.name : OdsFormService.generateName();
+        if(!$scope.schema){
+            console.warn('Form Schema is null.');
+            $scope.name = OdsFormService.generateName();
+        }else {
+            $scope.name = $scope.schema.name;
+        }
 
         if ($scope.config) {
             //CKEditor config load.

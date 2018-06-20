@@ -29,6 +29,7 @@
 
             //Utils methods
             newSchema: newSchema,
+            newSchemaEmpty: newSchemaEmpty,
             initSchema: initSchema,
             generateName: generateName,
             onAdd: onAdd,
@@ -118,6 +119,20 @@
                 hideLabel: true,
                 description: 'New Form Description',
                 layout: [newSectionObject()],
+                allowedTypes: [OdsComponentType.SECTION]
+            };
+        }
+
+        /**
+         * Create a new Schema.
+         */
+        function newSchemaEmpty() {
+            return {
+                name: generateName(OdsComponentType.FORM),
+                label: 'New Form',
+                hideLabel: true,
+                description: 'New Form Description',
+                layout: [],
                 allowedTypes: [OdsComponentType.SECTION]
             };
         }
@@ -1383,7 +1398,7 @@
          */
         function getExportables(schema) {
 
-            var form = newSchema();
+            var form = newSchemaEmpty();
             var layout = schema.layout;
             for (var i = 0; i < layout.length; i++) {
                 var content = layout[i];
