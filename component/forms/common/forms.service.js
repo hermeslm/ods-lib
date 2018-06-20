@@ -1383,7 +1383,7 @@
          */
         function getExportables(schema) {
 
-            var form = OdsFormService.newSchema();
+            var form = newSchema();
             var layout = schema.layout;
             for (var i = 0; i < layout.length; i++) {
                 var content = layout[i];
