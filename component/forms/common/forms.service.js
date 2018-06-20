@@ -1361,21 +1361,38 @@
             return schema;
         }
 
+        // /**
+        //  * Return all exportable elements as array.
+        //  */
+        // function getExportables(schema) {
+        //
+        //     var exportables = [];
+        //     var layout = schema.layout;
+        //     for (var i = 0; i < layout.length; i++) {
+        //         var content = layout[i];
+        //         if (content && content.exportable) {
+        //             exportables.push(content);
+        //         }
+        //     }
+        //
+        //     return exportables;
+        // }
+
         /**
-         * Return all exportable elements as array.
+         * Return all exportable elements embedded in a form.
          */
         function getExportables(schema) {
 
-            var exportables = [];
+            var form = OdsFormService.newSchema();
             var layout = schema.layout;
             for (var i = 0; i < layout.length; i++) {
                 var content = layout[i];
                 if (content && content.exportable) {
-                    exportables.push(content);
+                    form.layout.push(content);
                 }
             }
 
-            return exportables;
+            return form;
         }
 
         /**
