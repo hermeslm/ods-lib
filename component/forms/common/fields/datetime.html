@@ -3,7 +3,7 @@
            enable-time="field.enableTime" datetime-picker="{{field.format}}" ng-required="getRequired(field)"
            ng-model="field.value" is-open="field.open" model-options="field.options" ng-disabled="field.readonly"/>
     <span class="input-group-btn">
-        <button type="button" class="btn btn-default" ng-click="openCalendar(field)" disabled="field.readonly">
+        <button type="button" class="btn btn-default" ng-click="openCalendar(field)" ng-disabled="field.readonly">
             <i class="fa fa-calendar"></i>
         </button>
     </span>

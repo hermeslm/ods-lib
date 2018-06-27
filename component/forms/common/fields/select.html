@@ -1,6 +1,5 @@
 <select class="form-control" ods-dynamic-name="field.name" name="{{field.name}}" id="{{field.name + dev}}"
-        ng-model="field.value" title="{{field.tooltip}}" ng-required="getRequired(field)"
-        disabled="{{fieldDisabled || field.readonly}}"
+        ng-model="field.value" title="{{field.tooltip}}" ng-required="getRequired(field)" ng-disabled="field.readonly"
         ng-options="element as element.name for element in field.options | limitTo: field.limitTo track by element.id">
     <option value="" disabled hidden>{{field.placeholder}}</option>
 </select>
