@@ -5,10 +5,14 @@
                 <h3 class="box-title">{{toolbar.title}}</h3>
             </div>
             <div class="col-lg-4 accordion-button-right">
-                <button class="btn btn-success"  title="Import Form">
+                <label class="btn btn-success">
                     <i class="fa fa-upload"></i>
-                    <input type="file" hidden ng-model="importFile" accept=".json" ods-file-upload>
-                </button>
+                    <input type="file" style="display: none;" ng-model="importFile" accept=".json" ods-file-upload>
+                </label>
+                <!--<button class="btn btn-success"  title="Import Form">-->
+                    <!--<i class="fa fa-upload"></i>-->
+                    <!--<input type="file" ng-model="importFile" accept=".json" ods-file-upload>-->
+                <!--</button>-->
                 <button class="btn btn-primary" title="Export Form" ng-click="export()">
                     <i class="fa fa-download"></i>
                 </button>

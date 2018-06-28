@@ -26,9 +26,8 @@
 
             if (!ngModel) return;
 
-            ngModel.$render = function () {
-            };
-
+            // ngModel.$render = function () {
+            // };
             element.bind('change', function (e) {
                 var element = e.target;
 
