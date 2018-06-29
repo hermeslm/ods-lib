@@ -1118,12 +1118,23 @@
                         value += Number(field.value[id]);
                     }
                     break;
+                case OdsFieldType.SELECT2:
+                    if (field.value) {
+                        id = getSelectFieldId(field);
+                        value += Number(field.value[id]);
+                    }
+                    break;
                 case OdsFieldType.MULTI_SELECT:
                     if (field.value) {
                         id = getSelectFieldId(field);
                         for (var i = 0; i < field.value.length; i++) {
                             value += Number(field.value[i][id]);
                         }
+                    }
+                    break;
+                case OdsFieldType.LABEL:
+                    if (field.value) {
+                        value += 0;
                     }
                     break;
                 default:

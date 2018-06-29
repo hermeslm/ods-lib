@@ -3404,116 +3404,6 @@ function StepsIndicator() {
 
     angular
         .module('ods-lib')
-        .directive('odsFileUpload', odsFileUpload);
-
-    odsFileUpload.$inject = ['$q'];
-
-    function odsFileUpload($q) {
-
-        var slice = Array.prototype.slice;
-
-        var directive = {
-            restrict: 'A',
-            require: '?ngModel',
-            onLoad: '&',
-            link: linkFunc
-        };
-
-        return directive;
-
-        /* private helper methods*/
-
-        function linkFunc($scope, element, attrs, ngModel) {
-
-            if (!ngModel) return;
-
-            // ngModel.$render = function () {
-            // };
-            element.bind('change', function (e) {
-                var element = e.target;
-
-                $q.all(slice.call(element.files, 0).map(readFile))
-                    .then(function (values) {
-                        if (element.multiple) ngModel.$setViewValue(values);
-                        else ngModel.$setViewValue(values.length ? values[0] : null);
-                    });
-
-                function readFile(file) {
-                    var deferred = $q.defer();
-
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        if ($scope.onLoad) {
-                            $scope.onLoad(e.target.result);
-                        }
-                        deferred.resolve(e.target.result);
-                    };
-
-                    reader.onerror = function (e) {
-                        deferred.reject(e);
-                    };
-
-                    reader.readAsDataURL(file);
-
-                    return deferred.promise;
-                }
-            }); //change
-        } //link
-    }
-})();
-
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .directive('uiSelectRequired', UiSelectRequired);
-
-    UiSelectRequired.$inject = ['$parse'];
-
-    function UiSelectRequired($parse) {
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function (scope, element, attrs, ctrl) {
-
-                //console.log($scope.required);
-                scope.required = $parse(attrs.uiSelectRequired)(scope);//JSON.parse(attrs.ngRequired);
-
-                ctrl.$validators.uiSelectRequired = function (modelValue, viewValue) {
-
-                    if (scope.required) {
-                        var determineVal;
-                        if (angular.isArray(modelValue)) {
-                            determineVal = modelValue;
-                        } else if (angular.isArray(viewValue)) {
-                            determineVal = viewValue;
-                        } else return !isEmpty(modelValue);
-                        return determineVal.length > 0;
-                    } else {
-                        return true;
-                    }
-                };
-            }
-        };
-    }
-
-    function isEmpty(obj) {
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                return false;
-            }
-        }
-        return true;
-    }
-})();
-
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
         .constant('OdsWizardState', {
             CURRENT: 'current',
             DONE: 'done',
@@ -3682,6 +3572,116 @@ function wizardSteps() {
         }
 
         return service;
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .directive('odsFileUpload', odsFileUpload);
+
+    odsFileUpload.$inject = ['$q'];
+
+    function odsFileUpload($q) {
+
+        var slice = Array.prototype.slice;
+
+        var directive = {
+            restrict: 'A',
+            require: '?ngModel',
+            onLoad: '&',
+            link: linkFunc
+        };
+
+        return directive;
+
+        /* private helper methods*/
+
+        function linkFunc($scope, element, attrs, ngModel) {
+
+            if (!ngModel) return;
+
+            // ngModel.$render = function () {
+            // };
+            element.bind('change', function (e) {
+                var element = e.target;
+
+                $q.all(slice.call(element.files, 0).map(readFile))
+                    .then(function (values) {
+                        if (element.multiple) ngModel.$setViewValue(values);
+                        else ngModel.$setViewValue(values.length ? values[0] : null);
+                    });
+
+                function readFile(file) {
+                    var deferred = $q.defer();
+
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        if ($scope.onLoad) {
+                            $scope.onLoad(e.target.result);
+                        }
+                        deferred.resolve(e.target.result);
+                    };
+
+                    reader.onerror = function (e) {
+                        deferred.reject(e);
+                    };
+
+                    reader.readAsDataURL(file);
+
+                    return deferred.promise;
+                }
+            }); //change
+        } //link
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .directive('uiSelectRequired', UiSelectRequired);
+
+    UiSelectRequired.$inject = ['$parse'];
+
+    function UiSelectRequired($parse) {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ctrl) {
+
+                //console.log($scope.required);
+                scope.required = $parse(attrs.uiSelectRequired)(scope);//JSON.parse(attrs.ngRequired);
+
+                ctrl.$validators.uiSelectRequired = function (modelValue, viewValue) {
+
+                    if (scope.required) {
+                        var determineVal;
+                        if (angular.isArray(modelValue)) {
+                            determineVal = modelValue;
+                        } else if (angular.isArray(viewValue)) {
+                            determineVal = viewValue;
+                        } else return !isEmpty(modelValue);
+                        return determineVal.length > 0;
+                    } else {
+                        return true;
+                    }
+                };
+            }
+        };
+    }
+
+    function isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                return false;
+            }
+        }
+        return true;
     }
 })();
 
@@ -4894,12 +4894,23 @@ function DynamicNameDirective($compile, $parse) {
                         value += Number(field.value[id]);
                     }
                     break;
+                case OdsFieldType.SELECT2:
+                    if (field.value) {
+                        id = getSelectFieldId(field);
+                        value += Number(field.value[id]);
+                    }
+                    break;
                 case OdsFieldType.MULTI_SELECT:
                     if (field.value) {
                         id = getSelectFieldId(field);
                         for (var i = 0; i < field.value.length; i++) {
                             value += Number(field.value[i][id]);
                         }
+                    }
+                    break;
+                case OdsFieldType.LABEL:
+                    if (field.value) {
+                        value += 0;
                     }
                     break;
                 default:
