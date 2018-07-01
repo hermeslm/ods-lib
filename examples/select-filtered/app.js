@@ -36,49 +36,72 @@ app.controller('MainCtrl', function ($scope, $q) {
             "id": 1,
             "name": "1-Week(1/01/2017-1/07/2017)",
             "startDate": "1/01/2017",
-            "endDate": "1/07/2017"
+            "endDate": "1/07/2017",
+            "closed": false
         },
         {
             "id": 2,
             "name": "2-Week(1/08/2017-1/14/2017)",
             "startDate": "1/08/2017",
-            "endDate": "1/14/2017"
+            "endDate": "1/14/2017",
+            "closed": false
         },
         {
             "deleted": false,
             "id": 3,
             "name": "3-Week(1/15/2018-1/21/2018)",
             "startDate": "2018-01-15",
-            "endDate": "2018-01-21"
+            "endDate": "2018-01-21",
+            "closed": true
         },
         {
             "deleted": false,
             "id": 4,
             "name": "4-Week(2/22/2018-1/28/2018)",
             "startDate": "2018-01-22",
-            "endDate": "2018-01-28"
+            "endDate": "2018-01-28",
+            "closed": false
         },
         {
             "deleted": false,
             "id": 5,
             "name": "5-Week(2/29/2018-2/04/2018)",
             "startDate": "2018-01-29",
-            "endDate": "2018-02-04"
+            "endDate": "2018-02-04",
+            "closed": true
         }];
 
     $scope.onSelect = function () {
 
         alert($scope.selectdWorkingWeek.name);
-    }
+    };
 
     $scope.toggleRequired = function () {
 
         $scope.required = !$scope.required;
-    }
+    };
 
     $scope.toggleDisabled = function () {
 
         $scope.disabled = !$scope.disabled;
-    }
+    };
+
+    $scope.renderStyle = function (element) {
+
+        if (element) {
+            return {'error text-danger': element.closed};
+        } else {
+            return '';
+        }
+    };
+
+    $scope.render = function (element, titleProperty) {
+
+        if (element && element.closed) {
+            return element[titleProperty] + ' Closed';
+        } else {
+            return element[titleProperty];
+        }
+    };
 
 });

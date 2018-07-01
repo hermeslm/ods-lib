@@ -5,10 +5,10 @@
                    ui-select-required="ngRequired" close-on-select="true" title="{{tooltip}}"
                    on-select="onSelectFn()">
             <ui-select-match placeholder="{{placeholder}}">
-                {{getSelectTitleValue($select.selected)}}
+                <div ng-class="renderClass($select.selected)" ng-bind-html="getSelectTitleValue($select.selected)"></div>
             </ui-select-match>
             <ui-select-choices repeat="item in filtered | filter:$select.search">
-                <div ng-bind-html="getSelectTitleValue(item) | highlight: $select.search"></div>
+                <div ng-class="renderClass(item)" ng-bind-html="getSelectTitleValue(item) | highlight: $select.search"></div>
             </ui-select-choices>
         </ui-select>
         <div class="input-group-btn">
