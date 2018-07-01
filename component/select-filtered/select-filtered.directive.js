@@ -24,10 +24,11 @@ function selectFiltered($filter) {
             list: '=',
             filters: '=',
             onSelect: '&',
-            renderStyle: '&',
-            render: '&'
+            renderStyle: '&?',
+            render: '&?'
         },
         link: linkFunc
+
     };
 
     /* private helper methods*/
@@ -96,7 +97,7 @@ function selectFiltered($filter) {
 
         function renderClass(element) {
 
-            if($scope.renderStyle){
+            if(element && $scope.renderStyle){
                 return $scope.renderStyle()(element);
             }else {
                 return '';
