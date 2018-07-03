@@ -46,9 +46,5 @@
     "recursive-copy": "2.0.6",
     "run-sequence": "^2.2.0",
     "xml2js": "^0.4.19"
-  },
-  "scripts": {
-    "postinstall": "bower install",
-    "test": "./node_modules/gulp/bin/gulp.js ci"
   }
 }
