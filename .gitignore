@@ -9,6 +9,7 @@ tmp
 test_out/
 .DS_Store
 .idea
+npm-debug.log
 
 
 

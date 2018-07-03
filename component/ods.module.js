@@ -7,7 +7,7 @@ angular
         'ui.select',
         'ui.bootstrap.datetimepicker',
         'webcam',
-        'nzToggle',
+        // 'nzToggle',
         'dndLists',
         'ngSanitize',
         'cp.ngConfirm',

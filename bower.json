@@ -20,7 +20,6 @@
     "webcam-directive": "3.1.1",
     "angular-bootstrap-toggle": "^0.1.2",
     "angular-ui-select": "0.19.6",
-    "nz-toggle": "^2.2.1",
     "angular-drag-and-drop-lists": "https://github.com/marceljuenemann/angular-drag-and-drop-lists.git#2.1.0",
     "underscore": "^1.8.3",
     "angular-confirm": "angular1-confirm#^1.1.0",
