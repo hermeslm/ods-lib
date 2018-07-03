@@ -23,9 +23,12 @@ function selectFiltered($filter) {
             tooltip: '@',
             list: '=',
             filters: '=',
-            onSelect: '&'
+            onSelect: '&',
+            renderStyle: '&?',
+            render: '&?'
         },
         link: linkFunc
+
     };
 
     /* private helper methods*/
@@ -35,6 +38,7 @@ function selectFiltered($filter) {
         $scope.toggleFilter = toggleFilter;
         $scope.getSelectTitleValue = getSelectTitleValue;
         $scope.onSelectFn = onSelectFn;
+        $scope.renderClass = renderClass;
 
         init();
 
@@ -72,7 +76,11 @@ function selectFiltered($filter) {
         function getSelectTitleValue(element) {
 
             if (element && element.constructor !== Array) {
-                return element[$scope.titleProperty];
+                if($scope.render){
+                    return $scope.render()(element, $scope.titleProperty);
+                }else {
+                    return element[$scope.titleProperty];
+                }
             } else {
                 return $scope.placeholder;
             }
@@ -84,6 +92,15 @@ function selectFiltered($filter) {
                 $scope.onSelect();
             } else {
                 console.log('You must to to define onSelect() function.');
+            }
+        }
+
+        function renderClass(element) {
+
+            if(element && $scope.renderStyle){
+                return $scope.renderStyle()(element);
+            }else {
+                return '';
             }
         }
 

@@ -35,8 +35,7 @@ function FieldDirective(OdsFormService, dialogs) {
          * This set the field in Schema view disabled.
          * @type {boolean}
          */
-        $scope.fieldDisabled = true;
-
+        // $scope.fieldDisabled = true;
         $scope.dev = '-dev';
 
         $scope.toggleFieldProperties = toggleFieldProperties;

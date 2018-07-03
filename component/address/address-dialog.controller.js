@@ -20,12 +20,15 @@ function AddressDialogController($uibModalInstance, address, countries, states) 
     vm.clear = clear;
     vm.save = save;
     vm.toggleEmail = toggleEmail;
+    vm.emailChanged = emailChanged;
 
     function clear() {
+
         $uibModalInstance.dismiss('cancel');
     }
 
     function save() {
+
         $uibModalInstance.close(vm.address);
         vm.isSaving = false;
     }
@@ -33,19 +36,24 @@ function AddressDialogController($uibModalInstance, address, countries, states) 
     function toggleEmail() {
 
         if (vm.nonEmail) {
-            if(vm.address){
-                if(vm.address.email){
-                    vm.address.email = nonEmail;
-                }else {
-                    vm.address = {
-                        email : nonEmail
-                    }
-                }
-            }else {
+            if (vm.address) {
+                vm.address.email = nonEmail;
+            } else {
                 vm.address = {
-                    email : nonEmail
+                    email: nonEmail
                 }
             }
+        } else {
+            if (vm.address) {
+                vm.address.email = '';
+            }
+        }
+    }
+
+    function emailChanged() {
+
+        if (!vm.address.email) {
+            vm.nonEmail = false;
         }
     }
 }

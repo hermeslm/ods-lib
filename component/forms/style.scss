@@ -33,9 +33,18 @@
 
 .form-header {
   margin-left: 10px;
+  margin-right: 10px;
+}
+
+.accordion-button-right {
+  padding-top: 12px;
 }
 
 //Toolbar section
+
+[hidden] {
+  display: none !important;
+}
 
 .toolbar-container {
   margin-top: 10px;
@@ -204,7 +213,7 @@
   padding: 15px 5px 0px;
 }
 
-.box-body ul {
+.toolbar-list {
   padding-top: 5px;
 }
 
@@ -270,7 +279,11 @@
   overflow-y: auto;
   max-height: 350px;
   white-space: pre-wrap;
-  
+
+}
+
+.pad {
+  padding: 10px;
 }
 
 .no-padding {

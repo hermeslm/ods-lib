@@ -21,7 +21,7 @@
                     </ul>
                 </div>
             </td>
-            <td ng-show="field.manageRows" width="20px">
+            <td ng-show="field.manageRows" width="20px" style="position: relative">
                 <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
                         ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right">
                     <span class="fa fa-trash"></span>
@@ -44,7 +44,7 @@
             </td>
         </tr>
         <tr ng-show="field.manageColumns">
-            <td ng-repeat="col in field.matrix[0]">
+            <td ng-repeat="col in field.matrix[0]" style="position: relative">
                 <button type="button" ng-click="removeColumn(field, $index)" title="Remove column"
                         ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right">
                     <span class="fa fa-trash"></span>

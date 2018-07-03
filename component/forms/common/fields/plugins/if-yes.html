@@ -1,7 +1,8 @@
 <br ng-if="field.ln">
 <toggle name="{{field.name}}" id="{{field.name}}-toogle" on="{{field.on}}" off="{{field.off}}"
-        ng-model="field.value.toggle"></toggle>
+        ng-model="field.value.toggle" ng-disabled="field.readonly"></toggle>
 <textarea class="form-control" name="{{field.name}}" id="{{field.name + dev}}-text" placeholder="{{field.placeholder}}"
           title="{{field.tooltip}}" style="margin-top: 10px;" ng-model="field.value.textarea"
           ng-required="field.value.toggle" type="{{field.type}}" ng-minlength="getMinLength(field)"
-          ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" ng-show="field.value.toggle"></textarea>
+          ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" ng-show="field.value.toggle"
+          ng-disabled="field.readonly"></textarea>

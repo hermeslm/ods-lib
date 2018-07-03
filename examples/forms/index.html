@@ -26,23 +26,11 @@
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="../dist/forms/style.css">
-    <link rel="stylesheet" href="../dist/steps-indicator/style.css">
     <link rel="stylesheet" href="../dist/reports/style.css">
+    <link rel="stylesheet" href="../dist/steps-indicator/style.css">
     <link rel="stylesheet" href="../dist/wizard-steps/style.css">
     <!-- endinject -->
     <!-- endbuild -->
-
-    <!--<style type="text/css">-->
-
-        <!--.form-print{-->
-            <!--background-color: #0f74a8;-->
-        <!--}-->
-
-        <!--.form-print1{-->
-            <!--background-color: #00cc66;-->
-        <!--}-->
-
-    <!--</style>-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -56,42 +44,53 @@
 <div class="container-fluid">
 
     <!--<section class="content-header">-->
-        <!--<div class="starter-template">-->
-            <!--<h1>AngularJS Form Builder Bootstrap based.</h1>-->
-        <!--</div>-->
-        <!--<div class="row">-->
-            <!--<div class="col-lg-6">-->
-                <!--<button type="button" class="btn btn-primary" ng-click="parse1()">Parse test 1</button>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-lg-12">-->
-                        <!--<b>Original:</b>-->
-                        <!--<div ng-bind-html="test1"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-lg-12">-->
-                        <!--<b>Parsed:</b>-->
-                        <!--<div ng-bind-html="templateResult1"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-            <!--<div class="col-lg-6">-->
-                <!--<button type="button" class="btn btn-success" ng-click="parse2()">Parse test 2</button>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-lg-12">-->
-                        <!--<b>Original:</b>-->
-                        <!--<div ng-bind-html="test2"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<div class="row">-->
-                    <!--<div class="col-lg-12">-->
-                        <!--<b>Parsed:</b>-->
-                        <!--<div ng-bind-html="templateResult2"></div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
+    <!--<div class="starter-template">-->
+    <!--<h1>AngularJS Form Builder Bootstrap based.</h1>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+    <!--<div class="col-lg-6">-->
+    <!--<button type="button" class="btn btn-primary" ng-click="parse1()">Parse test 1</button>-->
+    <!--<div class="row">-->
+    <!--<div class="col-lg-12">-->
+    <!--<b>Original:</b>-->
+    <!--<div ng-bind-html="test1"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+    <!--<div class="col-lg-12">-->
+    <!--<b>Parsed:</b>-->
+    <!--<div ng-bind-html="templateResult1"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="col-lg-6">-->
+    <!--<button type="button" class="btn btn-success" ng-click="parse2()">Parse test 2</button>-->
+    <!--<div class="row">-->
+    <!--<div class="col-lg-12">-->
+    <!--<b>Original:</b>-->
+    <!--<div ng-bind-html="test2"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--<div class="row">-->
+    <!--<div class="col-lg-12">-->
+    <!--<b>Parsed:</b>-->
+    <!--<div ng-bind-html="templateResult2"></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</section>-->
+    <section class="content-header">
+        <div class="starter-template">
+            <h1>AngularJS Form Builder Bootstrap based.</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <button type="button" class="btn btn-primary" ng-click="copyExportables()">Get Exportables</button>
+            </div>
+        </div>
+    </section>
+
     <section class="content-header">
         <h1>Forms Builder</h1>
     </section>

@@ -47,6 +47,15 @@
             // LongTime: 'g:i:s A',
             // UniversalSortableDateTime: 'Y-m-d H:i:sO',
             // YearMonth: 'F, Y'
+        })
+        .constant('OdsEvent', {
+            IMPORT_FORM: 'importForm',
+            EXPORT_FORM: 'exportForm',
+            LOAD_SUB_FORM: 'loadSubForm'
+        })
+        .constant('OdsPosition', {
+            TOP: 'top',
+            DOWN: 'down'
         });
 
 })();

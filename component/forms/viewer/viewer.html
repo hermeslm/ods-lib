@@ -20,25 +20,6 @@
                                     <!--ng-if="field.value"-->
 
                                     <ng-include src="getFormViewerTemplate(field.type)"></ng-include>
-
-                                    <div ng-show="{{schema.name}}.{{field.name}}.$invalid">
-                                        <p class="help-block"
-                                           ng-show="{{schema.name}}.{{field.name}}.$error.required">
-                                            {{field.validation.messages.required}}
-                                        </p>
-                                        <p class="help-block"
-                                           ng-show="{{schema.name}}.{{field.name}}.$error.minlength">
-                                            {{field.validation.messages.minlength}}
-                                        </p>
-                                        <p class="help-block"
-                                           ng-show="{{schema.name}}.{{field.name}}.$error.maxlength">
-                                            {{field.validation.messages.maxlength}}
-                                        </p>
-                                        <p class="help-block"
-                                           ng-show="{{schema.name}}.{{field.name}}.$error.pattern">
-                                            {{field.validation.messages.pattern}}
-                                        </p>
-                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -1,8 +1,7 @@
-<div class="">
+<div ng-if="schema">
     <div class="form-header with-border">
         <h3 class="box-title" ng-hide="schema.hideLabel" ng-bind-html="schema.label"></h3>
     </div>
-    <!-- /.box-header -->
     <!-- form start -->
     <div ng-if="schema.layout.length !== 0">
         <ng-form name="{{schema.name}}" role="form" novalidate>
@@ -59,7 +58,7 @@
                 <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="clear()">
                     <span class="fa fa-trash-o"></span>&nbsp;<span>Clear</span>
                 </button>
-                <button type="submit" ng-disabled="{{schema.name}}.$invalid" class="btn btn-primary">
+                <button type="submit" ng-disabled="{{name}}.$invalid" class="btn btn-primary">
                     <span class="fa fa-save"></span>&nbsp;<span>Save</span>
                 </button>
             </div>

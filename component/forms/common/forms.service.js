@@ -9,12 +9,18 @@
         .factory('OdsFormService', OdsFormService);
 
     OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
-        '$resource'];
+        '$resource', 'OdsPosition'];
 
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-                            $resource) {
+                            $resource, OdsPosition) {
 
         var uniqueCounter = (+new Date()) % 10000;
+
+        var version = '1.0';
+
+        var formats = {
+            JSON: 'json'
+        };
 
         var clipBoard = [];
         var callbacks = [];
@@ -23,6 +29,7 @@
 
             //Utils methods
             newSchema: newSchema,
+            newSchemaEmpty: newSchemaEmpty,
             initSchema: initSchema,
             generateName: generateName,
             onAdd: onAdd,
@@ -35,7 +42,13 @@
             addToClipBoard: addToClipBoard,
             onAddToClipBoard: onAddToClipBoard,
             renameComponent: renameComponent,
-            // http: http,
+            importForm: importForm,
+            exportForm: exportForm,
+            importSubForm: importSubForm,
+            downloadObjectAsJson: downloadObjectAsJson,
+            loadSubForm: loadSubForm,
+            checkUpload: checkUpload,
+            getExportables: getExportables,
 
             //Templates management
             getToolbarComponent: getToolbarComponent,
@@ -89,6 +102,7 @@
 
             getTimeZoneUTC: getTimeZoneUTC,
             convertFormSchemaFromServer: convertFormSchemaFromServer,
+            setReadOnlyStatus: setReadOnlyStatus,
             copyJson: copyJson,
             getDataFromComponentCode: getDataFromComponentCode,
             saveFormData: saveFormData,
@@ -107,6 +121,88 @@
                 layout: [newSectionObject()],
                 allowedTypes: [OdsComponentType.SECTION]
             };
+        }
+
+        /**
+         * Create a new Schema.
+         */
+        function newSchemaEmpty() {
+            return {
+                name: generateName(OdsComponentType.FORM),
+                label: 'New Form',
+                hideLabel: true,
+                description: 'New Form Description',
+                layout: [],
+                allowedTypes: [OdsComponentType.SECTION]
+            };
+        }
+
+        /**
+         * Import Schema.
+         */
+        function importForm(file) {
+
+            var base64result = file.substr(file.indexOf(',') + 1);
+            var decodedString = atob(base64result);
+            if (decodedString && decodedString !== '') {
+                return angular.fromJson(decodedString);
+            } else {
+                console.error('Not valid JSON file!!!')
+            }
+        }
+
+        /**
+         * Export Schema.
+         */
+        function exportForm(schema) {
+
+            var exportObject = {
+                format: formats.JSON,
+                version: version,
+                form: schema
+            };
+
+            var now = new Date();
+
+            downloadObjectAsJson(exportObject, schema.label + ' ' + now.getFullYear() + '-' +
+                now.getMonth() + '-' + now.getDate());
+        }
+
+        /**
+         * Download schema as JSON
+         * @param exportObj
+         * @param exportName
+         */
+        function downloadObjectAsJson(exportObj, exportName) {
+
+            var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj));
+            var downloadAnchorNode = document.createElement('a');
+            downloadAnchorNode.setAttribute('href', dataStr);
+            downloadAnchorNode.setAttribute('download', exportName + '.json');
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+        }
+
+        function checkUpload() {
+
+            // Check for the various File API support.
+            if ($window.File && $window.FileReader && $window.FileList && $window.Blob) {
+                // Great success! All the File APIs are supported.
+                return true;
+            } else {
+                alert('The File APIs are not fully supported in this browser.');
+                return false;
+            }
+        }
+
+        /**
+         * This method allows to import a subform into th schema
+         * @param subForm
+         */
+        function importSubForm(subForm) {
+
+            //TODO check subform syntax.
+            EventDataFactory.setData(OdsEvent.LOAD_SUB_FORM, subForm);
         }
 
         /**
@@ -521,6 +617,7 @@
                 name: generateName(OdsComponentType.SECTION),
                 componentType: OdsComponentType.SECTION,
                 title: 'Section',
+                isExportable: false,
                 displayProperties: false,
                 allowedTypes: [
                     OdsComponentType.ROW
@@ -731,7 +828,16 @@
                 titleField: 'name',
                 limitTo: 10,
                 value: [],
-                options: [],
+                options: [{
+                    id: 1,
+                    name: 'Option 1'
+                }, {
+                    id: 2,
+                    name: 'Option 2'
+                }, {
+                    id: 3,
+                    name: 'Option 3'
+                }],
                 render: null,
                 validation: {
                     messages: {}
@@ -894,7 +1000,7 @@
         function newCKEditorObject() {
 
             //Default key combination. (CTRL + SPACE)
-            const CTRL = 1114112;
+            var CTRL = 1114112;
 
             return {
                 componentType: OdsComponentType.FIELD,
@@ -1006,17 +1112,13 @@
             var value = 0;
             var id;
             switch (field.type) {
-                case OdsFieldType.TEXT:
-                    if (field.value) {
-                        value += Number(field.value);
-                    }
-                    break;
-                case OdsFieldType.NUMBER:
-                    if (field.value) {
-                        value += Number(field.value);
-                    }
-                    break;
                 case OdsFieldType.SELECT:
+                    if (field.value) {
+                        id = getSelectFieldId(field);
+                        value += Number(field.value[id]);
+                    }
+                    break;
+                case OdsFieldType.SELECT2:
                     if (field.value) {
                         id = getSelectFieldId(field);
                         value += Number(field.value[id]);
@@ -1030,7 +1132,12 @@
                         }
                     }
                     break;
-                case OdsFieldType.TEXTAREA:
+                case OdsFieldType.LABEL:
+                    if (field.value) {
+                        value += 0;
+                    }
+                    break;
+                default:
                     if (field.value) {
                         value += Number(field.value);
                     }
@@ -1280,6 +1387,61 @@
             return schema;
         }
 
+        // /**
+        //  * Return all exportable elements as array.
+        //  */
+        // function getExportables(schema) {
+        //
+        //     var exportables = [];
+        //     var layout = schema.layout;
+        //     for (var i = 0; i < layout.length; i++) {
+        //         var content = layout[i];
+        //         if (content && content.exportable) {
+        //             exportables.push(content);
+        //         }
+        //     }
+        //
+        //     return exportables;
+        // }
+
+        /**
+         * Return all exportable elements embedded in a form.
+         */
+        function getExportables(schema) {
+
+            var form = newSchemaEmpty();
+            var layout = schema.layout;
+            for (var i = 0; i < layout.length; i++) {
+                var content = layout[i];
+                if (content && content.exportable) {
+                    form.layout.push(content);
+                }
+            }
+
+            return form;
+        }
+
+        /**
+         * Load a subform into the schema
+         *
+         * @return Boolean Return True if the operation is successful or False if an error occur.
+         */
+        function loadSubForm(schema, subForm, position) {
+
+            var layout = schema.layout;
+            if (Array.isArray(layout)) {
+                if (position === OdsPosition.TOP) {
+                    layout.unshift(subForm);
+                } else {
+                    layout.push(subForm);
+                }
+
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         function getDataFromComponentCode(schema, code) {
 
             var resultFields = [];
@@ -1375,7 +1537,15 @@
             return schema;
         }
 
-        function setConfigToCKEditorComponent(schema, config) {
+        /**
+         * This method make all fields in the schema read only or not.
+         * @param json
+         * @param status
+         * @return {Object|Array|string|number}
+         */
+        function setReadOnlyStatus(json, status) {
+
+            var schema = angular.fromJson(json);
 
             var fields;
             var layout = schema.layout;
@@ -1392,36 +1562,70 @@
                                     var matrixRow = fields[l].matrix[m];
                                     for (var p = 0; p < matrixRow.length; p++) {
                                         if (matrixRow[p].fields.length > 0) {
-                                            if (matrixRow[p].fields[0].type === OdsFieldType.CKEDITOR) {
-                                                matrixRow[p].fields[0].options.prefix = config.ckeditor.prefix ?
-                                                    config.ckeditor.prefix : defaultCKEditorPrefix();
-                                                matrixRow[p].fields[0].options.suffix = config.ckeditor.suffix ?
-                                                    config.ckeditor.suffix : defaultCKEditorSuffix();
-                                                matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions ?
-                                                    config.ckeditor.suggestions : [];
-                                                matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens ?
-                                                    config.ckeditor.tokens : null;
-                                            }
+                                            matrixRow[p].fields[0].readonly = status;
                                         }
                                     }
                                 }
                             } else {
-                                if (fields[l].type === OdsFieldType.CKEDITOR) {
-                                    fields[l].options.prefix = config.ckeditor.prefix ?
-                                        config.ckeditor.prefix : defaultCKEditorPrefix();
-                                    fields[l].options.suffix = config.ckeditor.suffix ?
-                                        config.ckeditor.suffix : defaultCKEditorSuffix();
-                                    fields[l].options.suggestions = config.ckeditor.suggestions ?
-                                        config.ckeditor.suggestions : [];
-                                    fields[l].options.tokens = config.ckeditor.tokens ?
-                                        config.ckeditor.tokens : null;
+                                fields[l].readonly = status;
+                            }
+                        }
+                    }
+                }
+            }
+
+            return schema;
+        }
+
+        function setConfigToCKEditorComponent(schema, config) {
+
+            var fields;
+
+            if (schema && schema.layout) {
+                var layout = schema.layout;
+
+                for (var i = 0; i < layout.length; i++) {
+                    var rows = layout[i].rows;
+                    for (var j = 0; j < rows.length; j++) {
+                        var cols = rows[j].cols;
+                        for (var k = 0; k < cols.length; k++) {
+                            fields = cols[k].fields;
+                            for (var l = 0; l < fields.length; l++) {
+                                if (fields[l].type === OdsFieldType.TABLE) {
+                                    for (var m = 0; m < fields[l].matrix.length; m++) {
+                                        var matrixRow = fields[l].matrix[m];
+                                        for (var p = 0; p < matrixRow.length; p++) {
+                                            if (matrixRow[p].fields.length > 0) {
+                                                if (matrixRow[p].fields[0].type === OdsFieldType.CKEDITOR) {
+                                                    matrixRow[p].fields[0].options.prefix = config.ckeditor.prefix ?
+                                                        config.ckeditor.prefix : defaultCKEditorPrefix();
+                                                    matrixRow[p].fields[0].options.suffix = config.ckeditor.suffix ?
+                                                        config.ckeditor.suffix : defaultCKEditorSuffix();
+                                                    matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions ?
+                                                        config.ckeditor.suggestions : [];
+                                                    matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens ?
+                                                        config.ckeditor.tokens : null;
+                                                }
+                                            }
+                                        }
+                                    }
+                                } else {
+                                    if (fields[l].type === OdsFieldType.CKEDITOR) {
+                                        fields[l].options.prefix = config.ckeditor.prefix ?
+                                            config.ckeditor.prefix : defaultCKEditorPrefix();
+                                        fields[l].options.suffix = config.ckeditor.suffix ?
+                                            config.ckeditor.suffix : defaultCKEditorSuffix();
+                                        fields[l].options.suggestions = config.ckeditor.suggestions ?
+                                            config.ckeditor.suggestions : [];
+                                        fields[l].options.tokens = config.ckeditor.tokens ?
+                                            config.ckeditor.tokens : null;
+                                    }
                                 }
                             }
                         }
                     }
                 }
             }
-            return fields;
         }
 
         return service;

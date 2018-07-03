@@ -30,6 +30,8 @@ function RowDirective(OdsFormService, dialogs) {
 
     function linkFunc($scope) {
 
+        //We get the component name, it i used in form and fields ids and names.
+        $scope.name = $scope.row.name;
         $scope.toggleRowProperties = toggleRowProperties;
         $scope.removeRow = removeRow;
         $scope.addColumn = addColumn;

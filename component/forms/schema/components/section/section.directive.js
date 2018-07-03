@@ -30,6 +30,8 @@ function SectionDirective(OdsFormService, dialogs) {
 
     function linkFunc($scope) {
 
+        //We get the component name, it i used in form and fields ids and names.
+        $scope.name = $scope.section.name;
         $scope.toggleProperties = toggleProperties;
         $scope.remove = remove;
         $scope.swap = swap;

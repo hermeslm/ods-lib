@@ -1,1 +1,6 @@
-<div ng-bind-html="getSelectTextFromValue(field)"></div>
+<div>
+    <div class="form-check" ng-if="getSelectTextFromValue(field)">
+        <i class="form-check-input fa fa-check-square-o"></i>
+        <span class="form-check-label" ng-bind-html="getSelectTextFromValue(field)"></span>
+    </div>
+</div>

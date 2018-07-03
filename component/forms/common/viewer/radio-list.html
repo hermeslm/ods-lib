@@ -1,1 +1,6 @@
-<div ng-bind-html="getRadioTextFromValue(field)"></div>
+<div>
+    <div class="form-check" ng-if="getRadioTextFromValue(field)">
+        <i class="form-check-input fa fa-check-square-o"></i>
+        <span class="form-check-label" ng-bind-html="getRadioTextFromValue(field)"></span>
+    </div>
+</div>

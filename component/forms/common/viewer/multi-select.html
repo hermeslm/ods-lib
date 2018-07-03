@@ -1,1 +1,6 @@
-<div>{{getFieldTextsFromValues(field)}}</div>
+<div>
+    <div class="checkbox-inline" ng-repeat="option in getFieldTextsFromValues(field)">
+        <i class="fa fa-check-square-o"></i>
+        <span class="form-check-label" ng-bind-html="option"></span>
+    </div>
+</div>

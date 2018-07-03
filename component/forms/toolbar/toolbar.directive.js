@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsFormToolbar', OdsFormToolbar);
 
-OdsFormToolbar.$inject = ['OdsFormService', '$sessionStorage', 'dialogs'];
+OdsFormToolbar.$inject = ['OdsFormService', '$sessionStorage', 'dialogs', 'EventDataFactory', 'OdsEvent'];
 
-function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
+function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFactory, OdsEvent) {
 
     var directive = {
         restrict: 'E',
@@ -25,6 +25,12 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
 
         $scope.getToolbarComponent = getToolbarComponent;
         $scope.removeFromClipboard = removeFromClipboard;
+
+        $scope.export = exportSchema;
+
+        $scope.onLoad = onLoad;
+
+        $scope.importFile = null;
 
         var clipboardIndex = 6;
 
@@ -140,6 +146,16 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs) {
         function getToolbarComponent(componentType) {
 
             return OdsFormService.getToolbarComponent(componentType);
+        }
+
+        function onLoad(file) {
+
+            EventDataFactory.setData(OdsEvent.IMPORT_FORM, OdsFormService.importForm(file));
+        }
+
+        function exportSchema() {
+
+            EventDataFactory.setData(OdsEvent.EXPORT_FORM, "");
         }
     }
 }
