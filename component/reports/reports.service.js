@@ -21,7 +21,8 @@
             getSourceReport: getSourceReport,
             isMimeSupported: isMimeSupported,
             forceDownload: forceDownload,
-            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject
+            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject,
+            forceDownloadFromData: forceDownloadFromData,
         };
 
         return service;
@@ -166,7 +167,7 @@
 
             // It is necessary to create a new blob object with mime-type explicitly set
             // otherwise only Chrome works like it should
-            var newBlob = new Blob([arrBuffer], { type: "application/pdf" });
+            var newBlob = new Blob([arrBuffer], {type: "application/pdf"});
 
             // IE doesn't allow using a blob object directly as link href
             // instead it is necessary to use msSaveOrOpenBlob
@@ -368,5 +369,12 @@
 
             pdfMake.createPdf(data).open();
         }
+
+        function forceDownloadFromData(data, title) {
+
+            pdfMake.createPdf(data).download(title);
+        }
+
+
     }
 })();

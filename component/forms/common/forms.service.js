@@ -619,6 +619,7 @@
                 title: 'Section',
                 isExportable: false,
                 displayProperties: false,
+                hideLabel: false,
                 allowedTypes: [
                     OdsComponentType.ROW
                 ],
@@ -915,6 +916,7 @@
                 label: 'CheckBox List',
                 name: generateName(OdsComponentType.FIELD),
                 type: OdsFieldType.CHECKBOX_LIST,
+                inline: false,
                 options: [{
                     id: 1,
                     name: 'Option 1'
