@@ -1605,6 +1605,8 @@
                                                         config.ckeditor.suffix : defaultCKEditorSuffix();
                                                     matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions ?
                                                         config.ckeditor.suggestions : [];
+                                                    matrixRow[p].fields[0].options.suggestionsUrl = config.ckeditor.suggestionsUrl ?
+                                                        config.ckeditor.suggestionsUrl : '';
                                                     matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens ?
                                                         config.ckeditor.tokens : null;
                                                 }
@@ -1619,6 +1621,8 @@
                                             config.ckeditor.suffix : defaultCKEditorSuffix();
                                         fields[l].options.suggestions = config.ckeditor.suggestions ?
                                             config.ckeditor.suggestions : [];
+                                        fields[l].options.suggestionsUrl = config.ckeditor.suggestionsUrl ?
+                                            config.ckeditor.suggestionsUrl : '';
                                         fields[l].options.tokens = config.ckeditor.tokens ?
                                             config.ckeditor.tokens : null;
                                     }
