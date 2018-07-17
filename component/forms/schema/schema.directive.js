@@ -44,6 +44,13 @@ function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
             // $scope.schema = OdsFormService.initSchema($scope.schema);
         }
 
+        //CKEditor config load.
+        if ($scope.config) {
+            if ($scope.config.ckeditor) {
+                OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
+            }
+        }
+
         /**
          * Catch onAdd event in drag and drop for setting field properties
          */
