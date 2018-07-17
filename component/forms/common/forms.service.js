@@ -1603,12 +1603,15 @@
                                                         config.ckeditor.prefix : defaultCKEditorPrefix();
                                                     matrixRow[p].fields[0].options.suffix = config.ckeditor.suffix ?
                                                         config.ckeditor.suffix : defaultCKEditorSuffix();
-                                                    matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions ?
-                                                        config.ckeditor.suggestions : [];
-                                                    matrixRow[p].fields[0].options.suggestionsUrl = config.ckeditor.suggestionsUrl ?
-                                                        config.ckeditor.suggestionsUrl : '';
-                                                    matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens ?
-                                                        config.ckeditor.tokens : null;
+                                                    if (config.ckeditor.suggestions) {
+                                                        matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions;
+                                                    }
+                                                    if (config.ckeditor.suggestionsUrl) {
+                                                        matrixRow[p].fields[0].options.suggestionsUrl = config.ckeditor.suggestionsUrl
+                                                    }
+                                                    if (config.ckeditor.tokens) {
+                                                        matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens;
+                                                    }
                                                 }
                                             }
                                         }
@@ -1619,12 +1622,15 @@
                                             config.ckeditor.prefix : defaultCKEditorPrefix();
                                         fields[l].options.suffix = config.ckeditor.suffix ?
                                             config.ckeditor.suffix : defaultCKEditorSuffix();
-                                        fields[l].options.suggestions = config.ckeditor.suggestions ?
-                                            config.ckeditor.suggestions : [];
-                                        fields[l].options.suggestionsUrl = config.ckeditor.suggestionsUrl ?
-                                            config.ckeditor.suggestionsUrl : '';
-                                        fields[l].options.tokens = config.ckeditor.tokens ?
-                                            config.ckeditor.tokens : null;
+                                        if (config.ckeditor.suggestions) {
+                                            fields[l].options.suggestions = config.ckeditor.suggestions;
+                                        }
+                                        if (config.ckeditor.suggestionsUrl) {
+                                            fields[l].options.suggestionsUrl = config.ckeditor.suggestionsUrl
+                                        }
+                                        if (config.ckeditor.tokens) {
+                                            fields[l].options.tokens = config.ckeditor.tokens;
+                                        }
                                     }
                                 }
                             }
