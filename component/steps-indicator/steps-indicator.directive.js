@@ -69,24 +69,28 @@ function StepsIndicator() {
 
     function linkFunc($scope) {
 
-        $scope.changeStatus = changeStatus;
+        $scope.onClick = onClick;
 
-        function changeStatus(elem) {
+        function onClick(elem) {
 
-            if ($scope.type === 'multiselect') {
-                if (elem.callback) {
-                    elem.callback(elem);
-                }
-            } else {
-                if (elem.callback) {
-                    for (var i = 0; i < $scope.ngModel.length; i++) {
-                        $scope.ngModel[i].status = '';
-                    }
-                    elem.callback(elem);
-                }
+            if (elem.callback) {
+                elem.callback(elem);
             }
-            var elementPos = $scope.ngModel.map(function(x) {return x.name; }).indexOf(elem.name);
-            $scope.ngModel[elementPos].status = 'active';
+
+            // if ($scope.type === 'multiselect') {
+            //     if (elem.callback) {
+            //         elem.callback(elem);
+            //     }
+            // } else {
+            //     if (elem.callback) {
+            //         for (var i = 0; i < $scope.ngModel.length; i++) {
+            //             $scope.ngModel[i].status = '';
+            //         }
+            //         elem.callback(elem);
+            //     }
+            // }
+            // var elementPos = $scope.ngModel.map(function(x) {return x.name; }).indexOf(elem.name);
+            // $scope.ngModel[elementPos].status = 'active';
         }
     }
 }

@@ -1,4 +1,4 @@
 <div class="btn-group {{class}}">
-    <button type="button" class="btn btn-primary {{step.status}}" ng-disabled="step.disabled" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</button>
+    <button type="button" class="btn btn-primary {{step.status}}" ng-disabled="step.disabled" ng-repeat="step in ngModel" ng-click="onClick(step)">{{step.label}}</button>
     <!--<a class="{{step.status}} {{step.disabled ? 'disabled': ''}}" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</a>-->
 </div>
