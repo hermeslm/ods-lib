@@ -12,6 +12,7 @@ StepsIndicator.$inject = [];
  *        name: 'DRAFT',
  *        label: 'Draft',
  *        status: 'active',
+ *        disabled: false,
  *        callback: function (elem) {
  *            // Prompt for status change
  *        }
@@ -20,6 +21,7 @@ StepsIndicator.$inject = [];
  *        name: 'READY',
  *        label: 'Ready',
  *        status: '',
+ *        disabled: true,
  *        callback: function (elem) {
  *            // Prompt for status change
  *        }
@@ -28,6 +30,7 @@ StepsIndicator.$inject = [];
  *        name: 'JOINED',
  *        label: 'Joined',
  *        status: '',
+ *        disabled: false,
  *        callback: function (elem) {
  *            // Prompt for status change
  *        }

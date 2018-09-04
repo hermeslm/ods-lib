@@ -15,8 +15,8 @@ app.controller('MainCtrl', function ($scope) {
             disabled: false,
             callback: function (elem) {
                 // Prompt for status change
-                // if(confirm('Do you want to change to READY state?')){
-                // }
+                if(confirm('Do you want to change to READY state?')){
+                }
             }
         },
         {

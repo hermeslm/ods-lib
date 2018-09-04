@@ -22,8 +22,7 @@
         vm.areaType = areaType;
 
         vm.file = {
-            image: null,
-            //type: null
+            image: null
         };
 
         vm.save = save;

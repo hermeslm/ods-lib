@@ -104,6 +104,21 @@ gulp.task('steps-scss', function () {
         .pipe(gulp.dest('./dist/steps-indicator/'));
 });
 
+gulp.task('steps-indicator-inject', function () {
+    return gulp.src('./examples/steps-indicator/index.html')
+        .pipe(inject(gulp.src(bowerFiles(), {read: false}), {
+            name: 'bower',
+            relative: true
+        }))
+        .pipe(inject(es.merge(
+            gulp.src(['./examples/steps-indicator/**/*.css', './examples/dist/steps-indicator/**/*.css', '!./bower_components/**'], {read: false}),
+            gulp.src(['./examples/steps-indicator/**/*.js', './examples/dist/ods-lib.js', '!./bower_components/**'])
+                .pipe(naturalSort())
+                .pipe(angularFilesort())
+        ), {relative: true}))
+        .pipe(gulp.dest('./examples/steps-indicator'));
+});
+
 //CKEditor tasks
 gulp.task('ckeditor-inject', function () {
     return gulp.src('./examples/ckeditor/index.html')
@@ -279,8 +294,8 @@ gulp.task('ci', function () {
 // gulp.task('build', ['clean', 'templates', 'scripts']);
 gulp.task('build', function (done) {
     runSequence('clean', 'templates', 'scripts', 'form-scss', 'steps-scss', 'report-scss', 'wizard-steps-scss',
-        'forms-inject', 'ckeditor-inject', 'jsig-inject', 'address-inject', 'reports-inject', 'img-upload-inject',
-        'wizard-steps-inject', 'selected-filtered', 'copy-lib-to-samples', function () {
+        'forms-inject', 'steps-indicator-inject', 'ckeditor-inject', 'jsig-inject', 'address-inject', 'reports-inject',
+        'img-upload-inject', 'wizard-steps-inject', 'selected-filtered', 'copy-lib-to-samples', function () {
             // console.log('Run something else');
             done();
         })

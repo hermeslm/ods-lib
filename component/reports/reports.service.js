@@ -374,7 +374,6 @@
 
             pdfMake.createPdf(data).download(title);
         }
-
-
     }
+
 })();

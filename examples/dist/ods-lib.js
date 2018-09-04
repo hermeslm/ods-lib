@@ -68,9 +68,9 @@ function configFunction($rootScopeProvider, $localStorageProvider, $translatePro
 'use strict';
 angular.module('ods-lib').run(['$templateCache', function($templateCache) {$templateCache.put('address/address-dialog.html','<form name="addressForm" role="form" novalidate ng-submit="vm.save()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myAddressLabel">Create or edit a Address</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><div class="row"><div class="col-md-6"><div class="form-group" ng-class="{\'has-error\': addressForm.street.$invalid}"><label class="control-label" for="field_street">Street</label> <input type="text" class="form-control" name="street" id="field_street" ng-required="true" ng-model="vm.address.street" placeholder="Street..." tabindex="1" autocomplete="street-address"><div ng-show="addressForm.street.$invalid"><p class="help-block" ng-show="addressForm.street.$error.required">This field is required.</p></div></div></div><div class="col-md-6"><div class="form-group" ng-class="{\'has-error\': addressForm.mobile.$invalid}"><label class="control-label" for="field_mobile">Mobile</label> <input type="text" class="form-control" name="mobile" id="field_mobile" ng-model="vm.address.mobile" placeholder="Mobile..." tabindex="7" autocomplete="tel-national" ng-required="true"><div ng-show="addressForm.mobile.$invalid"><p class="help-block" ng-show="addressForm.mobile.$error.required">This field is required.</p></div></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_street2">Street2</label> <input type="text" class="form-control" name="street2" id="field_street2" ng-model="vm.address.street2" placeholder="Street 2..." tabindex="2" autocomplete="address-line2"></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_phone">Phone</label> <input type="text" class="form-control" name="phone" id="field_phone" placeholder="Phone..." tabindex="8" ng-model="vm.address.phone" autocomplete="tel-national"></div></div></div><div class="row"><div class="col-md-3"><div class="form-group" ng-class="{\'has-error\': addressForm.city.$invalid}"><label class="control-label" for="field_city">City</label> <input type="text" class="form-control" name="city" id="field_city" ng-required="true" ng-model="vm.address.city" placeholder="City..." tabindex="3" autocomplete="address-level2"><div ng-show="addressForm.city.$invalid"><p class="help-block" ng-show="addressForm.city.$error.required">This field is required.</p></div></div></div><div class="col-md-3"><div class="form-group" ng-class="{\'has-error\': addressForm.country.$invalid}"><label class="control-label" for="field_country">Country</label> <select class="form-control" id="field_country" name="country" ng-model="vm.address.state.country" tabindex="4" ng-required="true" ng-options="country as country.name for country in vm.countries track by country.code" autocomplete="country-name"><option value="" disabled="disabled" hidden>Country...</option></select><div ng-show="addressForm.country.$invalid"><p class="help-block" ng-show="addressForm.country.$error.required">This field is required.</p></div></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_fax">Fax</label> <input type="text" class="form-control" name="fax" id="field_fax" ng-model="vm.address.fax" placeholder="Fax..." tabindex="9" autocomplete="fax"></div></div></div><div class="row"><div class="col-md-3"><div class="form-group" ng-class="{\'has-error\': addressForm.zipCode.$invalid}"><label class="control-label" for="field_zipCode">Zip</label> <input type="text" class="form-control" name="zipCode" id="field_zipCode" ng-model="vm.address.zip" placeholder="ZIP" tabindex="5" ng-required="true" autocomplete="postal-code"><div ng-show="addressForm.zipCode.$invalid"><p class="help-block" ng-show="addressForm.zipCode.$error.required">This field is required.</p></div></div></div><div class="col-md-3"><div class="form-group" ng-class="{\'has-error\': addressForm.state.$invalid}"><label class="control-label" for="field_state">State</label> <select class="form-control" id="field_state" name="state" ng-model="vm.address.state" tabindex="6" ng-required="true" ng-options="state as state.name for state in vm.states | filter:{country:vm.address.state.country} track by state.code" autocomplete="state"><option value="" disabled="disabled" hidden>State...</option></select><div ng-show="addressForm.state.$invalid"><p class="help-block" ng-show="addressForm.state.$error.required">This field is required.</p></div></div></div><div class="col-md-6"><div class="form-group" ng-class="{\'has-error\': addressForm.email.$invalid}"><label class="control-label" for="field_email">Email</label><div class="input-group"><span class="input-group-addon" uib-tooltip="Mark it if you don\'t have email"><input type="checkbox" id="field_nonEmail" name="field_nonEmail" ng-model="vm.nonEmail" ng-click="vm.toggleEmail()" style="position: relative;margin-top: 4px;"><!--<label for="field_nonEmail" style="padding-left: 20px;height: 13px;"></label>--> </span><input type="email" class="form-control" name="email" id="field_email" ng-required="true" ng-model="vm.address.email" placeholder="Email..." tabindex="10" autocomplete="email" ng-change="vm.emailChanged()"></div><div ng-show="addressForm.email.$invalid"><p class="help-block" ng-show="addressForm.email.$error.required">This field is required.</p><p class="help-block" ng-show="addressForm.email.$error.email">Email not valid.</p></div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group"><label class="control-label" for="field_notes">Notes</label> <textarea rows="3" class="form-control" name="notes" id="field_notes" ng-model="vm.address.notes" placeholder="Notes..." tabindex="11">\n                    </textarea></div></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button type="button" ng-click="vm.save()" ng-disabled="addressForm.$invalid || vm.isSaving" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span></button></div></form>');
 $templateCache.put('address/address.html','<label ng-show="label" class="control-label" for="udt-address">{{label}}</label><div class="input-group"><input type="text" class="form-control" name="udt-address" id="udt-address" readonly="readonly" value="{{printName(ngModel)}}"> <span class="input-group-addon" ng-click="openModal()"><i class="fa fa-external-link"></i></span></div>');
+$templateCache.put('forms/form-builder.html','<!--<div class="row">--><!--<div class="col-lg-12">--><!--<button type="button" class="btn btn-success" ng-click="toggleStyle()">--><!--<span class="fa fa-refresh"></span>&nbsp;<span>Toggle style</span>--><!--</button>--><!--</div>--><!--</div>--><div class="row"><div class="col-md-3"><ods-form-toolbar></ods-form-toolbar></div><div class="col-md-9"><uib-tabset><uib-tab index="0" heading="Form information"><ods-form-info schema="schema"></ods-form-info></uib-tab><uib-tab index="1" heading="Form Schema"><ods-schema schema="schema" config="config" debug-mode="debugMode"></ods-schema></uib-tab><uib-tab index="2" heading="Form Preview"><ods-form schema="schema" config="runTimeConfig" on-save="saveForm(schema)"></ods-form></uib-tab><uib-tab index="3" heading="Form Print View"><ods-viewer schema="schema" config="runTimeConfig" css-class="cssClass"></ods-viewer></uib-tab><uib-tab index="4" heading="Form Model" ng-show="debugMode"><ods-model model="schema" css-class="fixed-height"></ods-model></uib-tab></uib-tabset></div></div>');
 $templateCache.put('file-upload/file-upload.html','<label ng-show="label" class="control-label" for="udt-address">{{label}}</label><div class="input-group"><input type="text" class="form-control" name="udt-address" id="udt-address" readonly="readonly" value="{{printName(ngModel)}}"> <span class="input-group-addon" ng-click="openModal()"><i class="fa fa-external-link"></i></span></div>');
 $templateCache.put('file-upload/udt-attach-file.html','<div class="box-footer"><ul class="mailbox-attachments clearfix"><li ng-repeat="item in files track by item.id" data-id="{{item.id}}" ng-hide="item.hide"><span class="pull-right" style="margin-right: 5px; cursor: hand" ng-click="deleteFile(item.id)" ng-if="!disableAttach" uib-tooltip="Delete file"><i class="fa fa-remove" style="color: #a20000"></i> </span><!--<span class="pull-right" style="margin-right: 5px;">--><!--<button class="btn-circle btn-danger btn-circle-xxs"><i class="fa fa-remove"></i></button>--><!--</span>--><!----> <span class="mailbox-attachment-icon"><i ng-if="(item.type.split(\'/\')[0] == applicationType)" class="fa fa-file-pdf-o" ng-click="getFileAttached(item.type, item.id)"></i><!--<i ng-if="(item.type.split(\'/\')[0] == imageType)" class="fa fa-picture-o"></i>--> <a ng-if="(item.type.split(\'/\')[0] == imageType)" ng-click="imageDetail(item.id, item.type);" uib-tooltip="Click to view the image"><i class="fa fa-picture-o"></i> </a><i ng-if="!item.type" class="fa fa-file-pdf-o" ng-click="getFileAttached(item.type, item.id)"></i></span><div class="mailbox-attachment-info"><p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{item.name?item.name.split(\'\')[0]:\'default\'}}</p><span class="mailbox-attachment-size">{{item.size}}</span></div></li><li ng-show="!isSigned && !disableAttach"><span class="mailbox-attachment-icon"><button type="button" ngf-select style="background-color: white; border: aliceblue;" uib-tooltip="Add attachment" ngf-change="attachFile($file, attachFileData)" accept="image/*,pdf,csv"><i class="fa fa-paperclip"></i></button></span><div class="mailbox-attachment-info"><p class="mailbox-attachment-name">Add New Attachment</p></div></li><li ng-if="files.length == 0 && disableAttach"><div class="col-xs-12 block-mt5"><p>No attachments.</p></div></li></ul></div>');
-$templateCache.put('forms/form-builder.html','<!--<div class="row">--><!--<div class="col-lg-12">--><!--<button type="button" class="btn btn-success" ng-click="toggleStyle()">--><!--<span class="fa fa-refresh"></span>&nbsp;<span>Toggle style</span>--><!--</button>--><!--</div>--><!--</div>--><div class="row"><div class="col-md-3"><ods-form-toolbar></ods-form-toolbar></div><div class="col-md-9"><uib-tabset><uib-tab index="0" heading="Form information"><ods-form-info schema="schema"></ods-form-info></uib-tab><uib-tab index="1" heading="Form Schema"><ods-schema schema="schema" config="config" debug-mode="debugMode"></ods-schema></uib-tab><uib-tab index="2" heading="Form Preview"><ods-form schema="schema" config="runTimeConfig" on-save="saveForm(schema)"></ods-form></uib-tab><uib-tab index="3" heading="Form Print View"><ods-viewer schema="schema" config="runTimeConfig" css-class="cssClass"></ods-viewer></uib-tab><uib-tab index="4" heading="Form Model" ng-show="debugMode"><ods-model model="schema" css-class="fixed-height"></ods-model></uib-tab></uib-tabset></div></div>');
 $templateCache.put('image-upload/image-upload-dialog.html','<form name="editForm" role="form" novalidate ng-submit="vm.save()"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myImageLabel">Create or edit a Picture</h4></div><div class="modal-body"><div class="row"><div class="col-lg-5"><img data-ng-src="{{\'data:\' + vm.image.pictureContentType + \';base64,\' + vm.image.picture}}" class="img-responsive" ng-if="vm.image.picture"><div ng-if="vm.image.picture" class="help-block clearfix"><span class="pull-left">{{vm.image.pictureContentType}}, {{vm.byteSize(vm.image.picture)}}</span> <button type="button" ng-click="vm.resetUserPicture()" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-remove"></span></button></div><button type="button" ngf-select class="btn btn-default btn-block" ngf-change="vm.setPicture($file, vm.patient)" accept="image/*">Browse...</button></div><div class="col-lg-5"><div id="webcam"><webcam channel="vm.channel" on-streaming="vm.onSuccess()" on-error="vm.onError(err)" on-stream="vm.onStream(stream)"></webcam><div ng-if="vm.image.picture" class="help-block clearfix"><span class="pull-left"><button class="btn btn-default btn-xs pull-right" type="button" ng-click="vm.makeSnapshot()"><span class="glyphicon glyphicon-camera"></span></button></span></div><canvas ng-hide="true" id="snapshot" width="383" height="383"></canvas></div></div></div><!--<div class="row">--><!--<div class="col-lg-12">--><!--<img data-ng-src="{{\'data:\' + vm.image.pictureContentType + \';base64,\' + vm.image.picture}}"--><!--class="img-responsive" ng-if="vm.image.picture"/>--><!--<div ng-if="vm.image.picture" class="help-block clearfix">--><!--<span--><!--class="pull-left">{{vm.image.pictureContentType}}, {{vm.byteSize(vm.image.picture)}}</span>--><!--<button type="button" ng-click="vm.resetUserPicture()"--><!--class="btn btn-default btn-xs pull-right">--><!--<span class="glyphicon glyphicon-remove"></span>--><!--</button>--><!--</div>--><!--<button type="button" ngf-select class="btn btn-default btn-block"--><!--ngf-change="vm.setPicture($file, vm.image)" accept="image/*">--><!--Browse...--><!--</button>--><!--</div>--><!--</div>--></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Accept</span></button></div></form>');
 $templateCache.put('image-upload/image-upload.html','<img class="img-responsive {{cssClass}}" id="imgPicture" data-ng-src="{{\'data:\' + imageType + \';base64,\' + image}}" ng-click="openModal()" style="cursor: pointer;min-height: 100px;{{css}}" alt="User profile picture"><!--<div class="o_form_image_controls" style="--><!--position: absolute;--><!--top: 0;--><!--left: 10px;--><!--bottom: auto;--><!--right: 10px;--><!--width: 80%;--><!--color: #f4f4f4;--><!--background-color: #00a09d;--><!--/* opacity: 0; */--><!--transition: opacity ease 400ms;">--><!--<span class="fa fa-pencil fa-lg pull-left o_select_file_button" title="Edit" style="--><!--margin: 5px;--><!--cursor: pointer;"></span>--><!--<span class="fa fa-trash-o fa-lg pull-right o_clear_file_button" title="Clear" style="--><!--margin: 5px;--><!--cursor: pointer;"></span>--><!--</div>-->');
 $templateCache.put('img-upload/img-upload-dialog.html','<form name="editForm" role="form" novalidate ng-submit="vm.save()"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myImageLabel">Change/Edit Image</h4></div><div class="modal-body"><div class="row"><div class="col-lg-6" style="text-align: center;"><div class="img-responsive img-thumbnail"><ui-cropper image="vm.original" area-type="{{vm.areaType}}" chargement="\'Loading\'" result-image-size="vm.croppedImageSize" result-image="vm.model" canvas-scalemode="true" change-on-fly="true"></ui-cropper></div></div><div class="col-lg-6" style="text-align: center;"><img class="img-responsive img-thumbnail" ng-src="{{vm.model}}"></div></div><br><div class="row"><div class="col-lg-6"><button type="button" class="btn btn-warning btn-block" ngf-select ngf-change="vm.handleFileSelect($event, $file)" accept="image/*"><i class="fa fa-image" aria-hidden="true"></i> Browse...</button></div></div><!--<div class="cropper-wrapper">--><!--<div class="crop-area" ng-class="!originalImage?\'default-img\':\'\'">--><!--<ui-cropper image="vm.originalImage"--><!--area-type="{{vm.areaType}}"--><!--chargement="\'Loading\'"--><!--result-image-size="vm.resultImageSize"--><!--result-image="vm.myCroppedImage"--><!--canvas-scalemode="true"--><!--change-on-fly="true">--><!--</ui-cropper>--><!--<div class="load-button">--><!--<button type="button" class="btn btn-warning btn-block"--><!--ngf-select--><!--ngf-change="vm.handleFileSelect($event, $file)"--><!--accept="image/*">--><!--<i class="fa fa-image" aria-hidden="true"></i> Browse...--><!--</button>--><!--</div>--><!--</div>--><!--<div class="cropped-image">--><!--<img ng-src="{{vm.myCroppedImage}}">--><!--</div>--><!--</div>--></div><div class="modal-footer"><button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true"></i> Save</button> <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.clear()"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button></div></form>');
@@ -80,7 +80,7 @@ $templateCache.put('reports/param.html','<form name="paramsForm" novalidate show
 $templateCache.put('reports/params.html','<form name="paramsForm" novalidate ng-submit="vm.openReport()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myCityLabel">Report Params for:</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><h4>{{vm.report.title}}</h4><ng-include src="\'reports/tpl/one-col.tpl.html\'" ng-if="!vm.report.multiCols"></ng-include><ng-include src="\'reports/tpl/two-col.tpl.html\'" ng-if="vm.report.multiCols"></ng-include></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button ng-disabled="paramsForm.$invalid" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Open</span></button></div></form>');
 $templateCache.put('reports/reports.html','<div class="row" ng-show="infoMessage" ng-class="ng-hide"><div class="col-lg-12"><div uib-alert class="alert alert-info alert-dismissible" close="hideInfoMessage()"><h4><i class="icon fa fa-info"></i> Reports info!</h4>If don\'t have a PDF viewer plugin in the browser. No biggie... you can download it. Please select the report and download it from report preview.</div></div></div><div class="row"><div class="col-md-3"><div class="box box-solid"><div class="box-header with-border"><h3 class="box-title">{{reportsGroup.title}}</h3></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in reportsGroup.groups" ng-init="groupIndex = $index"><ul class="list-group list-group-unbordered"><li class="list-group-item" ng-repeat="report in group.reports" ng-init="reportIndex = $index"><a href="" ng-click="openReport(groupIndex, reportIndex)"><b>{{report.title}}</b></a></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box --></div><div class="col-md-9"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">Report Preview</h3></div><!-- /.box-header --><div class="box-body" style="height: 100vh;"><div ng-show="selectReport" class="ng-hide"><p>Download report: <a ng-click="downloadReport()">{{selectReport.title}}</a></p></div><pdfjs-viewer data="reportFile"></pdfjs-viewer><!--<object embed-src="{{vm.reportFile}}" width="100%" height="100%">--><!--</object>--><!--<object style="height: 90vh;" type="application/pdf" data="{{reportFile}}" width="100%"--><!--height="100%"/>--></div></div></div></div>');
 $templateCache.put('signature/signature.html','<div id="signature" class="{{options.cssClass}}"><style type="text/css" scoped>.sig-box {\n            border-radius: 4px;padding: 5px 5px 0;margin-bottom: 5px;\n        }\n        .sig-box-default {\n            border: 1px solid #ccc;"\n        }\n        .sig-box-error {\n            border: 1px solid #a94442;"\n        }</style><div id="{{name}}" class="sig-box {{requiredClass}}"><!--style=">--></div><button type="button" class="btn btn-danger" ng-click="reset()" ng-disabled="disabled"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');
-$templateCache.put('steps-indicator/template.html','<div class="ods-breadcrumb {{class}}"><a class="{{step.status}} {{step.disabled ? \'disabled\': \'\'}}" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</a></div>');
+$templateCache.put('steps-indicator/template.html','<div class="btn-group {{class}}"><button type="button" class="btn btn-primary {{step.status}}" ng-disabled="step.disabled" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</button><!--<a class="{{step.status}} {{step.disabled ? \'disabled\': \'\'}}" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</a>--></div>');
 $templateCache.put('wizard-steps/wizard-steps.html','<div class="ods-wizard-content"><div class="ods-wizard-circle ods-wizard clearfix"><div class="steps clearfix"><ul><li class="{{step.status}}" ng-repeat="step in ngModel" ng-class="{ \'first\': $index === 0, \'done\': step.done, \'last\': $index === ngModel.length -1}" ng-show="step.visible"><a href="" ng-click="step.callback()"><span class="step">{{step.label}}</span></a></li><!--<li class="first done">--><!--<a href=""><span class="step">Select template</span></a>--><!--</li>--><!--<li class="current">--><!--<a href="" ui-sref="{{vm.parentName}}.info"><span class="step">Information</span></a>--><!--</li>--><!--<li class="">--><!--<a href="" ui-sref="{{vm.parentName}}.form"><span class="step">Form</span></a>--><!--</li>--><!--<li class="disabled" ng-show="vm.doc.billable"><a href="" ui-sref="{{vm.parentName}}.services">--><!--<span class="step">Services</span></a>--><!--</li>--><!--<li class="disabled">--><!--<a href="" ui-sref="{{vm.parentName}}.attachment"><span class="step">Attachments</span></a>--><!--</li>--><!--<li class="disabled">--><!--<a href="" ui-sref="{{vm.parentName}}.signature"><span class="step">Signature</span></a>--><!--</li>--><!--<li class="disabled last">--><!--<a href="" ui-sref="{{vm.parentName}}.finish"><span class="step">Finish</span></a>--><!--</li>--></ul></div></div></div><!--<div class="ods-breadcrumb {{class}}">--><!--<a class="{{step.status}} {{step.disabled ? \'disabled\': \'\'}}" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</a>--><!--</div>-->');
 $templateCache.put('forms/form/form.html','<div ng-if="schema"><div class="form-header with-border"><h3 class="box-title" ng-hide="schema.hideLabel" ng-bind-html="schema.label"></h3></div><!-- form start --><div ng-if="schema.layout.length !== 0"><ng-form name="{{schema.name}}" role="form" novalidate><div class="box-body padding-top"><div class="alert alert-success" ng-show="success"><strong>Success! </strong>{{message}}</div><div class="alert alert-danger" ng-show="error"><strong>Error! </strong>{{message}}</div><div class="alert alert-info" ng-show="info"><strong>Information! </strong>{{message}}</div><div ng-repeat="section in schema.layout"><h4 ng-bind-html="section.title" ng-hide="hideTitle(section)"></h4><div class="{{row.cssClass}}" ng-repeat="row in section.rows"><div class="{{col.cssClass}}" ng-repeat="col in row.cols"><div class="" ng-repeat="field in col.fields"><div ng-if="field"><div class="form-group" ng-class="{\'has-error\': {{schema.name}}.{{field.name}}.$invalid}"><label class="control-label" for="{{field.name}}" ng-hide="hideTitle(field)">{{field.label}}&nbsp;</label><ng-include src="getFormFieldTemplate(field.type)"></ng-include><div ng-show="{{schema.name}}.{{field.name}}.$invalid"><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.required">{{field.validation.messages.required}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.minlength">{{field.validation.messages.minlength}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.maxlength">{{field.validation.messages.maxlength}}</p><p class="help-block" ng-show="{{schema.name}}.{{field.name}}.$error.pattern">{{field.validation.messages.pattern}}</p></div></div></div></div></div></div></div></div><div class="box-footer" ng-show="schema.handleSubmit"><button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="clear()"><span class="fa fa-trash-o"></span>&nbsp;<span>Clear</span></button> <button type="submit" ng-disabled="{{name}}.$invalid" class="btn btn-primary"><span class="fa fa-save"></span>&nbsp;<span>Save</span></button></div></ng-form></div></div>');
 $templateCache.put('forms/form-info/form-info.html','<form name="formInfo" role="form" novalidate ng-submit="save()" show-validation><div class="box-body padding-top"><div class="row"><div class="col-lg-6"><div class="form-group" ng-class="{\'has-error\': formInfo.formName.$invalid}"><label class="control-label" for="formName">Form name</label> <input class="form-control" name="formName" id="formName" ng-model="schema.name" ng-required="true"></div></div><div class="col-lg-6"><div class="form-group" ng-class="{\'has-error\': formInfo.formLabel.$invalid}"><label class="control-label" for="formLabel">Form label</label> <input class="form-control" name="formLabel" id="formLabel" ng-model="schema.label" ng-required="true"></div></div></div><div class="row"><div class="col-lg-12"><div class="form-group" ng-class="{\'has-error\': formInfo.description.$invalid}"><label class="control-label" for="description">Form description</label> <textarea class="form-control" name="description" id="description" ng-model="schema.description" ng-required="false" rows="3" placeholder="Type form description...">\n                    </textarea></div></div></div><div class="row"><div class="col-lg-3"><div class="form-group" ng-class="{\'has-error\': formInfo.handleSubmit.$invalid}"><label class="control-label" for="handleSubmit">Handle submit internally: &nbsp;</label> <input type="checkbox" name="handleSubmit" id="handleSubmit" ng-model="schema.handleSubmit" ng-required="false" title="Specify if submit is handle by form (in this case you must to specify submit callback) or externally"></div></div><div class="col-lg-9"><div class="form-group" ng-class="{\'has-error\': formInfo.handleSubmit.$invalid}"><label class="control-label" for="hideLabel">Hide form label: &nbsp;</label> <input type="checkbox" name="hideLabel" id="hideLabel" ng-model="schema.hideLabel" ng-required="false" title="This allow to hide the form title."></div></div></div></div></form>');
@@ -179,9 +179,9 @@ $templateCache.put('forms/schema/components/section/section.html','<div class="b
 $templateCache.put('forms/schema/components/select/select-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="{{field.name}}-limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="{{field.name}}-limitTo" name="{{field.name}}-limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><div class="table-responsive" style="max-height: 250px"><table class="table table-condensed position-relative" style="position: relative;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'has-error\': fieldOptionForm.$invalid }"><td><input type="radio" name="{{field.name}}Selected[]" ng-value="field.options[$index]" ng-model="field.value"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" ng-required="true"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
 $templateCache.put('forms/schema/components/select/select-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-select-options field="field"></ods-field-select-options></div></form></uib-tab><uib-tab index="2" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/select/select.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/select.html\'"></div>');
-$templateCache.put('forms/schema/components/text/text-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/select2/select-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-select-options field="field"></ods-field-select-options></div></form></uib-tab><uib-tab index="2" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/select2/select2.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/select2.html\'"></div>');
+$templateCache.put('forms/schema/components/text/text-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/pattern-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/textarea/textarea-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/minlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/maxlength-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/textarea/textarea.html','<div ng-include="\'forms/schema/components/label.html\'"></div><textarea class="form-control" name="{{field.name}}" id="{{field.name + dev}}" ng-required="{{field.required}}" title="{{field.tooltip}}" rows="{{field.rows}}" placeholder="{{field.placeholder}}" ng-model="field.value" data-resize="disabled" ng-readonly="field.readonly">\n</textarea>');
 $templateCache.put('forms/schema/components/toggle/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
@@ -197,6 +197,230 @@ $templateCache.put('forms/schema/plugins/table/table-properties.html','<uib-tabs
 $templateCache.put('forms/schema/plugins/table/table-props.html','<div class="padding-top"><div class="row"><form name="fieldPropsForm" class="form-horizontal"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-rows.$invalid}"><label for="{{field.name}}-rows" class="control-label col-sm-5">Rows:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-rows" name="{{field.name}}-rows" placeholder="Rows..." ng-model="field.matrix.length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addRow()" title="Add row">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-cols.$invalid}"><label for="{{field.name}}-cols" class="control-label col-sm-5">Cols:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-cols" name="{{field.name}}-cols" placeholder="Cols..." ng-model="field.matrix[0].length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addColumn()" title="Add column">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-rowHeader" class="control-label col-sm-5">Row Header:</label> <input class="col-sm-1" type="checkbox" id="{{field.name}}-rowHeader" name="{{field.name}}-rowHeader" ng-model="field.rowHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-colHeader" class="control-label col-sm-5">Col Header:</label> <input class="col-sm-1" type="checkbox" id="{{field.name}}-colHeader" name="{{field.name}}-colHeader" ng-model="field.colHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-totals" class="control-label col-sm-5">Show Totals:</label> <input class="col-sm-1" type="checkbox" id="{{field.name}}-totals" name="{{field.name}}-totals" ng-model="field.totals"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-canClone" class="control-label col-sm-5">Can clone row:</label> <input class="col-sm-1" type="checkbox" id="{{field.name}}-canClone" name="{{field.name}}-canClone" ng-model="field.canCloneRow"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageRows.$invalid}"><label for="{{field.name}}-manageRows" class="control-label col-sm-5">Manage rows:</label> <input class="col-sm-1" type="checkbox" id="{{field.name}}-manageRows" name="{{field.name}}-manageRows" ng-model="field.manageRows"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageColumns.$invalid}"><label for="{{field.name}}-manageColumns" class="control-label col-sm-5">Manage columns:</label> <input class="col-sm-1" type="checkbox" id="{{field.name}}-manageColumns" name="{{field.name}}-manageColumns" ng-model="field.manageColumns"></div></div><div class="col-md-8 col-sm-8 col-xs-12"><h3>Columns configuration</h3><div class="table-responsive" style="max-height: 300px"><table class="table table-bordered"><thead><tr><th>#</th><th>CSS class</th><th>Width</th><th>Total</th><th>Total Label</th></tr></thead><tbody><tr ng-repeat="col in field.matrix[0]"><td>{{$index + 1}}</td><td><input type="text" class="form-control" id="{{field.name}}-col{{$index}}" name="{{field.name}}-col{{$index}}" placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass"></td><td><input type="text" class="form-control" id="{{field.name}}-width{{$index}}" name="{{field.name}}-width{{$index}}" placeholder="width..." ng-model="col.width"></td><td><input type="checkbox" id="{{field.name}}-total{{$index}}" name="{{field.name}}-total{{$index}}" title="Add total to this column" ng-model="col.total"></td><td><input type="text" class="form-control" id="{{field.name}}-totalLabel{{$index}}" name="{{field.name}}-totalLabel{{$index}}" placeholder="Total label..." ng-model="field.matrix[0][$index].totalLabel"></td></tr></tbody></table></div></div></form></div></div>');
 $templateCache.put('forms/schema/plugins/table/table.html','<form name="{{field.name}}" class="position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" width="{{col.width}}"><div class="box-row col-lg-12"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px;" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)" dnd-drop="checkItem(index, item, external, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" dnd-callback="onDrop(list, $index, targetList, targetIndex)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" popover-props="true" debug-mode="debugMode"></ods-field></li></ul></div></td><td ng-show="field.manageRows" width="20px" style="position: relative"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-up"></span></button> <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-down"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]" style="position: relative"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapColumn($index, $index + 1)" title="Swap column right" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-right"></span></button> <button type="button" ng-click="swapColumn($index - 1, $index)" title="Swap column left" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-left"></span></button></td></tr></tbody></table><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div></form>');
 $templateCache.put('forms/schema/plugins/table/total.html','<div><b>{{label}}: {{total}}</b></div>');}]);
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsCkeditor', CKEditor);
+
+CKEditor.$inject = ['$timeout', 'OdsCkeditor'];
+
+function CKEditor($timeout, OdsCkeditor) {
+
+    var directive = {
+        restrict: 'A',
+        require: '?ngModel',
+        scope: {
+            name: '@',
+            ngModel: '=',
+            options: '=',
+            disabled: '=?ngDisabled'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope, elm, attr) {
+
+        if (typeof($scope.ngModel) === 'undefined') {
+            $scope.ngModel = '';
+        }
+
+        if (typeof(CKEDITOR) === 'undefined') {
+            console.error('Please include CKEditor js in your html.');
+            return;
+        }
+
+        if (!attr.id && !attr.name) {
+            $scope.name = OdsCkeditor.generateName();
+        } else {
+            $scope.name = attr.name;
+        }
+
+        //We check if an instance exists.
+        $scope.ck = OdsCkeditor.getInstance($scope.name);
+
+        if (!$scope.ck) {
+            elm[0].name = $scope.name;
+            elm[0].id = $scope.name;
+            $scope.ck = CKEDITOR.replace(elm[0]);
+            OdsCkeditor.register($scope.name, $scope.ck);
+        }
+
+        $scope.disabled = $scope.disabled ? $scope.disabled : false;
+
+        $scope.ck.on('instanceReady', function () {
+
+            OdsCkeditor.setData($scope.name, $scope.ngModel);
+            OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
+        });
+
+        $scope.ck.on('change', function () {
+            $timeout(function () {
+                $scope.ngModel = OdsCkeditor.getData($scope.name);
+            }, 0, false);
+        });
+
+        // ['dataReady', 'change', 'blur', 'saveSnapshot'].forEach(function (event) {
+        //     controller.onCKEvent(event, function syncView() {
+        //         ngModelController.$setViewValue(controller.instance.getData() || '');
+        //     });
+        // });
+
+        $scope.$watch('disabled', function (newValue, oldValue) {
+
+            $timeout(function () {
+                if (newValue !== oldValue) {
+                    newValue = newValue ? newValue : false;
+                    OdsCkeditor.setReadOnly($scope.name, newValue);
+                }
+            }, 0, false);
+            return;
+        });
+
+        $scope.$watch('options', function (options) {
+
+            $timeout(function () {
+                OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions(options));
+            }, 0, false);
+            return;
+        });
+
+        $scope.$watch('ngModel', function (model, oldModel) {
+
+            $timeout(function () {
+                if(model !== oldModel){
+                    OdsCkeditor.setData($scope.name, model);
+                }
+            }, 0, false);
+            return;
+        });
+
+        $scope.$on('$destroy', function () {
+            OdsCkeditor.unregister($scope.name);
+        });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .factory('OdsCkeditor', OdsCkeditor);
+
+function OdsCkeditor() {
+
+    var uniqueCounter = (+new Date()) % 10000;
+
+    var keyCode = CKEDITOR.CTRL + 32;
+
+    var instanceMap = {};
+
+    var service = {
+        register: register,
+        getInstance: getInstance,
+        unregister: unregister,
+        generateName: generateName,
+        getData: getData,
+        setData: setData,
+        setOptions: setOptions,
+        setReadOnly: setReadOnly,
+        initOptions: initOptions
+    };
+
+    function register(name, instance) {
+
+        instanceMap[name] = instance;
+    }
+
+    function getInstance(name) {
+
+        if (instanceMap[name]) {
+            return instanceMap[name];
+        } else {
+            return false;
+        }
+    }
+
+    function unregister(name) {
+
+        instanceMap[name] = null;
+    }
+
+    function generateName() {
+
+        uniqueCounter++;
+        return 'ckeditor' + uniqueCounter;
+    }
+
+    function getData(name) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            return ck.getData();
+        } else {
+            return '';
+        }
+    }
+
+    function setData(name, model) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            ck.setData(model);
+
+            // ck.focus();
+            // var selection = ck.getSelection();
+            // if (selection) {
+            //     var range = selection.getRanges()[0];
+            //     var pCon = range.startContainer.getAscendant({p: 2}, true); //getAscendant('p',true);
+            //     var newRange = new CKEDITOR.dom.range(range.document);
+            //     newRange.moveToPosition(pCon, CKEDITOR.POSITION_BEFORE_START);
+            //     newRange.select();
+            // }
+        }
+    }
+
+    function setOptions(name, options) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            ck.execCommand('reloadOptions', initOptions(options));
+        }
+    }
+
+    function setReadOnly(name, isReadOnly) {
+
+        var ck = getInstance(name);
+        if (ck) {
+            ck.setReadOnly(isReadOnly);
+        }
+    }
+
+    function initOptions(options) {
+
+        var tmp = {};
+        if (options) {
+            tmp = {
+                triggerKeyCode: !options.triggerKeyCode ? keyCode : options.triggerKeyCode,
+                prefix: !options.prefix ? '${' : options.prefix,
+                suffix: !options.suffix ? '}' : options.suffix,
+                suggestions: options.suggestions
+            };
+            return tmp;
+        } else {
+            tmp = {
+                triggerKeyCode: keyCode,
+                prefix: '${',
+                suffix: '}',
+                suggestions: []
+            };
+            return tmp;
+        }
+    }
+
+    return service;
+}
 'use strict';
 
 angular
@@ -679,230 +903,6 @@ function PropsFilter() {
         return out;
     };
 }
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsCkeditor', CKEditor);
-
-CKEditor.$inject = ['$timeout', 'OdsCkeditor'];
-
-function CKEditor($timeout, OdsCkeditor) {
-
-    var directive = {
-        restrict: 'A',
-        require: '?ngModel',
-        scope: {
-            name: '@',
-            ngModel: '=',
-            options: '=',
-            disabled: '=?ngDisabled'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope, elm, attr) {
-
-        if (typeof($scope.ngModel) === 'undefined') {
-            $scope.ngModel = '';
-        }
-
-        if (typeof(CKEDITOR) === 'undefined') {
-            console.error('Please include CKEditor js in your html.');
-            return;
-        }
-
-        if (!attr.id && !attr.name) {
-            $scope.name = OdsCkeditor.generateName();
-        } else {
-            $scope.name = attr.name;
-        }
-
-        //We check if an instance exists.
-        $scope.ck = OdsCkeditor.getInstance($scope.name);
-
-        if (!$scope.ck) {
-            elm[0].name = $scope.name;
-            elm[0].id = $scope.name;
-            $scope.ck = CKEDITOR.replace(elm[0]);
-            OdsCkeditor.register($scope.name, $scope.ck);
-        }
-
-        $scope.disabled = $scope.disabled ? $scope.disabled : false;
-
-        $scope.ck.on('instanceReady', function () {
-
-            OdsCkeditor.setData($scope.name, $scope.ngModel);
-            OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions($scope.options));
-        });
-
-        $scope.ck.on('change', function () {
-            $timeout(function () {
-                $scope.ngModel = OdsCkeditor.getData($scope.name);
-            }, 0, false);
-        });
-
-        // ['dataReady', 'change', 'blur', 'saveSnapshot'].forEach(function (event) {
-        //     controller.onCKEvent(event, function syncView() {
-        //         ngModelController.$setViewValue(controller.instance.getData() || '');
-        //     });
-        // });
-
-        $scope.$watch('disabled', function (newValue, oldValue) {
-
-            $timeout(function () {
-                if (newValue !== oldValue) {
-                    newValue = newValue ? newValue : false;
-                    OdsCkeditor.setReadOnly($scope.name, newValue);
-                }
-            }, 0, false);
-            return;
-        });
-
-        $scope.$watch('options', function (options) {
-
-            $timeout(function () {
-                OdsCkeditor.setOptions($scope.name, OdsCkeditor.initOptions(options));
-            }, 0, false);
-            return;
-        });
-
-        $scope.$watch('ngModel', function (model, oldModel) {
-
-            $timeout(function () {
-                if(model !== oldModel){
-                    OdsCkeditor.setData($scope.name, model);
-                }
-            }, 0, false);
-            return;
-        });
-
-        $scope.$on('$destroy', function () {
-            OdsCkeditor.unregister($scope.name);
-        });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .factory('OdsCkeditor', OdsCkeditor);
-
-function OdsCkeditor() {
-
-    var uniqueCounter = (+new Date()) % 10000;
-
-    var keyCode = CKEDITOR.CTRL + 32;
-
-    var instanceMap = {};
-
-    var service = {
-        register: register,
-        getInstance: getInstance,
-        unregister: unregister,
-        generateName: generateName,
-        getData: getData,
-        setData: setData,
-        setOptions: setOptions,
-        setReadOnly: setReadOnly,
-        initOptions: initOptions
-    };
-
-    function register(name, instance) {
-
-        instanceMap[name] = instance;
-    }
-
-    function getInstance(name) {
-
-        if (instanceMap[name]) {
-            return instanceMap[name];
-        } else {
-            return false;
-        }
-    }
-
-    function unregister(name) {
-
-        instanceMap[name] = null;
-    }
-
-    function generateName() {
-
-        uniqueCounter++;
-        return 'ckeditor' + uniqueCounter;
-    }
-
-    function getData(name) {
-
-        var ck = getInstance(name);
-        if (ck) {
-            return ck.getData();
-        } else {
-            return '';
-        }
-    }
-
-    function setData(name, model) {
-
-        var ck = getInstance(name);
-        if (ck) {
-            ck.setData(model);
-
-            // ck.focus();
-            // var selection = ck.getSelection();
-            // if (selection) {
-            //     var range = selection.getRanges()[0];
-            //     var pCon = range.startContainer.getAscendant({p: 2}, true); //getAscendant('p',true);
-            //     var newRange = new CKEDITOR.dom.range(range.document);
-            //     newRange.moveToPosition(pCon, CKEDITOR.POSITION_BEFORE_START);
-            //     newRange.select();
-            // }
-        }
-    }
-
-    function setOptions(name, options) {
-
-        var ck = getInstance(name);
-        if (ck) {
-            ck.execCommand('reloadOptions', initOptions(options));
-        }
-    }
-
-    function setReadOnly(name, isReadOnly) {
-
-        var ck = getInstance(name);
-        if (ck) {
-            ck.setReadOnly(isReadOnly);
-        }
-    }
-
-    function initOptions(options) {
-
-        var tmp = {};
-        if (options) {
-            tmp = {
-                triggerKeyCode: !options.triggerKeyCode ? keyCode : options.triggerKeyCode,
-                prefix: !options.prefix ? '${' : options.prefix,
-                suffix: !options.suffix ? '}' : options.suffix,
-                suggestions: options.suggestions
-            };
-            return tmp;
-        } else {
-            tmp = {
-                triggerKeyCode: keyCode,
-                prefix: '${',
-                suffix: '}',
-                suggestions: []
-            };
-            return tmp;
-        }
-    }
-
-    return service;
-}
 /**
  * Created by hermeslm on 3/28/17.
  */
@@ -998,6 +998,145 @@ function OdsFormBuilder() {
 
     }
 }
+
+/**
+ * Created by PpTMUnited on 2/21/2017.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .controller('ImgUploadDialogController', ImgUploadDialogController);
+
+    ImgUploadDialogController.$inject = ['$scope', '$uibModalInstance', 'areaType', 'ngModel',
+        'croppedImageSize', 'original'];
+
+    function ImgUploadDialogController($scope, $uibModalInstance, areaType, ngModel,
+                                       croppedImageSize, original) {
+
+        var vm = this;
+
+        vm.original = original;
+        vm.model = ngModel;
+        vm.croppedImageSize = croppedImageSize ? Number(croppedImageSize) : 300;
+        vm.areaType = areaType;
+
+        vm.file = {
+            image: null
+        };
+
+        vm.save = save;
+        vm.clear = clear;
+        vm.handleFileSelect = handleFileSelect;
+
+        function handleFileSelect(evt, file) {
+
+            vm.file = file;
+            // var fileUp = file;
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                $scope.$apply(function () {
+                    vm.original = evt.target.result;
+                });
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clear() {
+            $uibModalInstance.dismiss(null);
+        }
+
+        function save() {
+            var file = {
+                original: vm.original,
+                model: vm.model
+            };
+            $uibModalInstance.dismiss(file);
+        }
+    }
+})();
+
+
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .directive('odsImgUpload', OdsImgUpload);
+
+    OdsImgUpload.$inject = ['$uibModal'];
+
+    function OdsImgUpload($uibModal) {
+
+        var directive = {
+            restrict: 'E',
+            templateUrl: 'img-upload/img-upload.html',
+            scope: {//all this scope value defined, are attr for the directive. There use are explained below
+                original: '=',//original image not modified.
+                ngModel: '=',//model where to put result image.
+                mode: '@', //Mode insert/edit
+                image: '=',//modal field for the image value
+                displayImage: '=',//boolean if you want to show the image result in directive view
+                size: '@',//size for the modal, can be: sm or lg[e.g: modalSize="sm"]. This attr modified the size of the modal
+                cssClass: '@',
+                areaType: '@',//form for the image component. Can be square or circle[e.g: class="circle/square/rectangle"]
+                onSave: '&', // function to execute after of
+                croppedImageSize: '@', //size of the crop image
+                defaultImage: '=?',
+                uploadText: '@' //Text by default in case you dont have a default or image yet
+            },
+            link: linkFunc
+        };
+
+        return directive;
+
+        function linkFunc($scope) {
+
+            //Init vars.
+            $scope.defaultImage = $scope.defaultImage ? $scope.defaultImage : 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QHGRXhpZgAATU0AKgAAAAgABFEAAAQAAAABAAAAAFEBAAMAAAABAAEAAFECAAEAAAGAAAAAPlEDAAEAAAABAAAAAAAAAADn5+fBwcHAwMC/v7+5ubm8vLzm5ubo6Oi+vr64uLi9vb27u7u6urq3t7fCwsLAwsHCwMHk5OTl5eW2trbf39/V1dXOzs7h4eHj4+Pi4uLa2trFxcXPz8/S0tLc3NzHx8fLy8vW1tbIyMjDw8PKysrExMTX19fMzMzZ2dnR0dHe3t7d3d3Nzc3Q0NDg4ODU1NTGxsbY2NjT09PBwb/b29vBwcPJycnCwb/BwL7Bv8DAwcPCwMPAwr+/wcDCwsDBw8LCwsTBw8C6uLng3t/DwcTBwMXEwL+/wb7AwcXAwMLCwb3b293i4+Xd3tnf4eDBwsTZ3d7AwL68vLrZ3dy7vbzo6Oq9uLzDwcLb29nn5+W5t7i8urvj4eK4ure/w8LFwMS+w7/c2tu5ubvBv8Tn5+nDwsDp5+jp6em7u726vLkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAF/AX8DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9nKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorH8aeOdP8C6W1zfTBWIPlRKcyTH0A/r0FeT6X+0drU2rxNcQ2K2TTDzAI23LHu5wc9QO+KAPcKKRHWRAykMrDII7iloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiqer+ItP0CPdfXlraLjP72UJn6Z60AXKK4PXf2ivD+lblt2udRkHQQx7Vz7s2P0BriPEP7RutauGTT7eDTY243f62T8z8v6UAe06xrtn4etDcX11Dawj+KR9ufYep9hXmHjb9pRFDW+gweY3T7TOuFH+6vU/U4+hrzC+kvfEF59ovrme6mb+KVyx/DPT6VNb6csYoAjvri88S6i13f3E1zcSdXkbP4D0HsOKsQ2ixLipVUJ0paAPZvgn4q/t7wqLWVs3GmkRHJ5KfwH8hj/gNdlmvAfh94qbwd4pt7ot/o7nypx6oep/Dg/hXvwbeNw5B5B9aACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoqG/v4NLs5Li5mjt4Yhl5JGCqo9ya8r8b/tJBXa30CASEcfaplO3/gKf1P5UAer3FzHaQtJNJHFGoyzOwVR+JrmtV+M3hnR2ZZNWglZe0Aab9VBH614HrGr6p4tuvO1G8uLps5AdvlX6L0H4CmRaQAOeaAPXtT/ab0e24tbK/um7Fgsan8ck/pXN6t+0tq95kWOn2dqvrIWlYfjwP0ri005F7VKtsq0AW9U+JfifXwwm1a6jVv4YSIR9PlA/WsT+zZLiQySM0jtyWY5JrSEajtTqAKcWlKvarCWqp2qSigAAxRRRQAUUUUABG4Yr6A+Ht0954I0uSTlvs6qSe+Bj+lfP+M17r8J9Rj1DwHY+WwLQqYnH91ge/wCGD+NAHR0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVj+NfG9j4E0dry+kx/DFEv35m9FH9egrSv76LTLGa4ncRw26GR2PRVAyTXzX418W3PxF8TyXsxZYQdkERPESdh9T1J9aAJPG3xA1P4lahuuW8q0RsxWyH5I/c/3m9z+nSqNppyxjkVNbWywp0qagBqoFHFOoooAKKKKACiiigAooooAKKKKACiiigArofhv49fwNrm6Qs2n3RCzqP4fRx7j9R+Fc9Qw3DFAH0rbXEd3bxyxOskcihkZTlWB6EU+vJPgn8Q20u8XRb1z9mnbFs5/wCWTn+H6Ht6H68et0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwf7RWsyaZ8P/JjyPt9wkDEf3cFj+e0D8TXi+m2wSKvXP2mRnwjp/8A1/L/AOgPXldsMRCgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooADkEMpKspyCOxr6G8Ias2u+F7C8b/AFk8Cs/+9jn9c18817x8LTnwBpn/AFzP/oRoA6CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA83/AGmP+RR0/wD6/l/9AevK7b/UrXq/7S0e7wXYt/dv0z7fI9eUW3+pWgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK96+GS7PAWl/8AXHP6mvBa+g/A1ubXwZpaH732WMkemVBoA1aKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDn/inp0OpfD7VlmjWRYbZ5lz/CyKWBH4ivAbKTfEPpX0R48XzPA+sr/esZx/5DavnLSz+5WgC3RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAOij82VVHViBX0pBCttCka/djUKPoK+b9PG6/gHrIv86+kqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAzvGCeZ4S1Rf71pKP8Axw182aUf3Qr6Y8Rr5nh6/X+9byD/AMdNfM2knMdAF2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAktZPJuo37KwP619KCvmc8ivffhxqr614I064kJaRotjE9WKkrn8cUAbdFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRQaAMPx/4w0/whoEr303l/aEaOJANzyNjsPxHPQV876T/q61Pih4jm8aePbyR2P2e1kNvAvZUUkfqcn8faqdtB5KUASUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXuvwlRY/h7poVg3yuSR6l2J/nXhVeifs/wCvzJql3pbNut2jNwgP8DAgHH1yPyoA9UooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPmnxFZfYfGurQ/8APO8lA+m84ptbHxcsP7O+KOpDHyzlJl98oM/qDWPQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXYfA1tvjtf8AagkH16GuPrtPgRAZfG7N/wA8rZ2P5qP60AeyUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHjv7R2l/Z/E+m3wHy3MBhJHqjZ/k/6VxKnKivcPi34Jbxt4UaOAZvLV/OgH94gEFfxH6gV4cEaFmjkVo5IztZWGCp7gigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr0b9nqwLX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';
+            $scope.original = $scope.original ? $scope.original : $scope.defaultImage;
+            $scope.mode = $scope.mode ? $scope.mode : 'insert';
+            $scope.display = $scope.display ? $scope.display : true;
+
+            $scope.openModal = function () {
+                $uibModal.open({
+                    templateUrl: 'img-upload/img-upload-dialog.html',
+                    controller: 'ImgUploadDialogController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: $scope.size ? $scope.size : 'lg',
+                    windowTopClass: 'custom-dialog-styles',
+                    resolve: {
+                        original: function () {
+                            return $scope.original;
+                        },
+                        ngModel: function () {
+                            return $scope.ngModel;
+                        },
+                        areaType: function () {
+                            return $scope.areaType ? $scope.areaType : 'square';
+                        },
+                        croppedImageSize: function () {
+                            return $scope.croppedImageSize ? $scope.croppedImageSize : 300;
+                        }
+                    }
+                }).result.then(function () {
+                    // console.log('close');
+                }, function (result) {
+                    if (result && (typeof(result) === 'object')) {
+                        if ($scope.ngModel === null) {
+                            $scope.ngModel = {};
+                        }
+                        $scope.ngModel = result.model;
+                        $scope.original = result.original;
+                        $scope.onSave();
+                    }
+                });
+            };
+        }
+    }
+})();
 
 /**
  * Created by PpTMUnited on 2/21/2017.
@@ -1252,6 +1391,752 @@ function ImageUploadService() {
         object.imageContentType = getDefaultUserPictureContentType();
     }
 }
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsParam', odsParamDirective);
+
+odsParamDirective.$inject = ['OdsParamType', 'DTOptionsBuilder', 'DTColumnBuilder', '$q', '$filter', '$compile'];
+
+function odsParamDirective(OdsParamType, DTOptionsBuilder, DTColumnBuilder, $q, $filter, $compile) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'reports/param.html',
+        scope: {
+            param: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        $scope.hideTitle = hideTitle;
+        $scope.hideParam = hideParam;
+        $scope.getRequired = getRequired;
+        $scope.openCalendar = openCalendar;
+        $scope.getSelectTitleField = getSelectTitleField;
+
+        //TABLE_SELECT
+        $scope.search = search;
+        $scope.getDtOptions = getDtOptions;
+        $scope.getDtColumns = getDtColumns;
+        $scope.toggleAll = toggleAll;
+        $scope.toggleOne = toggleOne;
+
+        initTableParam($scope.param);
+        initDateParam($scope.param);
+
+        function initTableParam(param) {
+
+            if (param.type === OdsParamType.TABLE_SELECT) {
+                param.dtInstance = {};
+                param.dtOptions = undefined;
+                param.dtColumns = undefined;
+                param.isFilter = false;
+                param.selected = [];
+                param.selectedAll = false;
+                //init pre-selections
+                var valueField = param.valueField;
+                var gridOptions = param.gridOptions;
+                for (var j = 0; j < gridOptions.preSelected.length; j++) {
+                    var preSelectedId = gridOptions.preSelected[j][valueField];
+                    param.selected[preSelectedId] = true;
+                }
+            }
+        }
+
+        function initDateParam(param) {
+
+            if (param.type === OdsParamType.DATE) {
+                param.datePickerOpenStatus = false;
+            }
+        }
+
+        function hideTitle(param) {
+
+            return !!(param.hidden || param.hideTitle);
+        }
+
+        function hideParam(param) {
+
+            return !!param.hidden;
+        }
+
+        function getRequired(param) {
+
+            return param.required !== undefined ? param.required : false;
+        }
+
+        function openCalendar(param) {
+
+            param.datePickerOpenStatus = true;
+        }
+
+        function getSelectTitleField(param, element) {
+
+            if (element) {
+                if (param.render) {
+                    return param.render(element);
+                } else {
+                    return param.titleField !== undefined ? element[param.titleField] : element.name;
+                }
+            } else {
+                return param.placeholder;
+            }
+        }
+
+        function search(param) {
+            param.dtInstance.reloadData();
+        }
+
+        function getDtOptions(param) {
+
+            if (param.dtOptions === undefined) {
+                //We set the new dtOptions into array
+                param.dtOptions = DTOptionsBuilder.fromFnPromise(function () {
+                    var defer = $q.defer();
+                    if (param.isFilter) {
+                        defer.resolve(param.gridOptions.data);
+                        param.isFilter = false;
+                    } else if (!param.searchQuery || param.searchQuery === '') {
+                        defer.resolve(param.gridOptions.data);
+                    } else {
+                        defer.resolve($filter('filter')(param.gridOptions.data, param.searchQuery, undefined));
+                    }
+                    return defer.promise;
+                }).withPaginationType('full_numbers').withBootstrap().withDOM('tip').withOption('aaSorting', [[1, 'asc']])
+                    .withOption('createdRow', function (row) {
+                        $compile(angular.element(row).contents())($scope);
+                    })
+                    .withOption('headerCallback', function (header) {
+                        $compile(angular.element(header).contents())($scope);
+                    });
+                return param.dtOptions;
+            } else {
+                return param.dtOptions;
+            }
+        }
+
+        function getDtColumns(param) {
+
+            if (param.dtColumns === undefined) {
+                //We build all columns
+                var gridOptions = param.gridOptions;
+                var columns = [];
+                for (var i = 0; i < gridOptions.columnDef.length; i++) {
+                    var columnDef = gridOptions.columnDef[i];
+                    if (columnDef.id) {
+                        columns.push(DTColumnBuilder.newColumn(null).withTitle(
+                            '<input type="checkbox" ng-model="param.selectedAll" ng-change="toggleAll(' + param + ')">')
+                            .notSortable()
+                            .renderWith(function (data) {
+                                return '<input type="checkbox" ng-model="param.selected[' + data[param.valueField] + ']" ng-click="toggleOne(' + param + ')">';
+                            }));
+                    } else {
+                        var column;
+                        if (columnDef.render === undefined) {
+                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title);
+                            columns.push(column);
+                        } else {
+                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title)
+                                .renderWith(columnDef.render);
+                            columns.push(column);
+                        }
+                    }
+                }
+                param.dtColumns = columns;
+            }
+
+            return param.dtColumns;
+        }
+
+        function toggleAll(param) {
+
+            for (var i = 0; i < param.gridOptions.data.length; i++) {
+                var valueField = param.valueField;
+                var value = param.gridOptions.data[i][valueField];
+                param.selected[value] = param.selectedAll;
+            }
+
+            param.value = param.selected;
+        }
+
+        function toggleOne(param) {
+            for (var id in param.selected) {
+                if (param.selected.hasOwnProperty(id)) {
+                    if (!param.selected[id]) {
+                        param.selectedAll = false;
+                        return;
+                    }
+                }
+            }
+            param.selectedAll = true;
+            param.value = param.selected;
+        }
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .controller('OdsParamsController', OdsParamsController);
+
+    OdsParamsController.$inject = ['OdsReportsService', 'OdsParamType', 'report', '$uibModalInstance'];
+
+    function OdsParamsController(OdsReportsService, OdsParamType, report, $uibModalInstance) {
+
+        var vm = this;
+
+        vm.clear = clear;
+        vm.openReport = openReport;
+        vm.paramType = OdsParamType;
+        vm.report = report;
+
+        function clear() {
+            $uibModalInstance.dismiss('cancel');
+        }
+
+        function openReport() {
+            $uibModalInstance.close(vm.report);
+        }
+        
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .constant('OdsParamType', {
+            'DATE': 'DATE',
+            'TEXT': 'TEXT',
+            'NUMBER': 'NUMBER',
+            'LIST': 'LIST',
+            'SINGLE_SELECT': 'SINGLE_SELECT',
+            'MULTI_SELECT': 'MULTI_SELECT',
+            'TABLE_SELECT': 'TABLE_SELECT',
+            'DRAG_AND_DROP': 'DRAG_AND_DROP',
+            'CHECK_LIST': 'CHECK_LIST'
+        })
+        .constant('OdsPageOrientation', {
+            'PORTRAIT': 'Portrait',
+            'LANDSCAPE': 'Landscape'
+        });
+
+})();
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsReports', ReportsDirective);
+
+ReportsDirective.$inject = ['OdsReportsService', '$uibModal', '$sce', '$q'];
+
+function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'reports/reports.html',
+        scope: {
+            reportsGroup: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        var BASE64_MARKER = ';base64,';
+
+        function convertDataURIToBinary(uri, buffer) {
+
+            var marker = ';base64,',
+                raw = window.atob(uri.substring(uri.indexOf(marker) + marker.length)),
+                n = raw.length,
+                a = new Uint8Array(new ArrayBuffer(n));
+            for(var i = 0; i < n ; i++){
+                a[i] = raw.charCodeAt(i);
+            }
+            return buffer ? a.buffer : a;
+        }
+
+        $scope.infoMessage = true;
+        $scope.selectReport = null;
+        $scope.reportFile = getUrlReport();
+        $scope.hideInfoMessage = hideInfoMessage;
+        $scope.downloadReport = downloadReport;
+        $scope.openReport = openReport;
+
+        function getUrlReport(url) {
+            return $sce.trustAsResourceUrl(url);
+        }
+
+        function hideInfoMessage() {
+            $scope.infoMessage = false;
+        }
+
+        function openReport(groupIndex, reportIndex) {
+
+            $scope.selectReport = null;
+
+            var report = $scope.reportsGroup.groups[groupIndex].reports[reportIndex];
+            var size = report.modalSize ? report.modalSize : 'sm';
+
+            if (report.params.length > 0 &&
+                $.grep(report.params, function (param) {
+                    if (param.hidden) {
+                        return param.hidden === false;
+                    } else {
+                        return true;
+                    }
+                }).length > 0) {
+                $uibModal.open({
+                    templateUrl: 'reports/params.html',
+                    controller: 'OdsParamsController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: size,
+                    resolve: {
+                        report: [function () {
+                            var deferred = $q.defer();
+                            deferred.resolve(report);
+                            return deferred.promise;
+                        }]
+                    }
+                }).result.then(function (report) {
+                    $scope.selectReport = report;
+                    open(report);
+                }, function () {
+                });
+            } else {
+                $scope.selectReport = report;
+                open(report);
+            }
+        }
+
+        function open(report) {
+            if (report.pdf !== undefined && !report.pdf) {
+                forceDownload();
+            } else {
+                OdsReportsService.getReport(report).then(function (outReport) {
+                    $scope.reportFile = convertDataURIToBinary(outReport);//getUrlReport(outReport);
+                }, function () {
+
+                });
+            }
+        }
+
+        function downloadReport() {
+            OdsReportsService.downloadReport($scope.selectReport);
+        }
+
+        function forceDownload() {
+            OdsReportsService.forceDownload($scope.selectReport);
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .factory('OdsReportsService', OdsReportsService);
+
+    OdsReportsService.$inject = ['$q', '$http', 'moment', 'OdsParamType', 'OdsDateUtils', '$window'];
+
+    function OdsReportsService($q, $http, moment, OdsParamType, OdsDateUtils, $window) {
+
+        var service = {
+            getHttpResource: getHttpResource,
+            postHttpResource: postHttpResource,
+            getReport: getReport,
+            downloadReport: downloadReport,
+            downloadReportFromSource: downloadReportFromSource,
+            getSourceReport: getSourceReport,
+            isMimeSupported: isMimeSupported,
+            forceDownload: forceDownload,
+            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject,
+            forceDownloadFromData: forceDownloadFromData,
+        };
+
+        return service;
+
+        function pdfFooterWithFilters(report) {
+
+            if (report.params.length > 0) {
+
+                var filters = '';
+                for (var i = 0; i < report.params.length; i++) {
+                    var hideParam = report.params[i].hideInFooter !== undefined ?
+                        report.params[i].hideInFooter : false;
+                    if (!hideParam) {
+                        switch (report.params[i].type) {
+                            case OdsParamType.DATE:
+                                filters += report.params[i].title + ': ' +
+                                    OdsDateUtils.formatter(report.params[i].value, 'MM/dd/yyyy') + '\n';
+                                break;
+                            case OdsParamType.NUMBER:
+                                filters += report.params[i].title + ': ' + report.params[i].value + '\n';
+                                break;
+                            default:
+                                filters += report.params[i].title + ': ' + report.params[i].value + '\n';
+                                break;
+                        }
+                    }
+                }
+
+                return function (currentPage, pageCount) {
+
+                    var result;
+                    if (report.footerLogo) {
+                        result = {
+                            columns: [
+                                {
+                                    text: filters,
+                                    margin: [20, 0],
+                                    fontSize: 8
+                                },
+                                {
+                                    image: report.footerLogo,
+                                    fit: [100, 100],
+                                    margin: [0, 0, 0, 0]
+                                },
+                                {
+                                    text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
+                                    'Page ' + currentPage.toString() + ' of ' + pageCount,
+                                    alignment: 'right',
+                                    margin: [0, 0, 20, 0],
+                                    fontSize: 8
+                                }
+                            ]
+                        }
+                    } else {
+                        result = {
+                            columns: [
+                                {
+                                    text: filters,
+                                    margin: [20, 0],
+                                    fontSize: 8
+                                },
+                                {
+                                    text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
+                                    'Page ' + currentPage.toString() + ' of ' + pageCount,
+                                    alignment: 'right',
+                                    margin: [0, 0, 20, 0],
+                                    fontSize: 8
+                                }
+                            ]
+                        }
+                    }
+                    return result;
+                };
+            } else {
+                return function (currentPage, pageCount) {
+                    return {
+                        columns: [
+                            {
+                                text: 'No Filters',
+                                margin: [20, 0],
+                                fontSize: 8
+                            },
+                            {
+                                text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
+                                'Page ' + currentPage.toString() + ' of ' + pageCount,
+                                alignment: 'right',
+                                margin: [0, 0, 20, 0],
+                                fontSize: 8
+                            }
+                        ]
+                    };
+                };
+            }
+
+        }
+
+        function postHttpResource(url, data) {
+
+            return $http.post(url, data);
+        }
+
+        function getHttpResource(url) {
+
+            return $http.get(url);
+        }
+
+        function getReport(report) {
+
+            return $q(function (resolve) {
+
+                var postReport = buildPost(report);
+                postHttpResource(report.url, postReport).then(function success(response) {
+
+                    //Check if the pdf is in base64
+                    if (report.base64) {
+                        resolve('data:application/pdf;base64,' + response.data.file);
+                    } else {
+                        var pdfData = response.data;
+                        pdfData.footer = pdfFooterWithFilters(report);
+                        var pdfFile = pdfMake.createPdf(pdfData);
+                        // var pdfFile = pdfMake.createPdf(response.data);
+                        pdfFile.getBase64(function (output) {
+                            // resolve(base64ToUint8Array(output));
+                            resolve('data:application/pdf;base64,' + output);
+                        });
+                    }
+                }, function error(response) {
+                    var pdfFile = pdfMake.createPdf(createErrorPdf(response));
+                    // var pdfFile = pdfMake.createPdf(response.data);
+                    pdfFile.getBase64(function (output) {
+                        // resolve(base64ToUint8Array(output));
+                        resolve('data:application/pdf;base64,' + output);
+                    });
+                    // console.log(response);
+                });
+            });
+        }
+
+        function download(base64Data, title) {
+
+            var arrBuffer = base64ToArrayBuffer(base64Data);
+
+            // It is necessary to create a new blob object with mime-type explicitly set
+            // otherwise only Chrome works like it should
+            var newBlob = new Blob([arrBuffer], {type: "application/pdf"});
+
+            // IE doesn't allow using a blob object directly as link href
+            // instead it is necessary to use msSaveOrOpenBlob
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(newBlob);
+                return;
+            }
+
+            // For other browsers:
+            // Create a link pointing to the ObjectURL containing the blob.
+            var data = window.URL.createObjectURL(newBlob);
+
+            var link = document.createElement('a');
+            document.body.appendChild(link); //required in FF, optional for Chrome
+            link.href = data;
+            link.download = title + ".pdf";
+            link.click();
+            window.URL.revokeObjectURL(data);
+            link.remove();
+        }
+
+        function base64ToArrayBuffer(data) {
+            var binaryString = window.atob(data);
+            var binaryLen = binaryString.length;
+            var bytes = new Uint8Array(binaryLen);
+            for (var i = 0; i < binaryLen; i++) {
+                var ascii = binaryString.charCodeAt(i);
+                bytes[i] = ascii;
+            }
+            return bytes;
+        }
+
+        function downloadReport(report) {
+
+            var postReport = buildPost(report);
+            postHttpResource(report.url, postReport).then(function success(response) {
+
+                //Check if the pdf is in base64
+                if (report.base64) {
+                    download(response.data.file, report.title);
+                } else {
+                    var pdfData = response.data;
+                    pdfData.footer = pdfFooterWithFilters(report);
+                    pdfMake.createPdf(pdfData).download(report.title);
+                }
+            }, function error(response) {
+                pdfMake.createPdf(createErrorPdf(response)).download(report.title);
+            });
+        }
+
+        function downloadReportFromSource(pdfSource, report) {
+
+            var pdfData = pdfSource;
+            pdfData.footer = pdfFooterWithFilters(report);
+            pdfMake.createPdf(pdfData).download(report.title);
+        }
+
+        function getSourceReport(report) {
+
+            return $q(function (resolve) {
+
+                var postReport = buildPost(report);
+                postHttpResource(report.url, postReport).then(function success(response) {
+
+                    //Check if the pdf is in base64
+                    if (report.base64) {
+                        resolve('data:application/pdf;base64,' + response.data.file);
+                    } else {
+                        var pdfData = response.data;
+                        pdfData.footer = pdfFooterWithFilters(report);
+                        resolve(pdfData);
+                    }
+                }, function error(response) {
+                    var pdfFile = createErrorPdf(response);
+                    resolve(pdfFile);
+                });
+            });
+        }
+
+        function createErrorPdf(response) {
+
+            var dd = {
+                'content': [
+                    {text: 'Error loading report with status: ' + response.status, color: '#ff0000'},
+                    {text: 'Status text: ' + response.statusText, color: '#ff0000'}
+                ]
+            };
+
+            return dd;
+        }
+
+        function isMimeSupported() {
+
+            return !!($window.navigator && $window.navigator.mimeTypes && $window.navigator.mimeTypes['application/pdf']);
+        }
+
+        function buildPost(report) {
+
+            // var url = report.url;
+            var params = [];
+            for (var i = 0; i < report.params.length; i++) {
+                var param = {
+                    name: report.params[i].name,
+                    type: report.params[i].type,
+                    value: null
+                };
+                var tmpParams = [];
+                var idField;
+                switch (report.params[i].type) {
+                    case OdsParamType.DATE:
+                        param.value = [OdsDateUtils.convertLocalDateToServer(report.params[i].value)];
+                        break;
+                    case OdsParamType.LIST:
+                        param.value = [report.params[i].value];
+                        break;
+                    case OdsParamType.SINGLE_SELECT:
+                        idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
+                        param.value = [report.params[i].value[idField]];
+                        break;
+                    case OdsParamType.MULTI_SELECT:
+                        param.value = getListValue(report.params[i]);
+                        break;
+                    case OdsParamType.TABLE_SELECT:
+                        tmpParams = [];
+                        for (var key in report.params[i].value) {
+                            if (key === 'length' || !report.params[i].value.hasOwnProperty(key)) {
+                                continue;
+                            }
+                            var value = key;
+                            if (report.params[i].value[key]) {
+                                tmpParams.push(value);
+                            }
+
+                        }
+                        param.value = tmpParams;
+                        break;
+                    case OdsParamType.DRAG_AND_DROP:
+                        param.value = getListValue(report.params[i]);
+                        break;
+                    case OdsParamType.CHECK_LIST:
+                        param.value = getListValue(report.params[i]);
+                        break;
+                    default:
+                        param.value = [report.params[i].value];
+                        break;
+                }
+                params.push(param);
+            }
+
+            var postReport = {
+                title: report.title,
+                params: params,
+                pageOrientation: report.pageOrientation
+            };
+
+            return postReport;
+        }
+
+        function getListValue(param) {
+
+            var tmpValue = [];
+            var idField;
+            for (var i = 0; i < param.value.length; i++) {
+                idField = param.valueField !== undefined ? param.valueField : 'id';
+                tmpValue.push(param.value[i][idField]);
+            }
+            return tmpValue;
+        }
+
+        function forceDownload(report) {
+
+            var postReport = buildPost(report);
+            postHttpResource(report.url, postReport).then(function success(response) {
+                var contentType = response.headers('Content-Type');
+                var contentDisp = response.headers('Content-Disposition');
+                var index = contentDisp.indexOf('filename="');
+
+                var filename = 'filename';
+
+                if (index !== -1) {
+                    var i = index + 10;
+                    while (contentDisp[i] !== '"') {
+                        i++;
+                    }
+
+                    filename = contentDisp.substring(index + 10, i);
+                }
+
+                var a = document.createElement('a');
+                a.href = URL.createObjectURL(new Blob([response.data], {type: contentType}));
+                a.download = filename;
+                a.click();
+            }, function error(response) {
+                pdfMake.createPdf(createErrorPdf(response)).download(report.title);
+            });
+        }
+
+        function forceDownloadAndOpenPDFObject(data) {
+
+            pdfMake.createPdf(data).open();
+        }
+
+        function forceDownloadFromData(data, title) {
+
+            pdfMake.createPdf(data).download(title);
+        }
+    }
+
+})();
 
 'use strict';
 
@@ -2448,146 +3333,6 @@ function OdsSignature() {
     //     }
     // }
 }
-/**
- * Created by PpTMUnited on 2/21/2017.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('ImgUploadDialogController', ImgUploadDialogController);
-
-    ImgUploadDialogController.$inject = ['$scope', '$uibModalInstance', 'areaType', 'ngModel',
-        'croppedImageSize', 'original'];
-
-    function ImgUploadDialogController($scope, $uibModalInstance, areaType, ngModel,
-                                       croppedImageSize, original) {
-
-        var vm = this;
-
-        vm.original = original;
-        vm.model = ngModel;
-        vm.croppedImageSize = croppedImageSize ? Number(croppedImageSize) : 300;
-        vm.areaType = areaType;
-
-        vm.file = {
-            image: null,
-            //type: null
-        };
-
-        vm.save = save;
-        vm.clear = clear;
-        vm.handleFileSelect = handleFileSelect;
-
-        function handleFileSelect(evt, file) {
-
-            vm.file = file;
-            // var fileUp = file;
-            var reader = new FileReader();
-            reader.onload = function (evt) {
-                $scope.$apply(function () {
-                    vm.original = evt.target.result;
-                });
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function clear() {
-            $uibModalInstance.dismiss(null);
-        }
-
-        function save() {
-            var file = {
-                original: vm.original,
-                model: vm.model
-            };
-            $uibModalInstance.dismiss(file);
-        }
-    }
-})();
-
-
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .directive('odsImgUpload', OdsImgUpload);
-
-    OdsImgUpload.$inject = ['$uibModal'];
-
-    function OdsImgUpload($uibModal) {
-
-        var directive = {
-            restrict: 'E',
-            templateUrl: 'img-upload/img-upload.html',
-            scope: {//all this scope value defined, are attr for the directive. There use are explained below
-                original: '=',//original image not modified.
-                ngModel: '=',//model where to put result image.
-                mode: '@', //Mode insert/edit
-                image: '=',//modal field for the image value
-                displayImage: '=',//boolean if you want to show the image result in directive view
-                size: '@',//size for the modal, can be: sm or lg[e.g: modalSize="sm"]. This attr modified the size of the modal
-                cssClass: '@',
-                areaType: '@',//form for the image component. Can be square or circle[e.g: class="circle/square/rectangle"]
-                onSave: '&', // function to execute after of
-                croppedImageSize: '@', //size of the crop image
-                defaultImage: '=?',
-                uploadText: '@' //Text by default in case you dont have a default or image yet
-            },
-            link: linkFunc
-        };
-
-        return directive;
-
-        function linkFunc($scope) {
-
-            //Init vars.
-            $scope.defaultImage = $scope.defaultImage ? $scope.defaultImage : 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/4QHGRXhpZgAATU0AKgAAAAgABFEAAAQAAAABAAAAAFEBAAMAAAABAAEAAFECAAEAAAGAAAAAPlEDAAEAAAABAAAAAAAAAADn5+fBwcHAwMC/v7+5ubm8vLzm5ubo6Oi+vr64uLi9vb27u7u6urq3t7fCwsLAwsHCwMHk5OTl5eW2trbf39/V1dXOzs7h4eHj4+Pi4uLa2trFxcXPz8/S0tLc3NzHx8fLy8vW1tbIyMjDw8PKysrExMTX19fMzMzZ2dnR0dHe3t7d3d3Nzc3Q0NDg4ODU1NTGxsbY2NjT09PBwb/b29vBwcPJycnCwb/BwL7Bv8DAwcPCwMPAwr+/wcDCwsDBw8LCwsTBw8C6uLng3t/DwcTBwMXEwL+/wb7AwcXAwMLCwb3b293i4+Xd3tnf4eDBwsTZ3d7AwL68vLrZ3dy7vbzo6Oq9uLzDwcLb29nn5+W5t7i8urvj4eK4ure/w8LFwMS+w7/c2tu5ubvBv8Tn5+nDwsDp5+jp6em7u726vLkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwMDAwYEBAMFBwYHBwcGBwcICQsJCAgKCAcHCg0KCgsMDAwMBwkODw0MDgsMDAz/2wBDAQICAgMDAwYDAwYMCAcIDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAz/wAARCAF/AX8DASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9nKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAorH8aeOdP8C6W1zfTBWIPlRKcyTH0A/r0FeT6X+0drU2rxNcQ2K2TTDzAI23LHu5wc9QO+KAPcKKRHWRAykMrDII7iloAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiqer+ItP0CPdfXlraLjP72UJn6Z60AXKK4PXf2ivD+lblt2udRkHQQx7Vz7s2P0BriPEP7RutauGTT7eDTY243f62T8z8v6UAe06xrtn4etDcX11Dawj+KR9ufYep9hXmHjb9pRFDW+gweY3T7TOuFH+6vU/U4+hrzC+kvfEF59ovrme6mb+KVyx/DPT6VNb6csYoAjvri88S6i13f3E1zcSdXkbP4D0HsOKsQ2ixLipVUJ0paAPZvgn4q/t7wqLWVs3GmkRHJ5KfwH8hj/gNdlmvAfh94qbwd4pt7ot/o7nypx6oep/Dg/hXvwbeNw5B5B9aACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAoqG/v4NLs5Li5mjt4Yhl5JGCqo9ya8r8b/tJBXa30CASEcfaplO3/gKf1P5UAer3FzHaQtJNJHFGoyzOwVR+JrmtV+M3hnR2ZZNWglZe0Aab9VBH614HrGr6p4tuvO1G8uLps5AdvlX6L0H4CmRaQAOeaAPXtT/ab0e24tbK/um7Fgsan8ck/pXN6t+0tq95kWOn2dqvrIWlYfjwP0ri005F7VKtsq0AW9U+JfifXwwm1a6jVv4YSIR9PlA/WsT+zZLiQySM0jtyWY5JrSEajtTqAKcWlKvarCWqp2qSigAAxRRRQAUUUUABG4Yr6A+Ht0954I0uSTlvs6qSe+Bj+lfP+M17r8J9Rj1DwHY+WwLQqYnH91ge/wCGD+NAHR0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVj+NfG9j4E0dry+kx/DFEv35m9FH9egrSv76LTLGa4ncRw26GR2PRVAyTXzX418W3PxF8TyXsxZYQdkERPESdh9T1J9aAJPG3xA1P4lahuuW8q0RsxWyH5I/c/3m9z+nSqNppyxjkVNbWywp0qagBqoFHFOoooAKKKKACiiigAooooAKKKKACiiigArofhv49fwNrm6Qs2n3RCzqP4fRx7j9R+Fc9Qw3DFAH0rbXEd3bxyxOskcihkZTlWB6EU+vJPgn8Q20u8XRb1z9mnbFs5/wCWTn+H6Ht6H68et0AFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQBwf7RWsyaZ8P/JjyPt9wkDEf3cFj+e0D8TXi+m2wSKvXP2mRnwjp/8A1/L/AOgPXldsMRCgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooADkEMpKspyCOxr6G8Ias2u+F7C8b/AFk8Cs/+9jn9c18817x8LTnwBpn/AFzP/oRoA6CiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA83/AGmP+RR0/wD6/l/9AevK7b/UrXq/7S0e7wXYt/dv0z7fI9eUW3+pWgCSiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAK96+GS7PAWl/8AXHP6mvBa+g/A1ubXwZpaH732WMkemVBoA1aKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigDn/inp0OpfD7VlmjWRYbZ5lz/CyKWBH4ivAbKTfEPpX0R48XzPA+sr/esZx/5DavnLSz+5WgC3RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAOij82VVHViBX0pBCttCka/djUKPoK+b9PG6/gHrIv86+kqACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAzvGCeZ4S1Rf71pKP8Axw182aUf3Qr6Y8Rr5nh6/X+9byD/AMdNfM2knMdAF2iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAktZPJuo37KwP619KCvmc8ivffhxqr614I064kJaRotjE9WKkrn8cUAbdFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRQaAMPx/4w0/whoEr303l/aEaOJANzyNjsPxHPQV876T/q61Pih4jm8aePbyR2P2e1kNvAvZUUkfqcn8faqdtB5KUASUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXuvwlRY/h7poVg3yuSR6l2J/nXhVeifs/wCvzJql3pbNut2jNwgP8DAgHH1yPyoA9UooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKAPmnxFZfYfGurQ/8APO8lA+m84ptbHxcsP7O+KOpDHyzlJl98oM/qDWPQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABXYfA1tvjtf8AagkH16GuPrtPgRAZfG7N/wA8rZ2P5qP60AeyUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAHjv7R2l/Z/E+m3wHy3MBhJHqjZ/k/6VxKnKivcPi34Jbxt4UaOAZvLV/OgH94gEFfxH6gV4cEaFmjkVo5IztZWGCp7gigBaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAr0b9nqwLX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';
-            $scope.original = $scope.original ? $scope.original : $scope.defaultImage;
-            $scope.mode = $scope.mode ? $scope.mode : 'insert';
-            $scope.display = $scope.display ? $scope.display : true;
-
-            $scope.openModal = function () {
-                $uibModal.open({
-                    templateUrl: 'img-upload/img-upload-dialog.html',
-                    controller: 'ImgUploadDialogController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: $scope.size ? $scope.size : 'lg',
-                    windowTopClass: 'custom-dialog-styles',
-                    resolve: {
-                        original: function () {
-                            return $scope.original;
-                        },
-                        ngModel: function () {
-                            return $scope.ngModel;
-                        },
-                        areaType: function () {
-                            return $scope.areaType ? $scope.areaType : 'square';
-                        },
-                        croppedImageSize: function () {
-                            return $scope.croppedImageSize ? $scope.croppedImageSize : 300;
-                        }
-                    }
-                }).result.then(function () {
-                    // console.log('close');
-                }, function (result) {
-                    if (result && (typeof(result) === 'object')) {
-                        if ($scope.ngModel === null) {
-                            $scope.ngModel = {};
-                        }
-                        $scope.ngModel = result.model;
-                        $scope.original = result.original;
-                        $scope.onSave();
-                    }
-                });
-            };
-        }
-    }
-})();
-
 'use strict';
 
 angular
@@ -2602,6 +3347,7 @@ StepsIndicator.$inject = [];
  *        name: 'DRAFT',
  *        label: 'Draft',
  *        status: 'active',
+ *        disabled: false,
  *        callback: function (elem) {
  *            // Prompt for status change
  *        }
@@ -2610,6 +3356,7 @@ StepsIndicator.$inject = [];
  *        name: 'READY',
  *        label: 'Ready',
  *        status: '',
+ *        disabled: true,
  *        callback: function (elem) {
  *            // Prompt for status change
  *        }
@@ -2618,6 +3365,7 @@ StepsIndicator.$inject = [];
  *        name: 'JOINED',
  *        label: 'Joined',
  *        status: '',
+ *        disabled: false,
  *        callback: function (elem) {
  *            // Prompt for status change
  *        }
@@ -2677,228 +3425,67 @@ function StepsIndicator() {
         }
     }
 }
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
+(function () {
+    'use strict';
 
-angular
-    .module('ods-lib')
-    .directive('odsParam', odsParamDirective);
+    angular
+        .module('ods-lib')
+        .directive('odsFileUpload', odsFileUpload);
 
-odsParamDirective.$inject = ['OdsParamType', 'DTOptionsBuilder', 'DTColumnBuilder', '$q', '$filter', '$compile'];
+    odsFileUpload.$inject = ['$q'];
 
-function odsParamDirective(OdsParamType, DTOptionsBuilder, DTColumnBuilder, $q, $filter, $compile) {
+    function odsFileUpload($q) {
 
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'reports/param.html',
-        scope: {
-            param: '='
-        },
-        link: linkFunc
-    };
+        var slice = Array.prototype.slice;
 
-    return directive;
+        var directive = {
+            restrict: 'A',
+            require: '?ngModel',
+            onLoad: '&',
+            link: linkFunc
+        };
 
-    function linkFunc($scope) {
+        return directive;
 
-        $scope.hideTitle = hideTitle;
-        $scope.hideParam = hideParam;
-        $scope.getRequired = getRequired;
-        $scope.openCalendar = openCalendar;
-        $scope.getSelectTitleField = getSelectTitleField;
+        /* private helper methods*/
 
-        //TABLE_SELECT
-        $scope.search = search;
-        $scope.getDtOptions = getDtOptions;
-        $scope.getDtColumns = getDtColumns;
-        $scope.toggleAll = toggleAll;
-        $scope.toggleOne = toggleOne;
+        function linkFunc($scope, element, attrs, ngModel) {
 
-        initTableParam($scope.param);
-        initDateParam($scope.param);
+            if (!ngModel) return;
 
-        function initTableParam(param) {
+            // ngModel.$render = function () {
+            // };
+            element.bind('change', function (e) {
+                var element = e.target;
 
-            if (param.type === OdsParamType.TABLE_SELECT) {
-                param.dtInstance = {};
-                param.dtOptions = undefined;
-                param.dtColumns = undefined;
-                param.isFilter = false;
-                param.selected = [];
-                param.selectedAll = false;
-                //init pre-selections
-                var valueField = param.valueField;
-                var gridOptions = param.gridOptions;
-                for (var j = 0; j < gridOptions.preSelected.length; j++) {
-                    var preSelectedId = gridOptions.preSelected[j][valueField];
-                    param.selected[preSelectedId] = true;
-                }
-            }
-        }
-
-        function initDateParam(param) {
-
-            if (param.type === OdsParamType.DATE) {
-                param.datePickerOpenStatus = false;
-            }
-        }
-
-        function hideTitle(param) {
-
-            return !!(param.hidden || param.hideTitle);
-        }
-
-        function hideParam(param) {
-
-            return !!param.hidden;
-        }
-
-        function getRequired(param) {
-
-            return param.required !== undefined ? param.required : false;
-        }
-
-        function openCalendar(param) {
-
-            param.datePickerOpenStatus = true;
-        }
-
-        function getSelectTitleField(param, element) {
-
-            if (element) {
-                if (param.render) {
-                    return param.render(element);
-                } else {
-                    return param.titleField !== undefined ? element[param.titleField] : element.name;
-                }
-            } else {
-                return param.placeholder;
-            }
-        }
-
-        function search(param) {
-            param.dtInstance.reloadData();
-        }
-
-        function getDtOptions(param) {
-
-            if (param.dtOptions === undefined) {
-                //We set the new dtOptions into array
-                param.dtOptions = DTOptionsBuilder.fromFnPromise(function () {
-                    var defer = $q.defer();
-                    if (param.isFilter) {
-                        defer.resolve(param.gridOptions.data);
-                        param.isFilter = false;
-                    } else if (!param.searchQuery || param.searchQuery === '') {
-                        defer.resolve(param.gridOptions.data);
-                    } else {
-                        defer.resolve($filter('filter')(param.gridOptions.data, param.searchQuery, undefined));
-                    }
-                    return defer.promise;
-                }).withPaginationType('full_numbers').withBootstrap().withDOM('tip').withOption('aaSorting', [[1, 'asc']])
-                    .withOption('createdRow', function (row) {
-                        $compile(angular.element(row).contents())($scope);
-                    })
-                    .withOption('headerCallback', function (header) {
-                        $compile(angular.element(header).contents())($scope);
+                $q.all(slice.call(element.files, 0).map(readFile))
+                    .then(function (values) {
+                        if (element.multiple) ngModel.$setViewValue(values);
+                        else ngModel.$setViewValue(values.length ? values[0] : null);
                     });
-                return param.dtOptions;
-            } else {
-                return param.dtOptions;
-            }
-        }
 
-        function getDtColumns(param) {
+                function readFile(file) {
+                    var deferred = $q.defer();
 
-            if (param.dtColumns === undefined) {
-                //We build all columns
-                var gridOptions = param.gridOptions;
-                var columns = [];
-                for (var i = 0; i < gridOptions.columnDef.length; i++) {
-                    var columnDef = gridOptions.columnDef[i];
-                    if (columnDef.id) {
-                        columns.push(DTColumnBuilder.newColumn(null).withTitle(
-                            '<input type="checkbox" ng-model="param.selectedAll" ng-change="toggleAll(' + param + ')">')
-                            .notSortable()
-                            .renderWith(function (data) {
-                                return '<input type="checkbox" ng-model="param.selected[' + data[param.valueField] + ']" ng-click="toggleOne(' + param + ')">';
-                            }));
-                    } else {
-                        var column;
-                        if (columnDef.render === undefined) {
-                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title);
-                            columns.push(column);
-                        } else {
-                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title)
-                                .renderWith(columnDef.render);
-                            columns.push(column);
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        if ($scope.onLoad) {
+                            $scope.onLoad(e.target.result);
                         }
-                    }
+                        deferred.resolve(e.target.result);
+                    };
+
+                    reader.onerror = function (e) {
+                        deferred.reject(e);
+                    };
+
+                    reader.readAsDataURL(file);
+
+                    return deferred.promise;
                 }
-                param.dtColumns = columns;
-            }
-
-            return param.dtColumns;
-        }
-
-        function toggleAll(param) {
-
-            for (var i = 0; i < param.gridOptions.data.length; i++) {
-                var valueField = param.valueField;
-                var value = param.gridOptions.data[i][valueField];
-                param.selected[value] = param.selectedAll;
-            }
-
-            param.value = param.selected;
-        }
-
-        function toggleOne(param) {
-            for (var id in param.selected) {
-                if (param.selected.hasOwnProperty(id)) {
-                    if (!param.selected[id]) {
-                        param.selectedAll = false;
-                        return;
-                    }
-                }
-            }
-            param.selectedAll = true;
-            param.value = param.selected;
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('OdsParamsController', OdsParamsController);
-
-    OdsParamsController.$inject = ['OdsReportsService', 'OdsParamType', 'report', '$uibModalInstance'];
-
-    function OdsParamsController(OdsReportsService, OdsParamType, report, $uibModalInstance) {
-
-        var vm = this;
-
-        vm.clear = clear;
-        vm.openReport = openReport;
-        vm.paramType = OdsParamType;
-        vm.report = report;
-
-        function clear() {
-            $uibModalInstance.dismiss('cancel');
-        }
-
-        function openReport() {
-            $uibModalInstance.close(vm.report);
-        }
-        
+            }); //change
+        } //link
     }
 })();
 
@@ -2907,520 +3494,44 @@ function odsParamDirective(OdsParamType, DTOptionsBuilder, DTColumnBuilder, $q, 
 
     angular
         .module('ods-lib')
-        .constant('OdsParamType', {
-            'DATE': 'DATE',
-            'TEXT': 'TEXT',
-            'NUMBER': 'NUMBER',
-            'LIST': 'LIST',
-            'SINGLE_SELECT': 'SINGLE_SELECT',
-            'MULTI_SELECT': 'MULTI_SELECT',
-            'TABLE_SELECT': 'TABLE_SELECT',
-            'DRAG_AND_DROP': 'DRAG_AND_DROP',
-            'CHECK_LIST': 'CHECK_LIST'
-        })
-        .constant('OdsPageOrientation', {
-            'PORTRAIT': 'Portrait',
-            'LANDSCAPE': 'Landscape'
-        });
+        .directive('uiSelectRequired', UiSelectRequired);
 
-})();
+    UiSelectRequired.$inject = ['$parse'];
 
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
+    function UiSelectRequired($parse) {
+        return {
+            restrict: 'A',
+            require: 'ngModel',
+            link: function (scope, element, attrs, ctrl) {
 
-angular
-    .module('ods-lib')
-    .directive('odsReports', ReportsDirective);
+                //console.log($scope.required);
+                scope.required = $parse(attrs.uiSelectRequired)(scope);//JSON.parse(attrs.ngRequired);
 
-ReportsDirective.$inject = ['OdsReportsService', '$uibModal', '$sce', '$q'];
+                ctrl.$validators.uiSelectRequired = function (modelValue, viewValue) {
 
-function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'reports/reports.html',
-        scope: {
-            reportsGroup: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        var BASE64_MARKER = ';base64,';
-
-        function convertDataURIToBinary(uri, buffer) {
-
-            var marker = ';base64,',
-                raw = window.atob(uri.substring(uri.indexOf(marker) + marker.length)),
-                n = raw.length,
-                a = new Uint8Array(new ArrayBuffer(n));
-            for(var i = 0; i < n ; i++){
-                a[i] = raw.charCodeAt(i);
-            }
-            return buffer ? a.buffer : a;
-        }
-
-        $scope.infoMessage = true;
-        $scope.selectReport = null;
-        $scope.reportFile = getUrlReport();
-        $scope.hideInfoMessage = hideInfoMessage;
-        $scope.downloadReport = downloadReport;
-        $scope.openReport = openReport;
-
-        function getUrlReport(url) {
-            return $sce.trustAsResourceUrl(url);
-        }
-
-        function hideInfoMessage() {
-            $scope.infoMessage = false;
-        }
-
-        function openReport(groupIndex, reportIndex) {
-
-            $scope.selectReport = null;
-
-            var report = $scope.reportsGroup.groups[groupIndex].reports[reportIndex];
-            var size = report.modalSize ? report.modalSize : 'sm';
-
-            if (report.params.length > 0 &&
-                $.grep(report.params, function (param) {
-                    if (param.hidden) {
-                        return param.hidden === false;
+                    if (scope.required) {
+                        var determineVal;
+                        if (angular.isArray(modelValue)) {
+                            determineVal = modelValue;
+                        } else if (angular.isArray(viewValue)) {
+                            determineVal = viewValue;
+                        } else return !isEmpty(modelValue);
+                        return determineVal.length > 0;
                     } else {
                         return true;
                     }
-                }).length > 0) {
-                $uibModal.open({
-                    templateUrl: 'reports/params.html',
-                    controller: 'OdsParamsController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: size,
-                    resolve: {
-                        report: [function () {
-                            var deferred = $q.defer();
-                            deferred.resolve(report);
-                            return deferred.promise;
-                        }]
-                    }
-                }).result.then(function (report) {
-                    $scope.selectReport = report;
-                    open(report);
-                }, function () {
-                });
-            } else {
-                $scope.selectReport = report;
-                open(report);
+                };
             }
-        }
-
-        function open(report) {
-            if (report.pdf !== undefined && !report.pdf) {
-                forceDownload();
-            } else {
-                OdsReportsService.getReport(report).then(function (outReport) {
-                    $scope.reportFile = convertDataURIToBinary(outReport);//getUrlReport(outReport);
-                }, function () {
-
-                });
-            }
-        }
-
-        function downloadReport() {
-            OdsReportsService.downloadReport($scope.selectReport);
-        }
-
-        function forceDownload() {
-            OdsReportsService.forceDownload($scope.selectReport);
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .factory('OdsReportsService', OdsReportsService);
-
-    OdsReportsService.$inject = ['$q', '$http', 'moment', 'OdsParamType', 'OdsDateUtils', '$window'];
-
-    function OdsReportsService($q, $http, moment, OdsParamType, OdsDateUtils, $window) {
-
-        var service = {
-            getHttpResource: getHttpResource,
-            postHttpResource: postHttpResource,
-            getReport: getReport,
-            downloadReport: downloadReport,
-            downloadReportFromSource: downloadReportFromSource,
-            getSourceReport: getSourceReport,
-            isMimeSupported: isMimeSupported,
-            forceDownload: forceDownload,
-            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject,
-            forceDownloadFromData: forceDownloadFromData,
         };
+    }
 
-        return service;
-
-        function pdfFooterWithFilters(report) {
-
-            if (report.params.length > 0) {
-
-                var filters = '';
-                for (var i = 0; i < report.params.length; i++) {
-                    var hideParam = report.params[i].hideInFooter !== undefined ?
-                        report.params[i].hideInFooter : false;
-                    if (!hideParam) {
-                        switch (report.params[i].type) {
-                            case OdsParamType.DATE:
-                                filters += report.params[i].title + ': ' +
-                                    OdsDateUtils.formatter(report.params[i].value, 'MM/dd/yyyy') + '\n';
-                                break;
-                            case OdsParamType.NUMBER:
-                                filters += report.params[i].title + ': ' + report.params[i].value + '\n';
-                                break;
-                            default:
-                                filters += report.params[i].title + ': ' + report.params[i].value + '\n';
-                                break;
-                        }
-                    }
-                }
-
-                return function (currentPage, pageCount) {
-
-                    var result;
-                    if (report.footerLogo) {
-                        result = {
-                            columns: [
-                                {
-                                    text: filters,
-                                    margin: [20, 0],
-                                    fontSize: 8
-                                },
-                                {
-                                    image: report.footerLogo,
-                                    fit: [100, 100],
-                                    margin: [0, 0, 0, 0]
-                                },
-                                {
-                                    text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
-                                    'Page ' + currentPage.toString() + ' of ' + pageCount,
-                                    alignment: 'right',
-                                    margin: [0, 0, 20, 0],
-                                    fontSize: 8
-                                }
-                            ]
-                        }
-                    } else {
-                        result = {
-                            columns: [
-                                {
-                                    text: filters,
-                                    margin: [20, 0],
-                                    fontSize: 8
-                                },
-                                {
-                                    text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
-                                    'Page ' + currentPage.toString() + ' of ' + pageCount,
-                                    alignment: 'right',
-                                    margin: [0, 0, 20, 0],
-                                    fontSize: 8
-                                }
-                            ]
-                        }
-                    }
-                    return result;
-                };
-            } else {
-                return function (currentPage, pageCount) {
-                    return {
-                        columns: [
-                            {
-                                text: 'No Filters',
-                                margin: [20, 0],
-                                fontSize: 8
-                            },
-                            {
-                                text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
-                                'Page ' + currentPage.toString() + ' of ' + pageCount,
-                                alignment: 'right',
-                                margin: [0, 0, 20, 0],
-                                fontSize: 8
-                            }
-                        ]
-                    };
-                };
+    function isEmpty(obj) {
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                return false;
             }
-
         }
-
-        function postHttpResource(url, data) {
-
-            return $http.post(url, data);
-        }
-
-        function getHttpResource(url) {
-
-            return $http.get(url);
-        }
-
-        function getReport(report) {
-
-            return $q(function (resolve) {
-
-                var postReport = buildPost(report);
-                postHttpResource(report.url, postReport).then(function success(response) {
-
-                    //Check if the pdf is in base64
-                    if (report.base64) {
-                        resolve('data:application/pdf;base64,' + response.data.file);
-                    } else {
-                        var pdfData = response.data;
-                        pdfData.footer = pdfFooterWithFilters(report);
-                        var pdfFile = pdfMake.createPdf(pdfData);
-                        // var pdfFile = pdfMake.createPdf(response.data);
-                        pdfFile.getBase64(function (output) {
-                            // resolve(base64ToUint8Array(output));
-                            resolve('data:application/pdf;base64,' + output);
-                        });
-                    }
-                }, function error(response) {
-                    var pdfFile = pdfMake.createPdf(createErrorPdf(response));
-                    // var pdfFile = pdfMake.createPdf(response.data);
-                    pdfFile.getBase64(function (output) {
-                        // resolve(base64ToUint8Array(output));
-                        resolve('data:application/pdf;base64,' + output);
-                    });
-                    // console.log(response);
-                });
-            });
-        }
-
-        function download(base64Data, title) {
-
-            var arrBuffer = base64ToArrayBuffer(base64Data);
-
-            // It is necessary to create a new blob object with mime-type explicitly set
-            // otherwise only Chrome works like it should
-            var newBlob = new Blob([arrBuffer], {type: "application/pdf"});
-
-            // IE doesn't allow using a blob object directly as link href
-            // instead it is necessary to use msSaveOrOpenBlob
-            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                window.navigator.msSaveOrOpenBlob(newBlob);
-                return;
-            }
-
-            // For other browsers:
-            // Create a link pointing to the ObjectURL containing the blob.
-            var data = window.URL.createObjectURL(newBlob);
-
-            var link = document.createElement('a');
-            document.body.appendChild(link); //required in FF, optional for Chrome
-            link.href = data;
-            link.download = title + ".pdf";
-            link.click();
-            window.URL.revokeObjectURL(data);
-            link.remove();
-        }
-
-        function base64ToArrayBuffer(data) {
-            var binaryString = window.atob(data);
-            var binaryLen = binaryString.length;
-            var bytes = new Uint8Array(binaryLen);
-            for (var i = 0; i < binaryLen; i++) {
-                var ascii = binaryString.charCodeAt(i);
-                bytes[i] = ascii;
-            }
-            return bytes;
-        }
-
-        function downloadReport(report) {
-
-            var postReport = buildPost(report);
-            postHttpResource(report.url, postReport).then(function success(response) {
-
-                //Check if the pdf is in base64
-                if (report.base64) {
-                    download(response.data.file, report.title);
-                } else {
-                    var pdfData = response.data;
-                    pdfData.footer = pdfFooterWithFilters(report);
-                    pdfMake.createPdf(pdfData).download(report.title);
-                }
-            }, function error(response) {
-                pdfMake.createPdf(createErrorPdf(response)).download(report.title);
-            });
-        }
-
-        function downloadReportFromSource(pdfSource, report) {
-
-            var pdfData = pdfSource;
-            pdfData.footer = pdfFooterWithFilters(report);
-            pdfMake.createPdf(pdfData).download(report.title);
-        }
-
-        function getSourceReport(report) {
-
-            return $q(function (resolve) {
-
-                var postReport = buildPost(report);
-                postHttpResource(report.url, postReport).then(function success(response) {
-
-                    //Check if the pdf is in base64
-                    if (report.base64) {
-                        resolve('data:application/pdf;base64,' + response.data.file);
-                    } else {
-                        var pdfData = response.data;
-                        pdfData.footer = pdfFooterWithFilters(report);
-                        resolve(pdfData);
-                    }
-                }, function error(response) {
-                    var pdfFile = createErrorPdf(response);
-                    resolve(pdfFile);
-                });
-            });
-        }
-
-        function createErrorPdf(response) {
-
-            var dd = {
-                'content': [
-                    {text: 'Error loading report with status: ' + response.status, color: '#ff0000'},
-                    {text: 'Status text: ' + response.statusText, color: '#ff0000'}
-                ]
-            };
-
-            return dd;
-        }
-
-        function isMimeSupported() {
-
-            return !!($window.navigator && $window.navigator.mimeTypes && $window.navigator.mimeTypes['application/pdf']);
-        }
-
-        function buildPost(report) {
-
-            // var url = report.url;
-            var params = [];
-            for (var i = 0; i < report.params.length; i++) {
-                var param = {
-                    name: report.params[i].name,
-                    type: report.params[i].type,
-                    value: null
-                };
-                var tmpParams = [];
-                var idField;
-                switch (report.params[i].type) {
-                    case OdsParamType.DATE:
-                        param.value = [OdsDateUtils.convertLocalDateToServer(report.params[i].value)];
-                        break;
-                    case OdsParamType.LIST:
-                        param.value = [report.params[i].value];
-                        break;
-                    case OdsParamType.SINGLE_SELECT:
-                        idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
-                        param.value = [report.params[i].value[idField]];
-                        break;
-                    case OdsParamType.MULTI_SELECT:
-                        param.value = getListValue(report.params[i]);
-                        break;
-                    case OdsParamType.TABLE_SELECT:
-                        tmpParams = [];
-                        for (var key in report.params[i].value) {
-                            if (key === 'length' || !report.params[i].value.hasOwnProperty(key)) {
-                                continue;
-                            }
-                            var value = key;
-                            if (report.params[i].value[key]) {
-                                tmpParams.push(value);
-                            }
-
-                        }
-                        param.value = tmpParams;
-                        break;
-                    case OdsParamType.DRAG_AND_DROP:
-                        param.value = getListValue(report.params[i]);
-                        break;
-                    case OdsParamType.CHECK_LIST:
-                        param.value = getListValue(report.params[i]);
-                        break;
-                    default:
-                        param.value = [report.params[i].value];
-                        break;
-                }
-                params.push(param);
-            }
-
-            var postReport = {
-                title: report.title,
-                params: params,
-                pageOrientation: report.pageOrientation
-            };
-
-            return postReport;
-        }
-
-        function getListValue(param) {
-
-            var tmpValue = [];
-            var idField;
-            for (var i = 0; i < param.value.length; i++) {
-                idField = param.valueField !== undefined ? param.valueField : 'id';
-                tmpValue.push(param.value[i][idField]);
-            }
-            return tmpValue;
-        }
-
-        function forceDownload(report) {
-
-            var postReport = buildPost(report);
-            postHttpResource(report.url, postReport).then(function success(response) {
-                var contentType = response.headers('Content-Type');
-                var contentDisp = response.headers('Content-Disposition');
-                var index = contentDisp.indexOf('filename="');
-
-                var filename = 'filename';
-
-                if (index !== -1) {
-                    var i = index + 10;
-                    while (contentDisp[i] !== '"') {
-                        i++;
-                    }
-
-                    filename = contentDisp.substring(index + 10, i);
-                }
-
-                var a = document.createElement('a');
-                a.href = URL.createObjectURL(new Blob([response.data], {type: contentType}));
-                a.download = filename;
-                a.click();
-            }, function error(response) {
-                pdfMake.createPdf(createErrorPdf(response)).download(report.title);
-            });
-        }
-
-        function forceDownloadAndOpenPDFObject(data) {
-
-            pdfMake.createPdf(data).open();
-        }
-
-        function forceDownloadFromData(data, title) {
-
-            pdfMake.createPdf(data).download(title);
-        }
-
-
+        return true;
     }
 })();
 
@@ -3600,115 +3711,251 @@ function wizardSteps() {
     }
 })();
 
-(function () {
-    'use strict';
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
 
-    angular
-        .module('ods-lib')
-        .directive('odsFileUpload', odsFileUpload);
+angular
+    .module('ods-lib')
+    .directive('odsForm', FormDirective);
 
-    odsFileUpload.$inject = ['$q'];
+FormDirective.$inject = ['OdsFormService', '$timeout'];
 
-    function odsFileUpload($q) {
+function FormDirective(OdsFormService, $timeout) {
 
-        var slice = Array.prototype.slice;
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/form/form.html',
+        scope: {
+            schema: '=',
+            config: '=',
+            onSave: '&'
+        },
+        link: linkFunc
+    };
 
-        var directive = {
-            restrict: 'A',
-            require: '?ngModel',
-            onLoad: '&',
-            link: linkFunc
-        };
+    return directive;
 
-        return directive;
+    /* private helper methods*/
 
-        /* private helper methods*/
+    function linkFunc($scope) {
 
-        function linkFunc($scope, element, attrs, ngModel) {
+        if(!$scope.schema){
+            console.warn('Form Schema is null.');
+            $scope.name = OdsFormService.generateName();
+        }else {
+            $scope.name = $scope.schema.name;
+        }
 
-            if (!ngModel) return;
+        if ($scope.config) {
+            //CKEditor config load.
+            if ($scope.config.ckeditor) {
 
-            // ngModel.$render = function () {
-            // };
-            element.bind('change', function (e) {
-                var element = e.target;
-
-                $q.all(slice.call(element.files, 0).map(readFile))
-                    .then(function (values) {
-                        if (element.multiple) ngModel.$setViewValue(values);
-                        else ngModel.$setViewValue(values.length ? values[0] : null);
-                    });
-
-                function readFile(file) {
-                    var deferred = $q.defer();
-
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        if ($scope.onLoad) {
-                            $scope.onLoad(e.target.result);
-                        }
-                        deferred.resolve(e.target.result);
-                    };
-
-                    reader.onerror = function (e) {
-                        deferred.reject(e);
-                    };
-
-                    reader.readAsDataURL(file);
-
-                    return deferred.promise;
-                }
-            }); //change
-        } //link
-    }
-})();
-
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .directive('uiSelectRequired', UiSelectRequired);
-
-    UiSelectRequired.$inject = ['$parse'];
-
-    function UiSelectRequired($parse) {
-        return {
-            restrict: 'A',
-            require: 'ngModel',
-            link: function (scope, element, attrs, ctrl) {
-
-                //console.log($scope.required);
-                scope.required = $parse(attrs.uiSelectRequired)(scope);//JSON.parse(attrs.ngRequired);
-
-                ctrl.$validators.uiSelectRequired = function (modelValue, viewValue) {
-
-                    if (scope.required) {
-                        var determineVal;
-                        if (angular.isArray(modelValue)) {
-                            determineVal = modelValue;
-                        } else if (angular.isArray(viewValue)) {
-                            determineVal = viewValue;
-                        } else return !isEmpty(modelValue);
-                        return determineVal.length > 0;
-                    } else {
-                        return true;
-                    }
-                };
-            }
-        };
-    }
-
-    function isEmpty(obj) {
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                return false;
+                OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
             }
         }
-        return true;
+
+        $scope.clear = clear;
+        $scope.save = save;
+
+        $scope.hideTitle = hideTitle;
+
+        //Common field validation
+        $scope.getRequired = getRequired;
+        $scope.getMinLength = getMinLength;
+        $scope.getMaxLength = getMaxLength;
+        $scope.getPattern = getPattern;
+
+        $scope.getFormFieldTemplate = getFormFieldTemplate;
+
+        //Select field specific
+        $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
+
+        //Calendar field specific
+        $scope.openCalendar = openCalendar;
+
+        //Table field specific
+        $scope.removeRow = removeRow;
+        $scope.removeColumn = removeColumn;
+        $scope.cloneRow = cloneRow;
+
+        //CKEditor specific
+        $scope.valueSubtitutor = valueSubtitutor;
+
+        /**
+         * Hide title or label from component
+         * @param field Component
+         * @returns {boolean}
+         */
+        function hideTitle(field) {
+
+            return field.hideLabel ? true : false;
+        }
+
+        /**
+         * Return if field is required.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getRequired(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.required &&
+            field.validation.required !== undefined ? field.validation.required : false;
+        }
+
+        /**
+         * Return if field has min length.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getMinLength(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.minlength &&
+            field.validation.minlength !== undefined ? field.validation.minlength : null;
+        }
+
+        /**
+         * Return if field has a pattern.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getPattern(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.pattern &&
+            field.validation.pattern !== undefined ? field.validation.pattern : null;
+        }
+
+        /**
+         * Return if field has max length.
+         * @param field Field
+         * @returns {boolean}
+         */
+        function getMaxLength(field) {
+
+            return field &&
+            field.validation &&
+            field.validation.maxlength &&
+            field.validation.maxlength !== undefined ? field.validation.maxlength : null;
+        }
+
+        function getFormFieldTemplate(fieldType) {
+
+            return OdsFormService.getFormFieldTemplate(fieldType);
+        }
+
+        function getSelectFieldTitleValue(field, element) {
+
+            return OdsFormService.getSelectFieldTitleValue(field, element);
+        }
+
+        function clear() {
+            //TODO confirm if you want to clear al fields.
+            showInfo('Form cleared!!!');
+        }
+
+        /**
+         * Call to external callback if it is specified, show error message if not defined.
+         */
+        function save() {
+
+            if ($scope.schema.handleSubmit) {
+                if ($scope.onSave) {
+                    $scope.onSave();
+                } else {
+                    showError('You must to to define onSave() function.');
+                }
+            }
+        }
+
+        function showError(message) {
+
+            $scope.error = true;
+            $scope.message = message;
+            $timeout(function () {
+                $scope.error = false;
+                $scope.message = '';
+            }, 5000);
+        }
+
+        // function showSuccess(message) {
+        //
+        //     $scope.success = true;
+        //     $scope.message = message;
+        //     $timeout(function () {
+        //         $scope.success = false;
+        //         $scope.message = '';
+        //     }, 5000);
+        // }
+
+        function showInfo(message) {
+
+            $scope.info = true;
+            $scope.message = message;
+            $timeout(function () {
+                $scope.info = false;
+                $scope.message = '';
+            }, 5000);
+        }
+
+        /**
+         * Open and close Calendar popup
+         * @param field
+         * @returns {boolean|*}
+         */
+        function openCalendar(field) {
+
+            field.open = !field.open;
+            return field.open;
+        }
+
+        /**
+         * Remove row from section.
+         * @param table Table to remove row
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            OdsFormService.removeRow(table, index);
+        }
+
+        /**
+         * Add column to current row.
+         * @param table Table to remove column
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            OdsFormService.removeColumn(table, index);
+        }
+
+        /**
+         * Clone the last row in table and add it as a new row.
+         * @param table Table
+         */
+        function cloneRow(table) {
+
+            OdsFormService.cloneRow(table);
+        }
+
+        function valueSubtitutor(field) {
+
+            if (field.options.tokens && field.printView) {
+                return OdsFormService.strSubtitutor(field.value, field.options.tokens,
+                    field.options.prefix, field.options.suffix);
+            } else {
+                return field.value;
+            }
+        }
+
     }
-})();
+}
 
 /**
  * Created by hermeslm on 3/28/17.
@@ -5452,252 +5699,6 @@ function DynamicNameDirective($compile, $parse) {
 
 angular
     .module('ods-lib')
-    .directive('odsForm', FormDirective);
-
-FormDirective.$inject = ['OdsFormService', '$timeout'];
-
-function FormDirective(OdsFormService, $timeout) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/form/form.html',
-        scope: {
-            schema: '=',
-            config: '=',
-            onSave: '&'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        if(!$scope.schema){
-            console.warn('Form Schema is null.');
-            $scope.name = OdsFormService.generateName();
-        }else {
-            $scope.name = $scope.schema.name;
-        }
-
-        if ($scope.config) {
-            //CKEditor config load.
-            if ($scope.config.ckeditor) {
-
-                OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
-            }
-        }
-
-        $scope.clear = clear;
-        $scope.save = save;
-
-        $scope.hideTitle = hideTitle;
-
-        //Common field validation
-        $scope.getRequired = getRequired;
-        $scope.getMinLength = getMinLength;
-        $scope.getMaxLength = getMaxLength;
-        $scope.getPattern = getPattern;
-
-        $scope.getFormFieldTemplate = getFormFieldTemplate;
-
-        //Select field specific
-        $scope.getSelectFieldTitleValue = getSelectFieldTitleValue;
-
-        //Calendar field specific
-        $scope.openCalendar = openCalendar;
-
-        //Table field specific
-        $scope.removeRow = removeRow;
-        $scope.removeColumn = removeColumn;
-        $scope.cloneRow = cloneRow;
-
-        //CKEditor specific
-        $scope.valueSubtitutor = valueSubtitutor;
-
-        /**
-         * Hide title or label from component
-         * @param field Component
-         * @returns {boolean}
-         */
-        function hideTitle(field) {
-
-            return field.hideLabel ? true : false;
-        }
-
-        /**
-         * Return if field is required.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getRequired(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.required &&
-            field.validation.required !== undefined ? field.validation.required : false;
-        }
-
-        /**
-         * Return if field has min length.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getMinLength(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.minlength &&
-            field.validation.minlength !== undefined ? field.validation.minlength : null;
-        }
-
-        /**
-         * Return if field has a pattern.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getPattern(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.pattern &&
-            field.validation.pattern !== undefined ? field.validation.pattern : null;
-        }
-
-        /**
-         * Return if field has max length.
-         * @param field Field
-         * @returns {boolean}
-         */
-        function getMaxLength(field) {
-
-            return field &&
-            field.validation &&
-            field.validation.maxlength &&
-            field.validation.maxlength !== undefined ? field.validation.maxlength : null;
-        }
-
-        function getFormFieldTemplate(fieldType) {
-
-            return OdsFormService.getFormFieldTemplate(fieldType);
-        }
-
-        function getSelectFieldTitleValue(field, element) {
-
-            return OdsFormService.getSelectFieldTitleValue(field, element);
-        }
-
-        function clear() {
-            //TODO confirm if you want to clear al fields.
-            showInfo('Form cleared!!!');
-        }
-
-        /**
-         * Call to external callback if it is specified, show error message if not defined.
-         */
-        function save() {
-
-            if ($scope.schema.handleSubmit) {
-                if ($scope.onSave) {
-                    $scope.onSave();
-                } else {
-                    showError('You must to to define onSave() function.');
-                }
-            }
-        }
-
-        function showError(message) {
-
-            $scope.error = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.error = false;
-                $scope.message = '';
-            }, 5000);
-        }
-
-        // function showSuccess(message) {
-        //
-        //     $scope.success = true;
-        //     $scope.message = message;
-        //     $timeout(function () {
-        //         $scope.success = false;
-        //         $scope.message = '';
-        //     }, 5000);
-        // }
-
-        function showInfo(message) {
-
-            $scope.info = true;
-            $scope.message = message;
-            $timeout(function () {
-                $scope.info = false;
-                $scope.message = '';
-            }, 5000);
-        }
-
-        /**
-         * Open and close Calendar popup
-         * @param field
-         * @returns {boolean|*}
-         */
-        function openCalendar(field) {
-
-            field.open = !field.open;
-            return field.open;
-        }
-
-        /**
-         * Remove row from section.
-         * @param table Table to remove row
-         * @param index Row index to remove.
-         */
-        function removeRow(table, index) {
-
-            OdsFormService.removeRow(table, index);
-        }
-
-        /**
-         * Add column to current row.
-         * @param table Table to remove column
-         * @param row Row to add column.
-         */
-        function removeColumn(table, index) {
-
-            OdsFormService.removeColumn(table, index);
-        }
-
-        /**
-         * Clone the last row in table and add it as a new row.
-         * @param table Table
-         */
-        function cloneRow(table) {
-
-            OdsFormService.cloneRow(table);
-        }
-
-        function valueSubtitutor(field) {
-
-            if (field.options.tokens && field.printView) {
-                return OdsFormService.strSubtitutor(field.value, field.options.tokens,
-                    field.options.prefix, field.options.suffix);
-            } else {
-                return field.value;
-            }
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
     .directive('odsFormInfo', OdsFormInfoDirective);
 
 OdsFormInfoDirective.$inject = [];
@@ -6259,342 +6260,6 @@ function ModelDirective(OdsFormService) {
 
         function copy() {
             OdsFormService.copyJson(angular.toJson($scope.model, true));
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsSuggestionOptions', SuggestionOptionsDirective);
-
-SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor'];
-
-function SuggestionOptionsDirective(OdsFormService, OdsCkeditor) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
-        scope: {
-            field: '=',
-            config: '=',
-            profile: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope) {
-
-        if ($scope.config && $scope.config.ckeditor) {
-            $scope.field.options.prefix = $scope.config.ckeditor.prefix ?
-                $scope.config.ckeditor.prefix : OdsFormService.defaultCKEditorPrefix();
-            $scope.field.options.suffix = $scope.config.ckeditor.suffix ?
-                $scope.config.ckeditor.suffix : OdsFormService.defaultCKEditorSuffix();
-            $scope.field.options.tokensUrl = $scope.config.ckeditor.tokensUrl ?
-                $scope.config.ckeditor.tokensUrl : '';
-            $scope.field.options.suggestions = $scope.config.ckeditor.suggestions ?
-                $scope.config.ckeditor.suggestions : [];
-        }
-
-        $scope.options = initOptions();
-        $scope.addOption = addOption;
-        $scope.removeOption = removeOption;
-        $scope.refreshOption = refreshOption;
-        $scope.loadSuggestions = loadSuggestions;
-        $scope.loadTokens = loadTokens;
-
-        function initOptions() {
-
-            var options = [];
-            for (var i = 0; i < $scope.field.options.suggestions.length; i++) {
-                var option = {
-                    id: $scope.field.options.suggestions[i].id,
-                    label: $scope.field.options.suggestions[i].label
-                };
-                options.push(option);
-            }
-            return options;
-        }
-
-        function addOption() {
-
-            var option = {
-                id: '',
-                label: ''
-            };
-
-            $scope.options.push(option);
-        }
-
-        function removeOption(index) {
-
-            $scope.options.suggestions.splice(index, 1);
-        }
-
-        function refreshOption() {
-
-            OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
-            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
-        }
-
-        function loadSuggestions(url) {
-
-            OdsFormService.restResource(url).query(function (result) {
-                $scope.options = result;
-            });
-        }
-
-        function loadTokens(url) {
-
-            OdsFormService.restResource(url).get(function (result) {
-                $scope.field.options.tokens = result;
-            });
-        }
-
-        $scope.$watch('options', function (model) {
-
-            var options = [];
-            for (var i = 0; i < model.length; i++) {
-                var option = {};
-                option.id = model[i].id;
-                option.label = model[i].label;
-                options.push(option);
-            }
-            $scope.field.options.suggestions = options;
-        }, true);
-    }
-}
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableProps', TablePropsDirective);
-
-TablePropsDirective.$inject = ['OdsFormService'];
-
-function TablePropsDirective(OdsFormService) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table-props.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope) {
-
-        $scope.addRow = addRow;
-        $scope.addColumn = addColumn;
-
-        /**
-         * Add row to the table
-         */
-        function addRow() {
-            var columnLength = $scope.field.matrix[0].length;
-            var row = [];
-            for (var i = 0; i < columnLength; i++) {
-                row.push(OdsFormService.newItemObject());
-            }
-            $scope.field.matrix.push(row);
-        }
-
-        /**
-         * Add column to the table.
-         * @param row Row to add column.
-         */
-        function addColumn() {
-            for (var i = 0; i < $scope.field.matrix.length; i++) {
-                $scope.field.matrix[i].push(OdsFormService.newItemObject());
-            }
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTable', TableDirective);
-
-TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
-
-function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/table.html',
-        scope: {
-            field: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.removeRow = removeRow;
-        $scope.removeColumn = removeColumn;
-        $scope.onAdd = onAdd;
-        $scope.cloneRow = cloneRow;
-        $scope.swapRow = swapRow;
-        $scope.swapColumn = swapColumn;
-        $scope.checkItem = checkItem;
-
-        function checkItem(index, item, external, type) {
-
-            //We prevent add recursively a table inside other.
-            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
-                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.', {size: 'sm'});
-                return false;
-            } else {
-                return item;
-            }
-
-        }
-
-        function onAdd(item, type) {
-
-            OdsFormService.onAdd(item, type);
-        }
-
-        /**
-         * Remove row from section.
-         * @param table Table to remove row
-         * @param index Row index to remove.
-         */
-        function removeRow(table, index) {
-
-            OdsFormService.removeRow(table, index);
-        }
-
-        /**
-         * Add column to current row.
-         * @param table Table to remove column
-         * @param row Row to add column.
-         */
-        function removeColumn(table, index) {
-
-            OdsFormService.removeColumn(table, index);
-        }
-
-        function cloneRow(table) {
-
-            OdsFormService.cloneRow(table);
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapRow(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
-                {size: 'sm'}).result.then(function () {
-
-                // var _previousValue = [];
-                // angular.copy($scope.field.matrix, _previousValue);
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix.length ||
-                    idx2 >= $scope.field.matrix.length) {
-
-                    return;
-                }
-                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
-
-            });
-        }
-
-        /**
-         * Swap Row order.
-         * @param index New Row index.
-         */
-        function swapColumn(idx1, idx2) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
-                {size: 'sm'}).result.then(function () {
-
-                if (idx1 <= -1 || idx2 <= -1 ||
-                    idx1 >= $scope.field.matrix[idx1].length ||
-                    idx2 >= $scope.field.matrix[idx2].length) {
-
-                    return;
-                }
-                for (var i = 0; i < $scope.field.matrix.length; i++) {
-                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
-                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
-                    $scope.field.matrix[i][idx1] = tmp;
-                }
-            });
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTableTotal', TableTotalDirective);
-
-TableTotalDirective.$inject = ['OdsFormService'];
-
-function TableTotalDirective(OdsFormService) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'forms/schema/plugins/table/total.html',
-        scope: {
-            field: '=',
-            label: '=',
-            colIndex: '='
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.total = 0;
-        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
-
-        $scope.$watch('field', function (model) {
-            $scope.total = total(model);
-        }, true);
-
-        function total(model) {
-            var index = $scope.colIndex;
-            var total = 0;
-            for (var i = 0; i < model.matrix.length; i++) {
-
-                if (model.matrix[i][index].fields.length > 0) {
-                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
-                }
-            }
-            return total;
         }
     }
 }
@@ -7319,6 +6984,342 @@ function FieldSelectOptionsDirective(OdsFormService) {
             }
             $scope.field.options = options;
         }, true);
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsSuggestionOptions', SuggestionOptionsDirective);
+
+SuggestionOptionsDirective.$inject = ['OdsFormService', 'OdsCkeditor'];
+
+function SuggestionOptionsDirective(OdsFormService, OdsCkeditor) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/ckeditor/suggestion-options-properties.html',
+        scope: {
+            field: '=',
+            config: '=',
+            profile: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        if ($scope.config && $scope.config.ckeditor) {
+            $scope.field.options.prefix = $scope.config.ckeditor.prefix ?
+                $scope.config.ckeditor.prefix : OdsFormService.defaultCKEditorPrefix();
+            $scope.field.options.suffix = $scope.config.ckeditor.suffix ?
+                $scope.config.ckeditor.suffix : OdsFormService.defaultCKEditorSuffix();
+            $scope.field.options.tokensUrl = $scope.config.ckeditor.tokensUrl ?
+                $scope.config.ckeditor.tokensUrl : '';
+            $scope.field.options.suggestions = $scope.config.ckeditor.suggestions ?
+                $scope.config.ckeditor.suggestions : [];
+        }
+
+        $scope.options = initOptions();
+        $scope.addOption = addOption;
+        $scope.removeOption = removeOption;
+        $scope.refreshOption = refreshOption;
+        $scope.loadSuggestions = loadSuggestions;
+        $scope.loadTokens = loadTokens;
+
+        function initOptions() {
+
+            var options = [];
+            for (var i = 0; i < $scope.field.options.suggestions.length; i++) {
+                var option = {
+                    id: $scope.field.options.suggestions[i].id,
+                    label: $scope.field.options.suggestions[i].label
+                };
+                options.push(option);
+            }
+            return options;
+        }
+
+        function addOption() {
+
+            var option = {
+                id: '',
+                label: ''
+            };
+
+            $scope.options.push(option);
+        }
+
+        function removeOption(index) {
+
+            $scope.options.suggestions.splice(index, 1);
+        }
+
+        function refreshOption() {
+
+            OdsCkeditor.setOptions($scope.field.name, OdsCkeditor.initOptions($scope.field.options));
+            OdsCkeditor.setOptions($scope.field.name + $scope.profile, OdsCkeditor.initOptions($scope.field.options));
+        }
+
+        function loadSuggestions(url) {
+
+            OdsFormService.restResource(url).query(function (result) {
+                $scope.options = result;
+            });
+        }
+
+        function loadTokens(url) {
+
+            OdsFormService.restResource(url).get(function (result) {
+                $scope.field.options.tokens = result;
+            });
+        }
+
+        $scope.$watch('options', function (model) {
+
+            var options = [];
+            for (var i = 0; i < model.length; i++) {
+                var option = {};
+                option.id = model[i].id;
+                option.label = model[i].label;
+                options.push(option);
+            }
+            $scope.field.options.suggestions = options;
+        }, true);
+    }
+}
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableProps', TablePropsDirective);
+
+TablePropsDirective.$inject = ['OdsFormService'];
+
+function TablePropsDirective(OdsFormService) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table-props.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        $scope.addRow = addRow;
+        $scope.addColumn = addColumn;
+
+        /**
+         * Add row to the table
+         */
+        function addRow() {
+            var columnLength = $scope.field.matrix[0].length;
+            var row = [];
+            for (var i = 0; i < columnLength; i++) {
+                row.push(OdsFormService.newItemObject());
+            }
+            $scope.field.matrix.push(row);
+        }
+
+        /**
+         * Add column to the table.
+         * @param row Row to add column.
+         */
+        function addColumn() {
+            for (var i = 0; i < $scope.field.matrix.length; i++) {
+                $scope.field.matrix[i].push(OdsFormService.newItemObject());
+            }
+        }
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTable', TableDirective);
+
+TableDirective.$inject = ['OdsFormService', 'dialogs', 'OdsComponentType', 'OdsFieldType'];
+
+function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/table.html',
+        scope: {
+            field: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.removeRow = removeRow;
+        $scope.removeColumn = removeColumn;
+        $scope.onAdd = onAdd;
+        $scope.cloneRow = cloneRow;
+        $scope.swapRow = swapRow;
+        $scope.swapColumn = swapColumn;
+        $scope.checkItem = checkItem;
+
+        function checkItem(index, item, external, type) {
+
+            //We prevent add recursively a table inside other.
+            if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
+                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.', {size: 'sm'});
+                return false;
+            } else {
+                return item;
+            }
+
+        }
+
+        function onAdd(item, type) {
+
+            OdsFormService.onAdd(item, type);
+        }
+
+        /**
+         * Remove row from section.
+         * @param table Table to remove row
+         * @param index Row index to remove.
+         */
+        function removeRow(table, index) {
+
+            OdsFormService.removeRow(table, index);
+        }
+
+        /**
+         * Add column to current row.
+         * @param table Table to remove column
+         * @param row Row to add column.
+         */
+        function removeColumn(table, index) {
+
+            OdsFormService.removeColumn(table, index);
+        }
+
+        function cloneRow(table) {
+
+            OdsFormService.cloneRow(table);
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapRow(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
+                {size: 'sm'}).result.then(function () {
+
+                // var _previousValue = [];
+                // angular.copy($scope.field.matrix, _previousValue);
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix.length ||
+                    idx2 >= $scope.field.matrix.length) {
+
+                    return;
+                }
+                $scope.field.matrix[idx1] = $scope.field.matrix.splice(idx2, 1, $scope.field.matrix[idx1])[0];
+
+            });
+        }
+
+        /**
+         * Swap Row order.
+         * @param index New Row index.
+         */
+        function swapColumn(idx1, idx2) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
+                {size: 'sm'}).result.then(function () {
+
+                if (idx1 <= -1 || idx2 <= -1 ||
+                    idx1 >= $scope.field.matrix[idx1].length ||
+                    idx2 >= $scope.field.matrix[idx2].length) {
+
+                    return;
+                }
+                for (var i = 0; i < $scope.field.matrix.length; i++) {
+                    var tmp = angular.copy($scope.field.matrix[i][idx2]);
+                    $scope.field.matrix[i][idx2] = angular.copy($scope.field.matrix[i][idx1]);
+                    $scope.field.matrix[i][idx1] = tmp;
+                }
+            });
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTableTotal', TableTotalDirective);
+
+TableTotalDirective.$inject = ['OdsFormService'];
+
+function TableTotalDirective(OdsFormService) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'forms/schema/plugins/table/total.html',
+        scope: {
+            field: '=',
+            label: '=',
+            colIndex: '='
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.total = 0;
+        $scope.label = $scope.label && $scope.label !== '' ? $scope.label : 'Total';
+
+        $scope.$watch('field', function (model) {
+            $scope.total = total(model);
+        }, true);
+
+        function total(model) {
+            var index = $scope.colIndex;
+            var total = 0;
+            for (var i = 0; i < model.matrix.length; i++) {
+
+                if (model.matrix[i][index].fields.length > 0) {
+                    total += OdsFormService.getFieldValueAsNumber(model.matrix[i][index].fields[0]);
+                }
+            }
+            return total;
+        }
     }
 }
 
