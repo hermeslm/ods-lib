@@ -13,7 +13,7 @@ StepsIndicator.$inject = [];
  *        label: 'Draft',
  *        status: 'active',
  *        disabled: false,
- *        callback: function (elem) {
+ *        callback: function (elem, index) {
  *            // Prompt for status change
  *        }
  *    },
@@ -22,7 +22,7 @@ StepsIndicator.$inject = [];
  *        label: 'Ready',
  *        status: '',
  *        disabled: true,
- *        callback: function (elem) {
+ *        callback: function (elem, index) {
  *            // Prompt for status change
  *        }
  *    },
@@ -31,7 +31,7 @@ StepsIndicator.$inject = [];
  *        label: 'Joined',
  *        status: '',
  *        disabled: false,
- *        callback: function (elem) {
+ *        callback: function (elem, index) {
  *            // Prompt for status change
  *        }
  *    },
@@ -39,7 +39,7 @@ StepsIndicator.$inject = [];
  *        name: 'DISCHARGED',
  *        label: 'Discharged',
  *        status: '',
- *        callback: function (elem) {
+ *        callback: function (elem, index) {
  *            // Prompt for status change
  *        }
  *    }];
@@ -71,10 +71,10 @@ function StepsIndicator() {
 
         $scope.onClick = onClick;
 
-        function onClick(elem) {
+        function onClick(elem, index) {
 
             if (elem.callback) {
-                elem.callback(elem);
+                elem.callback(elem, index);
             }
 
             // if ($scope.type === 'multiselect') {
