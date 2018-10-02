@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsForm', FormDirective);
 
-FormDirective.$inject = ['OdsFormService', '$timeout'];
+FormDirective.$inject = ['OdsFormService', '$timeout', 'dialogs'];
 
-function FormDirective(OdsFormService, $timeout) {
+function FormDirective(OdsFormService, $timeout, dialogs) {
 
     var directive = {
         restrict: 'E',
@@ -48,6 +48,10 @@ function FormDirective(OdsFormService, $timeout) {
 
         $scope.hideTitle = hideTitle;
 
+        //Section specific
+        $scope.cloneSection = cloneSection;
+        $scope.removeSection = removeSection;
+
         //Common field validation
         $scope.getRequired = getRequired;
         $scope.getMinLength = getMinLength;
@@ -78,6 +82,33 @@ function FormDirective(OdsFormService, $timeout) {
         function hideTitle(field) {
 
             return field.hideLabel ? true : false;
+        }
+
+        /**
+         * Clone Section
+         * @param section Component
+         * @returns {boolean}
+         */
+        function cloneSection(section) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want to clone this Section?',
+                {size: 'sm'}).result.then(function () {
+                $scope.schema = OdsFormService.cloneSection($scope.schema, section,
+                    section.clonedCanCloned);
+            });
+        }
+
+        /**
+         * Remove Section
+         * @param section Component
+         * @returns {boolean}
+         */
+        function removeSection(index) {
+
+            dialogs.confirm('Confirm!!!', 'Do you want to remove this section?',
+                {size: 'sm'}).result.then(function () {
+                $scope.schema.layout.splice(index, 1);
+            });
         }
 
         /**

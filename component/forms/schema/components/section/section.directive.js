@@ -36,6 +36,7 @@ function SectionDirective(OdsFormService, dialogs) {
         $scope.remove = remove;
         $scope.swap = swap;
         $scope.addRow = addRow;
+        $scope.clone = clone;
 
         /**
          * Toggle Section properties options.
@@ -87,6 +88,18 @@ function SectionDirective(OdsFormService, dialogs) {
         function addRow() {
 
             $scope.section.rows.push(OdsFormService.newRowObject());
+        }
+
+        /**
+         * To clone the section down.
+         */
+        function clone() {
+
+            dialogs.confirm('Confirm!!!', 'Do you want to clone this Section?',
+                {size: 'sm'}).result.then(function () {
+                $scope.schema = OdsFormService.cloneSection($scope.schema, $scope.section,
+                    $scope.section.clonedCanCloned);
+            });
         }
 
     }

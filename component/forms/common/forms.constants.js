@@ -28,7 +28,8 @@
             ROW: 'row', //Do not edit this type
             COLUMN: 'column', //Do not edit this type
             FIELD: 'field', //Do not edit this type
-            PLUGIN: 'plugin' //Do not edit this type
+            PLUGIN: 'plugin', //Do not edit this type
+            ITEM: 'ITEM' //Do not edit this type
         })
         .constant('OdsDateTimeFormat', {
             FullDate: 'fullDate',

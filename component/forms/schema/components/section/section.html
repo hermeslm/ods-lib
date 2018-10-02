@@ -8,18 +8,19 @@
                     title="Configure this Section.">
                 <span class="fa fa-wrench"></span>
             </button>
-            <button class="btn btn-default btn-xs" type="button"
-                    ng-click="swap(index - 1, index)"
+            <button class="btn btn-default btn-xs" type="button" ng-click="swap(index - 1, index)"
                     ng-disabled="index === 0" title="Move up">
                 <span class="fa fa-arrow-up"></span>
             </button>
-            <button class="btn btn-default btn-xs" type="button"
-                    ng-click="swap(index, index + 1)" title="Move down"
-                    ng-disabled="index === schema.layout.length - 1">
+            <button class="btn btn-default btn-xs" type="button" ng-click="swap(index, index + 1)"
+                    title="Move down" ng-disabled="index === schema.layout.length - 1">
                 <span class="fa fa-arrow-down"></span>
             </button>
-            <button class="btn btn-xs btn-danger" type="button"
-                    ng-click="remove(index)" title="Remove">
+            <button class="btn btn-warning btn-xs" type="button" ng-click="clone()"
+                    title="Clone Section">
+                <span class="fa fa-clone"></span>
+            </button>
+            <button class="btn btn-xs btn-danger" type="button" ng-click="remove(index)" title="Remove">
                 <span class="fa fa-trash"></span>
             </button>
         </div>
