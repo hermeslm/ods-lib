@@ -22,11 +22,13 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="box-tools pull-right">
-                                <button class="btn btn-warning" title="Clone Section" ng-if="section.canClone"
+                                <button class="btn btn-warning" type="button" title="Clone Section"
+                                        ng-if="section.canClone"
                                         ng-click="cloneSection(section)">
                                     <i class="fa fa-clone"></i>
                                 </button>
-                                <button class="btn btn-danger" title="Remove Section" ng-if="section.canClone"
+                                <button class="btn btn-danger" type="button" title="Remove Section"
+                                        ng-if="section.canClone"
                                         ng-click="removeSection($index)">
                                     <i class="fa fa-trash"></i>
                                 </button>
