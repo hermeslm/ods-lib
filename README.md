@@ -20,7 +20,10 @@ This repository contains a set of native AngularJS directives based on Bootstrap
                       of a signature capture field in a browser window, allowing a user to draw a signature using mouse, pen, or finger.
 4. **ODS-Address:** Useful directive that allow to have an address management adding an input group field. It open a modal windows where you 
                     can handle all address fields.
-5. **ODS-Img-Upload:** Useful directive that allow to upload images(profile images, logo images) and edit using a crop tool. 
+5. **ODS-Img-Upload:** Useful directive that allow to upload images(profile images, logo images) and edit using a crop tool.
+6. **Report Viewer Directive:** Report Viewer directive that allow to parametrize and visualize reports include report params.
+7. **Bootstrap Select with Filter Support Directive:** Select directive with dynamic filter support.
+8. **ODS-Hide-Value:** Useful directive for SSN, Medicaid and Medicare number that need privacy with a mask.
                                              
 
 ## Demos.
