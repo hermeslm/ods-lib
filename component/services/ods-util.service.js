@@ -7,8 +7,10 @@ angular
 function OdsUtils() {
 
     var statusTypes = ['default', 'danger', 'primary', 'success', 'info', 'warning'];
+    var uniqueCounter = (+new Date()) % 10000;
 
     var service = {
+        generateName: generateName,
         getActionsTemplate: getActionsTemplate,
         getStatusTemplate: getStatusTemplate,
         expandWeekCodeString: expandWeekCodeString,
@@ -29,6 +31,17 @@ function OdsUtils() {
     return service;
 
     /**
+     * Generate object name.
+     * @param baseName Object base name.
+     * @returns {String}
+     */
+    function generateName(baseName) {
+
+        uniqueCounter++;
+        return baseName + uniqueCounter;
+    }
+
+    /**
      * Return a Action Template for grid bootstrap based
      * @param data
      * @param entity
@@ -44,7 +57,7 @@ function OdsUtils() {
         //     '<a type="button" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a>'+
         //     '</div>';
 
-         // Single button
+        // Single button
         // stButtons = '<div class="btn-group-vertical">'+
         //     '<div class="btn-group open" uib-dropdown>'+
         //     '<button type="button" class="btn btn-default dropdown-toggle" uib-dropdown-toggle data-toggle="dropdown" aria-expanded="true">'+

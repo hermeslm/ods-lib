@@ -24,7 +24,8 @@ angular
         'datatables.colreorder',
         'uiCropper',
         'ngFileUpload',
-        'pdfjsViewer'
+        'pdfjsViewer',
+        'ui.mask'
     ])
     .config(configFunction)
     .value('version', '2.0.1')

@@ -24,12 +24,6 @@
     <link rel="stylesheet" href="../bower_components/angular-dialog-service/dist/dialogs.css">
     <link rel="stylesheet" href="../bower_components/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css">
     <!-- endinject -->
-    <!-- inject:css -->
-    <link rel="stylesheet" href="../dist/forms/style.css">
-    <link rel="stylesheet" href="../dist/reports/style.css">
-    <link rel="stylesheet" href="../dist/steps-indicator/style.css">
-    <link rel="stylesheet" href="../dist/wizard-steps/style.css">
-    <!-- endinject -->
     <!-- endbuild -->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -44,11 +38,29 @@
 <div class="container">
 
     <div class="starter-template">
-        <h1>Address directive</h1>
-        <form>
-            <ods-address label="My Address" ng-model="address" countries="countries"
-                     states="states">
-            </ods-address>
+        <h1>SSN hide directive</h1>
+        <form name="testForm">
+            <button class="btn btn-success" ng-click="toggleDisabled()">Toggle enabled</button>
+            <button class="btn btn-danger" ng-click="toggleRequired()">Toggle required</button>
+            <br>
+            <div class="form-group"
+                 ng-class="{'has-error': testForm.ssnField.$invalid}">
+                <ods-input-hide-value label="SSN" name="ssnField" ng-model="ssn" mask="999-99-9999" ng-disabled="disabled"
+                                      ng-required="required"></ods-input-hide-value>
+                <div ng-show="testForm.ssnField.$invalid">
+                    <p class="help-block"
+                       ng-show="testForm.ssnField.$error.required">
+                        This field is required.
+                    </p>
+                </div>
+            </div>
+            <p>
+                <i class="fa fa-id-card" aria-hidden="true"></i>
+                <span class="ng-scope">SSN</span>
+            </p>
+            <h4 class="margin-bottom">
+                <ods-text-hide-value ng-value="{{ssn | ssn}}" chart="*"></ods-text-hide-value>
+            </h4>
         </form>
     </div>
 
