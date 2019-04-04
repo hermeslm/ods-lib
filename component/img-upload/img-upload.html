@@ -1,9 +1,9 @@
 <div ng-if="displayImage">
-    <img class="img-responsive {{cssClass}}" id="imgPicture"
+    <img class="img-responsive" id="imgPicture"
          ng-src="{{ngModel}}"
          ng-if="ngModel"
          ng-click="openModal()" style="cursor: pointer;min-height: 100px">
-    <img class="img-responsive {{cssClass}}" id="imgPictureDefault"
+    <img class="img-responsive" id="imgPictureDefault"
          ng-src="{{original}}"
          ng-if="!ngModel && original"
          ng-click="openModal()" style="cursor: pointer;min-height: 100px">
