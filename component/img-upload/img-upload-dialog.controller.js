@@ -6,12 +6,12 @@
 
     angular
         .module('ods-lib')
-        .controller('ImgUploadDialogController', ImgUploadDialogController);
+        .controller('OdsImgUploadDialogController', OdsImgUploadDialogController);
 
-    ImgUploadDialogController.$inject = ['$scope', '$uibModalInstance', 'areaType', 'ngModel',
+    OdsImgUploadDialogController.$inject = ['$scope', '$uibModalInstance', 'areaType', 'ngModel',
         'croppedImageSize', 'original'];
 
-    function ImgUploadDialogController($scope, $uibModalInstance, areaType, ngModel,
+    function OdsImgUploadDialogController($scope, $uibModalInstance, areaType, ngModel,
                                        croppedImageSize, original) {
 
         var vm = this;
