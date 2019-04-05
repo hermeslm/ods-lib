@@ -70,7 +70,7 @@
                         }
                         $scope.ngModel = result.model;
                         $scope.original = result.original;
-                        $scope.onSave({ model: result.model });
+                        $scope.onSave({ result: result });
                     }
                 });
             };
