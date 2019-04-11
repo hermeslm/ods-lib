@@ -49,6 +49,10 @@
 
                                         <div ng-show="{{schema.name}}.{{field.name}}.$invalid">
                                             <p class="help-block"
+                                               ng-show="{{schema.name}}.{{field.name}}.$error.datetime">
+                                                {{field.validation.messages.datetime}}
+                                            </p>
+                                            <p class="help-block"
                                                ng-show="{{schema.name}}.{{field.name}}.$error.required">
                                                 {{field.validation.messages.required}}
                                             </p>

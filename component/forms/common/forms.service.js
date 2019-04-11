@@ -884,7 +884,13 @@
                     },
                     // utc: true,
                     required: false,
-                    value: date
+                    value: date,
+                    validation: {
+                        datetime: false,
+                        messages: {
+                            datetime: 'Invalid Date or Time.'
+                        }
+                    }
                 };
             }
 

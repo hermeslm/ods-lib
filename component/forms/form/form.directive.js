@@ -120,8 +120,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
             return field &&
             field.validation &&
-            field.validation.required &&
-            field.validation.required !== undefined ? field.validation.required : false;
+            field.validation.required ? field.validation.required : false;
         }
 
         /**
@@ -133,8 +132,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
             return field &&
             field.validation &&
-            field.validation.minlength &&
-            field.validation.minlength !== undefined ? field.validation.minlength : null;
+            field.validation.minlength ? field.validation.minlength : null;
         }
 
         /**
@@ -146,8 +144,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
             return field &&
             field.validation &&
-            field.validation.pattern &&
-            field.validation.pattern !== undefined ? field.validation.pattern : null;
+            field.validation.pattern ? field.validation.pattern : null;
         }
 
         /**
@@ -159,8 +156,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
             return field &&
             field.validation &&
-            field.validation.maxlength &&
-            field.validation.maxlength !== undefined ? field.validation.maxlength : null;
+            field.validation.maxlength ? field.validation.maxlength : null;
         }
 
         function getFormFieldTemplate(fieldType) {
