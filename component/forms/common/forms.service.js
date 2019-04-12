@@ -1530,16 +1530,16 @@
                                             if (matrixRow[p].fields.length > 0) {
                                                 if (matrixRow[p].fields[0].type === OdsFieldType.DATETIME) {
                                                     //If field is datetime we set Date object from string
-                                                    matrixRow[p].fields[0].value = new Date(Date.parse(matrixRow[p].fields[0].value));
+                                                    if(fields[l].value != null){
+                                                        matrixRow[p].fields[0].value = new Date(Date.parse(matrixRow[p].fields[0].value));
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 } else {
                                     if (fields[l].type === OdsFieldType.DATETIME) {
-                                        if(fields[l].value == null){
-                                            delete fields[l].value;
-                                        }else {
+                                        if(fields[l].value != null){
                                             fields[l].value = new Date(Date.parse(fields[l].value));
                                         }
                                     }
