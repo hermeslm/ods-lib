@@ -1537,7 +1537,11 @@
                                     }
                                 } else {
                                     if (fields[l].type === OdsFieldType.DATETIME) {
-                                        fields[l].value = new Date(Date.parse(fields[l].value));
+                                        if(fields[l].value == null){
+                                            delete fields[l].value;
+                                        }else {
+                                            fields[l].value = new Date(Date.parse(fields[l].value));
+                                        }
                                     }
                                 }
                             }
