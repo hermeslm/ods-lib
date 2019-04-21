@@ -43,6 +43,8 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
             }
         }
 
+        $scope.getEditMode = getEditMode;
+
         $scope.clear = clear;
         $scope.save = save;
 
@@ -75,13 +77,21 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
         $scope.valueSubtitutor = valueSubtitutor;
 
         /**
+         * Return if it is in edit mode.
+         * @returns {boolean}
+         */
+        function getEditMode() {
+            return false;
+        }
+
+        /**
          * Hide title or label from component
          * @param field Component
          * @returns {boolean}
          */
         function hideTitle(field) {
 
-            return field.hideLabel ? true : false;
+            return !!field.hideLabel;
         }
 
         /**

@@ -35,6 +35,7 @@ function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
 
     function linkFunc($scope) {
 
+        $scope.getEditMode = getEditMode;
         $scope.onAdd = onAdd;
         $scope.onImportForm = onImportForm;
         $scope.onExportForm = onExportForm;
@@ -49,6 +50,14 @@ function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
             if ($scope.config.ckeditor) {
                 OdsFormService.setConfigToCKEditorComponent($scope.schema, $scope.config);
             }
+        }
+
+        /**
+         * Return if it is in edit mode.
+         * @returns {boolean}
+         */
+        function getEditMode() {
+            return true;
         }
 
         /**
@@ -68,17 +77,17 @@ function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
             $scope.schema = data.form;
         }
 
-        function onExportForm(){
+        function onExportForm() {
 
             OdsFormService.exportForm($scope.schema);
         }
 
-        function onLoadSubForm(subForm, position){
+        function onLoadSubForm(subForm, position) {
 
             OdsFormService.loadSubForm($scope.schema, subForm, position);
         }
 
-        $scope.$on('$destroy', function() {
+        $scope.$on('$destroy', function () {
 
             EventDataFactory.unRegisterObserver(OdsEvent.IMPORT_FORM, $scope, '$id');
             EventDataFactory.unRegisterObserver(OdsEvent.EXPORT_FORM, $scope, '$id');

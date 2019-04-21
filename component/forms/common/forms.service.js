@@ -879,9 +879,10 @@
                     enableTime: false,
                     format: OdsDateTimeFormat.ShortDateLongYear,
                     selectedFormat: OdsDateTimeFormat.ShortDateLongYear,
-                    options: {
+                    modelOptions: {
                         timezone: getTimeZoneUTC()
                     },
+                    openInEditMode: false,
                     // utc: true,
                     required: false,
                     value: date,
