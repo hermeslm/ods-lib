@@ -53,7 +53,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
          */
         function hideTitle(field) {
 
-            return field.hideLabel ? true : false;
+            return !!field.hideLabel;
         }
 
         /**
@@ -69,7 +69,8 @@ function ViewerDirective(OdsFormService, uibDateParser) {
         function valueSubtitutor(field) {
 
             if (field.options.tokens && field.printView) {
-                return OdsFormService.strSubtitutor(field.value, field.options.tokens, field.options.prefix, field.options.suffix);
+                return OdsFormService.strSubtitutor(field.value, field.options.tokens, field.options.prefix,
+                    field.options.suffix);
             } else {
                 return field.value;
             }
@@ -84,7 +85,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
 
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
-                if (value == field.value) {
+                if (value === field.value) {
                     return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                 }
             }

@@ -155,7 +155,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
 
         function exportSchema() {
 
-            EventDataFactory.setData(OdsEvent.EXPORT_FORM, "");
+            EventDataFactory.setData(OdsEvent.EXPORT_FORM, '');
         }
     }
 }

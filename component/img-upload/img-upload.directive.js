@@ -42,7 +42,7 @@
             $scope.openModal = function () {
                 $uibModal.open({
                     templateUrl: 'img-upload/img-upload-dialog.html',
-                    controller: 'ImgUploadDialogController',
+                    controller: 'OdsImgUploadDialogController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: $scope.size ? $scope.size : 'lg',
@@ -70,7 +70,7 @@
                         }
                         $scope.ngModel = result.model;
                         $scope.original = result.original;
-                        $scope.onSave();
+                        $scope.onSave({ result: result });
                     }
                 });
             };

@@ -43,6 +43,8 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
             }
         }
 
+        $scope.getEditMode = getEditMode;
+
         $scope.clear = clear;
         $scope.save = save;
 
@@ -75,13 +77,21 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
         $scope.valueSubtitutor = valueSubtitutor;
 
         /**
+         * Return if it is in edit mode.
+         * @returns {boolean}
+         */
+        function getEditMode() {
+            return false;
+        }
+
+        /**
          * Hide title or label from component
          * @param field Component
          * @returns {boolean}
          */
         function hideTitle(field) {
 
-            return field.hideLabel ? true : false;
+            return !!field.hideLabel;
         }
 
         /**
@@ -120,8 +130,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
             return field &&
             field.validation &&
-            field.validation.required &&
-            field.validation.required !== undefined ? field.validation.required : false;
+            field.validation.required ? field.validation.required : false;
         }
 
         /**
@@ -133,8 +142,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
             return field &&
             field.validation &&
-            field.validation.minlength &&
-            field.validation.minlength !== undefined ? field.validation.minlength : null;
+            field.validation.minlength ? field.validation.minlength : null;
         }
 
         /**
@@ -146,8 +154,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
             return field &&
             field.validation &&
-            field.validation.pattern &&
-            field.validation.pattern !== undefined ? field.validation.pattern : null;
+            field.validation.pattern ? field.validation.pattern : null;
         }
 
         /**
@@ -159,8 +166,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
             return field &&
             field.validation &&
-            field.validation.maxlength &&
-            field.validation.maxlength !== undefined ? field.validation.maxlength : null;
+            field.validation.maxlength ? field.validation.maxlength : null;
         }
 
         function getFormFieldTemplate(fieldType) {

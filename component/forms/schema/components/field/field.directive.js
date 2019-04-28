@@ -170,8 +170,8 @@ function FieldDirective(OdsFormService, dialogs) {
          */
         function openCalendar(field) {
 
-            $scope.field.open = !field.open;
-            return $scope.field.open;
+            field.openInEditMode = !field.openInEditMode;
+            return field.openInEditMode;
         }
 
         /**
