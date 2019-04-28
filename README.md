@@ -1,4 +1,4 @@
-# AngularJS tools Lib developed by One Development Solution LLC.
+# AngularJS tools Lib developed by One Development Solution CORP in colaboration of UDT Software LLC.
 
 [![Build Status](https://travis-ci.org/refactorthis/angular-component-seed.svg?branch=master)](https://travis-ci.org/refactorthis/angular-component-seed)
 

@@ -39,6 +39,7 @@ function SchemaDirective(OdsFormService, EventDataFactory, OdsEvent) {
         $scope.onAdd = onAdd;
         $scope.onImportForm = onImportForm;
         $scope.onExportForm = onExportForm;
+        $scope.onLoadSubForm = onLoadSubForm;
 
         if (!$scope.schema) {
             $scope.schema = OdsFormService.newSchema();

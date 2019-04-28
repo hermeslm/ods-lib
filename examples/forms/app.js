@@ -3,13 +3,67 @@
  */
 var app = angular.module('example', ['ods-lib']);
 
+app.controller('ModalController', ModalController);
+
+ModalController.$inject = ['$scope', 'schema', '$uibModalInstance'];
+
+function ModalController($scope, schema, $uibModalInstance) {
+
+    var vm = this;
+
+    vm.schema = schema;
+
+    vm.ok = function () {
+        $uibModalInstance.close();
+    };
+
+    vm.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+
+}
+
 app.controller('FormsController', FormsController);
 
-FormsController.$inject = ['$scope', 'OdsFieldType', 'OdsComponentType', 'OdsFormService'];
+FormsController.$inject = ['$scope', 'OdsFieldType', 'OdsComponentType', 'OdsFormService', '$uibModal',
+    '$log', '$http'];
 
-function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService) {
+function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService, $uibModal,
+                         $log, $http) {
 
     // var $scope = this;
+
+    $scope.openInModal = function (size) {
+
+        var modalInstance = $uibModal.open({
+            ariaLabelledBy: 'modal-title',
+            ariaDescribedBy: 'modal-body',
+            templateUrl: 'modal-tpl.html',
+            controller: 'ModalController',
+            controllerAs: 'vm',
+            size: size,
+            resolve: {
+                schema: function () {
+                    return $scope.schema;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (result) {
+            $log.info('Modal closed at: ' + new Date());
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    $scope.loadFromServer = function () {
+
+        $http.get('resources/sample-form.json').success(function (data) {
+            // you can do some processing here
+            $scope.schema = OdsFormService.newSchema();
+            $scope.schema = OdsFormService.convertFormSchemaFromServer(data.form);
+        });
+    };
 
     var section0 = {
         "name": "section9543",
@@ -1161,8 +1215,8 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
     $scope.test2 = '<p>this is a sample&nbsp;&nbsp;<span class="marker">@patientName</span>&nbsp;that I testing with&nbsp;&nbsp;<span class="marker">@patientDob</span>&nbsp;. but we must to check this @patientDobcase hermeslm@gmail.com. @patientName is here.</p>';
 
     var patient = {
-        patientName : 'Hermes Lorenzo',
-        patientDob : '01/24/2017'
+        patientName: 'Hermes Lorenzo',
+        patientDob: '01/24/2017'
     };
 
     $scope.parse1 = parse1;
@@ -1182,6 +1236,7 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService)
     }
 
     $scope.copyExportables = copyExportables;
+
     function copyExportables() {
 
         var schema = OdsFormService.newSchema();

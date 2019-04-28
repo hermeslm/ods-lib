@@ -25,9 +25,9 @@
     <!-- endinject -->
     <!-- inject:css -->
     <link rel="stylesheet" href="../dist/forms/style.css">
-    <link rel="stylesheet" href="../dist/reports/style.css">
     <link rel="stylesheet" href="../dist/steps-indicator/style.css">
     <link rel="stylesheet" href="../dist/wizard-steps/style.css">
+    <link rel="stylesheet" href="../dist/reports/style.css">
     <!-- endinject -->
     <!-- endbuild -->
 
@@ -84,8 +84,10 @@
             <h1>AngularJS Form Builder Bootstrap based.</h1>
         </div>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
                 <button type="button" class="btn btn-primary" ng-click="copyExportables()">Get Exportables</button>
+                <button type="button" class="btn btn-success" ng-click="openInModal('lg')">Open in Modal</button>
+                <button type="button" class="btn btn-warning" ng-click="loadFromServer()">Load from Server</button>
             </div>
         </div>
     </section>
@@ -126,6 +128,7 @@
 <script src="../bower_components/ng-file-upload/ng-file-upload.js"></script>
 <script src="../bower_components/pdf.js-viewer/pdf.js"></script>
 <script src="../bower_components/angular-ui-mask/dist/mask.js"></script>
+<script src="../bower_components/lodash/lodash.js"></script>
 <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="../bower_components/angular-bootstrap-toggle/dist/angular-bootstrap-toggle.min.js"></script>
 <script src="../bower_components/angular-dialog-service/dist/dialogs.js"></script>

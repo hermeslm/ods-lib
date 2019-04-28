@@ -9,15 +9,13 @@
             .factory('OdsFormService', OdsFormService);
 
         OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
-            '$resource', 'OdsPosition'];
+            '$resource', 'OdsPosition', 'EventDataFactory', 'OdsEvent'];
 
         function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-                                $resource, OdsPosition) {
+                                $resource, OdsPosition, EventDataFactory, OdsEvent) {
 
             var uniqueCounter = (+new Date()) % 10000;
-
             var version = '1.0';
-
             var formats = {
                 JSON: 'json'
             };
@@ -104,6 +102,7 @@
                 defaultCKEditorSuffix: defaultCKEditorSuffix,
 
                 getTimeZoneUTC: getTimeZoneUTC,
+                convertFormSchema: convertFormSchema,
                 convertFormSchemaFromServer: convertFormSchemaFromServer,
                 setReadOnlyStatus: setReadOnlyStatus,
                 copyJson: copyJson,
@@ -148,9 +147,11 @@
                 var base64result = file.substr(file.indexOf(',') + 1);
                 var decodedString = atob(base64result);
                 if (decodedString && decodedString !== '') {
-                    return angular.fromJson(decodedString);
+                    var loadedFile = angular.fromJson(decodedString);
+                    loadedFile.form = convertFormSchema(loadedFile.form);
+                    return loadedFile
                 } else {
-                    console.error('Not valid JSON file!!!')
+                    console.error('Not valid JSON file!!!');
                 }
             }
 
@@ -612,7 +613,10 @@
 
             /**
              * Create a new Section Object.
-             * @returns {{name, componentType: string, title: string, displayProperties: boolean, allowedTypes: [null], rows: [null]}}
+             * @returns {{isExportable: boolean, displayProperties: boolean, allowedTypes: string[],
+             * componentType: string, name: (*|number), title: string, rows: {displayProperties: boolean,
+             * componentType: string, cssClass: string, name: (*|number), cols: {allowedTypes: string[],
+             * cssClass: string, name: (*|number), fields: Array}[]}[], hideLabel: boolean}}
              */
             function newSectionObject() {
 
@@ -632,7 +636,8 @@
 
             /**
              * Create a new Row Object.
-             * @returns {{name, componentType: string, cssClass: string, displayProperties: boolean, cols: [null]}}
+             * @returns {{displayProperties: boolean, componentType: string, cssClass: string,
+             * name: (*|number), cols: {allowedTypes: string[], cssClass: string, name: (*|number), fields: Array}[]}}
              */
             function newRowObject() {
 
@@ -648,7 +653,7 @@
             /**
              * Create a new Column Object.
              * @param colWidth Width of column.
-             * @returns {{name, cssClass: string, allowedTypes: [null], fields: Array}}
+             * @returns {{allowedTypes: string[], cssClass: string, name: (*|number), fields: Array}}
              */
             function newColumnObject(colWidth) {
 
@@ -749,7 +754,9 @@
 
             /**
              * Create a new Field Select Object
-             * @returns Field Select Object
+             * @returns {componentType: string, titleField: string, name: (*|number), options: *[],
+             * limitTo: number, label: string, placeholder: string, type: (number|string),
+             * valueField: string, value: null, required: boolean, validation: {messages: {}}} Select Object
              */
             function newFieldSelectObject() {
 
@@ -782,7 +789,10 @@
 
             /**
              * Create a new Field Select2 Object
-             * @returns Field Select2 Object
+             * @returns {componentType: string, titleField: string, limitTo: number,
+             * label: string, type: string, valueField: string, required: boolean,
+             * name: (*|number), options: *[], placeholder: string, value: null,
+             * validation: {messages: {}}, multiSelect: boolean} Select2 Object
              */
             function newFieldSelect2Object() {
 
@@ -851,7 +861,8 @@
 
             /**
              * Create a new Field Toggle Object
-             * @returns Field Toggle Object
+             * @returns {componentType: string, ln: boolean, name: (*|number),
+             * label: string, type: string, value: boolean, off: string, on: string} Toggle Object
              */
             function newFieldToggleObject() {
 
@@ -1187,8 +1198,7 @@
                     } else {
                         if (element && element.constructor !== Array) {
                             return field.titleField !== undefined ? element[field.titleField] : element.name;
-                        }
-                        else {
+                        } else {
                             return field.placeholder;
                         }
                     }
@@ -1318,35 +1328,21 @@
 
                 var comp = angular.copy(component);
 
-                switch (comp.componentType) {
-                    // case OdsComponentType.FORM:
-                    //     return 'form' + uniqueCounter;
-                    // case OdsComponentType.SECTION:
-                    //     return 'section' + uniqueCounter;
-                    // case OdsComponentType.ROW:
-                    //     return 'row' + uniqueCounter;
-                    // case OdsComponentType.COLUMN:
-                    //     return 'column' + uniqueCounter;
-                    case OdsComponentType.FIELD:
-                        comp.name = generateName(comp.componentType);
-                        if (comp.type === OdsFieldType.TABLE) {
-                            for (var i = 0; i < comp.matrix.length; i++) {
-                                for (var j = 0; j < comp.matrix[i].length; j++) {
-                                    comp.matrix[i][j].name = generateName(comp.matrix[i][j].componentType);
-                                }
-                            }
-                        }
-                        return comp;
-                    // case OdsComponentType.ITEM:
-                    //     return 'item' + uniqueCounter;
-                    // case OdsComponentType.PLUGIN:
-                    //     return 'plugin' + uniqueCounter;
-                    default :
-                        return uniqueCounter;
+                if (comp.componentType === OdsComponentType.FIELD) {
+                    comp.name = generateName(comp.componentType);
+                    if (comp.type === OdsFieldType.TABLE) {
+                        _.forEach(comp.matrix, function (rows) {
+                            _.forEach(rows, function (column) {
+                                column.name = generateName(column.componentType);
+                            });
+                        });
+                    }
+                    return comp;
+                } else {
+                    return uniqueCounter;
                 }
             }
 
-            //TODO add get values from table field, not implemented at the moment.
             function saveFormData(schema) {
 
                 var formData = {
@@ -1356,41 +1352,7 @@
                     fields: []
                 };
 
-                var field;
-                var layout = schema.layout;
-
-                for (var i = 0; i < layout.length; i++) {
-                    var rows = layout[i].rows;
-                    for (var j = 0; j < rows.length; j++) {
-                        var cols = rows[j].cols;
-                        for (var k = 0; k < cols.length; k++) {
-                            var fields = cols[k].fields;
-                            for (var l = 0; l < fields.length; l++) {
-                                if (fields[l].type === OdsFieldType.TABLE) {
-                                    for (var m = 0; m < fields[l].matrix.length; m++) {
-                                        for (var p = 0; p < fields[l].matrix[m].length; p++) {
-                                            field = {
-                                                name: cols[k].fields[l].matrix[m][p].fields[0].name,
-                                                type: cols[k].fields[l].matrix[m][p].fields[0].type,
-                                                code: cols[k].fields[l].matrix[m][p].fields[0].code,
-                                                value: cols[k].fields[l].matrix[m][p].fields[0].value
-                                            };
-                                            formData.fields.push(field);
-                                        }
-                                    }
-                                } else {
-                                    field = {
-                                        name: cols[k].fields[l].name,
-                                        type: cols[k].fields[l].type,
-                                        code: cols[k].fields[l].code,
-                                        value: cols[k].fields[l].value
-                                    };
-                                    formData.fields.push(field);
-                                }
-                            }
-                        }
-                    }
-                }
+                formData.fields.concat(getDataFromComponentCode(schema, false, null));
                 return formData;
             }
 
@@ -1422,13 +1384,11 @@
             function getExportables(schema) {
 
                 var form = newSchemaEmpty();
-                var layout = schema.layout;
-                for (var i = 0; i < layout.length; i++) {
-                    var content = layout[i];
-                    if (content && content.exportable) {
-                        form.layout.push(content);
+                _.forEach(schema.layout, function (item) {
+                    if (item && item.exportable) {
+                        form.layout.push(item);
                     }
-                }
+                });
 
                 return form;
             }
@@ -1447,110 +1407,140 @@
                     } else {
                         layout.push(subForm);
                     }
-
                     return true;
                 } else {
                     return false;
                 }
             }
 
-            function getDataFromComponentCode(schema, code) {
+            /**
+             * Get fields data from schema by code.
+             * @param schema Form schema.
+             * @param code Code to fin in the schema.
+             * @param filter Boolean to specify if filter or not.
+             * @returns {Array}
+             */
+            function getDataFromComponentCode(schema, filter, code) {
 
-                var resultFields = [];
+                var fields = [];
 
-                var field;
-                var layout = schema.layout;
-                var fields;
-
-                for (var i = 0; i < layout.length; i++) {
-                    var rows = layout[i].rows;
-                    for (var j = 0; j < rows.length; j++) {
-                        var cols = rows[j].cols;
-                        for (var k = 0; k < cols.length; k++) {
-                            fields = cols[k].fields;
-                            for (var l = 0; l < fields.length; l++) {
-                                if (fields[l].type === OdsFieldType.TABLE) {
-                                    for (var m = 0; m < fields[l].matrix.length; m++) {
-                                        for (var p = 0; p < fields[l].matrix[m].length; p++) {
-                                            if (cols[k].fields[l].matrix[m][p].fields[0].code === code) {
-                                                field = {
-                                                    name: cols[k].fields[l].matrix[m][p].fields[0].name,
-                                                    type: cols[k].fields[l].matrix[m][p].fields[0].type,
-                                                    code: cols[k].fields[l].matrix[m][p].fields[0].code,
-                                                    value: cols[k].fields[l].matrix[m][p].fields[0].value
-                                                };
-                                                resultFields.push(field);
-                                            }
-                                        }
-                                    }
+                _.forEach(schema.layout, function (item) {
+                    var rows = item.rows;
+                    _.forEach(rows, function (row) {
+                        var cols = row.cols;
+                        _.forEach(cols, function (columnRow) {
+                            _.forEach(columnRow.fields, function (field) {
+                                if (field.type === OdsFieldType.TABLE) {
+                                    getDataFromTablePlugin(fields, field, filter, code);
                                 } else {
-                                    if (cols[k].fields[l].code === code) {
-                                        field = {
-                                            name: cols[k].fields[l].name,
-                                            type: cols[k].fields[l].type,
-                                            code: cols[k].fields[l].code,
-                                            value: cols[k].fields[l].value
-                                        };
-                                        resultFields.push(field);
-                                    }
+                                    getDataFromField(fields, field, filter, code);
                                 }
-                                // //TODO if component is a table we need to lookup for every field in the table.
-                                // if (cols[k].fields[l].code === code) {
-                                //     var field = {
-                                //         name: cols[k].fields[l].name,
-                                //         code: cols[k].fields[l].code,
-                                //         value: cols[k].fields[l].value
-                                //     };
-                                //     resultFields.push(field);
-                                // }
-                            }
-                        }
-                    }
-                }
+                            });
+                        });
+                    });
+                });
+
                 return fields;
             }
 
-            function convertFormSchemaFromServer(json) {
+            function getDataFromTablePlugin(result, field, filter, code) {
 
-                var schema = angular.fromJson(json);
-
-                var fields;
-                var layout = schema.layout;
-
-                for (var i = 0; i < layout.length; i++) {
-                    var rows = layout[i].rows;
-                    for (var j = 0; j < rows.length; j++) {
-                        var cols = rows[j].cols;
-                        for (var k = 0; k < cols.length; k++) {
-                            fields = cols[k].fields;
-                            for (var l = 0; l < fields.length; l++) {
-                                if (fields[l].type === OdsFieldType.TABLE) {
-                                    for (var m = 0; m < fields[l].matrix.length; m++) {
-                                        var matrixRow = fields[l].matrix[m];
-                                        for (var p = 0; p < matrixRow.length; p++) {
-                                            if (matrixRow[p].fields.length > 0) {
-                                                if (matrixRow[p].fields[0].type === OdsFieldType.DATETIME) {
-                                                    //If field is datetime we set Date object from string
-                                                    if(fields[l].value != null){
-                                                        matrixRow[p].fields[0].value = new Date(Date.parse(matrixRow[p].fields[0].value));
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    if (fields[l].type === OdsFieldType.DATETIME) {
-                                        if(fields[l].value != null){
-                                            fields[l].value = new Date(Date.parse(fields[l].value));
-                                        }
-                                    }
-                                }
-                            }
+                //We must to repeat the process because is a table.
+                _.forEach(field.matrix, function (matrixRow) {
+                    _.forEach(matrixRow, function (matrixColumn) {
+                        if (matrixColumn.fields.length > 0) {
+                            getDataFromField(result, matrixColumn.fields[0], filter, code);
                         }
+                    })
+                });
+            }
+
+            function getDataFromField(result, field, filter, code) {
+
+                field = {
+                    name: field.name,
+                    type: field.type,
+                    code: field.code,
+                    value: field.value
+                };
+                if (filter) {
+                    if (field.code === code) {
+                        result.push(field);
                     }
+                } else {
+                    result.push(field);
+                }
+            }
+
+            /**
+             * Deserialize the json schema into schema object and parse
+             * the datetime field value from string into a Date valid object.
+             * @param json The json form schema.
+             * @returns {Object|Array|string|number}
+             */
+            function convertFormSchema(schema) {
+
+                if (schema) {
+                    _.forEach(schema.layout, function (item) {
+                        var rows = item.rows;
+                        _.forEach(rows, function (row) {
+                            var cols = row.cols;
+                            _.forEach(cols, function (columnRow) {
+                                _.forEach(columnRow.fields, function (field) {
+                                    if (field.type === OdsFieldType.TABLE) {
+                                        convertTablePlugin(field);
+                                    } else {
+                                        initDateTimeField(field);
+                                    }
+                                });
+                            });
+                        });
+                    });
                 }
 
                 return schema;
+            }
+
+            /**
+             * Deserialize the json schema into schema object and parse
+             * the datetime field value from string into a Date valid object.
+             * @param json The json form schema.
+             * @returns {Object|Array|string|number}
+             */
+            function convertFormSchemaFromServer(json) {
+
+                var schema = angular.fromJson(json);
+                return convertFormSchema(schema);
+            }
+
+            /**
+             * Initialize the DateTime field from text using Date parsing.
+             * @param field DateTime field.
+             */
+            function initDateTimeField(field) {
+
+                //If field is datetime we set Date object from string
+                if (field.type === OdsFieldType.DATETIME) {
+                    if (field.value != null) {
+                        field.value = new Date(Date.parse(field.value));
+                    }
+                }
+            }
+
+            /**
+             * Util function that serialize schema matrix plugin
+             * @param field Field of type OdsFieldType.TABLE
+             */
+            function convertTablePlugin(field) {
+
+                //We must to repeat the process because is a table.
+                _.forEach(field.matrix, function (matrixRow) {
+                    _.forEach(matrixRow, function (matrixColumn) {
+                        if (matrixColumn.fields.length > 0) {
+                            initDateTimeField(matrixColumn.fields[0]);
+                        }
+                    })
+                });
             }
 
             /**
@@ -1562,94 +1552,107 @@
             function setReadOnlyStatus(json, status) {
 
                 var schema = angular.fromJson(json);
-
-                var fields;
-                var layout = schema.layout;
-
-                for (var i = 0; i < layout.length; i++) {
-                    var rows = layout[i].rows;
-                    for (var j = 0; j < rows.length; j++) {
-                        var cols = rows[j].cols;
-                        for (var k = 0; k < cols.length; k++) {
-                            fields = cols[k].fields;
-                            for (var l = 0; l < fields.length; l++) {
-                                if (fields[l].type === OdsFieldType.TABLE) {
-                                    for (var m = 0; m < fields[l].matrix.length; m++) {
-                                        var matrixRow = fields[l].matrix[m];
-                                        for (var p = 0; p < matrixRow.length; p++) {
-                                            if (matrixRow[p].fields.length > 0) {
-                                                matrixRow[p].fields[0].readonly = status;
-                                            }
-                                        }
-                                    }
+                _.forEach(schema.layout, function (item) {
+                    var rows = item.rows;
+                    _.forEach(rows, function (row) {
+                        var cols = row.cols;
+                        _.forEach(cols, function (columnRow) {
+                            _.forEach(columnRow.fields, function (field) {
+                                if (field.type === OdsFieldType.TABLE) {
+                                    setStatusToTablePlugin(field, status);
                                 } else {
-                                    fields[l].readonly = status;
+                                    setStatusToField(field, status);
                                 }
-                            }
-                        }
-                    }
-                }
+                            });
+                        });
+                    });
+                });
 
                 return schema;
             }
 
+            function setStatusToTablePlugin(field, status) {
+
+                //We must to repeat the process because is a table.
+                _.forEach(field.matrix, function (matrixRow) {
+                    _.forEach(matrixRow, function (matrixColumn) {
+                        if (matrixColumn.fields.length > 0) {
+                            setStatusToField(matrixColumn.fields[0], status);
+                        }
+                    })
+                });
+            }
+
+            function setStatusToField(field, status) {
+
+                field.readonly = status;
+            }
+
+            /**
+             * Inject config to CKEditor in the Schema.
+             * @param schema The Schema object.
+             * @param config The CKEditor configuration.
+             */
             function setConfigToCKEditorComponent(schema, config) {
 
-                var fields;
-
-                if (schema && schema.layout) {
-                    var layout = schema.layout;
-
-                    for (var i = 0; i < layout.length; i++) {
-                        var rows = layout[i].rows;
-                        for (var j = 0; j < rows.length; j++) {
-                            var cols = rows[j].cols;
-                            for (var k = 0; k < cols.length; k++) {
-                                fields = cols[k].fields;
-                                for (var l = 0; l < fields.length; l++) {
-                                    if (fields[l].type === OdsFieldType.TABLE) {
-                                        for (var m = 0; m < fields[l].matrix.length; m++) {
-                                            var matrixRow = fields[l].matrix[m];
-                                            for (var p = 0; p < matrixRow.length; p++) {
-                                                if (matrixRow[p].fields.length > 0) {
-                                                    if (matrixRow[p].fields[0].type === OdsFieldType.CKEDITOR) {
-                                                        matrixRow[p].fields[0].options.prefix = config.ckeditor.prefix ?
-                                                            config.ckeditor.prefix : defaultCKEditorPrefix();
-                                                        matrixRow[p].fields[0].options.suffix = config.ckeditor.suffix ?
-                                                            config.ckeditor.suffix : defaultCKEditorSuffix();
-                                                        if (config.ckeditor.suggestions) {
-                                                            matrixRow[p].fields[0].options.suggestions = config.ckeditor.suggestions;
-                                                        }
-                                                        if (config.ckeditor.suggestionsUrl) {
-                                                            matrixRow[p].fields[0].options.suggestionsUrl = config.ckeditor.suggestionsUrl
-                                                        }
-                                                        if (config.ckeditor.tokens) {
-                                                            matrixRow[p].fields[0].options.tokens = config.ckeditor.tokens;
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
+                if (schema && schema.layout && config) {
+                    _.forEach(schema.layout, function (item) {
+                        var rows = item.rows;
+                        _.forEach(rows, function (row) {
+                            var cols = row.cols;
+                            _.forEach(cols, function (columnRow) {
+                                _.forEach(columnRow.fields, function (field) {
+                                    if (field.type === OdsFieldType.TABLE) {
+                                        setConfigToCKEditorInTablePlugin(field, config);
                                     } else {
-                                        if (fields[l].type === OdsFieldType.CKEDITOR) {
-                                            fields[l].options.prefix = config.ckeditor.prefix ?
-                                                config.ckeditor.prefix : defaultCKEditorPrefix();
-                                            fields[l].options.suffix = config.ckeditor.suffix ?
-                                                config.ckeditor.suffix : defaultCKEditorSuffix();
-                                            if (config.ckeditor.suggestions) {
-                                                fields[l].options.suggestions = config.ckeditor.suggestions;
-                                            }
-                                            if (config.ckeditor.suggestionsUrl) {
-                                                fields[l].options.suggestionsUrl = config.ckeditor.suggestionsUrl
-                                            }
-                                            if (config.ckeditor.tokens) {
-                                                fields[l].options.tokens = config.ckeditor.tokens;
-                                            }
-                                        }
+                                        setConfigToCKEditorField(field.fields[0], config);
                                     }
-                                }
-                            }
+                                });
+                            });
+                        });
+                    });
+                }
+            }
+
+            /**
+             * Inject config to CKEditor in the Table plugin field.
+             * @param field The field object.
+             * @param config The CKEditor configuration.
+             */
+            function setConfigToCKEditorInTablePlugin(field, config) {
+
+                //We must to repeat the process because is a table.
+                _.forEach(field.matrix, function (matrixRow) {
+                    _.forEach(matrixRow, function (matrixColumn) {
+                        if (matrixColumn.fields.length > 0 &&
+                            matrixColumn.fields[0].type === OdsFieldType.CKEDITOR) {
+
+                            setConfigToCKEditorField(matrixColumn.fields[0], config);
                         }
+                    })
+                });
+            }
+
+            /**
+             * Inject config to CKEditor into the field.
+             * @param field The field object.
+             * @param config The CKEditor configuration.
+             */
+            function setConfigToCKEditorField(field, config) {
+
+                if (config.ckeditor) {
+                    field.options.prefix = config.ckeditor.prefix ?
+                        config.ckeditor.prefix : defaultCKEditorPrefix();
+                    field.options.suffix = config.ckeditor.suffix ?
+                        config.ckeditor.suffix : defaultCKEditorSuffix();
+                    if (config.ckeditor.suggestions) {
+                        field.options.suggestions = config.ckeditor.suggestions;
+                    }
+                    if (config.ckeditor.suggestionsUrl) {
+                        field.options.suggestionsUrl = config.ckeditor.suggestionsUrl
+                    }
+                    if (config.ckeditor.tokens) {
+                        field.options.tokens = config.ckeditor.tokens;
                     }
                 }
             }
@@ -1659,40 +1662,37 @@
              * @param schema
              * @param section
              * @param position
-             * @package clonedCanClone
+             * @param clonedCanClone
              * @return {Object|Array|string|number}
              */
             function cloneSection(schema, section, clonedCanClone, position) {
 
-                var fields;
                 var cloneSection = angular.copy(section);
                 cloneSection.name = generateName(cloneSection.componentType);
                 cloneSection.canClone = clonedCanClone;
                 cloneSection.clonedCanClone = clonedCanClone;
-                var rows = cloneSection.rows;
-                for (var i = 0; i < rows.length; i++) {
-                    var cols = rows[i].cols;
-                    rows[i].name = generateName(rows[i].componentType);
-                    for (var j = 0; j < cols.length; j++) {
-                        fields = cols[j].fields;
-                        cols[j].name = generateName(cols[j].componentType);
-                        for (var k = 0; k < fields.length; k++) {
-                            if (fields[k].type === OdsFieldType.TABLE) {
-                                for (var l = 0; l < fields[k].matrix.length; l++) {
-                                    var matrixRow = fields[k].matrix[l];
-                                    for (var p = 0; p < matrixRow.length; p++) {
-                                        matrixRow[p].name = generateName(OdsComponentType.ITEM);
-                                        if (matrixRow[p].fields.length > 0) {
-                                            matrixRow[p].fields[0].name = generateName(matrixRow[p].fields[0].componentType);
+                _.forEach(cloneSection.rows, function (row) {
+                    row.name = generateName(row.componentType);
+                    _.forEach(row.cols, function (columnRow) {
+                        columnRow.name = generateName(columnRow.componentType);
+                        _.forEach(columnRow.fields, function (field) {
+                            if (field.type === OdsFieldType.TABLE) {
+                                //We must to repeat the process because is a table.
+                                _.forEach(field.matrix, function (matrixRow) {
+                                    matrixRow.name = generateName(OdsComponentType.ITEM);
+                                    _.forEach(matrixRow, function (matrixColumn) {
+                                        if (matrixColumn.fields.length > 0) {
+                                            matrixColumn.fields[0].name =
+                                                generateName(matrixColumn.fields[0].componentType);
                                         }
-                                    }
-                                }
+                                    })
+                                });
                             } else {
-                                fields[k].name = generateName(fields[k].componentType);
+                                field.name = generateName(field.componentType);
                             }
-                        }
-                    }
-                }
+                        });
+                    });
+                });
 
                 position = position ? position : OdsPosition.DOWN;
                 if (position === OdsPosition.UP) {

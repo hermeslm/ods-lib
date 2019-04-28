@@ -94,7 +94,7 @@ function RowDirective(OdsFormService, dialogs) {
 
                 var size = row.cols[i].cssClass.substr(row.cols[i].cssClass.length - 2);
                 size = parseInt(size.replace(/-/g, ''));
-                gridSize = eval(gridSize + size);
+                gridSize = gridSize + size;
             }
             if (gridSize < 12) {
                 row.cols.push(OdsFormService.newColumnObject(12 - gridSize));
