@@ -1,6 +1,6 @@
 <div ng-include="'forms/schema/components/label.html'"></div>
 <div class="input-group">
-    <input id="{{field.name}}" class="form-control" ods-dynamic-name="field.name" type="text"
+    <input id="{{getUniqueName(field)}}" ods-dynamic-name="getUniqueName(field)" class="form-control" type="text"
            enable-time="field.enableTime" datetime-picker="{{field.format}}" ng-required="getRequired(field)"
            ng-model="field.value" is-open="field.openInEditMode" model-options="field.modelOptions"
            ng-disabled="field.readonly" datepicker-append-to-body="true"/>

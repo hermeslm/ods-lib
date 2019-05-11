@@ -2,7 +2,7 @@
      ng-bind-html="valueSubtitutor(field)">
 </div>
 <div ng-if="!field.printView" class="position-relative">
-<textarea id="{{field.name}}" name="{{field.name}}" placeholder="{{field.placeholder}}" ng-model="field.value"
-          title="{{field.tooltip}}" options="field.options" ods-ckeditor
+<textarea id="{{getUniqueName(field)}}" name="{{getUniqueName(field)}}" placeholder="{{field.placeholder}}"
+          ng-model="field.value" title="{{field.tooltip}}" options="field.options" ods-ckeditor
           ng-disabled="field.readonly"></textarea>
 </div>

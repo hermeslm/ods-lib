@@ -1605,7 +1605,7 @@
                                     if (field.type === OdsFieldType.TABLE) {
                                         setConfigToCKEditorInTablePlugin(field, config);
                                     } else {
-                                        setConfigToCKEditorField(field.fields[0], config);
+                                        setConfigToCKEditorField(field, config);
                                     }
                                 });
                             });
@@ -1620,13 +1620,11 @@
              * @param config The CKEditor configuration.
              */
             function setConfigToCKEditorInTablePlugin(field, config) {
-
                 //We must to repeat the process because is a table.
                 _.forEach(field.matrix, function (matrixRow) {
                     _.forEach(matrixRow, function (matrixColumn) {
                         if (matrixColumn.fields.length > 0 &&
                             matrixColumn.fields[0].type === OdsFieldType.CKEDITOR) {
-
                             setConfigToCKEditorField(matrixColumn.fields[0], config);
                         }
                     })
@@ -1641,18 +1639,20 @@
             function setConfigToCKEditorField(field, config) {
 
                 if (config.ckeditor) {
-                    field.options.prefix = config.ckeditor.prefix ?
-                        config.ckeditor.prefix : defaultCKEditorPrefix();
-                    field.options.suffix = config.ckeditor.suffix ?
-                        config.ckeditor.suffix : defaultCKEditorSuffix();
-                    if (config.ckeditor.suggestions) {
-                        field.options.suggestions = config.ckeditor.suggestions;
-                    }
-                    if (config.ckeditor.suggestionsUrl) {
-                        field.options.suggestionsUrl = config.ckeditor.suggestionsUrl
-                    }
-                    if (config.ckeditor.tokens) {
-                        field.options.tokens = config.ckeditor.tokens;
+                    if (field.type === OdsFieldType.CKEDITOR) {
+                        field.options.prefix = config.ckeditor.prefix ?
+                            config.ckeditor.prefix : defaultCKEditorPrefix();
+                        field.options.suffix = config.ckeditor.suffix ?
+                            config.ckeditor.suffix : defaultCKEditorSuffix();
+                        if (config.ckeditor.suggestions) {
+                            field.options.suggestions = config.ckeditor.suggestions;
+                        }
+                        if (config.ckeditor.suggestionsUrl) {
+                            field.options.suggestionsUrl = config.ckeditor.suggestionsUrl
+                        }
+                        if (config.ckeditor.tokens) {
+                            field.options.tokens = config.ckeditor.tokens;
+                        }
                     }
                 }
             }

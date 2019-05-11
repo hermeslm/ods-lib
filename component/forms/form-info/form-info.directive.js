@@ -24,7 +24,18 @@ function OdsFormInfoDirective() {
 
     /* private helper methods*/
 
-    function linkFunc() {
+    function linkFunc($scope) {
 
+        $scope.view = '-schema';
+
+        $scope.getUniqueName = getUniqueName;
+
+        /**
+         * Return an unique name to avoid fields name collisions.
+         * @returns {boolean}
+         */
+        function getUniqueName(field) {
+            return field.name ? field.name + $scope.view : $scope.view;
+        }
     }
 }

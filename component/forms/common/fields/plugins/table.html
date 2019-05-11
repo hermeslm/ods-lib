@@ -1,5 +1,5 @@
 <div class="table-responsive position-relative">
-    <table class="{{field.cssClass}}" id="{{field.name}}">
+    <table class="{{field.cssClass}}" id="{{getUniqueName(field)}}">
         <tbody>
         <tr ng-repeat="row in field.matrix">
             <td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}" style="min-width: 100px">
