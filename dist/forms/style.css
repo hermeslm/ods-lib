@@ -298,7 +298,7 @@
 }
 
 .datetime-picker-dropdown {
-  z-index: 1151 !important;
+  z-index: 2500 !important;
 }
 
 /*# sourceMappingURL=style.css.map */
