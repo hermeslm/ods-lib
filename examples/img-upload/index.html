@@ -100,18 +100,18 @@
     <div class="starter-template">
         <h1>Image upload directive</h1>
         <ods-img-upload
-                original="original"
+                original="defaultPicture"
                 ng-model="image"
                 css-class="img-thumbnail"
                 display-image="true"
                 mode="insert"
                 upload-text="Upload image..."
                 size="lg"
-                default-image="defaultPicture"
                 area-type="square"
                 on-save="savePictureOfChart()">
         </ods-img-upload>
     </div>
+    {{$scope.image}}
 
 </div>
 
@@ -126,7 +126,6 @@
 <script src="../bower_components/jSignature/src/plugins/jSignature.CompressorBase30.js"></script>
 <script src="../bower_components/jSignature/src/plugins/jSignature.CompressorSVG.js"></script>
 <script src="../bower_components/jSignature/src/plugins/jSignature.UndoButton.js"></script>
-<script src="../bower_components/webcam-directive/dist/webcam.min.js"></script>
 <script src="../bower_components/angular-ui-select/dist/select.js"></script>
 <script src="../bower_components/angular-drag-and-drop-lists/angular-drag-and-drop-lists.js"></script>
 <script src="../bower_components/angular-confirm/dist/angular-confirm.min.js"></script>

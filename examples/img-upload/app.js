@@ -7,8 +7,8 @@ app.controller('MainCtrl', function ($scope) {
 
     // var vm = this;
 
-    $scope.original;
-    $scope.image;
+    $scope.original = '';
+    $scope.image = null;
 
     $scope.pictureRef;
 

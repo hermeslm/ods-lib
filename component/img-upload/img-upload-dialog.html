@@ -26,41 +26,17 @@
         <br>
         <div class="row">
             <div class="col-lg-6">
-                <button type="button" class="btn btn-warning btn-block"
-                        ngf-select
-                        ngf-change="vm.handleFileSelect($event, $file)"
-                        accept="image/*">
+                <button type="button" class="btn btn-warning btn-block" ngf-select
+                        ngf-change="vm.handleFileSelect($event, $file)" accept="image/*">
                     <i class="fa fa-image" aria-hidden="true"></i> Browse...
                 </button>
             </div>
         </div>
-        <!--<div class="cropper-wrapper">-->
-
-        <!--<div class="crop-area" ng-class="!originalImage?'default-img':''">-->
-        <!--<ui-cropper image="vm.originalImage"-->
-        <!--area-type="{{vm.areaType}}"-->
-        <!--chargement="'Loading'"-->
-        <!--result-image-size="vm.resultImageSize"-->
-        <!--result-image="vm.myCroppedImage"-->
-        <!--canvas-scalemode="true"-->
-        <!--change-on-fly="true">-->
-        <!--</ui-cropper>-->
-
-        <!--<div class="load-button">-->
-        <!--<button type="button" class="btn btn-warning btn-block"-->
-        <!--ngf-select-->
-        <!--ngf-change="vm.handleFileSelect($event, $file)"-->
-        <!--accept="image/*">-->
-        <!--<i class="fa fa-image" aria-hidden="true"></i> Browse...-->
-        <!--</button>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="cropped-image">-->
-        <!--<img ng-src="{{vm.myCroppedImage}}">-->
-        <!--</div>-->
-        <!--</div>-->
     </div>
     <div class="modal-footer">
+        <button type="button" class="btn btn-info" ng-click="vm.setDefault()">
+            <i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Restore default
+        </button>
         <button type="submit" class="btn btn-success">
             <i class="fa fa-save" aria-hidden="true"></i> Save
         </button>
