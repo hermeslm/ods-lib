@@ -1,5 +1,6 @@
-<ui-select name="{{field.name}}" id="{{field.name + dev}}" multiple ng-model="field.value" ng-disabled="field.readonly"
-           ui-select-required="getRequired(field)" close-on-select="true" title="{{field.title}}">
+<ui-select name="{{getUniqueName(field)}}" id="{{getUniqueName(field)}}" multiple ng-model="field.value"
+           ng-disabled="field.readonly" ui-select-required="getRequired(field)" close-on-select="true"
+           title="{{field.title}}">
     <ui-select-match placeholder="{{field.placeholder}}">
         {{getSelectFieldTitleValue(field, $item)}}
     </ui-select-match>

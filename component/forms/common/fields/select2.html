@@ -1,5 +1,5 @@
-<ui-select ods-dynamic-name="field.name" name="{{field.name}}" id="{{field.name + dev}}" ng-model="field.value"
-           ng-disabled="field.readonly" ui-select-required="getRequired(field)" close-on-select="true"
+<ui-select ods-dynamic-name="getUniqueName(field)" id="{{getUniqueName(field)}}" ng-model="field.value"
+           close-on-select="true" ng-disabled="field.readonly" ui-select-required="getRequired(field)"
            title="{{field.tooltip}}">
     <ui-select-match placeholder="{{field.placeholder}}">
         {{getSelectFieldTitleValue(field, $select.selected)}}

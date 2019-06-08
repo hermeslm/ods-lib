@@ -1,5 +1,5 @@
-<textarea class="form-control" ods-dynamic-name="field.name" id="{{field.name + dev}}" placeholder="{{field.placeholder}}"
-          title="{{field.tooltip}}" ng-model="field.value" ng-required="getRequired(field)" type="{{field.type}}"
-          ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}"
-          data-resize="disabled" ng-readonly="field.readonly">
+<textarea class="form-control" ods-dynamic-name="getUniqueName(field)" id="{{getUniqueName(field)}}"
+          placeholder="{{field.placeholder}}" title="{{field.tooltip}}" ng-model="field.value"
+          ng-required="getRequired(field)" type="{{field.type}}" ng-minlength="getMinLength(field)"
+          ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" data-resize="disabled" ng-readonly="field.readonly">
 </textarea>

@@ -36,7 +36,9 @@ function FieldDirective(OdsFormService, dialogs) {
          * @type {boolean}
          */
         // $scope.fieldDisabled = true;
-        $scope.dev = '-dev';
+        $scope.view = '-schema';
+
+        $scope.getUniqueName = getUniqueName;
 
         $scope.toggleFieldProperties = toggleFieldProperties;
         $scope.getSchemaField = getSchemaField;
@@ -56,10 +58,18 @@ function FieldDirective(OdsFormService, dialogs) {
         $scope.openCalendar = openCalendar;
         $scope.formats = OdsFormService.getDateTimeFormats();
         $scope.formats.push({value: 'custom', option: 'Custom format'});
-        $scope.showCustomFormat = $scope.field.selectedFormat === 'custom' ? true : false;
+        $scope.showCustomFormat = $scope.field.selectedFormat === 'custom';
         $scope.onSelectFormat = onSelectFormat;
 
         $scope.addToClipboard = OdsFormService.addToClipBoard;
+
+        /**
+         * Return an unique name to avoid fields name collisions.
+         * @returns {boolean}
+         */
+        function getUniqueName(field) {
+            return field.name ? field.name + $scope.view : $scope.view;
+        }
 
         /**
          * Toggle Row properties options.
@@ -126,10 +136,9 @@ function FieldDirective(OdsFormService, dialogs) {
                     $scope.field.validation.pattern = $scope.patterns[$scope.field.patternSelect].pattern;
                 }
             } else {
-                var pattern = {
+                $scope.field.validation = {
                     pattern: $scope.patterns[$scope.field.patternSelect].pattern
                 };
-                $scope.field.validation = pattern;
             }
         }
 

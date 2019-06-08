@@ -9,10 +9,10 @@
         .controller('OdsImgUploadDialogController', OdsImgUploadDialogController);
 
     OdsImgUploadDialogController.$inject = ['$scope', '$uibModalInstance', 'areaType', 'ngModel',
-        'croppedImageSize', 'original'];
+        'croppedImageSize', 'original', 'defaultImage'];
 
     function OdsImgUploadDialogController($scope, $uibModalInstance, areaType, ngModel,
-                                       croppedImageSize, original) {
+                                       croppedImageSize, original, defaultImage) {
 
         var vm = this;
 
@@ -28,6 +28,7 @@
         vm.save = save;
         vm.clear = clear;
         vm.handleFileSelect = handleFileSelect;
+        vm.setDefault = setDefault;
 
         function handleFileSelect(evt, file) {
 
@@ -50,6 +51,14 @@
             var file = {
                 original: vm.original,
                 model: vm.model
+            };
+            $uibModalInstance.dismiss(file);
+        }
+
+        function setDefault() {
+            var file = {
+                original: defaultImage,
+                model: defaultImage
             };
             $uibModalInstance.dismiss(file);
         }

@@ -1,5 +1,6 @@
 <div ng-include="'forms/schema/components/label.html'"></div>
-<textarea class="form-control" name="{{field.name}}" id="{{field.name + dev}}" ng-required="{{field.required}}"
-          title="{{field.tooltip}}" rows="{{field.rows}}" placeholder="{{field.placeholder}}" ng-model="field.value"
-          data-resize="disabled" ng-readonly="field.readonly">
+<textarea class="form-control" name="{{getUniqueName(field)}}" id="{{getUniqueName(field)}}"
+          ng-required="{{field.required}}" title="{{field.tooltip}}" rows="{{field.rows}}"
+          placeholder="{{field.placeholder}}" ng-model="field.value" data-resize="disabled"
+          ng-readonly="field.readonly">
 </textarea>

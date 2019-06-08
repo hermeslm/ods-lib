@@ -28,8 +28,9 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
     function linkFunc($scope) {
 
+        $scope.view = '-form';
+
         if(!$scope.schema){
-            console.warn('Form Schema is null.');
             $scope.name = OdsFormService.generateName();
         }else {
             $scope.name = $scope.schema.name;
@@ -43,6 +44,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
             }
         }
 
+        $scope.getUniqueName = getUniqueName;
         $scope.getEditMode = getEditMode;
 
         $scope.clear = clear;
@@ -75,6 +77,14 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
         //CKEditor specific
         $scope.valueSubtitutor = valueSubtitutor;
+
+        /**
+         * Return an unique name to avoid fields name collisions.
+         * @returns {boolean}
+         */
+        function getUniqueName(field) {
+            return field.name ? field.name + $scope.view : $scope.view;
+        }
 
         /**
          * Return if it is in edit mode.
