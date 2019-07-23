@@ -1074,13 +1074,13 @@
 
                 if (table.matrix.length > 1) {
                     dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
-                        {size: 'sm'}).result.then(function () {
+                        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
 
                         table.matrix.splice(index, 1);
                     });
                 } else {
                     dialogs.notify('Information', 'At least one row must exist.',
-                        {size: 'sm'}).result.then(function () {
+                        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
                     });
                 }
             }
@@ -1094,7 +1094,7 @@
 
                 if (table.matrix[0].length > 1) {
                     dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
-                        {size: 'sm'}).result.then(function () {
+                        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
 
                         for (var i = 0; i < table.matrix.length; i++) {
                             table.matrix[i].splice(index, 1);
@@ -1102,7 +1102,7 @@
                     });
                 } else {
                     dialogs.notify('Information', 'At least one column must exist.',
-                        {size: 'sm'}).result.then(function () {
+                        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
                     });
                 }
             }

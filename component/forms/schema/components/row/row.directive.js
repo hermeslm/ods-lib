@@ -77,7 +77,7 @@ function RowDirective(OdsFormService, dialogs) {
         function removeRow(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
 
                 $scope.section.rows.splice(index, 1);
             });
@@ -100,7 +100,7 @@ function RowDirective(OdsFormService, dialogs) {
                 row.cols.push(OdsFormService.newColumnObject(12 - gridSize));
             } else {
                 dialogs.notify('Notification', 'Columns can\'t be greater than 12 columns, please fix it!!!',
-                    {size: 'sm'}).result.then(function () {
+                    {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
                 });
             }
         }
@@ -112,7 +112,7 @@ function RowDirective(OdsFormService, dialogs) {
         function removeColumn(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
 
                 $scope.row.cols.splice(index, 1);
             });

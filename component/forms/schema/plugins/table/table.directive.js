@@ -38,7 +38,7 @@ function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType)
 
             //We prevent add recursively a table inside other.
             if (type === OdsComponentType.FIELD && item.type === OdsFieldType.TABLE) {
-                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.', {size: 'sm'});
+                dialogs.notify('Information!!!', 'Insert a table into a table cell is not allowed.', {size: 'sm', windowClass: 'ods-dialog'});
                 return false;
             } else {
                 return item;
@@ -83,7 +83,7 @@ function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType)
         function swapRow(idx1, idx2) {
 
             dialogs.confirm('Confirm!!!', 'Do you want swap this row?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
 
                 // var _previousValue = [];
                 // angular.copy($scope.field.matrix, _previousValue);
@@ -106,7 +106,7 @@ function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType)
         function swapColumn(idx1, idx2) {
 
             dialogs.confirm('Confirm!!!', 'Do you want swap this column?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
 
                 if (idx1 <= -1 || idx2 <= -1 ||
                     idx1 >= $scope.field.matrix[idx1].length ||

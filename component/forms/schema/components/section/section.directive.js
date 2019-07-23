@@ -54,7 +54,7 @@ function SectionDirective(OdsFormService, dialogs) {
         function remove(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this section?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
                 $scope.schema.layout.splice(index, 1);
             });
         }
@@ -66,7 +66,7 @@ function SectionDirective(OdsFormService, dialogs) {
         function swap(idx1, idx2) {
 
             dialogs.confirm('Confirm!!!', 'Do you want swap this section?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
 
                 var _previousValue = [];
                 angular.copy($scope.schema.layout, _previousValue);
@@ -96,7 +96,7 @@ function SectionDirective(OdsFormService, dialogs) {
         function clone() {
 
             dialogs.confirm('Confirm!!!', 'Do you want to clone this Section?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
                 $scope.schema = OdsFormService.cloneSection($scope.schema, $scope.section,
                     $scope.section.clonedCanCloned);
             });

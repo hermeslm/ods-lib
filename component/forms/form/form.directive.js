@@ -112,7 +112,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
         function cloneSection(section) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to clone this Section?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
                 $scope.schema = OdsFormService.cloneSection($scope.schema, section,
                     section.clonedCanCloned);
             });
@@ -126,7 +126,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
         function removeSection(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this section?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
                 $scope.schema.layout.splice(index, 1);
             });
         }

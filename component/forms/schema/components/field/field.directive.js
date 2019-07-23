@@ -119,7 +119,7 @@ function FieldDirective(OdsFormService, dialogs) {
         function removeField(index) {
 
             dialogs.confirm('Confirm!!!', 'Do you want to remove this field?',
-                {size: 'sm'}).result.then(function () {
+                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
 
                 $scope.col.fields.splice(index, 1);
             });
