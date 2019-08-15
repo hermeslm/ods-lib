@@ -149,7 +149,7 @@
                 if (decodedString && decodedString !== '') {
                     var loadedFile = angular.fromJson(decodedString);
                     loadedFile.form = convertFormSchema(loadedFile.form);
-                    return loadedFile
+                    return loadedFile;
                 } else {
                     console.error('Not valid JSON file!!!');
                 }
