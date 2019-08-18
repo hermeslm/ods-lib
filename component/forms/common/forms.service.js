@@ -668,6 +668,20 @@
             }
 
             /**
+             * Create a new base Field Object.
+             * @returns
+             */
+            function newBaseFieldObject() {
+
+                return {
+                    componentType: OdsComponentType.FIELD,
+                    name: generateName(OdsComponentType.FIELD),
+                    placeholder: '',
+                    required: false
+                };
+            }
+
+            /**
              * Create a new Field Text Object.
              * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
              */
