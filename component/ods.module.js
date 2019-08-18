@@ -25,7 +25,7 @@ angular
         'ui.mask'
     ])
     .config(configFunction)
-    .value('version', '3.5.1')
+    .value('version', '3.6.0')
     .run(function (/*editableOptions */) {
         // editableOptions.theme = 'bs3';
     });

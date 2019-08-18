@@ -15,12 +15,12 @@
   "undef": true,
   "unused": true,
   "strict": true,
-  "trailing": true,
+  "trailing": false,
   "smarttabs": true,
   "multistr": true,
   "node": true,
   "globals": {
-    "angular": false,
+    "angular": true,
     "describe": false,
     "it": false,
     "expect": false,
@@ -28,6 +28,6 @@
     "afterEach": false,
     "module": false,
     "inject": false,
-    "_": false
+    "_": true
   }
 }

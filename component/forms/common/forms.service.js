@@ -676,8 +676,9 @@
                 return {
                     componentType: OdsComponentType.FIELD,
                     name: generateName(OdsComponentType.FIELD),
-                    placeholder: '',
-                    required: false
+                    required: false,
+                    exportable: false,
+                    linkedTo: null
                 };
             }
 
@@ -687,22 +688,15 @@
              */
             function newFieldTextObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'TextBox',
-                    name: generateName(OdsComponentType.FIELD),
                     placeholder: '',
                     type: OdsFieldType.TEXT,
-                    required: false,
                     value: null,
                     validation: {
                         messages: {}
                     }
-                    // ,
-                    // getValue: function () {
-                    //     return value;
-                    // }
-                };
+                });
             }
 
             /**
@@ -711,18 +705,15 @@
              */
             function newFieldNumberObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Number',
-                    name: generateName(OdsComponentType.FIELD),
                     placeholder: '',
                     type: OdsFieldType.NUMBER,
-                    required: false,
                     value: null,
                     validation: {
                         messages: {}
                     }
-                };
+                });
             }
 
             /**
@@ -731,18 +722,15 @@
              */
             function newFieldPasswordObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Password',
-                    name: generateName(OdsComponentType.FIELD),
                     placeholder: '',
                     type: OdsFieldType.PASSWORD,
-                    required: false,
                     value: null,
                     validation: {
                         messages: {}
                     }
-                };
+                });
             }
 
             /**
@@ -751,19 +739,16 @@
              */
             function newFieldTextareaObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Textarea',
-                    name: generateName(OdsComponentType.FIELD),
                     placeholder: '',
                     type: OdsFieldType.TEXTAREA,
-                    required: false,
                     rows: 3,
                     value: null,
                     validation: {
                         messages: {}
                     }
-                };
+                });
             }
 
             /**
@@ -774,13 +759,10 @@
              */
             function newFieldSelectObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Select',
-                    name: generateName(OdsComponentType.FIELD),
                     placeholder: '',
                     type: OdsFieldType.SELECT,
-                    required: false,
                     valueField: 'id',
                     titleField: 'name',
                     limitTo: 10,
@@ -798,25 +780,19 @@
                     validation: {
                         messages: {}
                     }
-                };
+                });
             }
 
             /**
              * Create a new Field Select2 Object
-             * @returns {componentType: string, titleField: string, limitTo: number,
-             * label: string, type: string, valueField: string, required: boolean,
-             * name: (*|number), options: *[], placeholder: string, value: null,
-             * validation: {messages: {}}, multiSelect: boolean} Select2 Object
+             * @returns
              */
             function newFieldSelect2Object() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Select2',
-                    name: generateName(OdsComponentType.FIELD),
                     placeholder: '',
                     type: OdsFieldType.SELECT2,
-                    required: false,
                     multiSelect: false,
                     valueField: 'id',
                     titleField: 'name',
@@ -835,22 +811,19 @@
                     validation: {
                         messages: {}
                     }
-                };
+                });
             }
 
             /**
              * Create a new Field Multiselect Object
-             * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, multiSelect: boolean, valueField: string, titleField: string, limitTo: number, value: Array, options: Array, render: null, validation: {messages: {}}}}
+             * @returns
              */
             function newFieldMultiSelectObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Multi select',
-                    name: generateName(OdsComponentType.FIELD),
                     placeholder: '',
                     type: OdsFieldType.MULTI_SELECT,
-                    required: false,
                     multiSelect: true,
                     valueField: 'id',
                     titleField: 'name',
@@ -870,36 +843,32 @@
                     validation: {
                         messages: {}
                     }
-                };
+                });
             }
 
             /**
              * Create a new Field Toggle Object
-             * @returns {componentType: string, ln: boolean, name: (*|number),
-             * label: string, type: string, value: boolean, off: string, on: string} Toggle Object
+             * @returns
              */
             function newFieldToggleObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Toggle',
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.TOGGLE,
                     ln: false,
                     on: 'Yes',
                     off: 'No',
                     value: false
-                };
+                });
             }
 
             function newDateTimeObject() {
 
                 var today = new Date();
-                var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 9, 0, 0));
-                return {
-                    componentType: OdsComponentType.FIELD,
+                var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(),
+                    today.getDate(), 9, 0, 0));
+                return _.merge(newBaseFieldObject(), {
                     label: 'DateTime',
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.DATETIME,
                     enableTime: false,
                     format: OdsDateTimeFormat.ShortDateLongYear,
@@ -909,7 +878,6 @@
                     },
                     openInEditMode: false,
                     // utc: true,
-                    required: false,
                     value: date,
                     validation: {
                         datetime: false,
@@ -917,39 +885,33 @@
                             datetime: 'Invalid Date or Time.'
                         }
                     }
-                };
+                });
             }
 
             function newFieldLabelObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Label',
                     cssClass: 'text-left',
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.LABEL,
                     value: 'Label'
-                };
+                });
             }
 
             function newFieldCheckBoxObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'CheckBox',
                     hideLabel: true,
                     ln: false,
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.CHECKBOX,
                     value: false
-                };
+                });
             }
 
             function newFieldCheckBoxListObject() {
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'CheckBox List',
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.CHECKBOX_LIST,
                     inline: false,
                     options: [{
@@ -963,14 +925,12 @@
                         name: 'Option 3'
                     }],
                     value: {}
-                };
+                });
             }
 
             function newFieldRadioListObject() {
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Radiobutton List',
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.RADIO,
                     options: [{
                         id: 1,
@@ -983,15 +943,13 @@
                         name: 'Option 3'
                     }],
                     value: {}
-                };
+                });
             }
 
             function newYesNoObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'If yes:',
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.IF_YES,
                     ln: false,
                     on: 'Yes',
@@ -1004,15 +962,13 @@
                     validation: {
                         messages: {}
                     }
-                };
+                });
             }
 
             function newTableObject() {
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'Table',
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.TABLE,
                     cssClass: 'table table-bordered',
                     matrix: [
@@ -1021,7 +977,7 @@
                     validation: {
                         messages: {}
                     }
-                };
+                });
             }
 
             function newItemObject() {
@@ -1039,10 +995,8 @@
                 //Default key combination. (CTRL + SPACE)
                 var CTRL = 1114112;
 
-                return {
-                    componentType: OdsComponentType.FIELD,
+                return _.merge(newBaseFieldObject(), {
                     label: 'CKEditor',
-                    name: generateName(OdsComponentType.FIELD),
                     type: OdsFieldType.CKEDITOR,
                     readonly: false,
                     printView: false,
@@ -1066,7 +1020,7 @@
                         tokens: null
                     },
                     value: null
-                };
+                });
             }
 
             function defaultCKEditorPrefix() {
@@ -1088,7 +1042,7 @@
 
                 if (table.matrix.length > 1) {
                     dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
-                        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+                        { size: 'sm', windowClass: 'ods-dialog' }).result.then(function () {
 
                         table.matrix.splice(index, 1);
                     });
@@ -1465,7 +1419,7 @@
                         if (matrixColumn.fields.length > 0) {
                             getDataFromField(result, matrixColumn.fields[0], filter, code);
                         }
-                    })
+                    });
                 });
             }
 
@@ -1535,7 +1489,7 @@
 
                 //If field is datetime we set Date object from string
                 if (field.type === OdsFieldType.DATETIME) {
-                    if (field.value != null) {
+                    if (field.value !== null) {
                         field.value = new Date(Date.parse(field.value));
                     }
                 }
@@ -1553,7 +1507,7 @@
                         if (matrixColumn.fields.length > 0) {
                             initDateTimeField(matrixColumn.fields[0]);
                         }
-                    })
+                    });
                 });
             }
 
@@ -1593,7 +1547,7 @@
                         if (matrixColumn.fields.length > 0) {
                             setStatusToField(matrixColumn.fields[0], status);
                         }
-                    })
+                    });
                 });
             }
 
@@ -1641,7 +1595,7 @@
                             matrixColumn.fields[0].type === OdsFieldType.CKEDITOR) {
                             setConfigToCKEditorField(matrixColumn.fields[0], config);
                         }
-                    })
+                    });
                 });
             }
 
@@ -1662,7 +1616,7 @@
                             field.options.suggestions = config.ckeditor.suggestions;
                         }
                         if (config.ckeditor.suggestionsUrl) {
-                            field.options.suggestionsUrl = config.ckeditor.suggestionsUrl
+                            field.options.suggestionsUrl = config.ckeditor.suggestionsUrl;
                         }
                         if (config.ckeditor.tokens) {
                             field.options.tokens = config.ckeditor.tokens;
@@ -1699,7 +1653,7 @@
                                             matrixColumn.fields[0].name =
                                                 generateName(matrixColumn.fields[0].componentType);
                                         }
-                                    })
+                                    });
                                 });
                             } else {
                                 field.name = generateName(field.componentType);
@@ -1723,4 +1677,5 @@
         }
     }
 
-)();
+)
+();
