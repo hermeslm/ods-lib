@@ -1,0 +1,31 @@
+<!--<div class="row">-->
+    <!--<div class="col-lg-12">-->
+        <!--<button type="button" class="btn btn-success" ng-click="toggleStyle()">-->
+            <!--<span class="fa fa-refresh"></span>&nbsp;<span>Toggle style</span>-->
+        <!--</button>-->
+    <!--</div>-->
+<!--</div>-->
+<div class="row">
+    <div class="col-md-3">
+        <ods-form-toolbar></ods-form-toolbar>
+    </div>
+    <div class="col-md-9">
+        <uib-tabset>
+            <uib-tab index="0" heading="Form information">
+                <ods-form-info schema="schema"></ods-form-info>
+            </uib-tab>
+            <uib-tab index="1" heading="Form Schema">
+                <ods-schema schema="schema" config="config" debug-mode="debugMode"></ods-schema>
+            </uib-tab>
+            <uib-tab index="2" heading="Form Preview">
+                <ods-form schema="schema" config="runTimeConfig" on-save="saveForm(schema)"></ods-form>
+            </uib-tab>
+            <uib-tab index="3" heading="Form Print View">
+                <ods-viewer schema="schema" config="runTimeConfig" css-class="cssClass"></ods-viewer>
+            </uib-tab>
+            <uib-tab index="4" heading="Form Model" ng-show="debugMode">
+                <ods-model model="schema" css-class="fixed-height"></ods-model>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+</div>

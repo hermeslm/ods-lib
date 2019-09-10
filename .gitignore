@@ -1,16 +1,12 @@
-# Include your project-specific ignores in this file
-# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
 
-logs/*
-!.gitkeep
-node_modules/
-bower_components/
-tmp
-test_out/
-.DS_Store
+# IntelliJ project files
 .idea
-npm-debug.log
-
-
-
-
+*.iml
+out
+gen
+build/
+dist/
+node_modules/
