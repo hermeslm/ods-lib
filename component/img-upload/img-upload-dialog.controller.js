@@ -50,17 +50,17 @@
         function save() {
             var file = {
                 original: vm.original,
-                model: vm.model
+                file: vm.model
             };
-            $uibModalInstance.dismiss(file);
+            $uibModalInstance.close(file);
         }
 
         function setDefault() {
             var file = {
                 original: defaultImage,
-                model: defaultImage
+                file: defaultImage
             };
-            $uibModalInstance.dismiss(file);
+            $uibModalInstance.close(file);
         }
     }
 })();
