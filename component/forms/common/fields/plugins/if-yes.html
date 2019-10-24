@@ -3,6 +3,6 @@
         off="{{field.off}}" ng-model="field.value.toggle" ng-disabled="field.readonly"></toggle>
 <textarea class="form-control" name="{{getUniqueName(field)}}-text" id="{{getUniqueName(field)}}-text"
           placeholder="{{field.placeholder}}" title="{{field.tooltip}}" style="margin-top: 10px;"
-          ng-model="field.value.textarea" ng-required="field.value.toggle" type="{{field.type}}"
-          ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}"
-          ng-show="field.value.toggle" ng-disabled="field.readonly"></textarea>
+          ng-model="field.value.textarea" ng-model-options="{ updateOn: 'blur' }" ng-required="field.value.toggle"
+          type="{{field.type}}" ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)"
+          rows="{{field.rows}}" ng-show="field.value.toggle" ng-disabled="field.readonly"></textarea>

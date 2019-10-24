@@ -1,4 +1,4 @@
 <div ng-include="'forms/schema/components/label.html'"></div>
 <input class="form-control" name="{{field.name}}-dev" id="{{field.name}}-dev" ng-model="field.value"
-       type="{{field.type}}" placeholder="{{field.placeholder}}" ng-required="{{field.required}}"
-       title="{{field.tooltip}}" ng-readonly="field.readonly"/>
+       ng-model-options="{ updateOn: 'blur' }" type="{{field.type}}" placeholder="{{field.placeholder}}"
+       ng-required="{{field.required}}" title="{{field.tooltip}}" ng-readonly="field.readonly"/>

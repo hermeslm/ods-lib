@@ -1,6 +1,7 @@
 <div ng-include="'forms/schema/components/label.html'"></div>
 <div class="position-relative">
-<textarea id="{{field.name + dev}}" name="{{field.name + dev}}" placeholder="{{field.placeholder}}" ng-model="field.value"
-          title="{{field.tooltip}}" options="field.options" ods-ckeditor ng-disabled="field.readonly">
+<textarea id="{{field.name + dev}}" name="{{field.name + dev}}" placeholder="{{field.placeholder}}"
+          ng-model="field.value" ng-model-options="{ updateOn: 'blur' }" title="{{field.tooltip}}"
+          options="field.options" ods-ckeditor ng-disabled="field.readonly">
 </textarea>
 </div>

@@ -28,6 +28,13 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
 
     function linkFunc($scope) {
 
+        // var nbDigest = 0;
+        //
+        // $rootScope.$watch(function() {
+        //     nbDigest++;
+        //     console.log('digest number:' + nbDigest);
+        // });
+
         $scope.view = '-form';
 
         if(!$scope.schema){
