@@ -1,7 +1,7 @@
 {
   "name": "ods-lib",
   "private": false,
-  "version": "3.6.3",
+  "version": "3.6.4",
   "description": "AngularJS tools Lib developed by One Development Solutions CORP.",
   "repository": "https://github.com/hermeslm/ods-lib",
   "author": "Hermes Lorenzo <hermeslm@gmail.com>",
