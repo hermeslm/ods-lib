@@ -6,5 +6,7 @@
         <!--ng-click="displayHidden = !displayHidden" ng-class="{ 'active': displayHidden }"><span-->
         <!--class="fa fa-eye"></span></button>-->
     </div>
-    <pre class="{{cssClass}}">{{modelAsJson}}</pre>
+    <pre class="{{cssClass}}">
+        <json-formatter open="1" json="model"></json-formatter>
+    </pre>
 </div>
