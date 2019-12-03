@@ -49,15 +49,15 @@ function configFunction($rootScopeProvider, $localStorageProvider) {
 angular.module('ods-lib').run(['$templateCache', function($templateCache) {$templateCache.put('address/address-dialog.html','<form name="addressForm" role="form" novalidate ng-submit="vm.save()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myAddressLabel">Create or edit a Address</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><div class="row"><div class="col-md-6"><div class="form-group" ng-class="{\'has-error\': addressForm.street.$invalid}"><label class="control-label" for="field_street">Street</label><input type="text" class="form-control" name="street" id="field_street" ng-required="true" ng-model="vm.address.street" placeholder="Street..." tabindex="1" autocomplete="street-address"><div ng-show="addressForm.street.$invalid"><p class="help-block" ng-show="addressForm.street.$error.required">This field is required.</p></div></div></div><div class="col-md-6"><div class="form-group" ng-class="{\'has-error\': addressForm.mobile.$invalid}"><label class="control-label" for="field_mobile">Mobile</label><input type="text" class="form-control" name="mobile" id="field_mobile" ng-model="vm.address.mobile" placeholder="Mobile..." tabindex="7" autocomplete="tel-national" ng-required="true"><div ng-show="addressForm.mobile.$invalid"><p class="help-block" ng-show="addressForm.mobile.$error.required">This field is required.</p></div></div></div></div><div class="row"><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_street2">Street2</label><input type="text" class="form-control" name="street2" id="field_street2" ng-model="vm.address.street2" placeholder="Street 2..." tabindex="2" autocomplete="address-line2"></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_phone">Phone</label><input type="text" class="form-control" name="phone" id="field_phone" placeholder="Phone..." tabindex="8" ng-model="vm.address.phone" autocomplete="tel-national"></div></div></div><div class="row"><div class="col-md-3"><div class="form-group" ng-class="{\'has-error\': addressForm.city.$invalid}"><label class="control-label" for="field_city">City</label><input type="text" class="form-control" name="city" id="field_city" ng-required="true" ng-model="vm.address.city" placeholder="City..." tabindex="3" autocomplete="address-level2"><div ng-show="addressForm.city.$invalid"><p class="help-block" ng-show="addressForm.city.$error.required">This field is required.</p></div></div></div><div class="col-md-3"><div class="form-group" ng-class="{\'has-error\': addressForm.country.$invalid}"><label class="control-label" for="field_country">Country</label><select class="form-control" id="field_country" name="country" ng-model="vm.address.state.country" tabindex="4" ng-required="true" ng-options="country as country.name for country in vm.countries track by country.code" autocomplete="country-name"><option value="" disabled="disabled" hidden>Country...</option></select><div ng-show="addressForm.country.$invalid"><p class="help-block" ng-show="addressForm.country.$error.required">This field is required.</p></div></div></div><div class="col-md-6"><div class="form-group"><label class="control-label" for="field_fax">Fax</label><input type="text" class="form-control" name="fax" id="field_fax" ng-model="vm.address.fax" placeholder="Fax..." tabindex="9" autocomplete="fax"></div></div></div><div class="row"><div class="col-md-3"><div class="form-group" ng-class="{\'has-error\': addressForm.zipCode.$invalid}"><label class="control-label" for="field_zipCode">Zip</label><input type="text" class="form-control" name="zipCode" id="field_zipCode" ng-model="vm.address.zip" placeholder="ZIP" tabindex="5" ng-required="true" autocomplete="postal-code"><div ng-show="addressForm.zipCode.$invalid"><p class="help-block" ng-show="addressForm.zipCode.$error.required">This field is required.</p></div></div></div><div class="col-md-3"><div class="form-group" ng-class="{\'has-error\': addressForm.state.$invalid}"><label class="control-label" for="field_state">State</label><select class="form-control" id="field_state" name="state" ng-model="vm.address.state" tabindex="6" ng-required="true" ng-options="state as state.name for state in vm.states | filter:{country:vm.address.state.country} track by state.code" autocomplete="state"><option value="" disabled="disabled" hidden>State...</option></select><div ng-show="addressForm.state.$invalid"><p class="help-block" ng-show="addressForm.state.$error.required">This field is required.</p></div></div></div><div class="col-md-6"><div class="form-group" ng-class="{\'has-error\': addressForm.email.$invalid}"><label class="control-label" for="field_email">Email</label><div class="input-group"><span class="input-group-addon" uib-tooltip="Mark it if you don\'t have email"><input type="checkbox" id="field_nonEmail" name="field_nonEmail" ng-model="vm.nonEmail" ng-click="vm.toggleEmail()" style="position: relative;margin-top: 4px;"><!--<label for="field_nonEmail" style="padding-left: 20px;height: 13px;"></label>--> </span><input type="email" class="form-control" name="email" id="field_email" ng-required="true" ng-model="vm.address.email" placeholder="Email..." tabindex="10" autocomplete="email" ng-change="vm.emailChanged()"></div><div ng-show="addressForm.email.$invalid"><p class="help-block" ng-show="addressForm.email.$error.required">This field is required.</p><p class="help-block" ng-show="addressForm.email.$error.email">Email not valid.</p></div></div></div></div><div class="row"><div class="col-md-12"><div class="form-group"><label class="control-label" for="field_notes">Notes</label><textarea rows="3" class="form-control" name="notes" id="field_notes" ng-model="vm.address.notes" placeholder="Notes..." tabindex="11">\n                    </textarea></div></div></div></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button type="button" ng-click="vm.save()" ng-disabled="addressForm.$invalid || vm.isSaving" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span></button></div></form>');
 $templateCache.put('address/address.html','<label ng-show="label" class="control-label" for="ods-address">{{label}}</label><div class="input-group"><input type="text" class="form-control" name="ods-address" id="ods-address" readonly="readonly" value="{{printName(ngModel)}}"> <span class="input-group-addon" ng-click="openModal()"><i class="fa fa-external-link"></i></span></div>');
 $templateCache.put('file-upload/udt-attach-file.html','<div class="box-footer"><ul class="mailbox-attachments clearfix"><li ng-repeat="item in files track by item.id" data-id="{{item.id}}" ng-hide="item.hide"><span class="pull-right" style="margin-right: 5px; cursor: hand" ng-click="deleteFile(item.id)" ng-if="!disableAttach" uib-tooltip="Delete file"><i class="fa fa-remove" style="color: #a20000"></i> </span><!--<span class="pull-right" style="margin-right: 5px;">--><!--<button class="btn-circle btn-danger btn-circle-xxs"><i class="fa fa-remove"></i></button>--><!--</span>--><!----> <span class="mailbox-attachment-icon"><i ng-if="(item.type.split(\'/\')[0] == applicationType)" class="fa fa-file-pdf-o" ng-click="getFileAttached(item.type, item.id)"></i><!--<i ng-if="(item.type.split(\'/\')[0] == imageType)" class="fa fa-picture-o"></i>--> <a ng-if="(item.type.split(\'/\')[0] == imageType)" ng-click="imageDetail(item.id, item.type);" uib-tooltip="Click to view the image"><i class="fa fa-picture-o"></i> </a><i ng-if="!item.type" class="fa fa-file-pdf-o" ng-click="getFileAttached(item.type, item.id)"></i></span><div class="mailbox-attachment-info"><p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{item.name?item.name.split(\'\')[0]:\'default\'}}</p><span class="mailbox-attachment-size">{{item.size}}</span></div></li><li ng-show="!isSigned && !disableAttach"><span class="mailbox-attachment-icon"><button type="button" ngf-select style="background-color: white; border: aliceblue;" uib-tooltip="Add attachment" ngf-change="attachFile($file, attachFileData)" accept="image/*,pdf,csv"><i class="fa fa-paperclip"></i></button></span><div class="mailbox-attachment-info"><p class="mailbox-attachment-name">Add New Attachment</p></div></li><li ng-if="files.length == 0 && disableAttach"><div class="col-xs-12 block-mt5"><p>No attachments.</p></div></li></ul></div>');
+$templateCache.put('forms/form-builder.html','<!--<div class="row">--><!--<div class="col-lg-12">--><!--<button type="button" class="btn btn-success" ng-click="toggleStyle()">--><!--<span class="fa fa-refresh"></span>&nbsp;<span>Toggle style</span>--><!--</button>--><!--</div>--><!--</div>--><div class="row"><div class="col-md-3"><ods-form-toolbar></ods-form-toolbar></div><div class="col-md-9"><uib-tabset><uib-tab index="0" heading="Form information"><ods-form-info schema="schema"></ods-form-info></uib-tab><uib-tab index="1" heading="Form Schema"><ods-schema schema="schema" config="config" debug-mode="debugMode"></ods-schema></uib-tab><uib-tab index="2" heading="Form Preview"><ods-form schema="schema" config="runTimeConfig" on-save="saveForm(schema)"></ods-form></uib-tab><uib-tab index="3" heading="Form Print View"><ods-viewer schema="schema" config="runTimeConfig" css-class="cssClass"></ods-viewer></uib-tab><uib-tab index="4" heading="Form Model" ng-show="debugMode"><ods-model model="schema" css-class="fixed-height"></ods-model></uib-tab></uib-tabset></div></div>');
 $templateCache.put('hide-value/input-hide-value.html','<div class="form-group has-feedback"><label ng-show="label" class="control-label" for="{{name}}">{{label}}</label><input name="{{name}}" type="{{type}}" class="form-control" placeholder="{{placeholder}}" ng-model="ngModel" ng-focus="onFocus()" ng-blur="onBlur()" ui-mask="{{mask}}" ng-disabled="ngDisabled" ng-required="ngRequired"> <span class="{{icon}} form-control-feedback" style="cursor: {{cursor}}; pointer-events: all;" ng-click="toggleFn()"></span></div>');
 $templateCache.put('hide-value/text-hide-value.html','<span>{{value}}</span> <span class="{{icon}}" style="cursor: {{cursor}}; pointer-events: all;" ng-click="toggleFn()"></span>');
-$templateCache.put('forms/form-builder.html','<!--<div class="row">--><!--<div class="col-lg-12">--><!--<button type="button" class="btn btn-success" ng-click="toggleStyle()">--><!--<span class="fa fa-refresh"></span>&nbsp;<span>Toggle style</span>--><!--</button>--><!--</div>--><!--</div>--><div class="row"><div class="col-md-3"><ods-form-toolbar></ods-form-toolbar></div><div class="col-md-9"><uib-tabset><uib-tab index="0" heading="Form information"><ods-form-info schema="schema"></ods-form-info></uib-tab><uib-tab index="1" heading="Form Schema"><ods-schema schema="schema" config="config" debug-mode="debugMode"></ods-schema></uib-tab><uib-tab index="2" heading="Form Preview"><ods-form schema="schema" config="runTimeConfig" on-save="saveForm(schema)"></ods-form></uib-tab><uib-tab index="3" heading="Form Print View"><ods-viewer schema="schema" config="runTimeConfig" css-class="cssClass"></ods-viewer></uib-tab><uib-tab index="4" heading="Form Model" ng-show="debugMode"><ods-model model="schema" css-class="fixed-height"></ods-model></uib-tab></uib-tabset></div></div>');
 $templateCache.put('img-upload/img-upload-dialog.html','<form name="editForm" role="form" novalidate ng-submit="vm.save()"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myImageLabel">Change/Edit Image</h4></div><div class="modal-body"><div class="row"><div class="col-lg-6" style="text-align: center;"><div class="img-responsive img-thumbnail"><ui-cropper image="vm.original" area-type="{{vm.areaType}}" chargement="\'Loading\'" result-image-size="vm.croppedImageSize" result-image="vm.model" canvas-scalemode="true" change-on-fly="true"></ui-cropper></div></div><div class="col-lg-6" style="text-align: center;"><img class="img-responsive img-thumbnail" ng-src="{{vm.model}}"></div></div><br><div class="row"><div class="col-lg-6"><button type="button" class="btn btn-warning btn-block" ngf-select ngf-change="vm.handleFileSelect($event, $file)" accept="image/*"><i class="fa fa-image" aria-hidden="true"></i> Browse...</button></div></div></div><div class="modal-footer"><button type="button" class="btn btn-info" ng-click="vm.setDefault()"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Restore default</button> <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true"></i> Save</button> <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.clear()"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button></div></form>');
 $templateCache.put('img-upload/img-upload.html','<div ng-if="displayImage"><img class="img-responsive {{cssClass}}" id="imgPicture" ng-src="{{ngModel}}" ng-if="ngModel" ng-click="openModal()" style="cursor: pointer;min-height: 100px"></div><a href="" class="footer-link" ng-if="!displayImage" ng-click="openModal()">{{uploadText}}&nbsp; <i class="fa fa-plus-circle" aria-hidden="true" ng-if="mode === \'insert\'"></i> <i class="fa fa-edit" aria-hidden="true" ng-if="mode === \'edit\'"></i></a>');
-$templateCache.put('select-filtered/select-filtered.html','<!--<div class="form-group">--><label for="{{name}}" ng-if="!hideLabel">{{label}}</label><div class="input-group"><ui-select name="{{name}}" id="{{name}}" ng-model="selected.value" ng-disabled="ngDisabled" ui-select-required="ngRequired" close-on-select="true" title="{{tooltip}}" on-select="onSelectFn()"><ui-select-match placeholder="{{placeholder}}"><div ng-class="renderClass($select.selected)" ng-bind-html="getSelectTitleValue($select.selected)"></div></ui-select-match><ui-select-choices repeat="item in filtered | filter:$select.search"><div ng-class="renderClass(item)" ng-bind-html="getSelectTitleValue(item) | highlight: $select.search"></div></ui-select-choices></ui-select><div class="input-group-btn"><div class="btn-group" uib-dropdown is-open="isOpen"><button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><span class="fa fa-filter"></span></button><ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button"><li role="menuitem" ng-repeat="filter in filters" ng-click="toggleFilter(filter)"><a href=""><span ng-class="filter.active ? \'fa fa-check-circle\' : \'fa fa-times-circle\'"></span> {{filter.title}}</a></li><!--<li class="divider"></li>--><!--<li role="menuitem"><a href="#">Separated link</a></li>--></ul></div></div></div><!--</div>-->');
 $templateCache.put('reports/param.html','<form name="paramsForm" novalidate show-validation><div class="form-group" ng-class="{\'has-error\': paramsForm.{{param.name}}.$invalid}"><div ng-switch="param.type"><label class="control-label" for="{{param.name}}" ng-hide="hideTitle(param)">{{param.title}}</label><input ng-switch-when="NUMBER" class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)" type="number"> <input ng-switch-when="TEXT" class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)"><div ng-switch-when="DATE" class="input-group" ng-hide="hideParam(param)"><input id="{{param.name}}" class="form-control" name="{{param.name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="getRequired(param)" ng-model="param.value" is-open="param.datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="openCalendar(param)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" ng-model="param.value" ui-select-required="vm.getRequired(param)" close-on-select="true" title="{{param.title}}"><ui-select-match placeholder="{{param.placeholder}}">{{getSelectTitleField(param, $select.selected)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search | limitTo: 500"><div ng-bind-html="getSelectTitleField(param, element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select ng-switch-when="LIST" class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-options="item.id as item.name for item in param.list" ng-required="getRequired(param)"></select><div ng-switch-when="MULTI_SELECT" ng-hide="hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" multiple="multiple" ng-model="param.value" close-on-select="false" title="{{param.title}}" ui-select-required="getRequired(param)"><ui-select-match placeholder="{{param.placeholder}}">{{getSelectTitleField(param, $item)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search">{{getSelectTitleField(param, element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="hideParam(param)"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="param.searchQuery" id="searchQueryrpt-metadata" placeholder="{{param.placeholder}}" ng-change="search(param)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="getDtOptions(param)" dt-columns="getDtColumns(param)" dt-instance="param.dtInstance" class="table table-striped table-bordered table-condensed"></table></div><div ng-switch-when="DRAG_AND_DROP" ng-hide="hideParam(param)"><div class="row"><div class="col-md-6"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title ng-binding">{{param.sourceTitle}}</h3></div><div class="panel-body source-sections"><ul dnd-list="param.list"><li ng-repeat="item in param.list" dnd-draggable="item" dnd-moved="param.list.splice($index, 1)" dnd-effect-allowed="move">{{getSelectTitleField(param, item)}}</li></ul></div></div></div><div class="col-md-6"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title ng-binding">{{param.targetTitle}}</h3></div><div class="panel-body selected-sections"><ul dnd-list="param.value"><li ng-repeat="item in param.value" dnd-draggable="item" dnd-moved="param.value.splice($index, 1)" dnd-effect-allowed="move">{{getSelectTitleField(param, item)}}</li></ul></div></div></div></div></div><div ng-switch-when="CHECK_LIST" ng-hide="hideParam(param)"><ods-check-list list="param.list" ng-model="param.value" height="param.height"></ods-check-list><!--ng-if="hideParam(param)"--><!--ng-required="getRequired(param)"--></div><input ng-switch-default class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)"><div ng-show="paramsForm.{{param.name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{param.name}}.$error.required">This field is required.</p></div></div></div></form>');
 $templateCache.put('reports/params.html','<form name="paramsForm" novalidate ng-submit="vm.openReport()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myCityLabel">Report Params for:</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><h4>{{vm.report.title}}</h4><ng-include src="\'reports/tpl/one-col.tpl.html\'" ng-if="!vm.report.multiCols"></ng-include><ng-include src="\'reports/tpl/two-col.tpl.html\'" ng-if="vm.report.multiCols"></ng-include></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button ng-disabled="paramsForm.$invalid" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Open</span></button></div></form>');
 $templateCache.put('reports/reports.html','<div class="row" ng-show="infoMessage" ng-class="ng-hide"><div class="col-lg-12"><div uib-alert class="alert alert-info alert-dismissible" close="hideInfoMessage()"><h4><i class="icon fa fa-info"></i> Reports info!</h4>If don\'t have a PDF viewer plugin in the browser. No biggie... you can download it. Please select the report and download it from report preview.</div></div></div><div class="row"><div class="col-md-3"><div class="box box-solid"><div class="box-header with-border"><h3 class="box-title">{{reportsGroup.title}}</h3></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in reportsGroup.groups" ng-init="groupIndex = $index"><ul class="list-group list-group-unbordered"><li class="list-group-item" ng-repeat="report in group.reports" ng-init="reportIndex = $index"><a href="" ng-click="openReport(groupIndex, reportIndex)"><b>{{report.title}}</b></a></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box --></div><div class="col-md-9"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">Report Preview</h3></div><!-- /.box-header --><div class="box-body" style="height: 100vh;"><div ng-show="selectReport" class="ng-hide"><p>Download report: <a ng-click="downloadReport()">{{selectReport.title}}</a></p></div><pdfjs-viewer data="reportFile"></pdfjs-viewer><!--<object embed-src="{{vm.reportFile}}" width="100%" height="100%">--><!--</object>--><!--<object style="height: 90vh;" type="application/pdf" data="{{reportFile}}" width="100%"--><!--height="100%"/>--></div></div></div></div>');
+$templateCache.put('select-filtered/select-filtered.html','<!--<div class="form-group">--><label for="{{name}}" ng-if="!hideLabel">{{label}}</label><div class="input-group"><ui-select name="{{name}}" id="{{name}}" ng-model="selected.value" ng-disabled="ngDisabled" ui-select-required="ngRequired" close-on-select="true" title="{{tooltip}}" on-select="onSelectFn()"><ui-select-match placeholder="{{placeholder}}"><div ng-class="renderClass($select.selected)" ng-bind-html="getSelectTitleValue($select.selected)"></div></ui-select-match><ui-select-choices repeat="item in filtered | filter:$select.search"><div ng-class="renderClass(item)" ng-bind-html="getSelectTitleValue(item) | highlight: $select.search"></div></ui-select-choices></ui-select><div class="input-group-btn"><div class="btn-group" uib-dropdown is-open="isOpen"><button id="single-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled"><span class="fa fa-filter"></span></button><ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu" aria-labelledby="single-button"><li role="menuitem" ng-repeat="filter in filters" ng-click="toggleFilter(filter)"><a href=""><span ng-class="filter.active ? \'fa fa-check-circle\' : \'fa fa-times-circle\'"></span> {{filter.title}}</a></li><!--<li class="divider"></li>--><!--<li role="menuitem"><a href="#">Separated link</a></li>--></ul></div></div></div><!--</div>-->');
 $templateCache.put('signature/signature.html','<div id="signature" class="{{options.cssClass}}"><style type="text/css" scoped>.sig-box {\n            border-radius: 4px;padding: 5px 5px 0;margin-bottom: 5px;\n        }\n        .sig-box-default {\n            border: 1px solid #ccc;"\n        }\n        .sig-box-error {\n            border: 1px solid #a94442;"\n        }</style><div id="{{name}}" class="sig-box {{requiredClass}}"><!--style=">--></div><button type="button" class="btn btn-danger" ng-click="reset()" ng-disabled="disabled"><span class="glyphicon glyphicon-erase"></span> <span>Clear</span></button><!--<button ng-click="getData()">getData</button>--><!--<button ng-click="setData()">setData</button>--></div>');
 $templateCache.put('steps-indicator/template.html','<div class="btn-group {{class}}"><button type="button" class="btn btn-primary {{step.status}}" ng-disabled="step.disabled" ng-repeat="step in ngModel" ng-click="onClick(step, $index)">{{step.label}}</button><!--<a class="{{step.status}} {{step.disabled ? \'disabled\': \'\'}}" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</a>--></div>');
 $templateCache.put('wizard-steps/wizard-steps.html','<div class="ods-wizard-content"><div class="ods-wizard-circle ods-wizard clearfix"><div class="steps clearfix"><ul><li class="{{step.status}}" ng-repeat="step in ngModel" ng-class="{ \'first\': $index === 0, \'done\': step.done, \'last\': $index === ngModel.length -1}" ng-show="step.visible"><a href="" ng-click="step.callback()"><span class="step">{{step.label}}</span></a></li><!--<li class="first done">--><!--<a href=""><span class="step">Select template</span></a>--><!--</li>--><!--<li class="current">--><!--<a href="" ui-sref="{{vm.parentName}}.info"><span class="step">Information</span></a>--><!--</li>--><!--<li class="">--><!--<a href="" ui-sref="{{vm.parentName}}.form"><span class="step">Form</span></a>--><!--</li>--><!--<li class="disabled" ng-show="vm.doc.billable"><a href="" ui-sref="{{vm.parentName}}.services">--><!--<span class="step">Services</span></a>--><!--</li>--><!--<li class="disabled">--><!--<a href="" ui-sref="{{vm.parentName}}.attachment"><span class="step">Attachments</span></a>--><!--</li>--><!--<li class="disabled">--><!--<a href="" ui-sref="{{vm.parentName}}.signature"><span class="step">Signature</span></a>--><!--</li>--><!--<li class="disabled last">--><!--<a href="" ui-sref="{{vm.parentName}}.finish"><span class="step">Finish</span></a>--><!--</li>--></ul></div></div></div><!--<div class="ods-breadcrumb {{class}}">--><!--<a class="{{step.status}} {{step.disabled ? \'disabled\': \'\'}}" ng-repeat="step in ngModel" ng-click="changeStatus(step)">{{step.label}}</a>--><!--</div>-->');
@@ -97,8 +97,6 @@ $templateCache.put('forms/schema/components/input.html','<div ng-include="\'form
 $templateCache.put('forms/schema/components/label.html','<label class="control-label" for="{{field.name}}" ng-hide="hideTitle(field)" ng-bind-html="field.label"></label>');
 $templateCache.put('forms/schema/components/no-field-properties.html','<div><h4>Field properties error</h4><div style="padding: 5px;">Field properties template not found, please fix the path, type: {{field.type}}</div></div>');
 $templateCache.put('forms/schema/components/no-field.html','<div><h4>Field error</h4><div style="padding: 5px;">Schema template not found, please fix the path, type: {{field.type}}</div></div>');
-$templateCache.put('forms/toolbar/plugins/if-yes.html','<div class="row"><div class="col-lg-12"><div ng-include="\'forms/toolbar/components/label.html\'"></div></div></div><div class="row"><div class="col-lg-2"><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle></div><div class="col-lg-10"><input class="form-control" name="{{component.name}}" id="{{component.name}}"></div></div>');
-$templateCache.put('forms/toolbar/plugins/table.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><table class="table table-bordered table-responsive" id="{{component.name}}"><!--<thead>--><!--<tr>--><!--<td>#</td>--><!--<td ng-repeat="column in component.columns">{{column.title}}</td>--><!--</tr>--><!--</thead>--><tbody><tr ng-repeat="row in component.matrix"><td ng-repeat="col in row">{{col.name}}</td></tr></tbody></table>');
 $templateCache.put('forms/toolbar/components/checkbox-list.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><div class="checkbox" ng-repeat="option in component.options"><label><input type="checkbox" value="{{option.id}}"> {{option.name}}</label></div>');
 $templateCache.put('forms/toolbar/components/checkbox.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><div class="checkbox"><label><input type="checkbox" value=""> Option</label></div>');
 $templateCache.put('forms/toolbar/components/ckeditor.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><img width="100%" src="data:image/png;base64,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"><!--<textarea id="{{component.name}}" name="{{component.name}}" ng-model="content" ck="ck" options="options"--><!--ods-ckeditor></textarea>-->');
@@ -113,22 +111,14 @@ $templateCache.put('forms/toolbar/components/section.html','<div class=""><h3>Se
 $templateCache.put('forms/toolbar/components/select.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><select name="{{component.name}}" id="{{component.name}}" class="form-control"><option value="1">Option 1...</option></select>');
 $templateCache.put('forms/toolbar/components/textarea.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><textarea class="form-control" name="{{component.name}}" id="{{component.name}}" rows="{{component.rows}}" placeholder="{{component.placeholder}}">\n</textarea>');
 $templateCache.put('forms/toolbar/components/toggle.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle>');
+$templateCache.put('forms/toolbar/plugins/if-yes.html','<div class="row"><div class="col-lg-12"><div ng-include="\'forms/toolbar/components/label.html\'"></div></div></div><div class="row"><div class="col-lg-2"><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle></div><div class="col-lg-10"><input class="form-control" name="{{component.name}}" id="{{component.name}}"></div></div>');
+$templateCache.put('forms/toolbar/plugins/table.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><table class="table table-bordered table-responsive" id="{{component.name}}"><!--<thead>--><!--<tr>--><!--<td>#</td>--><!--<td ng-repeat="column in component.columns">{{column.title}}</td>--><!--</tr>--><!--</thead>--><tbody><tr ng-repeat="row in component.matrix"><td ng-repeat="col in row">{{col.name}}</td></tr></tbody></table>');
 $templateCache.put('forms/common/fields/plugins/ckeditor.html','<div ng-if="field.printView" ng-bind-html="valueSubtitutor(field)"></div><div ng-if="!field.printView" class="position-relative"><textarea id="{{getUniqueName(field)}}" name="{{getUniqueName(field)}}" placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" title="{{field.tooltip}}" options="field.options" ods-ckeditor ng-disabled="field.readonly"></textarea></div>');
 $templateCache.put('forms/common/fields/plugins/if-yes.html','<br ng-if="field.ln"><toggle name="{{getUniqueName(field)}}-toogle" id="{{getUniqueName(field)}}-toogle" on="{{field.on}}" off="{{field.off}}" ng-model="field.value.toggle" ng-disabled="field.readonly"></toggle><textarea class="form-control" name="{{getUniqueName(field)}}-text" id="{{getUniqueName(field)}}-text" placeholder="{{field.placeholder}}" title="{{field.tooltip}}" style="margin-top: 10px;" ng-model="field.value.textarea" ng-model-options="{ updateOn: \'blur\' }" ng-required="field.value.toggle" type="{{field.type}}" ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" ng-show="field.value.toggle" ng-disabled="field.readonly"></textarea>');
 $templateCache.put('forms/common/fields/plugins/table.html','<div class="table-responsive position-relative"><table class="{{field.cssClass}}" id="{{getUniqueName(field)}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}" style="min-width: 100px"><div ng-repeat="field in col.fields"><ng-include src="getFormFieldTemplate(field.type)"></ng-include></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr></tbody></table></div><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div>');
 $templateCache.put('forms/common/viewer/plugins/ckeditor.html','<div ng-bind-html="valueSubtitutor(field)"></div>');
 $templateCache.put('forms/common/viewer/plugins/if-yes.html','<!--<br ng-if="field.ln">--><div ng-bind-html="field.value.toggle ? field.on : field.off"></div><div ng-bind-html="field.value.textarea" ng-if="field.value.toggle"></div>');
 $templateCache.put('forms/common/viewer/plugins/table.html','<div class="table-responsive position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}"><div class="col-lg-12" ng-repeat="field in col.fields"><ng-include src="getFormViewerTemplate(field.type)"></ng-include></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr></tbody></table></div>');
-$templateCache.put('forms/schema/plugins/ckeditor/ckeditor-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.locked.$invalid}"><label for="locked" class="col-sm-4 control-label" title="Indicates if suggestions are locked in this field.">Suggestions locked:</label><div class="col-sm-8"><input type="checkbox" id="locked" name="locked" ng-model="field.options.locked" class="ng-pristine ng-valid"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.printView.$invalid}"><label for="printView" class="col-sm-4 control-label" title="Indicates if CKEditor will show as print view.">Print View:</label><div class="col-sm-8"><input type="checkbox" id="printView" name="printView" ng-model="field.printView" class="ng-pristine ng-valid"></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.prefix.$invalid}"><label for="prefix" class="col-sm-2 control-label">Prefix:</label><div class="col-sm-2"><input type="text" class="form-control" id="prefix" name="prefix" placeholder="Prefix..." ng-model="field.options.prefix" ng-required="true"></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suffix.$invalid}"><label for="suffix" class="col-sm-2 control-label">Suffix:</label><div class="col-sm-2"><input type="text" class="form-control" id="suffix" name="suffix" placeholder="Suffix..." ng-model="field.options.suffix" ng-required="true"></div></div></div></div><ods-suggestion-options field="field" config="config" profile="dev"></ods-suggestion-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/plugins/ckeditor/ckeditor.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div class="position-relative"><textarea id="{{field.name + dev}}" name="{{field.name + dev}}" placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" title="{{field.tooltip}}" options="field.options" ods-ckeditor ng-disabled="field.readonly">\n</textarea></div>');
-$templateCache.put('forms/schema/plugins/ckeditor/suggestion-options-properties.html','<div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suggestionsUrl.$invalid}"><label for="suggestionsUrl" class="col-sm-2 control-label">Suggestions Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="suggestionsUrl" id="suggestionsUrl" placeholder="Suggestion Url..." ng-model="field.options.suggestionsUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadSuggestions(field.options.suggestionsUrl)">Load Suggestions</button></span></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"><button class="btn btn-info" type="button" ng-click="refreshOption()" title="Update options in CKEditor">Update <span class="fa fa-refresh"></span></button></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.tokensUrl.$invalid}"><label for="tokensUrl" class="col-sm-2 control-label">Tokens Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="tokensUrl" id="tokensUrl" placeholder="Tokens Url..." ng-model="field.options.tokensUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadTokens(field.options.tokensUrl)">Load Tokens</button></span></div></div></div></div><div class="table-responsive" style="max-height: 300px;overflow-y: auto;margin-top: 20px;"><table class="table table-condensed position-relative"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option" ng-disabled="field.options.locked"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required" ng-disabled="field.options.locked"></td><td><input type="text" ng-model="option.label" class="form-control" ng-required="true"></td><td><button class="btn btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
-$templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-toggleValue.$invalid}"><label for="{{field.name}}-toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-toggleValue" name="{{field.name}}-toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-textValue.$invalid}"><label for="{{field.name}}-textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-textValue" name="{{field.name}}-textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/plugins/if-yes/if-yes.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes.html\'"></div>');
-$templateCache.put('forms/schema/plugins/table/container.html','<div ng-include="\'forms/schema/components/label.html\'"></div><ods-table field="field" mode="edit"></ods-table>');
-$templateCache.put('forms/schema/plugins/table/table-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.{{field.name}}-cssClass.$invalid}"><label for="{{field.name}}-cssClass" class="col-sm-4 control-label">Class Name:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-cssClass" name="{{field.name}}-cssClass" placeholder="Css Class..." ng-model="field.cssClass" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.{{field.name}}-code.$invalid}"><label for="{{field.name}}-code" class="col-sm-4 control-label">Component code:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-code" name="{{field.name}}-code" placeholder="Code..." ng-model="field.code" ng-required="false"> <span class="help-block">Code is like a identification or type in this form. useful for a component classification.</span></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Layout"><ods-table-props field="field"></ods-table-props></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/plugins/table/table-props.html','<div class="padding-top"><div class="row"><form name="fieldPropsForm" class="form-horizontal"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-rows.$invalid}"><label for="{{field.name}}-rows" class="control-label col-sm-5">Rows:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-rows" name="{{field.name}}-rows" placeholder="Rows..." ng-model="field.matrix.length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addRow()" title="Add row">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-cols.$invalid}"><label for="{{field.name}}-cols" class="control-label col-sm-5">Cols:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-cols" name="{{field.name}}-cols" placeholder="Cols..." ng-model="field.matrix[0].length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addColumn()" title="Add column">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-rowHeader" class="control-label col-sm-5">Row Header:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-rowHeader" name="{{field.name}}-rowHeader" ng-model="field.rowHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-colHeader" class="control-label col-sm-5">Col Header:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-colHeader" name="{{field.name}}-colHeader" ng-model="field.colHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-totals" class="control-label col-sm-5">Show Totals:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-totals" name="{{field.name}}-totals" ng-model="field.totals"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-canClone" class="control-label col-sm-5">Can clone row:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-canClone" name="{{field.name}}-canClone" ng-model="field.canCloneRow"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageRows.$invalid}"><label for="{{field.name}}-manageRows" class="control-label col-sm-5">Manage rows:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-manageRows" name="{{field.name}}-manageRows" ng-model="field.manageRows"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageColumns.$invalid}"><label for="{{field.name}}-manageColumns" class="control-label col-sm-5">Manage columns:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-manageColumns" name="{{field.name}}-manageColumns" ng-model="field.manageColumns"></div></div><div class="col-md-8 col-sm-8 col-xs-12"><h3>Columns configuration</h3><div class="table-responsive" style="max-height: 300px"><table class="table table-bordered"><thead><tr><th>#</th><th>CSS class</th><th>Width</th><th>Total</th><th>Total Label</th></tr></thead><tbody><tr ng-repeat="col in field.matrix[0]"><td>{{$index + 1}}</td><td><input type="text" class="form-control" id="{{field.name}}-col{{$index}}" name="{{field.name}}-col{{$index}}" placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass"></td><td><input type="text" class="form-control" id="{{field.name}}-width{{$index}}" name="{{field.name}}-width{{$index}}" placeholder="width..." ng-model="col.width"></td><td><input type="checkbox" id="{{field.name}}-total{{$index}}" name="{{field.name}}-total{{$index}}" title="Add total to this column" ng-model="col.total"></td><td><input type="text" class="form-control" id="{{field.name}}-totalLabel{{$index}}" name="{{field.name}}-totalLabel{{$index}}" placeholder="Total label..." ng-model="field.matrix[0][$index].totalLabel"></td></tr></tbody></table></div></div></form></div></div>');
-$templateCache.put('forms/schema/plugins/table/table.html','<form name="{{field.name}}" class="position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" width="{{col.width}}"><div class="box-row col-lg-12"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px;" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)" dnd-drop="checkItem(index, item, external, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" dnd-callback="onDrop(list, $index, targetList, targetIndex)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" popover-props="true" debug-mode="debugMode"></ods-field></li></ul></div></td><td ng-show="field.manageRows" width="20px" style="position: relative"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-up"></span></button> <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-down"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]" style="position: relative"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapColumn($index, $index + 1)" title="Swap column right" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-right"></span></button> <button type="button" ng-click="swapColumn($index - 1, $index)" title="Swap column left" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-left"></span></button></td></tr></tbody></table><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div></form>');
-$templateCache.put('forms/schema/plugins/table/total.html','<div><b>{{label}}: {{total}}</b></div>');
 $templateCache.put('forms/schema/components/base-properties/common-properties.html','<div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/exportable-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/linkedTo-properties.html\'"></div>');
 $templateCache.put('forms/schema/components/base-properties/exportable-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.{{field.name}}-exportable.$invalid}"><label for="{{field.name}}-exportable" class="col-sm-4 control-label" title="Indicates if a value is required for this field.">Exportable:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-exportable" name="{{field.name}}-exportable" ng-model="field.exportable" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/label-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-label.$invalid}"><label for="{{field.name}}-label" class="col-sm-4 control-label">Label:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-label" name="{{field.name}}-label" placeholder="Label..." ng-model="field.label" ng-required="false"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-hideLabel.$invalid}"><label for="{{field.name}}-hideLabel" class="col-sm-4 control-label" title="Indicates if will show label or not.">Hide Label:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-hideLabel" name="{{field.name}}-hideLabel" ng-model="field.hideLabel"></div></div></div>');
@@ -178,7 +168,17 @@ $templateCache.put('forms/schema/components/textarea/textarea-properties.html','
 $templateCache.put('forms/schema/components/textarea/textarea.html','<div ng-include="\'forms/schema/components/label.html\'"></div><textarea class="form-control" name="{{getUniqueName(field)}}" id="{{getUniqueName(field)}}" ng-required="{{field.required}}" title="{{field.tooltip}}" rows="{{field.rows}}" placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" data-resize="disabled" ng-readonly="field.readonly">\n</textarea>');
 $templateCache.put('forms/schema/components/toggle/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/toggle/toggle-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/components/toggle/toggle.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/toggle.html\'"></div>');}]);
+$templateCache.put('forms/schema/components/toggle/toggle.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/toggle.html\'"></div>');
+$templateCache.put('forms/schema/plugins/ckeditor/ckeditor-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.locked.$invalid}"><label for="locked" class="col-sm-4 control-label" title="Indicates if suggestions are locked in this field.">Suggestions locked:</label><div class="col-sm-8"><input type="checkbox" id="locked" name="locked" ng-model="field.options.locked" class="ng-pristine ng-valid"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.printView.$invalid}"><label for="printView" class="col-sm-4 control-label" title="Indicates if CKEditor will show as print view.">Print View:</label><div class="col-sm-8"><input type="checkbox" id="printView" name="printView" ng-model="field.printView" class="ng-pristine ng-valid"></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.prefix.$invalid}"><label for="prefix" class="col-sm-2 control-label">Prefix:</label><div class="col-sm-2"><input type="text" class="form-control" id="prefix" name="prefix" placeholder="Prefix..." ng-model="field.options.prefix" ng-required="true"></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suffix.$invalid}"><label for="suffix" class="col-sm-2 control-label">Suffix:</label><div class="col-sm-2"><input type="text" class="form-control" id="suffix" name="suffix" placeholder="Suffix..." ng-model="field.options.suffix" ng-required="true"></div></div></div></div><ods-suggestion-options field="field" config="config" profile="dev"></ods-suggestion-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/ckeditor/ckeditor.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div class="position-relative"><textarea id="{{field.name + dev}}" name="{{field.name + dev}}" placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" title="{{field.tooltip}}" options="field.options" ods-ckeditor ng-disabled="field.readonly">\n</textarea></div>');
+$templateCache.put('forms/schema/plugins/ckeditor/suggestion-options-properties.html','<div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suggestionsUrl.$invalid}"><label for="suggestionsUrl" class="col-sm-2 control-label">Suggestions Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="suggestionsUrl" id="suggestionsUrl" placeholder="Suggestion Url..." ng-model="field.options.suggestionsUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadSuggestions(field.options.suggestionsUrl)">Load Suggestions</button></span></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"><button class="btn btn-info" type="button" ng-click="refreshOption()" title="Update options in CKEditor">Update <span class="fa fa-refresh"></span></button></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.tokensUrl.$invalid}"><label for="tokensUrl" class="col-sm-2 control-label">Tokens Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="tokensUrl" id="tokensUrl" placeholder="Tokens Url..." ng-model="field.options.tokensUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadTokens(field.options.tokensUrl)">Load Tokens</button></span></div></div></div></div><div class="table-responsive" style="max-height: 300px;overflow-y: auto;margin-top: 20px;"><table class="table table-condensed position-relative"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option" ng-disabled="field.options.locked"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required" ng-disabled="field.options.locked"></td><td><input type="text" ng-model="option.label" class="form-control" ng-required="true"></td><td><button class="btn btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
+$templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-toggleValue.$invalid}"><label for="{{field.name}}-toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-toggleValue" name="{{field.name}}-toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-textValue.$invalid}"><label for="{{field.name}}-textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-textValue" name="{{field.name}}-textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/if-yes/if-yes.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes.html\'"></div>');
+$templateCache.put('forms/schema/plugins/table/container.html','<div ng-include="\'forms/schema/components/label.html\'"></div><ods-table field="field" mode="edit"></ods-table>');
+$templateCache.put('forms/schema/plugins/table/table-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.{{field.name}}-cssClass.$invalid}"><label for="{{field.name}}-cssClass" class="col-sm-4 control-label">Class Name:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-cssClass" name="{{field.name}}-cssClass" placeholder="Css Class..." ng-model="field.cssClass" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.{{field.name}}-code.$invalid}"><label for="{{field.name}}-code" class="col-sm-4 control-label">Component code:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-code" name="{{field.name}}-code" placeholder="Code..." ng-model="field.code" ng-required="false"> <span class="help-block">Code is like a identification or type in this form. useful for a component classification.</span></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Layout"><ods-table-props field="field"></ods-table-props></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/table/table-props.html','<div class="padding-top"><div class="row"><form name="fieldPropsForm" class="form-horizontal"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-rows.$invalid}"><label for="{{field.name}}-rows" class="control-label col-sm-5">Rows:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-rows" name="{{field.name}}-rows" placeholder="Rows..." ng-model="field.matrix.length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addRow()" title="Add row">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-cols.$invalid}"><label for="{{field.name}}-cols" class="control-label col-sm-5">Cols:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-cols" name="{{field.name}}-cols" placeholder="Cols..." ng-model="field.matrix[0].length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addColumn()" title="Add column">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-rowHeader" class="control-label col-sm-5">Row Header:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-rowHeader" name="{{field.name}}-rowHeader" ng-model="field.rowHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-colHeader" class="control-label col-sm-5">Col Header:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-colHeader" name="{{field.name}}-colHeader" ng-model="field.colHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-totals" class="control-label col-sm-5">Show Totals:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-totals" name="{{field.name}}-totals" ng-model="field.totals"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-canClone" class="control-label col-sm-5">Can clone row:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-canClone" name="{{field.name}}-canClone" ng-model="field.canCloneRow"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageRows.$invalid}"><label for="{{field.name}}-manageRows" class="control-label col-sm-5">Manage rows:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-manageRows" name="{{field.name}}-manageRows" ng-model="field.manageRows"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageColumns.$invalid}"><label for="{{field.name}}-manageColumns" class="control-label col-sm-5">Manage columns:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-manageColumns" name="{{field.name}}-manageColumns" ng-model="field.manageColumns"></div></div><div class="col-md-8 col-sm-8 col-xs-12"><h3>Columns configuration</h3><div class="table-responsive" style="max-height: 300px"><table class="table table-bordered"><thead><tr><th>#</th><th>CSS class</th><th>Width</th><th>Total</th><th>Total Label</th></tr></thead><tbody><tr ng-repeat="col in field.matrix[0]"><td>{{$index + 1}}</td><td><input type="text" class="form-control" id="{{field.name}}-col{{$index}}" name="{{field.name}}-col{{$index}}" placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass"></td><td><input type="text" class="form-control" id="{{field.name}}-width{{$index}}" name="{{field.name}}-width{{$index}}" placeholder="width..." ng-model="col.width"></td><td><input type="checkbox" id="{{field.name}}-total{{$index}}" name="{{field.name}}-total{{$index}}" title="Add total to this column" ng-model="col.total"></td><td><input type="text" class="form-control" id="{{field.name}}-totalLabel{{$index}}" name="{{field.name}}-totalLabel{{$index}}" placeholder="Total label..." ng-model="field.matrix[0][$index].totalLabel"></td></tr></tbody></table></div></div></form></div></div>');
+$templateCache.put('forms/schema/plugins/table/table.html','<form name="{{field.name}}" class="position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" width="{{col.width}}"><div class="box-row col-lg-12"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px;" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)" dnd-drop="checkItem(index, item, external, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" dnd-callback="onDrop(list, $index, targetList, targetIndex)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" popover-props="true" debug-mode="debugMode"></ods-field></li></ul></div></td><td ng-show="field.manageRows" width="20px" style="position: relative"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-up"></span></button> <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-down"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]" style="position: relative"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapColumn($index, $index + 1)" title="Swap column right" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-right"></span></button> <button type="button" ng-click="swapColumn($index - 1, $index)" title="Swap column left" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-left"></span></button></td></tr></tbody></table><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div></form>');
+$templateCache.put('forms/schema/plugins/table/total.html','<div><b>{{label}}: {{total}}</b></div>');}]);
 'use strict';
 
 angular
@@ -1177,6 +1177,752 @@ function odsTextHideValue() {
   }
 })();
 
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsParam', odsParamDirective);
+
+odsParamDirective.$inject = ['OdsParamType', 'DTOptionsBuilder', 'DTColumnBuilder', '$q', '$filter', '$compile'];
+
+function odsParamDirective(OdsParamType, DTOptionsBuilder, DTColumnBuilder, $q, $filter, $compile) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'reports/param.html',
+        scope: {
+            param: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    function linkFunc($scope) {
+
+        $scope.hideTitle = hideTitle;
+        $scope.hideParam = hideParam;
+        $scope.getRequired = getRequired;
+        $scope.openCalendar = openCalendar;
+        $scope.getSelectTitleField = getSelectTitleField;
+
+        //TABLE_SELECT
+        $scope.search = search;
+        $scope.getDtOptions = getDtOptions;
+        $scope.getDtColumns = getDtColumns;
+        $scope.toggleAll = toggleAll;
+        $scope.toggleOne = toggleOne;
+
+        initTableParam($scope.param);
+        initDateParam($scope.param);
+
+        function initTableParam(param) {
+
+            if (param.type === OdsParamType.TABLE_SELECT) {
+                param.dtInstance = {};
+                param.dtOptions = undefined;
+                param.dtColumns = undefined;
+                param.isFilter = false;
+                param.selected = [];
+                param.selectedAll = false;
+                //init pre-selections
+                var valueField = param.valueField;
+                var gridOptions = param.gridOptions;
+                for (var j = 0; j < gridOptions.preSelected.length; j++) {
+                    var preSelectedId = gridOptions.preSelected[j][valueField];
+                    param.selected[preSelectedId] = true;
+                }
+            }
+        }
+
+        function initDateParam(param) {
+
+            if (param.type === OdsParamType.DATE) {
+                param.datePickerOpenStatus = false;
+            }
+        }
+
+        function hideTitle(param) {
+
+            return !!(param.hidden || param.hideTitle);
+        }
+
+        function hideParam(param) {
+
+            return !!param.hidden;
+        }
+
+        function getRequired(param) {
+
+            return param.required !== undefined ? param.required : false;
+        }
+
+        function openCalendar(param) {
+
+            param.datePickerOpenStatus = true;
+        }
+
+        function getSelectTitleField(param, element) {
+
+            if (element) {
+                if (param.render) {
+                    return param.render(element);
+                } else {
+                    return param.titleField !== undefined ? element[param.titleField] : element.name;
+                }
+            } else {
+                return param.placeholder;
+            }
+        }
+
+        function search(param) {
+            param.dtInstance.reloadData();
+        }
+
+        function getDtOptions(param) {
+
+            if (param.dtOptions === undefined) {
+                //We set the new dtOptions into array
+                param.dtOptions = DTOptionsBuilder.fromFnPromise(function () {
+                    var defer = $q.defer();
+                    if (param.isFilter) {
+                        defer.resolve(param.gridOptions.data);
+                        param.isFilter = false;
+                    } else if (!param.searchQuery || param.searchQuery === '') {
+                        defer.resolve(param.gridOptions.data);
+                    } else {
+                        defer.resolve($filter('filter')(param.gridOptions.data, param.searchQuery, undefined));
+                    }
+                    return defer.promise;
+                }).withPaginationType('full_numbers').withBootstrap().withDOM('tip').withOption('aaSorting', [[1, 'asc']])
+                    .withOption('createdRow', function (row) {
+                        $compile(angular.element(row).contents())($scope);
+                    })
+                    .withOption('headerCallback', function (header) {
+                        $compile(angular.element(header).contents())($scope);
+                    });
+                return param.dtOptions;
+            } else {
+                return param.dtOptions;
+            }
+        }
+
+        function getDtColumns(param) {
+
+            if (param.dtColumns === undefined) {
+                //We build all columns
+                var gridOptions = param.gridOptions;
+                var columns = [];
+                for (var i = 0; i < gridOptions.columnDef.length; i++) {
+                    var columnDef = gridOptions.columnDef[i];
+                    if (columnDef.id) {
+                        columns.push(DTColumnBuilder.newColumn(null).withTitle(
+                            '<input type="checkbox" ng-model="param.selectedAll" ng-change="toggleAll(' + param + ')">')
+                            .notSortable()
+                            .renderWith(function (data) {
+                                return '<input type="checkbox" ng-model="param.selected[' + data[param.valueField] + ']" ng-click="toggleOne(' + param + ')">';
+                            }));
+                    } else {
+                        var column;
+                        if (columnDef.render === undefined) {
+                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title);
+                            columns.push(column);
+                        } else {
+                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title)
+                                .renderWith(columnDef.render);
+                            columns.push(column);
+                        }
+                    }
+                }
+                param.dtColumns = columns;
+            }
+
+            return param.dtColumns;
+        }
+
+        function toggleAll(param) {
+
+            for (var i = 0; i < param.gridOptions.data.length; i++) {
+                var valueField = param.valueField;
+                var value = param.gridOptions.data[i][valueField];
+                param.selected[value] = param.selectedAll;
+            }
+
+            param.value = param.selected;
+        }
+
+        function toggleOne(param) {
+            for (var id in param.selected) {
+                if (param.selected.hasOwnProperty(id)) {
+                    if (!param.selected[id]) {
+                        param.selectedAll = false;
+                        return;
+                    }
+                }
+            }
+            param.selectedAll = true;
+            param.value = param.selected;
+        }
+
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .controller('OdsParamsController', OdsParamsController);
+
+    OdsParamsController.$inject = ['OdsReportsService', 'OdsParamType', 'report', '$uibModalInstance'];
+
+    function OdsParamsController(OdsReportsService, OdsParamType, report, $uibModalInstance) {
+
+        var vm = this;
+
+        vm.clear = clear;
+        vm.openReport = openReport;
+        vm.paramType = OdsParamType;
+        vm.report = report;
+
+        function clear() {
+            $uibModalInstance.dismiss('cancel');
+        }
+
+        function openReport() {
+            $uibModalInstance.close(vm.report);
+        }
+        
+    }
+})();
+
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .constant('OdsParamType', {
+            'DATE': 'DATE',
+            'TEXT': 'TEXT',
+            'NUMBER': 'NUMBER',
+            'LIST': 'LIST',
+            'SINGLE_SELECT': 'SINGLE_SELECT',
+            'MULTI_SELECT': 'MULTI_SELECT',
+            'TABLE_SELECT': 'TABLE_SELECT',
+            'DRAG_AND_DROP': 'DRAG_AND_DROP',
+            'CHECK_LIST': 'CHECK_LIST'
+        })
+        .constant('OdsPageOrientation', {
+            'PORTRAIT': 'Portrait',
+            'LANDSCAPE': 'Landscape'
+        });
+
+})();
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsReports', ReportsDirective);
+
+ReportsDirective.$inject = ['OdsReportsService', '$uibModal', '$sce', '$q'];
+
+function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'reports/reports.html',
+        scope: {
+            reportsGroup: '='
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        var BASE64_MARKER = ';base64,';
+
+        function convertDataURIToBinary(uri, buffer) {
+
+            var marker = ';base64,',
+                raw = window.atob(uri.substring(uri.indexOf(marker) + marker.length)),
+                n = raw.length,
+                a = new Uint8Array(new ArrayBuffer(n));
+            for(var i = 0; i < n ; i++){
+                a[i] = raw.charCodeAt(i);
+            }
+            return buffer ? a.buffer : a;
+        }
+
+        $scope.infoMessage = true;
+        $scope.selectReport = null;
+        $scope.reportFile = getUrlReport();
+        $scope.hideInfoMessage = hideInfoMessage;
+        $scope.downloadReport = downloadReport;
+        $scope.openReport = openReport;
+
+        function getUrlReport(url) {
+            return $sce.trustAsResourceUrl(url);
+        }
+
+        function hideInfoMessage() {
+            $scope.infoMessage = false;
+        }
+
+        function openReport(groupIndex, reportIndex) {
+
+            $scope.selectReport = null;
+
+            var report = $scope.reportsGroup.groups[groupIndex].reports[reportIndex];
+            var size = report.modalSize ? report.modalSize : 'sm';
+
+            if (report.params.length > 0 &&
+                $.grep(report.params, function (param) {
+                    if (param.hidden) {
+                        return param.hidden === false;
+                    } else {
+                        return true;
+                    }
+                }).length > 0) {
+                $uibModal.open({
+                    templateUrl: 'reports/params.html',
+                    controller: 'OdsParamsController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: size,
+                    resolve: {
+                        report: [function () {
+                            var deferred = $q.defer();
+                            deferred.resolve(report);
+                            return deferred.promise;
+                        }]
+                    }
+                }).result.then(function (report) {
+                    $scope.selectReport = report;
+                    open(report);
+                }, function () {
+                });
+            } else {
+                $scope.selectReport = report;
+                open(report);
+            }
+        }
+
+        function open(report) {
+            if (report.pdf !== undefined && !report.pdf) {
+                forceDownload();
+            } else {
+                OdsReportsService.getReport(report).then(function (outReport) {
+                    $scope.reportFile = convertDataURIToBinary(outReport);//getUrlReport(outReport);
+                }, function () {
+
+                });
+            }
+        }
+
+        function downloadReport() {
+            OdsReportsService.downloadReport($scope.selectReport);
+        }
+
+        function forceDownload() {
+            OdsReportsService.forceDownload($scope.selectReport);
+        }
+    }
+}
+
+/**
+ * Created by hermeslm on 3/28/17.
+ */
+(function () {
+    'use strict';
+
+    angular
+        .module('ods-lib')
+        .factory('OdsReportsService', OdsReportsService);
+
+    OdsReportsService.$inject = ['$q', '$http', 'moment', 'OdsParamType', 'OdsDateUtils', '$window'];
+
+    function OdsReportsService($q, $http, moment, OdsParamType, OdsDateUtils, $window) {
+
+        var service = {
+            getHttpResource: getHttpResource,
+            postHttpResource: postHttpResource,
+            getReport: getReport,
+            downloadReport: downloadReport,
+            downloadReportFromSource: downloadReportFromSource,
+            getSourceReport: getSourceReport,
+            isMimeSupported: isMimeSupported,
+            forceDownload: forceDownload,
+            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject,
+            forceDownloadFromData: forceDownloadFromData,
+        };
+
+        return service;
+
+        function pdfFooterWithFilters(report) {
+
+            if (report.params.length > 0) {
+
+                var filters = '';
+                for (var i = 0; i < report.params.length; i++) {
+                    var hideParam = report.params[i].hideInFooter !== undefined ?
+                        report.params[i].hideInFooter : false;
+                    if (!hideParam) {
+                        switch (report.params[i].type) {
+                            case OdsParamType.DATE:
+                                filters += report.params[i].title + ': ' +
+                                    OdsDateUtils.formatter(report.params[i].value, 'MM/dd/yyyy') + '\n';
+                                break;
+                            case OdsParamType.NUMBER:
+                                filters += report.params[i].title + ': ' + report.params[i].value + '\n';
+                                break;
+                            default:
+                                filters += report.params[i].title + ': ' + report.params[i].value + '\n';
+                                break;
+                        }
+                    }
+                }
+
+                return function (currentPage, pageCount) {
+
+                    var result;
+                    if (report.footerLogo) {
+                        result = {
+                            columns: [
+                                {
+                                    text: filters,
+                                    margin: [20, 0],
+                                    fontSize: 8
+                                },
+                                {
+                                    image: report.footerLogo,
+                                    fit: [100, 100],
+                                    margin: [0, 0, 0, 0]
+                                },
+                                {
+                                    text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
+                                    'Page ' + currentPage.toString() + ' of ' + pageCount,
+                                    alignment: 'right',
+                                    margin: [0, 0, 20, 0],
+                                    fontSize: 8
+                                }
+                            ]
+                        }
+                    } else {
+                        result = {
+                            columns: [
+                                {
+                                    text: filters,
+                                    margin: [20, 0],
+                                    fontSize: 8
+                                },
+                                {
+                                    text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
+                                    'Page ' + currentPage.toString() + ' of ' + pageCount,
+                                    alignment: 'right',
+                                    margin: [0, 0, 20, 0],
+                                    fontSize: 8
+                                }
+                            ]
+                        }
+                    }
+                    return result;
+                };
+            } else {
+                return function (currentPage, pageCount) {
+                    return {
+                        columns: [
+                            {
+                                text: 'No Filters',
+                                margin: [20, 0],
+                                fontSize: 8
+                            },
+                            {
+                                text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
+                                'Page ' + currentPage.toString() + ' of ' + pageCount,
+                                alignment: 'right',
+                                margin: [0, 0, 20, 0],
+                                fontSize: 8
+                            }
+                        ]
+                    };
+                };
+            }
+
+        }
+
+        function postHttpResource(url, data) {
+
+            return $http.post(url, data);
+        }
+
+        function getHttpResource(url) {
+
+            return $http.get(url);
+        }
+
+        function getReport(report) {
+
+            return $q(function (resolve) {
+
+                var postReport = buildPost(report);
+                postHttpResource(report.url, postReport).then(function success(response) {
+
+                    //Check if the pdf is in base64
+                    if (report.base64) {
+                        resolve('data:application/pdf;base64,' + response.data.file);
+                    } else {
+                        var pdfData = response.data;
+                        pdfData.footer = pdfFooterWithFilters(report);
+                        var pdfFile = pdfMake.createPdf(pdfData);
+                        // var pdfFile = pdfMake.createPdf(response.data);
+                        pdfFile.getBase64(function (output) {
+                            // resolve(base64ToUint8Array(output));
+                            resolve('data:application/pdf;base64,' + output);
+                        });
+                    }
+                }, function error(response) {
+                    var pdfFile = pdfMake.createPdf(createErrorPdf(response));
+                    // var pdfFile = pdfMake.createPdf(response.data);
+                    pdfFile.getBase64(function (output) {
+                        // resolve(base64ToUint8Array(output));
+                        resolve('data:application/pdf;base64,' + output);
+                    });
+                    // console.log(response);
+                });
+            });
+        }
+
+        function download(base64Data, title) {
+
+            var arrBuffer = base64ToArrayBuffer(base64Data);
+
+            // It is necessary to create a new blob object with mime-type explicitly set
+            // otherwise only Chrome works like it should
+            var newBlob = new Blob([arrBuffer], {type: "application/pdf"});
+
+            // IE doesn't allow using a blob object directly as link href
+            // instead it is necessary to use msSaveOrOpenBlob
+            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+                window.navigator.msSaveOrOpenBlob(newBlob);
+                return;
+            }
+
+            // For other browsers:
+            // Create a link pointing to the ObjectURL containing the blob.
+            var data = window.URL.createObjectURL(newBlob);
+
+            var link = document.createElement('a');
+            document.body.appendChild(link); //required in FF, optional for Chrome
+            link.href = data;
+            link.download = title + ".pdf";
+            link.click();
+            window.URL.revokeObjectURL(data);
+            link.remove();
+        }
+
+        function base64ToArrayBuffer(data) {
+            var binaryString = window.atob(data);
+            var binaryLen = binaryString.length;
+            var bytes = new Uint8Array(binaryLen);
+            for (var i = 0; i < binaryLen; i++) {
+                var ascii = binaryString.charCodeAt(i);
+                bytes[i] = ascii;
+            }
+            return bytes;
+        }
+
+        function downloadReport(report) {
+
+            var postReport = buildPost(report);
+            postHttpResource(report.url, postReport).then(function success(response) {
+
+                //Check if the pdf is in base64
+                if (report.base64) {
+                    download(response.data.file, report.title);
+                } else {
+                    var pdfData = response.data;
+                    pdfData.footer = pdfFooterWithFilters(report);
+                    pdfMake.createPdf(pdfData).download(report.title);
+                }
+            }, function error(response) {
+                pdfMake.createPdf(createErrorPdf(response)).download(report.title);
+            });
+        }
+
+        function downloadReportFromSource(pdfSource, report) {
+
+            var pdfData = pdfSource;
+            pdfData.footer = pdfFooterWithFilters(report);
+            pdfMake.createPdf(pdfData).download(report.title);
+        }
+
+        function getSourceReport(report) {
+
+            return $q(function (resolve) {
+
+                var postReport = buildPost(report);
+                postHttpResource(report.url, postReport).then(function success(response) {
+
+                    //Check if the pdf is in base64
+                    if (report.base64) {
+                        resolve('data:application/pdf;base64,' + response.data.file);
+                    } else {
+                        var pdfData = response.data;
+                        pdfData.footer = pdfFooterWithFilters(report);
+                        resolve(pdfData);
+                    }
+                }, function error(response) {
+                    var pdfFile = createErrorPdf(response);
+                    resolve(pdfFile);
+                });
+            });
+        }
+
+        function createErrorPdf(response) {
+
+            var dd = {
+                'content': [
+                    {text: 'Error loading report with status: ' + response.status, color: '#ff0000'},
+                    {text: 'Status text: ' + response.statusText, color: '#ff0000'}
+                ]
+            };
+
+            return dd;
+        }
+
+        function isMimeSupported() {
+
+            return !!($window.navigator && $window.navigator.mimeTypes && $window.navigator.mimeTypes['application/pdf']);
+        }
+
+        function buildPost(report) {
+
+            // var url = report.url;
+            var params = [];
+            for (var i = 0; i < report.params.length; i++) {
+                var param = {
+                    name: report.params[i].name,
+                    type: report.params[i].type,
+                    value: null
+                };
+                var tmpParams = [];
+                var idField;
+                switch (report.params[i].type) {
+                    case OdsParamType.DATE:
+                        param.value = [OdsDateUtils.convertLocalDateToServer(report.params[i].value)];
+                        break;
+                    case OdsParamType.LIST:
+                        param.value = [report.params[i].value];
+                        break;
+                    case OdsParamType.SINGLE_SELECT:
+                        idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
+                        param.value = [report.params[i].value[idField]];
+                        break;
+                    case OdsParamType.MULTI_SELECT:
+                        param.value = getListValue(report.params[i]);
+                        break;
+                    case OdsParamType.TABLE_SELECT:
+                        tmpParams = [];
+                        for (var key in report.params[i].value) {
+                            if (key === 'length' || !report.params[i].value.hasOwnProperty(key)) {
+                                continue;
+                            }
+                            var value = key;
+                            if (report.params[i].value[key]) {
+                                tmpParams.push(value);
+                            }
+
+                        }
+                        param.value = tmpParams;
+                        break;
+                    case OdsParamType.DRAG_AND_DROP:
+                        param.value = getListValue(report.params[i]);
+                        break;
+                    case OdsParamType.CHECK_LIST:
+                        param.value = getListValue(report.params[i]);
+                        break;
+                    default:
+                        param.value = [report.params[i].value];
+                        break;
+                }
+                params.push(param);
+            }
+
+            var postReport = {
+                title: report.title,
+                params: params,
+                pageOrientation: report.pageOrientation
+            };
+
+            return postReport;
+        }
+
+        function getListValue(param) {
+
+            var tmpValue = [];
+            var idField;
+            for (var i = 0; i < param.value.length; i++) {
+                idField = param.valueField !== undefined ? param.valueField : 'id';
+                tmpValue.push(param.value[i][idField]);
+            }
+            return tmpValue;
+        }
+
+        function forceDownload(report) {
+
+            var postReport = buildPost(report);
+            postHttpResource(report.url, postReport).then(function success(response) {
+                var contentType = response.headers('Content-Type');
+                var contentDisp = response.headers('Content-Disposition');
+                var index = contentDisp.indexOf('filename="');
+
+                var filename = 'filename';
+
+                if (index !== -1) {
+                    var i = index + 10;
+                    while (contentDisp[i] !== '"') {
+                        i++;
+                    }
+
+                    filename = contentDisp.substring(index + 10, i);
+                }
+
+                var a = document.createElement('a');
+                a.href = URL.createObjectURL(new Blob([response.data], {type: contentType}));
+                a.download = filename;
+                a.click();
+            }, function error(response) {
+                pdfMake.createPdf(createErrorPdf(response)).download(report.title);
+            });
+        }
+
+        function forceDownloadAndOpenPDFObject(data) {
+
+            pdfMake.createPdf(data).open();
+        }
+
+        function forceDownloadFromData(data, title) {
+
+            pdfMake.createPdf(data).download(title);
+        }
+    }
+
+})();
+
 'use strict';
 
 angular
@@ -2040,848 +2786,6 @@ function OdsUtils() {
         }
     }
 }
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsParam', odsParamDirective);
-
-odsParamDirective.$inject = ['OdsParamType', 'DTOptionsBuilder', 'DTColumnBuilder', '$q', '$filter', '$compile'];
-
-function odsParamDirective(OdsParamType, DTOptionsBuilder, DTColumnBuilder, $q, $filter, $compile) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'reports/param.html',
-        scope: {
-            param: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    function linkFunc($scope) {
-
-        $scope.hideTitle = hideTitle;
-        $scope.hideParam = hideParam;
-        $scope.getRequired = getRequired;
-        $scope.openCalendar = openCalendar;
-        $scope.getSelectTitleField = getSelectTitleField;
-
-        //TABLE_SELECT
-        $scope.search = search;
-        $scope.getDtOptions = getDtOptions;
-        $scope.getDtColumns = getDtColumns;
-        $scope.toggleAll = toggleAll;
-        $scope.toggleOne = toggleOne;
-
-        initTableParam($scope.param);
-        initDateParam($scope.param);
-
-        function initTableParam(param) {
-
-            if (param.type === OdsParamType.TABLE_SELECT) {
-                param.dtInstance = {};
-                param.dtOptions = undefined;
-                param.dtColumns = undefined;
-                param.isFilter = false;
-                param.selected = [];
-                param.selectedAll = false;
-                //init pre-selections
-                var valueField = param.valueField;
-                var gridOptions = param.gridOptions;
-                for (var j = 0; j < gridOptions.preSelected.length; j++) {
-                    var preSelectedId = gridOptions.preSelected[j][valueField];
-                    param.selected[preSelectedId] = true;
-                }
-            }
-        }
-
-        function initDateParam(param) {
-
-            if (param.type === OdsParamType.DATE) {
-                param.datePickerOpenStatus = false;
-            }
-        }
-
-        function hideTitle(param) {
-
-            return !!(param.hidden || param.hideTitle);
-        }
-
-        function hideParam(param) {
-
-            return !!param.hidden;
-        }
-
-        function getRequired(param) {
-
-            return param.required !== undefined ? param.required : false;
-        }
-
-        function openCalendar(param) {
-
-            param.datePickerOpenStatus = true;
-        }
-
-        function getSelectTitleField(param, element) {
-
-            if (element) {
-                if (param.render) {
-                    return param.render(element);
-                } else {
-                    return param.titleField !== undefined ? element[param.titleField] : element.name;
-                }
-            } else {
-                return param.placeholder;
-            }
-        }
-
-        function search(param) {
-            param.dtInstance.reloadData();
-        }
-
-        function getDtOptions(param) {
-
-            if (param.dtOptions === undefined) {
-                //We set the new dtOptions into array
-                param.dtOptions = DTOptionsBuilder.fromFnPromise(function () {
-                    var defer = $q.defer();
-                    if (param.isFilter) {
-                        defer.resolve(param.gridOptions.data);
-                        param.isFilter = false;
-                    } else if (!param.searchQuery || param.searchQuery === '') {
-                        defer.resolve(param.gridOptions.data);
-                    } else {
-                        defer.resolve($filter('filter')(param.gridOptions.data, param.searchQuery, undefined));
-                    }
-                    return defer.promise;
-                }).withPaginationType('full_numbers').withBootstrap().withDOM('tip').withOption('aaSorting', [[1, 'asc']])
-                    .withOption('createdRow', function (row) {
-                        $compile(angular.element(row).contents())($scope);
-                    })
-                    .withOption('headerCallback', function (header) {
-                        $compile(angular.element(header).contents())($scope);
-                    });
-                return param.dtOptions;
-            } else {
-                return param.dtOptions;
-            }
-        }
-
-        function getDtColumns(param) {
-
-            if (param.dtColumns === undefined) {
-                //We build all columns
-                var gridOptions = param.gridOptions;
-                var columns = [];
-                for (var i = 0; i < gridOptions.columnDef.length; i++) {
-                    var columnDef = gridOptions.columnDef[i];
-                    if (columnDef.id) {
-                        columns.push(DTColumnBuilder.newColumn(null).withTitle(
-                            '<input type="checkbox" ng-model="param.selectedAll" ng-change="toggleAll(' + param + ')">')
-                            .notSortable()
-                            .renderWith(function (data) {
-                                return '<input type="checkbox" ng-model="param.selected[' + data[param.valueField] + ']" ng-click="toggleOne(' + param + ')">';
-                            }));
-                    } else {
-                        var column;
-                        if (columnDef.render === undefined) {
-                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title);
-                            columns.push(column);
-                        } else {
-                            column = DTColumnBuilder.newColumn(columnDef.field).withTitle(columnDef.title)
-                                .renderWith(columnDef.render);
-                            columns.push(column);
-                        }
-                    }
-                }
-                param.dtColumns = columns;
-            }
-
-            return param.dtColumns;
-        }
-
-        function toggleAll(param) {
-
-            for (var i = 0; i < param.gridOptions.data.length; i++) {
-                var valueField = param.valueField;
-                var value = param.gridOptions.data[i][valueField];
-                param.selected[value] = param.selectedAll;
-            }
-
-            param.value = param.selected;
-        }
-
-        function toggleOne(param) {
-            for (var id in param.selected) {
-                if (param.selected.hasOwnProperty(id)) {
-                    if (!param.selected[id]) {
-                        param.selectedAll = false;
-                        return;
-                    }
-                }
-            }
-            param.selectedAll = true;
-            param.value = param.selected;
-        }
-
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .controller('OdsParamsController', OdsParamsController);
-
-    OdsParamsController.$inject = ['OdsReportsService', 'OdsParamType', 'report', '$uibModalInstance'];
-
-    function OdsParamsController(OdsReportsService, OdsParamType, report, $uibModalInstance) {
-
-        var vm = this;
-
-        vm.clear = clear;
-        vm.openReport = openReport;
-        vm.paramType = OdsParamType;
-        vm.report = report;
-
-        function clear() {
-            $uibModalInstance.dismiss('cancel');
-        }
-
-        function openReport() {
-            $uibModalInstance.close(vm.report);
-        }
-        
-    }
-})();
-
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .constant('OdsParamType', {
-            'DATE': 'DATE',
-            'TEXT': 'TEXT',
-            'NUMBER': 'NUMBER',
-            'LIST': 'LIST',
-            'SINGLE_SELECT': 'SINGLE_SELECT',
-            'MULTI_SELECT': 'MULTI_SELECT',
-            'TABLE_SELECT': 'TABLE_SELECT',
-            'DRAG_AND_DROP': 'DRAG_AND_DROP',
-            'CHECK_LIST': 'CHECK_LIST'
-        })
-        .constant('OdsPageOrientation', {
-            'PORTRAIT': 'Portrait',
-            'LANDSCAPE': 'Landscape'
-        });
-
-})();
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsReports', ReportsDirective);
-
-ReportsDirective.$inject = ['OdsReportsService', '$uibModal', '$sce', '$q'];
-
-function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'reports/reports.html',
-        scope: {
-            reportsGroup: '='
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        var BASE64_MARKER = ';base64,';
-
-        function convertDataURIToBinary(uri, buffer) {
-
-            var marker = ';base64,',
-                raw = window.atob(uri.substring(uri.indexOf(marker) + marker.length)),
-                n = raw.length,
-                a = new Uint8Array(new ArrayBuffer(n));
-            for(var i = 0; i < n ; i++){
-                a[i] = raw.charCodeAt(i);
-            }
-            return buffer ? a.buffer : a;
-        }
-
-        $scope.infoMessage = true;
-        $scope.selectReport = null;
-        $scope.reportFile = getUrlReport();
-        $scope.hideInfoMessage = hideInfoMessage;
-        $scope.downloadReport = downloadReport;
-        $scope.openReport = openReport;
-
-        function getUrlReport(url) {
-            return $sce.trustAsResourceUrl(url);
-        }
-
-        function hideInfoMessage() {
-            $scope.infoMessage = false;
-        }
-
-        function openReport(groupIndex, reportIndex) {
-
-            $scope.selectReport = null;
-
-            var report = $scope.reportsGroup.groups[groupIndex].reports[reportIndex];
-            var size = report.modalSize ? report.modalSize : 'sm';
-
-            if (report.params.length > 0 &&
-                $.grep(report.params, function (param) {
-                    if (param.hidden) {
-                        return param.hidden === false;
-                    } else {
-                        return true;
-                    }
-                }).length > 0) {
-                $uibModal.open({
-                    templateUrl: 'reports/params.html',
-                    controller: 'OdsParamsController',
-                    controllerAs: 'vm',
-                    backdrop: 'static',
-                    size: size,
-                    resolve: {
-                        report: [function () {
-                            var deferred = $q.defer();
-                            deferred.resolve(report);
-                            return deferred.promise;
-                        }]
-                    }
-                }).result.then(function (report) {
-                    $scope.selectReport = report;
-                    open(report);
-                }, function () {
-                });
-            } else {
-                $scope.selectReport = report;
-                open(report);
-            }
-        }
-
-        function open(report) {
-            if (report.pdf !== undefined && !report.pdf) {
-                forceDownload();
-            } else {
-                OdsReportsService.getReport(report).then(function (outReport) {
-                    $scope.reportFile = convertDataURIToBinary(outReport);//getUrlReport(outReport);
-                }, function () {
-
-                });
-            }
-        }
-
-        function downloadReport() {
-            OdsReportsService.downloadReport($scope.selectReport);
-        }
-
-        function forceDownload() {
-            OdsReportsService.forceDownload($scope.selectReport);
-        }
-    }
-}
-
-/**
- * Created by hermeslm on 3/28/17.
- */
-(function () {
-    'use strict';
-
-    angular
-        .module('ods-lib')
-        .factory('OdsReportsService', OdsReportsService);
-
-    OdsReportsService.$inject = ['$q', '$http', 'moment', 'OdsParamType', 'OdsDateUtils', '$window'];
-
-    function OdsReportsService($q, $http, moment, OdsParamType, OdsDateUtils, $window) {
-
-        var service = {
-            getHttpResource: getHttpResource,
-            postHttpResource: postHttpResource,
-            getReport: getReport,
-            downloadReport: downloadReport,
-            downloadReportFromSource: downloadReportFromSource,
-            getSourceReport: getSourceReport,
-            isMimeSupported: isMimeSupported,
-            forceDownload: forceDownload,
-            forceDownloadAndOpenPDFObject: forceDownloadAndOpenPDFObject,
-            forceDownloadFromData: forceDownloadFromData,
-        };
-
-        return service;
-
-        function pdfFooterWithFilters(report) {
-
-            if (report.params.length > 0) {
-
-                var filters = '';
-                for (var i = 0; i < report.params.length; i++) {
-                    var hideParam = report.params[i].hideInFooter !== undefined ?
-                        report.params[i].hideInFooter : false;
-                    if (!hideParam) {
-                        switch (report.params[i].type) {
-                            case OdsParamType.DATE:
-                                filters += report.params[i].title + ': ' +
-                                    OdsDateUtils.formatter(report.params[i].value, 'MM/dd/yyyy') + '\n';
-                                break;
-                            case OdsParamType.NUMBER:
-                                filters += report.params[i].title + ': ' + report.params[i].value + '\n';
-                                break;
-                            default:
-                                filters += report.params[i].title + ': ' + report.params[i].value + '\n';
-                                break;
-                        }
-                    }
-                }
-
-                return function (currentPage, pageCount) {
-
-                    var result;
-                    if (report.footerLogo) {
-                        result = {
-                            columns: [
-                                {
-                                    text: filters,
-                                    margin: [20, 0],
-                                    fontSize: 8
-                                },
-                                {
-                                    image: report.footerLogo,
-                                    fit: [100, 100],
-                                    margin: [0, 0, 0, 0]
-                                },
-                                {
-                                    text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
-                                    'Page ' + currentPage.toString() + ' of ' + pageCount,
-                                    alignment: 'right',
-                                    margin: [0, 0, 20, 0],
-                                    fontSize: 8
-                                }
-                            ]
-                        }
-                    } else {
-                        result = {
-                            columns: [
-                                {
-                                    text: filters,
-                                    margin: [20, 0],
-                                    fontSize: 8
-                                },
-                                {
-                                    text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
-                                    'Page ' + currentPage.toString() + ' of ' + pageCount,
-                                    alignment: 'right',
-                                    margin: [0, 0, 20, 0],
-                                    fontSize: 8
-                                }
-                            ]
-                        }
-                    }
-                    return result;
-                };
-            } else {
-                return function (currentPage, pageCount) {
-                    return {
-                        columns: [
-                            {
-                                text: 'No Filters',
-                                margin: [20, 0],
-                                fontSize: 8
-                            },
-                            {
-                                text: 'Date: ' + moment().format('MM/DD/YYYY hh:mm') + '\n' +
-                                'Page ' + currentPage.toString() + ' of ' + pageCount,
-                                alignment: 'right',
-                                margin: [0, 0, 20, 0],
-                                fontSize: 8
-                            }
-                        ]
-                    };
-                };
-            }
-
-        }
-
-        function postHttpResource(url, data) {
-
-            return $http.post(url, data);
-        }
-
-        function getHttpResource(url) {
-
-            return $http.get(url);
-        }
-
-        function getReport(report) {
-
-            return $q(function (resolve) {
-
-                var postReport = buildPost(report);
-                postHttpResource(report.url, postReport).then(function success(response) {
-
-                    //Check if the pdf is in base64
-                    if (report.base64) {
-                        resolve('data:application/pdf;base64,' + response.data.file);
-                    } else {
-                        var pdfData = response.data;
-                        pdfData.footer = pdfFooterWithFilters(report);
-                        var pdfFile = pdfMake.createPdf(pdfData);
-                        // var pdfFile = pdfMake.createPdf(response.data);
-                        pdfFile.getBase64(function (output) {
-                            // resolve(base64ToUint8Array(output));
-                            resolve('data:application/pdf;base64,' + output);
-                        });
-                    }
-                }, function error(response) {
-                    var pdfFile = pdfMake.createPdf(createErrorPdf(response));
-                    // var pdfFile = pdfMake.createPdf(response.data);
-                    pdfFile.getBase64(function (output) {
-                        // resolve(base64ToUint8Array(output));
-                        resolve('data:application/pdf;base64,' + output);
-                    });
-                    // console.log(response);
-                });
-            });
-        }
-
-        function download(base64Data, title) {
-
-            var arrBuffer = base64ToArrayBuffer(base64Data);
-
-            // It is necessary to create a new blob object with mime-type explicitly set
-            // otherwise only Chrome works like it should
-            var newBlob = new Blob([arrBuffer], {type: "application/pdf"});
-
-            // IE doesn't allow using a blob object directly as link href
-            // instead it is necessary to use msSaveOrOpenBlob
-            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                window.navigator.msSaveOrOpenBlob(newBlob);
-                return;
-            }
-
-            // For other browsers:
-            // Create a link pointing to the ObjectURL containing the blob.
-            var data = window.URL.createObjectURL(newBlob);
-
-            var link = document.createElement('a');
-            document.body.appendChild(link); //required in FF, optional for Chrome
-            link.href = data;
-            link.download = title + ".pdf";
-            link.click();
-            window.URL.revokeObjectURL(data);
-            link.remove();
-        }
-
-        function base64ToArrayBuffer(data) {
-            var binaryString = window.atob(data);
-            var binaryLen = binaryString.length;
-            var bytes = new Uint8Array(binaryLen);
-            for (var i = 0; i < binaryLen; i++) {
-                var ascii = binaryString.charCodeAt(i);
-                bytes[i] = ascii;
-            }
-            return bytes;
-        }
-
-        function downloadReport(report) {
-
-            var postReport = buildPost(report);
-            postHttpResource(report.url, postReport).then(function success(response) {
-
-                //Check if the pdf is in base64
-                if (report.base64) {
-                    download(response.data.file, report.title);
-                } else {
-                    var pdfData = response.data;
-                    pdfData.footer = pdfFooterWithFilters(report);
-                    pdfMake.createPdf(pdfData).download(report.title);
-                }
-            }, function error(response) {
-                pdfMake.createPdf(createErrorPdf(response)).download(report.title);
-            });
-        }
-
-        function downloadReportFromSource(pdfSource, report) {
-
-            var pdfData = pdfSource;
-            pdfData.footer = pdfFooterWithFilters(report);
-            pdfMake.createPdf(pdfData).download(report.title);
-        }
-
-        function getSourceReport(report) {
-
-            return $q(function (resolve) {
-
-                var postReport = buildPost(report);
-                postHttpResource(report.url, postReport).then(function success(response) {
-
-                    //Check if the pdf is in base64
-                    if (report.base64) {
-                        resolve('data:application/pdf;base64,' + response.data.file);
-                    } else {
-                        var pdfData = response.data;
-                        pdfData.footer = pdfFooterWithFilters(report);
-                        resolve(pdfData);
-                    }
-                }, function error(response) {
-                    var pdfFile = createErrorPdf(response);
-                    resolve(pdfFile);
-                });
-            });
-        }
-
-        function createErrorPdf(response) {
-
-            var dd = {
-                'content': [
-                    {text: 'Error loading report with status: ' + response.status, color: '#ff0000'},
-                    {text: 'Status text: ' + response.statusText, color: '#ff0000'}
-                ]
-            };
-
-            return dd;
-        }
-
-        function isMimeSupported() {
-
-            return !!($window.navigator && $window.navigator.mimeTypes && $window.navigator.mimeTypes['application/pdf']);
-        }
-
-        function buildPost(report) {
-
-            // var url = report.url;
-            var params = [];
-            for (var i = 0; i < report.params.length; i++) {
-                var param = {
-                    name: report.params[i].name,
-                    type: report.params[i].type,
-                    value: null
-                };
-                var tmpParams = [];
-                var idField;
-                switch (report.params[i].type) {
-                    case OdsParamType.DATE:
-                        param.value = [OdsDateUtils.convertLocalDateToServer(report.params[i].value)];
-                        break;
-                    case OdsParamType.LIST:
-                        param.value = [report.params[i].value];
-                        break;
-                    case OdsParamType.SINGLE_SELECT:
-                        idField = report.params[i].valueField !== undefined ? report.params[i].valueField : 'id';
-                        param.value = [report.params[i].value[idField]];
-                        break;
-                    case OdsParamType.MULTI_SELECT:
-                        param.value = getListValue(report.params[i]);
-                        break;
-                    case OdsParamType.TABLE_SELECT:
-                        tmpParams = [];
-                        for (var key in report.params[i].value) {
-                            if (key === 'length' || !report.params[i].value.hasOwnProperty(key)) {
-                                continue;
-                            }
-                            var value = key;
-                            if (report.params[i].value[key]) {
-                                tmpParams.push(value);
-                            }
-
-                        }
-                        param.value = tmpParams;
-                        break;
-                    case OdsParamType.DRAG_AND_DROP:
-                        param.value = getListValue(report.params[i]);
-                        break;
-                    case OdsParamType.CHECK_LIST:
-                        param.value = getListValue(report.params[i]);
-                        break;
-                    default:
-                        param.value = [report.params[i].value];
-                        break;
-                }
-                params.push(param);
-            }
-
-            var postReport = {
-                title: report.title,
-                params: params,
-                pageOrientation: report.pageOrientation
-            };
-
-            return postReport;
-        }
-
-        function getListValue(param) {
-
-            var tmpValue = [];
-            var idField;
-            for (var i = 0; i < param.value.length; i++) {
-                idField = param.valueField !== undefined ? param.valueField : 'id';
-                tmpValue.push(param.value[i][idField]);
-            }
-            return tmpValue;
-        }
-
-        function forceDownload(report) {
-
-            var postReport = buildPost(report);
-            postHttpResource(report.url, postReport).then(function success(response) {
-                var contentType = response.headers('Content-Type');
-                var contentDisp = response.headers('Content-Disposition');
-                var index = contentDisp.indexOf('filename="');
-
-                var filename = 'filename';
-
-                if (index !== -1) {
-                    var i = index + 10;
-                    while (contentDisp[i] !== '"') {
-                        i++;
-                    }
-
-                    filename = contentDisp.substring(index + 10, i);
-                }
-
-                var a = document.createElement('a');
-                a.href = URL.createObjectURL(new Blob([response.data], {type: contentType}));
-                a.download = filename;
-                a.click();
-            }, function error(response) {
-                pdfMake.createPdf(createErrorPdf(response)).download(report.title);
-            });
-        }
-
-        function forceDownloadAndOpenPDFObject(data) {
-
-            pdfMake.createPdf(data).open();
-        }
-
-        function forceDownloadFromData(data, title) {
-
-            pdfMake.createPdf(data).download(title);
-        }
-    }
-
-})();
-
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('stepsIndicator', StepsIndicator);
-
-StepsIndicator.$inject = [];
-
-/**
- *  steps = [
- *    {
- *        name: 'DRAFT',
- *        label: 'Draft',
- *        status: 'active',
- *        disabled: false,
- *        callback: function (elem, index) {
- *            // Prompt for status change
- *        }
- *    },
- *    {
- *        name: 'READY',
- *        label: 'Ready',
- *        status: '',
- *        disabled: true,
- *        callback: function (elem, index) {
- *            // Prompt for status change
- *        }
- *    },
- *    {
- *        name: 'JOINED',
- *        label: 'Joined',
- *        status: '',
- *        disabled: false,
- *        callback: function (elem, index) {
- *            // Prompt for status change
- *        }
- *    },
- *    {
- *        name: 'DISCHARGED',
- *        label: 'Discharged',
- *        status: '',
- *        callback: function (elem, index) {
- *            // Prompt for status change
- *        }
- *    }];
- *
- *
- *
- * @returns {{restrict: string, templateUrl: string, scope: {ngModel: string, class: string, type: string}, link: linkFunc}}
- * @constructor
- */
-
-function StepsIndicator() {
-
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'steps-indicator/template.html',
-        scope: {
-            ngModel: '=',
-            class: '@',
-            type: '@'
-        },
-        link: linkFunc
-    };
-
-    return directive;
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.onClick = onClick;
-
-        function onClick(elem, index) {
-
-            if (elem.callback) {
-                elem.callback(elem, index);
-            }
-
-            // if ($scope.type === 'multiselect') {
-            //     if (elem.callback) {
-            //         elem.callback(elem);
-            //     }
-            // } else {
-            //     if (elem.callback) {
-            //         for (var i = 0; i < $scope.ngModel.length; i++) {
-            //             $scope.ngModel[i].status = '';
-            //         }
-            //         elem.callback(elem);
-            //     }
-            // }
-            // var elementPos = $scope.ngModel.map(function(x) {return x.name; }).indexOf(elem.name);
-            // $scope.ngModel[elementPos].status = 'active';
-        }
-    }
-}
 'use strict';
 
 angular
@@ -3226,6 +3130,102 @@ function OdsSignature() {
     //         element.jSignature('events');
     //     }
     // }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('stepsIndicator', StepsIndicator);
+
+StepsIndicator.$inject = [];
+
+/**
+ *  steps = [
+ *    {
+ *        name: 'DRAFT',
+ *        label: 'Draft',
+ *        status: 'active',
+ *        disabled: false,
+ *        callback: function (elem, index) {
+ *            // Prompt for status change
+ *        }
+ *    },
+ *    {
+ *        name: 'READY',
+ *        label: 'Ready',
+ *        status: '',
+ *        disabled: true,
+ *        callback: function (elem, index) {
+ *            // Prompt for status change
+ *        }
+ *    },
+ *    {
+ *        name: 'JOINED',
+ *        label: 'Joined',
+ *        status: '',
+ *        disabled: false,
+ *        callback: function (elem, index) {
+ *            // Prompt for status change
+ *        }
+ *    },
+ *    {
+ *        name: 'DISCHARGED',
+ *        label: 'Discharged',
+ *        status: '',
+ *        callback: function (elem, index) {
+ *            // Prompt for status change
+ *        }
+ *    }];
+ *
+ *
+ *
+ * @returns {{restrict: string, templateUrl: string, scope: {ngModel: string, class: string, type: string}, link: linkFunc}}
+ * @constructor
+ */
+
+function StepsIndicator() {
+
+    var directive = {
+        restrict: 'E',
+        templateUrl: 'steps-indicator/template.html',
+        scope: {
+            ngModel: '=',
+            class: '@',
+            type: '@'
+        },
+        link: linkFunc
+    };
+
+    return directive;
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.onClick = onClick;
+
+        function onClick(elem, index) {
+
+            if (elem.callback) {
+                elem.callback(elem, index);
+            }
+
+            // if ($scope.type === 'multiselect') {
+            //     if (elem.callback) {
+            //         elem.callback(elem);
+            //     }
+            // } else {
+            //     if (elem.callback) {
+            //         for (var i = 0; i < $scope.ngModel.length; i++) {
+            //             $scope.ngModel[i].status = '';
+            //         }
+            //         elem.callback(elem);
+            //     }
+            // }
+            // var elementPos = $scope.ngModel.map(function(x) {return x.name; }).indexOf(elem.name);
+            // $scope.ngModel[elementPos].status = 'active';
+        }
+    }
 }
 //
 // Copyright Kamil Pękala http://github.com/kamilkp
@@ -6082,7 +6082,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
 
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
-                if (value === field.value) {
+                if (value == field.value) {
                     return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                 }
             }

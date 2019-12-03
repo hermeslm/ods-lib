@@ -26,7 +26,7 @@ angular
     'jsonFormatter'
   ])
   .config(configFunction)
-  .value('version', '3.6.4')
+  .value('version', '3.6.5')
   .run(function (/*editableOptions */) {
     // editableOptions.theme = 'bs3';
   });

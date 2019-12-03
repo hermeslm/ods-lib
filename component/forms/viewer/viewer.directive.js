@@ -85,7 +85,7 @@ function ViewerDirective(OdsFormService, uibDateParser) {
 
             for (var i = 0; i < field.options.length; i++) {
                 var value = field.options[i][OdsFormService.getSelectFieldId(field)];
-                if (value === field.value) {
+                if (value == field.value) {
                     return field.options[i][OdsFormService.getSelectFieldTitle(field)];
                 }
             }
