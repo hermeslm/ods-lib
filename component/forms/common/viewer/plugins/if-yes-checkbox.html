@@ -1,0 +1,9 @@
+<!--<br ng-if="field.ln">-->
+<div ng-bind-html="field.value.toggle ? field.on : field.off"></div>
+<div ng-if="field.value.toggle">
+    <div class="" ng-repeat="option in getFieldChecklistFromValues(field, field.value.checkbox)"
+         ng-class="{'checkbox-inline' : field.inline, 'checkbox' : !field.inline}">
+        <i class="fa fa-check-square-o"></i>
+        <span class="form-check-label" ng-bind-html="option"></span>
+    </div>
+</div>

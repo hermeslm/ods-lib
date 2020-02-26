@@ -1,0 +1,11 @@
+<div class="row no-vertical-margin">
+    <div class="form-group margin-bottom"
+         ng-class="{'has-error': fieldPropertiesForm.inline.$invalid}">
+        <label for="{{field.name}}-inline" class="col-sm-4 control-label"
+               title="Indicates if will show inline or not.">Inline:</label>
+        <div class="col-sm-8">
+            <input type="checkbox" id="{{field.name}}-inline" name="{{field.name}}-inline"
+                   ng-model="field.inline">
+        </div>
+    </div>
+</div>

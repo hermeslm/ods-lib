@@ -1,0 +1,13 @@
+<br ng-if="field.ln">
+<toggle name="{{getUniqueName(field)}}-toogle" id="{{getUniqueName(field)}}-toogle" on="{{field.on}}"
+        off="{{field.off}}" ng-model="field.value.toggle" ng-disabled="field.readonly"></toggle>
+<br/>
+<br/>
+<div ng-class="field.inline === true ? 'checkbox-inline' : 'checkbox'" ng-repeat="option in field.options"
+     ng-show="field.value.toggle">
+    <label>
+        <input type="checkbox" value="{{option.id}}" ng-model="field.value.checkbox[option.id]"
+               ng-disabled="field.readonly"/>
+        {{option.name}}
+    </label>
+</div>
