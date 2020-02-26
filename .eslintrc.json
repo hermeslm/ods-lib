@@ -8,7 +8,10 @@
     ],
     "globals": {
         "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
+        "SharedArrayBuffer": "readonly",
+        "_": "readonly",
+        "angular": "readonly",
+        "$": "readonly"
     },
     "parserOptions": {
         "ecmaVersion": 2018

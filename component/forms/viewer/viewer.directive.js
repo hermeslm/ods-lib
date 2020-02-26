@@ -143,17 +143,16 @@ function ViewerDirective(OdsFormService, uibDateParser) {
             }
         }
 
-        function getFieldChecklistFromValues(field) {
+        function getFieldChecklistFromValues(field, value) {
 
             var result = [];
-            if (field.value) {
-                for (var i = 0; i < field.options.length; i++) {
-                    var id = field.value[i + 1];
+            if (value) {
+                field.options.forEach(function (option, i) {
+                    var id = value[i + 1];
                     if (id) {
-                        var value = field.options[i].name;
-                        result.push(value);
+                        result.push(field.options[i].name);
                     }
-                }
+                  });
             }
 
             if (result.length > 0) {

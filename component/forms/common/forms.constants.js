@@ -14,6 +14,7 @@
             SELECT2: 'select2',
             MULTI_SELECT: 'multiselect',
             IF_YES: 'if_yes',
+            IF_YES_CHECKBOX: 'if_yes_checkbox',
             TABLE: 'table',
             LABEL: 'label',
             CHECKBOX: 'checkbox',

@@ -30,7 +30,7 @@ angular
     'jsonFormatter'
   ])
   .config(configFunction)
-  .value('version', '3.6.4')
+  .value('version', '3.6.5')
   .run(function (/*editableOptions */) {
     // editableOptions.theme = 'bs3';
   });
@@ -50,10 +50,10 @@ angular.module('ods-lib').run(['$templateCache', function($templateCache) {$temp
 $templateCache.put('address/address.html','<label ng-show="label" class="control-label" for="ods-address">{{label}}</label><div class="input-group"><input type="text" class="form-control" name="ods-address" id="ods-address" readonly="readonly" value="{{printName(ngModel)}}"> <span class="input-group-addon" ng-click="openModal()"><i class="fa fa-external-link"></i></span></div>');
 $templateCache.put('file-upload/udt-attach-file.html','<div class="box-footer"><ul class="mailbox-attachments clearfix"><li ng-repeat="item in files track by item.id" data-id="{{item.id}}" ng-hide="item.hide"><span class="pull-right" style="margin-right: 5px; cursor: hand" ng-click="deleteFile(item.id)" ng-if="!disableAttach" uib-tooltip="Delete file"><i class="fa fa-remove" style="color: #a20000"></i> </span><!--<span class="pull-right" style="margin-right: 5px;">--><!--<button class="btn-circle btn-danger btn-circle-xxs"><i class="fa fa-remove"></i></button>--><!--</span>--><!----> <span class="mailbox-attachment-icon"><i ng-if="(item.type.split(\'/\')[0] == applicationType)" class="fa fa-file-pdf-o" ng-click="getFileAttached(item.type, item.id)"></i><!--<i ng-if="(item.type.split(\'/\')[0] == imageType)" class="fa fa-picture-o"></i>--> <a ng-if="(item.type.split(\'/\')[0] == imageType)" ng-click="imageDetail(item.id, item.type);" uib-tooltip="Click to view the image"><i class="fa fa-picture-o"></i> </a><i ng-if="!item.type" class="fa fa-file-pdf-o" ng-click="getFileAttached(item.type, item.id)"></i></span><div class="mailbox-attachment-info"><p class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{item.name?item.name.split(\'\')[0]:\'default\'}}</p><span class="mailbox-attachment-size">{{item.size}}</span></div></li><li ng-show="!isSigned && !disableAttach"><span class="mailbox-attachment-icon"><button type="button" ngf-select style="background-color: white; border: aliceblue;" uib-tooltip="Add attachment" ngf-change="attachFile($file, attachFileData)" accept="image/*,pdf,csv"><i class="fa fa-paperclip"></i></button></span><div class="mailbox-attachment-info"><p class="mailbox-attachment-name">Add New Attachment</p></div></li><li ng-if="files.length == 0 && disableAttach"><div class="col-xs-12 block-mt5"><p>No attachments.</p></div></li></ul></div>');
 $templateCache.put('forms/form-builder.html','<!--<div class="row">--><!--<div class="col-lg-12">--><!--<button type="button" class="btn btn-success" ng-click="toggleStyle()">--><!--<span class="fa fa-refresh"></span>&nbsp;<span>Toggle style</span>--><!--</button>--><!--</div>--><!--</div>--><div class="row"><div class="col-md-3"><ods-form-toolbar></ods-form-toolbar></div><div class="col-md-9"><uib-tabset><uib-tab index="0" heading="Form information"><ods-form-info schema="schema"></ods-form-info></uib-tab><uib-tab index="1" heading="Form Schema"><ods-schema schema="schema" config="config" debug-mode="debugMode"></ods-schema></uib-tab><uib-tab index="2" heading="Form Preview"><ods-form schema="schema" config="runTimeConfig" on-save="saveForm(schema)"></ods-form></uib-tab><uib-tab index="3" heading="Form Print View"><ods-viewer schema="schema" config="runTimeConfig" css-class="cssClass"></ods-viewer></uib-tab><uib-tab index="4" heading="Form Model" ng-show="debugMode"><ods-model model="schema" css-class="fixed-height"></ods-model></uib-tab></uib-tabset></div></div>');
-$templateCache.put('hide-value/input-hide-value.html','<div class="form-group has-feedback"><label ng-show="label" class="control-label" for="{{name}}">{{label}}</label><input name="{{name}}" type="{{type}}" class="form-control" placeholder="{{placeholder}}" ng-model="ngModel" ng-focus="onFocus()" ng-blur="onBlur()" ui-mask="{{mask}}" ng-disabled="ngDisabled" ng-required="ngRequired"> <span class="{{icon}} form-control-feedback" style="cursor: {{cursor}}; pointer-events: all;" ng-click="toggleFn()"></span></div>');
-$templateCache.put('hide-value/text-hide-value.html','<span>{{value}}</span> <span class="{{icon}}" style="cursor: {{cursor}}; pointer-events: all;" ng-click="toggleFn()"></span>');
 $templateCache.put('img-upload/img-upload-dialog.html','<form name="editForm" role="form" novalidate ng-submit="vm.save()"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myImageLabel">Change/Edit Image</h4></div><div class="modal-body"><div class="row"><div class="col-lg-6" style="text-align: center;"><div class="img-responsive img-thumbnail"><ui-cropper image="vm.original" area-type="{{vm.areaType}}" chargement="\'Loading\'" result-image-size="vm.croppedImageSize" result-image="vm.model" canvas-scalemode="true" change-on-fly="true"></ui-cropper></div></div><div class="col-lg-6" style="text-align: center;"><img class="img-responsive img-thumbnail" ng-src="{{vm.model}}"></div></div><br><div class="row"><div class="col-lg-6"><button type="button" class="btn btn-warning btn-block" ngf-select ngf-change="vm.handleFileSelect($event, $file)" accept="image/*"><i class="fa fa-image" aria-hidden="true"></i> Browse...</button></div></div></div><div class="modal-footer"><button type="button" class="btn btn-info" ng-click="vm.setDefault()"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Restore default</button> <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true"></i> Save</button> <button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="vm.clear()"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</button></div></form>');
 $templateCache.put('img-upload/img-upload.html','<div ng-if="displayImage"><img class="img-responsive {{cssClass}}" id="imgPicture" ng-src="{{ngModel}}" ng-if="ngModel" ng-click="openModal()" style="cursor: pointer;min-height: 100px"></div><a href="" class="footer-link" ng-if="!displayImage" ng-click="openModal()">{{uploadText}}&nbsp; <i class="fa fa-plus-circle" aria-hidden="true" ng-if="mode === \'insert\'"></i> <i class="fa fa-edit" aria-hidden="true" ng-if="mode === \'edit\'"></i></a>');
+$templateCache.put('hide-value/input-hide-value.html','<div class="form-group has-feedback"><label ng-show="label" class="control-label" for="{{name}}">{{label}}</label><input name="{{name}}" type="{{type}}" class="form-control" placeholder="{{placeholder}}" ng-model="ngModel" ng-focus="onFocus()" ng-blur="onBlur()" ui-mask="{{mask}}" ng-disabled="ngDisabled" ng-required="ngRequired"> <span class="{{icon}} form-control-feedback" style="cursor: {{cursor}}; pointer-events: all;" ng-click="toggleFn()"></span></div>');
+$templateCache.put('hide-value/text-hide-value.html','<span>{{value}}</span> <span class="{{icon}}" style="cursor: {{cursor}}; pointer-events: all;" ng-click="toggleFn()"></span>');
 $templateCache.put('reports/param.html','<form name="paramsForm" novalidate show-validation><div class="form-group" ng-class="{\'has-error\': paramsForm.{{param.name}}.$invalid}"><div ng-switch="param.type"><label class="control-label" for="{{param.name}}" ng-hide="hideTitle(param)">{{param.title}}</label><input ng-switch-when="NUMBER" class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)" type="number"> <input ng-switch-when="TEXT" class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)"><div ng-switch-when="DATE" class="input-group" ng-hide="hideParam(param)"><input id="{{param.name}}" class="form-control" name="{{param.name}}" uib-datepicker-popup="MM/dd/yyyy" ng-required="getRequired(param)" ng-model="param.value" is-open="param.datePickerOpenStatus"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="openCalendar(param)"><i class="glyphicon glyphicon-calendar"></i></button></span></div><div ng-switch-when="SINGLE_SELECT" ng-hide="hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" ng-model="param.value" ui-select-required="vm.getRequired(param)" close-on-select="true" title="{{param.title}}"><ui-select-match placeholder="{{param.placeholder}}">{{getSelectTitleField(param, $select.selected)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search | limitTo: 500"><div ng-bind-html="getSelectTitleField(param, element) | highlight: $select.search"></div><!--<small ng-bind-html="vm.getSelectTitleField(param, element) | highlight: $select.search"></small>--><!--{{vm.getSelectTitleField(param, element)}}--></ui-select-choices></ui-select></div><select ng-switch-when="LIST" class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-options="item.id as item.name for item in param.list" ng-required="getRequired(param)"></select><div ng-switch-when="MULTI_SELECT" ng-hide="hideParam(param)"><ui-select name="{{param.name}}" id="{{param.name}}" multiple="multiple" ng-model="param.value" close-on-select="false" title="{{param.title}}" ui-select-required="getRequired(param)"><ui-select-match placeholder="{{param.placeholder}}">{{getSelectTitleField(param, $item)}}</ui-select-match><ui-select-choices repeat="element in param.list | filter:$select.search">{{getSelectTitleField(param, element)}}</ui-select-choices></ui-select></div><div ng-switch-when="TABLE_SELECT" ng-hide="hideParam(param)"><div class="navbar-form navbar-right"><div class="text-right"><div class="has-feedback input-group-sm"><input class="form-control" ng-model="param.searchQuery" id="searchQueryrpt-metadata" placeholder="{{param.placeholder}}" ng-change="search(param)"> <span class="glyphicon glyphicon-search form-control-feedback"></span></div></div></div><br><br><table datatable="" dt-options="getDtOptions(param)" dt-columns="getDtColumns(param)" dt-instance="param.dtInstance" class="table table-striped table-bordered table-condensed"></table></div><div ng-switch-when="DRAG_AND_DROP" ng-hide="hideParam(param)"><div class="row"><div class="col-md-6"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title ng-binding">{{param.sourceTitle}}</h3></div><div class="panel-body source-sections"><ul dnd-list="param.list"><li ng-repeat="item in param.list" dnd-draggable="item" dnd-moved="param.list.splice($index, 1)" dnd-effect-allowed="move">{{getSelectTitleField(param, item)}}</li></ul></div></div></div><div class="col-md-6"><div class="panel panel-info"><div class="panel-heading"><h3 class="panel-title ng-binding">{{param.targetTitle}}</h3></div><div class="panel-body selected-sections"><ul dnd-list="param.value"><li ng-repeat="item in param.value" dnd-draggable="item" dnd-moved="param.value.splice($index, 1)" dnd-effect-allowed="move">{{getSelectTitleField(param, item)}}</li></ul></div></div></div></div></div><div ng-switch-when="CHECK_LIST" ng-hide="hideParam(param)"><ods-check-list list="param.list" ng-model="param.value" height="param.height"></ods-check-list><!--ng-if="hideParam(param)"--><!--ng-required="getRequired(param)"--></div><input ng-switch-default class="form-control" name="{{param.name}}" id="{{param.name}}" ng-hide="hideParam(param)" ng-model="param.value" ng-required="getRequired(param)"><div ng-show="paramsForm.{{param.name}}.$invalid"><p class="help-block" ng-show="paramsForm.{{param.name}}.$error.required">This field is required.</p></div></div></div></form>');
 $templateCache.put('reports/params.html','<form name="paramsForm" novalidate ng-submit="vm.openReport()" show-validation><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="vm.clear()">&times;</button><h4 class="modal-title" id="myCityLabel">Report Params for:</h4></div><div class="modal-body"><jhi-alert-error></jhi-alert-error><h4>{{vm.report.title}}</h4><ng-include src="\'reports/tpl/one-col.tpl.html\'" ng-if="!vm.report.multiCols"></ng-include><ng-include src="\'reports/tpl/two-col.tpl.html\'" ng-if="vm.report.multiCols"></ng-include></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()"><span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span></button> <button ng-disabled="paramsForm.$invalid" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>&nbsp;<span>Open</span></button></div></form>');
 $templateCache.put('reports/reports.html','<div class="row" ng-show="infoMessage" ng-class="ng-hide"><div class="col-lg-12"><div uib-alert class="alert alert-info alert-dismissible" close="hideInfoMessage()"><h4><i class="icon fa fa-info"></i> Reports info!</h4>If don\'t have a PDF viewer plugin in the browser. No biggie... you can download it. Please select the report and download it from report preview.</div></div></div><div class="row"><div class="col-md-3"><div class="box box-solid"><div class="box-header with-border"><h3 class="box-title">{{reportsGroup.title}}</h3></div><!-- /.box-header --><div class="box-body"><uib-accordion close-others="true"><div uib-accordion-group class="panel-default" heading="{{group.title}}" is-open="group.open" is-disabled="group.disabled" ng-repeat="group in reportsGroup.groups" ng-init="groupIndex = $index"><ul class="list-group list-group-unbordered"><li class="list-group-item" ng-repeat="report in group.reports" ng-init="reportIndex = $index"><a href="" ng-click="openReport(groupIndex, reportIndex)"><b>{{report.title}}</b></a></li></ul></div></uib-accordion></div><!-- /.box-body --></div><!-- /.box --></div><div class="col-md-9"><div class="box box-primary"><div class="box-header with-border"><h3 class="box-title">Report Preview</h3></div><!-- /.box-header --><div class="box-body" style="height: 100vh;"><div ng-show="selectReport" class="ng-hide"><p>Download report: <a ng-click="downloadReport()">{{selectReport.title}}</a></p></div><pdfjs-viewer data="reportFile"></pdfjs-viewer><!--<object embed-src="{{vm.reportFile}}" width="100%" height="100%">--><!--</object>--><!--<object style="height: 90vh;" type="application/pdf" data="{{reportFile}}" width="100%"--><!--height="100%"/>--></div></div></div></div>');
@@ -84,7 +84,7 @@ $templateCache.put('forms/common/fields/select2.html','<ui-select ods-dynamic-na
 $templateCache.put('forms/common/fields/textarea.html','<textarea autoheight class="form-control" ods-dynamic-name="getUniqueName(field)" id="{{getUniqueName(field)}}" placeholder="{{field.placeholder}}" title="{{field.tooltip}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" ng-required="getRequired(field)" type="{{field.type}}" ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" data-resize="disabled" ng-readonly="field.readonly">\n</textarea>');
 $templateCache.put('forms/common/fields/toggle.html','<br ng-if="field.ln"><toggle name="{{getUniqueName(field)}}" id="{{getUniqueName(field)}}" on="{{field.on}}" off="{{field.off}}" ng-model="field.value" ng-disabled="field.readonly"></toggle>');
 $templateCache.put('forms/common/model/model.html','<div class="jsonify padding"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" title="Copy the json data." ng-click="copy()"><span class="fa fa-clipboard"></span></button><!--<button class="btn btn-default btn-xs" type="button" title="Display hidden properties."--><!--ng-click="displayHidden = !displayHidden" ng-class="{ \'active\': displayHidden }"><span--><!--class="fa fa-eye"></span></button>--></div><pre class="{{cssClass}}">\n        <json-formatter open="1" json="model"></json-formatter>\n    </pre></div>');
-$templateCache.put('forms/common/viewer/checkbox-list.html','<div><div class="" ng-repeat="option in getFieldChecklistFromValues(field)" ng-class="{\'checkbox-inline\' : field.inline, \'checkbox\' : !field.inline}"><i class="fa fa-check-square-o"></i> <span class="form-check-label" ng-bind-html="option"></span></div></div>');
+$templateCache.put('forms/common/viewer/checkbox-list.html','<div><div class="" ng-repeat="option in getFieldChecklistFromValues(field, field.value)" ng-class="{\'checkbox-inline\' : field.inline, \'checkbox\' : !field.inline}"><i class="fa fa-check-square-o"></i> <span class="form-check-label" ng-bind-html="option"></span></div></div>');
 $templateCache.put('forms/common/viewer/checkbox.html','<div><br ng-show="field.ln"><div class="form-check"><i class="form-check-input fa fa-square-o" ng-if="!field.value"></i> <i class="form-check-input fa fa-check-square-o" ng-if="field.value"></i> <span class="form-check-label" ng-bind-html="field.label"></span></div></div>');
 $templateCache.put('forms/common/viewer/datetime.html','<div ng-bind-html="dateTimeRender(field)"></div>');
 $templateCache.put('forms/common/viewer/input.html','<div ng-bind-html="field.value" style="white-space:pre-wrap;"></div>');
@@ -111,16 +111,32 @@ $templateCache.put('forms/toolbar/components/section.html','<div class=""><h3>Se
 $templateCache.put('forms/toolbar/components/select.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><select name="{{component.name}}" id="{{component.name}}" class="form-control"><option value="1">Option 1...</option></select>');
 $templateCache.put('forms/toolbar/components/textarea.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><textarea class="form-control" name="{{component.name}}" id="{{component.name}}" rows="{{component.rows}}" placeholder="{{component.placeholder}}">\n</textarea>');
 $templateCache.put('forms/toolbar/components/toggle.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle>');
+$templateCache.put('forms/toolbar/plugins/if-yes-checkbox.html','<div class="row"><div class="col-lg-12"><div ng-include="\'forms/toolbar/components/label.html\'"></div></div></div><div class="row"><div class="col-lg-4"><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle></div><div class="col-lg-8"><div class="checkbox"><label><input type="checkbox" value=""> Option</label></div></div></div>');
 $templateCache.put('forms/toolbar/plugins/if-yes.html','<div class="row"><div class="col-lg-12"><div ng-include="\'forms/toolbar/components/label.html\'"></div></div></div><div class="row"><div class="col-lg-2"><br ng-if="component.ln"><toggle name="{{component.name}}" id="{{component.name}}" on="{{component.on}}" off="{{component.off}}" ng-model="component.value"></toggle></div><div class="col-lg-10"><input class="form-control" name="{{component.name}}" id="{{component.name}}"></div></div>');
 $templateCache.put('forms/toolbar/plugins/table.html','<div ng-include="\'forms/toolbar/components/label.html\'"></div><table class="table table-bordered table-responsive" id="{{component.name}}"><!--<thead>--><!--<tr>--><!--<td>#</td>--><!--<td ng-repeat="column in component.columns">{{column.title}}</td>--><!--</tr>--><!--</thead>--><tbody><tr ng-repeat="row in component.matrix"><td ng-repeat="col in row">{{col.name}}</td></tr></tbody></table>');
 $templateCache.put('forms/common/fields/plugins/ckeditor.html','<div ng-if="field.printView" ng-bind-html="valueSubtitutor(field)"></div><div ng-if="!field.printView" class="position-relative"><textarea id="{{getUniqueName(field)}}" name="{{getUniqueName(field)}}" placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" title="{{field.tooltip}}" options="field.options" ods-ckeditor ng-disabled="field.readonly"></textarea></div>');
+$templateCache.put('forms/common/fields/plugins/if-yes-checkbox.html','<br ng-if="field.ln"><toggle name="{{getUniqueName(field)}}-toogle" id="{{getUniqueName(field)}}-toogle" on="{{field.on}}" off="{{field.off}}" ng-model="field.value.toggle" ng-disabled="field.readonly"></toggle><br><br><div ng-class="field.inline === true ? \'checkbox-inline\' : \'checkbox\'" ng-repeat="option in field.options" ng-show="field.value.toggle"><label><input type="checkbox" value="{{option.id}}" ng-model="field.value.checkbox[option.id]" ng-disabled="field.readonly"> {{option.name}}</label></div>');
 $templateCache.put('forms/common/fields/plugins/if-yes.html','<br ng-if="field.ln"><toggle name="{{getUniqueName(field)}}-toogle" id="{{getUniqueName(field)}}-toogle" on="{{field.on}}" off="{{field.off}}" ng-model="field.value.toggle" ng-disabled="field.readonly"></toggle><textarea class="form-control" name="{{getUniqueName(field)}}-text" id="{{getUniqueName(field)}}-text" placeholder="{{field.placeholder}}" title="{{field.tooltip}}" style="margin-top: 10px;" ng-model="field.value.textarea" ng-model-options="{ updateOn: \'blur\' }" ng-required="field.value.toggle" type="{{field.type}}" ng-minlength="getMinLength(field)" ng-maxlength="getMaxLength(field)" rows="{{field.rows}}" ng-show="field.value.toggle" ng-disabled="field.readonly"></textarea>');
 $templateCache.put('forms/common/fields/plugins/table.html','<div class="table-responsive position-relative"><table class="{{field.cssClass}}" id="{{getUniqueName(field)}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}" style="min-width: 100px"><div ng-repeat="field in col.fields"><ng-include src="getFormFieldTemplate(field.type)"></ng-include></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr></tbody></table></div><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div>');
 $templateCache.put('forms/common/viewer/plugins/ckeditor.html','<div ng-bind-html="valueSubtitutor(field)"></div>');
+$templateCache.put('forms/common/viewer/plugins/if-yes-checkbox.html','<!--<br ng-if="field.ln">--><div ng-bind-html="field.value.toggle ? field.on : field.off"></div><div ng-if="field.value.toggle"><div class="" ng-repeat="option in getFieldChecklistFromValues(field, field.value.checkbox)" ng-class="{\'checkbox-inline\' : field.inline, \'checkbox\' : !field.inline}"><i class="fa fa-check-square-o"></i> <span class="form-check-label" ng-bind-html="option"></span></div></div>');
 $templateCache.put('forms/common/viewer/plugins/if-yes.html','<!--<br ng-if="field.ln">--><div ng-bind-html="field.value.toggle ? field.on : field.off"></div><div ng-bind-html="field.value.textarea" ng-if="field.value.toggle"></div>');
 $templateCache.put('forms/common/viewer/plugins/table.html','<div class="table-responsive position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}"><div class="col-lg-12" ng-repeat="field in col.fields"><ng-include src="getFormViewerTemplate(field.type)"></ng-include></div></td><td ng-show="field.manageRows" width="20px"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.rowHeader && $index != 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr></tbody></table></div>');
+$templateCache.put('forms/schema/plugins/ckeditor/ckeditor-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.locked.$invalid}"><label for="locked" class="col-sm-4 control-label" title="Indicates if suggestions are locked in this field.">Suggestions locked:</label><div class="col-sm-8"><input type="checkbox" id="locked" name="locked" ng-model="field.options.locked" class="ng-pristine ng-valid"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.printView.$invalid}"><label for="printView" class="col-sm-4 control-label" title="Indicates if CKEditor will show as print view.">Print View:</label><div class="col-sm-8"><input type="checkbox" id="printView" name="printView" ng-model="field.printView" class="ng-pristine ng-valid"></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.prefix.$invalid}"><label for="prefix" class="col-sm-2 control-label">Prefix:</label><div class="col-sm-2"><input type="text" class="form-control" id="prefix" name="prefix" placeholder="Prefix..." ng-model="field.options.prefix" ng-required="true"></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suffix.$invalid}"><label for="suffix" class="col-sm-2 control-label">Suffix:</label><div class="col-sm-2"><input type="text" class="form-control" id="suffix" name="suffix" placeholder="Suffix..." ng-model="field.options.suffix" ng-required="true"></div></div></div></div><ods-suggestion-options field="field" config="config" profile="dev"></ods-suggestion-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/ckeditor/ckeditor.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div class="position-relative"><textarea id="{{field.name + dev}}" name="{{field.name + dev}}" placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" title="{{field.tooltip}}" options="field.options" ods-ckeditor ng-disabled="field.readonly">\n</textarea></div>');
+$templateCache.put('forms/schema/plugins/ckeditor/suggestion-options-properties.html','<div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suggestionsUrl.$invalid}"><label for="suggestionsUrl" class="col-sm-2 control-label">Suggestions Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="suggestionsUrl" id="suggestionsUrl" placeholder="Suggestion Url..." ng-model="field.options.suggestionsUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadSuggestions(field.options.suggestionsUrl)">Load Suggestions</button></span></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"><button class="btn btn-info" type="button" ng-click="refreshOption()" title="Update options in CKEditor">Update <span class="fa fa-refresh"></span></button></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.tokensUrl.$invalid}"><label for="tokensUrl" class="col-sm-2 control-label">Tokens Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="tokensUrl" id="tokensUrl" placeholder="Tokens Url..." ng-model="field.options.tokensUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadTokens(field.options.tokensUrl)">Load Tokens</button></span></div></div></div></div><div class="table-responsive" style="max-height: 300px;overflow-y: auto;margin-top: 20px;"><table class="table table-condensed position-relative"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option" ng-disabled="field.options.locked"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required" ng-disabled="field.options.locked"></td><td><input type="text" ng-model="option.label" class="form-control" ng-required="true"></td><td><button class="btn btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
+$templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-toggleValue.$invalid}"><label for="{{field.name}}-toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-toggleValue" name="{{field.name}}-toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-textValue.$invalid}"><label for="{{field.name}}-textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-textValue" name="{{field.name}}-textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/if-yes/if-yes.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes.html\'"></div>');
+$templateCache.put('forms/schema/plugins/if-yes-checkbox/if-yes-checkbox-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-toggleValue.$invalid}"><label for="{{field.name}}-toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-toggleValue" name="{{field.name}}-toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/inline-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-checkboxlist-options field="field"></ods-field-checkboxlist-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/if-yes-checkbox/if-yes-checkbox.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes-checkbox.html\'"></div>');
+$templateCache.put('forms/schema/plugins/table/container.html','<div ng-include="\'forms/schema/components/label.html\'"></div><ods-table field="field" mode="edit"></ods-table>');
+$templateCache.put('forms/schema/plugins/table/table-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.{{field.name}}-cssClass.$invalid}"><label for="{{field.name}}-cssClass" class="col-sm-4 control-label">Class Name:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-cssClass" name="{{field.name}}-cssClass" placeholder="Css Class..." ng-model="field.cssClass" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.{{field.name}}-code.$invalid}"><label for="{{field.name}}-code" class="col-sm-4 control-label">Component code:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-code" name="{{field.name}}-code" placeholder="Code..." ng-model="field.code" ng-required="false"> <span class="help-block">Code is like a identification or type in this form. useful for a component classification.</span></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Layout"><ods-table-props field="field"></ods-table-props></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/plugins/table/table-props.html','<div class="padding-top"><div class="row"><form name="fieldPropsForm" class="form-horizontal"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-rows.$invalid}"><label for="{{field.name}}-rows" class="control-label col-sm-5">Rows:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-rows" name="{{field.name}}-rows" placeholder="Rows..." ng-model="field.matrix.length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addRow()" title="Add row">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-cols.$invalid}"><label for="{{field.name}}-cols" class="control-label col-sm-5">Cols:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-cols" name="{{field.name}}-cols" placeholder="Cols..." ng-model="field.matrix[0].length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addColumn()" title="Add column">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-rowHeader" class="control-label col-sm-5">Row Header:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-rowHeader" name="{{field.name}}-rowHeader" ng-model="field.rowHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-colHeader" class="control-label col-sm-5">Col Header:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-colHeader" name="{{field.name}}-colHeader" ng-model="field.colHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-totals" class="control-label col-sm-5">Show Totals:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-totals" name="{{field.name}}-totals" ng-model="field.totals"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-canClone" class="control-label col-sm-5">Can clone row:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-canClone" name="{{field.name}}-canClone" ng-model="field.canCloneRow"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageRows.$invalid}"><label for="{{field.name}}-manageRows" class="control-label col-sm-5">Manage rows:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-manageRows" name="{{field.name}}-manageRows" ng-model="field.manageRows"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageColumns.$invalid}"><label for="{{field.name}}-manageColumns" class="control-label col-sm-5">Manage columns:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-manageColumns" name="{{field.name}}-manageColumns" ng-model="field.manageColumns"></div></div><div class="col-md-8 col-sm-8 col-xs-12"><h3>Columns configuration</h3><div class="table-responsive" style="max-height: 300px"><table class="table table-bordered"><thead><tr><th>#</th><th>CSS class</th><th>Width</th><th>Total</th><th>Total Label</th></tr></thead><tbody><tr ng-repeat="col in field.matrix[0]"><td>{{$index + 1}}</td><td><input type="text" class="form-control" id="{{field.name}}-col{{$index}}" name="{{field.name}}-col{{$index}}" placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass"></td><td><input type="text" class="form-control" id="{{field.name}}-width{{$index}}" name="{{field.name}}-width{{$index}}" placeholder="width..." ng-model="col.width"></td><td><input type="checkbox" id="{{field.name}}-total{{$index}}" name="{{field.name}}-total{{$index}}" title="Add total to this column" ng-model="col.total"></td><td><input type="text" class="form-control" id="{{field.name}}-totalLabel{{$index}}" name="{{field.name}}-totalLabel{{$index}}" placeholder="Total label..." ng-model="field.matrix[0][$index].totalLabel"></td></tr></tbody></table></div></div></form></div></div>');
+$templateCache.put('forms/schema/plugins/table/table.html','<form name="{{field.name}}" class="position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" width="{{col.width}}"><div class="box-row col-lg-12"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px;" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)" dnd-drop="checkItem(index, item, external, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" dnd-callback="onDrop(list, $index, targetList, targetIndex)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" popover-props="true" debug-mode="debugMode"></ods-field></li></ul></div></td><td ng-show="field.manageRows" width="20px" style="position: relative"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-up"></span></button> <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-down"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]" style="position: relative"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapColumn($index, $index + 1)" title="Swap column right" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-right"></span></button> <button type="button" ng-click="swapColumn($index - 1, $index)" title="Swap column left" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-left"></span></button></td></tr></tbody></table><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div></form>');
+$templateCache.put('forms/schema/plugins/table/total.html','<div><b>{{label}}: {{total}}</b></div>');
 $templateCache.put('forms/schema/components/base-properties/common-properties.html','<div ng-include="\'forms/schema/components/base-properties/name-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/label-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/exportable-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/linkedTo-properties.html\'"></div>');
 $templateCache.put('forms/schema/components/base-properties/exportable-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.{{field.name}}-exportable.$invalid}"><label for="{{field.name}}-exportable" class="col-sm-4 control-label" title="Indicates if a value is required for this field.">Exportable:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-exportable" name="{{field.name}}-exportable" ng-model="field.exportable" class="ng-pristine ng-valid"></div></div></div>');
+$templateCache.put('forms/schema/components/base-properties/inline-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.inline.$invalid}"><label for="{{field.name}}-inline" class="col-sm-4 control-label" title="Indicates if will show inline or not.">Inline:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-inline" name="{{field.name}}-inline" ng-model="field.inline"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/label-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-label.$invalid}"><label for="{{field.name}}-label" class="col-sm-4 control-label">Label:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-label" name="{{field.name}}-label" placeholder="Label..." ng-model="field.label" ng-required="false"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-hideLabel.$invalid}"><label for="{{field.name}}-hideLabel" class="col-sm-4 control-label" title="Indicates if will show label or not.">Hide Label:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-hideLabel" name="{{field.name}}-hideLabel" ng-model="field.hideLabel"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/linkedTo-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-linkedTo.$invalid}"><label for="{{field.name}}-linkedTo" class="col-sm-4 control-label">Linked to:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-linkedTo" name="{{field.name}}-linkedTo" placeholder="Linked to..." ng-model="field.linkedTo" ng-required="true"></div></div></div>');
 $templateCache.put('forms/schema/components/base-properties/maxlength-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.{{field.name}}-maxLength.$invalid}"><label for="{{field.name}}-maxLength" class="col-sm-4 control-label">Max Length:</label><div class="col-sm-8"><input type="number" class="form-control" id="{{field.name}}-maxLength" name="{{field.name}}-maxLength" placeholder="Max Length..." ng-model="field.validation.maxlength" ng-required="false" ng-change="onChangeMaxLength()"></div></div></div><div class="row no-vertical-margin" ng-show="field.validation.maxlength"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.{{field.name}}-minLengthMessage.$invalid}"><label for="{{field.name}}-maxLengthMessage" class="col-sm-4 control-label">Message</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-maxLengthMessage" name="{{field.name}}-maxLengthMessage" placeholder="Max length message..." ng-model="field.validation.messages.maxlength" ng-required="false"></div></div></div>');
@@ -137,11 +153,11 @@ $templateCache.put('forms/schema/components/base-properties/value-properties.htm
 $templateCache.put('forms/schema/components/checkbox/checkbox-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/tooltip-properties.html\'"></div><div ng-include="\'forms/schema/components/checkbox/ln-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><!--<uib-tab index="1" heading="Validation">--><!--<form name="fieldValidationForm" class="form-horizontal">--><!--<div class="box-body padding-top">--><!--<div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div>--><!--</div>--><!--</form>--><!--</uib-tab>--><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/checkbox/checkbox.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/checkbox.html\'"></div>');
 $templateCache.put('forms/schema/components/checkbox/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
+$templateCache.put('forms/schema/components/datetime/datetime-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.formatSelector.$invalid}"><label for="formatSelector" class="col-sm-4 control-label">Format</label><div class="col-sm-8"><select name="formatSelector" id="formatSelector" ng-model="field.selectedFormat" class="form-control" ng-change="onSelectFormat(field.selectedFormat)"><option value="">Select format...</option><option ng-repeat="format in formats" value="{{format.value}}">{{format.option}}</option></select></div></div></div><div class="row no-vertical-margin" ng-show="showCustomFormat"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.format.$invalid}"><label for="format" class="col-sm-4 control-label">Custom Format</label><div class="col-sm-8"><input type="text" class="form-control" id="format" name="format" ng-model="field.format" ng-required="false" ng-value="selectedFormat"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.enableTime.$invalid}"><label for="enableTime" class="col-sm-4 control-label" title="Indicates if component time is enabled for this field.">Time enable:</label><div class="col-sm-8"><input type="checkbox" id="enableTime" name="enableTime" ng-model="field.enableTime" class="ng-pristine ng-valid"></div></div></div><!--<div class="row no-vertical-margin">--><!--<div class="form-group margin-bottom"--><!--ng-class="{\'has-error\': fieldPropertiesForm.utc.$invalid}">--><!--<label for="utc" class="col-sm-4 control-label"--><!--title="Indicates Time in UTC or not for this field.">UTC:</label>--><!--<div class="col-sm-8">--><!--<input type="checkbox" id="utc" name="utc" ng-model="field.utc"--><!--class="ng-pristine ng-valid" ng-change="onChangeUTCOption()">--><!--</div>--><!--</div>--><!--</div>--><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
+$templateCache.put('forms/schema/components/datetime/datetime.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div class="input-group"><input id="{{getUniqueName(field)}}" ods-dynamic-name="getUniqueName(field)" class="form-control" type="text" enable-time="field.enableTime" datetime-picker="{{field.format}}" ng-required="getRequired(field)" ng-model="field.value" is-open="field.openInEditMode" model-options="field.modelOptions" ng-disabled="field.readonly" datepicker-append-to-body="true"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="openCalendar(field)" ng-disabled="field.readonly"><i class="fa fa-calendar"></i></button></span></div>');
 $templateCache.put('forms/schema/components/checkbox-list/checkbox-list-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.inline.$invalid}"><label for="{{field.name}}-inline" class="col-sm-4 control-label" title="Indicates if will show inline or not.">Inline:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-inline" name="{{field.name}}-inline" ng-model="field.inline"></div></div></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><ods-field-checkboxlist-options field="field"></ods-field-checkboxlist-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/checkbox-list/checkbox-list.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/checkbox-list.html\'"></div>');
 $templateCache.put('forms/schema/components/checkbox-list/checkboxlist-options-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom"><label for="{{field.name}}-limitTo" class="col-sm-2 control-label">Limit to:</label><div class="col-sm-10"><input type="number" class="form-control" id="{{field.name}}-limitTo" name="{{field.name}}-limitTo" placeholder="Limit list to..." ng-model="field.limitTo" ng-required="false"></div></div></div><div class="table-responsive" style="max-height: 250px"><table class="table table-condensed position-relative" style="position: relative;"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-default btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'has-error\': fieldOptionForm.$invalid }"><td><input type="checkbox" name="{{field.name}}Selected[]" ng-model="field.value[option.id]"></td><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required"></td><td><input type="text" ng-model="option.name" class="form-control" ng-required="true"></td><td><button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
-$templateCache.put('forms/schema/components/datetime/datetime-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.formatSelector.$invalid}"><label for="formatSelector" class="col-sm-4 control-label">Format</label><div class="col-sm-8"><select name="formatSelector" id="formatSelector" ng-model="field.selectedFormat" class="form-control" ng-change="onSelectFormat(field.selectedFormat)"><option value="">Select format...</option><option ng-repeat="format in formats" value="{{format.value}}">{{format.option}}</option></select></div></div></div><div class="row no-vertical-margin" ng-show="showCustomFormat"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.format.$invalid}"><label for="format" class="col-sm-4 control-label">Custom Format</label><div class="col-sm-8"><input type="text" class="form-control" id="format" name="format" ng-model="field.format" ng-required="false" ng-value="selectedFormat"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.enableTime.$invalid}"><label for="enableTime" class="col-sm-4 control-label" title="Indicates if component time is enabled for this field.">Time enable:</label><div class="col-sm-8"><input type="checkbox" id="enableTime" name="enableTime" ng-model="field.enableTime" class="ng-pristine ng-valid"></div></div></div><!--<div class="row no-vertical-margin">--><!--<div class="form-group margin-bottom"--><!--ng-class="{\'has-error\': fieldPropertiesForm.utc.$invalid}">--><!--<label for="utc" class="col-sm-4 control-label"--><!--title="Indicates Time in UTC or not for this field.">UTC:</label>--><!--<div class="col-sm-8">--><!--<input type="checkbox" id="utc" name="utc" ng-model="field.utc"--><!--class="ng-pristine ng-valid" ng-change="onChangeUTCOption()">--><!--</div>--><!--</div>--><!--</div>--><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="1" heading="Validation"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/required-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/components/datetime/datetime.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div class="input-group"><input id="{{getUniqueName(field)}}" ods-dynamic-name="getUniqueName(field)" class="form-control" type="text" enable-time="field.enableTime" datetime-picker="{{field.format}}" ng-required="getRequired(field)" ng-model="field.value" is-open="field.openInEditMode" model-options="field.modelOptions" ng-disabled="field.readonly" datepicker-append-to-body="true"> <span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="openCalendar(field)" ng-disabled="field.readonly"><i class="fa fa-calendar"></i></button></span></div>');
 $templateCache.put('forms/schema/components/field/field-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="sectionPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.name.$invalid}"><label for="name" class="col-sm-2 control-label">Name:</label><div class="col-sm-4"><input type="text" class="form-control" id="name" name="name" placeholder="Name..." ng-model="row.name" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.cssClass.$invalid}"><label for="cssClass" class="col-sm-2 control-label">Class Name:</label><div class="col-sm-4"><input type="text" class="form-control" id="cssClass" name="cssClass" placeholder="Css Class..." ng-model="row.cssClass" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.cols.$invalid}"><label for="cols" class="col-sm-2 control-label">Cols:</label><div class="col-sm-4"><input type="number" class="form-control" id="cols" name="cols" placeholder="Cols..." ng-model="row.cols.length" ng-required="false" ng-disabled="true"></div><div class="col-lg-6"><!--<button type="button" class="btn btn-primary" ng-click="addRow()">Add row</button>--></div></div></div></div></form><div class="row no-vertical-margin"><div class="col-lg-6"><table ng-table="tableParams" class="table table-bordered table-hover table-condensed editable-table demoTable" ng-form="tableForm" disable-filter="isAdding"><colgroup><col width="50%"></colgroup><tr ng-repeat="row in $data" ng-form="rowForm"><td title="\'Class Name\'" ng-switch="row.isEditing" ng-form="cssClass" class="align-middle"><span ng-switch-default class="editable-text">{{row.cssClass}}</span><div class="controls" ng-switch-when="true"><input type="text" name="cssClass" ng-model="row.cssClass" class="editable-input form-control input-sm" required></div></td><td><button type="button" class="btn btn-primary btn-sm" ng-click="saveColumnEdited(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button> <button type="button" class="btn btn-default btn-sm" ng-click="cancelColumnEdited(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button> <button type="button" class="btn btn-default btn-sm" ng-click="row.isEditing = true" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span></button> <button type="button" class="btn btn-danger btn-sm" ng-click="removeColumn($data, $index)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button></td></tr></table></div><div class="col-lg-6"><button type="button" class="btn btn-primary" ng-click="addColumn(row)">Add column</button></div></div></uib-tab><uib-tab index="3" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div><!--<ods-model model="row" css-class="fixed-height"></ods-model>--></uib-tab></uib-tabset>');
 $templateCache.put('forms/schema/components/field/field.html','<div class="box-draggable" ng-class="{ \'error\': object.invalid}"><div class="box-overlay"><div class="btn-toolbar btn-toolbar-right"><button class="btn btn-default btn-xs" type="button" title="Copy component to Clipboard." ng-click="addToClipboard(field)"><span class="fa fa-clipboard"></span></button> <button class="btn btn-default btn-xs" type="button" ng-class="{ \'active\': field.showProperties }" ng-click="toggleFieldProperties(field)" title="Configure this field." uib-popover-template="\'forms/schema/components/field/properties.html\'" popover-append-to-body="true" popover-placement="auto bottom" popover-trigger="none" popover-title="Field config" popover-is-open="field.popoverProps"><span class="fa fa-wrench"></span></button><!--<button class="btn btn-default btn-xs" type="button"--><!--ng-show="field.popoverProps"--><!--title="Configure this field."--><!--uib-popover-template="\'forms/schema/components/field/properties.html\'"--><!--popover-append-to-body=\'true\' popover-placement=\'auto bottom\'--><!--popover-trigger="outsideClick" popover-title="Field config">--><!--<span class="fa fa-wrench"></span>--><!--</button>--><!--<button class="btn btn-default btn-xs" type="button"--><!--ng-click="swap(index - 1, index)"--><!--ng-disabled="index === 0" title="Move up">--><!--<span class="fa fa-arrow-left"></span>--><!--</button>--><!--<button class="btn btn-default btn-xs" type="button"--><!--ng-click="swap(index, index + 1)"--><!--ng-disabled="$index === schema.fields.length - 1" title="Move down">--><!--<span class="fa fa-arrow-right"></span>--><!--</button>--> <button class="btn btn-xs btn-danger" type="button" title="Remove" ng-click="removeField(index)"><span class="fa fa-trash"></span></button></div></div><div class="box-field-container padding"><div class="box-body no-padding"><div ng-include="getSchemaField(field)"></div></div></div><div class="box-properties-container" ng-class="{ visible: field.showProperties }"><div class="padding" ng-if="field.showProperties"><div ng-include="\'forms/schema/components/field/properties.html\'"></div></div></div></div>');
 $templateCache.put('forms/schema/components/field/properties.html','<div ng-include="getSchemaFieldProperties(field)"></div>');
@@ -168,170 +184,7 @@ $templateCache.put('forms/schema/components/textarea/textarea-properties.html','
 $templateCache.put('forms/schema/components/textarea/textarea.html','<div ng-include="\'forms/schema/components/label.html\'"></div><textarea class="form-control" name="{{getUniqueName(field)}}" id="{{getUniqueName(field)}}" ng-required="{{field.required}}" title="{{field.tooltip}}" rows="{{field.rows}}" placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" data-resize="disabled" ng-readonly="field.readonly">\n</textarea>');
 $templateCache.put('forms/schema/components/toggle/ln-properties.html','<div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.ln.$invalid}"><label for="ln" class="col-sm-4 control-label" title="Print a new line between label and field.">New line:</label><div class="col-sm-8"><input type="checkbox" id="ln" name="ln" ng-model="field.ln" class="ng-pristine ng-valid"></div></div></div>');
 $templateCache.put('forms/schema/components/toggle/toggle-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/value-properties.html\'"></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/components/toggle/toggle.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/toggle.html\'"></div>');
-$templateCache.put('forms/schema/plugins/ckeditor/ckeditor-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.locked.$invalid}"><label for="locked" class="col-sm-4 control-label" title="Indicates if suggestions are locked in this field.">Suggestions locked:</label><div class="col-sm-8"><input type="checkbox" id="locked" name="locked" ng-model="field.options.locked" class="ng-pristine ng-valid"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldValidationForm.printView.$invalid}"><label for="printView" class="col-sm-4 control-label" title="Indicates if CKEditor will show as print view.">Print View:</label><div class="col-sm-8"><input type="checkbox" id="printView" name="printView" ng-model="field.printView" class="ng-pristine ng-valid"></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Options"><form name="fieldValidationForm" class="form-horizontal"><div class="box-body padding-top"><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.prefix.$invalid}"><label for="prefix" class="col-sm-2 control-label">Prefix:</label><div class="col-sm-2"><input type="text" class="form-control" id="prefix" name="prefix" placeholder="Prefix..." ng-model="field.options.prefix" ng-required="true"></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suffix.$invalid}"><label for="suffix" class="col-sm-2 control-label">Suffix:</label><div class="col-sm-2"><input type="text" class="form-control" id="suffix" name="suffix" placeholder="Suffix..." ng-model="field.options.suffix" ng-required="true"></div></div></div></div><ods-suggestion-options field="field" config="config" profile="dev"></ods-suggestion-options></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/plugins/ckeditor/ckeditor.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div class="position-relative"><textarea id="{{field.name + dev}}" name="{{field.name + dev}}" placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: \'blur\' }" title="{{field.tooltip}}" options="field.options" ods-ckeditor ng-disabled="field.readonly">\n</textarea></div>');
-$templateCache.put('forms/schema/plugins/ckeditor/suggestion-options-properties.html','<div class="row no-vertical-margin"><div class="col-lg-1"></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.suggestionsUrl.$invalid}"><label for="suggestionsUrl" class="col-sm-2 control-label">Suggestions Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="suggestionsUrl" id="suggestionsUrl" placeholder="Suggestion Url..." ng-model="field.options.suggestionsUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadSuggestions(field.options.suggestionsUrl)">Load Suggestions</button></span></div></div></div></div><div class="row no-vertical-margin"><div class="col-lg-1"><button class="btn btn-info" type="button" ng-click="refreshOption()" title="Update options in CKEditor">Update <span class="fa fa-refresh"></span></button></div><div class="col-lg-11"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.tokensUrl.$invalid}"><label for="tokensUrl" class="col-sm-2 control-label">Tokens Url:</label><div class="input-group col-sm-10" style="padding-left: 15px;"><input type="text" class="form-control" name="tokensUrl" id="tokensUrl" placeholder="Tokens Url..." ng-model="field.options.tokensUrl"> <span class="input-group-btn"><button class="btn btn-primary" type="button" ng-click="loadTokens(field.options.tokensUrl)">Load Tokens</button></span></div></div></div></div><div class="table-responsive" style="max-height: 300px;overflow-y: auto;margin-top: 20px;"><table class="table table-condensed position-relative"><thead><tr><th></th><th>Value</th><th>Text</th><th><button class="btn btn-xs btn-success" type="button" ng-click="addOption()" title="Add a new option" ng-disabled="field.options.locked"><span class="fa fa-plus"></span></button></th><th></th></tr></thead><tbody><tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ \'error\': fieldOptionForm.$invalid }"><td><input type="text" name="optionValue" ng-model="option.id" ng-required="true" class="form-control" required="required" ng-disabled="field.options.locked"></td><td><input type="text" ng-model="option.label" class="form-control" ng-required="true"></td><td><button class="btn btn-xs btn-danger" type="button" ng-click="removeOption($index)" title="Remove this option"><span class="fa fa-trash"></span></button></td><td></td></tr></tbody></table></div>');
-$templateCache.put('forms/schema/plugins/if-yes/if-yes-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-toggleValue.$invalid}"><label for="{{field.name}}-toggleValue" class="col-sm-4 control-label">Toggle value:</label><div class="col-sm-8"><input type="checkbox" id="{{field.name}}-toggleValue" name="{{field.name}}-toggleValue" ng-model="field.value.toggle" class="ng-pristine ng-valid"></div></div></div><div ng-include="\'forms/schema/components/toggle/ln-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': fieldPropertiesForm.{{field.name}}-textValue.$invalid}"><label for="{{field.name}}-textValue" class="col-sm-4 control-label">Text value:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-textValue" name="{{field.name}}-textValue" placeholder="Text value..." ng-model="field.value.textarea" ng-required="false"></div></div></div><div ng-include="\'forms/schema/components/base-properties/readonly-properties.html\'"></div></div></form></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/plugins/if-yes/if-yes.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/plugins/if-yes.html\'"></div>');
-$templateCache.put('forms/schema/plugins/table/container.html','<div ng-include="\'forms/schema/components/label.html\'"></div><ods-table field="field" mode="edit"></ods-table>');
-$templateCache.put('forms/schema/plugins/table/table-properties.html','<uib-tabset class="nav-tabs"><uib-tab index="0" heading="Properties"><form name="fieldPropertiesForm" class="form-horizontal"><div class="box-body padding-top"><div ng-include="\'forms/schema/components/base-properties/common-properties.html\'"></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.{{field.name}}-cssClass.$invalid}"><label for="{{field.name}}-cssClass" class="col-sm-4 control-label">Class Name:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-cssClass" name="{{field.name}}-cssClass" placeholder="Css Class..." ng-model="field.cssClass" ng-required="true"></div></div></div><div class="row no-vertical-margin"><div class="form-group margin-bottom" ng-class="{\'has-error\': sectionPropertiesForm.{{field.name}}-code.$invalid}"><label for="{{field.name}}-code" class="col-sm-4 control-label">Component code:</label><div class="col-sm-8"><input type="text" class="form-control" id="{{field.name}}-code" name="{{field.name}}-code" placeholder="Code..." ng-model="field.code" ng-required="false"> <span class="help-block">Code is like a identification or type in this form. useful for a component classification.</span></div></div></div></div></form></uib-tab><uib-tab index="1" heading="Layout"><ods-table-props field="field"></ods-table-props></uib-tab><uib-tab index="2" heading="Debug" ng-show="debugMode"><div ng-include="\'forms/schema/components/base-properties/model-properties.html\'"></div></uib-tab></uib-tabset>');
-$templateCache.put('forms/schema/plugins/table/table-props.html','<div class="padding-top"><div class="row"><form name="fieldPropsForm" class="form-horizontal"><div class="col-md-4 col-sm-4 col-xs-12"><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-rows.$invalid}"><label for="{{field.name}}-rows" class="control-label col-sm-5">Rows:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-rows" name="{{field.name}}-rows" placeholder="Rows..." ng-model="field.matrix.length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addRow()" title="Add row">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-cols.$invalid}"><label for="{{field.name}}-cols" class="control-label col-sm-5">Cols:</label><div class="col-sm-3"><input type="number" class="form-control" id="{{field.name}}-cols" name="{{field.name}}-cols" placeholder="Cols..." ng-model="field.matrix[0].length" ng-required="false" ng-disabled="true"></div><div class="col-sm-3"><button type="button" class="btn btn-primary" ng-click="addColumn()" title="Add column">Add</button></div></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-rowHeader" class="control-label col-sm-5">Row Header:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-rowHeader" name="{{field.name}}-rowHeader" ng-model="field.rowHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-colHeader" class="control-label col-sm-5">Col Header:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-colHeader" name="{{field.name}}-colHeader" ng-model="field.colHeader"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-totals.$invalid}"><label for="{{field.name}}-totals" class="control-label col-sm-5">Show Totals:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-totals" name="{{field.name}}-totals" ng-model="field.totals"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-canClone.$invalid}"><label for="{{field.name}}-canClone" class="control-label col-sm-5">Can clone row:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-canClone" name="{{field.name}}-canClone" ng-model="field.canCloneRow"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageRows.$invalid}"><label for="{{field.name}}-manageRows" class="control-label col-sm-5">Manage rows:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-manageRows" name="{{field.name}}-manageRows" ng-model="field.manageRows"></div><div class="form-group" ng-class="{\'has-error\': fieldPropsForm.{{field.name}}-manageColumns.$invalid}"><label for="{{field.name}}-manageColumns" class="control-label col-sm-5">Manage columns:</label><input class="col-sm-1" type="checkbox" id="{{field.name}}-manageColumns" name="{{field.name}}-manageColumns" ng-model="field.manageColumns"></div></div><div class="col-md-8 col-sm-8 col-xs-12"><h3>Columns configuration</h3><div class="table-responsive" style="max-height: 300px"><table class="table table-bordered"><thead><tr><th>#</th><th>CSS class</th><th>Width</th><th>Total</th><th>Total Label</th></tr></thead><tbody><tr ng-repeat="col in field.matrix[0]"><td>{{$index + 1}}</td><td><input type="text" class="form-control" id="{{field.name}}-col{{$index}}" name="{{field.name}}-col{{$index}}" placeholder="Css class..." ng-model="field.matrix[0][$index].cssClass"></td><td><input type="text" class="form-control" id="{{field.name}}-width{{$index}}" name="{{field.name}}-width{{$index}}" placeholder="width..." ng-model="col.width"></td><td><input type="checkbox" id="{{field.name}}-total{{$index}}" name="{{field.name}}-total{{$index}}" title="Add total to this column" ng-model="col.total"></td><td><input type="text" class="form-control" id="{{field.name}}-totalLabel{{$index}}" name="{{field.name}}-totalLabel{{$index}}" placeholder="Total label..." ng-model="field.matrix[0][$index].totalLabel"></td></tr></tbody></table></div></div></form></div></div>');
-$templateCache.put('forms/schema/plugins/table/table.html','<form name="{{field.name}}" class="position-relative"><table class="{{field.cssClass}}" id="{{field.name}}"><tbody><tr ng-repeat="row in field.matrix"><td ng-repeat="col in row" width="{{col.width}}"><div class="box-row col-lg-12"><ul dnd-list="col.fields" dnd-disable-if="col.fields.length >= 1" style="min-width: 10px;" dnd-allowed-types="col.allowedTypes" dnd-inserted="onAdd(item, type)" dnd-drop="checkItem(index, item, external, type)"><li class="box-field" ng-repeat="field in col.fields" dnd-draggable="field" dnd-type="field.componentType" dnd-effect-allowed="move" dnd-selected="models.selected = field" dnd-moved="col.fields.splice($index, 1)" dnd-callback="onDrop(list, $index, targetList, targetIndex)" ng-class="{selected: models.selected === col.fields}"><ods-field row="row" col="col" index="$index" field="field" popover-props="true" debug-mode="debugMode"></ods-field></li></ul></div></td><td ng-show="field.manageRows" width="20px" style="position: relative"><button type="button" ng-click="removeRow(field, $index)" title="Remove row" ng-show="field.manageRows && !(field.manageRows && $index === 0)" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-up"></span></button> <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-down"></span></button></td></tr><tr ng-show="field.totals"><td ng-repeat="col in field.matrix[0]"><div ng-show="col.total" class="pull-right"><ods-table-total field="field" col-index="$index" label="col.totalLabel"></ods-table-total></div></td></tr><tr ng-show="field.manageColumns"><td ng-repeat="col in field.matrix[0]" style="position: relative"><button type="button" ng-click="removeColumn(field, $index)" title="Remove column" ng-hide="field.colHeader && $index === 0" class="btn btn-danger pull-right"><span class="fa fa-trash"></span></button> <button type="button" ng-click="swapColumn($index, $index + 1)" title="Swap column right" class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1"><span class="fa fa-arrow-right"></span></button> <button type="button" ng-click="swapColumn($index - 1, $index)" title="Swap column left" class="btn btn-info pull-right" ng-disabled="$index === 0"><span class="fa fa-arrow-left"></span></button></td></tr></tbody></table><div class="btn-edit position-relative" ng-show="field.canCloneRow"><button type="button" class="btn btn-primary pull-right" ng-click="cloneRow(field)">Clone row</button></div></form>');
-$templateCache.put('forms/schema/plugins/table/total.html','<div><b>{{label}}: {{total}}</b></div>');}]);
-'use strict';
-
-angular
-    .module('ods-lib')
-    .controller('AddressDialogController', AddressDialogController);
-
-AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states'];
-
-function AddressDialogController($uibModalInstance, address, countries, states) {
-
-    var vm = this;
-
-    var nonEmail = "non-email@domain.com";
-
-    vm.address = address;
-    vm.countries = countries;
-    vm.states = states;
-    vm.nonEmail = false;
-
-    vm.clear = clear;
-    vm.save = save;
-    vm.toggleEmail = toggleEmail;
-    vm.emailChanged = emailChanged;
-
-    function clear() {
-
-        $uibModalInstance.dismiss('cancel');
-    }
-
-    function save() {
-
-        $uibModalInstance.close(vm.address);
-        vm.isSaving = false;
-    }
-
-    function toggleEmail() {
-
-        if (vm.nonEmail) {
-            if (vm.address) {
-                vm.address.email = nonEmail;
-            } else {
-                vm.address = {
-                    email: nonEmail
-                }
-            }
-        } else {
-            if (vm.address) {
-                vm.address.email = '';
-            }
-        }
-    }
-
-    function emailChanged() {
-
-        if (!vm.address.email) {
-            vm.nonEmail = false;
-        }
-    }
-}
-
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsAddress', Address);
-
-Address.$inject = ['$uibModal'];
-
-function Address($uibModal) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'address/address.html',
-        scope: {
-            label: '@',
-            address: '=',
-            countries: '=',
-            states: '=',
-            ngModel: '='
-        },
-        link: linkFunc
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.openModal = function () {
-            $uibModal.open({
-                templateUrl: 'address/address-dialog.html',
-                controller: 'AddressDialogController',
-                controllerAs: 'vm',
-                backdrop: 'static',
-                size: 'lg',
-                resolve: {
-                    address: function () {
-                        if ($scope.ngModel !== null) {
-                            return $scope.ngModel;
-                            // {
-                            //     address: $scope.ngModel.address,
-                            //     address2: $scope.ngModel.address2,
-                            //     city: $scope.ngModel.city,
-                            //     state: $scope.ngModel.state,
-                            //     zip: $scope.ngModel.zip,
-                            //     // country: $scope.ngModel.country,
-                            //     phone: $scope.ngModel.phone,
-                            //     mobile: $scope.ngModel.mobile,
-                            //     fax: $scope.ngModel.fax,
-                            //     email: $scope.ngModel.email,
-                            //     notes: $scope.ngModel.notes
-                            // }
-                        } else {
-                            return null;
-                        }
-                    },
-                    countries: function () {
-                        return $scope.countries;
-                    },
-                    states: function () {
-                        return $scope.states;
-                    }
-
-                }
-            }).result.then(function (result) {
-                // $element.
-                updateValue(result);
-                //$state.go($state.current.name, null, {reload: $state.current.name});
-            }, function () {
-                //$state.go($state.current.name);
-            });
-        };
-
-        $scope.printName = printName;
-
-        function printName(address) {
-            if (address) {
-                return address.street + ' ' +
-                    address.street2 + ' ' +
-                    address.city + ',' +
-                    address.state.name + ' ' +
-                    address.zip;
-            } else {
-                return '';
-            }
-        }
-
-        function updateValue(value) {
-            // var input = $element[0].getElementsByTagName('input');
-            $scope.ngModel = value;
-        }
-
-    }
-}
+$templateCache.put('forms/schema/components/toggle/toggle.html','<div ng-include="\'forms/schema/components/label.html\'"></div><div ng-include="\'forms/common/fields/toggle.html\'"></div>');}]);
 'use strict';
 
 angular
@@ -685,6 +538,159 @@ function OdsCkeditor() {
 
 angular
     .module('ods-lib')
+    .controller('AddressDialogController', AddressDialogController);
+
+AddressDialogController.$inject = ['$uibModalInstance', 'address', 'countries', 'states'];
+
+function AddressDialogController($uibModalInstance, address, countries, states) {
+
+    var vm = this;
+
+    var nonEmail = "non-email@domain.com";
+
+    vm.address = address;
+    vm.countries = countries;
+    vm.states = states;
+    vm.nonEmail = false;
+
+    vm.clear = clear;
+    vm.save = save;
+    vm.toggleEmail = toggleEmail;
+    vm.emailChanged = emailChanged;
+
+    function clear() {
+
+        $uibModalInstance.dismiss('cancel');
+    }
+
+    function save() {
+
+        $uibModalInstance.close(vm.address);
+        vm.isSaving = false;
+    }
+
+    function toggleEmail() {
+
+        if (vm.nonEmail) {
+            if (vm.address) {
+                vm.address.email = nonEmail;
+            } else {
+                vm.address = {
+                    email: nonEmail
+                }
+            }
+        } else {
+            if (vm.address) {
+                vm.address.email = '';
+            }
+        }
+    }
+
+    function emailChanged() {
+
+        if (!vm.address.email) {
+            vm.nonEmail = false;
+        }
+    }
+}
+
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsAddress', Address);
+
+Address.$inject = ['$uibModal'];
+
+function Address($uibModal) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'address/address.html',
+        scope: {
+            label: '@',
+            address: '=',
+            countries: '=',
+            states: '=',
+            ngModel: '='
+        },
+        link: linkFunc
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.openModal = function () {
+            $uibModal.open({
+                templateUrl: 'address/address-dialog.html',
+                controller: 'AddressDialogController',
+                controllerAs: 'vm',
+                backdrop: 'static',
+                size: 'lg',
+                resolve: {
+                    address: function () {
+                        if ($scope.ngModel !== null) {
+                            return $scope.ngModel;
+                            // {
+                            //     address: $scope.ngModel.address,
+                            //     address2: $scope.ngModel.address2,
+                            //     city: $scope.ngModel.city,
+                            //     state: $scope.ngModel.state,
+                            //     zip: $scope.ngModel.zip,
+                            //     // country: $scope.ngModel.country,
+                            //     phone: $scope.ngModel.phone,
+                            //     mobile: $scope.ngModel.mobile,
+                            //     fax: $scope.ngModel.fax,
+                            //     email: $scope.ngModel.email,
+                            //     notes: $scope.ngModel.notes
+                            // }
+                        } else {
+                            return null;
+                        }
+                    },
+                    countries: function () {
+                        return $scope.countries;
+                    },
+                    states: function () {
+                        return $scope.states;
+                    }
+
+                }
+            }).result.then(function (result) {
+                // $element.
+                updateValue(result);
+                //$state.go($state.current.name, null, {reload: $state.current.name});
+            }, function () {
+                //$state.go($state.current.name);
+            });
+        };
+
+        $scope.printName = printName;
+
+        function printName(address) {
+            if (address) {
+                return address.street + ' ' +
+                    address.street2 + ' ' +
+                    address.city + ',' +
+                    address.state.name + ' ' +
+                    address.zip;
+            } else {
+                return '';
+            }
+        }
+
+        function updateValue(value) {
+            // var input = $element[0].getElementsByTagName('input');
+            $scope.ngModel = value;
+        }
+
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
     .filter('DateFilter', DateFilter);
 
 DateFilter.$inject = ['moment'];
@@ -888,145 +894,6 @@ function OdsFormBuilder() {
     }
 }
 
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsInputHideValue', odsInputHideValue);
-
-odsInputHideValue.$inject = ['OdsUtils'];
-
-function odsInputHideValue(OdsUtils) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'hide-value/input-hide-value.html',
-        scope: {
-            label: '@',
-            name: '@',
-            ngModel: '=',
-            ngDisabled: '=',
-            ngRequired: '=',
-            mask: '@'
-        },
-        link: linkFunc
-    };
-
-    function linkFunc($scope) {
-
-        $scope.toggleFn = toggleFn;
-        $scope.onBlur = onBlur;
-        $scope.onFocus = onFocus;
-
-        init();
-
-        function init() {
-
-            $scope.name = $scope.name ? $scope.name : OdsUtils.generateName('odsInputHideValue');
-            $scope.toggle = $scope.toggle ? $scope.toggle : false;
-            $scope.ngRequired = $scope.ngRequired ? $scope.ngRequired : false;
-            updateComponent();
-        }
-
-        function toggleIcon() {
-            $scope.icon = $scope.toggle ? 'fa fa-eye' : 'fa fa-eye-slash';
-        }
-
-        function toggleType() {
-            $scope.type = $scope.toggle ? 'text' : 'password';
-        }
-
-        function toggleCursor() {
-            $scope.cursor = $scope.ngDisabled ? 'not-allowed' : 'pointer';
-        }
-
-        function updateComponent() {
-            toggleIcon();
-            toggleType();
-            toggleCursor();
-        }
-
-        function toggleFn() {
-            $scope.toggle = !$scope.ngDisabled ? !$scope.toggle : $scope.toggle;
-            updateComponent();
-        }
-
-        function onBlur() {
-            $scope.toggle = false;
-            updateComponent();
-        }
-
-        function onFocus() {
-            $scope.toggle = true;
-            updateComponent();
-        }
-
-        $scope.$watch('ngDisabled', function () {
-            toggleCursor();
-        });
-    }
-}
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('odsTextHideValue', odsTextHideValue);
-
-odsTextHideValue.$inject = [];
-
-function odsTextHideValue() {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'hide-value/text-hide-value.html',
-        scope: {
-            ngValue: '@',
-            chart: '@'
-        },
-        link: linkFunc
-    };
-
-    function linkFunc($scope) {
-
-        $scope.toggleFn = toggleFn;
-
-        init();
-
-        function init() {
-
-            $scope.toggle = $scope.toggle ? $scope.toggle : false;
-            $scope.chart = $scope.chart ? $scope.chart : 'x';
-            updateComponent();
-        }
-
-        function toggleIcon() {
-            $scope.icon = $scope.toggle ? 'fa fa-eye' : 'fa fa-eye-slash';
-        }
-
-        function toggleCursor() {
-            $scope.cursor = $scope.ngDisabled ? 'not-allowed' : 'pointer';
-        }
-
-        function toggleValue() {
-            $scope.value = '';
-            for (var i = 0; i < $scope.ngValue.length; i++) {
-                $scope.value += $scope.chart;
-            }
-            $scope.value = $scope.toggle ? $scope.ngValue : $scope.value;
-        }
-
-        function updateComponent() {
-            toggleIcon();
-            toggleCursor();
-            toggleValue();
-        }
-
-        function toggleFn() {
-            $scope.toggle = !$scope.toggle;
-            updateComponent();
-        }
-    }
-}
 /**
  * Created by PpTMUnited on 2/21/2017.
  */
@@ -1176,6 +1043,264 @@ function odsTextHideValue() {
     }
   }
 })();
+
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsInputHideValue', odsInputHideValue);
+
+odsInputHideValue.$inject = ['OdsUtils'];
+
+function odsInputHideValue(OdsUtils) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'hide-value/input-hide-value.html',
+        scope: {
+            label: '@',
+            name: '@',
+            ngModel: '=',
+            ngDisabled: '=',
+            ngRequired: '=',
+            mask: '@'
+        },
+        link: linkFunc
+    };
+
+    function linkFunc($scope) {
+
+        $scope.toggleFn = toggleFn;
+        $scope.onBlur = onBlur;
+        $scope.onFocus = onFocus;
+
+        init();
+
+        function init() {
+
+            $scope.name = $scope.name ? $scope.name : OdsUtils.generateName('odsInputHideValue');
+            $scope.toggle = $scope.toggle ? $scope.toggle : false;
+            $scope.ngRequired = $scope.ngRequired ? $scope.ngRequired : false;
+            updateComponent();
+        }
+
+        function toggleIcon() {
+            $scope.icon = $scope.toggle ? 'fa fa-eye' : 'fa fa-eye-slash';
+        }
+
+        function toggleType() {
+            $scope.type = $scope.toggle ? 'text' : 'password';
+        }
+
+        function toggleCursor() {
+            $scope.cursor = $scope.ngDisabled ? 'not-allowed' : 'pointer';
+        }
+
+        function updateComponent() {
+            toggleIcon();
+            toggleType();
+            toggleCursor();
+        }
+
+        function toggleFn() {
+            $scope.toggle = !$scope.ngDisabled ? !$scope.toggle : $scope.toggle;
+            updateComponent();
+        }
+
+        function onBlur() {
+            $scope.toggle = false;
+            updateComponent();
+        }
+
+        function onFocus() {
+            $scope.toggle = true;
+            updateComponent();
+        }
+
+        $scope.$watch('ngDisabled', function () {
+            toggleCursor();
+        });
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('odsTextHideValue', odsTextHideValue);
+
+odsTextHideValue.$inject = [];
+
+function odsTextHideValue() {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'hide-value/text-hide-value.html',
+        scope: {
+            ngValue: '@',
+            chart: '@'
+        },
+        link: linkFunc
+    };
+
+    function linkFunc($scope) {
+
+        $scope.toggleFn = toggleFn;
+
+        init();
+
+        function init() {
+
+            $scope.toggle = $scope.toggle ? $scope.toggle : false;
+            $scope.chart = $scope.chart ? $scope.chart : 'x';
+            updateComponent();
+        }
+
+        function toggleIcon() {
+            $scope.icon = $scope.toggle ? 'fa fa-eye' : 'fa fa-eye-slash';
+        }
+
+        function toggleCursor() {
+            $scope.cursor = $scope.ngDisabled ? 'not-allowed' : 'pointer';
+        }
+
+        function toggleValue() {
+            $scope.value = '';
+            for (var i = 0; i < $scope.ngValue.length; i++) {
+                $scope.value += $scope.chart;
+            }
+            $scope.value = $scope.toggle ? $scope.ngValue : $scope.value;
+        }
+
+        function updateComponent() {
+            toggleIcon();
+            toggleCursor();
+            toggleValue();
+        }
+
+        function toggleFn() {
+            $scope.toggle = !$scope.toggle;
+            updateComponent();
+        }
+    }
+}
+'use strict';
+
+angular
+    .module('ods-lib')
+    .directive('selectFiltered', selectFiltered);
+
+selectFiltered.$inject = ['$filter'];
+
+function selectFiltered($filter) {
+
+    return {
+        restrict: 'E',
+        templateUrl: 'select-filtered/select-filtered.html',
+        scope: {
+            label: '@',
+            name: '@',
+            hideLabel: '=',
+            placeholder: '@',
+            ngModel: '=',
+            titleProperty: '=?',
+            ngDisabled: '=?',
+            ngRequired: '=?',
+            tooltip: '@',
+            list: '=',
+            filters: '=',
+            onSelect: '&',
+            renderStyle: '&?',
+            render: '&?'
+        },
+        link: linkFunc
+
+    };
+
+    /* private helper methods*/
+
+    function linkFunc($scope) {
+
+        $scope.toggleFilter = toggleFilter;
+        $scope.getSelectTitleValue = getSelectTitleValue;
+        $scope.onSelectFn = onSelectFn;
+        $scope.renderClass = renderClass;
+
+        init();
+
+        function init() {
+
+            var tmpModel = angular.copy($scope.ngModel);
+            $scope.selected = {
+                value : tmpModel ? tmpModel : null
+            };
+            $scope.ngDisabled = !!$scope.ngDisabled;
+            $scope.ngRequired = !!$scope.ngRequired;
+            $scope.titleProperty = $scope.titleProperty ? $scope.titleProperty : 'name';
+            doFilter();
+        }
+
+        function doFilter() {
+
+            $scope.filtered = angular.copy($scope.list);
+            if ($scope.filters && $scope.filters.length > 0) {
+                for (var i = 0; i < $scope.filters.length; i++) {
+                    if ($scope.filters[i].active) {
+                        // $scope.selected.value = null;
+                        $scope.filtered = $filter('filter')($scope.filtered, $scope.filters[i].pattern, undefined);
+                    }
+                }
+            }
+        }
+
+        function toggleFilter(filter) {
+
+            filter.active = !filter.active;
+            doFilter();
+        }
+
+        function getSelectTitleValue(element) {
+
+            if (element && element.constructor !== Array) {
+                if($scope.render){
+                    return $scope.render()(element, $scope.titleProperty);
+                }else {
+                    return element[$scope.titleProperty];
+                }
+            } else {
+                return $scope.placeholder;
+            }
+        }
+
+        function onSelectFn() {
+
+            if ($scope.onSelect) {
+                $scope.onSelect();
+            } else {
+                console.log('You must to to define onSelect() function.');
+            }
+        }
+
+        function renderClass(element) {
+
+            if(element && $scope.renderStyle){
+                return $scope.renderStyle()(element);
+            }else {
+                return '';
+            }
+        }
+
+        $scope.$watch('selected', function (newValue) {
+
+            $scope.ngModel = newValue.value;
+        }, true);
+
+        $scope.$watch('list', function () {
+
+            doFilter();
+        }, true);
+
+    }
+}
 
 /**
  * Created by hermeslm on 3/28/17.
@@ -1922,125 +2047,6 @@ function ReportsDirective(OdsReportsService, $uibModal, $sce, $q) {
     }
 
 })();
-
-'use strict';
-
-angular
-    .module('ods-lib')
-    .directive('selectFiltered', selectFiltered);
-
-selectFiltered.$inject = ['$filter'];
-
-function selectFiltered($filter) {
-
-    return {
-        restrict: 'E',
-        templateUrl: 'select-filtered/select-filtered.html',
-        scope: {
-            label: '@',
-            name: '@',
-            hideLabel: '=',
-            placeholder: '@',
-            ngModel: '=',
-            titleProperty: '=?',
-            ngDisabled: '=?',
-            ngRequired: '=?',
-            tooltip: '@',
-            list: '=',
-            filters: '=',
-            onSelect: '&',
-            renderStyle: '&?',
-            render: '&?'
-        },
-        link: linkFunc
-
-    };
-
-    /* private helper methods*/
-
-    function linkFunc($scope) {
-
-        $scope.toggleFilter = toggleFilter;
-        $scope.getSelectTitleValue = getSelectTitleValue;
-        $scope.onSelectFn = onSelectFn;
-        $scope.renderClass = renderClass;
-
-        init();
-
-        function init() {
-
-            var tmpModel = angular.copy($scope.ngModel);
-            $scope.selected = {
-                value : tmpModel ? tmpModel : null
-            };
-            $scope.ngDisabled = !!$scope.ngDisabled;
-            $scope.ngRequired = !!$scope.ngRequired;
-            $scope.titleProperty = $scope.titleProperty ? $scope.titleProperty : 'name';
-            doFilter();
-        }
-
-        function doFilter() {
-
-            $scope.filtered = angular.copy($scope.list);
-            if ($scope.filters && $scope.filters.length > 0) {
-                for (var i = 0; i < $scope.filters.length; i++) {
-                    if ($scope.filters[i].active) {
-                        // $scope.selected.value = null;
-                        $scope.filtered = $filter('filter')($scope.filtered, $scope.filters[i].pattern, undefined);
-                    }
-                }
-            }
-        }
-
-        function toggleFilter(filter) {
-
-            filter.active = !filter.active;
-            doFilter();
-        }
-
-        function getSelectTitleValue(element) {
-
-            if (element && element.constructor !== Array) {
-                if($scope.render){
-                    return $scope.render()(element, $scope.titleProperty);
-                }else {
-                    return element[$scope.titleProperty];
-                }
-            } else {
-                return $scope.placeholder;
-            }
-        }
-
-        function onSelectFn() {
-
-            if ($scope.onSelect) {
-                $scope.onSelect();
-            } else {
-                console.log('You must to to define onSelect() function.');
-            }
-        }
-
-        function renderClass(element) {
-
-            if(element && $scope.renderStyle){
-                return $scope.renderStyle()(element);
-            }else {
-                return '';
-            }
-        }
-
-        $scope.$watch('selected', function (newValue) {
-
-            $scope.ngModel = newValue.value;
-        }, true);
-
-        $scope.$watch('list', function () {
-
-            doFilter();
-        }, true);
-
-    }
-}
 
 (function() {
     'use strict';
@@ -3662,6 +3668,7 @@ function DynamicNameDirective($compile, $parse) {
             SELECT2: 'select2',
             MULTI_SELECT: 'multiselect',
             IF_YES: 'if_yes',
+            IF_YES_CHECKBOX: 'if_yes_checkbox',
             TABLE: 'table',
             LABEL: 'label',
             CHECKBOX: 'checkbox',
@@ -3713,1680 +3720,1719 @@ function DynamicNameDirective($compile, $parse) {
  * Created by hermeslm on 3/28/17.
  */
 (function () {
-        'use strict';
-
-        angular
-            .module('ods-lib')
-            .factory('OdsFormService', OdsFormService);
-
-        OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
-            '$resource', 'OdsPosition', 'EventDataFactory', 'OdsEvent'];
-
-        function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-                                $resource, OdsPosition, EventDataFactory, OdsEvent) {
-
-            var uniqueCounter = (+new Date()) % 10000;
-            var version = '1.0';
-            var formats = {
-                JSON: 'json'
-            };
-
-            var clipBoard = [];
-            var callbacks = [];
-
-            var service = {
-
-                //Utils methods
-                newSchema: newSchema,
-                newSchemaEmpty: newSchemaEmpty,
-                initSchema: initSchema,
-                generateName: generateName,
-                onAdd: onAdd,
-                getFieldValueAsNumber: getFieldValueAsNumber,
-                copyToClipboard: copyToClipboard,
-                strSubtitutor: strSubtitutor,
-                restResource: restResource,
-                getClipBoard: getClipBoard,
-                setClipBoard: setClipBoard,
-                addToClipBoard: addToClipBoard,
-                onAddToClipBoard: onAddToClipBoard,
-                renameComponent: renameComponent,
-                importForm: importForm,
-                exportForm: exportForm,
-                importSubForm: importSubForm,
-                downloadObjectAsJson: downloadObjectAsJson,
-                loadSubForm: loadSubForm,
-                checkUpload: checkUpload,
-                getExportables: getExportables,
-
-                //Section specific
-                cloneSection: cloneSection,
-
-                //Templates management
-                getToolbarComponent: getToolbarComponent,
-                getSchemaField: getSchemaField,
-                getSchemaFieldProperties: getSchemaFieldProperties,
-                getFormFieldTemplate: getFormFieldTemplate,
-                getFormViewerTemplate: getFormViewerTemplate,
-
-                getValidationPatterns: getValidationPatterns,
-                getDateTimeFormats: getDateTimeFormats,
-                newSectionObject: newSectionObject,
-                newRowObject: newRowObject,
-                newColumnObject: newColumnObject,
-
-                //Fields creation methods
-                newFieldTextObject: newFieldTextObject,
-                newFieldNumberObject: newFieldNumberObject,
-                newFieldPasswordObject: newFieldPasswordObject,
-                newFieldTextareaObject: newFieldTextareaObject,
-                newFieldSelectObject: newFieldSelectObject,
-                newFieldSelect2Object: newFieldSelect2Object,
-                newFieldMultiSelectObject: newFieldMultiSelectObject,
-                newFieldToggleObject: newFieldToggleObject,
-                newDateTimeObject: newDateTimeObject,
-                newFieldLabelObject: newFieldLabelObject,
-                newFieldCheckBoxObject: newFieldCheckBoxObject,
-                newFieldCheckBoxListObject: newFieldCheckBoxListObject,
-                newFieldRadioListObject: newFieldRadioListObject,
-
-                //Fields plugins creation methods
-                newYesNoObject: newYesNoObject,
-                newTableObject: newTableObject,
-                newItemObject: newItemObject,
-                newCKEditorObject: newCKEditorObject,
-
-                //Select utils methods
-                getSelectFieldId: getSelectFieldId,
-                getSelectFieldTitle: getSelectFieldTitle,
-                getSelectFieldTitleValue: getSelectFieldTitleValue,
-                getSelectFieldIdValue: getSelectFieldIdValue,
-
-                //Table field specific
-                removeRow: removeRow,
-                removeColumn: removeColumn,
-                cloneRow: cloneRow,
-
-                //CKEditor field specific
-                setConfigToCKEditorComponent: setConfigToCKEditorComponent,
-                defaultCKEditorPrefix: defaultCKEditorPrefix,
-                defaultCKEditorSuffix: defaultCKEditorSuffix,
-
-                getTimeZoneUTC: getTimeZoneUTC,
-                convertFormSchema: convertFormSchema,
-                convertFormSchemaFromServer: convertFormSchemaFromServer,
-                setReadOnlyStatus: setReadOnlyStatus,
-                copyJson: copyJson,
-                getDataFromComponentCode: getDataFromComponentCode,
-                saveFormData: saveFormData,
-                saveFormSchema: saveFormSchema
-            };
-
-            /**
-             * Create a new Schema.
-             */
-            function newSchema() {
-                return {
-                    name: generateName(OdsComponentType.FORM),
-                    label: 'New Form',
-                    hideLabel: true,
-                    description: 'New Form Description',
-                    layout: [newSectionObject()],
-                    allowedTypes: [OdsComponentType.SECTION]
-                };
-            }
-
-            /**
-             * Create a new Schema.
-             */
-            function newSchemaEmpty() {
-                return {
-                    name: generateName(OdsComponentType.FORM),
-                    label: 'New Form',
-                    hideLabel: true,
-                    description: 'New Form Description',
-                    layout: [],
-                    allowedTypes: [OdsComponentType.SECTION]
-                };
-            }
-
-            /**
-             * Import Schema.
-             */
-            function importForm(file) {
-
-                var base64result = file.substr(file.indexOf(',') + 1);
-                var decodedString = atob(base64result);
-                if (decodedString && decodedString !== '') {
-                    var loadedFile = angular.fromJson(decodedString);
-                    loadedFile.form = convertFormSchema(loadedFile.form);
-                    return loadedFile;
-                } else {
-                    console.error('Not valid JSON file!!!');
-                }
-            }
-
-            /**
-             * Export Schema.
-             */
-            function exportForm(schema) {
-
-                var exportObject = {
-                    format: formats.JSON,
-                    version: version,
-                    form: schema
-                };
-
-                var now = new Date();
-
-                downloadObjectAsJson(exportObject, schema.label + ' ' + now.getFullYear() + '-' +
-                    now.getMonth() + '-' + now.getDate());
-            }
-
-            /**
-             * Download schema as JSON
-             * @param exportObj
-             * @param exportName
-             */
-            function downloadObjectAsJson(exportObj, exportName) {
-
-                var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj));
-                var downloadAnchorNode = document.createElement('a');
-                downloadAnchorNode.setAttribute('href', dataStr);
-                downloadAnchorNode.setAttribute('download', exportName + '.json');
-                downloadAnchorNode.click();
-                downloadAnchorNode.remove();
-            }
-
-            function checkUpload() {
-
-                // Check for the various File API support.
-                if ($window.File && $window.FileReader && $window.FileList && $window.Blob) {
-                    // Great success! All the File APIs are supported.
-                    return true;
-                } else {
-                    alert('The File APIs are not fully supported in this browser.');
-                    return false;
-                }
-            }
-
-            /**
-             * This method allows to import a subform into th schema
-             * @param subForm
-             */
-            function importSubForm(subForm) {
-
-                //TODO check subform syntax.
-                EventDataFactory.setData(OdsEvent.LOAD_SUB_FORM, subForm);
-            }
-
-            /**
-             * Generate object name by type.
-             * @param type Object type.
-             * @returns
-             */
-            function generateName(type) {
-
-                uniqueCounter++;
-
-                switch (type) {
-                    case OdsComponentType.FORM:
-                        return 'form' + uniqueCounter;
-                    case OdsComponentType.SECTION:
-                        return 'section' + uniqueCounter;
-                    case OdsComponentType.ROW:
-                        return 'row' + uniqueCounter;
-                    case OdsComponentType.COLUMN:
-                        return 'column' + uniqueCounter;
-                    case OdsComponentType.FIELD:
-                        return 'field' + uniqueCounter;
-                    case OdsComponentType.ITEM:
-                        return 'item' + uniqueCounter;
-                    case OdsComponentType.PLUGIN:
-                        return 'plugin' + uniqueCounter;
-                    default :
-                        return uniqueCounter;
-                }
-            }
-
-            /**
-             * Catch onAdd event in drag and drop for setting field properties,
-             * we only set field name and datetime for now.
-             *
-             * @param item Field
-             * @param type Field type.
-             */
-            function onAdd(item, type) {
-
-                if (type === OdsComponentType.FIELD) {
-                    item.name = generateName(OdsComponentType.FIELD);
-                    if (item.type === OdsFieldType.DATETIME) {
-                        // var today = new Date();
-                        // var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0));
-                        item.value = new Date();
-                    }
-                    return item;
-                }
-            }
-
-            /**
-             * @deprecated
-             * Init the schema
-             * @param schema
-             * @returns {*}
-             */
-            function initSchema(schema) {
-
-                if (schema) {
-                    schema.allowedTypes = [OdsComponentType.SECTION];
-
-                    for (var i = 0; i < schema.layout.length; i++) {
-                        schema.layout[i].displayProperties = false;
-                        schema.layout[i].allowedTypes = [OdsComponentType.ROW];
-                        for (var j = 0; j < schema.layout[i].rows.length; j++) {
-                            schema.layout[i].rows[j].displayProperties = false;
-                            for (var k = 0; k < schema.layout[i].rows[j].cols.length; k++) {
-                                schema.layout[i].rows[j].cols[k].allowedTypes = [OdsComponentType.FIELD];
-                                schema.layout[i].rows[j].cols[k].displayProperties = false;
-                            }
-                        }
-                    }
-                    // this.schema = schema;
-                } else {
-                    console.error('Please specify a schema!!!');
-                }
-                return schema;
-            }
-
-            /**
-             * Return a toolbar component template from type.
-             * @param component Component type.
-             * @returns {*} Component template.
-             */
-            function getToolbarComponent(component) {
-
-                switch (component.componentType) {
-                    case OdsComponentType.SECTION:
-                        return 'forms/toolbar/components/section.html';
-                    case OdsComponentType.FIELD:
-                        switch (component.type) {
-                            case OdsFieldType.TEXT:
-                                return 'forms/toolbar/components/input.html';
-                            case OdsFieldType.NUMBER:
-                                return 'forms/toolbar/components/input.html';
-                            case OdsFieldType.PASSWORD:
-                                return 'forms/toolbar/components/input.html';
-                            case OdsFieldType.TEXTAREA:
-                                return 'forms/toolbar/components/textarea.html';
-                            case OdsFieldType.SELECT:
-                                return 'forms/toolbar/components/select.html';
-                            case OdsFieldType.SELECT2:
-                                return 'forms/toolbar/components/select.html';
-                            case OdsFieldType.MULTI_SELECT:
-                                return 'forms/toolbar/components/multi-select.html';
-                            case OdsFieldType.TOGGLE:
-                                return 'forms/toolbar/components/toggle.html';
-                            case OdsFieldType.DATETIME:
-                                return 'forms/toolbar/components/datetime.html';
-                            case OdsFieldType.IF_YES:
-                                return 'forms/toolbar/plugins/if-yes.html';
-                            case OdsFieldType.TABLE:
-                                return 'forms/toolbar/plugins/table.html';
-                            case OdsFieldType.LABEL:
-                                return 'forms/toolbar/components/label.html';
-                            case OdsFieldType.CHECKBOX:
-                                return 'forms/toolbar/components/checkbox.html';
-                            case OdsFieldType.CHECKBOX_LIST:
-                                return 'forms/toolbar/components/checkbox-list.html';
-                            case OdsFieldType.RADIO:
-                                return 'forms/toolbar/components/radio-list.html';
-                            case OdsFieldType.CKEDITOR:
-                                return 'forms/toolbar/components/ckeditor.html';
-                            default :
-                                return 'forms/toolbar/components/no-component.html';
-                        }
-                    default :
-                        return 'forms/toolbar/components/no-component.html';
-                }
-            }
-
-            /**
-             * Return field template for Schema View
-             * @param field Field
-             * @returns {*}
-             */
-            function getSchemaField(field) {
-
-                switch (field.type) {
-                    case OdsFieldType.TEXT:
-                        return 'forms/schema/components/input.html';
-                    case OdsFieldType.NUMBER:
-                        return 'forms/schema/components/input.html';
-                    case OdsFieldType.PASSWORD:
-                        return 'forms/schema/components/input.html';
-                    case OdsFieldType.TEXTAREA:
-                        return 'forms/schema/components/textarea/textarea.html';
-                    case OdsFieldType.SELECT:
-                        return 'forms/schema/components/select/select.html';
-                    case OdsFieldType.SELECT2:
-                        return 'forms/schema/components/select2/select2.html';
-                    case OdsFieldType.MULTI_SELECT:
-                        return 'forms/schema/components/multi-select/multi-select.html';
-                    case OdsFieldType.TOGGLE:
-                        return 'forms/schema/components/toggle/toggle.html';
-                    case OdsFieldType.DATETIME:
-                        return 'forms/schema/components/datetime/datetime.html';
-                    case OdsFieldType.IF_YES:
-                        return 'forms/schema/plugins/if-yes/if-yes.html';
-                    case OdsFieldType.TABLE:
-                        return 'forms/schema/plugins/table/container.html';
-                    case OdsFieldType.LABEL:
-                        return 'forms/schema/components/label.html';
-                    case OdsFieldType.CHECKBOX:
-                        return 'forms/schema/components/checkbox/checkbox.html';
-                    case OdsFieldType.CHECKBOX_LIST:
-                        return 'forms/schema/components/checkbox-list/checkbox-list.html';
-                    case OdsFieldType.RADIO:
-                        return 'forms/schema/components/radio-list/radio-list.html';
-                    case OdsFieldType.CKEDITOR:
-                        return 'forms/schema/plugins/ckeditor/ckeditor.html';
-                    default :
-                        return 'forms/schema/components/no-field.html';
-                }
-            }
-
-            /**
-             * Return field properties template for Schema View
-             * @param field Field
-             * @returns {*}
-             */
-            function getSchemaFieldProperties(field) {
-
-                switch (field.type) {
-                    case OdsFieldType.TEXT:
-                        return 'forms/schema/components/text/text-properties.html';
-                    case OdsFieldType.NUMBER:
-                        return 'forms/schema/components/number/number-properties.html';
-                    case OdsFieldType.PASSWORD:
-                        return 'forms/schema/components/password/password-properties.html';
-                    case OdsFieldType.TEXTAREA:
-                        return 'forms/schema/components/textarea/textarea-properties.html';
-                    case OdsFieldType.SELECT:
-                        return 'forms/schema/components/select/select-properties.html';
-                    case OdsFieldType.SELECT2:
-                        return 'forms/schema/components/select/select-properties.html';
-                    case OdsFieldType.MULTI_SELECT:
-                        return 'forms/schema/components/multi-select/multi-select-properties.html';
-                    case OdsFieldType.TOGGLE:
-                        return 'forms/schema/components/toggle/toggle-properties.html';
-                    case OdsFieldType.DATETIME:
-                        return 'forms/schema/components/datetime/datetime-properties.html';
-                    case OdsFieldType.IF_YES:
-                        return 'forms/schema/plugins/if-yes/if-yes-properties.html';
-                    case OdsFieldType.TABLE:
-                        return 'forms/schema/plugins/table/table-properties.html';
-                    case OdsFieldType.LABEL:
-                        return 'forms/schema/components/label/label-properties.html';
-                    case OdsFieldType.CHECKBOX:
-                        return 'forms/schema/components/checkbox/checkbox-properties.html';
-                    case OdsFieldType.CHECKBOX_LIST:
-                        return 'forms/schema/components/checkbox-list/checkbox-list-properties.html';
-                    case OdsFieldType.RADIO:
-                        return 'forms/schema/components/radio-list/radio-list-properties.html';
-                    case OdsFieldType.CKEDITOR:
-                        return 'forms/schema/plugins/ckeditor/ckeditor-properties.html';
-                    default :
-                        return 'forms/schema/components/no-field-properties.html';
-                }
-            }
-
-            /**
-             * Return field template for each field type in Form View
-             * @param fieldType Field type
-             * @returns {*}
-             */
-            function getFormFieldTemplate(fieldType) {
-
-                switch (fieldType) {
-                    case OdsFieldType.TEXT:
-                        return 'forms/common/fields/input.html';
-                    case OdsFieldType.NUMBER:
-                        return 'forms/common/fields/input.html';
-                    case OdsFieldType.PASSWORD:
-                        return 'forms/common/fields/input.html';
-                    case OdsFieldType.DATE:
-                        return 'forms/common/fields/date.html';
-                    case OdsFieldType.TEXTAREA:
-                        return 'forms/common/fields/textarea.html';
-                    case OdsFieldType.TOGGLE:
-                        return 'forms/common/fields/toggle.html';
-                    case OdsFieldType.SELECT:
-                        return 'forms/common/fields/select.html';
-                    case OdsFieldType.SELECT2:
-                        return 'forms/common/fields/select2.html';
-                    case OdsFieldType.MULTI_SELECT:
-                        return 'forms/common/fields/multi-select.html';
-                    case OdsFieldType.DATETIME:
-                        return 'forms/common/fields/datetime.html';
-                    case OdsFieldType.IF_YES:
-                        return 'forms/common/fields/plugins/if-yes.html';
-                    case OdsFieldType.TABLE:
-                        return 'forms/common/fields/plugins/table.html';
-                    case OdsFieldType.LABEL:
-                        return 'forms/common/fields/label-empty.html';
-                    case OdsFieldType.CHECKBOX:
-                        return 'forms/common/fields/checkbox.html';
-                    case OdsFieldType.CHECKBOX_LIST:
-                        return 'forms/common/fields/checkbox-list.html';
-                    case OdsFieldType.RADIO:
-                        return 'forms/common/fields/radio-list.html';
-                    case OdsFieldType.CKEDITOR:
-                        return 'forms/common/fields/plugins/ckeditor.html';
-                    default :
-                        return 'forms/common/fields/no-field.html';
-                }
-            }
-
-            /**
-             * Return field template for each field type in Form Viewer
-             * @param fieldType Field type
-             * @returns {*}
-             */
-            function getFormViewerTemplate(fieldType) {
-
-                switch (fieldType) {
-                    case OdsFieldType.TEXT:
-                        return 'forms/common/viewer/input.html';
-                    case OdsFieldType.NUMBER:
-                        return 'forms/common/viewer/input.html';
-                    case OdsFieldType.PASSWORD:
-                        return 'forms/common/viewer/input.html';
-                    case OdsFieldType.DATE:
-                        return 'forms/common/viewer/input.html';
-                    case OdsFieldType.TEXTAREA:
-                        return 'forms/common/viewer/input.html';
-                    case OdsFieldType.TOGGLE:
-                        return 'forms/common/viewer/toggle.html';
-                    case OdsFieldType.SELECT:
-                        return 'forms/common/viewer/select.html';
-                    case OdsFieldType.SELECT2:
-                        return 'forms/common/viewer/select.html';
-                    case OdsFieldType.MULTI_SELECT:
-                        return 'forms/common/viewer/multi-select.html';
-                    case OdsFieldType.DATETIME:
-                        return 'forms/common/viewer/datetime.html';
-                    case OdsFieldType.IF_YES:
-                        return 'forms/common/viewer/plugins/if-yes.html';
-                    case OdsFieldType.TABLE:
-                        return 'forms/common/viewer/plugins/table.html';
-                    case OdsFieldType.LABEL:
-                        return 'forms/common/fields/label-empty.html';
-                    case OdsFieldType.CHECKBOX:
-                        return 'forms/common/viewer/checkbox.html';
-                    case OdsFieldType.CHECKBOX_LIST:
-                        return 'forms/common/viewer/checkbox-list.html';
-                    case OdsFieldType.RADIO:
-                        return 'forms/common/viewer/radio-list.html';
-                    case OdsFieldType.CKEDITOR:
-                        return 'forms/common/viewer/plugins/ckeditor.html';
-                    default :
-                        return 'forms/common/viewer/no-template.html';
-                }
-            }
-
-            /**
-             * Return pattern list.
-             * @returns [null,null,null,null,null,null,null,null,null,null,null,null] list.
-             */
-            function getValidationPatterns() {
-
-                return [
-                    {
-                        value: 0,
-                        pattern: '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$',
-                        title: 'Url',
-                        group: 'url'
-                    }, {
-                        value: 1,
-                        pattern: '^([a-z][a-z0-9\\-]+(\\.|\\-*\\.))+[a-z]{2,6}$',
-                        title: 'Domain',
-                        group: 'domain'
-                    }, {
-                        value: 2,
-                        pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
-                        title: 'IPv4 Address',
-                        group: 'ip'
-                    }, {
-                        value: 3,
-                        pattern: '^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$',
-                        title: 'Email Address',
-                        group: 'email'
-                    }, {
-                        value: 4,
-                        pattern: '^-{0,1}\\d+$',
-                        title: 'Integer',
-                        group: 'numeric'
-                    }, {
-                        value: 5,
-                        pattern: '^\\d+$',
-                        title: 'Positive Integer',
-                        group: 'numeric'
-                    }, {
-                        value: 6,
-                        pattern: '^-\\d+$',
-                        title: 'Negative Integer',
-                        group: 'numeric'
-                    }, {
-                        value: 7,
-                        pattern: '^-{0,1}\\d*\\.{0,1}\\d+$',
-                        title: 'Number',
-                        group: 'numeric'
-                    }, {
-                        value: 8,
-                        pattern: '^\\d*\\.{0,1}\\d+$',
-                        title: 'Positive Number',
-                        group: 'numeric'
-                    }, {
-                        value: 9,
-                        pattern: '^-\\d*\\.{0,1}\\d+$',
-                        title: 'Negative Number',
-                        group: 'numeric'
-                    }, {
-                        value: 10,
-                        pattern: '^(19|20)[\\d]{2,2}$',
-                        title: 'Year (1920-2099)',
-                        group: 'numeric'
-                    }, {
-                        value: 11,
-                        pattern: '(?=.*\\d)(?=.*[!@#$%^&*\\-=()|?."\';:]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$',
-                        title: 'Password',
-                        group: 'password'
-                    }
-                ];
-            }
-
-            function getDateTimeFormats() {
-
-                var object = OdsDateTimeFormat;
-                var formats = [];
-                for (var property in object) {
-                    if (object.hasOwnProperty(property)) {
-                        // do stuff
-                        var format = {
-                            value: object[property],
-                            option: property
-                        };
-                        formats.push(format);
-                    }
-                }
-                return formats;
-            }
-
-            /**
-             * Create a new Section Object.
-             * @returns {{isExportable: boolean, displayProperties: boolean, allowedTypes: string[],
-             * componentType: string, name: (*|number), title: string, rows: {displayProperties: boolean,
-             * componentType: string, cssClass: string, name: (*|number), cols: {allowedTypes: string[],
-             * cssClass: string, name: (*|number), fields: Array}[]}[], hideLabel: boolean}}
-             */
-            function newSectionObject() {
-
-                return {
-                    name: generateName(OdsComponentType.SECTION),
-                    componentType: OdsComponentType.SECTION,
-                    title: 'Section',
-                    isExportable: false,
-                    displayProperties: false,
-                    hideLabel: false,
-                    allowedTypes: [
-                        OdsComponentType.ROW
-                    ],
-                    rows: [newRowObject()]
-                };
-            }
-
-            /**
-             * Create a new Row Object.
-             * @returns {{displayProperties: boolean, componentType: string, cssClass: string,
-             * name: (*|number), cols: {allowedTypes: string[], cssClass: string, name: (*|number), fields: Array}[]}}
-             */
-            function newRowObject() {
-
-                return {
-                    name: generateName(OdsComponentType.ROW),
-                    componentType: OdsComponentType.ROW,
-                    cssClass: 'row',
-                    displayProperties: false,
-                    cols: [newColumnObject(12)]
-                };
-            }
-
-            /**
-             * Create a new Column Object.
-             * @param colWidth Width of column.
-             * @returns {{allowedTypes: string[], cssClass: string, name: (*|number), fields: Array}}
-             */
-            function newColumnObject(colWidth) {
-
-                return {
-                    name: generateName(OdsComponentType.COLUMN),
-                    cssClass: ' col-xs-' + colWidth + ' col-sm-' + colWidth + ' col-md-' + colWidth + ' col-lg-' + colWidth,
-                    allowedTypes: [
-                        OdsComponentType.FIELD
-                    ],
-                    fields: []
-                };
-            }
-
-            /**
-             * Create a new base Field Object.
-             * @returns
-             */
-            function newBaseFieldObject() {
-
-                return {
-                    componentType: OdsComponentType.FIELD,
-                    name: generateName(OdsComponentType.FIELD),
-                    required: false,
-                    exportable: false,
-                    linkedTo: null
-                };
-            }
-
-            /**
-             * Create a new Field Text Object.
-             * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
-             */
-            function newFieldTextObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'TextBox',
-                    placeholder: '',
-                    type: OdsFieldType.TEXT,
-                    value: null,
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            /**
-             * Create a new Field Number Object.
-             * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
-             */
-            function newFieldNumberObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Number',
-                    placeholder: '',
-                    type: OdsFieldType.NUMBER,
-                    value: null,
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            /**
-             * Create a new Field Password Object.
-             * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
-             */
-            function newFieldPasswordObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Password',
-                    placeholder: '',
-                    type: OdsFieldType.PASSWORD,
-                    value: null,
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            /**
-             * Create a new Field Textarea Object.
-             * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
-             */
-            function newFieldTextareaObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Textarea',
-                    placeholder: '',
-                    type: OdsFieldType.TEXTAREA,
-                    rows: 3,
-                    value: null,
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            /**
-             * Create a new Field Select Object
-             * @returns {componentType: string, titleField: string, name: (*|number), options: *[],
-             * limitTo: number, label: string, placeholder: string, type: (number|string),
-             * valueField: string, value: null, required: boolean, validation: {messages: {}}} Select Object
-             */
-            function newFieldSelectObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Select',
-                    placeholder: '',
-                    type: OdsFieldType.SELECT,
-                    valueField: 'id',
-                    titleField: 'name',
-                    limitTo: 10,
-                    value: null,
-                    options: [{
-                        id: 1,
-                        name: 'Option 1'
-                    }, {
-                        id: 2,
-                        name: 'Option 2'
-                    }, {
-                        id: 3,
-                        name: 'Option 3'
-                    }],
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            /**
-             * Create a new Field Select2 Object
-             * @returns
-             */
-            function newFieldSelect2Object() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Select2',
-                    placeholder: '',
-                    type: OdsFieldType.SELECT2,
-                    multiSelect: false,
-                    valueField: 'id',
-                    titleField: 'name',
-                    limitTo: 10,
-                    value: null,
-                    options: [{
-                        id: 1,
-                        name: 'Option 1'
-                    }, {
-                        id: 2,
-                        name: 'Option 2'
-                    }, {
-                        id: 3,
-                        name: 'Option 3'
-                    }],
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            /**
-             * Create a new Field Multiselect Object
-             * @returns
-             */
-            function newFieldMultiSelectObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Multi select',
-                    placeholder: '',
-                    type: OdsFieldType.MULTI_SELECT,
-                    multiSelect: true,
-                    valueField: 'id',
-                    titleField: 'name',
-                    limitTo: 10,
-                    value: [],
-                    options: [{
-                        id: 1,
-                        name: 'Option 1'
-                    }, {
-                        id: 2,
-                        name: 'Option 2'
-                    }, {
-                        id: 3,
-                        name: 'Option 3'
-                    }],
-                    render: null,
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            /**
-             * Create a new Field Toggle Object
-             * @returns
-             */
-            function newFieldToggleObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Toggle',
-                    type: OdsFieldType.TOGGLE,
-                    ln: false,
-                    on: 'Yes',
-                    off: 'No',
-                    value: false
-                });
-            }
-
-            function newDateTimeObject() {
-
-                var today = new Date();
-                var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(),
-                    today.getDate(), 9, 0, 0));
-                return _.merge(newBaseFieldObject(), {
-                    label: 'DateTime',
-                    type: OdsFieldType.DATETIME,
-                    enableTime: false,
-                    format: OdsDateTimeFormat.ShortDateLongYear,
-                    selectedFormat: OdsDateTimeFormat.ShortDateLongYear,
-                    modelOptions: {
-                        timezone: getTimeZoneUTC()
-                    },
-                    openInEditMode: false,
-                    // utc: true,
-                    value: date,
-                    validation: {
-                        datetime: false,
-                        messages: {
-                            datetime: 'Invalid Date or Time.'
-                        }
-                    }
-                });
-            }
-
-            function newFieldLabelObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Label',
-                    cssClass: 'text-left',
-                    type: OdsFieldType.LABEL,
-                    value: 'Label'
-                });
-            }
-
-            function newFieldCheckBoxObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'CheckBox',
-                    hideLabel: true,
-                    ln: false,
-                    type: OdsFieldType.CHECKBOX,
-                    value: false
-                });
-            }
-
-            function newFieldCheckBoxListObject() {
-                return _.merge(newBaseFieldObject(), {
-                    label: 'CheckBox List',
-                    type: OdsFieldType.CHECKBOX_LIST,
-                    inline: false,
-                    options: [{
-                        id: 1,
-                        name: 'Option 1'
-                    }, {
-                        id: 2,
-                        name: 'Option 2'
-                    }, {
-                        id: 3,
-                        name: 'Option 3'
-                    }],
-                    value: {}
-                });
-            }
-
-            function newFieldRadioListObject() {
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Radiobutton List',
-                    type: OdsFieldType.RADIO,
-                    options: [{
-                        id: 1,
-                        name: 'Option 1'
-                    }, {
-                        id: 2,
-                        name: 'Option 2'
-                    }, {
-                        id: 3,
-                        name: 'Option 3'
-                    }],
-                    value: {}
-                });
-            }
-
-            function newYesNoObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'If yes:',
-                    type: OdsFieldType.IF_YES,
-                    ln: false,
-                    on: 'Yes',
-                    off: 'No',
-                    value: {
-                        toggle: false,
-                        textarea: null
-                    },
-                    placeholder: '',
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            function newTableObject() {
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'Table',
-                    type: OdsFieldType.TABLE,
-                    cssClass: 'table table-bordered',
-                    matrix: [
-                        [newItemObject(), newItemObject()]
-                    ],
-                    validation: {
-                        messages: {}
-                    }
-                });
-            }
-
-            function newItemObject() {
-
-                return {
-                    name: generateName(OdsComponentType.ITEM),
-                    fields: [],
-                    // width: '10px',
-                    allowedTypes: [OdsComponentType.FIELD]
-                };
-            }
-
-            function newCKEditorObject() {
-
-                //Default key combination. (CTRL + SPACE)
-                var CTRL = 1114112;
-
-                return _.merge(newBaseFieldObject(), {
-                    label: 'CKEditor',
-                    type: OdsFieldType.CKEDITOR,
-                    readonly: false,
-                    printView: false,
-                    options: {
-                        triggerKeyCode: CTRL + 32,
-                        prefix: defaultCKEditorPrefix(),
-                        suffix: defaultCKEditorSuffix(),
-                        suggestionsUrl: '',
-                        tokensUrl: '',
-                        locked: true,
-                        suggestions: [{
-                            id: 'suggestion1',
-                            label: 'Suggestion1'
-                        }, {
-                            id: 'suggestion2',
-                            label: 'Suggestion2'
-                        }, {
-                            id: 'suggestion3',
-                            label: 'Suggestion3'
-                        }],
-                        tokens: null
-                    },
-                    value: null
-                });
-            }
-
-            function defaultCKEditorPrefix() {
-
-                return '${';
-            }
-
-            function defaultCKEditorSuffix() {
-
-                return '}';
-            }
-
-            /**
-             * Remove row from table.
-             * @param table Table
-             * @param index Row index to remove.
-             */
-            function removeRow(table, index) {
-
-                if (table.matrix.length > 1) {
-                    dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
-                        { size: 'sm', windowClass: 'ods-dialog' }).result.then(function () {
-
-                        table.matrix.splice(index, 1);
-                    });
-                } else {
-                    dialogs.notify('Information', 'At least one row must exist.',
-                        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
-                    });
-                }
-            }
-
-            /**
-             * remove column to from table.
-             * @param table Table
-             * @param index Column index to remove.
-             */
-            function removeColumn(table, index) {
-
-                if (table.matrix[0].length > 1) {
-                    dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
-                        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
-
-                        for (var i = 0; i < table.matrix.length; i++) {
-                            table.matrix[i].splice(index, 1);
-                        }
-                    });
-                } else {
-                    dialogs.notify('Information', 'At least one column must exist.',
-                        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
-                    });
-                }
-            }
-
-            /**
-             * Clone the last row in table and add it as a new row.
-             * @param table Table
-             */
-            function cloneRow(table) {
-
-                //copy last row in table
-                var row = angular.copy(table.matrix[table.matrix.length - 1]);
-                //set new name for every field in row.
-                for (var i = 0; i < row.length; i++) {
-                    row[i].name = generateName(OdsComponentType.ITEM);
-                    for (var j = 0; j < row[i].fields.length; j++) {
-                        row[i].fields[j].name = generateName(OdsComponentType.FIELD);
-                    }
-                }
-                table.matrix.push(row);
-            }
-
-            function getTimeZoneUTC() {
-
-                return 'UTC/GMT';
-            }
-
-            function getFieldValueAsNumber(field) {
-
-                var value = 0;
-                var id;
-                switch (field.type) {
-                    case OdsFieldType.SELECT:
-                        if (field.value) {
-                            id = getSelectFieldId(field);
-                            value += Number(field.value[id]);
-                        }
-                        break;
-                    case OdsFieldType.SELECT2:
-                        if (field.value) {
-                            id = getSelectFieldId(field);
-                            value += Number(field.value[id]);
-                        }
-                        break;
-                    case OdsFieldType.MULTI_SELECT:
-                        if (field.value) {
-                            id = getSelectFieldId(field);
-                            for (var i = 0; i < field.value.length; i++) {
-                                value += Number(field.value[i][id]);
-                            }
-                        }
-                        break;
-                    case OdsFieldType.LABEL:
-                        if (field.value) {
-                            value += 0;
-                        }
-                        break;
-                    default:
-                        if (field.value) {
-                            value += Number(field.value);
-                        }
-                        break;
-                }
-
-                return value;
-            }
-
-            function getSelectFieldId(field) {
-
-                var defaultId = 'id';
-                if (field) {
-                    return field.valueField !== undefined ? field.valueField : defaultId;
-                } else {
-                    return defaultId;
-                }
-            }
-
-            function getSelectFieldTitle(field) {
-
-                var defaultName = 'name';
-                if (field) {
-                    return field.titleField !== undefined ? field.titleField : defaultName;
-                } else {
-                    return defaultName;
-                }
-            }
-
-            function getSelectFieldTitleValue(field, element) {
-
-                if (field) {
-                    if (field.render && element && element.constructor !== Array) {
-                        return field.render(element);
-                    } else {
-                        if (element && element.constructor !== Array) {
-                            return field.titleField !== undefined ? element[field.titleField] : element.name;
-                        } else {
-                            return field.placeholder;
-                        }
-                    }
-                } else {
-                    return field.placeholder;
-                }
-            }
-
-            function getSelectFieldIdValue(field, element) {
-
-                if (field) {
-                    if (element && element.constructor !== Array) {
-                        return field.valueField !== undefined ? element[field.valueField] : element.id;
-                    }
-                } else {
-                    return field.placeholder;
-                }
-            }
-
-            function copyToClipboard(text) {
-                if (window.clipboardData && window.clipboardData.setData) {
-                    // IE specific code path to prevent textarea being shown while dialog is visible.
-                    return window.clipboardData.setData('Text', text);
-
-                } else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
-                    var textarea = document.createElement('textarea');
-                    textarea.textContent = text;
-                    textarea.style.position = 'fixed';  // Prevent scrolling to bottom of page in MS Edge.
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    try {
-                        return document.execCommand('copy');  // Security exception may be thrown by some browsers.
-                    } catch (ex) {
-                        console.warn('Copy to clipboard failed.', ex);
-                        return false;
-                    } finally {
-                        document.body.removeChild(textarea);
-                    }
-                }
-            }
-
-            /**
-             * Substitute object value in a string template using pattern with prefix and suffix.
-             * @param str String to substitute.
-             * @param valuesMap Object with values.
-             * @param prefix Pattern prefix.
-             * @param suffix Pattern suffix.
-             * @returns {*} String pattern replaced with it object values.
-             */
-            function strSubtitutor(str, valuesMap, prefix, suffix) {
-
-                var strResult = '';
-
-                if (str) {
-                    strResult = str;
-
-                    for (var property in valuesMap) {
-                        if (valuesMap.hasOwnProperty(property)) {
-                            // do stuff
-                            var re = new RegExp(escapeRegExp(prefix + property + suffix), 'gi');
-                            strResult = strResult.replace(re, valuesMap[property]);
-                        }
-                    }
-                }
-
-                return strResult;
-            }
-
-            function restResource(resourceUrl) {
-
-                return $resource(resourceUrl, {}, {
-                    'query': {method: 'GET', isArray: true},
-                    'get': {
-                        method: 'GET',
-                        transformResponse: function (data) {
-                            if (data) {
-                                data = angular.fromJson(data);
-                            }
-                            return data;
-                        }
-                    }
-                });
-            }
-
-            function getClipBoard() {
-
-                return clipBoard;
-            }
-
-            function setClipBoard(cb) {
-
-                clipBoard = cb;
-                //notify if there are any listeners
-                for (var i = 0; i < callbacks.length; i++) {
-                    callbacks[i](clipBoard);
-                }
-            }
-
-            function addToClipBoard(item) {
-
-                var comp = renameComponent(item);
-                clipBoard.push(comp);
-                //notify if there are any listeners
-                for (var i = 0; i < callbacks.length; i++) {
-                    callbacks[i](clipBoard);
-                }
-            }
-
-            function onAddToClipBoard(callback) {
-
-                callbacks.push(callback);
-            }
-
-            function escapeRegExp(str) {
-
-                return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
-            }
-
-            function copyJson(json) {
-
-                // $window.prompt('Copy to clipboard: Ctrl+C, Enter', json);
-                copyToClipboard(json);
-                $window.alert('Code copied to clipboard!!!');
-            }
-
-            function renameComponent(component) {
-
-                var comp = angular.copy(component);
-
-                if (comp.componentType === OdsComponentType.FIELD) {
-                    comp.name = generateName(comp.componentType);
-                    if (comp.type === OdsFieldType.TABLE) {
-                        _.forEach(comp.matrix, function (rows) {
-                            _.forEach(rows, function (column) {
-                                column.name = generateName(column.componentType);
-                            });
-                        });
-                    }
-                    return comp;
-                } else {
-                    return uniqueCounter;
-                }
-            }
-
-            function saveFormData(schema) {
-
-                var formData = {
-                    formName: schema.name,
-                    formLabel: schema.label,
-                    formDescription: schema.description,
-                    fields: []
-                };
-
-                formData.fields.concat(getDataFromComponentCode(schema, false, null));
-                return formData;
-            }
-
-            function saveFormSchema(schema) {
-
-                return schema;
-            }
-
-            // /**
-            //  * Return all exportable elements as array.
-            //  */
-            // function getExportables(schema) {
-            //
-            //     var exportables = [];
-            //     var layout = schema.layout;
-            //     for (var i = 0; i < layout.length; i++) {
-            //         var content = layout[i];
-            //         if (content && content.exportable) {
-            //             exportables.push(content);
-            //         }
-            //     }
-            //
-            //     return exportables;
-            // }
-
-            /**
-             * Return all exportable elements embedded in a form.
-             */
-            function getExportables(schema) {
-
-                var form = newSchemaEmpty();
-                _.forEach(schema.layout, function (item) {
-                    if (item && item.exportable) {
-                        form.layout.push(item);
-                    }
-                });
-
-                return form;
-            }
-
-            /**
-             * Load a subform into the schema
-             *
-             * @return Boolean Return True if the operation is successful or False if an error occur.
-             */
-            function loadSubForm(schema, subForm, position) {
-
-                var layout = schema.layout;
-                if (Array.isArray(layout)) {
-                    if (position === OdsPosition.TOP) {
-                        layout.unshift(subForm);
-                    } else {
-                        layout.push(subForm);
-                    }
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-
-            /**
-             * Get fields data from schema by code.
-             * @param schema Form schema.
-             * @param code Code to fin in the schema.
-             * @param filter Boolean to specify if filter or not.
-             * @returns {Array}
-             */
-            function getDataFromComponentCode(schema, filter, code) {
-
-                var fields = [];
-
-                _.forEach(schema.layout, function (item) {
-                    var rows = item.rows;
-                    _.forEach(rows, function (row) {
-                        var cols = row.cols;
-                        _.forEach(cols, function (columnRow) {
-                            _.forEach(columnRow.fields, function (field) {
-                                if (field.type === OdsFieldType.TABLE) {
-                                    getDataFromTablePlugin(fields, field, filter, code);
-                                } else {
-                                    getDataFromField(fields, field, filter, code);
-                                }
-                            });
-                        });
-                    });
-                });
-
-                return fields;
-            }
-
-            function getDataFromTablePlugin(result, field, filter, code) {
-
-                //We must to repeat the process because is a table.
-                _.forEach(field.matrix, function (matrixRow) {
-                    _.forEach(matrixRow, function (matrixColumn) {
-                        if (matrixColumn.fields.length > 0) {
-                            getDataFromField(result, matrixColumn.fields[0], filter, code);
-                        }
-                    });
-                });
-            }
-
-            function getDataFromField(result, field, filter, code) {
-
-                field = {
-                    name: field.name,
-                    type: field.type,
-                    code: field.code,
-                    value: field.value
-                };
-                if (filter) {
-                    if (field.code === code) {
-                        result.push(field);
-                    }
-                } else {
-                    result.push(field);
-                }
-            }
-
-            /**
-             * Deserialize the json schema into schema object and parse
-             * the datetime field value from string into a Date valid object.
-             * @param json The json form schema.
-             * @returns {Object|Array|string|number}
-             */
-            function convertFormSchema(schema) {
-
-                if (schema) {
-                    _.forEach(schema.layout, function (item) {
-                        var rows = item.rows;
-                        _.forEach(rows, function (row) {
-                            var cols = row.cols;
-                            _.forEach(cols, function (columnRow) {
-                                _.forEach(columnRow.fields, function (field) {
-                                    if (field.type === OdsFieldType.TABLE) {
-                                        convertTablePlugin(field);
-                                    } else {
-                                        initDateTimeField(field);
-                                    }
-                                });
-                            });
-                        });
-                    });
-                }
-
-                return schema;
-            }
-
-            /**
-             * Deserialize the json schema into schema object and parse
-             * the datetime field value from string into a Date valid object.
-             * @param json The json form schema.
-             * @returns {Object|Array|string|number}
-             */
-            function convertFormSchemaFromServer(json) {
-
-                var schema = angular.fromJson(json);
-                return convertFormSchema(schema);
-            }
-
-            /**
-             * Initialize the DateTime field from text using Date parsing.
-             * @param field DateTime field.
-             */
-            function initDateTimeField(field) {
-
-                //If field is datetime we set Date object from string
-                if (field.type === OdsFieldType.DATETIME) {
-                    if (field.value !== null) {
-                        field.value = new Date(Date.parse(field.value));
-                    }
-                }
-            }
-
-            /**
-             * Util function that serialize schema matrix plugin
-             * @param field Field of type OdsFieldType.TABLE
-             */
-            function convertTablePlugin(field) {
-
-                //We must to repeat the process because is a table.
-                _.forEach(field.matrix, function (matrixRow) {
-                    _.forEach(matrixRow, function (matrixColumn) {
-                        if (matrixColumn.fields.length > 0) {
-                            initDateTimeField(matrixColumn.fields[0]);
-                        }
-                    });
-                });
-            }
-
-            /**
-             * This method make all fields in the schema read only or not.
-             * @param json
-             * @param status
-             * @return {Object|Array|string|number}
-             */
-            function setReadOnlyStatus(json, status) {
-
-                var schema = angular.fromJson(json);
-                _.forEach(schema.layout, function (item) {
-                    var rows = item.rows;
-                    _.forEach(rows, function (row) {
-                        var cols = row.cols;
-                        _.forEach(cols, function (columnRow) {
-                            _.forEach(columnRow.fields, function (field) {
-                                if (field.type === OdsFieldType.TABLE) {
-                                    setStatusToTablePlugin(field, status);
-                                } else {
-                                    setStatusToField(field, status);
-                                }
-                            });
-                        });
-                    });
-                });
-
-                return schema;
-            }
-
-            function setStatusToTablePlugin(field, status) {
-
-                //We must to repeat the process because is a table.
-                _.forEach(field.matrix, function (matrixRow) {
-                    _.forEach(matrixRow, function (matrixColumn) {
-                        if (matrixColumn.fields.length > 0) {
-                            setStatusToField(matrixColumn.fields[0], status);
-                        }
-                    });
-                });
-            }
-
-            function setStatusToField(field, status) {
-
-                field.readonly = status;
-            }
-
-            /**
-             * Inject config to CKEditor in the Schema.
-             * @param schema The Schema object.
-             * @param config The CKEditor configuration.
-             */
-            function setConfigToCKEditorComponent(schema, config) {
-
-                if (schema && schema.layout && config) {
-                    _.forEach(schema.layout, function (item) {
-                        var rows = item.rows;
-                        _.forEach(rows, function (row) {
-                            var cols = row.cols;
-                            _.forEach(cols, function (columnRow) {
-                                _.forEach(columnRow.fields, function (field) {
-                                    if (field.type === OdsFieldType.TABLE) {
-                                        setConfigToCKEditorInTablePlugin(field, config);
-                                    } else {
-                                        setConfigToCKEditorField(field, config);
-                                    }
-                                });
-                            });
-                        });
-                    });
-                }
-            }
-
-            /**
-             * Inject config to CKEditor in the Table plugin field.
-             * @param field The field object.
-             * @param config The CKEditor configuration.
-             */
-            function setConfigToCKEditorInTablePlugin(field, config) {
-                //We must to repeat the process because is a table.
-                _.forEach(field.matrix, function (matrixRow) {
-                    _.forEach(matrixRow, function (matrixColumn) {
-                        if (matrixColumn.fields.length > 0 &&
-                            matrixColumn.fields[0].type === OdsFieldType.CKEDITOR) {
-                            setConfigToCKEditorField(matrixColumn.fields[0], config);
-                        }
-                    });
-                });
-            }
-
-            /**
-             * Inject config to CKEditor into the field.
-             * @param field The field object.
-             * @param config The CKEditor configuration.
-             */
-            function setConfigToCKEditorField(field, config) {
-
-                if (config.ckeditor) {
-                    if (field.type === OdsFieldType.CKEDITOR) {
-                        field.options.prefix = config.ckeditor.prefix ?
-                            config.ckeditor.prefix : defaultCKEditorPrefix();
-                        field.options.suffix = config.ckeditor.suffix ?
-                            config.ckeditor.suffix : defaultCKEditorSuffix();
-                        if (config.ckeditor.suggestions) {
-                            field.options.suggestions = config.ckeditor.suggestions;
-                        }
-                        if (config.ckeditor.suggestionsUrl) {
-                            field.options.suggestionsUrl = config.ckeditor.suggestionsUrl;
-                        }
-                        if (config.ckeditor.tokens) {
-                            field.options.tokens = config.ckeditor.tokens;
-                        }
-                    }
-                }
-            }
-
-            /**
-             * This method clone Section.
-             * @param schema
-             * @param section
-             * @param position
-             * @param clonedCanClone
-             * @return {Object|Array|string|number}
-             */
-            function cloneSection(schema, section, clonedCanClone, position) {
-
-                var cloneSection = angular.copy(section);
-                cloneSection.name = generateName(cloneSection.componentType);
-                cloneSection.canClone = clonedCanClone;
-                cloneSection.clonedCanClone = clonedCanClone;
-                _.forEach(cloneSection.rows, function (row) {
-                    row.name = generateName(row.componentType);
-                    _.forEach(row.cols, function (columnRow) {
-                        columnRow.name = generateName(columnRow.componentType);
-                        _.forEach(columnRow.fields, function (field) {
-                            if (field.type === OdsFieldType.TABLE) {
-                                //We must to repeat the process because is a table.
-                                _.forEach(field.matrix, function (matrixRow) {
-                                    matrixRow.name = generateName(OdsComponentType.ITEM);
-                                    _.forEach(matrixRow, function (matrixColumn) {
-                                        if (matrixColumn.fields.length > 0) {
-                                            matrixColumn.fields[0].name =
-                                                generateName(matrixColumn.fields[0].componentType);
-                                        }
-                                    });
-                                });
-                            } else {
-                                field.name = generateName(field.componentType);
-                            }
-                        });
-                    });
-                });
-
-                position = position ? position : OdsPosition.DOWN;
-                if (position === OdsPosition.UP) {
-                    //We put over the new section
-                    schema.layout.unshift(cloneSection);
-                } else {
-                    //Put above the new section
-                    schema.layout.push(cloneSection);
-                }
-                return schema;
-            }
-
-            return service;
+    'use strict';
+
+    angular
+      .module('ods-lib')
+      .factory('OdsFormService', OdsFormService);
+
+    OdsFormService.$inject = ['OdsFieldType', 'OdsComponentType', 'OdsDateTimeFormat', '$window', 'dialogs',
+      '$resource', 'OdsPosition', 'EventDataFactory', 'OdsEvent'];
+
+    function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
+                            $resource, OdsPosition, EventDataFactory, OdsEvent) {
+
+      var uniqueCounter = (+new Date()) % 10000;
+      var version = '1.0';
+      var formats = {
+        JSON: 'json'
+      };
+
+      var clipBoard = [];
+      var callbacks = [];
+
+      var service = {
+
+        //Utils methods
+        newSchema: newSchema,
+        newSchemaEmpty: newSchemaEmpty,
+        initSchema: initSchema,
+        generateName: generateName,
+        onAdd: onAdd,
+        getFieldValueAsNumber: getFieldValueAsNumber,
+        copyToClipboard: copyToClipboard,
+        strSubtitutor: strSubtitutor,
+        restResource: restResource,
+        getClipBoard: getClipBoard,
+        setClipBoard: setClipBoard,
+        addToClipBoard: addToClipBoard,
+        onAddToClipBoard: onAddToClipBoard,
+        renameComponent: renameComponent,
+        importForm: importForm,
+        exportForm: exportForm,
+        importSubForm: importSubForm,
+        downloadObjectAsJson: downloadObjectAsJson,
+        loadSubForm: loadSubForm,
+        checkUpload: checkUpload,
+        getExportables: getExportables,
+
+        //Section specific
+        cloneSection: cloneSection,
+
+        //Templates management
+        getToolbarComponent: getToolbarComponent,
+        getSchemaField: getSchemaField,
+        getSchemaFieldProperties: getSchemaFieldProperties,
+        getFormFieldTemplate: getFormFieldTemplate,
+        getFormViewerTemplate: getFormViewerTemplate,
+
+        getValidationPatterns: getValidationPatterns,
+        getDateTimeFormats: getDateTimeFormats,
+        newSectionObject: newSectionObject,
+        newRowObject: newRowObject,
+        newColumnObject: newColumnObject,
+
+        //Fields creation methods
+        newFieldTextObject: newFieldTextObject,
+        newFieldNumberObject: newFieldNumberObject,
+        newFieldPasswordObject: newFieldPasswordObject,
+        newFieldTextareaObject: newFieldTextareaObject,
+        newFieldSelectObject: newFieldSelectObject,
+        newFieldSelect2Object: newFieldSelect2Object,
+        newFieldMultiSelectObject: newFieldMultiSelectObject,
+        newFieldToggleObject: newFieldToggleObject,
+        newDateTimeObject: newDateTimeObject,
+        newFieldLabelObject: newFieldLabelObject,
+        newFieldCheckBoxObject: newFieldCheckBoxObject,
+        newFieldCheckBoxListObject: newFieldCheckBoxListObject,
+        newFieldRadioListObject: newFieldRadioListObject,
+
+        //Fields plugins creation methods
+        newYesNoObject: newYesNoObject,
+        newYesNoCheckboxObject: newYesNoCheckboxObject,
+        newTableObject: newTableObject,
+        newItemObject: newItemObject,
+        newCKEditorObject: newCKEditorObject,
+
+        //Select utils methods
+        getSelectFieldId: getSelectFieldId,
+        getSelectFieldTitle: getSelectFieldTitle,
+        getSelectFieldTitleValue: getSelectFieldTitleValue,
+        getSelectFieldIdValue: getSelectFieldIdValue,
+
+        //Table field specific
+        removeRow: removeRow,
+        removeColumn: removeColumn,
+        cloneRow: cloneRow,
+
+        //CKEditor field specific
+        setConfigToCKEditorComponent: setConfigToCKEditorComponent,
+        defaultCKEditorPrefix: defaultCKEditorPrefix,
+        defaultCKEditorSuffix: defaultCKEditorSuffix,
+
+        getTimeZoneUTC: getTimeZoneUTC,
+        convertFormSchema: convertFormSchema,
+        convertFormSchemaFromServer: convertFormSchemaFromServer,
+        setReadOnlyStatus: setReadOnlyStatus,
+        copyJson: copyJson,
+        getDataFromComponentCode: getDataFromComponentCode,
+        saveFormData: saveFormData,
+        saveFormSchema: saveFormSchema
+      };
+
+      /**
+       * Create a new Schema.
+       */
+      function newSchema() {
+        return {
+          name: generateName(OdsComponentType.FORM),
+          label: 'New Form',
+          hideLabel: true,
+          description: 'New Form Description',
+          layout: [newSectionObject()],
+          allowedTypes: [OdsComponentType.SECTION]
+        };
+      }
+
+      /**
+       * Create a new Schema.
+       */
+      function newSchemaEmpty() {
+        return {
+          name: generateName(OdsComponentType.FORM),
+          label: 'New Form',
+          hideLabel: true,
+          description: 'New Form Description',
+          layout: [],
+          allowedTypes: [OdsComponentType.SECTION]
+        };
+      }
+
+      /**
+       * Import Schema.
+       */
+      function importForm(file) {
+
+        var base64result = file.substr(file.indexOf(',') + 1);
+        var decodedString = atob(base64result);
+        if (decodedString && decodedString !== '') {
+          var loadedFile = angular.fromJson(decodedString);
+          loadedFile.form = convertFormSchema(loadedFile.form);
+          return loadedFile;
+        } else {
+          console.error('Not valid JSON file!!!');
         }
+      }
+
+      /**
+       * Export Schema.
+       */
+      function exportForm(schema) {
+
+        var exportObject = {
+          format: formats.JSON,
+          version: version,
+          form: schema
+        };
+
+        var now = new Date();
+
+        downloadObjectAsJson(exportObject, schema.label + ' ' + now.getFullYear() + '-' +
+          now.getMonth() + '-' + now.getDate());
+      }
+
+      /**
+       * Download schema as JSON
+       * @param exportObj
+       * @param exportName
+       */
+      function downloadObjectAsJson(exportObj, exportName) {
+
+        var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(exportObj));
+        var downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute('href', dataStr);
+        downloadAnchorNode.setAttribute('download', exportName + '.json');
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+      }
+
+      function checkUpload() {
+
+        // Check for the various File API support.
+        if ($window.File && $window.FileReader && $window.FileList && $window.Blob) {
+          // Great success! All the File APIs are supported.
+          return true;
+        } else {
+          alert('The File APIs are not fully supported in this browser.');
+          return false;
+        }
+      }
+
+      /**
+       * This method allows to import a subform into th schema
+       * @param subForm
+       */
+      function importSubForm(subForm) {
+
+        //TODO check subform syntax.
+        EventDataFactory.setData(OdsEvent.LOAD_SUB_FORM, subForm);
+      }
+
+      /**
+       * Generate object name by type.
+       * @param type Object type.
+       * @returns
+       */
+      function generateName(type) {
+
+        uniqueCounter++;
+
+        switch (type) {
+          case OdsComponentType.FORM:
+            return 'form' + uniqueCounter;
+          case OdsComponentType.SECTION:
+            return 'section' + uniqueCounter;
+          case OdsComponentType.ROW:
+            return 'row' + uniqueCounter;
+          case OdsComponentType.COLUMN:
+            return 'column' + uniqueCounter;
+          case OdsComponentType.FIELD:
+            return 'field' + uniqueCounter;
+          case OdsComponentType.ITEM:
+            return 'item' + uniqueCounter;
+          case OdsComponentType.PLUGIN:
+            return 'plugin' + uniqueCounter;
+          default :
+            return uniqueCounter;
+        }
+      }
+
+      /**
+       * Catch onAdd event in drag and drop for setting field properties,
+       * we only set field name and datetime for now.
+       *
+       * @param item Field
+       * @param type Field type.
+       */
+      function onAdd(item, type) {
+
+        if (type === OdsComponentType.FIELD) {
+          item.name = generateName(OdsComponentType.FIELD);
+          if (item.type === OdsFieldType.DATETIME) {
+            // var today = new Date();
+            // var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate(), 0, 0, 0));
+            item.value = new Date();
+          }
+          return item;
+        }
+      }
+
+      /**
+       * @deprecated
+       * Init the schema
+       * @param schema
+       * @returns {*}
+       */
+      function initSchema(schema) {
+
+        if (schema) {
+          schema.allowedTypes = [OdsComponentType.SECTION];
+
+          for (var i = 0; i < schema.layout.length; i++) {
+            schema.layout[i].displayProperties = false;
+            schema.layout[i].allowedTypes = [OdsComponentType.ROW];
+            for (var j = 0; j < schema.layout[i].rows.length; j++) {
+              schema.layout[i].rows[j].displayProperties = false;
+              for (var k = 0; k < schema.layout[i].rows[j].cols.length; k++) {
+                schema.layout[i].rows[j].cols[k].allowedTypes = [OdsComponentType.FIELD];
+                schema.layout[i].rows[j].cols[k].displayProperties = false;
+              }
+            }
+          }
+          // this.schema = schema;
+        } else {
+          console.error('Please specify a schema!!!');
+        }
+        return schema;
+      }
+
+      /**
+       * Return a toolbar component template from type.
+       * @param component Component type.
+       * @returns {*} Component template.
+       */
+      function getToolbarComponent(component) {
+
+        switch (component.componentType) {
+          case OdsComponentType.SECTION:
+            return 'forms/toolbar/components/section.html';
+          case OdsComponentType.FIELD:
+            switch (component.type) {
+              case OdsFieldType.TEXT:
+                return 'forms/toolbar/components/input.html';
+              case OdsFieldType.NUMBER:
+                return 'forms/toolbar/components/input.html';
+              case OdsFieldType.PASSWORD:
+                return 'forms/toolbar/components/input.html';
+              case OdsFieldType.TEXTAREA:
+                return 'forms/toolbar/components/textarea.html';
+              case OdsFieldType.SELECT:
+                return 'forms/toolbar/components/select.html';
+              case OdsFieldType.SELECT2:
+                return 'forms/toolbar/components/select.html';
+              case OdsFieldType.MULTI_SELECT:
+                return 'forms/toolbar/components/multi-select.html';
+              case OdsFieldType.TOGGLE:
+                return 'forms/toolbar/components/toggle.html';
+              case OdsFieldType.DATETIME:
+                return 'forms/toolbar/components/datetime.html';
+              case OdsFieldType.IF_YES:
+                return 'forms/toolbar/plugins/if-yes.html';
+              case OdsFieldType.IF_YES_CHECKBOX:
+                return 'forms/toolbar/plugins/if-yes-checkbox.html';
+              case OdsFieldType.TABLE:
+                return 'forms/toolbar/plugins/table.html';
+              case OdsFieldType.LABEL:
+                return 'forms/toolbar/components/label.html';
+              case OdsFieldType.CHECKBOX:
+                return 'forms/toolbar/components/checkbox.html';
+              case OdsFieldType.CHECKBOX_LIST:
+                return 'forms/toolbar/components/checkbox-list.html';
+              case OdsFieldType.RADIO:
+                return 'forms/toolbar/components/radio-list.html';
+              case OdsFieldType.CKEDITOR:
+                return 'forms/toolbar/components/ckeditor.html';
+              default :
+                return 'forms/toolbar/components/no-component.html';
+            }
+          default :
+            return 'forms/toolbar/components/no-component.html';
+        }
+      }
+
+      /**
+       * Return field template for Schema View
+       * @param field Field
+       * @returns {*}
+       */
+      function getSchemaField(field) {
+
+        switch (field.type) {
+          case OdsFieldType.TEXT:
+            return 'forms/schema/components/input.html';
+          case OdsFieldType.NUMBER:
+            return 'forms/schema/components/input.html';
+          case OdsFieldType.PASSWORD:
+            return 'forms/schema/components/input.html';
+          case OdsFieldType.TEXTAREA:
+            return 'forms/schema/components/textarea/textarea.html';
+          case OdsFieldType.SELECT:
+            return 'forms/schema/components/select/select.html';
+          case OdsFieldType.SELECT2:
+            return 'forms/schema/components/select2/select2.html';
+          case OdsFieldType.MULTI_SELECT:
+            return 'forms/schema/components/multi-select/multi-select.html';
+          case OdsFieldType.TOGGLE:
+            return 'forms/schema/components/toggle/toggle.html';
+          case OdsFieldType.DATETIME:
+            return 'forms/schema/components/datetime/datetime.html';
+          case OdsFieldType.IF_YES:
+            return 'forms/schema/plugins/if-yes/if-yes.html';
+          case OdsFieldType.IF_YES_CHECKBOX:
+            return 'forms/schema/plugins/if-yes-checkbox/if-yes-checkbox.html';
+          case OdsFieldType.TABLE:
+            return 'forms/schema/plugins/table/container.html';
+          case OdsFieldType.LABEL:
+            return 'forms/schema/components/label.html';
+          case OdsFieldType.CHECKBOX:
+            return 'forms/schema/components/checkbox/checkbox.html';
+          case OdsFieldType.CHECKBOX_LIST:
+            return 'forms/schema/components/checkbox-list/checkbox-list.html';
+          case OdsFieldType.RADIO:
+            return 'forms/schema/components/radio-list/radio-list.html';
+          case OdsFieldType.CKEDITOR:
+            return 'forms/schema/plugins/ckeditor/ckeditor.html';
+          default :
+            return 'forms/schema/components/no-field.html';
+        }
+      }
+
+      /**
+       * Return field properties template for Schema View
+       * @param field Field
+       * @returns {*}
+       */
+      function getSchemaFieldProperties(field) {
+
+        switch (field.type) {
+          case OdsFieldType.TEXT:
+            return 'forms/schema/components/text/text-properties.html';
+          case OdsFieldType.NUMBER:
+            return 'forms/schema/components/number/number-properties.html';
+          case OdsFieldType.PASSWORD:
+            return 'forms/schema/components/password/password-properties.html';
+          case OdsFieldType.TEXTAREA:
+            return 'forms/schema/components/textarea/textarea-properties.html';
+          case OdsFieldType.SELECT:
+            return 'forms/schema/components/select/select-properties.html';
+          case OdsFieldType.SELECT2:
+            return 'forms/schema/components/select/select-properties.html';
+          case OdsFieldType.MULTI_SELECT:
+            return 'forms/schema/components/multi-select/multi-select-properties.html';
+          case OdsFieldType.TOGGLE:
+            return 'forms/schema/components/toggle/toggle-properties.html';
+          case OdsFieldType.DATETIME:
+            return 'forms/schema/components/datetime/datetime-properties.html';
+          case OdsFieldType.IF_YES:
+            return 'forms/schema/plugins/if-yes/if-yes-properties.html';
+          case OdsFieldType.IF_YES_CHECKBOX:
+            return 'forms/schema/plugins/if-yes-checkbox/if-yes-checkbox-properties.html';
+          case OdsFieldType.TABLE:
+            return 'forms/schema/plugins/table/table-properties.html';
+          case OdsFieldType.LABEL:
+            return 'forms/schema/components/label/label-properties.html';
+          case OdsFieldType.CHECKBOX:
+            return 'forms/schema/components/checkbox/checkbox-properties.html';
+          case OdsFieldType.CHECKBOX_LIST:
+            return 'forms/schema/components/checkbox-list/checkbox-list-properties.html';
+          case OdsFieldType.RADIO:
+            return 'forms/schema/components/radio-list/radio-list-properties.html';
+          case OdsFieldType.CKEDITOR:
+            return 'forms/schema/plugins/ckeditor/ckeditor-properties.html';
+          default :
+            return 'forms/schema/components/no-field-properties.html';
+        }
+      }
+
+      /**
+       * Return field template for each field type in Form View
+       * @param fieldType Field type
+       * @returns {*}
+       */
+      function getFormFieldTemplate(fieldType) {
+
+        switch (fieldType) {
+          case OdsFieldType.TEXT:
+            return 'forms/common/fields/input.html';
+          case OdsFieldType.NUMBER:
+            return 'forms/common/fields/input.html';
+          case OdsFieldType.PASSWORD:
+            return 'forms/common/fields/input.html';
+          case OdsFieldType.DATE:
+            return 'forms/common/fields/date.html';
+          case OdsFieldType.TEXTAREA:
+            return 'forms/common/fields/textarea.html';
+          case OdsFieldType.TOGGLE:
+            return 'forms/common/fields/toggle.html';
+          case OdsFieldType.SELECT:
+            return 'forms/common/fields/select.html';
+          case OdsFieldType.SELECT2:
+            return 'forms/common/fields/select2.html';
+          case OdsFieldType.MULTI_SELECT:
+            return 'forms/common/fields/multi-select.html';
+          case OdsFieldType.DATETIME:
+            return 'forms/common/fields/datetime.html';
+          case OdsFieldType.IF_YES:
+            return 'forms/common/fields/plugins/if-yes.html';
+          case OdsFieldType.IF_YES_CHECKBOX:
+            return 'forms/common/fields/plugins/if-yes-checkbox.html';
+          case OdsFieldType.TABLE:
+            return 'forms/common/fields/plugins/table.html';
+          case OdsFieldType.LABEL:
+            return 'forms/common/fields/label-empty.html';
+          case OdsFieldType.CHECKBOX:
+            return 'forms/common/fields/checkbox.html';
+          case OdsFieldType.CHECKBOX_LIST:
+            return 'forms/common/fields/checkbox-list.html';
+          case OdsFieldType.RADIO:
+            return 'forms/common/fields/radio-list.html';
+          case OdsFieldType.CKEDITOR:
+            return 'forms/common/fields/plugins/ckeditor.html';
+          default :
+            return 'forms/common/fields/no-field.html';
+        }
+      }
+
+      /**
+       * Return field template for each field type in Form Viewer
+       * @param fieldType Field type
+       * @returns {*}
+       */
+      function getFormViewerTemplate(fieldType) {
+
+        switch (fieldType) {
+          case OdsFieldType.TEXT:
+            return 'forms/common/viewer/input.html';
+          case OdsFieldType.NUMBER:
+            return 'forms/common/viewer/input.html';
+          case OdsFieldType.PASSWORD:
+            return 'forms/common/viewer/input.html';
+          case OdsFieldType.DATE:
+            return 'forms/common/viewer/input.html';
+          case OdsFieldType.TEXTAREA:
+            return 'forms/common/viewer/input.html';
+          case OdsFieldType.TOGGLE:
+            return 'forms/common/viewer/toggle.html';
+          case OdsFieldType.SELECT:
+            return 'forms/common/viewer/select.html';
+          case OdsFieldType.SELECT2:
+            return 'forms/common/viewer/select.html';
+          case OdsFieldType.MULTI_SELECT:
+            return 'forms/common/viewer/multi-select.html';
+          case OdsFieldType.DATETIME:
+            return 'forms/common/viewer/datetime.html';
+          case OdsFieldType.IF_YES:
+            return 'forms/common/viewer/plugins/if-yes.html';
+          case OdsFieldType.IF_YES_CHECKBOX:
+            return 'forms/common/viewer/plugins/if-yes-checkbox.html';
+          case OdsFieldType.TABLE:
+            return 'forms/common/viewer/plugins/table.html';
+          case OdsFieldType.LABEL:
+            return 'forms/common/fields/label-empty.html';
+          case OdsFieldType.CHECKBOX:
+            return 'forms/common/viewer/checkbox.html';
+          case OdsFieldType.CHECKBOX_LIST:
+            return 'forms/common/viewer/checkbox-list.html';
+          case OdsFieldType.RADIO:
+            return 'forms/common/viewer/radio-list.html';
+          case OdsFieldType.CKEDITOR:
+            return 'forms/common/viewer/plugins/ckeditor.html';
+          default :
+            return 'forms/common/viewer/no-template.html';
+        }
+      }
+
+      /**
+       * Return pattern list.
+       * @returns [null,null,null,null,null,null,null,null,null,null,null,null] list.
+       */
+      function getValidationPatterns() {
+
+        return [
+          {
+            value: 0,
+            pattern: '^(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?$',
+            title: 'Url',
+            group: 'url'
+          }, {
+            value: 1,
+            pattern: '^([a-z][a-z0-9\\-]+(\\.|\\-*\\.))+[a-z]{2,6}$',
+            title: 'Domain',
+            group: 'domain'
+          }, {
+            value: 2,
+            pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$',
+            title: 'IPv4 Address',
+            group: 'ip'
+          }, {
+            value: 3,
+            pattern: '^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$',
+            title: 'Email Address',
+            group: 'email'
+          }, {
+            value: 4,
+            pattern: '^-{0,1}\\d+$',
+            title: 'Integer',
+            group: 'numeric'
+          }, {
+            value: 5,
+            pattern: '^\\d+$',
+            title: 'Positive Integer',
+            group: 'numeric'
+          }, {
+            value: 6,
+            pattern: '^-\\d+$',
+            title: 'Negative Integer',
+            group: 'numeric'
+          }, {
+            value: 7,
+            pattern: '^-{0,1}\\d*\\.{0,1}\\d+$',
+            title: 'Number',
+            group: 'numeric'
+          }, {
+            value: 8,
+            pattern: '^\\d*\\.{0,1}\\d+$',
+            title: 'Positive Number',
+            group: 'numeric'
+          }, {
+            value: 9,
+            pattern: '^-\\d*\\.{0,1}\\d+$',
+            title: 'Negative Number',
+            group: 'numeric'
+          }, {
+            value: 10,
+            pattern: '^(19|20)[\\d]{2,2}$',
+            title: 'Year (1920-2099)',
+            group: 'numeric'
+          }, {
+            value: 11,
+            pattern: '(?=.*\\d)(?=.*[!@#$%^&*\\-=()|?."\';:]+)(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$',
+            title: 'Password',
+            group: 'password'
+          }
+        ];
+      }
+
+      function getDateTimeFormats() {
+
+        var object = OdsDateTimeFormat;
+        var formats = [];
+        for (var property in object) {
+          if (object.hasOwnProperty(property)) {
+            // do stuff
+            var format = {
+              value: object[property],
+              option: property
+            };
+            formats.push(format);
+          }
+        }
+        return formats;
+      }
+
+      /**
+       * Create a new Section Object.
+       * @returns {{isExportable: boolean, displayProperties: boolean, allowedTypes: string[],
+       * componentType: string, name: (*|number), title: string, rows: {displayProperties: boolean,
+       * componentType: string, cssClass: string, name: (*|number), cols: {allowedTypes: string[],
+       * cssClass: string, name: (*|number), fields: Array}[]}[], hideLabel: boolean}}
+       */
+      function newSectionObject() {
+
+        return {
+          name: generateName(OdsComponentType.SECTION),
+          componentType: OdsComponentType.SECTION,
+          title: 'Section',
+          isExportable: false,
+          displayProperties: false,
+          hideLabel: false,
+          allowedTypes: [
+            OdsComponentType.ROW
+          ],
+          rows: [newRowObject()]
+        };
+      }
+
+      /**
+       * Create a new Row Object.
+       * @returns {{displayProperties: boolean, componentType: string, cssClass: string,
+       * name: (*|number), cols: {allowedTypes: string[], cssClass: string, name: (*|number), fields: Array}[]}}
+       */
+      function newRowObject() {
+
+        return {
+          name: generateName(OdsComponentType.ROW),
+          componentType: OdsComponentType.ROW,
+          cssClass: 'row',
+          displayProperties: false,
+          cols: [newColumnObject(12)]
+        };
+      }
+
+      /**
+       * Create a new Column Object.
+       * @param colWidth Width of column.
+       * @returns {{allowedTypes: string[], cssClass: string, name: (*|number), fields: Array}}
+       */
+      function newColumnObject(colWidth) {
+
+        return {
+          name: generateName(OdsComponentType.COLUMN),
+          cssClass: ' col-xs-' + colWidth + ' col-sm-' + colWidth + ' col-md-' + colWidth + ' col-lg-' + colWidth,
+          allowedTypes: [
+            OdsComponentType.FIELD
+          ],
+          fields: []
+        };
+      }
+
+      /**
+       * Create a new base Field Object.
+       * @returns
+       */
+      function newBaseFieldObject() {
+
+        return {
+          componentType: OdsComponentType.FIELD,
+          name: generateName(OdsComponentType.FIELD),
+          required: false,
+          exportable: false,
+          linkedTo: null
+        };
+      }
+
+      /**
+       * Create a new Field Text Object.
+       * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
+       */
+      function newFieldTextObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'TextBox',
+          placeholder: '',
+          type: OdsFieldType.TEXT,
+          value: null,
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      /**
+       * Create a new Field Number Object.
+       * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
+       */
+      function newFieldNumberObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Number',
+          placeholder: '',
+          type: OdsFieldType.NUMBER,
+          value: null,
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      /**
+       * Create a new Field Password Object.
+       * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
+       */
+      function newFieldPasswordObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Password',
+          placeholder: '',
+          type: OdsFieldType.PASSWORD,
+          value: null,
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      /**
+       * Create a new Field Textarea Object.
+       * @returns {{componentType: string, label: string, name, placeholder: string, type: string, required: boolean, value: null}}
+       */
+      function newFieldTextareaObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Textarea',
+          placeholder: '',
+          type: OdsFieldType.TEXTAREA,
+          rows: 3,
+          value: null,
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      /**
+       * Create a new Field Select Object
+       * @returns {componentType: string, titleField: string, name: (*|number), options: *[],
+       * limitTo: number, label: string, placeholder: string, type: (number|string),
+       * valueField: string, value: null, required: boolean, validation: {messages: {}}} Select Object
+       */
+      function newFieldSelectObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Select',
+          placeholder: '',
+          type: OdsFieldType.SELECT,
+          valueField: 'id',
+          titleField: 'name',
+          limitTo: 10,
+          value: null,
+          options: [{
+            id: 1,
+            name: 'Option 1'
+          }, {
+            id: 2,
+            name: 'Option 2'
+          }, {
+            id: 3,
+            name: 'Option 3'
+          }],
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      /**
+       * Create a new Field Select2 Object
+       * @returns
+       */
+      function newFieldSelect2Object() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Select2',
+          placeholder: '',
+          type: OdsFieldType.SELECT2,
+          multiSelect: false,
+          valueField: 'id',
+          titleField: 'name',
+          limitTo: 10,
+          value: null,
+          options: [{
+            id: 1,
+            name: 'Option 1'
+          }, {
+            id: 2,
+            name: 'Option 2'
+          }, {
+            id: 3,
+            name: 'Option 3'
+          }],
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      /**
+       * Create a new Field Multiselect Object
+       * @returns
+       */
+      function newFieldMultiSelectObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Multi select',
+          placeholder: '',
+          type: OdsFieldType.MULTI_SELECT,
+          multiSelect: true,
+          valueField: 'id',
+          titleField: 'name',
+          limitTo: 10,
+          value: [],
+          options: [{
+            id: 1,
+            name: 'Option 1'
+          }, {
+            id: 2,
+            name: 'Option 2'
+          }, {
+            id: 3,
+            name: 'Option 3'
+          }],
+          render: null,
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      /**
+       * Create a new Field Toggle Object
+       * @returns
+       */
+      function newFieldToggleObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Toggle',
+          type: OdsFieldType.TOGGLE,
+          ln: false,
+          on: 'Yes',
+          off: 'No',
+          value: false
+        });
+      }
+
+      function newDateTimeObject() {
+
+        var today = new Date();
+        var date = new Date(Date.UTC(today.getFullYear(), today.getMonth(),
+          today.getDate(), 9, 0, 0));
+        return _.merge(newBaseFieldObject(), {
+          label: 'DateTime',
+          type: OdsFieldType.DATETIME,
+          enableTime: false,
+          format: OdsDateTimeFormat.ShortDateLongYear,
+          selectedFormat: OdsDateTimeFormat.ShortDateLongYear,
+          modelOptions: {
+            timezone: getTimeZoneUTC()
+          },
+          openInEditMode: false,
+          // utc: true,
+          value: date,
+          validation: {
+            datetime: false,
+            messages: {
+              datetime: 'Invalid Date or Time.'
+            }
+          }
+        });
+      }
+
+      function newFieldLabelObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Label',
+          cssClass: 'text-left',
+          type: OdsFieldType.LABEL,
+          value: 'Label'
+        });
+      }
+
+      function newFieldCheckBoxObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'CheckBox',
+          hideLabel: true,
+          ln: false,
+          type: OdsFieldType.CHECKBOX,
+          value: false
+        });
+      }
+
+      function newFieldCheckBoxListObject() {
+        return _.merge(newBaseFieldObject(), {
+          label: 'CheckBox List',
+          type: OdsFieldType.CHECKBOX_LIST,
+          inline: false,
+          options: [{
+            id: 1,
+            name: 'Option 1'
+          }, {
+            id: 2,
+            name: 'Option 2'
+          }, {
+            id: 3,
+            name: 'Option 3'
+          }],
+          value: {}
+        });
+      }
+
+      function newFieldRadioListObject() {
+        return _.merge(newBaseFieldObject(), {
+          label: 'Radiobutton List',
+          type: OdsFieldType.RADIO,
+          options: [{
+            id: 1,
+            name: 'Option 1'
+          }, {
+            id: 2,
+            name: 'Option 2'
+          }, {
+            id: 3,
+            name: 'Option 3'
+          }],
+          value: {}
+        });
+      }
+
+      function newYesNoObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'If yes:',
+          type: OdsFieldType.IF_YES,
+          ln: false,
+          on: 'Yes',
+          off: 'No',
+          value: {
+            toggle: false,
+            textarea: null
+          },
+          placeholder: '',
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      function newYesNoCheckboxObject() {
+        return _.merge(newBaseFieldObject(), {
+          label: 'If yes:',
+          type: OdsFieldType.IF_YES_CHECKBOX,
+          ln: false,
+          on: 'Yes',
+          off: 'No',
+          options: [{
+            id: 1,
+            name: 'Option 1'
+          }, {
+            id: 2,
+            name: 'Option 2'
+          }, {
+            id: 3,
+            name: 'Option 3'
+          }],
+          value: {
+            toggle: false,
+            checkbox: {}
+          },
+          placeholder: '',
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      function newTableObject() {
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'Table',
+          type: OdsFieldType.TABLE,
+          cssClass: 'table table-bordered',
+          matrix: [
+            [newItemObject(), newItemObject()]
+          ],
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      function newItemObject() {
+
+        return {
+          name: generateName(OdsComponentType.ITEM),
+          fields: [],
+          // width: '10px',
+          allowedTypes: [OdsComponentType.FIELD]
+        };
+      }
+
+      function newCKEditorObject() {
+
+        //Default key combination. (CTRL + SPACE)
+        var CTRL = 1114112;
+
+        return _.merge(newBaseFieldObject(), {
+          label: 'CKEditor',
+          type: OdsFieldType.CKEDITOR,
+          readonly: false,
+          printView: false,
+          options: {
+            triggerKeyCode: CTRL + 32,
+            prefix: defaultCKEditorPrefix(),
+            suffix: defaultCKEditorSuffix(),
+            suggestionsUrl: '',
+            tokensUrl: '',
+            locked: true,
+            suggestions: [{
+              id: 'suggestion1',
+              label: 'Suggestion1'
+            }, {
+              id: 'suggestion2',
+              label: 'Suggestion2'
+            }, {
+              id: 'suggestion3',
+              label: 'Suggestion3'
+            }],
+            tokens: null
+          },
+          value: null
+        });
+      }
+
+      function defaultCKEditorPrefix() {
+
+        return '${';
+      }
+
+      function defaultCKEditorSuffix() {
+
+        return '}';
+      }
+
+      /**
+       * Remove row from table.
+       * @param table Table
+       * @param index Row index to remove.
+       */
+      function removeRow(table, index) {
+
+        if (table.matrix.length > 1) {
+          dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
+            {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+
+            table.matrix.splice(index, 1);
+          });
+        } else {
+          dialogs.notify('Information', 'At least one row must exist.',
+            {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+          });
+        }
+      }
+
+      /**
+       * remove column to from table.
+       * @param table Table
+       * @param index Column index to remove.
+       */
+      function removeColumn(table, index) {
+
+        if (table.matrix[0].length > 1) {
+          dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
+            {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+
+            for (var i = 0; i < table.matrix.length; i++) {
+              table.matrix[i].splice(index, 1);
+            }
+          });
+        } else {
+          dialogs.notify('Information', 'At least one column must exist.',
+            {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+          });
+        }
+      }
+
+      /**
+       * Clone the last row in table and add it as a new row.
+       * @param table Table
+       */
+      function cloneRow(table) {
+
+        //copy last row in table
+        var row = angular.copy(table.matrix[table.matrix.length - 1]);
+        //set new name for every field in row.
+        for (var i = 0; i < row.length; i++) {
+          row[i].name = generateName(OdsComponentType.ITEM);
+          for (var j = 0; j < row[i].fields.length; j++) {
+            row[i].fields[j].name = generateName(OdsComponentType.FIELD);
+          }
+        }
+        table.matrix.push(row);
+      }
+
+      function getTimeZoneUTC() {
+
+        return 'UTC/GMT';
+      }
+
+      function getFieldValueAsNumber(field) {
+
+        var value = 0;
+        var id;
+        switch (field.type) {
+          case OdsFieldType.SELECT:
+            if (field.value) {
+              id = getSelectFieldId(field);
+              value += Number(field.value[id]);
+            }
+            break;
+          case OdsFieldType.SELECT2:
+            if (field.value) {
+              id = getSelectFieldId(field);
+              value += Number(field.value[id]);
+            }
+            break;
+          case OdsFieldType.MULTI_SELECT:
+            if (field.value) {
+              id = getSelectFieldId(field);
+              for (var i = 0; i < field.value.length; i++) {
+                value += Number(field.value[i][id]);
+              }
+            }
+            break;
+          case OdsFieldType.LABEL:
+            if (field.value) {
+              value += 0;
+            }
+            break;
+          default:
+            if (field.value) {
+              value += Number(field.value);
+            }
+            break;
+        }
+
+        return value;
+      }
+
+      function getSelectFieldId(field) {
+
+        var defaultId = 'id';
+        if (field) {
+          return field.valueField !== undefined ? field.valueField : defaultId;
+        } else {
+          return defaultId;
+        }
+      }
+
+      function getSelectFieldTitle(field) {
+
+        var defaultName = 'name';
+        if (field) {
+          return field.titleField !== undefined ? field.titleField : defaultName;
+        } else {
+          return defaultName;
+        }
+      }
+
+      function getSelectFieldTitleValue(field, element) {
+
+        if (field) {
+          if (field.render && element && element.constructor !== Array) {
+            return field.render(element);
+          } else {
+            if (element && element.constructor !== Array) {
+              return field.titleField !== undefined ? element[field.titleField] : element.name;
+            } else {
+              return field.placeholder;
+            }
+          }
+        } else {
+          return field.placeholder;
+        }
+      }
+
+      function getSelectFieldIdValue(field, element) {
+
+        if (field) {
+          if (element && element.constructor !== Array) {
+            return field.valueField !== undefined ? element[field.valueField] : element.id;
+          }
+        } else {
+          return field.placeholder;
+        }
+      }
+
+      function copyToClipboard(text) {
+        if (window.clipboardData && window.clipboardData.setData) {
+          // IE specific code path to prevent textarea being shown while dialog is visible.
+          return window.clipboardData.setData('Text', text);
+
+        } else if (document.queryCommandSupported && document.queryCommandSupported('copy')) {
+          var textarea = document.createElement('textarea');
+          textarea.textContent = text;
+          textarea.style.position = 'fixed';  // Prevent scrolling to bottom of page in MS Edge.
+          document.body.appendChild(textarea);
+          textarea.select();
+          try {
+            return document.execCommand('copy');  // Security exception may be thrown by some browsers.
+          } catch (ex) {
+            console.warn('Copy to clipboard failed.', ex);
+            return false;
+          } finally {
+            document.body.removeChild(textarea);
+          }
+        }
+      }
+
+      /**
+       * Substitute object value in a string template using pattern with prefix and suffix.
+       * @param str String to substitute.
+       * @param valuesMap Object with values.
+       * @param prefix Pattern prefix.
+       * @param suffix Pattern suffix.
+       * @returns {*} String pattern replaced with it object values.
+       */
+      function strSubtitutor(str, valuesMap, prefix, suffix) {
+
+        var strResult = '';
+
+        if (str) {
+          strResult = str;
+
+          for (var property in valuesMap) {
+            if (valuesMap.hasOwnProperty(property)) {
+              // do stuff
+              var re = new RegExp(escapeRegExp(prefix + property + suffix), 'gi');
+              strResult = strResult.replace(re, valuesMap[property]);
+            }
+          }
+        }
+
+        return strResult;
+      }
+
+      function restResource(resourceUrl) {
+
+        return $resource(resourceUrl, {}, {
+          'query': {method: 'GET', isArray: true},
+          'get': {
+            method: 'GET',
+            transformResponse: function (data) {
+              if (data) {
+                data = angular.fromJson(data);
+              }
+              return data;
+            }
+          }
+        });
+      }
+
+      function getClipBoard() {
+
+        return clipBoard;
+      }
+
+      function setClipBoard(cb) {
+
+        clipBoard = cb;
+        //notify if there are any listeners
+        for (var i = 0; i < callbacks.length; i++) {
+          callbacks[i](clipBoard);
+        }
+      }
+
+      function addToClipBoard(item) {
+
+        var comp = renameComponent(item);
+        clipBoard.push(comp);
+        //notify if there are any listeners
+        for (var i = 0; i < callbacks.length; i++) {
+          callbacks[i](clipBoard);
+        }
+      }
+
+      function onAddToClipBoard(callback) {
+
+        callbacks.push(callback);
+      }
+
+      function escapeRegExp(str) {
+
+        return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, '\\$1');
+      }
+
+      function copyJson(json) {
+
+        // $window.prompt('Copy to clipboard: Ctrl+C, Enter', json);
+        copyToClipboard(json);
+        $window.alert('Code copied to clipboard!!!');
+      }
+
+      function renameComponent(component) {
+
+        var comp = angular.copy(component);
+
+        if (comp.componentType === OdsComponentType.FIELD) {
+          comp.name = generateName(comp.componentType);
+          if (comp.type === OdsFieldType.TABLE) {
+            _.forEach(comp.matrix, function (rows) {
+              _.forEach(rows, function (column) {
+                column.name = generateName(column.componentType);
+              });
+            });
+          }
+          return comp;
+        } else {
+          return uniqueCounter;
+        }
+      }
+
+      function saveFormData(schema) {
+
+        var formData = {
+          formName: schema.name,
+          formLabel: schema.label,
+          formDescription: schema.description,
+          fields: []
+        };
+
+        formData.fields.concat(getDataFromComponentCode(schema, false, null));
+        return formData;
+      }
+
+      function saveFormSchema(schema) {
+
+        return schema;
+      }
+
+      // /**
+      //  * Return all exportable elements as array.
+      //  */
+      // function getExportables(schema) {
+      //
+      //     var exportables = [];
+      //     var layout = schema.layout;
+      //     for (var i = 0; i < layout.length; i++) {
+      //         var content = layout[i];
+      //         if (content && content.exportable) {
+      //             exportables.push(content);
+      //         }
+      //     }
+      //
+      //     return exportables;
+      // }
+
+      /**
+       * Return all exportable elements embedded in a form.
+       */
+      function getExportables(schema) {
+
+        var form = newSchemaEmpty();
+        _.forEach(schema.layout, function (item) {
+          if (item && item.exportable) {
+            form.layout.push(item);
+          }
+        });
+
+        return form;
+      }
+
+      /**
+       * Load a subform into the schema
+       *
+       * @return Boolean Return True if the operation is successful or False if an error occur.
+       */
+      function loadSubForm(schema, subForm, position) {
+
+        var layout = schema.layout;
+        if (Array.isArray(layout)) {
+          if (position === OdsPosition.TOP) {
+            layout.unshift(subForm);
+          } else {
+            layout.push(subForm);
+          }
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      /**
+       * Get fields data from schema by code.
+       * @param schema Form schema.
+       * @param code Code to fin in the schema.
+       * @param filter Boolean to specify if filter or not.
+       * @returns {Array}
+       */
+      function getDataFromComponentCode(schema, filter, code) {
+
+        var fields = [];
+
+        _.forEach(schema.layout, function (item) {
+          var rows = item.rows;
+          _.forEach(rows, function (row) {
+            var cols = row.cols;
+            _.forEach(cols, function (columnRow) {
+              _.forEach(columnRow.fields, function (field) {
+                if (field.type === OdsFieldType.TABLE) {
+                  getDataFromTablePlugin(fields, field, filter, code);
+                } else {
+                  getDataFromField(fields, field, filter, code);
+                }
+              });
+            });
+          });
+        });
+
+        return fields;
+      }
+
+      function getDataFromTablePlugin(result, field, filter, code) {
+
+        //We must to repeat the process because is a table.
+        _.forEach(field.matrix, function (matrixRow) {
+          _.forEach(matrixRow, function (matrixColumn) {
+            if (matrixColumn.fields.length > 0) {
+              getDataFromField(result, matrixColumn.fields[0], filter, code);
+            }
+          });
+        });
+      }
+
+      function getDataFromField(result, field, filter, code) {
+
+        field = {
+          name: field.name,
+          type: field.type,
+          code: field.code,
+          value: field.value
+        };
+        if (filter) {
+          if (field.code === code) {
+            result.push(field);
+          }
+        } else {
+          result.push(field);
+        }
+      }
+
+      /**
+       * Deserialize the json schema into schema object and parse
+       * the datetime field value from string into a Date valid object.
+       * @param json The json form schema.
+       * @returns {Object|Array|string|number}
+       */
+      function convertFormSchema(schema) {
+
+        if (schema) {
+          _.forEach(schema.layout, function (item) {
+            var rows = item.rows;
+            _.forEach(rows, function (row) {
+              var cols = row.cols;
+              _.forEach(cols, function (columnRow) {
+                _.forEach(columnRow.fields, function (field) {
+                  if (field.type === OdsFieldType.TABLE) {
+                    convertTablePlugin(field);
+                  } else {
+                    initDateTimeField(field);
+                  }
+                });
+              });
+            });
+          });
+        }
+
+        return schema;
+      }
+
+      /**
+       * Deserialize the json schema into schema object and parse
+       * the datetime field value from string into a Date valid object.
+       * @param json The json form schema.
+       * @returns {Object|Array|string|number}
+       */
+      function convertFormSchemaFromServer(json) {
+
+        var schema = angular.fromJson(json);
+        return convertFormSchema(schema);
+      }
+
+      /**
+       * Initialize the DateTime field from text using Date parsing.
+       * @param field DateTime field.
+       */
+      function initDateTimeField(field) {
+
+        //If field is datetime we set Date object from string
+        if (field.type === OdsFieldType.DATETIME) {
+          if (field.value !== null) {
+            field.value = new Date(Date.parse(field.value));
+          }
+        }
+      }
+
+      /**
+       * Util function that serialize schema matrix plugin
+       * @param field Field of type OdsFieldType.TABLE
+       */
+      function convertTablePlugin(field) {
+
+        //We must to repeat the process because is a table.
+        _.forEach(field.matrix, function (matrixRow) {
+          _.forEach(matrixRow, function (matrixColumn) {
+            if (matrixColumn.fields.length > 0) {
+              initDateTimeField(matrixColumn.fields[0]);
+            }
+          });
+        });
+      }
+
+      /**
+       * This method make all fields in the schema read only or not.
+       * @param json
+       * @param status
+       * @return {Object|Array|string|number}
+       */
+      function setReadOnlyStatus(json, status) {
+
+        var schema = angular.fromJson(json);
+        _.forEach(schema.layout, function (item) {
+          var rows = item.rows;
+          _.forEach(rows, function (row) {
+            var cols = row.cols;
+            _.forEach(cols, function (columnRow) {
+              _.forEach(columnRow.fields, function (field) {
+                if (field.type === OdsFieldType.TABLE) {
+                  setStatusToTablePlugin(field, status);
+                } else {
+                  setStatusToField(field, status);
+                }
+              });
+            });
+          });
+        });
+
+        return schema;
+      }
+
+      function setStatusToTablePlugin(field, status) {
+
+        //We must to repeat the process because is a table.
+        _.forEach(field.matrix, function (matrixRow) {
+          _.forEach(matrixRow, function (matrixColumn) {
+            if (matrixColumn.fields.length > 0) {
+              setStatusToField(matrixColumn.fields[0], status);
+            }
+          });
+        });
+      }
+
+      function setStatusToField(field, status) {
+
+        field.readonly = status;
+      }
+
+      /**
+       * Inject config to CKEditor in the Schema.
+       * @param schema The Schema object.
+       * @param config The CKEditor configuration.
+       */
+      function setConfigToCKEditorComponent(schema, config) {
+
+        if (schema && schema.layout && config) {
+          _.forEach(schema.layout, function (item) {
+            var rows = item.rows;
+            _.forEach(rows, function (row) {
+              var cols = row.cols;
+              _.forEach(cols, function (columnRow) {
+                _.forEach(columnRow.fields, function (field) {
+                  if (field.type === OdsFieldType.TABLE) {
+                    setConfigToCKEditorInTablePlugin(field, config);
+                  } else {
+                    setConfigToCKEditorField(field, config);
+                  }
+                });
+              });
+            });
+          });
+        }
+      }
+
+      /**
+       * Inject config to CKEditor in the Table plugin field.
+       * @param field The field object.
+       * @param config The CKEditor configuration.
+       */
+      function setConfigToCKEditorInTablePlugin(field, config) {
+        //We must to repeat the process because is a table.
+        _.forEach(field.matrix, function (matrixRow) {
+          _.forEach(matrixRow, function (matrixColumn) {
+            if (matrixColumn.fields.length > 0 &&
+              matrixColumn.fields[0].type === OdsFieldType.CKEDITOR) {
+              setConfigToCKEditorField(matrixColumn.fields[0], config);
+            }
+          });
+        });
+      }
+
+      /**
+       * Inject config to CKEditor into the field.
+       * @param field The field object.
+       * @param config The CKEditor configuration.
+       */
+      function setConfigToCKEditorField(field, config) {
+
+        if (config.ckeditor) {
+          if (field.type === OdsFieldType.CKEDITOR) {
+            field.options.prefix = config.ckeditor.prefix ?
+              config.ckeditor.prefix : defaultCKEditorPrefix();
+            field.options.suffix = config.ckeditor.suffix ?
+              config.ckeditor.suffix : defaultCKEditorSuffix();
+            if (config.ckeditor.suggestions) {
+              field.options.suggestions = config.ckeditor.suggestions;
+            }
+            if (config.ckeditor.suggestionsUrl) {
+              field.options.suggestionsUrl = config.ckeditor.suggestionsUrl;
+            }
+            if (config.ckeditor.tokens) {
+              field.options.tokens = config.ckeditor.tokens;
+            }
+          }
+        }
+      }
+
+      /**
+       * This method clone Section.
+       * @param schema
+       * @param section
+       * @param position
+       * @param clonedCanClone
+       * @return {Object|Array|string|number}
+       */
+      function cloneSection(schema, section, clonedCanClone, position) {
+
+        var cloneSection = angular.copy(section);
+        cloneSection.name = generateName(cloneSection.componentType);
+        cloneSection.canClone = clonedCanClone;
+        cloneSection.clonedCanClone = clonedCanClone;
+        _.forEach(cloneSection.rows, function (row) {
+          row.name = generateName(row.componentType);
+          _.forEach(row.cols, function (columnRow) {
+            columnRow.name = generateName(columnRow.componentType);
+            _.forEach(columnRow.fields, function (field) {
+              if (field.type === OdsFieldType.TABLE) {
+                //We must to repeat the process because is a table.
+                _.forEach(field.matrix, function (matrixRow) {
+                  matrixRow.name = generateName(OdsComponentType.ITEM);
+                  _.forEach(matrixRow, function (matrixColumn) {
+                    if (matrixColumn.fields.length > 0) {
+                      matrixColumn.fields[0].name =
+                        generateName(matrixColumn.fields[0].componentType);
+                    }
+                  });
+                });
+              } else {
+                field.name = generateName(field.componentType);
+              }
+            });
+          });
+        });
+
+        position = position ? position : OdsPosition.DOWN;
+        if (position === OdsPosition.UP) {
+          //We put over the new section
+          schema.layout.unshift(cloneSection);
+        } else {
+          //Put above the new section
+          schema.layout.push(cloneSection);
+        }
+        return schema;
+      }
+
+      return service;
     }
+  }
 
 )
 ();
@@ -5939,6 +5985,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
                 allowDelete: false,
                 components: [
                     OdsFormService.newYesNoObject(),
+                    OdsFormService.newYesNoCheckboxObject(),
                     OdsFormService.newTableObject(),
                     OdsFormService.newFieldLabelObject(),
                     OdsFormService.newCKEditorObject()
@@ -6140,17 +6187,16 @@ function ViewerDirective(OdsFormService, uibDateParser) {
             }
         }
 
-        function getFieldChecklistFromValues(field) {
+        function getFieldChecklistFromValues(field, value) {
 
             var result = [];
-            if (field.value) {
-                for (var i = 0; i < field.options.length; i++) {
-                    var id = field.value[i + 1];
+            if (value) {
+                field.options.forEach(function (option, i) {
+                    var id = value[i + 1];
                     if (id) {
-                        var value = field.options[i].name;
-                        result.push(value);
+                        result.push(field.options[i].name);
                     }
-                }
+                  });
             }
 
             if (result.length > 0) {

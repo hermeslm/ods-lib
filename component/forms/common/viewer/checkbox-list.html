@@ -1,5 +1,5 @@
 <div>
-    <div class="" ng-repeat="option in getFieldChecklistFromValues(field)"
+    <div class="" ng-repeat="option in getFieldChecklistFromValues(field, field.value)"
          ng-class="{'checkbox-inline' : field.inline, 'checkbox' : !field.inline}">
         <i class="fa fa-check-square-o"></i>
         <span class="form-check-label" ng-bind-html="option"></span>
