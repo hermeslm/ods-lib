@@ -107,7 +107,8 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
                     OdsFormService.newYesNoCheckboxObject(),
                     OdsFormService.newTableObject(),
                     OdsFormService.newFieldLabelObject(),
-                    OdsFormService.newCKEditorObject()
+                    OdsFormService.newCKEditorObject(),
+                    OdsFormService.newOptionsTextAreaObject()
                 ]
             }, {
                 id: 6,
