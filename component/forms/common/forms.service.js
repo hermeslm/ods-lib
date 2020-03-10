@@ -82,6 +82,7 @@
         //Fields plugins creation methods
         newYesNoObject: newYesNoObject,
         newYesNoCheckboxObject: newYesNoCheckboxObject,
+        newOptionsTextAreaObject: newOptionsTextAreaObject,
         newTableObject: newTableObject,
         newItemObject: newItemObject,
         newCKEditorObject: newCKEditorObject,
@@ -334,6 +335,8 @@
                 return 'forms/toolbar/components/radio-list.html';
               case OdsFieldType.CKEDITOR:
                 return 'forms/toolbar/components/ckeditor.html';
+              case OdsFieldType.OPTIONS_TEXTAREA:
+                return 'forms/toolbar/plugins/options-textarea.html';
               default :
                 return 'forms/toolbar/components/no-component.html';
             }
@@ -384,6 +387,8 @@
             return 'forms/schema/components/radio-list/radio-list.html';
           case OdsFieldType.CKEDITOR:
             return 'forms/schema/plugins/ckeditor/ckeditor.html';
+          case OdsFieldType.OPTIONS_TEXTAREA:
+            return 'forms/schema/plugins/options-textarea/options-textarea.html';
           default :
             return 'forms/schema/components/no-field.html';
         }
@@ -431,6 +436,8 @@
             return 'forms/schema/components/radio-list/radio-list-properties.html';
           case OdsFieldType.CKEDITOR:
             return 'forms/schema/plugins/ckeditor/ckeditor-properties.html';
+          case OdsFieldType.OPTIONS_TEXTAREA:
+            return 'forms/schema/plugins/options-textarea/options-textarea-properties.html';
           default :
             return 'forms/schema/components/no-field-properties.html';
         }
@@ -480,6 +487,8 @@
             return 'forms/common/fields/radio-list.html';
           case OdsFieldType.CKEDITOR:
             return 'forms/common/fields/plugins/ckeditor.html';
+          case OdsFieldType.OPTIONS_TEXTAREA:
+            return 'forms/common/fields/plugins/options-textarea.html';
           default :
             return 'forms/common/fields/no-field.html';
         }
@@ -529,6 +538,8 @@
             return 'forms/common/viewer/radio-list.html';
           case OdsFieldType.CKEDITOR:
             return 'forms/common/viewer/plugins/ckeditor.html';
+          case OdsFieldType.OPTIONS_TEXTAREA:
+            return 'forms/common/viewer/plugins/options-textarea.html';
           default :
             return 'forms/common/viewer/no-template.html';
         }
@@ -978,7 +989,7 @@
 
       function newYesNoCheckboxObject() {
         return _.merge(newBaseFieldObject(), {
-          label: 'If yes:',
+          label: 'If yes options:',
           type: OdsFieldType.IF_YES_CHECKBOX,
           ln: false,
           on: 'Yes',
@@ -996,6 +1007,31 @@
           value: {
             toggle: false,
             checkbox: {}
+          },
+          placeholder: '',
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      function newOptionsTextAreaObject() {
+        return _.merge(newBaseFieldObject(), {
+          label: 'Options Textarea:',
+          type: OdsFieldType.OPTIONS_TEXTAREA,
+          options: [{
+            id: 1,
+            name: 'Option 1'
+          }, {
+            id: 2,
+            name: 'Option 2'
+          }, {
+            id: 3,
+            name: 'Option 3'
+          }],
+          value: {
+            checkbox: {},
+            textarea: ''
           },
           placeholder: '',
           validation: {

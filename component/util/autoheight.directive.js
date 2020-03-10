@@ -3,6 +3,8 @@
 // autoheight v0.0.1
 //
 (function (window, document, angular) {
+
+    'use strict';
     /* jshint eqnull:true */
     /* jshint -W041 */
 

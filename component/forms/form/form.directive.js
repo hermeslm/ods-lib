@@ -85,6 +85,9 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
         //CKEditor specific
         $scope.valueSubtitutor = valueSubtitutor;
 
+        //Options-textarea specific
+        $scope.onOptionChange = onOptionChange;
+
         /**
          * Return an unique name to avoid fields name collisions.
          * @returns {boolean}
@@ -292,6 +295,12 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
                     field.options.prefix, field.options.suffix);
             } else {
                 return field.value;
+            }
+        }
+
+        function onOptionChange(field, source, value) {
+            if(source) {
+                field.value.textarea += value;
             }
         }
 
