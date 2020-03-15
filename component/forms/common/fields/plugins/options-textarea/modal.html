@@ -1,0 +1,58 @@
+<script type="text/ng-template" id="options-modal.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title">{{ field.modal.title }}</h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form>
+            <div ng-repeat="group in field.groups">
+                <div ng-if="$index % 3 === 0"
+                     ng-init="groups = field.groups.slice($index, $index + 3)">
+                    <div class="row">
+                        <div class="col-lg-4" ng-repeat="group in groups">
+                            <uib-accordion>
+                                <div uib-accordion-group class="panel-default" is-open="group.isOpen">
+                                    <uib-accordion-heading>
+                                        {{ group.label }}
+                                        <i class="pull-right glyphicon"
+                                           ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></i>
+                                    </uib-accordion-heading>
+                                    <div ng-class="field.inline === true ? 'checkbox-inline' : 'checkbox'"
+                                         ng-repeat="option in group.options">
+                                        <label>
+                                            <input type="checkbox" value="{{option.id}}"
+                                                   ng-model="group.optionValue[option.id]"/>
+                                            {{option.name}}
+                                        </label>
+                                    </div>
+                                </div>
+                            </uib-accordion>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Free text</label>
+                <textarea autoheight class="form-control" ods-dynamic-name="getUniqueName(field)"
+                          id="{{getUniqueName(field)}}" placeholder="{{field.modal.placeholder}}"
+                          title="{{field.modal.tooltip}}" ng-model="field.modal.value" type="textarea"
+                          ng-model-options="{ updateOn: 'blur' }" rows="3" data-resize="disabled">
+                </textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <div class="row">
+            <div class="col-sm-6 text-left">
+                <button class="btn btn-danger left" type="button" ng-click="clear(field)">Clear Data</button>
+            </div>
+            <div class="col-sm-6 text-right">
+                <button class="btn btn-primary" type="button" ng-click="save(field)">Save</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</script>
+<br>
+<button type="button" class="btn btn-primary" ng-click="openModal(field, 'lg')">Open</button>
+<br>
+<br>

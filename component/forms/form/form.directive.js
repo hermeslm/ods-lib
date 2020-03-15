@@ -7,9 +7,9 @@ angular
     .module('ods-lib')
     .directive('odsForm', FormDirective);
 
-FormDirective.$inject = ['OdsFormService', '$timeout', 'dialogs'];
+FormDirective.$inject = ['OdsFormService', '$timeout', 'dialogs', '$uibModal'];
 
-function FormDirective(OdsFormService, $timeout, dialogs) {
+function FormDirective(OdsFormService, $timeout, dialogs, $uibModal) {
 
     var directive = {
         restrict: 'E',
@@ -86,7 +86,7 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
         $scope.valueSubtitutor = valueSubtitutor;
 
         //Options-textarea specific
-        $scope.onOptionChange = onOptionChange;
+        $scope.openModal = openModal;
 
         /**
          * Return an unique name to avoid fields name collisions.
@@ -298,11 +298,17 @@ function FormDirective(OdsFormService, $timeout, dialogs) {
             }
         }
 
-        function onOptionChange(field, source, value) {
-            if(source) {
-                field.value.textarea += value;
-            }
+        function openModal(field, size) {
+            $uibModal.open({
+                animation: true,
+                templateUrl: 'options-modal.html',
+                controller: 'OdsOptionsModalController',
+                controllerAs: 'vm',
+                size: size,
+                resolve: {
+                    field: field
+                }
+            });
         }
-
     }
 }
