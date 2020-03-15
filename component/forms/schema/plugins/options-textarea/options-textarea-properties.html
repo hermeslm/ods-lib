@@ -8,14 +8,24 @@
             </div>
         </form>
     </uib-tab>
-    <uib-tab index="1" heading="Options">
-        <form name="fieldValidationForm" class="form-horizontal">
+    <uib-tab index="1" heading="Modal">
+        <form name="fieldPropertiesForm" class="form-horizontal">
             <div class="box-body padding-top">
-                <ods-field-checkboxlist-options field="field"></ods-field-checkboxlist-options>
+                <div ng-include="'forms/schema/plugins/options-textarea/modal/title-property.html'"></div>
+                <div ng-include="'forms/schema/plugins/options-textarea/modal/placeholder-property.html'"></div>
+                <div ng-include="'forms/schema/plugins/options-textarea/modal/tooltip-property.html'"></div>
+                <div ng-include="'forms/schema/plugins/options-textarea/modal/value-property.html'"></div>
             </div>
         </form>
     </uib-tab>
-    <uib-tab index="2" heading="Debug" ng-show="debugMode">
+    <uib-tab index="2" heading="Options Groups">
+        <form name="fieldValidationForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <ods-accordion-properties field="field"></ods-accordion-properties>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="3" heading="Debug" ng-show="debugMode">
         <div ng-include="'forms/schema/components/base-properties/model-properties.html'"></div>
     </uib-tab>
 </uib-tabset>

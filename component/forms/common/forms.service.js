@@ -12,7 +12,7 @@
       '$resource', 'OdsPosition', 'EventDataFactory', 'OdsEvent'];
 
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-                            $resource, OdsPosition, EventDataFactory, OdsEvent) {
+      $resource, OdsPosition, EventDataFactory, OdsEvent) {
 
       var uniqueCounter = (+new Date()) % 10000;
       var version = '1.0';
@@ -102,6 +102,9 @@
         setConfigToCKEditorComponent: setConfigToCKEditorComponent,
         defaultCKEditorPrefix: defaultCKEditorPrefix,
         defaultCKEditorSuffix: defaultCKEditorSuffix,
+
+        //Options-textarea
+        createOptionsGroup: createOptionsGroup,
 
         getTimeZoneUTC: getTimeZoneUTC,
         convertFormSchema: convertFormSchema,
@@ -488,7 +491,7 @@
           case OdsFieldType.CKEDITOR:
             return 'forms/common/fields/plugins/ckeditor.html';
           case OdsFieldType.OPTIONS_TEXTAREA:
-            return 'forms/common/fields/plugins/options-textarea.html';
+            return 'forms/common/fields/plugins/options-textarea/options-textarea.html';
           default :
             return 'forms/common/fields/no-field.html';
         }
@@ -1019,25 +1022,40 @@
         return _.merge(newBaseFieldObject(), {
           label: 'Options Textarea:',
           type: OdsFieldType.OPTIONS_TEXTAREA,
-          options: [{
-            id: 1,
-            name: 'Option 1'
-          }, {
-            id: 2,
-            name: 'Option 2'
-          }, {
-            id: 3,
-            name: 'Option 3'
-          }],
-          value: {
-            checkbox: {},
-            textarea: ''
+          modal: {
+            title: 'Modal Title',
+            placeholder: '',
+            tooltip: '',
+            value: ''
           },
+          groups: [
+            createOptionsGroup()
+          ],
+          value: '',
           placeholder: '',
           validation: {
             messages: {}
           }
         });
+      }
+
+      function createOptionsGroup() {
+        const options = [];
+        for (var i = 1; i <= 3; i++) {
+          options.push({
+            id: 'Option ' + i,
+            name: 'Option ' + i
+          });
+        }
+        return {
+          name: generateName(),
+          label: 'Group label',
+          groupValue: 'Group value',
+          isOpen: false,
+          inline: false,
+          options: options,
+          optionValue: null
+        };
       }
 
       function newTableObject() {
@@ -1117,14 +1135,24 @@
 
         if (table.matrix.length > 1) {
           dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
-            {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+            {
+              size: 'sm',
+              windowClass: 'ods-dialog'
+            })
+            .result
+            .then(function () {
 
-            table.matrix.splice(index, 1);
-          });
+              table.matrix.splice(index, 1);
+            });
         } else {
           dialogs.notify('Information', 'At least one row must exist.',
-            {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
-          });
+            {
+              size: 'sm',
+              windowClass: 'ods-dialog'
+            })
+            .result
+            .then(function () {
+            });
         }
       }
 
@@ -1137,16 +1165,26 @@
 
         if (table.matrix[0].length > 1) {
           dialogs.confirm('Confirm!!!', 'Do you want to remove this column?',
-            {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+            {
+              size: 'sm',
+              windowClass: 'ods-dialog'
+            })
+            .result
+            .then(function () {
 
-            for (var i = 0; i < table.matrix.length; i++) {
-              table.matrix[i].splice(index, 1);
-            }
-          });
+              for (var i = 0; i < table.matrix.length; i++) {
+                table.matrix[i].splice(index, 1);
+              }
+            });
         } else {
           dialogs.notify('Information', 'At least one column must exist.',
-            {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
-          });
+            {
+              size: 'sm',
+              windowClass: 'ods-dialog'
+            })
+            .result
+            .then(function () {
+            });
         }
       }
 
@@ -1313,7 +1351,10 @@
       function restResource(resourceUrl) {
 
         return $resource(resourceUrl, {}, {
-          'query': {method: 'GET', isArray: true},
+          'query': {
+            method: 'GET',
+            isArray: true
+          },
           'get': {
             method: 'GET',
             transformResponse: function (data) {

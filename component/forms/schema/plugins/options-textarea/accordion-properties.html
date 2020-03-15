@@ -1,0 +1,38 @@
+<div class="row">
+    <div class="col-lg-12 margin-bottom">
+        <button type="button" class="btn btn-success" ng-click="addGroup(field)">Add Group</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <uib-accordion>
+            <div uib-accordion-group class="panel-default" ng-repeat="group in field.groups" is-open="group.isOpen">
+                <uib-accordion-heading>
+                    {{ group.label }}
+                    <em class="pull-right glyphicon"
+                        ng-class="{'glyphicon-chevron-down': status.open, 'glyphicon-chevron-right': !status.open}"></em>
+                </uib-accordion-heading>
+                <div class="form-group margin-bottom">
+                    <div class="col-sm-12 text-right">
+                        <button type="button" class="btn btn-danger" ng-click="removeGroup($index)">Remove Group</button>
+                    </div>
+                </div>
+                <div class="form-group margin-bottom">
+                    <label for="label-{{group.name}}" class="col-sm-2 control-label">Label:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="label-{{group.name}}" name="label-{{group.name}}"
+                               placeholder="Group Label..." ng-model="group.label" ng-required="false">
+                    </div>
+                </div>
+                <div class="form-group margin-bottom">
+                    <label for="value-{{group.name}}" class="col-sm-2 control-label">Value:</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="value-{{group.name}}" name="value-{{group.name}}"
+                               placeholder="Group Value..." ng-model="group.groupValue" ng-required="false">
+                    </div>
+                </div>
+                <ods-field-checkboxlist-options field="group"></ods-field-checkboxlist-options>
+            </div>
+        </uib-accordion>
+    </div>
+</div>
