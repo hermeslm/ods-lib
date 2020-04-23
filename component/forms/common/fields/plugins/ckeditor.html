@@ -3,6 +3,6 @@
 </div>
 <div ng-if="!field.printView" class="position-relative">
 <textarea id="{{getUniqueName(field)}}" name="{{getUniqueName(field)}}" placeholder="{{field.placeholder}}"
-          ng-model="field.value" ng-model-options="{ updateOn: 'blur' }" title="{{field.tooltip}}"
+          ng-model="field.value" ng-model-options="{ debounce: 1000 }" title="{{field.tooltip}}"
           options="field.options" ods-ckeditor ng-disabled="field.readonly"></textarea>
 </div>

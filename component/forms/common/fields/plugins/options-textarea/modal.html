@@ -35,7 +35,7 @@
                 <textarea autoheight class="form-control" ods-dynamic-name="getUniqueName(field)"
                           id="{{getUniqueName(field)}}" placeholder="{{field.modal.placeholder}}"
                           title="{{field.modal.tooltip}}" ng-model="field.modal.value" type="textarea"
-                          ng-model-options="{ updateOn: 'blur' }" rows="3" data-resize="disabled">
+                          ng-model-options="{ debounce: 1000 }" rows="3" data-resize="disabled">
                 </textarea>
             </div>
         </form>
