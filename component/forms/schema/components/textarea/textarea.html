@@ -1,6 +1,6 @@
 <div ng-include="'forms/schema/components/label.html'"></div>
 <textarea class="form-control" name="{{getUniqueName(field)}}" id="{{getUniqueName(field)}}"
           ng-required="{{field.required}}" title="{{field.tooltip}}" rows="{{field.rows}}"
-          placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ updateOn: 'blur' }"
+          placeholder="{{field.placeholder}}" ng-model="field.value" ng-model-options="{ debounce: 1000 }"
           data-resize="disabled" ng-readonly="field.readonly">
 </textarea>

@@ -32,9 +32,13 @@
     function concatOptions(optionValue) {
       var result = '';
       Object.entries(optionValue)
-        .forEach(function (entry) {
+        .forEach(function (entry, index) {
           if(entry[1]){
-            result += COMMA_SEPARATOR + entry[0]
+            if(index === 0) {
+              result += ' ' + entry[0]
+            } else {
+              result += COMMA_SEPARATOR + entry[0]
+            }
           }
         });
       return result;
