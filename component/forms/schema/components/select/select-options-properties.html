@@ -24,7 +24,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-form="fieldOptionForm" ng-repeat="option in options" ng-class="{ 'has-error': fieldOptionForm.$invalid }">
+        <tr ng-form="fieldOptionForm" ng-repeat="option in field.options" ng-class="{ 'has-error': fieldOptionForm.$invalid }">
             <td>
                 <input type="radio" name="{{field.name}}Selected[]" ng-value="field.options[$index]"
                        ng-model="field.value"/>
@@ -35,6 +35,9 @@
             </td>
             <td>
                 <input type="text" ng-model="option.name" class="form-control" ng-required="true"/>
+            </td>
+            <td>
+                <input color-picker color-picker-model="option.color" color-picker-position="bottom" class="form-control" ng-required="true"/>
             </td>
             <td>
                 <button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeOption($index)"

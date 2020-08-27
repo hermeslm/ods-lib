@@ -794,13 +794,16 @@
           value: null,
           options: [{
             id: 1,
-            name: 'Option 1'
+            name: 'Option 1',
+            color: '#FFFFFF'
           }, {
             id: 2,
-            name: 'Option 2'
+            name: 'Option 2',
+            color: '#FFFFFF'
           }, {
             id: 3,
-            name: 'Option 3'
+            name: 'Option 3',
+            color: '#FFFFFF'
           }],
           validation: {
             messages: {}
