@@ -1,7 +1,7 @@
 {
   "name": "ods-lib",
   "description": "AngularJS tools Lib developed by One Development Solution CORP.",
-  "version": "3.6.9",
+  "version": "3.7.0",
   "homepage": "https://github.com/hermeslm/ods-lib",
   "license": "MIT",
   "private": false,
@@ -35,7 +35,8 @@
     "angular-pdfjs-viewer": "https://github.com/hermeslm/angular-pdfjs-viewer.git#master",
     "angular-ui-mask": "1.8.7",
     "lodash": "4.17.15",
-    "json-formatter": "^0.7.0"
+    "json-formatter": "^0.7.0",
+    "angular-colorpicker-directive": "^1.2.2"
   },
   "overrides": {
     "angular-jquery": {

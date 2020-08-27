@@ -23,7 +23,8 @@ angular
     'ngFileUpload',
     'pdfjsViewer',
     'ui.mask',
-    'jsonFormatter'
+    'jsonFormatter',
+    'colorpicker'
   ])
   .config(configFunction)
   .value('version', '3.6.5')

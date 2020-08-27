@@ -24,48 +24,20 @@ function FieldSelectOptionsDirective(OdsFormService) {
 
     function linkFunc($scope) {
 
-        $scope.options = initOptions();
         $scope.addOption = addOption;
         $scope.removeOption = removeOption;
 
-        function initOptions() {
-
-            var options = [];
-            for (var i = 0; i < $scope.field.options.length; i++) {
-                var option = {
-                    id: OdsFormService.getSelectFieldIdValue($scope.field, $scope.field.options[i]),
-                    name: OdsFormService.getSelectFieldTitleValue($scope.field, $scope.field.options[i])
-                };
-                options.push(option);
-            }
-            return options;
-        }
-
         function addOption() {
-
             var option = {
                 id: '',
-                name: ''
+                name: '',
+                color: '#FFF'
             };
-
-            $scope.options.push(option);
+            $scope.field.options.push(option);
         }
 
         function removeOption(index) {
-
-            $scope.options.splice(index, 1);
+            $scope.field.options.splice(index, 1);
         }
-
-        $scope.$watch('options', function (model) {
-
-            var options = [];
-            for (var i = 0; i < model.length; i++) {
-                var option = {};
-                option[OdsFormService.getSelectFieldId($scope.field)] = model[i].id;
-                option[OdsFormService.getSelectFieldTitle($scope.field)] = model[i].name;
-                options.push(option);
-            }
-            $scope.field.options = options;
-        }, true);
     }
 }
