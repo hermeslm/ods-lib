@@ -1,7 +1,7 @@
 {
   "name": "ods-lib",
   "description": "AngularJS tools Lib developed by One Development Solution CORP.",
-  "version": "3.7.0",
+  "version": "3.7.1",
   "homepage": "https://github.com/hermeslm/ods-lib",
   "license": "MIT",
   "private": false,
@@ -62,6 +62,11 @@
       "main": [
         "dist/css/bootstrap.css"
       ]
+    },
+    "angular-colorpicker-directive": {
+      "dependencies": {
+        "angular": "1.5.8"
+      }
     }
   },
   "resolutions": {
