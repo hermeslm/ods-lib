@@ -153,7 +153,7 @@
         var decodedString = atob(base64result);
         if (decodedString && decodedString !== '') {
           var loadedFile = angular.fromJson(decodedString);
-          loadedFile.form = convertFormSchema(loadedFile.form);
+          loadedFile.form = convertFormSchema(loadedFile);
           return loadedFile;
         } else {
           console.error('Not valid JSON file!!!');
@@ -1204,6 +1204,8 @@
           row[i].name = generateName(OdsComponentType.ITEM);
           for (var j = 0; j < row[i].fields.length; j++) {
             row[i].fields[j].name = generateName(OdsComponentType.FIELD);
+            //We clean the field linked value.
+            row[i].fields[j].linkedTo = '';
           }
         }
         table.matrix.push(row);
