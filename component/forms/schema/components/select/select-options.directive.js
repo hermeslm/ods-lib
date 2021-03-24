@@ -29,6 +29,7 @@ function FieldSelectOptionsDirective(OdsFormService) {
 
         function addOption() {
             var option = {
+                value: $scope.field.options.length + 1,
                 id: '',
                 name: '',
                 color: '#FFF'
