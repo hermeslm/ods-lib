@@ -153,7 +153,7 @@
         var decodedString = atob(base64result);
         if (decodedString && decodedString !== '') {
           var loadedFile = angular.fromJson(decodedString);
-          loadedFile.form = convertFormSchema(loadedFile);
+          loadedFile.form = convertFormSchema(loadedFile.form);
           return loadedFile;
         } else {
           console.error('Not valid JSON file!!!');
@@ -793,14 +793,17 @@
           limitTo: 10,
           value: null,
           options: [{
+            value: 1,
             id: 1,
             name: 'Option 1',
             color: '#FFFFFF'
           }, {
+            value: 2,
             id: 2,
             name: 'Option 2',
             color: '#FFFFFF'
           }, {
+            value: 3,
             id: 3,
             name: 'Option 3',
             color: '#FFFFFF'
