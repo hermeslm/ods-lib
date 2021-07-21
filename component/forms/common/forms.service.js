@@ -786,7 +786,7 @@
 
         return _.merge(newBaseFieldObject(), {
           label: 'Select',
-          placeholder: '',
+          placeholder: '...Select an option',
           type: OdsFieldType.SELECT,
           valueField: 'id',
           titleField: 'name',

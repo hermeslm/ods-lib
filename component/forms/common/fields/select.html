@@ -2,7 +2,7 @@
         ng-model="field.value" title="{{field.tooltip}}" ng-required="getRequired(field)" ng-disabled="field.readonly"
         ng-style="{'background-color': field.value.color ? field.value.color : '#FFF'}"
         ng-options="element as element.name for element in field.options | limitTo: field.limitTo track by element.value ? element.value : element.id">
-    <option value="" disabled hidden>{{field.placeholder}}</option>
+    <option value="">{{field.placeholder}}</option>
     <!--    <option ng-repeat="option in field.options | limitTo: field.limitTo track by option.id"-->
     <!--            ng-selected="field.value == option">{{option.name}}</option>-->
 </select>
