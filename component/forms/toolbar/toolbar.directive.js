@@ -105,6 +105,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
                 components: [
                     OdsFormService.newYesNoObject(),
                     OdsFormService.newYesNoCheckboxObject(),
+                    OdsFormService.newYesNoRadioObject(),
                     OdsFormService.newTableObject(),
                     OdsFormService.newFieldLabelObject(),
                     OdsFormService.newCKEditorObject(),
