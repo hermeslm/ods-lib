@@ -33,6 +33,7 @@ function FieldRadioOptionsDirective(OdsFormService) {
             var options = [];
             for (var i = 0; i < $scope.field.options.length; i++) {
                 var option = {
+                    value: $scope.field.options[i].value,
                     id: OdsFormService.getSelectFieldIdValue($scope.field, $scope.field.options[i]),
                     name: OdsFormService.getSelectFieldTitleValue($scope.field, $scope.field.options[i])
                 };
@@ -44,6 +45,7 @@ function FieldRadioOptionsDirective(OdsFormService) {
         function addOption() {
 
             var option = {
+                value: $scope.options.length + 1,
                 id: '',
                 name: ''
             };
@@ -61,6 +63,7 @@ function FieldRadioOptionsDirective(OdsFormService) {
             var options = [];
             for (var i = 0; i < model.length; i++) {
                 var option = {};
+                option.value = model[i].value;
                 option[OdsFormService.getSelectFieldId($scope.field)] = model[i].id;
                 option[OdsFormService.getSelectFieldTitle($scope.field)] = model[i].name;
                 options.push(option);
