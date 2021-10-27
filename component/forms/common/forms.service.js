@@ -82,6 +82,7 @@
         //Fields plugins creation methods
         newYesNoObject: newYesNoObject,
         newYesNoCheckboxObject: newYesNoCheckboxObject,
+        newYesNoRadioObject: newYesNoRadioObject,
         newOptionsTextAreaObject: newOptionsTextAreaObject,
         newTableObject: newTableObject,
         newItemObject: newItemObject,
@@ -326,6 +327,8 @@
                 return 'forms/toolbar/plugins/if-yes.html';
               case OdsFieldType.IF_YES_CHECKBOX:
                 return 'forms/toolbar/plugins/if-yes-checkbox.html';
+              case OdsFieldType.IF_YES_RADIO:
+                return 'forms/toolbar/plugins/if-yes-radio.html';
               case OdsFieldType.TABLE:
                 return 'forms/toolbar/plugins/table.html';
               case OdsFieldType.LABEL:
@@ -378,6 +381,8 @@
             return 'forms/schema/plugins/if-yes/if-yes.html';
           case OdsFieldType.IF_YES_CHECKBOX:
             return 'forms/schema/plugins/if-yes-checkbox/if-yes-checkbox.html';
+          case OdsFieldType.IF_YES_RADIO:
+            return 'forms/schema/plugins/if-yes-radio/if-yes-radio.html';
           case OdsFieldType.TABLE:
             return 'forms/schema/plugins/table/container.html';
           case OdsFieldType.LABEL:
@@ -427,6 +432,8 @@
             return 'forms/schema/plugins/if-yes/if-yes-properties.html';
           case OdsFieldType.IF_YES_CHECKBOX:
             return 'forms/schema/plugins/if-yes-checkbox/if-yes-checkbox-properties.html';
+          case OdsFieldType.IF_YES_RADIO:
+            return 'forms/schema/plugins/if-yes-radio/if-yes-radio-properties.html';
           case OdsFieldType.TABLE:
             return 'forms/schema/plugins/table/table-properties.html';
           case OdsFieldType.LABEL:
@@ -478,6 +485,8 @@
             return 'forms/common/fields/plugins/if-yes.html';
           case OdsFieldType.IF_YES_CHECKBOX:
             return 'forms/common/fields/plugins/if-yes-checkbox.html';
+          case OdsFieldType.IF_YES_RADIO:
+            return 'forms/common/fields/plugins/if-yes-radio.html';
           case OdsFieldType.TABLE:
             return 'forms/common/fields/plugins/table.html';
           case OdsFieldType.LABEL:
@@ -529,6 +538,8 @@
             return 'forms/common/viewer/plugins/if-yes.html';
           case OdsFieldType.IF_YES_CHECKBOX:
             return 'forms/common/viewer/plugins/if-yes-checkbox.html';
+          case OdsFieldType.IF_YES_RADIO:
+            return 'forms/common/viewer/plugins/if-yes-radio.html';
           case OdsFieldType.TABLE:
             return 'forms/common/viewer/plugins/table.html';
           case OdsFieldType.LABEL:
@@ -983,6 +994,24 @@
           label: 'If yes:',
           type: OdsFieldType.IF_YES,
           ln: false,
+          on: 'Yes',
+          off: 'No',
+          value: {
+            toggle: false,
+            textarea: null
+          },
+          placeholder: '',
+          validation: {
+            messages: {}
+          }
+        });
+      }
+
+      function newYesNoRadioObject() {
+        return _.merge(newBaseFieldObject(), {
+          label: 'If yes Radio:',
+          type: OdsFieldType.IF_YES_RADIO,
+          ln: true,
           on: 'Yes',
           off: 'No',
           value: {
