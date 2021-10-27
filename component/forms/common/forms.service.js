@@ -975,12 +975,15 @@
           label: 'Radiobutton List',
           type: OdsFieldType.RADIO,
           options: [{
+            value: 1,
             id: 1,
             name: 'Option 1'
           }, {
+            value: 2,
             id: 2,
             name: 'Option 2'
           }, {
+            value: 3,
             id: 3,
             name: 'Option 3'
           }],
