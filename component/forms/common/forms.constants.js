@@ -18,6 +18,7 @@
       IF_YES_RADIO: 'if_yes_radio',
       TABLE: 'table',
       LABEL: 'label',
+      GRID_RENDER: 'grid_render',
       CHECKBOX: 'checkbox',
       CHECKBOX_LIST: 'checkboxlist',
       RADIO: 'radio',

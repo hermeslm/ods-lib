@@ -108,6 +108,7 @@ function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFacto
                     OdsFormService.newYesNoRadioObject(),
                     OdsFormService.newTableObject(),
                     OdsFormService.newFieldLabelObject(),
+                    OdsFormService.newGridRenderObject(),
                     OdsFormService.newCKEditorObject(),
                     OdsFormService.newOptionsTextAreaObject()
                 ]

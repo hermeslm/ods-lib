@@ -12,7 +12,7 @@
       '$resource', 'OdsPosition', 'EventDataFactory', 'OdsEvent'];
 
     function OdsFormService(OdsFieldType, OdsComponentType, OdsDateTimeFormat, $window, dialogs,
-      $resource, OdsPosition, EventDataFactory, OdsEvent) {
+                            $resource, OdsPosition, EventDataFactory, OdsEvent) {
 
       var uniqueCounter = (+new Date()) % 10000;
       var version = '1.0';
@@ -86,6 +86,7 @@
         newOptionsTextAreaObject: newOptionsTextAreaObject,
         newTableObject: newTableObject,
         newItemObject: newItemObject,
+        newGridRenderObject: newGridRenderObject,
         newCKEditorObject: newCKEditorObject,
 
         //Select utils methods
@@ -333,6 +334,8 @@
                 return 'forms/toolbar/plugins/table.html';
               case OdsFieldType.LABEL:
                 return 'forms/toolbar/components/label.html';
+              case OdsFieldType.GRID_RENDER:
+                return 'forms/toolbar/plugins/grid-render.html';
               case OdsFieldType.CHECKBOX:
                 return 'forms/toolbar/components/checkbox.html';
               case OdsFieldType.CHECKBOX_LIST:
@@ -387,6 +390,8 @@
             return 'forms/schema/plugins/table/container.html';
           case OdsFieldType.LABEL:
             return 'forms/schema/components/label.html';
+          case OdsFieldType.GRID_RENDER:
+            return 'forms/schema/plugins/grid-render/container.html';
           case OdsFieldType.CHECKBOX:
             return 'forms/schema/components/checkbox/checkbox.html';
           case OdsFieldType.CHECKBOX_LIST:
@@ -438,6 +443,8 @@
             return 'forms/schema/plugins/table/table-properties.html';
           case OdsFieldType.LABEL:
             return 'forms/schema/components/label/label-properties.html';
+          case OdsFieldType.GRID_RENDER:
+            return 'forms/schema/plugins/grid-render/grid-render-properties.html';
           case OdsFieldType.CHECKBOX:
             return 'forms/schema/components/checkbox/checkbox-properties.html';
           case OdsFieldType.CHECKBOX_LIST:
@@ -459,7 +466,6 @@
        * @returns {*}
        */
       function getFormFieldTemplate(fieldType) {
-
         switch (fieldType) {
           case OdsFieldType.TEXT:
             return 'forms/common/fields/input.html';
@@ -491,6 +497,8 @@
             return 'forms/common/fields/plugins/table.html';
           case OdsFieldType.LABEL:
             return 'forms/common/fields/label-empty.html';
+          case OdsFieldType.GRID_RENDER:
+            return 'forms/common/fields/plugins/grid-render.html';
           case OdsFieldType.CHECKBOX:
             return 'forms/common/fields/checkbox.html';
           case OdsFieldType.CHECKBOX_LIST:
@@ -544,6 +552,8 @@
             return 'forms/common/viewer/plugins/table.html';
           case OdsFieldType.LABEL:
             return 'forms/common/fields/label-empty.html';
+          case OdsFieldType.GRID_RENDER:
+            return 'forms/common/viewer/plugins/grid-render.html';
           case OdsFieldType.CHECKBOX:
             return 'forms/common/viewer/checkbox.html';
           case OdsFieldType.CHECKBOX_LIST:
@@ -1121,6 +1131,20 @@
         };
       }
 
+      function newGridRenderObject() {
+        return _.merge(newBaseFieldObject(), {
+          label: 'Grid Render',
+          type: OdsFieldType.GRID_RENDER,
+          cssClass: 'table table-bordered',
+          manageRows: true,
+          descriptor: {
+            header: ['Column 1', 'Column 2'],
+            data: []
+          }
+        });
+
+      }
+
       function newCKEditorObject() {
 
         //Default key combination. (CTRL + SPACE)
@@ -1165,13 +1189,12 @@
       }
 
       /**
-       * Remove row from table.
-       * @param table Table
+       * Remove row from grid.
+       * @param grid Table
        * @param index Row index to remove.
        */
-      function removeRow(table, index) {
-
-        if (table.matrix.length > 1) {
+      function removeRow(grid, index) {
+        if (grid.length > 1) {
           dialogs.confirm('Confirm!!!', 'Do you want to remove this row?',
             {
               size: 'sm',
@@ -1179,19 +1202,18 @@
             })
             .result
             .then(function () {
-
-              table.matrix.splice(index, 1);
+              grid.splice(index, 1);
             });
-        } else {
-          dialogs.notify('Information', 'At least one row must exist.',
-            {
-              size: 'sm',
-              windowClass: 'ods-dialog'
-            })
-            .result
-            .then(function () {
-            });
+          return;
         }
+        dialogs.notify('Information', 'At least one row must exist.',
+          {
+            size: 'sm',
+            windowClass: 'ods-dialog'
+          })
+          .result
+          .then(function () {
+          });
       }
 
       /**

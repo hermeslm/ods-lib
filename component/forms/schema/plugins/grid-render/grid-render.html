@@ -1,0 +1,31 @@
+<form name="{{field.name}}" class="position-relative">
+    <table class="{{field.cssClass}}" id="{{field.name}}">
+        <thead>
+        <tr>
+            <th ng-repeat="col in field.descriptor.header" scope="col">{{ col }}</th>
+            <th ng-show="field.manageRows" scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in field.descriptor.data">
+            <td ng-repeat="col in row" width="{{col.width}}">
+                {{ col }}
+            </td>
+            <td ng-show="field.manageRows" width="20px" style="position: relative">
+                <button type="button" ng-click="removeRow(field.descriptor.data, $index)" title="Remove row"
+                        class="btn btn-danger pull-right">
+                    <span class="fa fa-trash"></span>
+                </button>
+                <button type="button" ng-click="swapRow($index - 1, $index)" title="Swap row up"
+                        class="btn btn-info pull-right" ng-disabled="$index === 0">
+                    <span class="fa fa-arrow-up"></span>
+                </button>
+                <button type="button" ng-click="swapRow($index, $index + 1)" title="Swap row down"
+                        class="btn btn-info pull-right" ng-disabled="$index === field.matrix.length - 1">
+                    <span class="fa fa-arrow-down"></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</form>

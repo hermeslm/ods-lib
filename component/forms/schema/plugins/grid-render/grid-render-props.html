@@ -1,0 +1,14 @@
+<div class="padding-top">
+    <form name="fieldPropsForm" class="form-horizontal">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="form-group" ng-class="{'has-error': fieldPropsForm.{{field.name}}-manageRows.$invalid}">
+                    <label for="{{field.name}}-manageRows" class="control-label col-sm-4">Manage rows:</label>
+                    <input class="col-sm-1" type="checkbox" id="{{field.name}}-manageRows"
+                           name="{{field.name}}-manageRows"
+                           ng-model="field.manageRows">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

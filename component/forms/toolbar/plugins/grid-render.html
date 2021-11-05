@@ -1,0 +1,8 @@
+<div ng-include="'forms/toolbar/components/label.html'"></div>
+<table class="table table-bordered table-responsive" id="{{component.name}}">
+    <tbody>
+        <tr>
+            <td ng-repeat="column in component.descriptor.header">{{ column }}</td>
+        </tr>
+    </tbody>
+</table>
