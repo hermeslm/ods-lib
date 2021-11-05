@@ -57,7 +57,6 @@ function TableDirective(OdsFormService, dialogs, OdsComponentType, OdsFieldType)
          * @param index Row index to remove.
          */
         function removeRow(table, index) {
-
             OdsFormService.removeRow(table, index);
         }
 

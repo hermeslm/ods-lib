@@ -254,7 +254,6 @@ function FormDirective(OdsFormService, $timeout, dialogs, $uibModal) {
          * @returns {boolean|*}
          */
         function openCalendar(field) {
-
             field.open = !field.open;
             return field.open;
         }
@@ -265,7 +264,6 @@ function FormDirective(OdsFormService, $timeout, dialogs, $uibModal) {
          * @param index Row index to remove.
          */
         function removeRow(table, index) {
-
             OdsFormService.removeRow(table, index);
         }
 

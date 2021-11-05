@@ -8,7 +8,7 @@
                 </div>
             </td>
             <td ng-show="field.manageRows" width="20px">
-                <button type="button" ng-click="removeRow(field, $index)" title="Remove row"
+                <button type="button" ng-click="removeRow(field.matrix, $index)" title="Remove row"
                         ng-show="field.manageRows && !(field.manageRows && $index === 0)"
                         class="btn btn-danger pull-right">
                     <span class="fa fa-trash"></span>

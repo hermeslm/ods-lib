@@ -1,0 +1,16 @@
+<div class="table-responsive position-relative">
+    <table class="{{field.cssClass}}" id="{{field.name}}">
+        <thead>
+        <tr>
+            <th ng-repeat="col in field.descriptor.header" scope="col">{{ col }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in field.descriptor.data">
+            <td ng-repeat="col in row" class="table-td {{col.cssClass}}" width="{{col.width}}" style="min-width: 100px">
+                {{ col }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
