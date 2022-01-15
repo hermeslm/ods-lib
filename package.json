@@ -38,7 +38,7 @@
     "karma-phantomjs-launcher": "~0.1.4",
     "lodash": "4.17.19",
     "main-bower-files": "^2.13.1",
-    "shelljs": "^0.2.6"
+    "shelljs": "^0.8.5"
   },
   "dependencies": {
     "angular": "^1.0.8",
