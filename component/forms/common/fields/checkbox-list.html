@@ -1,7 +1,8 @@
 <br ng-if="field.inline">
 <div ng-class="field.inline === true ? 'checkbox-inline' : 'checkbox'" ng-repeat="option in field.options">
     <label>
-        <input type="checkbox" value="{{option.id}}" ng-model="field.value[option.id]" ng-disabled="field.readonly"/>
+        <input type="checkbox" value="{{option.id}}" ng-model="field.value[option.id]"
+               ng-model-options="{ debounce: 1000 }" ng-disabled="field.readonly"/>
         {{option.name}}
     </label>
 </div>

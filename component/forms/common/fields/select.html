@@ -1,5 +1,6 @@
 <select class="form-control" ods-dynamic-name="getUniqueName(field)" id="{{getUniqueName(field)}}"
-        ng-model="field.value" title="{{field.tooltip}}" ng-required="getRequired(field)" ng-disabled="field.readonly"
+        ng-model="field.value" ng-model-options="{ debounce: 1000 }" title="{{field.tooltip}}"
+        ng-required="getRequired(field)" ng-disabled="field.readonly"
         ng-style="{'background-color': field.value.color ? field.value.color : '#FFF'}"
         ng-options="element as element.name for element in field.options | limitTo: field.limitTo track by element.value ? element.value : element.id">
     <option value="">{{field.placeholder}}</option>
