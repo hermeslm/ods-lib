@@ -1,3 +1,3 @@
 <br ng-if="field.ln">
 <toggle name="{{getUniqueName(field)}}" id="{{getUniqueName(field)}}" on="{{field.on}}" off="{{field.off}}"
-        ng-model="field.value" ng-disabled="field.readonly"></toggle>
+        ng-model="field.value" ng-model-options="{ debounce: 1000 }" ng-disabled="field.readonly"></toggle>
