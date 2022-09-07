@@ -1,0 +1,43 @@
+<div class="row no-vertical-margin">
+    <div class="form-group margin-bottom">
+        <label for="{{field.name}}-limitTo" class="col-sm-2 control-label">Limit to:</label>
+        <div class="col-sm-10">
+            <input type="number" class="form-control" id="{{field.name}}-limitTo" name="{{field.name}}-limitTo"
+                   placeholder="Limit list to..." ng-model="field.limitTo"
+                   ng-required="false">
+        </div>
+    </div>
+</div>
+<div class="table-responsive" style="max-height: 250px">
+    <table class="table table-condensed position-relative" style="position: relative;">
+        <thead>
+        <tr>
+            <th>Color</th>
+            <th>Value</th>
+            <th>
+                <button class="btn btn-default btn-xs btn-success" type="button" ng-click="addColor()"
+                        title="Add a new option"><span class="fa fa-plus"></span>
+                </button>
+            </th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-form="fieldColorsForm" ng-repeat="color in colors track by $index"
+            ng-class="{ 'has-error': fieldColorsForm.$invalid }">
+            <td>
+                <div class="odsCanvasColor" ng-style="{'background-color':color}"></div>
+            </td>
+            <td>
+                <input type="text" ng-model="color" class="form-control" required="required"/>
+            </td>
+            <td>
+                <button class="btn btn-default btn-xs btn-danger" type="button" ng-click="removeColor($index)"
+                        title="Remove this color"><span class="fa fa-trash"></span>
+                </button>
+            </td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

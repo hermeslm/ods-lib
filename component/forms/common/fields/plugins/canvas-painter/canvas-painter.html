@@ -1,0 +1,19 @@
+<div ng-controller="OdsCanvasPainterController">
+    <div ods-canvas-painter-color-selector="field.options.lineColors"
+         color="selectedColor" ng-style="{ width: field.options.width }"></div>
+    <input type="range" min="1" max="50" ng-model="selectedLineWidth" class="lineWidthSelector"
+           ng-style="{ width: field.options.width }">
+    {{ selectedLineWidth }}
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-warning" ng-click="undo()" ng-disabled="version === 0">Undo (Version {{version}})</button>
+            <button class="btn btn-danger" ng-click="clear()" ng-disabled="version === 0">Clear</button>
+        </div>
+    </div>
+<!--    <div class="undo">-->
+<!--        <button ng-click="undo()" ng-disabled="version === 0">Undo (Version {{version}})-->
+<!--        </button>-->
+<!--    </div>-->
+    <ods-canvas-painter field="field" options="{ color: selectedColor, lineWidth: ctrl.selectedLineWidth }"
+                        version="version"/>
+</div>

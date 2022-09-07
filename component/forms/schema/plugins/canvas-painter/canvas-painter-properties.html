@@ -1,0 +1,20 @@
+<uib-tabset class="nav-tabs">
+    <uib-tab index="0" heading="Properties">
+        <form name="fieldPropertiesForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <div ng-include="'forms/schema/components/base-properties/common-properties.html'"></div>
+                <div ng-include="'forms/schema/components/base-properties/text-properties.html'"></div>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="1" heading="Colors">
+        <form name="fieldColorsForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <ods-canvas-painter-colors colors="field.options.lineColors"></ods-canvas-painter-colors>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="2" heading="Debug" ng-show="debugMode">
+        <div ng-include="'forms/schema/components/base-properties/model-properties.html'"></div>
+    </uib-tab>
+</uib-tabset>
