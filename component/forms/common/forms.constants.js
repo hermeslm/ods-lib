@@ -23,6 +23,7 @@
       CHECKBOX_LIST: 'checkboxlist',
       RADIO: 'radio',
       CKEDITOR: 'ckeditor',
+      CANVAS_PAINTER: 'canvas_painter',
       OPTIONS_TEXTAREA: 'options_textarea'
       // You can add your new field types
     })
