@@ -327,3 +327,45 @@
   z-index: 2500 !important;
 }
 
+
+//////////////////
+/// Canvas Painter
+//////////////////
+.odsCanvasPaint canvas:first-child {
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(0,0,0,0.1);
+  -webkit-box-shadow: 2px 2px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(0,0,0,0.1);
+}
+.odsCanvasSelector {
+  list-style: none;
+}
+.odsCanvasSelector li {
+  display: inline-block;
+}
+.odsCanvasColor {
+  display: inline-block;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  border: 2px solid transparent;
+  cursor: pointer;
+}
+.odsCanvasColor.active {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+  box-shadow: 2px 3px 2px rgba(0,0,0,0.2);
+  -webkit-box-shadow: 2px 3px 2px rgba(0,0,0,0.2);
+}
+.undo {
+  margin-top: 20px;
+}
+.undo > button {
+  background-color: orange;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+}
+.undo > button[disabled] {
+  background-color: #aaa;
+}

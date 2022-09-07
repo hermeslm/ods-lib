@@ -4,162 +4,163 @@
 'use strict';
 
 angular
-    .module('ods-lib')
-    .directive('odsFormToolbar', OdsFormToolbar);
+  .module('ods-lib')
+  .directive('odsFormToolbar', OdsFormToolbar);
 
 OdsFormToolbar.$inject = ['OdsFormService', '$sessionStorage', 'dialogs', 'EventDataFactory', 'OdsEvent'];
 
 function OdsFormToolbar(OdsFormService, $sessionStorage, dialogs, EventDataFactory, OdsEvent) {
 
-    var directive = {
-        restrict: 'E',
-        templateUrl: 'forms/toolbar/toolbar.html',
-        link: linkFunc
+  var directive = {
+    restrict: 'E',
+    templateUrl: 'forms/toolbar/toolbar.html',
+    link: linkFunc
+  };
+
+  return directive;
+
+  /* private helper methods*/
+
+  function linkFunc($scope) {
+
+    $scope.getToolbarComponent = getToolbarComponent;
+    $scope.removeFromClipboard = removeFromClipboard;
+
+    $scope.export = exportSchema;
+
+    $scope.onLoad = onLoad;
+
+    $scope.importFile = null;
+
+    var clipboardIndex = 6;
+
+    $scope.toolbar = {
+      title: 'Fields Toolbar',
+      groups: [{
+        id: 0,
+        open: false,
+        disabled: false,
+        title: 'Layout',
+        icon: 'fa fa-dashboard',
+        allowDelete: false,
+        components: [
+          OdsFormService.newSectionObject()
+        ]
+      }, {
+        id: 1,
+        open: false,
+        disabled: false,
+        title: 'Text input fields',
+        icon: 'fa fa-dashboard',
+        allowDelete: false,
+        components: [
+          OdsFormService.newFieldTextObject(),
+          OdsFormService.newFieldNumberObject(),
+          OdsFormService.newFieldPasswordObject(),
+          OdsFormService.newFieldTextareaObject()
+        ]
+      }, {
+        id: 2,
+        open: false,
+        disabled: false,
+        title: 'Select input fields',
+        icon: 'fa fa-dashboard',
+        allowDelete: false,
+        components: [
+          OdsFormService.newFieldRadioListObject(),
+          OdsFormService.newFieldSelectObject(),
+          OdsFormService.newFieldSelect2Object(),
+          OdsFormService.newFieldMultiSelectObject()
+
+        ]
+      }, {
+        id: 3,
+        open: false,
+        disabled: false,
+        title: 'Check input fields',
+        icon: 'fa fa-dashboard',
+        allowDelete: false,
+        components: [
+          OdsFormService.newFieldCheckBoxObject(),
+          OdsFormService.newFieldCheckBoxListObject(),
+          OdsFormService.newFieldToggleObject()
+        ]
+      }, {
+        id: 4,
+        open: false,
+        disabled: false,
+        title: 'DateTime fields',
+        icon: 'fa fa-dashboard',
+        allowDelete: false,
+        components: [
+          OdsFormService.newDateTimeObject()
+        ]
+      }, {
+        id: 5,
+        open: false,
+        disabled: false,
+        title: 'Plugins',
+        icon: 'fa fa-dashboard',
+        allowDelete: false,
+        components: [
+          OdsFormService.newYesNoObject(),
+          OdsFormService.newYesNoCheckboxObject(),
+          OdsFormService.newYesNoRadioObject(),
+          OdsFormService.newTableObject(),
+          OdsFormService.newFieldLabelObject(),
+          OdsFormService.newGridRenderObject(),
+          OdsFormService.newCKEditorObject(),
+          OdsFormService.newOptionsTextAreaObject(),
+          OdsFormService.newCanvasPainterObject()
+        ]
+      }, {
+        id: 6,
+        open: false,
+        disabled: false,
+        title: 'Clipboard',
+        icon: 'fa fa-dashboard',
+        allowDelete: true,
+        components: []
+      }]
     };
 
-    return directive;
+    //We register the update clipboard callback
+    OdsFormService.onAddToClipBoard(function (items) {
 
-    /* private helper methods*/
+      $scope.toolbar.groups[clipboardIndex].components = items;
+      $sessionStorage.clipBoard = items;
+    });
 
-    function linkFunc($scope) {
-
-        $scope.getToolbarComponent = getToolbarComponent;
-        $scope.removeFromClipboard = removeFromClipboard;
-
-        $scope.export = exportSchema;
-
-        $scope.onLoad = onLoad;
-
-        $scope.importFile = null;
-
-        var clipboardIndex = 6;
-
-        $scope.toolbar = {
-            title: 'Fields Toolbar',
-            groups: [{
-                id: 0,
-                open: false,
-                disabled: false,
-                title: 'Layout',
-                icon: 'fa fa-dashboard',
-                allowDelete: false,
-                components: [
-                    OdsFormService.newSectionObject()
-                ]
-            }, {
-                id: 1,
-                open: false,
-                disabled: false,
-                title: 'Text input fields',
-                icon: 'fa fa-dashboard',
-                allowDelete: false,
-                components: [
-                    OdsFormService.newFieldTextObject(),
-                    OdsFormService.newFieldNumberObject(),
-                    OdsFormService.newFieldPasswordObject(),
-                    OdsFormService.newFieldTextareaObject()
-                ]
-            }, {
-                id: 2,
-                open: false,
-                disabled: false,
-                title: 'Select input fields',
-                icon: 'fa fa-dashboard',
-                allowDelete: false,
-                components: [
-                    OdsFormService.newFieldRadioListObject(),
-                    OdsFormService.newFieldSelectObject(),
-                    OdsFormService.newFieldSelect2Object(),
-                    OdsFormService.newFieldMultiSelectObject()
-
-                ]
-            }, {
-                id: 3,
-                open: false,
-                disabled: false,
-                title: 'Check input fields',
-                icon: 'fa fa-dashboard',
-                allowDelete: false,
-                components: [
-                    OdsFormService.newFieldCheckBoxObject(),
-                    OdsFormService.newFieldCheckBoxListObject(),
-                    OdsFormService.newFieldToggleObject()
-                ]
-            }, {
-                id: 4,
-                open: false,
-                disabled: false,
-                title: 'DateTime fields',
-                icon: 'fa fa-dashboard',
-                allowDelete: false,
-                components: [
-                    OdsFormService.newDateTimeObject()
-                ]
-            }, {
-                id: 5,
-                open: false,
-                disabled: false,
-                title: 'Plugins',
-                icon: 'fa fa-dashboard',
-                allowDelete: false,
-                components: [
-                    OdsFormService.newYesNoObject(),
-                    OdsFormService.newYesNoCheckboxObject(),
-                    OdsFormService.newYesNoRadioObject(),
-                    OdsFormService.newTableObject(),
-                    OdsFormService.newFieldLabelObject(),
-                    OdsFormService.newGridRenderObject(),
-                    OdsFormService.newCKEditorObject(),
-                    OdsFormService.newOptionsTextAreaObject()
-                ]
-            }, {
-                id: 6,
-                open: false,
-                disabled: false,
-                title: 'Clipboard',
-                icon: 'fa fa-dashboard',
-                allowDelete: true,
-                components: []
-            }]
-        };
-
-        //We register the update clipboard callback
-        OdsFormService.onAddToClipBoard(function (items) {
-
-            $scope.toolbar.groups[clipboardIndex].components = items;
-            $sessionStorage.clipBoard = items;
-        });
-
-        if ($sessionStorage.clipBoard) {
-            OdsFormService.setClipBoard($sessionStorage.clipBoard);
-        } else {
-            $scope.toolbar.groups[clipboardIndex].components = [];
-            $sessionStorage.clipBoard = [];
-        }
-
-        function removeFromClipboard(index) {
-
-            dialogs.confirm('Confirm!!!', 'Do you want to remove the component from clipboard?',
-                {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
-
-                $scope.toolbar.groups[clipboardIndex].components.splice(index, 1);
-                $sessionStorage.clipBoard = $scope.toolbar.groups[clipboardIndex].components;
-            });
-        }
-
-        function getToolbarComponent(componentType) {
-
-            return OdsFormService.getToolbarComponent(componentType);
-        }
-
-        function onLoad(file) {
-
-            EventDataFactory.setData(OdsEvent.IMPORT_FORM, OdsFormService.importForm(file));
-        }
-
-        function exportSchema() {
-
-            EventDataFactory.setData(OdsEvent.EXPORT_FORM, '');
-        }
+    if ($sessionStorage.clipBoard) {
+      OdsFormService.setClipBoard($sessionStorage.clipBoard);
+    } else {
+      $scope.toolbar.groups[clipboardIndex].components = [];
+      $sessionStorage.clipBoard = [];
     }
+
+    function removeFromClipboard(index) {
+
+      dialogs.confirm('Confirm!!!', 'Do you want to remove the component from clipboard?',
+        {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+
+        $scope.toolbar.groups[clipboardIndex].components.splice(index, 1);
+        $sessionStorage.clipBoard = $scope.toolbar.groups[clipboardIndex].components;
+      });
+    }
+
+    function getToolbarComponent(componentType) {
+
+      return OdsFormService.getToolbarComponent(componentType);
+    }
+
+    function onLoad(file) {
+
+      EventDataFactory.setData(OdsEvent.IMPORT_FORM, OdsFormService.importForm(file));
+    }
+
+    function exportSchema() {
+
+      EventDataFactory.setData(OdsEvent.EXPORT_FORM, '');
+    }
+  }
 }
