@@ -22,5 +22,9 @@
     $scope.clear = function(){
       $scope.version = 0;
     };
+
+    $scope.toggleEdit = function(){
+      //$scope.field.readonly = !$scope.field.readonly;
+    };
   }
 })();

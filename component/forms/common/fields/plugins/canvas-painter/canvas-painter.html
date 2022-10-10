@@ -1,19 +1,27 @@
-<div ng-controller="OdsCanvasPainterController">
-    <div ods-canvas-painter-color-selector="field.options.lineColors"
-         color="selectedColor" ng-style="{ width: field.options.width }"></div>
-    <input type="range" min="1" max="50" ng-model="selectedLineWidth" class="lineWidthSelector"
-           ng-style="{ width: field.options.width }">
-    {{ selectedLineWidth }}
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn btn-warning" ng-click="undo()" ng-disabled="version === 0">Undo (Version {{version}})</button>
-            <button class="btn btn-danger" ng-click="clear()" ng-disabled="version === 0">Clear</button>
-        </div>
+<div ng-if="!field.readonly" ods-canvas-painter-color-selector="field.options.lineColors"
+     selected-color="field.options.color" ng-style="{ width: field.options.width }"></div>
+<input type="range" min="1" max="50" class="lineWidthSelector" ng-model="field.options.lineWidth" ng-if="!field.readonly"
+       ng-style="{ width: field.options.width }">
+<div class="row" ng-if="!field.readonly">
+    <div class="col-md-12">
+        {{ field.options.lineWidth }}
     </div>
-<!--    <div class="undo">-->
-<!--        <button ng-click="undo()" ng-disabled="version === 0">Undo (Version {{version}})-->
-<!--        </button>-->
-<!--    </div>-->
-    <ods-canvas-painter field="field" options="{ color: selectedColor, lineWidth: ctrl.selectedLineWidth }"
-                        version="version"/>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <button class="btn btn-success" ng-click="toggleEdit()">{{ field.readonly ? 'Enable Edit' : 'Finish Edit' }}
+        </button>
+        <button ng-if="!field.readonly" class="btn btn-warning" ng-click="undoCanvas()" ng-disabled="version === 0">
+            Undo(Version {{version}})
+        </button>
+        <button ng-if="!field.readonly" class="btn btn-danger" ng-click="clearCanvas()" ng-disabled="version === 0">
+            Clear
+        </button>
+    </div>
+</div>
+<canvas ng-show="!field.readonly" id="ods-canvas" class="odsCanvasPaint" style="position:absolute"></canvas>
+<canvas ng-show="!field.readonly" id="ods-canvas-tmp" class="odsCanvasPaint" style="position:relative;top: 0;left: 0"></canvas>
+<figure ng-if="field.readonly" class="figure">
+    <img id="ods-canvas-paint-viewer-result" ng-src="{{ field.value ? field.value : field.options.imageSrc }}"
+         width="field.width" height="field.height"/>
+</figure>
