@@ -12,7 +12,7 @@ function CanvasPainterColorSelector(OdsFormService) {
     restrict: 'AE',
     scope: {
       colorList: '=odsCanvasPainterColorSelector',
-      selectedColor: '=color'
+      selectedColor: '='
     },
     templateUrl: 'forms/common/fields/plugins/canvas-painter/color-selector.html',
     link: function (scope) {

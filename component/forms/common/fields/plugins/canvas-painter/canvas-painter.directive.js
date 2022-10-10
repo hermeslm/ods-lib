@@ -10,11 +10,9 @@ function CanvasPainterDirective(OdsFormService) {
 
   return {
     restrict: 'E',
-    templateUrl: 'forms/common/fields/plugins/canvas-painter/canvas.html',
+    templateUrl: 'forms/common/fields/plugins/canvas-painter/canvas-painter.html',
     scope: {
-      field: '=',
-      options: '=',
-      version: '='
+      field: '='
     },
     link: function postLink(scope, elm) {
       var isTouch = !!('ontouchstart' in window);
@@ -22,33 +20,21 @@ function CanvasPainterDirective(OdsFormService) {
       var PAINT_MOVE = isTouch ? 'touchmove' : 'mousemove';
       var PAINT_END = isTouch ? 'touchend' : 'mouseup';
 
-      //set default options
-      var options = scope.options || {};
-      options.canvasId = scope.field.canvasId || 'odsCanvasMain';
-      options.tmpCanvasId = options.canvasId ? (options.canvasId + 'Tmp') : 'odsCanvasMainTmp';
-      options.width = options.width || scope.field.options.width;
-      options.height = options.height || scope.field.options.height;
-      options.backgroundColor = options.backgroundColor || scope.field.options.backgroundColor;
-      options.color = options.color || scope.field.options.color;
-      options.undoEnabled = options.undoEnabled || scope.field.options.undoEnabled;
-      options.opacity = options.opacity || scope.field.options.opacity;
-      options.lineWidth = options.lineWidth || scope.field.options.lineWidth;
-      options.undo = options.undo || scope.field.options.undo;
-      options.imageSrc = options.imageSrc || scope.field.options.imageSrc;
+      scope.version = 0;
 
       // background image
-      if (options.imageSrc) {
+      if (scope.field.options.imageSrc) {
         var image = new Image();
         image.onload = function() {
           ctx.drawImage(this, 0, 0);
           scope.field.options.width = image.width
           scope.field.options.height = image.height
         };
-        image.src = options.imageSrc;
+        image.src = scope.field.options.imageSrc;
       }
 
       //undo
-      if (options.undo) {
+      if (scope.field.options.undo) {
         var undoCache = [];
         scope.$watch(function() {
           return undoCache.length;
@@ -70,21 +56,14 @@ function CanvasPainterDirective(OdsFormService) {
       }
 
       //create canvas and context
-      var canvas = document.createElement('canvas');
-      canvas.id = options.canvasId;
-      var canvasTmp = document.createElement('canvas');
-      canvasTmp.id = options.tmpCanvasId;
-      angular.element(canvasTmp).css({
-        position: 'absolute',
-        top: 0,
-        left: 0
-      });
-      elm.find('div').append(canvas);
-      elm.find('div').append(canvasTmp);
+      var canvas = document.getElementById('ods-canvas');
+      canvas.id = scope.field.options.canvasId;
+      var canvasTmp = document.getElementById('ods-canvas-tmp');
+      canvasTmp.id = scope.field.options.tmpCanvasId;
       var ctx = canvas.getContext('2d');
       var ctxTmp = canvasTmp.getContext('2d');
 
-      //inti variables
+      //init variables
       var point = {
         x: 0,
         y: 0
@@ -92,36 +71,36 @@ function CanvasPainterDirective(OdsFormService) {
       var ppts = [];
 
       //set canvas size
-      canvas.width = canvasTmp.width = options.width;
-      canvas.height = canvasTmp.height = options.height;
+      canvas.width = canvasTmp.width = scope.field.options.width;
+      canvas.height = canvasTmp.height = scope.field.options.height;
 
       //set context style
-      ctx.fillStyle = options.backgroundColor;
+      ctx.fillStyle = scope.field.options.backgroundColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctxTmp.globalAlpha = options.opacity;
+      ctxTmp.globalAlpha = scope.field.options.opacity;
       ctxTmp.lineJoin = ctxTmp.lineCap = 'round';
       ctxTmp.lineWidth = 10;
-      ctxTmp.strokeStyle = options.color;
+      ctxTmp.strokeStyle = scope.field.options.color;
 
 
       //Watch options
-      scope.$watch('options.lineWidth', function(newValue) {
+      scope.$watch('field.options.lineWidth', function(newValue) {
         if (typeof newValue === 'string') {
           newValue = parseInt(newValue, 10);
         }
         if (newValue && typeof newValue === 'number') {
-          ctxTmp.lineWidth = options.lineWidth = newValue;
+          ctxTmp.lineWidth = scope.field.options.lineWidth = newValue;
         }
       });
 
-      scope.$watch('options.color', function(newValue) {
+      scope.$watch('field.options.color', function(newValue) {
         if (newValue) {
           //ctx.fillStyle = newValue;
           ctxTmp.strokeStyle = ctxTmp.fillStyle = newValue;
         }
       });
 
-      scope.$watch('options.opacity', function(newValue) {
+      scope.$watch('field.options.opacity', function(newValue) {
         if (newValue) {
           ctxTmp.globalAlpha = newValue;
         }
@@ -190,11 +169,11 @@ function CanvasPainterDirective(OdsFormService) {
       };
 
       var copyTmpImage = function() {
-        if (options.undo) {
+        if (scope.field.options.undo) {
           scope.$apply(function() {
             undoCache.push(ctx.getImageData(0, 0, canvasTmp.width, canvasTmp.height));
-            if (angular.isNumber(options.undo) && options.undo > 0) {
-              undoCache = undoCache.slice(-1 * options.undo);
+            if (angular.isNumber(scope.field.options.undo) && scope.field.options.undo > 0) {
+              undoCache = undoCache.slice(-1 * scope.field.options.undo);
             }
           });
         }
@@ -270,14 +249,21 @@ function CanvasPainterDirective(OdsFormService) {
         if (undoCache.length > 0) {
           ctx.putImageData(undoCache[version], 0, 0);
           undoCache = undoCache.slice(0, version);
+          scope.field.value = canvas.toDataURL();
         }
       };
 
-      var clear = function(version) {
-        if (undoCache.length > 0) {
-          ctx.putImageData(undoCache[version], 0, 0);
-          undoCache = undoCache.clear();
-        }
+      scope.undoCanvas = function(){
+        scope.version--;
+      };
+
+      scope.clearCanvas = function(){
+        scope.version = 0;
+        scope.field.value = scope.field.options.imageSrc;
+      };
+
+      scope.toggleEdit = function(){
+        scope.field.readonly = !scope.field.readonly;
       };
 
       initListeners();
