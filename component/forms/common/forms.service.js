@@ -517,7 +517,7 @@
           case OdsFieldType.OPTIONS_TEXTAREA:
             return 'forms/common/fields/plugins/options-textarea/options-textarea.html';
           case OdsFieldType.CANVAS_PAINTER:
-            return 'forms/common/fields/plugins/canvas-painter/canvas-painter.html';
+            return 'forms/common/fields/plugins/canvas-painter/container.html';
           default :
             return 'forms/common/fields/no-field.html';
         }
@@ -1161,7 +1161,7 @@
         return _.merge(newBaseFieldObject(), {
           label: 'Canvas Painter',
           type: OdsFieldType.CANVAS_PAINTER,
-          readonly: false,
+          readonly: true,
           options: {
             canvasId: 'odsCanvasMain',
             tmpCanvasId: 'odsCanvasMain',
@@ -1174,7 +1174,7 @@
             imageSrc: defaultBackground,
             color: '#000',
             lineWidth: 10,
-            lineColors: ['#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#153974']
+            lineColors: ['#F9FF33', '#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#153974']
           },
           value: null
         });
