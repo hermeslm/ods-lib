@@ -13,7 +13,7 @@ function CanvasPainterColors() {
 
   var directive = {
     restrict: 'E',
-    templateUrl: 'forms/schema/plugins/canvas-painter/line-colors.html',
+    templateUrl: 'forms/common/fields/plugins/canvas-painter/line-colors.html',
     scope: {
       colors: '='
     },
@@ -23,8 +23,6 @@ function CanvasPainterColors() {
   return directive;
 
   function linkFunc($scope) {
-    console.log($scope)
-
     $scope.addColor = addColor;
     $scope.removeColor = removeColor;
 

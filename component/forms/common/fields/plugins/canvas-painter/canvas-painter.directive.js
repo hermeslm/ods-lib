@@ -4,9 +4,9 @@ angular
   .module('ods-lib')
   .directive('odsCanvasPainter', CanvasPainterDirective);
 
-CanvasPainterDirective.$inject = ['OdsFormService'];
+CanvasPainterDirective.$inject = ['dialogs'];
 
-function CanvasPainterDirective(OdsFormService) {
+function CanvasPainterDirective(dialogs) {
 
   return {
     restrict: 'E',
@@ -25,7 +25,7 @@ function CanvasPainterDirective(OdsFormService) {
       // background image
       if (scope.field.options.imageSrc) {
         var image = new Image();
-        image.onload = function() {
+        image.onload = function () {
           ctx.drawImage(this, 0, 0);
           scope.field.options.width = image.width
           scope.field.options.height = image.height
@@ -36,13 +36,13 @@ function CanvasPainterDirective(OdsFormService) {
       //undo
       if (scope.field.options.undo) {
         var undoCache = [];
-        scope.$watch(function() {
+        scope.$watch(function () {
           return undoCache.length;
-        }, function(newVal) {
+        }, function (newVal) {
           scope.version = newVal;
         });
 
-        scope.$watch('version', function(newVal) {
+        scope.$watch('version', function (newVal) {
           if (newVal < 0) {
             scope.version = 0;
             return;
@@ -84,7 +84,7 @@ function CanvasPainterDirective(OdsFormService) {
 
 
       //Watch options
-      scope.$watch('field.options.lineWidth', function(newValue) {
+      scope.$watch('field.options.lineWidth', function (newValue) {
         if (typeof newValue === 'string') {
           newValue = parseInt(newValue, 10);
         }
@@ -93,20 +93,20 @@ function CanvasPainterDirective(OdsFormService) {
         }
       });
 
-      scope.$watch('field.options.color', function(newValue) {
+      scope.$watch('field.options.color', function (newValue) {
         if (newValue) {
           //ctx.fillStyle = newValue;
           ctxTmp.strokeStyle = ctxTmp.fillStyle = newValue;
         }
       });
 
-      scope.$watch('field.options.opacity', function(newValue) {
+      scope.$watch('field.options.opacity', function (newValue) {
         if (newValue) {
           ctxTmp.globalAlpha = newValue;
         }
       });
 
-      var getOffset = function(elem) {
+      var getOffset = function (elem) {
         var bbox = elem.getBoundingClientRect();
         return {
           left: bbox.left,
@@ -114,7 +114,7 @@ function CanvasPainterDirective(OdsFormService) {
         };
       };
 
-      var setPointFromEvent = function(point, e) {
+      var setPointFromEvent = function (point, e) {
         if (isTouch) {
           point.x = e.changedTouches[0].pageX - getOffset(e.target).left;
           point.y = e.changedTouches[0].pageY - getOffset(e.target).top;
@@ -125,7 +125,7 @@ function CanvasPainterDirective(OdsFormService) {
       };
 
 
-      var paint = function(e) {
+      var paint = function (e) {
         if (e) {
           e.preventDefault();
           setPointFromEvent(point, e);
@@ -168,9 +168,9 @@ function CanvasPainterDirective(OdsFormService) {
         ctxTmp.stroke();
       };
 
-      var copyTmpImage = function() {
+      var copyTmpImage = function () {
         if (scope.field.options.undo) {
-          scope.$apply(function() {
+          scope.$apply(function () {
             undoCache.push(ctx.getImageData(0, 0, canvasTmp.width, canvasTmp.height));
             if (angular.isNumber(scope.field.options.undo) && scope.field.options.undo > 0) {
               undoCache = undoCache.slice(-1 * scope.field.options.undo);
@@ -184,7 +184,7 @@ function CanvasPainterDirective(OdsFormService) {
         scope.field.value = canvas.toDataURL();
       };
 
-      var startTmpImage = function(e) {
+      var startTmpImage = function (e) {
         e.preventDefault();
         canvasTmp.addEventListener(PAINT_MOVE, paint, false);
 
@@ -201,7 +201,7 @@ function CanvasPainterDirective(OdsFormService) {
         paint();
       };
 
-      var initListeners = function() {
+      var initListeners = function () {
         canvasTmp.addEventListener(PAINT_START, startTmpImage, false);
         canvasTmp.addEventListener(PAINT_END, copyTmpImage, false);
 
@@ -245,7 +245,7 @@ function CanvasPainterDirective(OdsFormService) {
         }
       };
 
-      var undo = function(version) {
+      var undo = function (version) {
         if (undoCache.length > 0) {
           ctx.putImageData(undoCache[version], 0, 0);
           undoCache = undoCache.slice(0, version);
@@ -253,18 +253,22 @@ function CanvasPainterDirective(OdsFormService) {
         }
       };
 
-      scope.undoCanvas = function(){
+      scope.undoCanvas = function () {
         scope.version--;
       };
 
-      scope.clearCanvas = function(){
-        scope.version = 0;
-        scope.field.value = scope.field.options.imageSrc;
+      scope.clearCanvas = function () {
+        dialogs.confirm('Confirm!!!', 'This operation will erase all draw you did, do you want to proceed?',
+          {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
+          scope.version = 0;
+          scope.field.value = scope.field.options.imageSrc;
+        });
       };
 
-      scope.toggleEdit = function(){
+      scope.toggleEdit = function () {
         scope.field.readonly = !scope.field.readonly;
       };
+
 
       initListeners();
     }

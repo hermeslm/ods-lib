@@ -461,7 +461,7 @@
           case OdsFieldType.OPTIONS_TEXTAREA:
             return 'forms/schema/plugins/options-textarea/options-textarea-properties.html';
           case OdsFieldType.CANVAS_PAINTER:
-            return 'forms/schema/plugins/canvas-painter/canvas-painter-properties.html';
+            return 'forms/common/fields/plugins/canvas-painter/canvas-painter-properties.html';
           default :
             return 'forms/schema/components/no-field-properties.html';
         }

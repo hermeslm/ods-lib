@@ -22,9 +22,9 @@
 
 .affix {
   width: calc(21.2% - 30px);
-  //top: 0;
+  top: 5%;
   max-height: 95%;
-  bottom: 5%;
+  overflow: auto;
 }
 
 .ng-table-pager {

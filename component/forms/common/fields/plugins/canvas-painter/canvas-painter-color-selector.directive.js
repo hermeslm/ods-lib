@@ -14,7 +14,7 @@ function CanvasPainterColorSelector(OdsFormService) {
       colorList: '=odsCanvasPainterColorSelector',
       selectedColor: '='
     },
-    templateUrl: 'forms/common/fields/plugins/canvas-painter/color-selector.html',
+    templateUrl: 'forms/common/fields/plugins/canvas-painter/canvas-painter-color-selector.html',
     link: function (scope) {
       scope.selectedColor = '#ff0';
 
