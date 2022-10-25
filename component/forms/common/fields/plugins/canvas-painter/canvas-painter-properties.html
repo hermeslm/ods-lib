@@ -3,30 +3,27 @@
         <form name="fieldPropertiesForm" class="form-horizontal">
             <div class="box-body padding-top">
                 <div ng-include="'forms/schema/components/base-properties/common-properties.html'"></div>
+                <div ng-include="'forms/schema/components/base-properties/text-properties.html'"></div>
                 <div class="row no-vertical-margin">
                     <div class="form-group margin-bottom"
-                         ng-class="{'has-error': fieldPropertiesForm.{{field.name}}-toggleValue.$invalid}">
-                        <label for="{{field.name}}-toggleValue" class="col-sm-4 control-label">Toggle value:</label>
+                         ng-class="{'has-error': fieldPropertiesForm.{{field.name}}-background.$invalid}">
+                        <label for="{{field.name}}-background" class="col-sm-4 control-label">Background:</label>
                         <div class="col-sm-8">
-                            <input type="checkbox" id="{{field.name}}-toggleValue" name="{{field.name}}-toggleValue"
-                                   ng-model="field.value.toggle"
-                                   class="ng-pristine ng-valid">
+                            <textarea rows="3" class="form-control" id="{{field.name}}-background"
+                                      name="{{field.name}}-background"
+                                      ng-model="field.options.imageSrc"
+                                      placeholder="Paste background base64 code image here..." tabindex="11">
+                            </textarea>
                         </div>
                     </div>
                 </div>
-                <div ng-include="'forms/schema/components/toggle/ln-properties.html'"></div>
-                <div class="row no-vertical-margin">
-                    <div class="form-group margin-bottom"
-                         ng-class="{'has-error': fieldPropertiesForm.{{field.name}}-textValue.$invalid}">
-                        <label for="{{field.name}}-textValue" class="col-sm-4 control-label">Text value:</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="{{field.name}}-textValue"
-                                   name="{{field.name}}-textValue"
-                                   placeholder="Text value..." ng-model="field.value.textarea" ng-required="false">
-                        </div>
-                    </div>
-                </div>
-                <div ng-include="'forms/schema/components/base-properties/readonly-properties.html'"></div>
+            </div>
+        </form>
+    </uib-tab>
+    <uib-tab index="1" heading="Colors">
+        <form name="fieldColorsForm" class="form-horizontal">
+            <div class="box-body padding-top">
+                <ods-canvas-painter-colors colors="field.options.lineColors"></ods-canvas-painter-colors>
             </div>
         </form>
     </uib-tab>
