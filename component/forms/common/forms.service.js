@@ -1176,7 +1176,7 @@
             lineWidth: 10,
             lineColors: ['#F9FF33', '#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#153974']
           },
-          value: null
+          value: defaultBackground
         });
       }
 

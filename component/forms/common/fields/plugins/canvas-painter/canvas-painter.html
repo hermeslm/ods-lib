@@ -1,27 +1,36 @@
-<div ng-if="!field.readonly" ods-canvas-painter-color-selector="field.options.lineColors"
-     selected-color="field.options.color" ng-style="{ width: field.options.width }"></div>
-<input type="range" min="1" max="50" class="lineWidthSelector" ng-model="field.options.lineWidth" ng-if="!field.readonly"
-       ng-style="{ width: field.options.width }">
-<div class="row" ng-if="!field.readonly">
+<div ng-if="!fieldCopy.readonly" ods-canvas-painter-color-selector="fieldCopy.options.lineColors"
+     selected-color="fieldCopy.options.color" ng-style="{ width: fieldCopy.options.width }"></div>
+<input type="range" min="1" max="50" class="lineWidthSelector" ng-model="fieldCopy.options.lineWidth"
+       ng-if="!fieldCopy.readonly"
+       ng-style="{ width: fieldCopy.options.width }">
+<div class="row" ng-if="!fieldCopy.readonly">
     <div class="col-md-12">
-        {{ field.options.lineWidth }}
+        {{ fieldCopy.options.lineWidth }}
     </div>
 </div>
+<canvas ng-show="!fieldCopy.readonly" id="ods-canvas" class="odsCanvasPaint" style="position:absolute"></canvas>
+<canvas ng-show="!fieldCopy.readonly" id="ods-canvas-tmp" class="odsCanvasPaint"
+        style="position:relative;top: 0;left: 0"></canvas>
+<figure ng-if="fieldCopy.readonly" class="figure">
+    <img id="ods-canvas-paint-viewer-result"
+         ng-src="{{ fieldCopy.value ? fieldCopy.value : fieldCopy.options.imageSrc }}"
+         width="fieldCopy.width" height="fieldCopy.height"/>
+</figure>
 <div class="row">
     <div class="col-md-12">
-        <button class="btn btn-success" ng-click="toggleEdit()">{{ field.readonly ? 'Enable Edit' : 'Finish Edit' }}
+        <button class="btn" title="{{ fieldCopy.readonly ? 'Enable Edit' : 'Save Changes' }}"
+                ng-class="{'btn-warning': fieldCopy.readonly, 'btn-success': !fieldCopy.readonly}"
+                ng-click="toggleEdit()">
+            <i class="fa fa-pencil" ng-if="fieldCopy.readonly"></i>
+            <i class="glyphicon glyphicon-ok" ng-if="!fieldCopy.readonly"></i>
         </button>
-        <button ng-if="!field.readonly" class="btn btn-warning" ng-click="undoCanvas()" ng-disabled="version === 0">
-            Undo(Version {{version}})
+        <button ng-if="!fieldCopy.readonly" class="btn btn-primary" title="Undo"
+                ng-click="undoCanvas()" ng-disabled="version === 0">
+            <i class="fa fa-undo"></i>
         </button>
-        <button ng-if="!field.readonly" class="btn btn-danger" ng-click="clearCanvas()" ng-disabled="version === 0">
-            Clear
+        <button ng-if="!fieldCopy.readonly" class="btn btn-danger" title="Clear" ng-click="clearCanvas()"
+                ng-disabled="version === 0">
+            <i class="fa fa-trash"></i>
         </button>
     </div>
 </div>
-<canvas ng-show="!field.readonly" id="ods-canvas" class="odsCanvasPaint" style="position:absolute"></canvas>
-<canvas ng-show="!field.readonly" id="ods-canvas-tmp" class="odsCanvasPaint" style="position:relative;top: 0;left: 0"></canvas>
-<figure ng-if="field.readonly" class="figure">
-    <img id="ods-canvas-paint-viewer-result" ng-src="{{ field.value ? field.value : field.options.imageSrc }}"
-         width="field.width" height="field.height"/>
-</figure>

@@ -21,20 +21,22 @@ function CanvasPainterDirective(dialogs) {
       var PAINT_END = isTouch ? 'touchend' : 'mouseup';
 
       scope.version = 0;
+      scope.fieldCopy = {}
+      angular.copy(scope.field, scope.fieldCopy);
 
       // background image
-      if (scope.field.options.imageSrc) {
+      if (scope.fieldCopy.options.imageSrc) {
         var image = new Image();
         image.onload = function () {
           ctx.drawImage(this, 0, 0);
-          scope.field.options.width = image.width
-          scope.field.options.height = image.height
+          scope.fieldCopy.options.width = image.width
+          scope.fieldCopy.options.height = image.height
         };
-        image.src = scope.field.options.imageSrc;
+        image.src = scope.fieldCopy.options.imageSrc;
       }
 
       //undo
-      if (scope.field.options.undo) {
+      if (scope.fieldCopy.options.undo) {
         var undoCache = [];
         scope.$watch(function () {
           return undoCache.length;
@@ -57,9 +59,9 @@ function CanvasPainterDirective(dialogs) {
 
       //create canvas and context
       var canvas = document.getElementById('ods-canvas');
-      canvas.id = scope.field.options.canvasId;
+      canvas.id = scope.fieldCopy.options.canvasId;
       var canvasTmp = document.getElementById('ods-canvas-tmp');
-      canvasTmp.id = scope.field.options.tmpCanvasId;
+      canvasTmp.id = scope.fieldCopy.options.tmpCanvasId;
       var ctx = canvas.getContext('2d');
       var ctxTmp = canvasTmp.getContext('2d');
 
@@ -71,16 +73,16 @@ function CanvasPainterDirective(dialogs) {
       var ppts = [];
 
       //set canvas size
-      canvas.width = canvasTmp.width = scope.field.options.width;
-      canvas.height = canvasTmp.height = scope.field.options.height;
+      canvas.width = canvasTmp.width = scope.fieldCopy.options.width;
+      canvas.height = canvasTmp.height = scope.fieldCopy.options.height;
 
       //set context style
-      ctx.fillStyle = scope.field.options.backgroundColor;
+      ctx.fillStyle = scope.fieldCopy.options.backgroundColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctxTmp.globalAlpha = scope.field.options.opacity;
+      ctxTmp.globalAlpha = scope.fieldCopy.options.opacity;
       ctxTmp.lineJoin = ctxTmp.lineCap = 'round';
       ctxTmp.lineWidth = 10;
-      ctxTmp.strokeStyle = scope.field.options.color;
+      ctxTmp.strokeStyle = scope.fieldCopy.options.color;
 
 
       //Watch options
@@ -89,7 +91,7 @@ function CanvasPainterDirective(dialogs) {
           newValue = parseInt(newValue, 10);
         }
         if (newValue && typeof newValue === 'number') {
-          ctxTmp.lineWidth = scope.field.options.lineWidth = newValue;
+          ctxTmp.lineWidth = scope.fieldCopy.options.lineWidth = newValue;
         }
       });
 
@@ -103,6 +105,12 @@ function CanvasPainterDirective(dialogs) {
       scope.$watch('field.options.opacity', function (newValue) {
         if (newValue) {
           ctxTmp.globalAlpha = newValue;
+        }
+      });
+
+      scope.$watch('field.options', function (newValue) {
+        if (newValue) {
+          scope.fieldCopy.options = newValue;
         }
       });
 
@@ -169,11 +177,11 @@ function CanvasPainterDirective(dialogs) {
       };
 
       var copyTmpImage = function () {
-        if (scope.field.options.undo) {
+        if (scope.fieldCopy.options.undo) {
           scope.$apply(function () {
             undoCache.push(ctx.getImageData(0, 0, canvasTmp.width, canvasTmp.height));
-            if (angular.isNumber(scope.field.options.undo) && scope.field.options.undo > 0) {
-              undoCache = undoCache.slice(-1 * scope.field.options.undo);
+            if (angular.isNumber(scope.fieldCopy.options.undo) && scope.fieldCopy.options.undo > 0) {
+              undoCache = undoCache.slice(-1 * scope.fieldCopy.options.undo);
             }
           });
         }
@@ -181,7 +189,7 @@ function CanvasPainterDirective(dialogs) {
         ctx.drawImage(canvasTmp, 0, 0);
         ctxTmp.clearRect(0, 0, canvasTmp.width, canvasTmp.height);
         ppts = [];
-        scope.field.value = canvas.toDataURL();
+        scope.fieldCopy.value = canvas.toDataURL();
       };
 
       var startTmpImage = function (e) {
@@ -249,7 +257,7 @@ function CanvasPainterDirective(dialogs) {
         if (undoCache.length > 0) {
           ctx.putImageData(undoCache[version], 0, 0);
           undoCache = undoCache.slice(0, version);
-          scope.field.value = canvas.toDataURL();
+          scope.fieldCopy.value = canvas.toDataURL();
         }
       };
 
@@ -261,12 +269,15 @@ function CanvasPainterDirective(dialogs) {
         dialogs.confirm('Confirm!!!', 'This operation will erase all draw you did, do you want to proceed?',
           {size: 'sm', windowClass: 'ods-dialog'}).result.then(function () {
           scope.version = 0;
-          scope.field.value = scope.field.options.imageSrc;
+          scope.fieldCopy.value = scope.fieldCopy.options.imageSrc;
         });
       };
 
       scope.toggleEdit = function () {
-        scope.field.readonly = !scope.field.readonly;
+        scope.fieldCopy.readonly = !scope.fieldCopy.readonly;
+        if(scope.fieldCopy.readonly){
+          scope.field.value = canvas.toDataURL();
+        }
       };
 
 
