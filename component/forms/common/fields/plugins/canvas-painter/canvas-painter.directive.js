@@ -273,11 +273,13 @@ function CanvasPainterDirective(dialogs) {
         });
       };
 
-      scope.toggleEdit = function () {
-        scope.fieldCopy.readonly = !scope.fieldCopy.readonly;
-        if(scope.fieldCopy.readonly){
-          scope.field.value = canvas.toDataURL();
-        }
+      scope.enableEdit = function () {
+        scope.fieldCopy.readonly = false;
+      };
+
+      scope.saveEdit = function () {
+        scope.fieldCopy.readonly = true;
+        scope.field.value = canvas.toDataURL();
       };
 
 
