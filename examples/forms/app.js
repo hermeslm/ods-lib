@@ -1211,6 +1211,11 @@ function FormsController($scope, OdsFieldType, OdsComponentType, OdsFormService,
   //     allowedTypes: ["section"]
   // };
 
+  //Watch options
+  $scope.$watch('schema', function (newValue, oldValue) {
+    if(oldValue !== newValue) console.log(newValue);
+  });
+
   $scope.test1 = '<p>this is a sample&nbsp;&nbsp;<span class="marker">${patientName}</span>&nbsp;that I testing with&nbsp;&nbsp;<span class="marker">${patientDob}</span>&nbsp;.${patientName} is here.</p>';
   $scope.test2 = '<p>this is a sample&nbsp;&nbsp;<span class="marker">@patientName</span>&nbsp;that I testing with&nbsp;&nbsp;<span class="marker">@patientDob</span>&nbsp;. but we must to check this @patientDobcase hermeslm@gmail.com. @patientName is here.</p>';
 

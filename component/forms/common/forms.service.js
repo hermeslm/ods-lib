@@ -1172,7 +1172,7 @@
             opacity: 0.9,
             undo: true,
             imageSrc: defaultBackground,
-            color: '#000',
+            color: '#ff0',
             lineWidth: 10,
             lineColors: ['#F9FF33', '#000', '#9CB199', '#CF3759', '#485247', '#E77547', '#D38E47', '#0A6A74', '#153974']
           },

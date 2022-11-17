@@ -21,8 +21,7 @@ function CanvasPainterDirective(dialogs) {
       var PAINT_END = isTouch ? 'touchend' : 'mouseup';
 
       scope.version = 0;
-      scope.fieldCopy = {}
-      angular.copy(scope.field, scope.fieldCopy);
+      scope.fieldCopy = angular.copy(scope.field);
 
       // background image
       if (scope.fieldCopy.options.imageSrc) {
@@ -62,8 +61,14 @@ function CanvasPainterDirective(dialogs) {
       canvas.id = scope.fieldCopy.options.canvasId;
       var canvasTmp = document.getElementById('ods-canvas-tmp');
       canvasTmp.id = scope.fieldCopy.options.tmpCanvasId;
-      var ctx = canvas.getContext('2d');
-      var ctxTmp = canvasTmp.getContext('2d');
+      var ctxOptions = {
+        alpha: true,
+        desynchronized: false,
+        colorSpace: 'srgb',
+        willReadFrequently: true
+      }
+      var ctx = canvas.getContext('2d', ctxOptions);
+      var ctxTmp = canvasTmp.getContext('2d', ctxOptions);
 
       //init variables
       var point = {
@@ -86,7 +91,7 @@ function CanvasPainterDirective(dialogs) {
 
 
       //Watch options
-      scope.$watch('field.options.lineWidth', function (newValue) {
+      scope.$watch('fieldCopy.options.lineWidth', function (newValue) {
         if (typeof newValue === 'string') {
           newValue = parseInt(newValue, 10);
         }
@@ -95,22 +100,22 @@ function CanvasPainterDirective(dialogs) {
         }
       });
 
-      scope.$watch('field.options.color', function (newValue) {
+      scope.$watch('fieldCopy.options.color', function (newValue) {
         if (newValue) {
           //ctx.fillStyle = newValue;
-          ctxTmp.strokeStyle = ctxTmp.fillStyle = newValue;
+          ctxTmp.strokeStyle = ctxTmp.fillStyle = angular.copy(newValue);
         }
       });
 
-      scope.$watch('field.options.opacity', function (newValue) {
+      scope.$watch('fieldCopy.options.opacity', function (newValue) {
         if (newValue) {
-          ctxTmp.globalAlpha = newValue;
+          ctxTmp.globalAlpha = angular.copy(newValue);
         }
       });
 
       scope.$watch('field.options', function (newValue) {
         if (newValue) {
-          scope.fieldCopy.options = newValue;
+          scope.fieldCopy.options = angular.copy(newValue);
         }
       });
 
